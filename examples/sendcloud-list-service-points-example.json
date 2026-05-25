@@ -1,0 +1,37 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://panel.sendcloud.sc/api/v3/service-points?country=FR&postal_code=75001&carrier=dpd&radius=2000"
+  },
+  "response": {
+    "data": [
+      {
+        "id": "11098765",
+        "code": "FR-11098765",
+        "name": "Pickup Point Rivoli",
+        "carrier": "dpd",
+        "is_active": true,
+        "address": {
+          "street": "Rue de Rivoli",
+          "house_number": "118",
+          "postal_code": "75001",
+          "city": "Paris",
+          "country": "FR"
+        },
+        "position": { "latitude": 48.8590, "longitude": 2.3370 },
+        "opening_times": [
+          { "day": "monday",  "open": "09:00", "close": "19:00" },
+          { "day": "tuesday", "open": "09:00", "close": "19:00" },
+          { "day": "wednesday", "open": "09:00", "close": "19:00" },
+          { "day": "thursday", "open": "09:00", "close": "19:00" },
+          { "day": "friday", "open": "09:00", "close": "19:00" },
+          { "day": "saturday", "open": "10:00", "close": "18:00" }
+        ]
+      }
+    ],
+    "links": {
+      "next": null,
+      "previous": null
+    }
+  }
+}

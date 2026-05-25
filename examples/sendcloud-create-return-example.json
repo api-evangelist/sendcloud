@@ -1,0 +1,32 @@
+{
+  "outgoing_parcel": {
+    "tracking_number": "3SKABA000001234"
+  },
+  "incoming_parcel": {
+    "weight": { "value": "1.100", "unit": "kg" },
+    "items": [
+      {
+        "description": "Stroopwafels - Box of 12 (wrong flavour)",
+        "quantity": 1,
+        "return_reason": "wrong_item"
+      }
+    ]
+  },
+  "delivery_option": {
+    "type": "drop_off_point",
+    "service_point_id": "11098765"
+  },
+  "reason": "wrong_item",
+  "comment": "Customer received caramel instead of honey.",
+  "refund": { "value": "9.95", "currency": "EUR" },
+  "from_address": {
+    "name": "Marie Dubois",
+    "address_line_1": "Rue de Rivoli",
+    "house_number": "112",
+    "city": "Paris",
+    "postal_code": "75001",
+    "country_code": "FR",
+    "phone_number": "+33170987654",
+    "email": "marie.dubois@example.com"
+  }
+}

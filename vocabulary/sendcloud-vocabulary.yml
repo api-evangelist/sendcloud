@@ -1,0 +1,190 @@
+title: Sendcloud API Vocabulary
+description: Operational and domain vocabulary for the Sendcloud European multi-carrier shipping platform
+provider: Sendcloud
+version: '2026-05-25'
+source: https://sendcloud.dev/
+
+terms:
+  - term: Parcel
+    definition: >-
+      The legacy (v2) representation of a physical package in the Sendcloud system,
+      including from/to address, weight, dimensions, and a shipping method. Replaced
+      conceptually by Shipment in v3.
+    type: resource
+    related: [Shipment, Label, ShippingMethod]
+
+  - term: Shipment
+    definition: >-
+      The v3 representation of an outgoing parcel announcement. A shipment carries
+      one or more parcels under a single ship-from / ship-to flow and may be created
+      synchronously or asynchronously and announced to the chosen carrier.
+    type: resource
+    related: [Order, Label, Carrier, ParcelDocument]
+
+  - term: Order
+    definition: >-
+      An incoming customer order representing items to be shipped. Orders are imported
+      from integrations or created via API and converted into shipments via the
+      "Ship an Order" flow.
+    type: resource
+    related: [Shipment, Integration]
+
+  - term: Ship an Order
+    definition: >-
+      A composite v3 API flow that creates a shipment from an existing order,
+      requests a label, and returns a usable parcel in one call.
+    type: concept
+    related: [Order, Shipment, Label]
+
+  - term: Return
+    definition: >-
+      A return shipment created on behalf of a consumer. Sendcloud's Returns API
+      generates a return label (and optional drop-off service point) and tracks the
+      reverse logistics status.
+    type: resource
+    related: [Shipment, ReturnMethod, ServicePoint]
+
+  - term: Return Method
+    definition: >-
+      A configured option offered to customers for handing a return back (drop-off
+      at service point, home pick-up, postbox, etc.). Defined per shop / region.
+    type: resource
+    related: [Return]
+
+  - term: Service Point
+    definition: >-
+      A physical drop-off / pick-up location operated by a carrier (parcel shop,
+      locker, post office). Used for first-mile and last-mile delivery and for
+      returns. Sendcloud aggregates service points across European carriers.
+    type: resource
+    related: [Carrier, Return, Shipment]
+
+  - term: Carrier
+    definition: >-
+      A shipping carrier integrated with Sendcloud (DHL, DPD, UPS, GLS, FedEx,
+      PostNL, bpost, La Poste, Royal Mail, Hermes, and 160+ others across Europe).
+    type: resource
+    related: [ShippingMethod, ServicePoint]
+
+  - term: Shipping Method
+    definition: >-
+      A specific carrier service (e.g. "DHL Express 9:00", "DPD Classic", "PostNL
+      Standard 0–10kg"). Each shipping method has a price, weight band, country
+      coverage, and feature flags (insurance, signature, tracking).
+    type: resource
+    related: [Carrier, Shipment]
+
+  - term: Label
+    definition: >-
+      The PDF or PNG shipping label produced once a shipment / parcel is announced.
+      Retrieved via the Labels API (v2) or Parcel Documents API (v2/v3).
+    type: resource
+    related: [Shipment, ParcelDocument]
+
+  - term: Parcel Document
+    definition: >-
+      A document associated with a parcel — shipping label, customs declaration
+      (CN22 / CN23), commercial invoice, or QR code. Available in PDF or ZPL.
+    type: resource
+    related: [Label, Shipment, Returns]
+
+  - term: Tracking Event
+    definition: >-
+      A normalised status update for a parcel as it moves through the carrier
+      network. Sendcloud unifies tracking across carriers into a common status set.
+    type: resource
+    related: [Shipment, Webhook]
+
+  - term: Event Subscription
+    definition: >-
+      A v3 webhook registration. The caller subscribes to a typed event (e.g.
+      parcel-status-changed, return-created) and receives signed HTTPS callbacks.
+    type: resource
+    related: [Webhook]
+
+  - term: Integration
+    definition: >-
+      A connector between Sendcloud and an external commerce / WMS / marketplace
+      platform (Shopify, WooCommerce, Magento, Amazon, etc.). Pulls orders in,
+      pushes tracking out.
+    type: resource
+    related: [Order, Shipment]
+
+  - term: Analytics
+    definition: >-
+      Aggregated metrics surface — shipping spend, carrier mix, service-level
+      performance, returns rates — exposed via the Analytics API.
+    type: resource
+
+  - term: Reporting
+    definition: >-
+      Per-shipment cost reports and billing line items, exposed via the Reporting
+      API for back-office reconciliation.
+    type: resource
+
+  - term: Integration Partner ID
+    definition: >-
+      A "Sendcloud-Partner-Id" header identifying a third-party platform or
+      integration partner calling the API on behalf of merchants.
+    type: concept
+    related: [Integration, Authentication]
+
+  - term: Public / Private Key
+    definition: >-
+      Sendcloud-issued API credentials. The public key is used as the HTTP Basic
+      username and the private key as the password. Must be created from the
+      Sendcloud panel and never exposed in client code.
+    type: concept
+    related: [Authentication]
+
+  - term: OAuth 2.0 Client Credentials
+    definition: >-
+      Token-based authentication using the public + private keys exchanged for a
+      short-lived bearer token at https://account.sendcloud.com/oauth2/token.
+      Scope: api. Tokens expire after ~1 hour.
+    type: concept
+    related: [Authentication, Public / Private Key]
+
+  - term: Multicollo
+    definition: >-
+      Multi-parcel shipment — multiple physical parcels announced under a single
+      shipment / order, generating linked tracking numbers.
+    type: concept
+    related: [Shipment]
+
+  - term: Branded Tracking
+    definition: >-
+      Merchant-branded tracking pages and email/SMS/WhatsApp notifications shown
+      to the end-customer, configurable per shop.
+    type: concept
+    related: [TrackingEvent]
+
+  - term: Pack & Go
+    definition: >-
+      Sendcloud's warehouse-floor pick-and-pack workflow for high-volume shippers.
+    type: concept
+
+capabilities:
+  - name: Multi-Carrier Label Generation
+    description: Generate shipping labels across 160+ European carriers in one API
+    apis: [Shipments, Labels, ParcelDocuments]
+
+  - name: Order-to-Ship Workflow
+    description: Import orders from integrations, convert to shipments, announce to carrier
+    apis: [Orders, ShipAnOrder, Shipments]
+
+  - name: Returns Management
+    description: Branded return portals, multi-method returns (drop-off / pickup / postbox)
+    apis: [Returns]
+
+  - name: Service Point Selection
+    description: Aggregate parcel-shop / locker / post-office network across European carriers
+    apis: [ServicePoints]
+
+  - name: Branded Tracking & Notifications
+    description: Carrier-normalised tracking events delivered as webhooks
+    apis: [ParcelTracking, Webhooks, EventSubscriptions]
+
+  - name: Shipping Analytics
+    description: Per-carrier and per-shop spend, performance, and return-rate analytics
+    apis: [Analytics, Reporting]

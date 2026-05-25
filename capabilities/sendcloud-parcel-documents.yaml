@@ -1,0 +1,99 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sendcloud API — Parcel Documents
+  description: 'Sendcloud API v3 — Parcel Documents. Retrieve labels, customs declarations, commercial invoices, and QR codes for parcels.'
+  tags:
+  - Sendcloud
+  - Labels
+  - Documents
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    SENDCLOUD_PUBLIC_KEY: SENDCLOUD_PUBLIC_KEY
+    SENDCLOUD_PRIVATE_KEY: SENDCLOUD_PRIVATE_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sendcloud-parcel-documents
+    baseUri: https://panel.sendcloud.sc/api/v3
+    description: Sendcloud Parcel Documents API v3.
+    resources:
+    - name: parcels-id-documents-type
+      path: /parcels/{id}/documents/{type}
+      operations:
+      - name: retrieveparceldocument
+        method: GET
+        description: Retrieve a parcel document by parcel id and document type.
+        outputRawFormat: binary
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: type
+          in: path
+          type: string
+          required: true
+    - name: parcel-documents-type
+      path: /parcel-documents/{type}
+      operations:
+      - name: retrievemultipleparceldocuments
+        method: POST
+        description: Retrieve multiple parcel documents in a single call.
+        outputRawFormat: binary
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: type
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.SENDCLOUD_PUBLIC_KEY}}'
+      password: '{{env.SENDCLOUD_PRIVATE_KEY}}'
+  exposes:
+  - type: mcp
+    namespace: sendcloud-parcel-documents-mcp
+    port: 9095
+    transport: http
+    description: MCP adapter for Sendcloud Parcel Documents.
+    tools:
+    - name: retrieve-parcel-document
+      description: Retrieve a parcel document by parcel id and document type.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sendcloud-parcel-documents.retrieveparceldocument
+      with:
+        id: tools.id
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-multiple-parcel-documents
+      description: Retrieve multiple parcel documents in a single call.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sendcloud-parcel-documents.retrievemultipleparceldocuments
+      with:
+        type: tools.type
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

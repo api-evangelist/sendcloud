@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sendcloud/main/json-schema/sendcloud-servicepointaddress-schema.json",
+  "title": "Service Point Address",
+  "type": "object",
+  "description": "Address of the service point.",
+  "properties": {
+    "street": {
+      "type": "string",
+      "example": "Stationsplein",
+      "description": "Street of the service point address."
+    },
+    "house_number": {
+      "type": "string",
+      "example": "1",
+      "description": "House number of the service point address."
+    },
+    "postal_code": {
+      "type": "string",
+      "example": "5611 AC",
+      "description": "Postal code of the service point address."
+    },
+    "city": {
+      "type": "string",
+      "example": "Eindhoven",
+      "description": "City of the service point address."
+    },
+    "country_code": {
+      "type": "string",
+      "example": "NL",
+      "description": "Country code of the service point address as an ISO 3166-1 alpha-2 code."
+    }
+  },
+  "required": [
+    "street",
+    "house_number",
+    "postal_code",
+    "city",
+    "country_code"
+  ]
+}

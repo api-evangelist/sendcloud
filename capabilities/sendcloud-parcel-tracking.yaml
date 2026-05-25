@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sendcloud API — Parcel Tracking
+  description: 'Sendcloud API v3 — Parcel Tracking. Retrieve tracking information for a parcel and register external parcels for tracking.'
+  tags:
+  - Sendcloud
+  - Tracking
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    SENDCLOUD_PUBLIC_KEY: SENDCLOUD_PUBLIC_KEY
+    SENDCLOUD_PRIVATE_KEY: SENDCLOUD_PRIVATE_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sendcloud-parcel-tracking
+    baseUri: https://panel.sendcloud.sc/api/v3
+    description: Sendcloud Parcel Tracking API v3.
+    resources:
+    - name: parcels-tracking-tracking_number
+      path: /parcels/tracking/{tracking_number}
+      operations:
+      - name: retrievetracking
+        method: GET
+        description: Retrieve tracking information for a parcel by tracking number.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tracking_number
+          in: path
+          type: string
+          required: true
+    - name: parcels-tracking
+      path: /parcels/tracking
+      operations:
+      - name: createexternalparcel
+        method: POST
+        description: Create an external parcel for tracking-only use.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.SENDCLOUD_PUBLIC_KEY}}'
+      password: '{{env.SENDCLOUD_PRIVATE_KEY}}'
+  exposes:
+  - type: mcp
+    namespace: sendcloud-parcel-tracking-mcp
+    port: 9094
+    transport: http
+    description: MCP adapter for Sendcloud Parcel Tracking.
+    tools:
+    - name: retrieve-tracking
+      description: Retrieve tracking information for a parcel.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sendcloud-parcel-tracking.retrievetracking
+      with:
+        tracking_number: tools.tracking_number
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-external-tracking-parcel
+      description: Register an external parcel for tracking.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sendcloud-parcel-tracking.createexternalparcel
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

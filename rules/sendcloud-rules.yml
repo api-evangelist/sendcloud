@@ -1,0 +1,132 @@
+extends: spectral:oas
+rules:
+  # Sendcloud API Naming Conventions
+
+  sendcloud-operation-id-camel-case:
+    description: Operation IDs must use camelCase
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  sendcloud-path-kebab-case:
+    description: Path segments must use kebab-case or curly-brace parameters
+    severity: warn
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z0-9{}_-]+)+$"
+
+  sendcloud-must-have-summary:
+    description: All operations must have a summary
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: defined
+
+  sendcloud-must-have-tags:
+    description: All operations must have at least one tag
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: defined
+
+  sendcloud-must-have-operation-id:
+    description: All operations must have an operationId
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: defined
+
+  sendcloud-response-200-must-have-schema:
+    description: 200 responses must have a content schema
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].responses[200]"
+    then:
+      field: content
+      function: defined
+
+  sendcloud-post-must-have-request-body:
+    description: POST operations should have a request body
+    severity: warn
+    given: "$.paths[*].post"
+    then:
+      field: requestBody
+      function: defined
+
+  sendcloud-security-defined:
+    description: All operations should have security defined at root or operation level
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          oneOf:
+            - required: [security]
+
+  sendcloud-basic-auth-or-oauth2:
+    description: Sendcloud supports HTTP Basic (public/private key) and OAuth 2.0 client_credentials authentication
+    severity: info
+    given: "$.components.securitySchemes[*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  sendcloud-cursor-pagination:
+    description: List operations should support cursor-based pagination
+    severity: info
+    given: "$.paths[*].get.parameters[?(@.name=='cursor')]"
+    then:
+      field: in
+      function: defined
+
+  sendcloud-base-url-versioned:
+    description: Servers should use the /api/v2 or /api/v3 versioned base path on panel.sendcloud.sc
+    severity: warn
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://panel\\.sendcloud\\.sc/api/v[23]$"
+
+  sendcloud-no-trailing-slash:
+    description: Paths must not have trailing slashes
+    severity: error
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: ".*/$"
+
+  sendcloud-parameters-have-description:
+    description: All parameters should have a description
+    severity: info
+    given: "$.paths[*][get,post,put,patch,delete].parameters[*]"
+    then:
+      field: description
+      function: defined
+
+  sendcloud-components-schemas-exist:
+    description: OpenAPI spec should define component schemas
+    severity: warn
+    given: "$.components"
+    then:
+      field: schemas
+      function: defined
+
+  sendcloud-error-object-standard:
+    description: Error responses should use the shared ErrorObject component schema
+    severity: info
+    given: "$.paths[*][get,post,put,patch,delete].responses[400,401,403,404,409,422,429,500]"
+    then:
+      field: content
+      function: defined

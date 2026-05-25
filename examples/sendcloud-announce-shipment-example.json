@@ -1,0 +1,44 @@
+{
+  "external_reference": "ORDER-2026-00421",
+  "ship_from": {
+    "name": "Acme Europe BV",
+    "company_name": "Acme Europe BV",
+    "address_line_1": "Stationsplein",
+    "house_number": "27",
+    "city": "Eindhoven",
+    "postal_code": "5611 AC",
+    "country_code": "NL",
+    "phone_number": "+31402188345",
+    "email": "warehouse@acme.example"
+  },
+  "ship_to": {
+    "name": "Marie Dubois",
+    "address_line_1": "Rue de Rivoli",
+    "house_number": "112",
+    "city": "Paris",
+    "postal_code": "75001",
+    "country_code": "FR",
+    "phone_number": "+33170987654",
+    "email": "marie.dubois@example.com"
+  },
+  "shipping_method_code": "dpd:standard",
+  "parcels": [
+    {
+      "weight": { "value": "1.250", "unit": "kg" },
+      "length": "30",
+      "width": "20",
+      "height": "10",
+      "items": [
+        {
+          "description": "Stroopwafels - Box of 12",
+          "quantity": 2,
+          "weight": { "value": "0.500", "unit": "kg" },
+          "value": { "value": "9.95", "currency": "EUR" },
+          "harmonized_system_code": "190590",
+          "origin_country": "NL"
+        }
+      ]
+    }
+  ],
+  "total_value": { "value": "19.90", "currency": "EUR" }
+}

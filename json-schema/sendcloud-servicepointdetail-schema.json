@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sendcloud/main/json-schema/sendcloud-servicepointdetail-schema.json",
+  "title": "Service Point",
+  "type": "object",
+  "description": "Information about a service point.",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "format": "int64",
+      "example": 1000001,
+      "description": "Unique Sendcloud identifier of the service point."
+    },
+    "name": {
+      "type": "string",
+      "example": "Stationsplein Parcel Locker",
+      "description": "Name of the service point."
+    },
+    "carrier": {
+      "$ref": "#/components/schemas/ServicePointCarrier"
+    },
+    "carrier_service_point_id": {
+      "type": "string",
+      "example": "NL-00001",
+      "description": "Carrier-specific identifier of the service point."
+    },
+    "carrier_shop_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "example": "PBA",
+      "description": "Carrier-specific shop type of the service point.\n\nFor example: `packStation` (DHL), `PBA` (PostNL), `400` (DPD).\n\nCan be `null` when this information is not available."
+    },
+    "general_shop_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "servicepoint",
+        "locker",
+        "post_office",
+        "carrier_depot"
+      ],
+      "example": "locker",
+      "description": "General shop type of the service point. Carrier-specific shop types vary per carrier and are mapped to a smaller set of common values.\n\n- `servicepoint` - Standard service point or parcel shop.\n- `locker` - Automated parcel locker.\n- `post_office` - Post office location.\n- `carrier_depot` - Carrier depot or distribution center.\n\nCan be `null` when the carrier-specific shop type does not map to one of these values. This mapping is maintained manually, so newer or less common carriers may not have a mapping yet.\n\nThis list is not exhaustive and may be extended with new values in the future."
+    },
+    "address": {
+      "$ref": "#/components/schemas/ServicePointAddress"
+    },
+    "position": {
+      "$ref": "#/components/schemas/ServicePointPosition"
+    },
+    "contact": {
+      "$ref": "#/components/schemas/ServicePointContact"
+    },
+    "opening_times": {
+      "$ref": "#/components/schemas/OpeningTimes"
+    },
+    "is_open_tomorrow": {
+      "type": "boolean",
+      "example": true,
+      "description": "Indicates whether the service point is expected to be open tomorrow based on its opening hours for the current week."
+    },
+    "next_open_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "example": "2026-03-11T09:00:00+01:00",
+      "description": "Date and time when the service point is expected to open next.\n\nCan be `null` when no upcoming opening time is available."
+    },
+    "is_expired": {
+      "type": "boolean",
+      "example": false,
+      "description": "Indicates whether the service point details are considered expired.\n\nWe regularly refresh service point details based on carrier updates.\nBecause update frequency and coverage vary by carrier, it is not always possible to guarantee that every service point is fully up to date.\n\nWhen `is_expired` is `true`, the service point was last refreshed long enough ago that we can no longer be confident the details are still up to date or that the service point still exists.\n\nThis field reflects freshness only. It does not indicate whether the service point is currently open or available."
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "carrier",
+    "carrier_service_point_id",
+    "carrier_shop_type",
+    "general_shop_type",
+    "address",
+    "position",
+    "contact",
+    "opening_times",
+    "is_open_tomorrow",
+    "next_open_at",
+    "is_expired"
+  ]
+}

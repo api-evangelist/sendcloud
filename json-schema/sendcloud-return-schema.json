@@ -1,0 +1,280 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sendcloud/main/json-schema/sendcloud-return-schema.json",
+  "title": "Return Object",
+  "type": "object",
+  "description": "A Sendcloud return object",
+  "properties": {
+    "from_address": {
+      "$ref": "#/components/schemas/address-with-required-fields"
+    },
+    "to_address": {
+      "$ref": "#/components/schemas/address-with-required-fields"
+    },
+    "shipping_product": {
+      "$ref": "#/components/schemas/shipping-products-ref"
+    },
+    "shipping_option": {
+      "title": "Shipping Option Code",
+      "type": "object",
+      "description": "Sendcloud shipping option code",
+      "properties": {
+        "code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The shipping option code, as provided by the [Shipping options API](/api/v3/shipping-options/return-a-list-of-available-shipping-options).",
+          "example": "postnl:standard/signature"
+        }
+      }
+    },
+    "dimensions": {
+      "$ref": "#/components/schemas/dimension"
+    },
+    "weight": {
+      "$ref": "#/components/schemas/weight"
+    },
+    "collo_count": {
+      "type": "integer",
+      "default": 1,
+      "minimum": 1,
+      "description": "The number of collos this return consists of"
+    },
+    "parcel_items": {
+      "type": "array",
+      "description": "List of items contained in this return. Required outside the EU.",
+      "items": {
+        "$ref": "#/components/schemas/parcel-item-returns-details"
+      }
+    },
+    "send_tracking_emails": {
+      "type": "boolean",
+      "default": false,
+      "description": "When `true`, Sendcloud will send out the default track and trace emails"
+    },
+    "brand_id": {
+      "type": "integer",
+      "description": "The ID of the brand this Return belongs to.",
+      "example": 1,
+      "minimum": 1
+    },
+    "label_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "URL to download the label. This can be `null` because it might not be announced yet. **Deprecated** in favour of the `label` field.",
+      "example": "https://panel.sendcloud.sc/api/v3/parcels/8/documents/label",
+      "deprecated": true
+    },
+    "label": {
+      "type": "object",
+      "description": "URLs to download the label, if the parcel has been announced.",
+      "properties": {
+        "normal_printer": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "url"
+          },
+          "description": "URLs to download the label as an A4 PDF. The array always contains 4 identical URLs for backward compatibility with the v2 positional label layout.",
+          "example": [
+            "https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4",
+            "https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4",
+            "https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4",
+            "https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4"
+          ]
+        },
+        "label_printer": {
+          "type": "string",
+          "description": "URL to download the label as an A6 PDF",
+          "format": "url",
+          "example": "https://panel.sendcloud.sc/api/v3/parcels/8/documents/label"
+        }
+      }
+    },
+    "label_cost": {
+      "$ref": "#/components/schemas/price"
+    },
+    "insurance": {
+      "type": "boolean",
+      "description": "Whether the return parcel is insured"
+    },
+    "tracking_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "This can be null because it might not be announced yet.",
+      "example": "3SSEND12345678"
+    },
+    "tracking_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "URL to track your return. This can be null because it might not be announced yet.",
+      "example": "https://tracking.eu-central-1-0.sendcloud.sc/forward?carrier=sendcloud&code=3SSEND12345678&destination=NL&lang=en-gb&source=NL&type=letter&verification=1001+VV&servicepoint_verification=&created_at=2022-07-27"
+    },
+    "is_cancellable": {
+      "type": "boolean",
+      "description": "Whether the incoming parcel of this return can be cancelled"
+    },
+    "status_history": {
+      "type": "array",
+      "description": "List with the timeline of your return status",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/components/schemas/detailed-tracking-blob-status"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "description": "Date and time of creation of this return",
+      "format": "date-time",
+      "example": "2022-08-09T14:32:21.463473+02:00"
+    },
+    "delivered_at": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "example": 1734946171662,
+      "description": "A unix timestamp indicating the delivery time of this return. **Deprecated** in favour of the `delivered_at_iso` field.",
+      "deprecated": true
+    },
+    "delivered_at_iso": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Date and time of delivery of this return",
+      "example": "2022-08-09T14:32:21.463473+02:00"
+    },
+    "reason": {
+      "$ref": "#/components/schemas/return-reason"
+    },
+    "refund": {
+      "$ref": "#/components/schemas/return-refund",
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "return_fee": {
+      "$ref": "#/components/schemas/price-with-any-currency",
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The fee associated with this return"
+    },
+    "order_number": {
+      "type": "string",
+      "description": "Order number filled by the user",
+      "example": "ORD12345"
+    },
+    "contract": {
+      "type": "integer",
+      "description": "ID of the contract used to ship this return"
+    },
+    "customs_invoice_nr": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Customs invoice number"
+    },
+    "customs_shipment_type": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "description": "Customs shipment type\n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
+    },
+    "delivery_option": {
+      "$ref": "#/components/schemas/DeliveryOption"
+    },
+    "images": {
+      "type": "array",
+      "description": "Images uploaded when creating a return via the Return Portal",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "properties": {
+          "product_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "123456",
+            "description": "The ID of the product that this image is related to."
+          },
+          "uploaded_image": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/image.png",
+            "description": "The temporary publicly-accessible URL of the originally uploaded image"
+          },
+          "thumbnail_image": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri",
+            "example": "https://example.com/thumbnail.png",
+            "description": "The temporary publicly-accessible URL of the image thumbnail"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "example": "My broken camera, with a crack on the lens",
+            "description": "A description of the uploaded image"
+          }
+        }
+      }
+    },
+    "status": {
+      "description": "The current status of the return",
+      "example": "open",
+      "type": "string",
+      "enum": [
+        "open",
+        "requested",
+        "request_rejected",
+        "awaiting_payment",
+        "payment_failed"
+      ]
+    },
+    "customs_information": {
+      "$ref": "#/components/schemas/parcel-customs-information"
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ErrorObject"
+      },
+      "readOnly": true,
+      "description": "This array will contain errors such as carrier announcement errors."
+    }
+  },
+  "required": [
+    "from_address",
+    "to_address",
+    "shipping_product",
+    "shipping_option",
+    "weight",
+    "send_tracking_emails",
+    "is_cancellable",
+    "status_history",
+    "created_at"
+  ]
+}

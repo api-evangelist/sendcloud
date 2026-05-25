@@ -1,0 +1,180 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sendcloud — European Shipping Fulfillment
+  description: 'End-to-end European fulfillment workflow on the Sendcloud platform: from order import, through service-point selection, label generation, branded tracking, and returns.'
+  tags:
+  - Sendcloud
+  - Workflow
+  - Shipping
+  - Fulfillment
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    SENDCLOUD_PUBLIC_KEY: SENDCLOUD_PUBLIC_KEY
+    SENDCLOUD_PRIVATE_KEY: SENDCLOUD_PRIVATE_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sendcloud
+    baseUri: https://panel.sendcloud.sc/api/v3
+    description: Sendcloud platform — composed v3 endpoints covering the end-to-end fulfillment lifecycle.
+    resources:
+    - name: orders
+      path: /orders
+      operations:
+      - name: listorders
+        method: GET
+        description: List inbound customer orders.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+    - name: service-points
+      path: /service-points
+      operations:
+      - name: listservicepoints
+        method: GET
+        description: List drop-off service points near a destination address.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: country
+          in: query
+          type: string
+        - name: postal_code
+          in: query
+          type: string
+        - name: carrier
+          in: query
+          type: string
+    - name: shipments-announce
+      path: /shipments/announce
+      operations:
+      - name: announceshipment
+        method: POST
+        description: Create and announce a shipment to the carrier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: parcels-tracking-tracking_number
+      path: /parcels/tracking/{tracking_number}
+      operations:
+      - name: retrievetracking
+        method: GET
+        description: Retrieve tracking information for a parcel.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tracking_number
+          in: path
+          type: string
+          required: true
+    - name: returns
+      path: /returns
+      operations:
+      - name: createreturn
+        method: POST
+        description: Create a return shipment for an existing parcel.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.SENDCLOUD_PUBLIC_KEY}}'
+      password: '{{env.SENDCLOUD_PRIVATE_KEY}}'
+  exposes:
+  - type: mcp
+    namespace: sendcloud-mcp
+    port: 9100
+    transport: http
+    description: Composite MCP surface exposing the Sendcloud European fulfillment workflow.
+    tools:
+    - name: list-orders
+      description: List inbound customer orders pulled from connected integrations.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sendcloud.listorders
+      with:
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: find-service-points
+      description: Locate drop-off service points near a destination address.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sendcloud.listservicepoints
+      with:
+        country: tools.country
+        postal_code: tools.postal_code
+        carrier: tools.carrier
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: announce-shipment
+      description: Create and announce a shipment to the carrier synchronously.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sendcloud.announceshipment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-tracking
+      description: Retrieve normalised tracking information for a parcel.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sendcloud.retrievetracking
+      with:
+        tracking_number: tools.tracking_number
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-return
+      description: Create a return shipment for an existing parcel.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sendcloud.createreturn
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

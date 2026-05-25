@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sendcloud/main/json-schema/sendcloud-servicepoint-schema.json",
+  "title": "Service Point Search Result",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/ServicePointDetail"
+    },
+    {
+      "type": "object",
+      "description": "Service point returned in a list response.",
+      "properties": {
+        "distance": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "example": 85,
+          "description": "Distance in meters from the reference point to the service point. `null` when no reference point was provided."
+        }
+      },
+      "required": [
+        "distance"
+      ]
+    }
+  ]
+}

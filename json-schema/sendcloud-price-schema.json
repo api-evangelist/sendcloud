@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sendcloud/main/json-schema/sendcloud-price-schema.json",
+  "title": "Price Object",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "string",
+      "example": "12.65",
+      "pattern": "[\\d]+(\\.[\\d]+)?"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "minLength": 3,
+      "maxLength": 3,
+      "example": "USD"
+    }
+  }
+}

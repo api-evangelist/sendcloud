@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sendcloud/main/json-schema/sendcloud-deliveryoption-schema.json",
+  "title": "DeliveryOption",
+  "x-stoplight": {
+    "id": "1e5khic8yxpaw"
+  },
+  "type": [
+    "string",
+    "null"
+  ],
+  "description": "The options the customer has for returning this parcel:\n\n- `drop_off_point`: At a drop-off point - Print at home\n- `drop_off_labelless`: At a drop-off point - No printer needed\n- `in_store`: Return in store\n- `pickup`: Arrange a pick-up",
+  "minLength": 1,
+  "example": "drop_off_point",
+  "enum": [
+    "drop_off_point",
+    "drop_off_labelless",
+    "pickup",
+    "in_store",
+    null
+  ]
+}

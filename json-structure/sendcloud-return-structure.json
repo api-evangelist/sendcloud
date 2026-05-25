@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-structure.org/draft/2025/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sendcloud/main/json-structure/sendcloud-return-structure.json",
+  "title": "Sendcloud Return",
+  "description": "Logical structure of a Sendcloud v3 return request announced through POST /returns or POST /returns/announce-synchronously on https://panel.sendcloud.sc/api/v3.",
+  "type": "object",
+  "required": ["outgoing_parcel", "incoming_parcel", "delivery_option", "reason"],
+  "properties": {
+    "outgoing_parcel": {
+      "type": "object",
+      "description": "Reference to the original outgoing parcel being returned.",
+      "properties": {
+        "id": { "type": "string" },
+        "tracking_number": { "type": "string" }
+      }
+    },
+    "incoming_parcel": {
+      "type": "object",
+      "properties": {
+        "weight": {
+          "type": "object",
+          "properties": {
+            "value": { "type": "string" },
+            "unit": { "type": "string", "enum": ["kg", "g", "lb", "oz"] }
+          }
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": { "type": "string" },
+              "quantity": { "type": "integer", "minimum": 1 },
+              "return_reason": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "delivery_option": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["drop_off_point", "in_store", "pickup", "postbox"]
+        },
+        "service_point_id": { "type": "string" }
+      }
+    },
+    "reason": { "type": "string" },
+    "comment": { "type": "string" },
+    "refund": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "string" },
+        "currency": { "type": "string" }
+      }
+    },
+    "from_address": { "$ref": "#/$defs/Address" }
+  },
+  "$defs": {
+    "Address": {
+      "type": "object",
+      "required": ["name", "address_line_1", "city", "postal_code", "country_code"],
+      "properties": {
+        "name": { "type": "string" },
+        "company_name": { "type": "string" },
+        "address_line_1": { "type": "string" },
+        "address_line_2": { "type": "string" },
+        "house_number": { "type": "string" },
+        "city": { "type": "string" },
+        "postal_code": { "type": "string" },
+        "country_code": { "type": "string", "minLength": 2, "maxLength": 2 },
+        "phone_number": { "type": "string" },
+        "email": { "type": "string", "format": "email" }
+      }
+    }
+  }
+}

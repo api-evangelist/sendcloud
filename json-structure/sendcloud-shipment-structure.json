@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-structure.org/draft/2025/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sendcloud/main/json-structure/sendcloud-shipment-structure.json",
+  "title": "Sendcloud Shipment",
+  "description": "Logical structure of a Sendcloud v3 shipment as announced through POST /shipments/announce on https://panel.sendcloud.sc/api/v3.",
+  "type": "object",
+  "required": ["ship_from", "ship_to", "parcels"],
+  "properties": {
+    "external_reference": { "type": "string", "description": "Merchant reference used to correlate the shipment with the originating order." },
+    "ship_from": { "$ref": "#/$defs/Address" },
+    "ship_to": { "$ref": "#/$defs/Address" },
+    "parcels": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/Parcel" }
+    },
+    "shipping_method_code": { "type": "string", "description": "Carrier service identifier (e.g. dpd:standard)." },
+    "service_point_id": { "type": "string", "description": "Optional drop-off / pick-up service point id." },
+    "weight": { "$ref": "#/$defs/Weight" },
+    "total_value": { "$ref": "#/$defs/Price" },
+    "insurance": {
+      "type": "object",
+      "properties": {
+        "amount": { "type": "number" },
+        "currency": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "Address": {
+      "type": "object",
+      "required": ["name", "address_line_1", "city", "postal_code", "country_code"],
+      "properties": {
+        "name": { "type": "string" },
+        "company_name": { "type": "string" },
+        "address_line_1": { "type": "string" },
+        "address_line_2": { "type": "string" },
+        "house_number": { "type": "string" },
+        "city": { "type": "string" },
+        "postal_code": { "type": "string" },
+        "country_code": { "type": "string", "minLength": 2, "maxLength": 2 },
+        "country_state_code": { "type": "string" },
+        "phone_number": { "type": "string" },
+        "email": { "type": "string", "format": "email" }
+      }
+    },
+    "Parcel": {
+      "type": "object",
+      "properties": {
+        "weight": { "$ref": "#/$defs/Weight" },
+        "length": { "type": "string" },
+        "width": { "type": "string" },
+        "height": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": { "type": "string" },
+              "quantity": { "type": "integer", "minimum": 1 },
+              "weight": { "$ref": "#/$defs/Weight" },
+              "value": { "$ref": "#/$defs/Price" },
+              "harmonized_system_code": { "type": "string" },
+              "origin_country": { "type": "string", "minLength": 2, "maxLength": 2 }
+            }
+          }
+        }
+      }
+    },
+    "Weight": {
+      "type": "object",
+      "required": ["value", "unit"],
+      "properties": {
+        "value": { "type": "string" },
+        "unit": { "type": "string", "enum": ["kg", "g", "lb", "oz"] }
+      }
+    },
+    "Price": {
+      "type": "object",
+      "required": ["value", "currency"],
+      "properties": {
+        "value": { "type": "string" },
+        "currency": { "type": "string", "minLength": 3, "maxLength": 3 }
+      }
+    }
+  }
+}

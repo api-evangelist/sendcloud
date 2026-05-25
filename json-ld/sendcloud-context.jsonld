@@ -1,0 +1,75 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "sendcloud": "https://sendcloud.dev/schema/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Shipment": "sendcloud:Shipment",
+    "Parcel": "sendcloud:Parcel",
+    "Order": "sendcloud:Order",
+    "Return": "sendcloud:Return",
+    "ServicePoint": "sendcloud:ServicePoint",
+    "Carrier": "sendcloud:Carrier",
+    "ShippingMethod": "sendcloud:ShippingMethod",
+    "Label": "sendcloud:Label",
+    "ParcelDocument": "sendcloud:ParcelDocument",
+    "TrackingEvent": "sendcloud:TrackingEvent",
+    "EventSubscription": "sendcloud:EventSubscription",
+    "Integration": "sendcloud:Integration",
+
+    "id": "schema:identifier",
+    "external_reference": "schema:identifier",
+    "external_order_id": "schema:identifier",
+    "created_at": { "@id": "schema:dateCreated", "@type": "xsd:dateTime" },
+    "updated_at": { "@id": "schema:dateModified", "@type": "xsd:dateTime" },
+    "status": "schema:status",
+
+    "ship_from": { "@id": "schema:sender", "@type": "schema:PostalAddress" },
+    "ship_to": { "@id": "schema:recipient", "@type": "schema:PostalAddress" },
+    "from_address": { "@id": "schema:sender", "@type": "schema:PostalAddress" },
+    "to_address": { "@id": "schema:recipient", "@type": "schema:PostalAddress" },
+
+    "name": "schema:name",
+    "company_name": "schema:legalName",
+    "address_line_1": "schema:streetAddress",
+    "address_line_2": "sendcloud:streetAddress2",
+    "house_number": "sendcloud:houseNumber",
+    "city": "schema:addressLocality",
+    "country_state_code": "schema:addressRegion",
+    "postal_code": "schema:postalCode",
+    "country_code": "schema:addressCountry",
+    "phone_number": "schema:telephone",
+    "email": "schema:email",
+
+    "weight": "schema:weight",
+    "length": { "@id": "schema:depth", "@type": "xsd:string" },
+    "width": { "@id": "schema:width", "@type": "xsd:string" },
+    "height": { "@id": "schema:height", "@type": "xsd:string" },
+    "value": { "@id": "schema:price", "@type": "xsd:string" },
+    "currency": "schema:priceCurrency",
+
+    "shipping_method": "sendcloud:shippingMethod",
+    "shipping_product": "sendcloud:shippingProduct",
+    "carrier": "schema:provider",
+    "service_point_id": "sendcloud:servicePointId",
+
+    "tracking_number": "schema:trackingNumber",
+    "tracking_url": { "@id": "schema:trackingUrl", "@type": "@id" },
+    "label_url": { "@id": "schema:url", "@type": "@id" },
+
+    "items": { "@id": "sendcloud:items", "@container": "@list" },
+    "parcels": { "@id": "sendcloud:parcels", "@container": "@list" },
+
+    "parcel_items": { "@id": "sendcloud:parcelItems", "@container": "@list" },
+    "harmonized_system_code": "sendcloud:harmonizedSystemCode",
+    "origin_country": "sendcloud:originCountry",
+
+    "opening_times": { "@id": "schema:openingHours", "@type": "@list" },
+    "latitude": "schema:latitude",
+    "longitude": "schema:longitude",
+
+    "event_type": "schema:eventType",
+    "event_data": "schema:additionalProperty",
+    "webhook_url": { "@id": "schema:url", "@type": "@id" }
+  }
+}

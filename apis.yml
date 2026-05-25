@@ -1,0 +1,521 @@
+aid: sendcloud
+url: https://raw.githubusercontent.com/api-evangelist/sendcloud/refs/heads/main/apis.yml
+apis:
+- aid: sendcloud:shipments-api-v3
+  name: Sendcloud Shipments API v3
+  tags:
+  - Shipping
+  - Labels
+  - Logistics
+  - Carriers
+  humanURL: https://sendcloud.dev/api/v3/shipments/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  properties:
+  - url: https://sendcloud.dev/api/v3/shipments/
+    type: Documentation
+  - url: https://sendcloud.dev/.openapi/v3/shipments/openapi.yaml
+    type: OpenAPI
+  - url: openapi/sendcloud-shipments-openapi.yml
+    type: OpenAPI
+  - url: https://sendcloud.dev/api/v3/shipments/create-and-announce-a-shipment-synchronously
+    type: APIReference
+  - url: json-structure/sendcloud-shipment-structure.json
+    type: JSONStructure
+  - url: examples/sendcloud-announce-shipment-example.json
+    type: Example
+  - url: capabilities/sendcloud-shipments.yaml
+    type: NaftikoCapability
+  description: >-
+    Create, announce, retrieve, and cancel outgoing shipments and their associated parcels on the Sendcloud platform.
+    Supports synchronous and asynchronous announcement, shipping-rules-driven defaults, address validation, multicollo
+    multi-parcel shipments, and return-portal generation across 160+ European carriers.
+- aid: sendcloud:orders-api-v3
+  name: Sendcloud Orders API v3
+  tags:
+  - Orders
+  - Ecommerce
+  humanURL: https://sendcloud.dev/api/v3/orders/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  properties:
+  - url: https://sendcloud.dev/api/v3/orders/
+    type: Documentation
+  - url: openapi/sendcloud-v3-orders-openapi.yml
+    type: OpenAPI
+  - url: json-schema/sendcloud-order-schema.json
+    type: JSONSchema
+  - url: capabilities/sendcloud-orders.yaml
+    type: NaftikoCapability
+  description: >-
+    Manage orders pulled in from connected commerce platforms and marketplaces. List, retrieve, update, and delete
+    orders before converting them into shipments via the Ship an Order flow.
+- aid: sendcloud:ship-an-order-api-v3
+  name: Sendcloud Ship an Order API v3
+  tags:
+  - Orders
+  - Shipping
+  - Fulfillment
+  humanURL: https://sendcloud.dev/api/v3/ship-an-order/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  properties:
+  - url: https://sendcloud.dev/api/v3/ship-an-order/
+    type: Documentation
+  - url: openapi/sendcloud-v3-ship-an-order-openapi.yml
+    type: OpenAPI
+  description: >-
+    Composite v3 flow that turns an existing order into a shipment, requests a label, and returns a usable parcel
+    in one call.
+- aid: sendcloud:returns-api-v3
+  name: Sendcloud Returns API v3
+  tags:
+  - Returns
+  - Reverse Logistics
+  humanURL: https://sendcloud.dev/api/v3/returns/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  properties:
+  - url: https://sendcloud.dev/api/v3/returns/
+    type: Documentation
+  - url: openapi/sendcloud-v3-returns-openapi.yml
+    type: OpenAPI
+  - url: json-schema/sendcloud-return-schema.json
+    type: JSONSchema
+  - url: json-schema/sendcloud-deliveryoption-schema.json
+    type: JSONSchema
+  - url: json-structure/sendcloud-return-structure.json
+    type: JSONStructure
+  - url: examples/sendcloud-create-return-example.json
+    type: Example
+  - url: capabilities/sendcloud-returns.yaml
+    type: NaftikoCapability
+  description: >-
+    Create, validate, list, announce, and cancel return shipments. Supports drop-off at service point, in-store,
+    home pickup, and postbox delivery options across European carriers.
+- aid: sendcloud:service-points-api-v3
+  name: Sendcloud Service Points API v3
+  tags:
+  - Service Points
+  - Carriers
+  - Last Mile
+  humanURL: https://sendcloud.dev/api/v3/service-points/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  properties:
+  - url: https://sendcloud.dev/api/v3/service-points/
+    type: Documentation
+  - url: openapi/sendcloud-v3-service-points-openapi.yml
+    type: OpenAPI
+  - url: json-schema/sendcloud-servicepoint-schema.json
+    type: JSONSchema
+  - url: json-schema/sendcloud-servicepointdetail-schema.json
+    type: JSONSchema
+  - url: json-schema/sendcloud-servicepointaddress-schema.json
+    type: JSONSchema
+  - url: examples/sendcloud-list-service-points-example.json
+    type: Example
+  - url: capabilities/sendcloud-service-points.yaml
+    type: NaftikoCapability
+  description: >-
+    Look up parcel-shop, locker, and post-office drop-off / pickup locations across 160+ European carriers,
+    filter by country, postcode, carrier, and radius, and check service-point availability.
+- aid: sendcloud:parcel-tracking-api-v3
+  name: Sendcloud Parcel Tracking API v3
+  tags:
+  - Tracking
+  - Last Mile
+  humanURL: https://sendcloud.dev/api/v3/parcel-tracking/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  properties:
+  - url: https://sendcloud.dev/api/v3/parcel-tracking/
+    type: Documentation
+  - url: openapi/sendcloud-v3-parcel-tracking-openapi.yml
+    type: OpenAPI
+  - url: json-schema/sendcloud-parceltrackingresponse-schema.json
+    type: JSONSchema
+  - url: json-schema/sendcloud-parceltrackingcreaterequest-schema.json
+    type: JSONSchema
+  - url: capabilities/sendcloud-parcel-tracking.yaml
+    type: NaftikoCapability
+  description: >-
+    Retrieve normalised tracking information for a parcel by tracking number and register external parcels for
+    Sendcloud's branded tracking experience and webhook notifications.
+- aid: sendcloud:parcel-documents-api-v3
+  name: Sendcloud Parcel Documents API v3
+  tags:
+  - Labels
+  - Customs
+  - Documents
+  humanURL: https://sendcloud.dev/api/v3/parcel-documents/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  properties:
+  - url: https://sendcloud.dev/api/v3/parcel-documents/
+    type: Documentation
+  - url: openapi/sendcloud-v3-parcel-documents-openapi.yml
+    type: OpenAPI
+  - url: capabilities/sendcloud-parcel-documents.yaml
+    type: NaftikoCapability
+  description: >-
+    Retrieve shipping labels, customs declarations (CN22 / CN23), commercial invoices, and QR codes for
+    individual parcels or in batch.
+- aid: sendcloud:webhooks-api-v3
+  name: Sendcloud Webhooks API v3
+  tags:
+  - Webhooks
+  - Events
+  humanURL: https://sendcloud.dev/api/v3/webhooks/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  properties:
+  - url: https://sendcloud.dev/api/v3/webhooks/
+    type: Documentation
+  - url: openapi/sendcloud-v3-webhooks-openapi.yml
+    type: OpenAPI
+  description: >-
+    Outbound webhook delivery surface — parcel-status-changed, return-created and other typed events sent to
+    merchant-configured HTTPS endpoints.
+- aid: sendcloud:event-subscriptions-api-v3
+  name: Sendcloud Event Subscriptions API v3
+  tags:
+  - Webhooks
+  - Events
+  - Subscriptions
+  humanURL: https://sendcloud.dev/api/v3/event-subscriptions/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  properties:
+  - url: https://sendcloud.dev/api/v3/event-subscriptions/
+    type: Documentation
+  - url: openapi/sendcloud-v3-event-subscriptions-openapi.yml
+    type: OpenAPI
+  - url: capabilities/sendcloud-event-subscriptions.yaml
+    type: NaftikoCapability
+  description: >-
+    Manage typed event subscriptions and webhook delivery connections — register endpoints, list subscriptions,
+    and broadcast test events.
+- aid: sendcloud:integrations-api-v3
+  name: Sendcloud Integrations API v3
+  tags:
+  - Integrations
+  - Marketplaces
+  humanURL: https://sendcloud.dev/api/v3/integrations/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  properties:
+  - url: https://sendcloud.dev/api/v3/integrations/
+    type: Documentation
+  - url: openapi/sendcloud-v3-integrations-openapi.yml
+    type: OpenAPI
+  description: >-
+    Manage connectors between Sendcloud and external commerce / WMS / marketplace platforms (Shopify, WooCommerce,
+    Magento, Amazon, Etsy, etc.).
+- aid: sendcloud:analytics-api-v3
+  name: Sendcloud Analytics API v3
+  tags:
+  - Analytics
+  - Reporting
+  humanURL: https://sendcloud.dev/api/v3/analytics/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  properties:
+  - url: https://sendcloud.dev/api/v3/analytics/
+    type: Documentation
+  - url: openapi/sendcloud-v3-analytics-openapi.yml
+    type: OpenAPI
+  description: >-
+    Aggregated shipping spend, carrier mix, service-level performance, and return-rate analytics.
+- aid: sendcloud:reporting-api-v3
+  name: Sendcloud Reporting API v3
+  tags:
+  - Reporting
+  - Billing
+  humanURL: https://sendcloud.dev/api/v3/reporting/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  properties:
+  - url: https://sendcloud.dev/api/v3/reporting/
+    type: Documentation
+  - url: openapi/sendcloud-v3-reporting-openapi.yml
+    type: OpenAPI
+  description: >-
+    Per-shipment cost reports and billing line items for back-office reconciliation.
+- aid: sendcloud:parcels-api-v2
+  name: Sendcloud Parcels API v2
+  tags:
+  - Parcels
+  - Legacy
+  - Shipping
+  humanURL: https://sendcloud.dev/api/v2/parcels/
+  baseURL: https://panel.sendcloud.sc/api/v2
+  properties:
+  - url: https://sendcloud.dev/api/v2/parcels/
+    type: Documentation
+  - url: openapi/sendcloud-v2-parcels-openapi.yml
+    type: OpenAPI
+  description: >-
+    Legacy v2 Parcels surface for announcing shipments and retrieving parcel state. Superseded by the v3
+    Shipments API; documented for migration paths.
+- aid: sendcloud:labels-api-v2
+  name: Sendcloud Labels API v2
+  tags:
+  - Labels
+  - Legacy
+  humanURL: https://sendcloud.dev/api/v2/labels/
+  baseURL: https://panel.sendcloud.sc/api/v2
+  properties:
+  - url: https://sendcloud.dev/api/v2/labels/
+    type: Documentation
+  - url: openapi/sendcloud-v2-labels-openapi.yml
+    type: OpenAPI
+  description: >-
+    Legacy v2 Labels surface for downloading the shipping label PDF / ZPL associated with a parcel. Superseded
+    by the v3 Parcel Documents API.
+- aid: sendcloud:tracking-api-v2
+  name: Sendcloud Tracking API v2
+  tags:
+  - Tracking
+  - Legacy
+  humanURL: https://sendcloud.dev/api/v2/tracking/
+  baseURL: https://panel.sendcloud.sc/api/v2
+  properties:
+  - url: https://sendcloud.dev/api/v2/tracking/
+    type: Documentation
+  - url: openapi/sendcloud-v2-tracking-openapi.yml
+    type: OpenAPI
+  description: Legacy v2 Tracking surface. Superseded by the v3 Parcel Tracking API.
+- aid: sendcloud:webhooks-api-v2
+  name: Sendcloud Webhooks API v2
+  tags:
+  - Webhooks
+  - Legacy
+  humanURL: https://sendcloud.dev/api/v2/webhooks/
+  baseURL: https://panel.sendcloud.sc/api/v2
+  properties:
+  - url: https://sendcloud.dev/api/v2/webhooks/
+    type: Documentation
+  - url: openapi/sendcloud-v2-webhooks-openapi.yml
+    type: OpenAPI
+  description: Legacy v2 Webhooks surface. Superseded by the v3 Event Subscriptions API.
+- aid: sendcloud:integrations-api-v2
+  name: Sendcloud Integrations API v2
+  tags:
+  - Integrations
+  - Legacy
+  humanURL: https://sendcloud.dev/api/v2/integrations/
+  baseURL: https://panel.sendcloud.sc/api/v2
+  properties:
+  - url: https://sendcloud.dev/api/v2/integrations/
+    type: Documentation
+  - url: openapi/sendcloud-v2-integrations-openapi.yml
+    type: OpenAPI
+  description: Legacy v2 Integrations surface managing connectors to commerce platforms.
+- aid: sendcloud:analytics-api-v2
+  name: Sendcloud Analytics API v2
+  tags:
+  - Analytics
+  - Legacy
+  humanURL: https://sendcloud.dev/api/v2/analytics/
+  baseURL: https://panel.sendcloud.sc/api/v2
+  properties:
+  - url: https://sendcloud.dev/api/v2/analytics/
+    type: Documentation
+  - url: openapi/sendcloud-v2-analytics-openapi.yml
+    type: OpenAPI
+  description: Legacy v2 Analytics surface exposing aggregated shipping metrics.
+- aid: sendcloud:reporting-api-v2
+  name: Sendcloud Reporting API v2
+  tags:
+  - Reporting
+  - Legacy
+  humanURL: https://sendcloud.dev/api/v2/reporting/
+  baseURL: https://panel.sendcloud.sc/api/v2
+  properties:
+  - url: https://sendcloud.dev/api/v2/reporting/
+    type: Documentation
+  - url: openapi/sendcloud-v2-reporting-openapi.yml
+    type: OpenAPI
+  description: Legacy v2 Reporting surface for shipment-level billing line items.
+- aid: sendcloud:parcel-documents-api-v2
+  name: Sendcloud Parcel Documents API v2
+  tags:
+  - Documents
+  - Customs
+  - Legacy
+  humanURL: https://sendcloud.dev/api/v2/parcel-documents/
+  baseURL: https://panel.sendcloud.sc/api/v2
+  properties:
+  - url: https://sendcloud.dev/api/v2/parcel-documents/
+    type: Documentation
+  - url: openapi/sendcloud-v2-parcel-documents-openapi.yml
+    type: OpenAPI
+  description: Legacy v2 Parcel Documents surface for retrieving labels and customs paperwork.
+name: Sendcloud
+tags:
+- Shipping
+- Logistics
+- Ecommerce
+- Carriers
+- Labels
+- Returns
+- Tracking
+- Europe
+kind: contract
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+created: '2026-05-25'
+modified: '2026-05-25'
+position: Consumer
+description: >-
+  Sendcloud is Europe's leading shipping platform for e-commerce, headquartered in Eindhoven, Netherlands.
+  The platform connects 30,000+ merchants to 160+ carriers (DHL, DPD, UPS, GLS, FedEx, PostNL, bpost, La Poste,
+  Royal Mail, Hermes, and many more) and 100+ commerce / WMS / marketplace integrations across the UK,
+  Netherlands, Belgium, France, Germany, Austria, Italy, and Spain. The Sendcloud APIs cover the full
+  fulfillment lifecycle — Orders, Ship an Order, Shipments, Service Points, Parcel Tracking, Parcel
+  Documents, Returns, Event Subscriptions, Webhooks, Integrations, Analytics, and Reporting — over a versioned
+  v2 / v3 REST surface on https://panel.sendcloud.sc, authenticated with HTTP Basic (public + private key)
+  or OAuth 2.0 client credentials.
+integrations:
+- name: Shopify
+- name: WooCommerce
+- name: Magento
+- name: PrestaShop
+- name: BigCommerce
+- name: Lightspeed
+- name: Wix
+- name: Squarespace
+- name: Amazon
+- name: eBay
+- name: Etsy
+- name: Bol.com
+- name: CCV Shop
+- name: ShopWare
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+specificationVersion: '0.19'
+common:
+- type: Website
+  url: https://www.sendcloud.com
+- type: DeveloperPortal
+  url: https://sendcloud.dev
+- type: Documentation
+  url: https://sendcloud.dev/docs/getting-started/
+- type: APIReference
+  url: https://sendcloud.dev/api/v3/
+- type: GettingStarted
+  url: https://sendcloud.dev/docs/getting-started/
+- type: Quickstart
+  url: https://sendcloud.dev/docs/getting-started/
+- type: Authentication
+  url: https://sendcloud.dev/docs/getting-started/authentication/
+- type: RateLimits
+  url: https://sendcloud.dev/docs/getting-started/rate-limits/
+- type: Pagination
+  url: https://sendcloud.dev/api/v3/pagination/
+- type: APIVersionGuide
+  url: https://sendcloud.dev/docs/getting-started/api-version-guide/
+- type: MigrationGuide
+  url: https://sendcloud.dev/docs/getting-started/migration-guidelines-for-api-v3/
+- type: ChangeLog
+  url: https://sendcloud.dev/api/v3/changelog/
+- type: ChangeLog
+  url: https://sendcloud.dev/api/v2/changelog/
+- type: Glossary
+  url: https://sendcloud.dev/docs/getting-started/glossary/
+- type: Postman
+  url: https://sendcloud.dev/docs/getting-started/postman/
+- type: Pricing
+  url: https://www.sendcloud.com/pricing/
+- type: Blog
+  url: https://www.sendcloud.com/blog/
+- type: Support
+  url: https://support.sendcloud.com/
+- type: ReleaseNotes
+  url: https://releaselog.sendcloud.com/
+- type: GitHubOrganization
+  url: https://github.com/Sendcloud
+- type: LinkedIn
+  url: https://www.linkedin.com/company/sendcloud/
+- type: LLMsTxt
+  url: https://sendcloud.dev/llms.txt
+- url: rules/sendcloud-rules.yml
+  type: SpectralRules
+- url: vocabulary/sendcloud-vocabulary.yml
+  type: Vocabulary
+- url: json-ld/sendcloud-context.jsonld
+  type: JSONLD
+- url: capabilities/european-shipping-fulfillment.yaml
+  type: NaftikoCapability
+- url: plans/sendcloud-plans-pricing.yml
+  type: Plans
+- url: rate-limits/sendcloud-rate-limits.yml
+  type: RateLimits
+- url: finops/sendcloud-finops.yml
+  type: FinOps
+- type: SDK
+  url: https://github.com/Sendcloud/SendCloud-API-PHP-Wrapper
+- type: SDK
+  url: https://github.com/Sendcloud/api-integration-example
+- type: Integration
+  url: https://github.com/Sendcloud/prestashop-thirtybees-module
+- type: Integration
+  url: https://github.com/Sendcloud/sendcloud
+- type: Integration
+  url: https://github.com/Sendcloud/salesforce-b2c-commerce-cartridge
+- type: Integration
+  url: https://github.com/Sendcloud/spp-integration-example
+- type: Features
+  data:
+  - name: 160+ European carriers
+    description: DHL, DPD, UPS, GLS, FedEx, PostNL, bpost, La Poste, Royal Mail, Hermes, Colissimo, Chronopost, Mondial Relay, and many more.
+  - name: 100+ commerce / WMS / marketplace integrations
+    description: Shopify, WooCommerce, Magento, PrestaShop, BigCommerce, Amazon, eBay, Etsy, Bol.com, Lightspeed.
+  - name: Service points across Europe
+    description: Aggregated parcel-shop, locker, and post-office network exposed through one Service Points API.
+  - name: Branded tracking
+    description: Merchant-branded tracking pages, email / SMS / WhatsApp delivery notifications.
+  - name: Returns portal
+    description: Self-service consumer return portal with drop-off, pickup, postbox, and in-store options.
+  - name: Multicollo (multi-parcel) shipments
+    description: Multiple physical parcels announced under a single shipment.
+  - name: Pack & Go
+    description: Warehouse-floor pick-and-pack workflow.
+  - name: REST API at panel.sendcloud.sc
+    description: Versioned v2 and v3 REST surface.
+  - name: HTTP Basic + OAuth 2.0 client credentials
+    description: Public/private key Basic auth or token exchange at https://account.sendcloud.com/oauth2/token (scope api).
+  - name: Cursor-based pagination
+    description: v3 list endpoints return next/previous cursors.
+  - name: Typed event subscriptions and webhooks
+    description: parcel-status-changed, return-created and other typed events delivered to merchant endpoints.
+  - name: Rate limits by HTTP safety class
+    description: 1,000 GET / minute and 100 unsafe / minute (15 burst / second) per integration.
+  - name: Multi-currency billing
+    description: Subscription priced in EUR; carrier postage in local currency.
+  - name: Postman collection + OpenAPI v3
+    description: Official Postman and downloadable OpenAPI for v3 surfaces.
+  - name: Marketplace integration guidelines
+    description: Sendcloud-Partner-Id header for third-party platforms calling on behalf of merchants.
+  sources:
+  - https://www.sendcloud.com
+  - https://sendcloud.dev/llms.txt
+  updated: '2026-05-25'
+- type: UseCases
+  data:
+  - name: European D2C fulfillment
+    description: Direct-to-consumer brands shipping across the EU from a central warehouse.
+  - name: Cross-border ecommerce
+    description: UK / EU cross-border shipping with customs documents and carrier routing.
+  - name: Marketplace shipping
+    description: Brands selling on Amazon, eBay, Etsy, and Bol.com aggregating fulfillment in one platform.
+  - name: 3PL / WMS integration
+    description: Warehouse providers calling Sendcloud on behalf of multiple merchants via the Integrations API and Sendcloud-Partner-Id header.
+  - name: Branded post-purchase experience
+    description: Merchant-branded tracking, return portal, and notifications.
+  - name: Returns automation
+    description: Self-service returns with multi-method drop-off / pickup.
+- type: Solutions
+  data:
+  - name: Lite
+    description: 'EUR 33/month - 400 labels/month, 3 integrations, branded tracking.'
+  - name: Growth
+    description: 'EUR 99/month - 1,000 labels/month, Pack & Go, WhatsApp notifications.'
+  - name: Premium
+    description: 'EUR 195/month - 10,000 labels/month, return management module, analytics.'
+  - name: Pro
+    description: 'EUR 799/month - 30,000 labels/month, dedicated CSM, marketplace solutions.'
+  - name: Enterprise
+    description: Custom volumes, SLAs, custom development.
+- type: Integrations
+  url: https://www.sendcloud.com/integrations/

@@ -1,0 +1,6 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/sendcloud/main/json-schema/sendcloud-parceltrackingresponse-schema.json",
+  "title": "Sendcloud ParcelTrackingResponse",
+  "$ref": "#/components/schemas/parcel-tracking-response"
+}
