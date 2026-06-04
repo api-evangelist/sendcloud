@@ -1,0 +1,97 @@
+arazzo: 1.0.1
+info:
+  title: Sendcloud Announce a Shipment with Label
+  summary: Announce a shipment synchronously, then verify it and read its label document link.
+  description: >-
+    Creates and announces a shipment in a single synchronous call so the
+    carrier label is generated immediately, then re-reads the shipment by its
+    id to confirm it persisted and to surface the parcel id, tracking number,
+    and the label document download link. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: shipmentsApi
+  url: ../openapi/sendcloud-shipments-openapi.yml
+  type: openapi
+workflows:
+- workflowId: announce-shipment-with-label
+  summary: Announce a shipment synchronously and retrieve its generated label link.
+  description: >-
+    Sends a synchronous announce request with the recipient address, sender
+    address, chosen shipping option, and a single parcel, then retrieves the
+    created shipment to expose the parcel id, tracking number, and label link.
+  inputs:
+    type: object
+    required:
+    - toAddress
+    - fromAddress
+    - shippingOptionCode
+    - parcels
+    properties:
+      toAddress:
+        type: object
+        description: Recipient address object (name, address_line_1, postal_code, city, country_code, etc.).
+      fromAddress:
+        type: object
+        description: Sender address object (name, address_line_1, postal_code, city, country_code, etc.).
+      shippingOptionCode:
+        type: string
+        description: The shipping option code selecting carrier and method (e.g. postnl:standard).
+      contractId:
+        type: integer
+        description: Optional direct carrier contract id to use for the shipment.
+      orderNumber:
+        type: string
+        description: Your order number to associate with the shipment.
+      parcels:
+        type: array
+        description: List of parcel objects with dimensions, weight, and optional parcel_items.
+  steps:
+  - stepId: announceShipment
+    description: >-
+      Create and announce the shipment synchronously so the label is generated
+      in the same call, returning the shipment id and its parcels.
+    operationId: sc-public-v3-scp-post-announce_shipment
+    requestBody:
+      contentType: application/json
+      payload:
+        label_details:
+          mime_type: application/pdf
+          dpi: 72
+        to_address: $inputs.toAddress
+        from_address: $inputs.fromAddress
+        ship_with:
+          type: shipping_option_code
+          properties:
+            shipping_option_code: $inputs.shippingOptionCode
+            contract_id: $inputs.contractId
+        order_number: $inputs.orderNumber
+        parcels: $inputs.parcels
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      shipmentId: $response.body#/data/id
+      parcelId: $response.body#/data/parcels/0/id
+      trackingNumber: $response.body#/data/parcels/0/tracking_number
+      labelLink: $response.body#/data/parcels/0/documents/0/link
+  - stepId: verifyShipment
+    description: >-
+      Re-read the shipment by its id to confirm it persisted and to surface the
+      current parcel status and tracking details.
+    operationId: sc-public-v3-scp-get-shipment_by_id
+    parameters:
+    - name: id
+      in: path
+      value: $steps.announceShipment.outputs.shipmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      shipmentData: $response.body#/data
+      parcelStatus: $response.body#/data/parcels/0/status/code
+  outputs:
+    shipmentId: $steps.announceShipment.outputs.shipmentId
+    parcelId: $steps.announceShipment.outputs.parcelId
+    trackingNumber: $steps.announceShipment.outputs.trackingNumber
+    labelLink: $steps.announceShipment.outputs.labelLink
+    parcelStatus: $steps.verifyShipment.outputs.parcelStatus

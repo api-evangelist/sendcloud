@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: Sendcloud Register an External Parcel and Track It
+  summary: Register a parcel labelled outside Sendcloud for tracking, then retrieve its tracking record.
+  description: >-
+    Registers a parcel whose label was created outside of Sendcloud purely for
+    tracking, supplying the tracking number, carrier, sender and recipient
+    addresses, and shipping option, then queries the v3 Parcel Tracking API by
+    that same tracking number to surface the parcel's status and recent events.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: parcelTrackingApi
+  url: ../openapi/sendcloud-v3-parcel-tracking-openapi.yml
+  type: openapi
+workflows:
+- workflowId: register-external-parcel-track
+  summary: Register an externally-labelled parcel for tracking and retrieve its tracking record.
+  description: >-
+    Registers an external parcel for tracking with its tracking number, carrier,
+    addresses, and shipping option, then retrieves the parcel tracking record
+    for that tracking number.
+  inputs:
+    type: object
+    required:
+    - announcedAt
+    - fromAddress
+    - toAddress
+    - sourceId
+    - trackingNumber
+    - carrierCode
+    - shippingOptionCode
+    properties:
+      announcedAt:
+        type: string
+        description: Timestamp the parcel was announced to the carrier (ISO 8601 date-time).
+      fromAddress:
+        type: object
+        description: Sender address object (name, address_line_1, postal_code, city, country_code).
+      toAddress:
+        type: object
+        description: Recipient address object (name, address_line_1, postal_code, city, country_code).
+      sourceId:
+        type: string
+        description: External identifier linking this parcel to your own system.
+      trackingNumber:
+        type: string
+        description: The carrier tracking number to register and then track.
+      carrierCode:
+        type: string
+        description: Sendcloud carrier code for the tracking number (e.g. postnl).
+      shippingOptionCode:
+        type: string
+        description: Shipping option code so the parcel appears in analytics (e.g. postnl:standard).
+  steps:
+  - stepId: registerParcel
+    description: >-
+      Register the externally-labelled parcel for tracking, supplying its
+      tracking number, carrier, addresses, and shipping option.
+    operationId: sc-public-v3-shipping_intelligence_engine-post-register_parcel_for_tracking
+    requestBody:
+      contentType: application/json
+      payload:
+        announced_at: $inputs.announcedAt
+        from_address: $inputs.fromAddress
+        to_address: $inputs.toAddress
+        source_id: $inputs.sourceId
+        ship_with:
+          type: shipping_option_code
+          properties:
+            shipping_option_code: $inputs.shippingOptionCode
+        shipment:
+          shipping_option_code: $inputs.shippingOptionCode
+        tracking_number:
+          carrier_code: $inputs.carrierCode
+          tracking_identifier: $inputs.trackingNumber
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sourceId: $response.body#/source_id
+  - stepId: trackParcel
+    description: >-
+      Retrieve the parcel tracking record by the registered tracking number to
+      surface its current status and recent tracking events.
+    operationId: sc-public-v3-shipping_intelligence_engine-get-get_parcel_by_tracking_number
+    parameters:
+    - name: tracking_number
+      in: path
+      value: $inputs.trackingNumber
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      events: $response.body#/events
+      trackingNumbers: $response.body#/tracking_numbers
+  outputs:
+    sourceId: $steps.registerParcel.outputs.sourceId
+    events: $steps.trackParcel.outputs.events
+    trackingNumbers: $steps.trackParcel.outputs.trackingNumbers

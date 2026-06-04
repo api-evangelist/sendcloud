@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Sendcloud Create a Parcel and Track its Shipment
+  summary: Create a labelled parcel, then poll its tracking until it is en route.
+  description: >-
+    Creates a parcel requesting a label and then uses the returned tracking
+    number to query the Tracking API, branching on the latest parent status:
+    when the parcel is still being announced the workflow loops back to poll
+    again, and once the carrier reports it on route the workflow ends. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: parcelsApi
+  url: ../openapi/sendcloud-v2-parcels-openapi.yml
+  type: openapi
+- name: trackingApi
+  url: ../openapi/sendcloud-v2-tracking-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-parcel-track-shipment
+  summary: Create a labelled parcel and poll its tracking status until it is on route.
+  description: >-
+    Creates a single parcel with a label request, captures the tracking number,
+    and polls the Tracking API, looping while the parcel is still being
+    announced and finishing once it is on route.
+  inputs:
+    type: object
+    required:
+    - name
+    - address
+    - city
+    - postalCode
+    - country
+    - shippingMethodId
+    properties:
+      name:
+        type: string
+        description: Name of the recipient.
+      address:
+        type: string
+        description: Street address of the recipient.
+      houseNumber:
+        type: string
+        description: House number of the recipient.
+      city:
+        type: string
+        description: City of the recipient.
+      postalCode:
+        type: string
+        description: Postal code of the recipient.
+      country:
+        type: string
+        description: ISO 2-letter country code of the recipient.
+      weight:
+        type: string
+        description: Weight of the parcel in kilograms (e.g. "2.000").
+      shippingMethodId:
+        type: integer
+        description: The id of the shipping method to use for the parcel.
+  steps:
+  - stepId: createParcel
+    description: >-
+      Create a single parcel and request a label, returning the tracking number
+      used to follow the shipment.
+    operationId: sc-public-v2-scp-post-create_parcel
+    requestBody:
+      contentType: application/json
+      payload:
+        parcel:
+          name: $inputs.name
+          address: $inputs.address
+          house_number: $inputs.houseNumber
+          city: $inputs.city
+          postal_code: $inputs.postalCode
+          country: $inputs.country
+          weight: $inputs.weight
+          request_label: true
+          shipment:
+            id: $inputs.shippingMethodId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      parcelId: $response.body#/parcel/id
+      trackingNumber: $response.body#/parcel/tracking_number
+  - stepId: trackParcel
+    description: >-
+      Fetch the latest tracking information for the parcel by its tracking
+      number and branch on the most recent parent status.
+    operationId: sc-public-v2-tracking-get-detailed_tracking_information
+    parameters:
+    - name: tracking_number
+      in: path
+      value: $steps.createParcel.outputs.trackingNumber
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestStatus: $response.body#/statuses/0/parent_status
+      carrierTrackingUrl: $response.body#/carrier_tracking_url
+    onSuccess:
+    - name: stillAnnouncing
+      type: goto
+      stepId: trackParcel
+      criteria:
+      - context: $response.body
+        condition: $.statuses[0].parent_status == "announcing"
+        type: jsonpath
+    - name: onRoute
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.statuses[0].parent_status == "shipment-on-route"
+        type: jsonpath
+  outputs:
+    parcelId: $steps.createParcel.outputs.parcelId
+    trackingNumber: $steps.createParcel.outputs.trackingNumber
+    latestStatus: $steps.trackParcel.outputs.latestStatus
+    carrierTrackingUrl: $steps.trackParcel.outputs.carrierTrackingUrl

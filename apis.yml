@@ -385,6 +385,45 @@ maintainers:
   email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/sendcloud-announce-shipment-return-portal-workflow.yml
+    name: Sendcloud Announce a Shipment and Get its Return Portal URL
+    summary: Announce a shipment synchronously, then retrieve the return portal URL customers use to create a return.
+  - url: arazzo/sendcloud-announce-shipment-with-label-workflow.yml
+    name: Sendcloud Announce a Shipment with Label
+    summary: Announce a shipment synchronously, then verify it and read its label document link.
+  - url: arazzo/sendcloud-bulk-print-labels-workflow.yml
+    name: Sendcloud Bulk Print Labels for Recent Parcels
+    summary: List parcels filtered by status, then request a single bulk PDF of their labels.
+  - url: arazzo/sendcloud-cancel-shipment-workflow.yml
+    name: Sendcloud Cancel a Shipment with Confirmation
+    summary: Look up a shipment by id, then cancel it and branch on whether cancellation was immediate or queued.
+  - url: arazzo/sendcloud-create-parcel-fetch-label-workflow.yml
+    name: Sendcloud Create a Parcel and Fetch its Label
+    summary: Create a parcel with a label request, then retrieve its PDF label download URLs.
+  - url: arazzo/sendcloud-create-parcel-return-portal-workflow.yml
+    name: Sendcloud Create a Parcel and Get its Return Portal URL
+    summary: Create a labelled parcel, then retrieve the return portal URL a customer can use to start a return.
+  - url: arazzo/sendcloud-create-parcel-track-shipment-workflow.yml
+    name: Sendcloud Create a Parcel and Track its Shipment
+    summary: Create a labelled parcel, then poll its tracking until it is en route.
+  - url: arazzo/sendcloud-create-return-cancel-if-cancellable-workflow.yml
+    name: Sendcloud Create a Return and Cancel It If Cancellable
+    summary: Create a standalone return, inspect it, and request cancellation only when it is still cancellable.
+  - url: arazzo/sendcloud-register-external-parcel-track-workflow.yml
+    name: Sendcloud Register an External Parcel and Track It
+    summary: Register a parcel labelled outside Sendcloud for tracking, then retrieve its tracking record.
+  - url: arazzo/sendcloud-ship-order-async-poll-parcel-workflow.yml
+    name: Sendcloud Ship an Order Asynchronously and Poll the Parcel
+    summary: Request a label for an order asynchronously, then poll the created parcel until it has a label.
+  - url: arazzo/sendcloud-ship-order-sync-track-workflow.yml
+    name: Sendcloud Ship an Order Synchronously and Track It
+    summary: Request a label for an order synchronously, then pull its v3 tracking detail.
+  - url: arazzo/sendcloud-validate-create-return-workflow.yml
+    name: Sendcloud Validate and Create a Return
+    summary: Validate a return payload, create the return, then retrieve its full detail.
 - type: Website
   url: https://www.sendcloud.com
 - type: DeveloperPortal

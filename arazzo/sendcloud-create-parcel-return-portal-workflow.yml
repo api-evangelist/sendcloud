@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: Sendcloud Create a Parcel and Get its Return Portal URL
+  summary: Create a labelled parcel, then retrieve the return portal URL a customer can use to start a return.
+  description: >-
+    Creates a parcel requesting a label and then retrieves the return portal URL
+    for that parcel, so a customer can be handed a link that lets them initiate
+    a return against their delivery. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: parcelsApi
+  url: ../openapi/sendcloud-v2-parcels-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-parcel-return-portal
+  summary: Create a labelled parcel and retrieve its return portal URL.
+  description: >-
+    Creates a single parcel with a label request, captures the parcel id, and
+    retrieves the return portal URL associated with that parcel.
+  inputs:
+    type: object
+    required:
+    - name
+    - address
+    - city
+    - postalCode
+    - country
+    - shippingMethodId
+    properties:
+      name:
+        type: string
+        description: Name of the recipient.
+      address:
+        type: string
+        description: Street address of the recipient.
+      houseNumber:
+        type: string
+        description: House number of the recipient.
+      city:
+        type: string
+        description: City of the recipient.
+      postalCode:
+        type: string
+        description: Postal code of the recipient.
+      country:
+        type: string
+        description: ISO 2-letter country code of the recipient.
+      weight:
+        type: string
+        description: Weight of the parcel in kilograms (e.g. "2.000").
+      orderNumber:
+        type: string
+        description: Order number to associate with the parcel.
+      shippingMethodId:
+        type: integer
+        description: The id of the shipping method to use for the parcel.
+  steps:
+  - stepId: createParcel
+    description: >-
+      Create a single parcel and request a label, returning the parcel id used
+      to look up its return portal URL.
+    operationId: sc-public-v2-scp-post-create_parcel
+    requestBody:
+      contentType: application/json
+      payload:
+        parcel:
+          name: $inputs.name
+          address: $inputs.address
+          house_number: $inputs.houseNumber
+          city: $inputs.city
+          postal_code: $inputs.postalCode
+          country: $inputs.country
+          weight: $inputs.weight
+          order_number: $inputs.orderNumber
+          request_label: true
+          shipment:
+            id: $inputs.shippingMethodId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      parcelId: $response.body#/parcel/id
+      trackingNumber: $response.body#/parcel/tracking_number
+  - stepId: getReturnPortalUrl
+    description: >-
+      Retrieve the return portal URL for the created parcel so the customer can
+      be sent a link to initiate a return.
+    operationId: sc-public-v2-scp-get-return_portal_url
+    parameters:
+    - name: id
+      in: path
+      value: $steps.createParcel.outputs.parcelId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      returnPortalUrl: $response.body#/url
+  outputs:
+    parcelId: $steps.createParcel.outputs.parcelId
+    trackingNumber: $steps.createParcel.outputs.trackingNumber
+    returnPortalUrl: $steps.getReturnPortalUrl.outputs.returnPortalUrl

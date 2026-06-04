@@ -1,0 +1,90 @@
+arazzo: 1.0.1
+info:
+  title: Sendcloud Announce a Shipment and Get its Return Portal URL
+  summary: Announce a shipment synchronously, then retrieve the return portal URL customers use to create a return.
+  description: >-
+    Creates and announces a shipment synchronously, then retrieves the return
+    portal URL for that shipment so the customer can be sent a link that lets
+    them initiate a return against the outgoing shipment. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: shipmentsApi
+  url: ../openapi/sendcloud-shipments-openapi.yml
+  type: openapi
+workflows:
+- workflowId: announce-shipment-return-portal
+  summary: Announce a shipment and retrieve its return portal URL.
+  description: >-
+    Announces a shipment synchronously and then fetches the return portal URL
+    that links directly to the shipment in the Sendcloud return portal.
+  inputs:
+    type: object
+    required:
+    - toAddress
+    - fromAddress
+    - shippingOptionCode
+    - parcels
+    properties:
+      toAddress:
+        type: object
+        description: Recipient address object (name, address_line_1, postal_code, city, country_code).
+      fromAddress:
+        type: object
+        description: Sender address object (name, address_line_1, postal_code, city, country_code).
+      shippingOptionCode:
+        type: string
+        description: Shipping option code selecting carrier and method (e.g. postnl:standard).
+      contractId:
+        type: integer
+        description: Optional direct carrier contract id to use.
+      orderNumber:
+        type: string
+        description: Your order number to associate with the shipment.
+      parcels:
+        type: array
+        description: List of parcel objects with dimensions, weight, and optional parcel_items.
+  steps:
+  - stepId: announceShipment
+    description: >-
+      Create and announce the shipment synchronously, returning the shipment id
+      used to look up its return portal URL.
+    operationId: sc-public-v3-scp-post-announce_shipment
+    requestBody:
+      contentType: application/json
+      payload:
+        label_details:
+          mime_type: application/pdf
+          dpi: 72
+        to_address: $inputs.toAddress
+        from_address: $inputs.fromAddress
+        ship_with:
+          type: shipping_option_code
+          properties:
+            shipping_option_code: $inputs.shippingOptionCode
+            contract_id: $inputs.contractId
+        order_number: $inputs.orderNumber
+        parcels: $inputs.parcels
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      shipmentId: $response.body#/data/id
+      trackingNumber: $response.body#/data/parcels/0/tracking_number
+  - stepId: getReturnPortalUrl
+    description: >-
+      Retrieve the return portal URL for the announced shipment so the customer
+      can be sent a link to initiate a return.
+    operationId: sc-public-v3-scp-get-return_portal_url
+    parameters:
+    - name: id
+      in: path
+      value: $steps.announceShipment.outputs.shipmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      returnPortalUrl: $response.body#/data/url
+  outputs:
+    shipmentId: $steps.announceShipment.outputs.shipmentId
+    trackingNumber: $steps.announceShipment.outputs.trackingNumber
+    returnPortalUrl: $steps.getReturnPortalUrl.outputs.returnPortalUrl

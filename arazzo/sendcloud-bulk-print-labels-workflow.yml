@@ -1,0 +1,77 @@
+arazzo: 1.0.1
+info:
+  title: Sendcloud Bulk Print Labels for Recent Parcels
+  summary: List parcels filtered by status, then request a single bulk PDF of their labels.
+  description: >-
+    Retrieves a list of parcels filtered by parcel status, captures the parcel
+    ids of the first parcels, then calls the bulk label endpoint with those ids
+    to obtain a single combined PDF of all their shipping labels for both normal
+    and label printers. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: parcelsApi
+  url: ../openapi/sendcloud-v2-parcels-openapi.yml
+  type: openapi
+- name: labelsApi
+  url: ../openapi/sendcloud-v2-labels-openapi.yml
+  type: openapi
+workflows:
+- workflowId: bulk-print-labels
+  summary: List ready-to-send parcels and bulk print their labels in one PDF.
+  description: >-
+    Lists parcels matching a given parcel status, collects the first few parcel
+    ids, and requests a bulk label PDF for that set of parcels.
+  inputs:
+    type: object
+    required:
+    - parcelStatus
+    properties:
+      parcelStatus:
+        type: integer
+        description: The parcel status code to filter the parcel list by (e.g. 1000 for ready to send).
+      parcelId1:
+        type: integer
+        description: First parcel id to include in the bulk label request.
+      parcelId2:
+        type: integer
+        description: Second parcel id to include in the bulk label request.
+      parcelId3:
+        type: integer
+        description: Third parcel id to include in the bulk label request.
+  steps:
+  - stepId: listParcels
+    description: >-
+      Retrieve a list of parcels filtered by the requested parcel status so the
+      caller can confirm which parcels are ready before printing.
+    operationId: sc-public-v2-scp-get-all_parcels
+    parameters:
+    - name: parcel_status
+      in: query
+      value: $inputs.parcelStatus
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstParcelId: $response.body#/parcels/0/id
+  - stepId: bulkPrintLabels
+    description: >-
+      Request a single bulk PDF containing the labels for the supplied parcel
+      ids, returning the normal-printer and label-printer download URLs.
+    operationId: sc-public-v2-scp-post-label_by_parcel_ids
+    requestBody:
+      contentType: application/json
+      payload:
+        label:
+          parcels:
+          - $inputs.parcelId1
+          - $inputs.parcelId2
+          - $inputs.parcelId3
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      normalPrinterUrls: $response.body#/label/normal_printer
+      labelPrinterUrl: $response.body#/label/label_printer
+  outputs:
+    firstParcelId: $steps.listParcels.outputs.firstParcelId
+    normalPrinterUrls: $steps.bulkPrintLabels.outputs.normalPrinterUrls
+    labelPrinterUrl: $steps.bulkPrintLabels.outputs.labelPrinterUrl

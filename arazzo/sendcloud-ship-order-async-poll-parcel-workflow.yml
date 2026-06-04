@@ -1,0 +1,100 @@
+arazzo: 1.0.1
+info:
+  title: Sendcloud Ship an Order Asynchronously and Poll the Parcel
+  summary: Request a label for an order asynchronously, then poll the created parcel until it has a label.
+  description: >-
+    Uses the Ship an Order API to request labels for one or more orders
+    asynchronously, returning the created parcel ids, then polls the v2 Parcels
+    API by parcel id: while the parcel has no tracking number yet it loops back
+    to poll again, and once a tracking number is present the workflow ends.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: shipAnOrderApi
+  url: ../openapi/sendcloud-v3-ship-an-order-openapi.yml
+  type: openapi
+- name: parcelsApi
+  url: ../openapi/sendcloud-v2-parcels-openapi.yml
+  type: openapi
+workflows:
+- workflowId: ship-order-async-poll-parcel
+  summary: Asynchronously label an order and poll the created parcel until labelled.
+  description: >-
+    Requests an asynchronous label for an order, captures the first created
+    parcel id, then polls the parcel until it reports a tracking number,
+    indicating the label was generated.
+  inputs:
+    type: object
+    required:
+    - integrationId
+    - orderNumber
+    properties:
+      integrationId:
+        type: integer
+        description: The id of the integration the order belongs to.
+      orderNumber:
+        type: string
+        description: The order number to request a label for.
+      shippingOptionCode:
+        type: string
+        description: Shipping option code selecting carrier and method (e.g. postnl:standard).
+      contractId:
+        type: integer
+        description: Optional direct carrier contract id to use.
+  steps:
+  - stepId: shipOrderAsync
+    description: >-
+      Request a label for the order asynchronously, returning the created parcel
+      ids without waiting for label generation.
+    operationId: sc-public-v3-orders_labels-post-create_labels_async
+    requestBody:
+      contentType: application/json
+      payload:
+        integration_id: $inputs.integrationId
+        ship_with:
+          type: shipping_option_code
+          properties:
+            contract_id: $inputs.contractId
+            shipping_option_code: $inputs.shippingOptionCode
+        orders:
+        - order_number: $inputs.orderNumber
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      parcelId: $response.body#/data/0/parcel_id
+      shipmentId: $response.body#/data/0/shipment_id
+      orderId: $response.body#/data/0/order_id
+  - stepId: pollParcel
+    description: >-
+      Retrieve the created parcel by id and branch on whether it has a tracking
+      number yet, looping until the label has been generated.
+    operationId: sc-public-v2-scp-get-parcel_by_id
+    parameters:
+    - name: id
+      in: path
+      value: $steps.shipOrderAsync.outputs.parcelId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      trackingNumber: $response.body#/parcel/tracking_number
+      statusMessage: $response.body#/parcel/status/message
+    onSuccess:
+    - name: notLabelledYet
+      type: goto
+      stepId: pollParcel
+      criteria:
+      - context: $response.body
+        condition: $.parcel.tracking_number == null
+        type: jsonpath
+    - name: labelled
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.parcel.tracking_number != null
+        type: jsonpath
+  outputs:
+    parcelId: $steps.shipOrderAsync.outputs.parcelId
+    shipmentId: $steps.shipOrderAsync.outputs.shipmentId
+    trackingNumber: $steps.pollParcel.outputs.trackingNumber
+    statusMessage: $steps.pollParcel.outputs.statusMessage

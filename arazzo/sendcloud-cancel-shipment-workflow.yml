@@ -1,0 +1,69 @@
+arazzo: 1.0.1
+info:
+  title: Sendcloud Cancel a Shipment with Confirmation
+  summary: Look up a shipment by id, then cancel it and branch on whether cancellation was immediate or queued.
+  description: >-
+    Retrieves a shipment by its id to confirm it exists and inspect its parcel
+    status, then issues a cancellation request and branches on the response:
+    a 200 means the shipment was cancelled immediately, while a 202 means the
+    cancellation was accepted and queued for asynchronous processing. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: shipmentsApi
+  url: ../openapi/sendcloud-shipments-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cancel-shipment
+  summary: Retrieve a shipment and cancel it, distinguishing immediate from queued cancellation.
+  description: >-
+    Looks up a shipment by id, then requests its cancellation and reports
+    whether the carrier cancelled it immediately or queued the request.
+  inputs:
+    type: object
+    required:
+    - shipmentId
+    properties:
+      shipmentId:
+        type: string
+        description: The id of the shipment to retrieve and cancel.
+  steps:
+  - stepId: getShipment
+    description: >-
+      Retrieve the shipment by its id to confirm it exists and read its current
+      parcel status before attempting cancellation.
+    operationId: sc-public-v3-scp-get-shipment_by_id
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.shipmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      parcelStatus: $response.body#/data/parcels/0/status/code
+  - stepId: cancelShipment
+    description: >-
+      Request cancellation of the shipment; a 200 indicates immediate
+      cancellation while a 202 indicates the request was queued.
+    operationId: sc-public-v3-scp-post-cancel_shipment
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.shipmentId
+    successCriteria:
+    - condition: $statusCode == 200 || $statusCode == 202
+    outputs:
+      cancellationStatus: $response.body#/status
+    onSuccess:
+    - name: cancelledImmediately
+      type: end
+      criteria:
+      - condition: $statusCode == 200
+    - name: cancellationQueued
+      type: end
+      criteria:
+      - condition: $statusCode == 202
+  outputs:
+    parcelStatus: $steps.getShipment.outputs.parcelStatus
+    cancellationStatus: $steps.cancelShipment.outputs.cancellationStatus

@@ -1,0 +1,125 @@
+arazzo: 1.0.1
+info:
+  title: Sendcloud Create a Parcel and Fetch its Label
+  summary: Create a parcel with a label request, then retrieve its PDF label download URLs.
+  description: >-
+    The classic Sendcloud v2 shipping flow. A parcel is created with
+    request_label set to true so a carrier label is generated, then the label
+    endpoint is called with the new parcel id to obtain the normal-printer and
+    label-printer PDF download URLs. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: parcelsApi
+  url: ../openapi/sendcloud-v2-parcels-openapi.yml
+  type: openapi
+- name: labelsApi
+  url: ../openapi/sendcloud-v2-labels-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-parcel-fetch-label
+  summary: Create a labelled parcel and retrieve its PDF label download URLs.
+  description: >-
+    Creates a single parcel requesting a label, captures the parcel id and
+    tracking number, then fetches the label document URLs for both normal and
+    label printers.
+  inputs:
+    type: object
+    required:
+    - name
+    - address
+    - city
+    - postalCode
+    - country
+    - shippingMethodId
+    properties:
+      name:
+        type: string
+        description: Name of the recipient.
+      companyName:
+        type: string
+        description: Company name of the recipient.
+      address:
+        type: string
+        description: Street address of the recipient.
+      houseNumber:
+        type: string
+        description: House number of the recipient.
+      city:
+        type: string
+        description: City of the recipient.
+      postalCode:
+        type: string
+        description: Postal code of the recipient.
+      country:
+        type: string
+        description: ISO 2-letter country code of the recipient.
+      telephone:
+        type: string
+        description: Telephone number of the recipient.
+      email:
+        type: string
+        description: E-mail address of the recipient.
+      weight:
+        type: string
+        description: Weight of the parcel in kilograms (e.g. "2.000").
+      orderNumber:
+        type: string
+        description: Order number to associate with the parcel.
+      shippingMethodId:
+        type: integer
+        description: The id of the shipping method to use for the parcel.
+      senderAddress:
+        type: integer
+        description: Optional sender address id to ship from a non-default location.
+  steps:
+  - stepId: createParcel
+    description: >-
+      Create a single parcel and request a label so a carrier label is
+      generated for it immediately.
+    operationId: sc-public-v2-scp-post-create_parcel
+    requestBody:
+      contentType: application/json
+      payload:
+        parcel:
+          name: $inputs.name
+          company_name: $inputs.companyName
+          address: $inputs.address
+          house_number: $inputs.houseNumber
+          city: $inputs.city
+          postal_code: $inputs.postalCode
+          country: $inputs.country
+          telephone: $inputs.telephone
+          email: $inputs.email
+          weight: $inputs.weight
+          order_number: $inputs.orderNumber
+          request_label: true
+          sender_address: $inputs.senderAddress
+          shipment:
+            id: $inputs.shippingMethodId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      parcelId: $response.body#/parcel/id
+      trackingNumber: $response.body#/parcel/tracking_number
+      labelUrls: $response.body#/parcel/label/normal_printer
+  - stepId: fetchLabel
+    description: >-
+      Retrieve the label document for the newly created parcel, returning the
+      PDF download URLs for both normal and label printers.
+    operationId: sc-public-v2-scp-get-label_by_parcel_id
+    parameters:
+    - name: parcel_id
+      in: path
+      value: $steps.createParcel.outputs.parcelId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      normalPrinterUrls: $response.body#/label/normal_printer
+      labelPrinterUrl: $response.body#/label/label_printer
+  outputs:
+    parcelId: $steps.createParcel.outputs.parcelId
+    trackingNumber: $steps.createParcel.outputs.trackingNumber
+    normalPrinterUrls: $steps.fetchLabel.outputs.normalPrinterUrls
+    labelPrinterUrl: $steps.fetchLabel.outputs.labelPrinterUrl

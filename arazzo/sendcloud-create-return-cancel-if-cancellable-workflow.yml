@@ -1,0 +1,111 @@
+arazzo: 1.0.1
+info:
+  title: Sendcloud Create a Return and Cancel It If Cancellable
+  summary: Create a standalone return, inspect it, and request cancellation only when it is still cancellable.
+  description: >-
+    Creates a standalone return, then retrieves it by id to read its
+    is_cancellable flag and branches: when the incoming parcel of the return can
+    still be cancelled it requests cancellation, and when it cannot the workflow
+    ends without attempting a cancellation. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: returnsApi
+  url: ../openapi/sendcloud-v3-returns-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-return-cancel-if-cancellable
+  summary: Create a return and conditionally request its cancellation.
+  description: >-
+    Creates a return, retrieves it to determine whether it is still cancellable,
+    and requests cancellation only when the return reports it can be cancelled.
+  inputs:
+    type: object
+    required:
+    - fromAddress
+    - toAddress
+    - shippingOptionCode
+    - weight
+    properties:
+      fromAddress:
+        type: object
+        description: Return sender address (name, address_line_1, postal_code, city, country_code).
+      toAddress:
+        type: object
+        description: Return destination address (name, address_line_1, postal_code, city, country_code).
+      shippingOptionCode:
+        type: string
+        description: Shipping option code for the return (e.g. dpd:return/return).
+      weight:
+        type: object
+        description: Weight object for the return parcel (value and unit).
+      orderNumber:
+        type: string
+        description: Identifier of the order associated with this return.
+  steps:
+  - stepId: createReturn
+    description: >-
+      Create the standalone return, returning the new return id and incoming
+      parcel id.
+    operationId: sc-public-v3-scp-post-returns_create_new_return
+    requestBody:
+      contentType: application/json
+      payload:
+        from_address: $inputs.fromAddress
+        to_address: $inputs.toAddress
+        ship_with:
+          type: shipping_option_code
+          shipping_option_code: $inputs.shippingOptionCode
+        weight: $inputs.weight
+        order_number: $inputs.orderNumber
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      returnId: $response.body#/return_id
+      parcelId: $response.body#/parcel_id
+  - stepId: getReturn
+    description: >-
+      Retrieve the created return to read whether its incoming parcel can still
+      be cancelled, then branch accordingly.
+    operationId: sc-public-v3-scp-get-returns_get_details
+    parameters:
+    - name: id
+      in: path
+      value: $steps.createReturn.outputs.returnId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      isCancellable: $response.body#/is_cancellable
+    onSuccess:
+    - name: cancellable
+      type: goto
+      stepId: cancelReturn
+      criteria:
+      - context: $response.body
+        condition: $.is_cancellable == true
+        type: jsonpath
+    - name: notCancellable
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.is_cancellable == false
+        type: jsonpath
+  - stepId: cancelReturn
+    description: >-
+      Request cancellation of the return; the API queues the cancellation and
+      returns a confirmation message.
+    operationId: sc-public-v3-scp-patch-returns_cancel
+    parameters:
+    - name: id
+      in: path
+      value: $steps.createReturn.outputs.returnId
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      cancellationMessage: $response.body#/message
+  outputs:
+    returnId: $steps.createReturn.outputs.returnId
+    parcelId: $steps.createReturn.outputs.parcelId
+    isCancellable: $steps.getReturn.outputs.isCancellable
+    cancellationMessage: $steps.cancelReturn.outputs.cancellationMessage

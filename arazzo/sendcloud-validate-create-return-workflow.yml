@@ -1,0 +1,110 @@
+arazzo: 1.0.1
+info:
+  title: Sendcloud Validate and Create a Return
+  summary: Validate a return payload, create the return, then retrieve its full detail.
+  description: >-
+    A safe return-creation flow. The same return payload is first sent to the
+    validation endpoint to confirm it passes all checks, then the return is
+    created as a standalone return, and finally the created return is retrieved
+    by id to expose its status and tracking detail. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: returnsApi
+  url: ../openapi/sendcloud-v3-returns-openapi.yml
+  type: openapi
+workflows:
+- workflowId: validate-create-return
+  summary: Validate a return, create it, and retrieve its detail.
+  description: >-
+    Validates a return payload built from the from/to addresses, weight, and
+    shipping option, creates the return once validation passes, and retrieves
+    the created return by its id.
+  inputs:
+    type: object
+    required:
+    - fromAddress
+    - toAddress
+    - shippingOptionCode
+    - weight
+    properties:
+      fromAddress:
+        type: object
+        description: Return sender address (name, address_line_1, postal_code, city, country_code).
+      toAddress:
+        type: object
+        description: Return destination address (name, address_line_1, postal_code, city, country_code).
+      shippingOptionCode:
+        type: string
+        description: Shipping option code for the return (e.g. dpd:return/return).
+      weight:
+        type: object
+        description: Weight object for the return parcel (value and unit).
+      orderNumber:
+        type: string
+        description: Identifier of the order associated with this return.
+      parcelItems:
+        type: array
+        description: List of items contained in the return (required for non-EU returns).
+  steps:
+  - stepId: validateReturn
+    description: >-
+      Send the return payload to the validation endpoint to confirm it passes
+      all checks before any return is actually created.
+    operationId: sc-public-v3-scp-post-returns_validate
+    requestBody:
+      contentType: application/json
+      payload:
+        from_address: $inputs.fromAddress
+        to_address: $inputs.toAddress
+        ship_with:
+          type: shipping_option_code
+          shipping_option_code: $inputs.shippingOptionCode
+        weight: $inputs.weight
+        order_number: $inputs.orderNumber
+        parcel_items: $inputs.parcelItems
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      validation: $response.body
+  - stepId: createReturn
+    description: >-
+      Create the standalone return now that the payload has been validated,
+      returning the new return id and incoming parcel id.
+    operationId: sc-public-v3-scp-post-returns_create_new_return
+    requestBody:
+      contentType: application/json
+      payload:
+        from_address: $inputs.fromAddress
+        to_address: $inputs.toAddress
+        ship_with:
+          type: shipping_option_code
+          shipping_option_code: $inputs.shippingOptionCode
+        weight: $inputs.weight
+        order_number: $inputs.orderNumber
+        parcel_items: $inputs.parcelItems
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      returnId: $response.body#/return_id
+      parcelId: $response.body#/parcel_id
+  - stepId: getReturn
+    description: >-
+      Retrieve the created return by its id to expose its current status and
+      tracking detail.
+    operationId: sc-public-v3-scp-get-returns_get_details
+    parameters:
+    - name: id
+      in: path
+      value: $steps.createReturn.outputs.returnId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      returnStatus: $response.body#/status
+      isCancellable: $response.body#/is_cancellable
+  outputs:
+    returnId: $steps.createReturn.outputs.returnId
+    parcelId: $steps.createReturn.outputs.parcelId
+    returnStatus: $steps.getReturn.outputs.returnStatus
+    isCancellable: $steps.getReturn.outputs.isCancellable
