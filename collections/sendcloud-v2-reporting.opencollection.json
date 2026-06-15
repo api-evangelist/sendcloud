@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reporting",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a parcels report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v2/reporting/parcels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generate a CSV report containing information about outgoing or incoming parcels."
+        },
+        {
+          "info": {
+            "name": "Retrieve a parcels report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/reporting/parcels/:report_id",
+            "params": [
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "path",
+                "description": "The report unique identifier"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Generate a URL to download a parcels report in CSV format."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

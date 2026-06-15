@@ -1,0 +1,1197 @@
+{
+  "item": [
+    {
+      "id": "ceb25b33-2178-4593-b08c-321b7b4730b2",
+      "name": "Orders",
+      "description": {
+        "content": "OrderAPI",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0cc979de-6951-4753-b5d1-25b0048b1a1f",
+          "name": "Create/Update orders in batch",
+          "request": {
+            "name": "Create/Update orders in batch",
+            "description": {
+              "content": "Use this endpoint to insert orders into a Sendcloud API integration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"order_details\": {\n      \"integration\": {\n        \"id\": \"<integer>\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"order_created_at\": \"<dateTime>\",\n      \"order_items\": [\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<url>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"key_0\": 9183.922542960177,\n            \"key_1\": \"string\",\n            \"key_2\": 2438\n          },\n          \"unit_price\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"weight\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"volume\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deliver_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"regulation_set\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"packaging_type_quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"packaging_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"packaging_instruction_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id_number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"class_division_number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit_of_measurement\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"proper_shipping_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"commodity_regulated_level_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transportation_mode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"emergency_contact_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"emergency_contact_phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"adr_packing_group_letter\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"local_proper_shipping_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transport_category\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tunnel_restriction_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"weight_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<url>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"key_0\": false,\n            \"key_1\": true\n          },\n          \"unit_price\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"weight\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"volume\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deliver_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"regulation_set\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"packaging_type_quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"packaging_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"packaging_instruction_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id_number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"class_division_number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit_of_measurement\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"proper_shipping_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"commodity_regulated_level_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transportation_mode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"emergency_contact_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"emergency_contact_phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"adr_packing_group_letter\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"local_proper_shipping_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transport_category\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tunnel_restriction_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"weight_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"order_updated_at\": \"<dateTime>\",\n      \"notes\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"payment_details\": {\n      \"total_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"is_cash_on_delivery\": \"<boolean,null>\",\n      \"subtotal_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"estimated_shipping_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"estimated_tax_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"invoice_date\": \"<string,null>\",\n      \"discount_granted\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"insurance_costs\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"freight_costs\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"other_costs\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      }\n    },\n    \"customs_details\": {\n      \"commercial_invoice_number\": \"<string>\",\n      \"shipment_type\": \"<string>\",\n      \"export_type\": \"<string>\",\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"receiver\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"importer_of_record\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    \"customer_details\": {\n      \"name\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"billing_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_details\": {\n      \"is_local_pickup\": \"<boolean,null>\",\n      \"delivery_indicator\": \"<string>\",\n      \"measurement\": {\n        \"dimension\": {\n          \"length\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"unit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"weight\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"unit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"volume\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"unit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"ship_with\": {\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"shipping_option_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"contract_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"service_point_details\": {\n      \"id\": \"<string>\",\n      \"post_number\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"type\": \"<string>\",\n      \"extra_data\": {\n        \"key_0\": 9101.707095952852\n      }\n    },\n    \"id\": \"<string>\"\n  },\n  {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"order_details\": {\n      \"integration\": {\n        \"id\": \"<integer>\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"order_created_at\": \"<dateTime>\",\n      \"order_items\": [\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<url>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"key_0\": 1739\n          },\n          \"unit_price\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"weight\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"volume\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deliver_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"regulation_set\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"packaging_type_quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"packaging_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"packaging_instruction_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id_number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"class_division_number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit_of_measurement\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"proper_shipping_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"commodity_regulated_level_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transportation_mode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"emergency_contact_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"emergency_contact_phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"adr_packing_group_letter\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"local_proper_shipping_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transport_category\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tunnel_restriction_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"weight_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<url>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"key_0\": false,\n            \"key_1\": 4708,\n            \"key_2\": true\n          },\n          \"unit_price\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"weight\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"volume\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deliver_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"regulation_set\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"packaging_type_quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"packaging_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"packaging_instruction_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"id_number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"class_division_number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit_of_measurement\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"proper_shipping_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"commodity_regulated_level_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transportation_mode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"emergency_contact_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"emergency_contact_phone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"adr_packing_group_letter\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"local_proper_shipping_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transport_category\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tunnel_restriction_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"weight_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"order_updated_at\": \"<dateTime>\",\n      \"notes\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"payment_details\": {\n      \"total_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"is_cash_on_delivery\": \"<boolean,null>\",\n      \"subtotal_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"estimated_shipping_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"estimated_tax_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"invoice_date\": \"<string,null>\",\n      \"discount_granted\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"insurance_costs\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"freight_costs\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"other_costs\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      }\n    },\n    \"customs_details\": {\n      \"commercial_invoice_number\": \"<string>\",\n      \"shipment_type\": \"<string>\",\n      \"export_type\": \"<string>\",\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"receiver\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"importer_of_record\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    \"customer_details\": {\n      \"name\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"billing_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_details\": {\n      \"is_local_pickup\": \"<boolean,null>\",\n      \"delivery_indicator\": \"<string>\",\n      \"measurement\": {\n        \"dimension\": {\n          \"length\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"width\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"height\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"unit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"weight\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"unit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"volume\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"unit\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"ship_with\": {\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"shipping_option_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"contract_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    \"service_point_details\": {\n      \"id\": \"<string>\",\n      \"post_number\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"type\": \"<string>\",\n      \"extra_data\": {\n        \"key_0\": 5235\n      }\n    },\n    \"id\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "998664bd-ee8d-4a09-b321-862172e071ae",
+              "name": "OK.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"order_id\": \"555413\",\n    \"order_number\": \"OXSDFGHTD-12\",\n    \"order_details\": {\n      \"integration\": {\n        \"id\": 7\n      },\n      \"status\": {\n        \"code\": \"fulfilled\",\n        \"message\": \"Fulfilled\"\n      },\n      \"order_created_at\": \"2018-02-27T10:00:00.556Z\",\n      \"order_items\": [\n        {\n          \"name\": \"Cylinder candle\",\n          \"quantity\": 1,\n          \"total_price\": {\n            \"value\": 3.5,\n            \"currency\": \"EUR\"\n          }\n        }\n      ]\n    },\n    \"payment_details\": {\n      \"total_price\": {\n        \"value\": 3.5,\n        \"currency\": \"EUR\"\n      },\n      \"status\": {\n        \"code\": \"paid\",\n        \"message\": \"Paid\"\n      }\n    },\n    \"shipping_address\": {\n      \"name\": \"John Doe\",\n      \"address_line_1\": \"Lansdown Glade\",\n      \"house_number\": \"15\",\n      \"postal_code\": \"5341XT\",\n      \"city\": \"Oss\",\n      \"country_code\": \"NL\"\n    },\n    \"shipping_details\": {\n      \"is_local_pickup\": false,\n      \"delivery_indicator\": \"DHL home delivery\",\n      \"measurement\": {\n        \"weight\": {\n          \"value\": 3,\n          \"unit\": \"kg\"\n        }\n      }\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 664,\n      \"order_id\": \"555413\",\n      \"order_number\": \"OXSDFGHTD-12\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ff45084-11ce-415f-b83f-21ef7dc23611",
+              "name": "Bad Request - Validation errors or business rule violations.\n\n**Error Response Structure**\n\nAll errors use JSON Pointer notation in the `source.pointer` field to indicate the exact location of the problem:\n\n- `[N]` indicates which order in the batch array (0-indexed)\n- The path after shows the field hierarchy within that order\n- **Example**: `/data/attributes/[1]/order_details/integration` means the error is in the second order's integration field.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"order_id\": \"555413\",\n    \"order_number\": \"OXSDFGHTD-12\",\n    \"order_details\": {\n      \"integration\": {\n        \"id\": 7\n      },\n      \"status\": {\n        \"code\": \"fulfilled\",\n        \"message\": \"Fulfilled\"\n      },\n      \"order_created_at\": \"2018-02-27T10:00:00.556Z\",\n      \"order_items\": [\n        {\n          \"name\": \"Cylinder candle\",\n          \"quantity\": 1,\n          \"total_price\": {\n            \"value\": 3.5,\n            \"currency\": \"EUR\"\n          }\n        }\n      ]\n    },\n    \"payment_details\": {\n      \"total_price\": {\n        \"value\": 3.5,\n        \"currency\": \"EUR\"\n      },\n      \"status\": {\n        \"code\": \"paid\",\n        \"message\": \"Paid\"\n      }\n    },\n    \"shipping_address\": {\n      \"name\": \"John Doe\",\n      \"address_line_1\": \"Lansdown Glade\",\n      \"house_number\": \"15\",\n      \"postal_code\": \"5341XT\",\n      \"city\": \"Oss\",\n      \"country_code\": \"NL\"\n    },\n    \"shipping_details\": {\n      \"is_local_pickup\": false,\n      \"delivery_indicator\": \"DHL home delivery\",\n      \"measurement\": {\n        \"weight\": {\n          \"value\": 3,\n          \"unit\": \"kg\"\n        }\n      }\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"400\",\n      \"code\": \"non_field_errors\",\n      \"title\": \"Wrong format\",\n      \"detail\": \"Wrong request format, expected list of objects\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3828cb2a-4825-4a3e-868c-8ff8b2bbf4c4",
+          "name": "Retrieve a list of orders",
+          "request": {
+            "name": "Retrieve a list of orders",
+            "description": {
+              "content": "Get a list of orders filtered by integration, order number, order ID, order status, creation date, and update date. You can also optionally sort the results and pass a `cursor` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "integration",
+                  "value": "<integer>",
+                  "description": "Filter orders by one or more integration IDs. Use a comma separated list, e.g. `integration=41,68,419`.\n\nYou can get your integration IDs from the [Retrieve a list of integrations](/api/v3/integrations/retrieve-a-list-of-integrations) endpoint."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_number",
+                  "value": "<string>",
+                  "description": "Filter orders by a specific order number, e.g. `order_number=ORDER_284565`. The filtering is case insensitive."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_id",
+                  "value": "<string>",
+                  "description": "Filter orders by a specific order id, e.g. `order_id=1896e94b-c01b-4e73-a9e7-57f51c8a4c77`. The filtering is case insensitive."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter orders based on their status, e.g. `status=unshipped`. The filtering is case insensitive."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_created_at",
+                  "value": "<date>",
+                  "description": "Find orders that were created on a specific date, e.g. `order_created_at=2023-04-28`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_created_at_min",
+                  "value": "<date>",
+                  "description": "Find orders that were created at or after a specific date, e.g. `order_created_at_min=2023-04-28`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_created_at_max",
+                  "value": "<date>",
+                  "description": "Find orders that were created at or before a specific date, e.g. `order_created_at_max=2023-04-28`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_updated_at",
+                  "value": "<date>",
+                  "description": "Find orders that were updated on a specific date, e.g. `order_updated_at=2023-04-28`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_updated_at_min",
+                  "value": "<date>",
+                  "description": "Find orders that were updated at or after a specific date, e.g. `order_updated_at_min=2023-04-28`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_updated_at_max",
+                  "value": "<date>",
+                  "description": "Find orders that were updated at or before a specific date, e.g. `order_updated_at_max=2023-04-28`."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort the orders in the response by using one or more of the following values:\n - `integration`: Sort by the integration ID of the retrieved orders; to sort in descending order, use `-integration`\n - `order_number`: Sort by the order number of the retrieved orders; to sort in descending order, use `-order_number`.\n - `order_created_at`: Sort by the date of an order creation of the retrieved orders; to sort in descending order, use `-order_created_at`\n - `order_updated_at`: Sort by the date of an order update of the retrieved orders; to sort in descending order, use `-order_updated_at`\n - `pk`: Sort by the ID (autogenerated internal ID) of the retrieved orders; to sort in descending order, use `-pk`\n\nAdditional information about this query:\n - Any valid combination of the above values is supported, e.g. `sort=integration,-order_created_at`. \n - In case of conflicting `sort` values, e.g. `/?sort=integration,-integration`, the conflicting value will be ignored.\n - If the `sort` query parameter is not set, the sorting of the retrieved orders will default to `-pk`.\n - If an unsupported `sort` value is provided, the results will be sorted by the default (`-pk`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "100",
+                  "description": "The maximum number of results to be returned per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n  - `o`: Offset\n  - `r`: Reverse\n  - `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "458fcbe0-c879-4370-8f8d-2a452383c511",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integration",
+                      "value": "17"
+                    },
+                    {
+                      "key": "order_number",
+                      "value": "ORDER_284565"
+                    },
+                    {
+                      "key": "order_id",
+                      "value": "1896e94b-c01b-4e73-a9e7-57f51c8a4c77"
+                    },
+                    {
+                      "key": "status",
+                      "value": "unshipped"
+                    },
+                    {
+                      "key": "order_created_at",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_created_at_min",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_created_at_max",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_updated_at",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_updated_at_min",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_updated_at_max",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-order_number"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "150"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "cj0xJnA9MzAw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Links to related resources in the [RFC 5988](https://tools.ietf.org/html/rfc5988#section-5) format. This includes the links with the `next` and `prev` types for the next and the previous pages.",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"669\",\n      \"order_id\": \"555413\",\n      \"order_number\": \"OXSDFGHTD-12\",\n      \"created_at\": \"2018-02-27T10:00:00.555Z\",\n      \"modified_at\": \"2018-02-27T10:00:00.555Z\",\n      \"order_details\": {\n        \"integration\": {\n          \"id\": 739283\n        },\n        \"status\": {\n          \"code\": \"fulfilled\",\n          \"message\": \"Fulfilled\"\n        },\n        \"order_created_at\": \"2018-02-27T10:00:00.555Z\",\n        \"order_updated_at\": \"2018-02-27T10:00:00.555Z\",\n        \"order_items\": [\n          {\n            \"name\": \"Cylinder candle\",\n            \"measurement\": {\n              \"weight\": {\n                \"value\": 1,\n                \"unit\": \"kg\"\n              }\n            },\n            \"quantity\": 1,\n            \"unit_price\": {\n              \"value\": 3.5,\n              \"currency\": \"EUR\"\n            },\n            \"total_price\": {\n              \"value\": 3.5,\n              \"currency\": \"EUR\"\n            },\n            \"delivery_dates\": {\n              \"handover_at\": \"2022-02-27T10:00:00.555309+00:00\",\n              \"deliver_at\": \"2022-03-02T11:50:00.555309+00:00\"\n            },\n            \"mid_code\": \"US1234567\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\"\n          }\n        ]\n      },\n      \"payment_details\": {\n        \"is_cash_on_delivery\": false,\n        \"total_price\": {\n          \"value\": 7,\n          \"currency\": \"EUR\"\n        },\n        \"status\": {\n          \"code\": \"paid\",\n          \"message\": \"Order has been paid\"\n        },\n        \"discount_granted\": {\n          \"value\": \"3.99\",\n          \"currency\": \"EUR\"\n        },\n        \"insurance_costs\": {\n          \"value\": \"9.99\",\n          \"currency\": \"EUR\"\n        },\n        \"freight_costs\": {\n          \"value\": \"5.99\",\n          \"currency\": \"EUR\"\n        },\n        \"other_costs\": {\n          \"value\": \"2.99\",\n          \"currency\": \"EUR\"\n        }\n      },\n      \"customs_details\": {\n        \"commercial_invoice_number\": \"0124-03102022\",\n        \"shipment_type\": \"commercial_goods\",\n        \"export_type\": \"commercial_b2c\",\n        \"tax_numbers\": {\n          \"sender\": [\n            {\n              \"name\": \"VAT\",\n              \"country_code\": \"NL\",\n              \"value\": \"NL987654321B02\"\n            }\n          ],\n          \"receiver\": [\n            {\n              \"name\": \"VAT\",\n              \"country_code\": \"DE\",\n              \"value\": \"DE123456789B03\"\n            }\n          ],\n          \"importer_of_record\": [\n            {\n              \"name\": \"VAT\",\n              \"country_code\": \"NL\",\n              \"value\": \"NL975318642B01\"\n            }\n          ]\n        }\n      },\n      \"shipping_address\": {\n        \"name\": \"John Doe\",\n        \"address_line_1\": \"Stadhuisplein\",\n        \"house_number\": \"15\",\n        \"postal_code\": \"5341TW\",\n        \"city\": \"Oss\",\n        \"country_code\": \"NL\"\n      },\n      \"shipping_details\": {\n        \"is_local_pickup\": false,\n        \"ship_with\": {\n          \"type\": \"shipping_option_code\",\n          \"properties\": {\n            \"shipping_option_code\": \"postnl:standard\",\n            \"contract_id\": 517\n          }\n        }\n      },\n      \"billing_address\": {\n        \"name\": \"Jane Doe\",\n        \"address_line_1\": \"Vioolstraat\",\n        \"house_number\": \"118\",\n        \"postal_code\": \"5391TW\",\n        \"city\": \"Breda\",\n        \"country_code\": \"NL\"\n      },\n      \"customer_details\": {\n        \"name\": \"Jane Doe\"\n      }\n    },\n    {\n      \"id\": \"1337\",\n      \"order_id\": \"555414\",\n      \"created_at\": \"2018-03-21T10:00:00.555Z\",\n      \"modified_at\": \"2018-03-22T10:00:00.555Z\",\n      \"order_number\": \"OXSDFGHTD-13\",\n      \"order_details\": {\n        \"integration\": {\n          \"id\": 739283\n        },\n        \"status\": {\n          \"code\": \"fulfilled\",\n          \"message\": \"Fulfilled\"\n        },\n        \"order_created_at\": \"2018-02-27T10:00:00.555Z\",\n        \"order_updated_at\": \"2018-02-28T11:05:15.634Z\",\n        \"order_items\": [\n          {\n            \"name\": \"Squared Candle\",\n            \"measurement\": {\n              \"weight\": {\n                \"value\": 0.8,\n                \"unit\": \"kg\"\n              }\n            },\n            \"quantity\": 3,\n            \"unit_price\": {\n              \"value\": 2,\n              \"currency\": \"EUR\"\n            },\n            \"total_price\": {\n              \"value\": 6,\n              \"currency\": \"EUR\"\n            },\n            \"delivery_dates\": null,\n            \"mid_code\": \"US1234567\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\"\n          },\n          {\n            \"name\": \"Scented Candle\",\n            \"quantity\": 2,\n            \"unit_price\": {\n              \"value\": 5.5,\n              \"currency\": \"EUR\"\n            },\n            \"total_price\": {\n              \"value\": 11,\n              \"currency\": \"EUR\"\n            },\n            \"delivery_dates\": null,\n            \"mid_code\": \"US1234567\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\"\n          }\n        ]\n      },\n      \"payment_details\": {\n        \"is_cash_on_delivery\": false,\n        \"total_price\": {\n          \"value\": 7,\n          \"currency\": \"EUR\"\n        },\n        \"status\": {\n          \"code\": \"paid\",\n          \"message\": \"Order has been paid\"\n        },\n        \"discount_granted\": {\n          \"value\": \"3.99\",\n          \"currency\": \"EUR\"\n        },\n        \"insurance_costs\": {\n          \"value\": \"9.99\",\n          \"currency\": \"EUR\"\n        },\n        \"freight_costs\": {\n          \"value\": \"5.99\",\n          \"currency\": \"EUR\"\n        },\n        \"other_costs\": {\n          \"value\": \"2.99\",\n          \"currency\": \"EUR\"\n        }\n      },\n      \"customs_details\": {\n        \"commercial_invoice_number\": \"0124-03102022\",\n        \"shipment_type\": \"commercial_goods\",\n        \"export_type\": \"commercial_b2c\",\n        \"tax_numbers\": {\n          \"sender\": [\n            {\n              \"name\": \"VAT\",\n              \"country_code\": \"NL\",\n              \"value\": \"NL987654321B02\"\n            }\n          ],\n          \"receiver\": [\n            {\n              \"name\": \"VAT\",\n              \"country_code\": \"DE\",\n              \"value\": \"DE123456789B03\"\n            }\n          ],\n          \"importer_of_record\": [\n            {\n              \"name\": \"VAT\",\n              \"country_code\": \"NL\",\n              \"value\": \"NL975318642B01\"\n            }\n          ]\n        }\n      },\n      \"shipping_address\": {\n        \"name\": \"John Doe\",\n        \"address_line_1\": \"Stadhuisplein\",\n        \"house_number\": \"15\",\n        \"postal_code\": \"5341AB\",\n        \"city\": \"Oss\",\n        \"country_code\": \"NL\",\n        \"phone_number\": \"0612345678\"\n      },\n      \"shipping_details\": {\n        \"is_local_pickup\": false,\n        \"ship_with\": {\n          \"type\": \"shipping_option_code\",\n          \"properties\": {\n            \"shipping_option_code\": \"postnl:standard\",\n            \"contract_id\": 517\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3e1cdd3-280f-4a93-9802-66a4c2b5ad9a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integration",
+                      "value": "17"
+                    },
+                    {
+                      "key": "order_number",
+                      "value": "ORDER_284565"
+                    },
+                    {
+                      "key": "order_id",
+                      "value": "1896e94b-c01b-4e73-a9e7-57f51c8a4c77"
+                    },
+                    {
+                      "key": "status",
+                      "value": "unshipped"
+                    },
+                    {
+                      "key": "order_created_at",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_created_at_min",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_created_at_max",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_updated_at",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_updated_at_min",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_updated_at_max",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-order_number"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "150"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "cj0xJnA9MzAw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"400\",\n      \"code\": \"invalid_choice\",\n      \"title\": \"Invalid Choice\",\n      \"detail\": \"Select a valid choice. 128 is not one of the available choices.\",\n      \"source\": {\n        \"parameter\": \"integration\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcf82fe7-2230-45a5-ba7b-54cbc06ee2f7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "integration",
+                      "value": "17"
+                    },
+                    {
+                      "key": "order_number",
+                      "value": "ORDER_284565"
+                    },
+                    {
+                      "key": "order_id",
+                      "value": "1896e94b-c01b-4e73-a9e7-57f51c8a4c77"
+                    },
+                    {
+                      "key": "status",
+                      "value": "unshipped"
+                    },
+                    {
+                      "key": "order_created_at",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_created_at_min",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_created_at_max",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_updated_at",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_updated_at_min",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "order_updated_at_max",
+                      "value": "2023-04-28"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-order_number"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "150"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "cj0xJnA9MzAw"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"404\",\n      \"title\": \"Invalid cursor\",\n      \"code\": \"not_found\",\n      \"detail\": \"Invalid cursor\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4e6870b-4a48-456a-b768-b3a9031115c2",
+          "name": "Retrieve an order",
+          "request": {
+            "name": "Retrieve an order",
+            "description": {
+              "content": "Find a specific order by its order ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Filtering on the Sendcloud order ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "56f1210e-bbe9-475e-a335-42dd7fa7d410",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Filtering on the Sendcloud order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"669\",\n    \"order_id\": \"555413\",\n    \"created_at\": \"2018-02-27T10:00:00.555Z\",\n    \"modified_at\": \"2018-02-27T10:00:00.555Z\",\n    \"order_number\": \"OXSDFGHTD-12\",\n    \"order_details\": {\n      \"integration\": {\n        \"id\": 739283\n      },\n      \"status\": {\n        \"code\": \"fulfilled\",\n        \"message\": \"Fulfilled\"\n      },\n      \"order_created_at\": \"2018-02-27T10:00:00.555Z\",\n      \"order_updated_at\": \"2018-02-27T10:00:00.555Z\",\n      \"order_items\": [\n        {\n          \"name\": \"Cylinder candle\",\n          \"measurement\": {\n            \"weight\": {\n              \"value\": 1,\n              \"unit\": \"kg\"\n            }\n          },\n          \"quantity\": 1,\n          \"unit_price\": {\n            \"value\": 3.5,\n            \"currency\": \"EUR\"\n          },\n          \"total_price\": {\n            \"value\": 3.5,\n            \"currency\": \"EUR\"\n          },\n          \"delivery_dates\": {\n            \"handover_at\": \"2022-02-27T10:00:00.555309+00:00\",\n            \"deliver_at\": \"2022-03-02T11:50:00.555309+00:00\"\n          },\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\"\n        }\n      ]\n    },\n    \"payment_details\": {\n      \"is_cash_on_delivery\": true,\n      \"total_price\": {\n        \"value\": 7,\n        \"currency\": \"EUR\"\n      },\n      \"status\": {\n        \"code\": \"paid\",\n        \"message\": \"Order has been paid\"\n      },\n      \"discount_granted\": {\n        \"value\": \"3.99\",\n        \"currency\": \"EUR\"\n      },\n      \"insurance_costs\": {\n        \"value\": \"9.99\",\n        \"currency\": \"EUR\"\n      },\n      \"freight_costs\": {\n        \"value\": \"5.99\",\n        \"currency\": \"EUR\"\n      },\n      \"other_costs\": {\n        \"value\": \"2.99\",\n        \"currency\": \"EUR\"\n      }\n    },\n    \"customs_details\": {\n      \"commercial_invoice_number\": \"0124-03102022\",\n      \"shipment_type\": \"commercial_goods\",\n      \"export_type\": \"commercial_b2c\",\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"name\": \"VAT\",\n            \"country_code\": \"NL\",\n            \"value\": \"NL987654321B02\"\n          }\n        ],\n        \"receiver\": [\n          {\n            \"name\": \"VAT\",\n            \"country_code\": \"DE\",\n            \"value\": \"DE123456789B03\"\n          }\n        ],\n        \"importer_of_record\": [\n          {\n            \"name\": \"VAT\",\n            \"country_code\": \"NL\",\n            \"value\": \"NL975318642B01\"\n          }\n        ]\n      }\n    },\n    \"shipping_address\": {\n      \"name\": \"John Doe\",\n      \"address_line_1\": \"Stadhuisplein\",\n      \"house_number\": \"15\",\n      \"postal_code\": \"5341TW\",\n      \"city\": \"Oss\",\n      \"country_code\": \"NL\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "749c4f61-a692-4f89-95ad-aef77dbcb013",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Filtering on the Sendcloud order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"404\",\n      \"code\": \"not_found\",\n      \"title\": \"Not found\",\n      \"detail\": \"The order could not be found with the search criteria given\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9cf1762-22e6-4dfc-b93a-c80253f23da3",
+          "name": "Delete an order",
+          "request": {
+            "name": "Delete an order",
+            "description": {
+              "content": "Delete an order by its unique id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Filtering on the Sendcloud order ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5e8b4af0-434b-419c-97be-63b213cf7c9f",
+              "name": "No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Filtering on the Sendcloud order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1b38dab7-1e75-4ea2-b41b-5dd719b758b8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Filtering on the Sendcloud order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"404\",\n      \"code\": \"not_found\",\n      \"title\": \"Not found\",\n      \"detail\": \"The order could not be found with the search criteria given\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "844b24b3-0256-4eff-90ab-7597d7f85f01",
+          "name": "Update an order",
+          "request": {
+            "name": "Update an order",
+            "description": {
+              "content": "Partially update some fields of an order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Filtering on the Sendcloud order ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"order_details\": {\n    \"integration\": {\n      \"id\": \"<integer>\"\n    },\n    \"status\": {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"order_created_at\": \"<dateTime>\",\n    \"order_updated_at\": \"<dateTime>\",\n    \"order_items\": [\n      {\n        \"item_id\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"hs_code\": \"<string>\",\n        \"country_of_origin\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"string\",\n          \"key_1\": 8609.622083812665\n        },\n        \"unit_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\"\n        },\n        \"total_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\"\n        },\n        \"measurement\": {\n          \"dimension\": {\n            \"length\": \"<number>\",\n            \"width\": \"<number>\",\n            \"height\": \"<number>\",\n            \"unit\": \"<string>\"\n          },\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"<string>\"\n          },\n          \"volume\": {\n            \"value\": \"<integer>\",\n            \"unit\": \"<string>\"\n          }\n        },\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\",\n        \"delivery_dates\": {\n          \"handover_at\": \"<dateTime>\",\n          \"deliver_at\": \"<dateTime>\"\n        }\n      },\n      {\n        \"item_id\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"hs_code\": \"<string>\",\n        \"country_of_origin\": \"<string>\",\n        \"properties\": {\n          \"key_0\": false,\n          \"key_1\": 4545,\n          \"key_2\": false\n        },\n        \"unit_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\"\n        },\n        \"total_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\"\n        },\n        \"measurement\": {\n          \"dimension\": {\n            \"length\": \"<number>\",\n            \"width\": \"<number>\",\n            \"height\": \"<number>\",\n            \"unit\": \"<string>\"\n          },\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"<string>\"\n          },\n          \"volume\": {\n            \"value\": \"<integer>\",\n            \"unit\": \"<string>\"\n          }\n        },\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\",\n        \"delivery_dates\": {\n          \"handover_at\": \"<dateTime>\",\n          \"deliver_at\": \"<dateTime>\"\n        }\n      }\n    ],\n    \"notes\": \"<string,null>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"payment_details\": {\n    \"total_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"<string>\"\n    },\n    \"subtotal_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"<string>\"\n    },\n    \"estimated_shipping_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"<string>\"\n    },\n    \"estimated_tax_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"<string>\"\n    },\n    \"status\": {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"invoice_date\": \"<string,null>\",\n    \"discount_granted\": {\n      \"value\": \"<string,null>\",\n      \"currency\": \"<string,null>\"\n    },\n    \"insurance_costs\": {\n      \"value\": \"<string,null>\",\n      \"currency\": \"<string,null>\"\n    },\n    \"freight_costs\": {\n      \"value\": \"<string,null>\",\n      \"currency\": \"<string,null>\"\n    },\n    \"other_costs\": {\n      \"value\": \"<string,null>\",\n      \"currency\": \"<string,null>\"\n    }\n  },\n  \"customs_details\": {\n    \"commercial_invoice_number\": \"<string>\",\n    \"shipment_type\": \"<string>\",\n    \"export_type\": \"<string>\",\n    \"tax_numbers\": {\n      \"sender\": [\n        {\n          \"name\": \"<string,null>\",\n          \"country_code\": \"<string,null>\",\n          \"value\": \"<string,null>\"\n        },\n        {\n          \"name\": \"<string,null>\",\n          \"country_code\": \"<string,null>\",\n          \"value\": \"<string,null>\"\n        }\n      ],\n      \"receiver\": [\n        {\n          \"name\": \"<string,null>\",\n          \"country_code\": \"<string,null>\",\n          \"value\": \"<string,null>\"\n        },\n        {\n          \"name\": \"<string,null>\",\n          \"country_code\": \"<string,null>\",\n          \"value\": \"<string,null>\"\n        }\n      ],\n      \"importer_of_record\": [\n        {\n          \"name\": \"<string,null>\",\n          \"country_code\": \"<string,null>\",\n          \"value\": \"<string,null>\"\n        },\n        {\n          \"name\": \"<string,null>\",\n          \"country_code\": \"<string,null>\",\n          \"value\": \"<string,null>\"\n        }\n      ]\n    }\n  },\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"billing_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"is_local_pickup\": \"<boolean,null>\",\n    \"delivery_indicator\": \"<string>\",\n    \"measurement\": {\n      \"dimension\": {\n        \"length\": \"<number>\",\n        \"width\": \"<number>\",\n        \"height\": \"<number>\",\n        \"unit\": \"<string>\"\n      },\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"<string>\"\n      },\n      \"volume\": {\n        \"value\": \"<integer>\",\n        \"unit\": \"<string>\"\n      }\n    },\n    \"ship_with\": {\n      \"type\": \"<string>\",\n      \"properties\": {\n        \"shipping_option_code\": \"<string,null>\",\n        \"contract_id\": \"<integer,null>\"\n      }\n    }\n  },\n  \"service_point_details\": {\n    \"id\": \"<string>\",\n    \"post_number\": \"<string>\",\n    \"latitude\": \"<string>\",\n    \"longitude\": \"<string>\",\n    \"type\": \"<string>\",\n    \"extra_data\": \"<object>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9d9ee4e-4c6b-4f41-8d76-643b001a2d70",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Filtering on the Sendcloud order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"669\",\n  \"order_id\": \"555413\",\n  \"order_details\": {\n    \"status\": {\n      \"code\": \"fulfilled\",\n      \"message\": \"Fulfilled\"\n    },\n    \"tags\": [\n      \"october_campaign\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 669,\n    \"order_id\": \"555413\",\n    \"order_number\": \"OXSDFGHTD-12\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14b67fc0-df5f-4ed4-b2c2-69b9dee3f8ea",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Filtering on the Sendcloud order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"669\",\n  \"order_id\": \"555413\",\n  \"order_details\": {\n    \"status\": {\n      \"code\": \"fulfilled\",\n      \"message\": \"Fulfilled\"\n    },\n    \"tags\": [\n      \"october_campaign\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"400\",\n      \"code\": \"invalid\",\n      \"title\": \"Invalid\",\n      \"detail\": \"Could not find specified item.\",\n      \"source\": {\n        \"pointer\": \"order/order_details/order_items\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd1cb893-fc3a-42a3-b5f6-6a6b5655e0ad",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Filtering on the Sendcloud order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"669\",\n  \"order_id\": \"555413\",\n  \"order_details\": {\n    \"status\": {\n      \"code\": \"fulfilled\",\n      \"message\": \"Fulfilled\"\n    },\n    \"tags\": [\n      \"october_campaign\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"404\",\n      \"code\": \"not_found\",\n      \"title\": \"Not found\",\n      \"detail\": \"Could not find specified item.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1cadb8c3-3715-41cb-a0e3-a678316c24e2",
+    "name": "Orders",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Orders API lets you manage your orders within Sendcloud. You can create and update orders in batch, retrieve a list of orders per integration, retrieve an order, partially update an order, and delete an order.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

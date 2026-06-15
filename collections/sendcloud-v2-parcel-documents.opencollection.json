@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Parcel Documents",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Parcel Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve parcel documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/parcels/:id/documents/:type",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the parcel which you want to retrieve a document from"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Document type you want to retrieve for this parcel"
+              },
+              {
+                "name": "dpi",
+                "value": "",
+                "type": "query",
+                "description": "DPI refers to the printing resolution of your shipping labels. It's important that labels are printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\nUse following amounts for appropriate result:\n<table>\n  <thead>\n    <tr>\n      <th>File format</th>\n      <th>Default DPI</th>\n      <th>Valid DPI</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>pdf</td>\n      <td>72</td>\n      <td>72</td>\n    </tr>\n    <tr>\n      <td>png</td>\n      <td>300</td>\n      <td>150, 300</td>\n    </tr>\n  </tbody>\n</table>\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n"
+              },
+              {
+                "name": "raw",
+                "value": "",
+                "type": "query",
+                "description": "There have been identified cases where custom documents, internally rendered, will only include some of the necessary information, mainly due to some restrictions. Using the raw query param, one can request to receive the document in the originally received format by the carrier. This temporary solution to the problem allows the normal operations of the affected customers. As such, you can expect this property to be sunsetted shortly once the necessary changes have been implemented."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a document for a given parcel by providing the parcel `id` and document `type`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

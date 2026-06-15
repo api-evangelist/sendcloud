@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Parcel Tracking API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Parcel Tracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve tracking information for a parcel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/parcels/tracking/:tracking_number",
+            "params": [
+              {
+                "name": "tracking_number",
+                "value": "",
+                "type": "path",
+                "description": "Parcel tracking number"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get information about a parcel, including its current status and recent tracking events, using its tracking number"
+        },
+        {
+          "info": {
+            "name": "Create an external parcel for tracking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/parcels/tracking",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Register an external parcel in the Sendcloud system for tracking, based on the provided details. It requires a valid tracking number and parcel information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

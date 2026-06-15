@@ -1,0 +1,1057 @@
+{
+  "item": [
+    {
+      "id": "f6734613-fcb0-4495-994b-1617592282b1",
+      "name": "Returns",
+      "description": {
+        "content": "Sendcloud's Returns API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f8d4a0ee-3ad4-41cd-946f-f024e0c1fcb8",
+          "name": "Create a return",
+          "request": {
+            "name": "Create a return",
+            "description": {
+              "content": "Create a standalone return",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "returns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": \"<integer,null>\",\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"<string,null>\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"<string,null>\",\n      \"delivery_deadline\": \"<string,null>\",\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"<string,null>\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"<string,null>\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"<string,null>\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"<string,null>\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"<string,null>\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"<string,null>\",\n      \"service_area\": \"<string,null>\",\n      \"signature\": \"<boolean>\",\n      \"size\": \"<string,null>\",\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"<string,null>\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"<string>\"\n  },\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"<string>\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"<string>\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"<string>\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"<string>\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"<string>\",\n        \"transportation_mode\": \"<string>\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"<string>\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"<string>\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"<string>\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"<string>\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"<string>\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"<string>\",\n        \"transportation_mode\": \"<string>\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"<string>\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"<string>\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      }\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"delivery_option\": \"<string,null>\",\n  \"customs_information\": {\n    \"invoice_number\": \"<string>\",\n    \"export_reason\": \"<string>\",\n    \"export_type\": \"commercial_b2c\",\n    \"invoice_date\": \"<date>\",\n    \"discount_granted\": \"<null>\",\n    \"freight_costs\": \"<null>\",\n    \"insurance_costs\": \"<null>\",\n    \"other_costs\": \"<null>\",\n    \"general_notes\": \"<string>\",\n    \"additional_declaration_statements\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"importer_of_record\": {\n      \"name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"state_province_code\": \"<string>\",\n      \"telephone\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"tax_numbers\": {\n      \"sender\": [\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"receiver\": [\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"importer_of_record\": [\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    \"return_data\": {\n      \"return_postal_code\": \"<string>\",\n      \"outbound_tracking_number\": \"<string>\",\n      \"outbound_shipment_date\": \"<date>\",\n      \"outbound_carrier_name\": \"<string>\"\n    }\n  },\n  \"apply_rules\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "90dcd67a-8a17-491a-9a36-d6c69ff5e320",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"return_id\": 12345,\n  \"parcel_id\": 67880,\n  \"multi_collo_ids\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9879e380-25cf-48f3-9379-db6afb787d87",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"field\": \"id\",\n      \"message\": \"This field is required\",\n      \"code\": \"invalid\"\n    },\n    {\n      \"field\": \"id\",\n      \"message\": \"This field is required\",\n      \"code\": \"required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf6e1861-6965-4879-93aa-3379aaa7da0c",
+          "name": "Retrieve a list of returns",
+          "request": {
+            "name": "Retrieve a list of returns",
+            "description": {
+              "content": "Retrieve a list of returns which have been created under your API credentials.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "returns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n- `o`: Offset\n- `r`: Reverse\n- `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`."
+                },
+                {
+                  "disabled": false,
+                  "key": "from_date",
+                  "value": "<string>",
+                  "description": "(Required) Excludes all returns before this datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_date",
+                  "value": "<string>",
+                  "description": "(Required) Excludes all returns after this datetime"
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_parcel_status",
+                  "value": "<string>",
+                  "description": "Search for returns with this parent status"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<number>",
+                  "description": "Refers to the number of items per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1da3a4d0-9aea-4589-af37-615d3f2e7752",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "cj0xJnA9MzAw"
+                    },
+                    {
+                      "key": "from_date",
+                      "value": "2022-04-06 00:00:00"
+                    },
+                    {
+                      "key": "to_date",
+                      "value": "2022-04-07 00:00:00"
+                    },
+                    {
+                      "key": "parent_parcel_status",
+                      "value": "announced"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"http://panel.sendcloud.sc/api/v3/returns?cursor=cD0z&page_size=1\",\n  \"previous\": \"http://panel.sendcloud.sc/api/v3/returns?cursor=cD0z&page_size=2\",\n  \"data\": [\n    {\n      \"created_at\": \"2022-07-18T15:34:21.869312+02:00\",\n      \"is_cancellable\": false,\n      \"label_cost\": {\n        \"value\": 6.15,\n        \"currency\": \"EUR\"\n      },\n      \"delivered_at\": 1734946171662,\n      \"delivered_at_iso\": \"2022-07-18T15:34:21.869312+02:00\",\n      \"shipping_product\": {\n        \"code\": \"postnl:standard/return\"\n      },\n      \"shipping_option\": {\n        \"code\": \"postnl:standard/signature\"\n      },\n      \"collo_count\": 1,\n      \"brand_id\": 1,\n      \"tracking_number\": \"JVGL1234567800001339\",\n      \"dimensions\": {\n        \"length\": 3,\n        \"width\": 3,\n        \"height\": 3,\n        \"unit\": \"cm\"\n      },\n      \"parcel_items\": [],\n      \"insurance\": false,\n      \"label_url\": \"https://panel.sendcloud.sc/api/v3/parcels/7/documents/label\",\n      \"label\": {\n        \"label_printer\": \"https://panel.sendcloud.sc/api/v3/parcels/7/documents/label\",\n        \"normal_printer\": [\n          \"https://panel.sendcloud.sc/api/v3/parcels/7/documents/label?paper_size=a4\",\n          \"https://panel.sendcloud.sc/api/v3/parcels/7/documents/label?paper_size=a4\",\n          \"https://panel.sendcloud.sc/api/v3/parcels/7/documents/label?paper_size=a4\",\n          \"https://panel.sendcloud.sc/api/v3/parcels/7/documents/label?paper_size=a4\"\n        ]\n      },\n      \"tracking_url\": \"https://tracking.eu-central-1-0.sendcloud.sc/forward?carrier=postnl&code=JVGL1234567800001339&destination=NL&lang=en-us&source=NL&type=parcel&verification=5611+JV&servicepoint_verification=&created_at=2022-07-18\",\n      \"send_tracking_emails\": false,\n      \"weight\": {\n        \"value\": 1,\n        \"unit\": \"kg\"\n      },\n      \"from_address\": {\n        \"name\": \"Gregory van der Poel\",\n        \"address_line_1\": \"Merchant Street\",\n        \"address_line_2\": \"\",\n        \"house_number\": \"1\",\n        \"postal_code\": \"5611 LX\",\n        \"city\": \"Eindhoven\",\n        \"country_code\": \"NL\",\n        \"email\": \"merchant@email.com\"\n      },\n      \"to_address\": {\n        \"name\": \"Customer3\",\n        \"po_box\": \"\",\n        \"address_line_1\": \"Customer Street3\",\n        \"address_line_2\": \"\",\n        \"house_number\": \"12\",\n        \"postal_code\": \"5611 JV\",\n        \"city\": \"Eindhoven\",\n        \"state_province_code\": \"Noord Brabant\",\n        \"country_code\": \"NL\",\n        \"email\": \"customer@email.com\"\n      },\n      \"reason\": {\n        \"id\": 1,\n        \"description\": \"Product did not match expectations\"\n      },\n      \"refund\": {\n        \"refund_type\": \"exchange\",\n        \"message\": \"Exchange for size M\"\n      },\n      \"return_fee\": {\n        \"value\": 1.5,\n        \"currency\": \"EUR\"\n      },\n      \"order_number\": \"\",\n      \"status_history\": [\n        {\n          \"carrier_update_timestamp\": \"2022-07-18T15:34:21.862840+02:00\",\n          \"parcel_status_history_id\": \"1\",\n          \"parent_status\": \"Ready to Ship\",\n          \"carrier_code\": \"some-carrier-code\",\n          \"carrier_message\": \"some-carrier-message\"\n        }\n      ],\n      \"customs_invoice_nr\": \"\",\n      \"customs_shipment_type\": 2\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d120ba1d-5780-4a7f-9645-6b0bc42844de",
+          "name": "Retrieve a return",
+          "request": {
+            "name": "Retrieve a return",
+            "description": {
+              "content": "Retrieve information about a specific return parcel based on the return `id`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "returns",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The internal Sendcloud id of this return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5bd42485-249c-454f-887c-19dcaca17bfd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The internal Sendcloud id of this return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"from_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein\",\n    \"house_number\": \"50\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"postal_code\": \"1013 AB\",\n    \"city\": \"Eindhoven\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\",\n    \"country_code\": \"NL\",\n    \"email\": \"johndoe@gmail.com\",\n    \"phone_number\": \"+319881729999\"\n  },\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein\",\n    \"house_number\": \"50\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"postal_code\": \"1013 AB\",\n    \"city\": \"Eindhoven\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\",\n    \"country_code\": \"NL\",\n    \"email\": \"johndoe@gmail.com\",\n    \"phone_number\": \"+319881729999\"\n  },\n  \"shipping_product\": {\n    \"code\": \"string\"\n  },\n  \"shipping_option\": {\n    \"code\": \"postnl:standard/signature\"\n  },\n  \"weight\": {\n    \"value\": 14.5,\n    \"unit\": \"g\"\n  },\n  \"send_tracking_emails\": false,\n  \"is_cancellable\": false,\n  \"status_history\": [\n    {\n      \"carrier_update_timestamp\": \"1998-09-10T16:20:15.367Z\",\n      \"parcel_status_history_id\": \"string\",\n      \"parent_status\": \"string\",\n      \"carrier_code\": \"string\",\n      \"carrier_message\": \"string\"\n    }\n  ],\n  \"created_at\": \"2022-08-09T14:32:21.463473+02:00\",\n  \"dimensions\": {\n    \"length\": 15,\n    \"width\": 20.5,\n    \"height\": 37,\n    \"unit\": \"mm\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"5552\",\n      \"description\": \"T-Shirt XL\",\n      \"quantity\": 1,\n      \"weight\": {\n        \"value\": 14.5,\n        \"unit\": \"g\"\n      },\n      \"price\": {\n        \"value\": 9442.810431847327,\n        \"currency\": \"EUR\"\n      },\n      \"value\": {\n        \"value\": 7037.408963857009,\n        \"currency\": \"EUR\"\n      },\n      \"hs_code\": \"6205.20\",\n      \"origin_country\": \"NL\",\n      \"sku\": \"TS1234\",\n      \"product_id\": \"19284\",\n      \"return_reason_id\": \"1\",\n      \"return_message\": \"Too big\",\n      \"mid_code\": \"NLOZR92MEL\",\n      \"material_content\": \"100% Cotton\",\n      \"intended_use\": \"Personal use\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"string\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"string\",\n        \"packaging_type\": \"string\",\n        \"packaging_instruction_code\": \"string\",\n        \"id_number\": \"string\",\n        \"class_division_number\": \"string\",\n        \"quantity\": \"string\",\n        \"unit_of_measurement\": \"ML\",\n        \"proper_shipping_name\": \"string\",\n        \"commodity_regulated_level_code\": \"EQ\",\n        \"transportation_mode\": \"Ground\",\n        \"emergency_contact_name\": \"string\",\n        \"emergency_contact_phone\": \"string\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"string\",\n        \"transport_category\": \"string\",\n        \"tunnel_restriction_code\": \"string\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"25FIYPEK0A7573\",\n      \"taric_doc_code\": \"Y142\",\n      \"manufacturer_product_id\": \"ABC-12345\",\n      \"manufacturer_product_id_std\": \"01234567890128\",\n      \"properties\": {\n        \"size\": \"red\",\n        \"color\": \"green\"\n      },\n      \"variant_id\": \"size-l\",\n      \"return_reason\": {\n        \"id\": 1,\n        \"description\": \"Too big for me\"\n      }\n    },\n    {\n      \"item_id\": \"5552\",\n      \"description\": \"T-Shirt XL\",\n      \"quantity\": 1,\n      \"weight\": {\n        \"value\": 14.5,\n        \"unit\": \"g\"\n      },\n      \"price\": {\n        \"value\": 3811.432136943931,\n        \"currency\": \"EUR\"\n      },\n      \"value\": {\n        \"value\": 9573.80488014936,\n        \"currency\": \"EUR\"\n      },\n      \"hs_code\": \"6205.20\",\n      \"origin_country\": \"NL\",\n      \"sku\": \"TS1234\",\n      \"product_id\": \"19284\",\n      \"return_reason_id\": \"1\",\n      \"return_message\": \"Too big\",\n      \"mid_code\": \"NLOZR92MEL\",\n      \"material_content\": \"100% Cotton\",\n      \"intended_use\": \"Personal use\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"string\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"string\",\n        \"packaging_type\": \"string\",\n        \"packaging_instruction_code\": \"string\",\n        \"id_number\": \"string\",\n        \"class_division_number\": \"string\",\n        \"quantity\": \"string\",\n        \"unit_of_measurement\": \"KG\",\n        \"proper_shipping_name\": \"string\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"string\",\n        \"emergency_contact_phone\": \"string\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"string\",\n        \"transport_category\": \"string\",\n        \"tunnel_restriction_code\": \"string\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"25FIYPEK0A7573\",\n      \"taric_doc_code\": \"Y142\",\n      \"manufacturer_product_id\": \"ABC-12345\",\n      \"manufacturer_product_id_std\": \"01234567890128\",\n      \"properties\": {\n        \"size\": \"red\",\n        \"color\": \"green\"\n      },\n      \"variant_id\": \"size-l\",\n      \"return_reason\": {\n        \"id\": 1,\n        \"description\": \"Too big for me\"\n      }\n    }\n  ],\n  \"brand_id\": 1,\n  \"label_url\": \"https://panel.sendcloud.sc/api/v3/parcels/8/documents/label\",\n  \"label\": {\n    \"normal_printer\": [\n      \"https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4\",\n      \"https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4\",\n      \"https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4\",\n      \"https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4\"\n    ],\n    \"label_printer\": \"https://panel.sendcloud.sc/api/v3/parcels/8/documents/label\"\n  },\n  \"label_cost\": {\n    \"value\": 1475.7733805593166,\n    \"currency\": \"USD\"\n  },\n  \"insurance\": false,\n  \"tracking_number\": \"3SSEND12345678\",\n  \"tracking_url\": \"https://tracking.eu-central-1-0.sendcloud.sc/forward?carrier=sendcloud&code=3SSEND12345678&destination=NL&lang=en-gb&source=NL&type=letter&verification=1001+VV&servicepoint_verification=&created_at=2022-07-27\",\n  \"delivered_at\": 1734946171662,\n  \"delivered_at_iso\": \"2022-08-09T14:32:21.463473+02:00\",\n  \"reason\": {\n    \"id\": 1,\n    \"description\": \"Too big for me\"\n  },\n  \"refund\": {\n    \"refund_type\": \"exchange\",\n    \"message\": \"Exchange for size M\"\n  },\n  \"return_fee\": {\n    \"value\": 7098.947531672531,\n    \"currency\": \"EUR\"\n  },\n  \"order_number\": \"ORD12345\",\n  \"contract\": 4615,\n  \"customs_invoice_nr\": \"string\",\n  \"customs_shipment_type\": 3,\n  \"delivery_option\": \"drop_off_point\",\n  \"images\": [\n    {\n      \"product_id\": \"123456\",\n      \"uploaded_image\": \"https://example.com/image.png\",\n      \"thumbnail_image\": \"https://example.com/thumbnail.png\",\n      \"description\": \"My broken camera, with a crack on the lens\"\n    },\n    {\n      \"product_id\": \"123456\",\n      \"uploaded_image\": \"https://example.com/image.png\",\n      \"thumbnail_image\": \"https://example.com/thumbnail.png\",\n      \"description\": \"My broken camera, with a crack on the lens\"\n    }\n  ],\n  \"status\": \"open\",\n  \"customs_information\": {\n    \"invoice_number\": \"INV-123\",\n    \"export_reason\": \"commercial_goods\",\n    \"export_type\": \"private\",\n    \"invoice_date\": \"2000-04-14\",\n    \"discount_granted\": null,\n    \"freight_costs\": null,\n    \"insurance_costs\": null,\n    \"other_costs\": null,\n    \"general_notes\": \"Compliance: Goods comply with international safety standards (CE certified).\",\n    \"additional_declaration_statements\": [\n      \"With reference to the above shipment, I understate that the content is not made of leather parts of animal species protected by the Washington Convention.\",\n      \"With reference to the above shipment, I understate that the content is not made of leather parts of animal species protected by the Washington Convention.\"\n    ],\n    \"importer_of_record\": {\n      \"name\": \"string\",\n      \"address_line_1\": \"string\",\n      \"city\": \"str\",\n      \"postal_code\": \"string\",\n      \"country_code\": \"st\",\n      \"company_name\": \"string\",\n      \"address_line_2\": \"string\",\n      \"house_number\": \"string\",\n      \"state_province_code\": \"IT-RM\",\n      \"telephone\": \"string\",\n      \"email\": \"string\"\n    },\n    \"tax_numbers\": {\n      \"sender\": [\n        {\n          \"name\": \"EORI\",\n          \"country_code\": \"NL\",\n          \"value\": \"NL123456789B01\"\n        },\n        {\n          \"name\": \"EORI\",\n          \"country_code\": \"NL\",\n          \"value\": \"NL123456789B01\"\n        }\n      ],\n      \"receiver\": [\n        {\n          \"name\": \"EORI\",\n          \"country_code\": \"NL\",\n          \"value\": \"NL123456789B01\"\n        },\n        {\n          \"name\": \"EORI\",\n          \"country_code\": \"NL\",\n          \"value\": \"NL123456789B01\"\n        }\n      ],\n      \"importer_of_record\": [\n        {\n          \"name\": \"EORI\",\n          \"country_code\": \"NL\",\n          \"value\": \"NL123456789B01\"\n        },\n        {\n          \"name\": \"EORI\",\n          \"country_code\": \"NL\",\n          \"value\": \"NL123456789B01\"\n        }\n      ]\n    },\n    \"return_data\": {\n      \"return_postal_code\": \"strin\",\n      \"outbound_tracking_number\": \"BE123456789\",\n      \"outbound_shipment_date\": \"2020-11-27\",\n      \"outbound_carrier_name\": \"DHL\"\n    }\n  },\n  \"errors\": [\n    {\n      \"id\": \"string\",\n      \"links\": {\n        \"about\": \"string\"\n      },\n      \"status\": \"string\",\n      \"code\": \"null\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"links\": {\n        \"about\": \"string\"\n      },\n      \"status\": \"string\",\n      \"code\": \"unknown_field\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18c5a65e-7d83-48ca-833a-c6c29aedd6d0",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The internal Sendcloud id of this return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e5c462e-49ee-4cfd-b3e9-f6796e13ef4c",
+          "name": "Request cancellation of a return",
+          "request": {
+            "name": "Request cancellation of a return",
+            "description": {
+              "content": "You can request cancellation for a return by providing the return `id` to this endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "returns",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The internal Sendcloud id of this return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            }
+          },
+          "response": [
+            {
+              "id": "ec92f115-6be4-434f-a4eb-2a0fa192f8a9",
+              "name": "Cancellation has successfully been requested",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The internal Sendcloud id of this return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Cancellation requested successfully\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c75315b5-d232-4a15-ae11-e60e6c3192d9",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The internal Sendcloud id of this return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6d6321d7-bd64-4721-896d-0714cd6930cd",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The internal Sendcloud id of this return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"field\": \"returns\",\n      \"code\": 409,\n      \"message\": \"Return is not cancellable.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38fa0c1e-2075-4f15-8424-3094fe469cba",
+          "name": "Validate a return",
+          "request": {
+            "name": "Validate a return",
+            "description": {
+              "content": "Check if a return can be announced **without** actually creating the return, or announcing it with the carrier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "returns",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": \"<integer,null>\",\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"<string,null>\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"<string,null>\",\n      \"delivery_deadline\": \"<string,null>\",\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"<string,null>\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"<string,null>\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"<string,null>\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"<string,null>\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"<string,null>\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"<string,null>\",\n      \"service_area\": \"<string,null>\",\n      \"signature\": \"<boolean>\",\n      \"size\": \"<string,null>\",\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"<string,null>\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"<string>\"\n  },\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"<string>\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"<string>\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"<string>\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"<string>\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"<string>\",\n        \"transportation_mode\": \"<string>\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"<string>\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"<string>\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"key_0\": 4972.149967196482,\n        \"key_1\": 3819.9277775122255\n      }\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"<string>\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"<string>\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"<string>\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"<string>\",\n        \"transportation_mode\": \"<string>\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"<string>\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"<string>\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      }\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"delivery_option\": \"<string,null>\",\n  \"customs_information\": {\n    \"invoice_number\": \"<string>\",\n    \"export_reason\": \"<string>\",\n    \"export_type\": \"commercial_b2c\",\n    \"invoice_date\": \"<date>\",\n    \"discount_granted\": \"<null>\",\n    \"freight_costs\": \"<null>\",\n    \"insurance_costs\": \"<null>\",\n    \"other_costs\": \"<null>\",\n    \"general_notes\": \"<string>\",\n    \"additional_declaration_statements\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"importer_of_record\": {\n      \"name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"state_province_code\": \"<string>\",\n      \"telephone\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"tax_numbers\": {\n      \"sender\": [\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"receiver\": [\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"importer_of_record\": [\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    \"return_data\": {\n      \"return_postal_code\": \"<string>\",\n      \"outbound_tracking_number\": \"<string>\",\n      \"outbound_shipment_date\": \"<date>\",\n      \"outbound_carrier_name\": \"<string>\"\n    }\n  },\n  \"apply_rules\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6c228cfb-f3c6-475c-acc3-cea6403920bc",
+              "name": "Your return passed all validation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"from_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein\",\n    \"house_number\": \"50\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"postal_code\": \"1013 AB\",\n    \"city\": \"Eindhoven\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\",\n    \"country_code\": \"NL\",\n    \"email\": \"johndoe@gmail.com\",\n    \"phone_number\": \"+319881729999\"\n  },\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein\",\n    \"house_number\": \"50\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"postal_code\": \"1013 AB\",\n    \"city\": \"Eindhoven\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\",\n    \"country_code\": \"NL\",\n    \"email\": \"johndoe@gmail.com\",\n    \"phone_number\": \"+319881729999\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"shipping_option_code\": \"dpd:return/return\",\n    \"shipping_product_code\": \"dpd:return/return\",\n    \"functionalities\": {\n      \"age_check\": null,\n      \"b2b\": false,\n      \"b2c\": true,\n      \"boxable\": true,\n      \"bulky_goods\": false,\n      \"carrier_billing_type\": \"zonal\",\n      \"cash_on_delivery\": 4234,\n      \"dangerous_goods\": false,\n      \"delivery_attempts\": 2663,\n      \"delivery_before\": \"0936\",\n      \"delivery_deadline\": \"within_24h\",\n      \"direct_contract_only\": false,\n      \"eco_delivery\": false,\n      \"first_mile\": \"fulfilment\",\n      \"flex_delivery\": true,\n      \"form_factor\": \"letter\",\n      \"fragile_goods\": false,\n      \"fresh_goods\": true,\n      \"harmonized_label\": false,\n      \"id_check\": false,\n      \"incoterm\": \"dap_dp\",\n      \"insurance\": 488,\n      \"last_mile\": \"locker_or_service_point\",\n      \"manually\": false,\n      \"multicollo\": false,\n      \"neighbor_delivery\": true,\n      \"non_conveyable\": true,\n      \"personalized_delivery\": false,\n      \"premium\": false,\n      \"priority\": \"economical\",\n      \"registered_delivery\": true,\n      \"returns\": false,\n      \"segment\": \"c\",\n      \"service_area\": \"domestic_remote\",\n      \"signature\": true,\n      \"size\": \"xl\",\n      \"sorted\": true,\n      \"surcharge\": true,\n      \"tracked\": false,\n      \"tyres\": false,\n      \"weekend_delivery\": \"weekends\",\n      \"ers\": false,\n      \"pick_up\": false,\n      \"labelless\": false\n    },\n    \"contract\": 4358\n  },\n  \"weight\": 2.8,\n  \"dimensions\": {\n    \"height\": 10,\n    \"width\": 10,\n    \"length\": 10\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"5552\",\n      \"description\": \"T-Shirt XL\",\n      \"quantity\": 1,\n      \"weight\": {\n        \"value\": 14.5,\n        \"unit\": \"g\"\n      },\n      \"price\": {\n        \"value\": 6670.626434253309,\n        \"currency\": \"EUR\"\n      },\n      \"value\": {\n        \"value\": 4441.123868329163,\n        \"currency\": \"EUR\"\n      },\n      \"hs_code\": \"6205.20\",\n      \"origin_country\": \"NL\",\n      \"sku\": \"TS1234\",\n      \"product_id\": \"19284\",\n      \"return_reason_id\": \"1\",\n      \"return_message\": \"Too big\",\n      \"mid_code\": \"NLOZR92MEL\",\n      \"material_content\": \"100% Cotton\",\n      \"intended_use\": \"Personal use\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"string\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"string\",\n        \"packaging_type\": \"string\",\n        \"packaging_instruction_code\": \"string\",\n        \"id_number\": \"string\",\n        \"class_division_number\": \"string\",\n        \"quantity\": \"string\",\n        \"unit_of_measurement\": \"KG\",\n        \"proper_shipping_name\": \"string\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"PAX\",\n        \"emergency_contact_name\": \"string\",\n        \"emergency_contact_phone\": \"string\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"string\",\n        \"transport_category\": \"string\",\n        \"tunnel_restriction_code\": \"string\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"25FIYPEK0A7573\",\n      \"taric_doc_code\": \"Y142\",\n      \"manufacturer_product_id\": \"ABC-12345\",\n      \"manufacturer_product_id_std\": \"01234567890128\",\n      \"properties\": {\n        \"size\": \"red\",\n        \"color\": \"green\"\n      },\n      \"variant_id\": \"size-l\"\n    },\n    {\n      \"item_id\": \"5552\",\n      \"description\": \"T-Shirt XL\",\n      \"quantity\": 1,\n      \"weight\": {\n        \"value\": 14.5,\n        \"unit\": \"g\"\n      },\n      \"price\": {\n        \"value\": 13.127111027853022,\n        \"currency\": \"EUR\"\n      },\n      \"value\": {\n        \"value\": 9296.08363336734,\n        \"currency\": \"EUR\"\n      },\n      \"hs_code\": \"6205.20\",\n      \"origin_country\": \"NL\",\n      \"sku\": \"TS1234\",\n      \"product_id\": \"19284\",\n      \"return_reason_id\": \"1\",\n      \"return_message\": \"Too big\",\n      \"mid_code\": \"NLOZR92MEL\",\n      \"material_content\": \"100% Cotton\",\n      \"intended_use\": \"Personal use\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"string\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"string\",\n        \"packaging_type\": \"string\",\n        \"packaging_instruction_code\": \"string\",\n        \"id_number\": \"string\",\n        \"class_division_number\": \"string\",\n        \"quantity\": \"string\",\n        \"unit_of_measurement\": \"L\",\n        \"proper_shipping_name\": \"string\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"string\",\n        \"emergency_contact_phone\": \"string\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"string\",\n        \"transport_category\": \"string\",\n        \"tunnel_restriction_code\": \"string\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"25FIYPEK0A7573\",\n      \"taric_doc_code\": \"Y142\",\n      \"manufacturer_product_id\": \"ABC-12345\",\n      \"manufacturer_product_id_std\": \"01234567890128\",\n      \"properties\": {\n        \"size\": \"red\",\n        \"color\": \"green\"\n      },\n      \"variant_id\": \"size-l\"\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": 1,\n  \"total_insured_value\": {\n    \"value\": 329.9187662009728,\n    \"currency\": \"EUR\"\n  },\n  \"order_number\": \"ORD12355\",\n  \"total_order_value\": {\n    \"value\": 9550.269902703561,\n    \"currency\": \"EUR\"\n  },\n  \"external_reference\": \"RET9876\",\n  \"customs_shipment_type\": 3,\n  \"delivery_option\": \"drop_off_point\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f634af8-3919-41ca-a332-0f5be8b47fe4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"field\": \"id\",\n      \"message\": \"This field is required\",\n      \"code\": \"invalid\"\n    },\n    {\n      \"field\": \"id\",\n      \"message\": \"This field is required\",\n      \"code\": \"required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a5b3193-4960-4587-8471-2577fe387804",
+          "name": "Create a return synchronously",
+          "request": {
+            "name": "Create a return synchronously",
+            "description": {
+              "content": "Create a return synchronously, i.e. wait for a response from the carrier before continuing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "returns",
+                "announce-synchronously"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": \"<integer,null>\",\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"<string,null>\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"<string,null>\",\n      \"delivery_deadline\": \"<string,null>\",\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"<string,null>\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"<string,null>\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"<string,null>\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"<string,null>\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"<string,null>\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"<string,null>\",\n      \"service_area\": \"<string,null>\",\n      \"signature\": \"<boolean>\",\n      \"size\": \"<string,null>\",\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"<string,null>\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"<string>\"\n  },\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"<string>\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"<string>\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"<string>\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"<string>\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"<string>\",\n        \"transportation_mode\": \"<string>\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"<string>\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"<string>\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"key_0\": 4972.149967196482,\n        \"key_1\": 3819.9277775122255\n      }\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"<string>\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"<string>\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"<string>\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"<string>\",\n        \"transportation_mode\": \"<string>\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"<string>\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"<string>\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      }\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"delivery_option\": \"<string,null>\",\n  \"customs_information\": {\n    \"invoice_number\": \"<string>\",\n    \"export_reason\": \"<string>\",\n    \"export_type\": \"commercial_b2c\",\n    \"invoice_date\": \"<date>\",\n    \"discount_granted\": \"<null>\",\n    \"freight_costs\": \"<null>\",\n    \"insurance_costs\": \"<null>\",\n    \"other_costs\": \"<null>\",\n    \"general_notes\": \"<string>\",\n    \"additional_declaration_statements\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"importer_of_record\": {\n      \"name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"state_province_code\": \"<string>\",\n      \"telephone\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"tax_numbers\": {\n      \"sender\": [\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"receiver\": [\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"importer_of_record\": [\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    \"return_data\": {\n      \"return_postal_code\": \"<string>\",\n      \"outbound_tracking_number\": \"<string>\",\n      \"outbound_shipment_date\": \"<date>\",\n      \"outbound_carrier_name\": \"<string>\"\n    }\n  },\n  \"apply_rules\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82465e6d-4a3d-4349-9478-e01a90c54838",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns",
+                    "announce-synchronously"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"return_id\": 12345,\n  \"parcel_id\": 67880,\n  \"multi_collo_ids\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4757c33a-95e5-4faf-9112-b5ccd24ca414",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "returns",
+                    "announce-synchronously"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"invalid_postal_code\",\n    \"request\": \"api/v2/brand/devtest/return-portal/outgoing\",\n    \"message\": \"The postal code you provided is invalid.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3524bd5f-1b12-4680-964e-3c29d4b3e4a6",
+    "name": "Returns",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sendcloud **Returns API** lets you create standalone returns easily and efficiently, so you can seamlessly incorporate returns into your existing workflow, ERP or WMS system. This API can be used in conjunction with other core Sendcloud features or independently.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

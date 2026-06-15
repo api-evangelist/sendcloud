@@ -1,0 +1,614 @@
+{
+  "item": [
+    {
+      "id": "719bfb66-1fca-4501-9101-5aa1b582d7c8",
+      "name": "Parcel Documents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb31623a-a13a-4fcc-9f7b-defff3b1b7bf",
+          "name": "Retrieve a parcel document",
+          "request": {
+            "name": "Retrieve a parcel document",
+            "description": {
+              "content": "Retrieve a specific document for a given parcel, and download it in your preferred format and resolution.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcels",
+                ":id",
+                "documents",
+                ":type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dpi",
+                  "value": "72",
+                  "description": "DPI, or dots per inch, refers to the printing resolution of your shipping labels. Labels must be printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\n\nUse the following table to find the appropriate DPI for each file format:\n\n| File format | Default DPI | Valid DPI |\n|-------------|-------------|-----------|\n| pdf         | 72          | 72        |\n| png         | 300         | 150, 300  |\n\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "paper_size",
+                  "value": "<string>",
+                  "description": "The paper size of the document you would like to retrieve. Paper size can be one of:\n\n- A4\n- A5\n- A6\n\nOmitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Identifier of the parcel which you want to retrieve a document from"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "type",
+                  "description": "(Required) Document type you want to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5410db9f-f55c-4888-b25e-5cf387bcee5c",
+              "name": "Requested parcel document file",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":id",
+                    "documents",
+                    ":type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dpi",
+                      "value": "300"
+                    },
+                    {
+                      "key": "paper_size",
+                      "value": "A4"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Identifier of the parcel which you want to retrieve a document from"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Document type you want to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The returned format of the document.\n\n**Note:** If a label is requested as native ZPL from the carrier it can't be converted to another format and will always be returned in ZPL.",
+                    "key": "Accept",
+                    "value": "image/png"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ffc11b1f-1241-41e8-a03b-4faa6e7132d6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":id",
+                    "documents",
+                    ":type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dpi",
+                      "value": "300"
+                    },
+                    {
+                      "key": "paper_size",
+                      "value": "A4"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Identifier of the parcel which you want to retrieve a document from"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Document type you want to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The returned format of the document.\n\n**Note:** If a label is requested as native ZPL from the carrier it can't be converted to another format and will always be returned in ZPL.",
+                    "key": "Accept",
+                    "value": "image/png"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"status\": \"400\",\n      \"detail\": \"Invalid document type.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7266aacf-b853-42dd-bb06-a02baf4e88cd",
+              "name": "Document type requested is not available for the parcel",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":id",
+                    "documents",
+                    ":type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dpi",
+                      "value": "300"
+                    },
+                    {
+                      "key": "paper_size",
+                      "value": "A4"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Identifier of the parcel which you want to retrieve a document from"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Document type you want to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The returned format of the document.\n\n**Note:** If a label is requested as native ZPL from the carrier it can't be converted to another format and will always be returned in ZPL.",
+                    "key": "Accept",
+                    "value": "image/png"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not_found\",\n      \"status\": \"404\",\n      \"detail\": \"No Parcel matches the given query.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75827378-1535-4277-abfb-6899a3e12f73",
+          "name": "Retrieve multiple parcel documents",
+          "request": {
+            "name": "Retrieve multiple parcel documents",
+            "description": {
+              "content": "Download multiple parcel documents of the same type in bulk.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcel-documents",
+                ":type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "parcels",
+                  "value": "<integer>",
+                  "description": "(Required) Parcels for which you want to retrieve the documents"
+                },
+                {
+                  "disabled": false,
+                  "key": "paper_size",
+                  "value": "<string>",
+                  "description": "The paper size of the document you would like to retrieve. Paper size can be one of:\n\n- A4\n- A5\n- A6\n\nOmitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "type",
+                  "description": "(Required) Document type you want to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c77a4b7c-6e1a-4a50-8603-65c0e93372fc",
+              "name": "Requested parcel document files of a specific type.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcel-documents",
+                    ":type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parcels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "parcels",
+                      "value": "2"
+                    },
+                    {
+                      "key": "parcels",
+                      "value": "3"
+                    },
+                    {
+                      "key": "paper_size",
+                      "value": "A4"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Document type you want to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a552d4e-aadc-4dc3-9f2f-c93cb01096cb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcel-documents",
+                    ":type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parcels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "parcels",
+                      "value": "2"
+                    },
+                    {
+                      "key": "parcels",
+                      "value": "3"
+                    },
+                    {
+                      "key": "paper_size",
+                      "value": "A4"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Document type you want to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"invalid\",\n      \"status\": \"400\",\n      \"detail\": \"Invalid document type.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83b27f3b-6761-4918-b603-a8228964e6ce",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcel-documents",
+                    ":type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parcels",
+                      "value": "1"
+                    },
+                    {
+                      "key": "parcels",
+                      "value": "2"
+                    },
+                    {
+                      "key": "parcels",
+                      "value": "3"
+                    },
+                    {
+                      "key": "paper_size",
+                      "value": "A4"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) Document type you want to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"not_found\",\n      \"status\": \"404\",\n      \"detail\": \"No Parcel matches the given query.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bf408750-f0d7-426e-b9fc-54f1ed4482a5",
+    "name": "Parcel documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "For international shipments, customs documentation is generated alongside the shipping label. These documents can be downloaded separately from the shipping label in various formats and resolutions via this API.\n\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

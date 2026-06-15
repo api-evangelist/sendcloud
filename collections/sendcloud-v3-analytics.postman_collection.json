@@ -1,0 +1,1252 @@
+{
+  "item": [
+    {
+      "id": "9e83d0d7-c2f1-4a79-b88f-3a551c735a1d",
+      "name": "Analytics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4a2b6bd5-1fd3-4915-9644-136963f995b9",
+          "name": "Retrieve carrier transit times",
+          "request": {
+            "name": "Retrieve carrier transit times",
+            "description": {
+              "content": "Returns aggregated transit-time statistics per carrier, optionally filtered by origin and destination country and a date window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "transit-times",
+                "carriers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "(Required) One or more carrier codes to retrieve transit times for. Repeat the parameter to pass multiple values."
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country_code",
+                  "value": "<string>",
+                  "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values."
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country_code",
+                  "value": "<string>",
+                  "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values."
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country_code",
+                  "value": "<string>",
+                  "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values."
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country_code",
+                  "value": "<string>",
+                  "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "451b4797-6508-461f-aa42-4d7f99a74794",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "dhl"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transit_times\": [\n    {\n      \"carrier_code\": \"postnl\",\n      \"from_country_code\": \"NL\",\n      \"to_country_code\": \"AT\",\n      \"start_date\": \"2025-03-01T00:00:00Z\",\n      \"end_date\": \"2025-03-31T23:59:59Z\",\n      \"total_parcels\": 1284,\n      \"transit_time_hours\": 48.5,\n      \"transit_time_days\": 2\n    },\n    {\n      \"carrier_code\": \"postnl\",\n      \"from_country_code\": \"NL\",\n      \"to_country_code\": \"DE\",\n      \"start_date\": \"2025-03-01T00:00:00Z\",\n      \"end_date\": \"2025-03-31T23:59:59Z\",\n      \"total_parcels\": 932,\n      \"transit_time_hours\": 36.2,\n      \"transit_time_days\": 2\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "262f87e1-8092-4aa7-8aac-1316c0d8da81",
+              "name": "Bad Request. Returned when a request parameter fails validation or the request is semantically invalid. The `source.parameter` field identifies the offending input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "dhl"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"400\",\n      \"code\": \"invalid\",\n      \"detail\": \"start_date must be on or before end_date.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1414b5e2-3654-4be1-b8be-408548f6b50d",
+              "name": "Unauthorized. Returned when authentication credentials are missing or invalid. Make sure you're using your **Public Key** as the username and **Secret Key** as the password (HTTP Basic Auth), or a valid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "dhl"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"401\",\n      \"code\": \"authentication_failed\",\n      \"detail\": \"Authentication credentials were not provided.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7231c0bd-a1dd-47ec-a9fb-88b3cfc33591",
+              "name": "Forbidden. Returned when your account doesn't have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "dhl"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"403\",\n      \"code\": \"forbidden\",\n      \"detail\": \"Analytics is not enabled for this organization.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c73e9744-d6ea-4c1c-a0f5-eec98df8b0ee",
+              "name": "Not Found. Returned when the analytics data source has not been provisioned for your organization. A successful query with no matching rows returns `200` with an empty `transit_times` array instead.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "dhl"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"404\",\n      \"code\": \"not_found\",\n      \"detail\": \"Analytics data is not available for this organization.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3df56df-8fde-42fd-ae2d-12f7c3efd1f3",
+              "name": "Internal Server Error. Returned when the analytics data source is unreachable, times out, or returns an unexpected error. Safe to retry, but if it persists, contact support and include the request ID from the `X-Request-Id` response header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "dhl"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"unknown_error\",\n      \"detail\": \"Failed to fetch analytics data. Please try again later.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "030896aa-277b-469a-a384-312dc118e31f",
+              "name": "Bad Gateway. Returned when a request to an external service fails with an unexpected status. Safe to retry, but if it persists, contact support and include the request ID from the `X-Request-Id` response header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "dhl"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"502\",\n      \"code\": \"external_service_error\",\n      \"detail\": \"An error occurred with an external service.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56c90438-f2b3-4819-8826-3656636ccc46",
+          "name": "Retrieve shipping option transit times",
+          "request": {
+            "name": "Retrieve shipping option transit times",
+            "description": {
+              "content": "Returns aggregated transit-time statistics per shipping option, optionally filtered by origin and destination country and a date window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "transit-times",
+                "shipping-options"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shipping_option_code",
+                  "value": "<string>",
+                  "description": "(Required) One or more shipping option codes to retrieve transit times for. Repeat the parameter to pass multiple values."
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country_code",
+                  "value": "<string>",
+                  "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values."
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country_code",
+                  "value": "<string>",
+                  "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values."
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country_code",
+                  "value": "<string>",
+                  "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values."
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country_code",
+                  "value": "<string>",
+                  "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ccb89577-663d-4c55-8f50-88e638165c19",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "shipping-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shipping_option_code",
+                      "value": "postnl_standard"
+                    },
+                    {
+                      "key": "shipping_option_code",
+                      "value": "dhl_express"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transit_times\": [\n    {\n      \"shipping_option_code\": \"postnl_standard\",\n      \"from_country_code\": \"NL\",\n      \"to_country_code\": \"AT\",\n      \"start_date\": \"2025-03-01T00:00:00Z\",\n      \"end_date\": \"2025-03-31T23:59:59Z\",\n      \"total_parcels\": 842,\n      \"transit_time_hours\": 50.1,\n      \"transit_time_days\": 2\n    },\n    {\n      \"shipping_option_code\": \"dhl_express\",\n      \"from_country_code\": \"NL\",\n      \"to_country_code\": \"DE\",\n      \"start_date\": \"2025-03-01T00:00:00Z\",\n      \"end_date\": \"2025-03-31T23:59:59Z\",\n      \"total_parcels\": 217,\n      \"transit_time_hours\": 26.4,\n      \"transit_time_days\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55b3fd62-0f96-4484-84e9-e3672932878d",
+              "name": "Bad Request. Returned when one or more request parameters fail validation (missing required parameters, country codes that aren't two characters, `shipping_option_code` outside its length bounds, dates outside the supported format) or when the request itself is semantically invalid (e.g. `start_date` after `end_date`).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "shipping-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shipping_option_code",
+                      "value": "postnl_standard"
+                    },
+                    {
+                      "key": "shipping_option_code",
+                      "value": "dhl_express"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"400\",\n      \"code\": \"invalid\",\n      \"detail\": \"start_date must be on or before end_date.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4201cce-7665-4cf1-97c4-be9045d4f5ce",
+              "name": "Unauthorized. Returned when authentication credentials are missing or invalid. Make sure you're using your **Public Key** as the username and **Secret Key** as the password (HTTP Basic Auth), or a valid OAuth 2.0 access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "shipping-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shipping_option_code",
+                      "value": "postnl_standard"
+                    },
+                    {
+                      "key": "shipping_option_code",
+                      "value": "dhl_express"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"401\",\n      \"code\": \"authentication_failed\",\n      \"detail\": \"Authentication credentials were not provided.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d02ebc18-5ba9-4a2a-a2a7-d18f79f10432",
+              "name": "Forbidden. Returned when your account doesn't have access to this endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "shipping-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shipping_option_code",
+                      "value": "postnl_standard"
+                    },
+                    {
+                      "key": "shipping_option_code",
+                      "value": "dhl_express"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"403\",\n      \"code\": \"forbidden\",\n      \"detail\": \"Analytics is not enabled for this organization.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5746f26-b43e-4d8e-bc29-3bebedd16ba4",
+              "name": "Not Found. Returned when the analytics data source has not been provisioned for your organization. A successful query with no matching rows returns `200` with an empty `transit_times` array instead.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "shipping-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shipping_option_code",
+                      "value": "postnl_standard"
+                    },
+                    {
+                      "key": "shipping_option_code",
+                      "value": "dhl_express"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"404\",\n      \"code\": \"not_found\",\n      \"detail\": \"Analytics data is not available for this organization.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7208af3d-3261-426b-a660-fadc78197017",
+              "name": "Internal Server Error. Returned when the analytics data source is unreachable, times out, or returns an unexpected error. Safe to retry, but if it persists, contact support and include the request ID from the `X-Request-Id` response header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "shipping-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shipping_option_code",
+                      "value": "postnl_standard"
+                    },
+                    {
+                      "key": "shipping_option_code",
+                      "value": "dhl_express"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"500\",\n      \"code\": \"unknown_error\",\n      \"detail\": \"Failed to fetch analytics data. Please try again later.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef429a56-f3c8-4914-bf74-da4bf830f1a6",
+              "name": "Bad Gateway. Returned when a request to an external service fails with an unexpected status. Safe to retry, but if it persists, contact support and include the request ID from the `X-Request-Id` response header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "transit-times",
+                    "shipping-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shipping_option_code",
+                      "value": "postnl_standard"
+                    },
+                    {
+                      "key": "shipping_option_code",
+                      "value": "dhl_express"
+                    },
+                    {
+                      "key": "from_country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "AT"
+                    },
+                    {
+                      "key": "to_country_code",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2025-03-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"502\",\n      \"code\": \"external_service_error\",\n      \"detail\": \"An error occurred with an external service.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "41837683-b253-49e9-bf4a-ee3d6d8f6ebd",
+    "name": "Analytics",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Analytics API exposes aggregated shipping insights derived from your account's shipping activity. The current release covers carrier and shipping option transit times.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

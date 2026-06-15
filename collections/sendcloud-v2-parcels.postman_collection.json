@@ -1,0 +1,1270 @@
+{
+  "item": [
+    {
+      "id": "1bab8d19-da7c-4ed9-a6d7-421a6b734a79",
+      "name": "Parcels",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f48631cc-d267-4fcc-846f-d53206e5785c",
+          "name": "Retrieve parcels",
+          "request": {
+            "name": "Retrieve parcels",
+            "description": {
+              "content": "This endpoint allows you to retrieve a list of all the parcels which you have created or imported into your Sendcloud account under your API credentials. You can filter the results based on the query parameters provided below, in order to retrieve a specific parcel or list of parcels which match the defined criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "parcel_status",
+                  "value": "<integer>",
+                  "description": "Returns parcels that have the requested status. For a list of possible statuses, see the [Retrieve a list of parcel statuses](/api/v2/parcel-statuses/retrieve-a-list-of-parcel-statuses) endpoint."
+                },
+                {
+                  "disabled": false,
+                  "key": "tracking_number",
+                  "value": "<string>",
+                  "description": "Returns parcels that match a specified tracking number"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_reference",
+                  "value": "<string>",
+                  "description": "Returns parcels that match a specified external reference"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_number",
+                  "value": "<string>",
+                  "description": "Returns an order that matches a specific `order_number` property from your parcels"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<string>",
+                  "description": "Returns all orders which have been updated in our system after a given time. You can use the value of ISO 8601 DateTime string like this"
+                },
+                {
+                  "disabled": false,
+                  "key": "announced_after",
+                  "value": "<string>",
+                  "description": "Returns all orders which have been announced to the carrier after the given time. You can use the value of ISO 8601 DateTime string like this"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "Filter results using a list of Parcel IDs. This is a comma separated list of IDs, it may not contain more then 100 IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Next and previous token that is used to paginate. The token is included in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "errors",
+                  "value": "<string>",
+                  "description": "If you are using this API for development purposes, you might want to use the errors query string in the URL. This allows you to visualize errors from the carrier."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ae06148a-ecdc-471b-9f95-60225bebfe97",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parcel_status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tracking_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "announced_after",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "errors",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": null,\n  \"previous\": null,\n  \"parcels\": [\n    {\n      \"id\": 3172,\n      \"name\": \"John Doe\",\n      \"company_name\": \"Sendcloud\",\n      \"contract\": 1,\n      \"address\": \"Stadhuisplein 10\",\n      \"address_divided\": {\n        \"street\": \"Stadhuisplein\",\n        \"house_number\": \"10\"\n      },\n      \"city\": \"Eindhoven\",\n      \"postal_code\": \"5611 EM\",\n      \"telephone\": \"0612345678\",\n      \"email\": \"test@email.com\",\n      \"date_created\": \"01-01-2018 21:45:30\",\n      \"date_updated\": \"01-01-2018 21:47:12\",\n      \"date_announced\": \"01-01-2018 21:47:13\",\n      \"tracking_number\": \"S0M3TR4Ck1NgNumB3r\",\n      \"customs_declaration\": {},\n      \"weight\": \"2.000\",\n      \"label\": {\n        \"normal_printer\": [\n          \"https://panel.sendcloud.sc/api/v2/label/normal_printer/3172?start_from=0&hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\",\n          \"https://panel.sendcloud.sc/api/v2/label/normal_printer/3172?start_from=1&hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\",\n          \"https://panel.sendcloud.sc/api/v2/label/normal_printer/3172?start_from=2&hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\",\n          \"https://panel.sendcloud.sc/api/v2/label/normal_printer/3172?start_from=3&hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\"\n        ],\n        \"label_printer\": \"https://panel.sendcloud.sc/api/v2/label/label_printer/3172?hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\"\n      },\n      \"status\": {\n        \"id\": 0,\n        \"message\": \"Ready to send\"\n      },\n      \"data\": {},\n      \"country\": {\n        \"iso_3\": \"NLD\",\n        \"iso_2\": \"NL\",\n        \"name\": \"Netherlands\"\n      },\n      \"shipment\": {\n        \"id\": 1,\n        \"name\": \"PostNL Standard 0-23kg\"\n      },\n      \"carrier\": {\n        \"code\": \"postnl\"\n      },\n      \"colli_uuid\": \"ab3ecb5e-61b6-42b1-8034-7c6befdeaa63\",\n      \"collo_nr\": 0,\n      \"collo_count\": 1,\n      \"reference\": \"some_reference_123\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8e08f83-8c31-4c54-9d0b-27000e8d97f5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parcel_status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tracking_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "announced_after",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "errors",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"request\": \"api/v2/parcels\",\n    \"message\": \"Invalid cursor\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b36b94c4-41a1-4d77-8e2e-aa750802b49c",
+          "name": "Create a parcel or parcels",
+          "request": {
+            "name": "Create a parcel or parcels",
+            "description": {
+              "content": "Create one or multiple parcels, either to be immediately announced to the carrier, or to be created for later announcement.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "errors",
+                  "value": "<string>",
+                  "description": "When making an API request, the errors query parameter can be used to determine the type of errors that should be included in the response. If `verbose` is specified, the response will only contain errors that Sendcloud has validated. These errors may include shipment details such as invalid addresses or missing postal codes. On the other hand, if `verbose-carrier` is specified, the response will include errors originating from the carriers side of the shipping process. These errors may result from technical or validation problems, such as connection failures or issues with the carrier`s systems, that prevent the shipment from being processed. More details are described on the page [Handling parcel errors](/docs/shipping/handling-parcel-errors)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parcel\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"company_name\": \"<string>\",\n    \"contract\": \"<integer>\",\n    \"address_2\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"telephone\": \"<string>\",\n    \"request_label\": \"<boolean>\",\n    \"email\": \"<string>\",\n    \"data\": \"<object>\",\n    \"shipment\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"weight\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"insured_value\": \"<integer>\",\n    \"total_order_value_currency\": \"<string>\",\n    \"total_order_value\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"shipping_method_checkout_name\": \"<string>\",\n    \"to_post_number\": \"<string>\",\n    \"country_state\": \"<string>\",\n    \"sender_address\": \"<integer>\",\n    \"customs_invoice_nr\": \"<string>\",\n    \"customs_shipment_type\": \"<integer>\",\n    \"external_reference\": \"<string>\",\n    \"reference\": \"0\",\n    \"to_service_point\": \"<integer>\",\n    \"total_insured_value\": \"<integer>\",\n    \"shipment_uuid\": \"<string>\",\n    \"parcel_items\": [\n      {\n        \"hs_code\": \"<string>\",\n        \"weight\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"description\": \"<string>\",\n        \"value\": \"<number>\",\n        \"origin_country\": \"<string,null>\",\n        \"sku\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"properties\": \"<object>\",\n        \"item_id\": \"<string,null>\",\n        \"return_reason\": \"<integer,null>\",\n        \"return_message\": \"<string,null>\",\n        \"mid_code\": \"<string>\",\n        \"material_content\": \"<string>\",\n        \"intended_use\": \"<string>\",\n        \"manufacturer_product_id\": \"<string,null>\",\n        \"manufacturer_product_id_std\": \"<string,null>\",\n        \"dangerous_goods\": {\n          \"chemical_record_identifier\": \"<string>\",\n          \"regulation_set\": \"<string>\",\n          \"packaging_type_quantity\": \"<string>\",\n          \"packaging_type\": \"<string>\",\n          \"packaging_instruction_code\": \"<string>\",\n          \"id_number\": \"<string>\",\n          \"class_division_number\": \"<string>\",\n          \"quantity\": \"<string>\",\n          \"unit_of_measurement\": \"<string>\",\n          \"proper_shipping_name\": \"<string>\",\n          \"commodity_regulated_level_code\": \"<string>\",\n          \"transportation_mode\": \"<string>\",\n          \"emergency_contact_name\": \"<string>\",\n          \"emergency_contact_phone\": \"<string>\",\n          \"adr_packing_group_letter\": \"<string>\",\n          \"local_proper_shipping_name\": \"<string>\",\n          \"transport_category\": \"<string>\",\n          \"tunnel_restriction_code\": \"<string>\",\n          \"weight_type\": \"<string>\"\n        },\n        \"dds_reference\": \"<string,null>\",\n        \"taric_doc_code\": \"<string,null>\"\n      },\n      {\n        \"hs_code\": \"<string>\",\n        \"weight\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"description\": \"<string>\",\n        \"value\": \"<number>\",\n        \"origin_country\": \"<string,null>\",\n        \"sku\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"properties\": \"<object>\",\n        \"item_id\": \"<string,null>\",\n        \"return_reason\": \"<integer,null>\",\n        \"return_message\": \"<string,null>\",\n        \"mid_code\": \"<string>\",\n        \"material_content\": \"<string>\",\n        \"intended_use\": \"<string>\",\n        \"manufacturer_product_id\": \"<string,null>\",\n        \"manufacturer_product_id_std\": \"<string,null>\",\n        \"dangerous_goods\": {\n          \"chemical_record_identifier\": \"<string>\",\n          \"regulation_set\": \"<string>\",\n          \"packaging_type_quantity\": \"<string>\",\n          \"packaging_type\": \"<string>\",\n          \"packaging_instruction_code\": \"<string>\",\n          \"id_number\": \"<string>\",\n          \"class_division_number\": \"<string>\",\n          \"quantity\": \"<string>\",\n          \"unit_of_measurement\": \"<string>\",\n          \"proper_shipping_name\": \"<string>\",\n          \"commodity_regulated_level_code\": \"<string>\",\n          \"transportation_mode\": \"<string>\",\n          \"emergency_contact_name\": \"<string>\",\n          \"emergency_contact_phone\": \"<string>\",\n          \"adr_packing_group_letter\": \"<string>\",\n          \"local_proper_shipping_name\": \"<string>\",\n          \"transport_category\": \"<string>\",\n          \"tunnel_restriction_code\": \"<string>\",\n          \"weight_type\": \"<string>\"\n        },\n        \"dds_reference\": \"<string,null>\",\n        \"taric_doc_code\": \"<string,null>\"\n      }\n    ],\n    \"is_return\": \"<boolean>\",\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"request_label_async\": \"<boolean>\",\n    \"apply_shipping_rules\": \"<boolean>\",\n    \"from_name\": \"<string>\",\n    \"from_company_name\": \"<string>\",\n    \"from_address_1\": \"<string>\",\n    \"from_address_2\": \"<string>\",\n    \"from_house_number\": \"<string>\",\n    \"from_city\": \"<string>\",\n    \"from_postal_code\": \"<string>\",\n    \"from_country\": \"<string>\",\n    \"from_telephone\": \"<string>\",\n    \"from_email\": \"<string>\",\n    \"from_vat_number\": \"<string>\",\n    \"from_eori_number\": \"<string>\",\n    \"from_inbound_vat_number\": \"<string>\",\n    \"from_inbound_eori_number\": \"<string>\",\n    \"from_ioss_number\": \"<string>\",\n    \"customs_information\": {\n      \"customs_invoice_nr\": \"<string>\",\n      \"customs_shipment_type\": \"<integer>\",\n      \"export_type\": \"commercial_b2c\",\n      \"invoice_date\": \"<date>\",\n      \"discount_granted\": \"<string>\",\n      \"freight_costs\": \"<string>\",\n      \"insurance_costs\": \"<string>\",\n      \"other_costs\": \"<string>\",\n      \"general_notes\": \"<string>\",\n      \"additional_declaration_statements\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"importer_of_record\": {\n        \"name\": \"<string>\",\n        \"address_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"address_2\": \"<string>\",\n        \"house_number\": \"<string>\",\n        \"country_state\": \"<string>\",\n        \"telephone\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"receiver\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"importer_of_record\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"return_data\": {\n        \"return_postal_code\": \"<string>\",\n        \"outbound_tracking_number\": \"<string>\",\n        \"outbound_shipment_date\": \"<date>\",\n        \"outbound_carrier_name\": \"<string>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b73f0b50-8cbd-409e-9fc9-a2c335bf9295",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "errors",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"parcel\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address\": \"Stadhuisplein\",\n    \"house_number\": \"10\",\n    \"city\": \"Eindhoven\",\n    \"postal_code\": \"5611 EM\",\n    \"telephone\": \"+31612345678\",\n    \"request_label\": true,\n    \"email\": \"john@doe.com\",\n    \"data\": {},\n    \"country\": \"NL\",\n    \"shipment\": {\n      \"id\": 8\n    },\n    \"weight\": \"10.000\",\n    \"order_number\": \"1234567890\",\n    \"insured_value\": 0,\n    \"total_order_value_currency\": \"GBP\",\n    \"total_order_value\": \"11.11\",\n    \"quantity\": 1,\n    \"shipping_method_checkout_name\": \"DHL Express Domestic\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"parcel\": {\n    \"id\": 3,\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"contract\": 1,\n    \"address\": \"Stadhuisplein 10\",\n    \"address_divided\": {\n      \"street\": \"Stadhuisplein\",\n      \"house_number\": \"10\"\n    },\n    \"city\": \"Eindhoven\",\n    \"postal_code\": \"5611 EM\",\n    \"telephone\": \"0612345678\",\n    \"email\": \"\",\n    \"date_created\": \"01-01-2018 21:45:30\",\n    \"date_updated\": \"01-01-2018 21:47:12\",\n    \"date_announced\": \"01-01-2018 21:47:13\",\n    \"tracking_number\": \"S0M3TR4Ck1NgNumB3r\",\n    \"weight\": \"2.000\",\n    \"label\": {\n      \"normal_printer\": [\n        \"https://panel.sendcloud.sc/api/v2/label/normal_printer/3172?start_from=0&hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\",\n        \"https://panel.sendcloud.sc/api/v2/label/normal_printer/3172?start_from=1&hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\",\n        \"https://panel.sendcloud.sc/api/v2/label/normal_printer/3172?start_from=2&hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\",\n        \"https://panel.sendcloud.sc/api/v2/label/normal_printer/3172?start_from=3&hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\"\n      ],\n      \"label_printer\": \"https://panel.sendcloud.sc/api/v2/label/label_printer/3172?hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\"\n    },\n    \"documents\": [\n      {\n        \"type\": \"label\",\n        \"size\": \"a6\",\n        \"link\": \"https://panel.sendcloud.sc/api/v2/parcels/3/documents/label\"\n      }\n    ],\n    \"status\": {\n      \"id\": 0,\n      \"message\": \"Ready to send\"\n    },\n    \"data\": {},\n    \"country\": {\n      \"iso_3\": \"NLD\",\n      \"iso_2\": \"NL\",\n      \"name\": \"Netherlands\"\n    },\n    \"shipment\": {\n      \"id\": 1,\n      \"name\": \"PostNL Standard 0-23kg\"\n    },\n    \"carrier\": {\n      \"code\": \"postnl\"\n    },\n    \"is_return\": false,\n    \"total_order_value_currency\": \"GBP\",\n    \"total_order_value\": \"11.11\",\n    \"colli_uuid\": \"88296eff-595c-4c62-9b6f-075112bf54f6\",\n    \"collo_nr\": 0,\n    \"collo_count\": 1,\n    \"awb_tracking_number\": null,\n    \"box_number\": null,\n    \"length\": null,\n    \"width\": null,\n    \"height\": null,\n    \"shipping_method_checkout_name\": \"DHL Express Domestic\",\n    \"reference\": \"some_reference_123\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1be721b4-5f8f-4b47-bae8-8627e5bba0ec",
+              "name": "Carrier returned an error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "errors",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"parcel\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address\": \"Stadhuisplein\",\n    \"house_number\": \"10\",\n    \"city\": \"Eindhoven\",\n    \"postal_code\": \"5611 EM\",\n    \"telephone\": \"+31612345678\",\n    \"request_label\": true,\n    \"email\": \"john@doe.com\",\n    \"data\": {},\n    \"country\": \"NL\",\n    \"shipment\": {\n      \"id\": 8\n    },\n    \"weight\": \"10.000\",\n    \"order_number\": \"1234567890\",\n    \"insured_value\": 0,\n    \"total_order_value_currency\": \"GBP\",\n    \"total_order_value\": \"11.11\",\n    \"quantity\": 1,\n    \"shipping_method_checkout_name\": \"DHL Express Domestic\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"non_field_errors: 'PostNL service error: The domain for email address johndoe@email.com seems to be invalid'\",\n    \"request\": \"api/v2/parcels\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92dca710-7dd0-4e07-bc8f-581eaf4e4ddb",
+          "name": "Update a parcel",
+          "request": {
+            "name": "Update a parcel",
+            "description": {
+              "content": "Update a parcel which has **not yet been announced**, either to make changes to the original parcel data, or to request a shipping label if one hasn't yet been created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parcel\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"country\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"company_name\": \"<string>\",\n    \"contract\": \"<integer>\",\n    \"address_2\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"telephone\": \"<string>\",\n    \"request_label\": \"<boolean>\",\n    \"email\": \"<string>\",\n    \"data\": \"<object>\",\n    \"shipment\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"weight\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"insured_value\": \"<integer>\",\n    \"total_order_value_currency\": \"<string>\",\n    \"total_order_value\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"shipping_method_checkout_name\": \"<string>\",\n    \"to_post_number\": \"<string>\",\n    \"country_state\": \"<string>\",\n    \"sender_address\": \"<integer>\",\n    \"customs_invoice_nr\": \"<string>\",\n    \"customs_shipment_type\": \"<integer>\",\n    \"external_reference\": \"<string>\",\n    \"reference\": \"0\",\n    \"to_service_point\": \"<integer>\",\n    \"total_insured_value\": \"<integer>\",\n    \"shipment_uuid\": \"<string>\",\n    \"parcel_items\": [\n      {\n        \"hs_code\": \"<string>\",\n        \"weight\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"description\": \"<string>\",\n        \"value\": \"<number>\",\n        \"origin_country\": \"<string,null>\",\n        \"sku\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"properties\": \"<object>\",\n        \"item_id\": \"<string,null>\",\n        \"return_reason\": \"<integer,null>\",\n        \"return_message\": \"<string,null>\",\n        \"mid_code\": \"<string>\",\n        \"material_content\": \"<string>\",\n        \"intended_use\": \"<string>\",\n        \"manufacturer_product_id\": \"<string,null>\",\n        \"manufacturer_product_id_std\": \"<string,null>\",\n        \"dangerous_goods\": {\n          \"chemical_record_identifier\": \"<string>\",\n          \"regulation_set\": \"<string>\",\n          \"packaging_type_quantity\": \"<string>\",\n          \"packaging_type\": \"<string>\",\n          \"packaging_instruction_code\": \"<string>\",\n          \"id_number\": \"<string>\",\n          \"class_division_number\": \"<string>\",\n          \"quantity\": \"<string>\",\n          \"unit_of_measurement\": \"<string>\",\n          \"proper_shipping_name\": \"<string>\",\n          \"commodity_regulated_level_code\": \"<string>\",\n          \"transportation_mode\": \"<string>\",\n          \"emergency_contact_name\": \"<string>\",\n          \"emergency_contact_phone\": \"<string>\",\n          \"adr_packing_group_letter\": \"<string>\",\n          \"local_proper_shipping_name\": \"<string>\",\n          \"transport_category\": \"<string>\",\n          \"tunnel_restriction_code\": \"<string>\",\n          \"weight_type\": \"<string>\"\n        },\n        \"dds_reference\": \"<string,null>\",\n        \"taric_doc_code\": \"<string,null>\"\n      },\n      {\n        \"hs_code\": \"<string>\",\n        \"weight\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"description\": \"<string>\",\n        \"value\": \"<number>\",\n        \"origin_country\": \"<string,null>\",\n        \"sku\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"properties\": \"<object>\",\n        \"item_id\": \"<string,null>\",\n        \"return_reason\": \"<integer,null>\",\n        \"return_message\": \"<string,null>\",\n        \"mid_code\": \"<string>\",\n        \"material_content\": \"<string>\",\n        \"intended_use\": \"<string>\",\n        \"manufacturer_product_id\": \"<string,null>\",\n        \"manufacturer_product_id_std\": \"<string,null>\",\n        \"dangerous_goods\": {\n          \"chemical_record_identifier\": \"<string>\",\n          \"regulation_set\": \"<string>\",\n          \"packaging_type_quantity\": \"<string>\",\n          \"packaging_type\": \"<string>\",\n          \"packaging_instruction_code\": \"<string>\",\n          \"id_number\": \"<string>\",\n          \"class_division_number\": \"<string>\",\n          \"quantity\": \"<string>\",\n          \"unit_of_measurement\": \"<string>\",\n          \"proper_shipping_name\": \"<string>\",\n          \"commodity_regulated_level_code\": \"<string>\",\n          \"transportation_mode\": \"<string>\",\n          \"emergency_contact_name\": \"<string>\",\n          \"emergency_contact_phone\": \"<string>\",\n          \"adr_packing_group_letter\": \"<string>\",\n          \"local_proper_shipping_name\": \"<string>\",\n          \"transport_category\": \"<string>\",\n          \"tunnel_restriction_code\": \"<string>\",\n          \"weight_type\": \"<string>\"\n        },\n        \"dds_reference\": \"<string,null>\",\n        \"taric_doc_code\": \"<string,null>\"\n      }\n    ],\n    \"is_return\": \"<boolean>\",\n    \"length\": \"<string>\",\n    \"width\": \"<string>\",\n    \"height\": \"<string>\",\n    \"request_label_async\": \"<boolean>\",\n    \"apply_shipping_rules\": \"<boolean>\",\n    \"from_name\": \"<string>\",\n    \"from_company_name\": \"<string>\",\n    \"from_address_1\": \"<string>\",\n    \"from_address_2\": \"<string>\",\n    \"from_house_number\": \"<string>\",\n    \"from_city\": \"<string>\",\n    \"from_postal_code\": \"<string>\",\n    \"from_country\": \"<string>\",\n    \"from_telephone\": \"<string>\",\n    \"from_email\": \"<string>\",\n    \"from_vat_number\": \"<string>\",\n    \"from_eori_number\": \"<string>\",\n    \"from_inbound_vat_number\": \"<string>\",\n    \"from_inbound_eori_number\": \"<string>\",\n    \"from_ioss_number\": \"<string>\",\n    \"customs_information\": {\n      \"customs_invoice_nr\": \"<string>\",\n      \"customs_shipment_type\": \"<integer>\",\n      \"export_type\": \"commercial_b2c\",\n      \"invoice_date\": \"<date>\",\n      \"discount_granted\": \"<string>\",\n      \"freight_costs\": \"<string>\",\n      \"insurance_costs\": \"<string>\",\n      \"other_costs\": \"<string>\",\n      \"general_notes\": \"<string>\",\n      \"additional_declaration_statements\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"importer_of_record\": {\n        \"name\": \"<string>\",\n        \"address_1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"address_2\": \"<string>\",\n        \"house_number\": \"<string>\",\n        \"country_state\": \"<string>\",\n        \"telephone\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"name\": \"<string>\",\n            \"country_code\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"country_code\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ],\n        \"receiver\": [\n          {\n            \"name\": \"<string>\",\n            \"country_code\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"country_code\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ],\n        \"importer_of_record\": [\n          {\n            \"name\": \"<string>\",\n            \"country_code\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"country_code\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      },\n      \"return_data\": {\n        \"return_postal_code\": \"<string>\",\n        \"outbound_tracking_number\": \"<string>\",\n        \"outbound_shipment_date\": \"<date>\",\n        \"outbound_carrier_name\": \"<string>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "32005a4a-d775-4651-9f11-c186216a2a87",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"parcel\": {\n    \"id\": 3,\n    \"name\": \"Sendcloud Userß\",\n    \"address\": \"Stadhuisplein 10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country\": \"NL\",\n    \"company_name\": \"Summer Co\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"parcel\": [\n    {\n      \"id\": 3,\n      \"name\": \"Anna Tester\",\n      \"company_name\": \"Summer Co\",\n      \"address\": \"Stadhuisplein 10\",\n      \"address_divided\": {\n        \"street\": \"Stadhuisplein\",\n        \"house_number\": \"10\"\n      },\n      \"city\": \"Eindhoven\",\n      \"postal_code\": \"5611 EM\",\n      \"telephone\": \"0612345678\",\n      \"email\": \"test@email.com\",\n      \"date_created\": \"01-01-2018 21:45:30\",\n      \"date_updated\": \"01-01-2018 21:45:31\",\n      \"date_announced\": \"01-01-2018 21:45:31\",\n      \"tracking_number\": \"S0M3TR4Ck1NgNumB3r\",\n      \"weight\": \"2.000\",\n      \"label\": {\n        \"normal_printer\": [\n          \"https://panel.sendcloud.sc/api/v2/label/normal_printer/3172?start_from=0&hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\",\n          \"https://panel.sendcloud.sc/api/v2/label/normal_printer/3172?start_from=1&hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\",\n          \"https://panel.sendcloud.sc/api/v2/label/normal_printer/3172?start_from=2&hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\",\n          \"https://panel.sendcloud.sc/api/v2/label/normal_printer/3172?start_from=3&hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\"\n        ],\n        \"label_printer\": \"https://panel.sendcloud.sc/api/v2/label/label_printer/3172?hash=bbfd669ee9ebb19408b85b33d181a50040fd9bc4\"\n      },\n      \"customs_declaration\": {},\n      \"status\": {\n        \"id\": 0,\n        \"message\": \"Ready to send\"\n      },\n      \"data\": {},\n      \"country\": {\n        \"iso_2\": \"NL\",\n        \"iso_3\": \"NLD\",\n        \"name\": \"Netherlands\"\n      },\n      \"shipment\": {\n        \"id\": 1,\n        \"name\": \"PostNL Standard 0-23kg\"\n      },\n      \"carrier\": {\n        \"code\": \"postnl\"\n      },\n      \"colli_uuid\": \"ab3ecb5e-61b6-42b1-8034-7c6befdeaa63\",\n      \"collo_nr\": 0,\n      \"collo_count\": 1,\n      \"reference\": \"some_reference_123\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d6a8551-f79f-477d-a863-6971e7da1253",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"parcel\": {\n    \"id\": 3,\n    \"name\": \"Sendcloud Userß\",\n    \"address\": \"Stadhuisplein 10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country\": \"NL\",\n    \"company_name\": \"Summer Co\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12d6c954-2687-4fa2-a91b-cd4e2ac4fb72",
+          "name": "Retrieve a parcel",
+          "request": {
+            "name": "Retrieve a parcel",
+            "description": {
+              "content": "Retrieve a specific parcel by its `id`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcels",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the parcel you want to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "af3e578c-0c01-45da-b8c1-37ef5dc0c178",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the parcel you want to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"parcel\": {\n    \"id\": 4747,\n    \"address\": \"string\",\n    \"address_2\": \"string\",\n    \"address_divided\": {\n      \"house_number\": \"string\",\n      \"street\": \"string\"\n    },\n    \"carrier\": {\n      \"code\": \"postnl\"\n    },\n    \"city\": \"string\",\n    \"company_name\": \"string\",\n    \"contract\": 6579,\n    \"country\": {\n      \"iso_2\": \"string\",\n      \"iso_3\": \"string\",\n      \"name\": \"string\"\n    },\n    \"customs_invoice_nr\": \"string\",\n    \"customs_shipment_type\": 1,\n    \"data\": {},\n    \"date_created\": \"string\",\n    \"date_updated\": \"string\",\n    \"date_announced\": \"string\",\n    \"email\": \"string\",\n    \"insured_value\": 5715,\n    \"label\": {\n      \"label_printer\": \"string\",\n      \"normal_printer\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"name\": \"string\",\n    \"order_number\": \"string\",\n    \"shipment_uuid\": \"string\",\n    \"parcel_items\": [\n      {\n        \"hs_code\": \"string\",\n        \"weight\": \"string\",\n        \"quantity\": 5710,\n        \"description\": \"string\",\n        \"value\": 10.5,\n        \"origin_country\": \"string\",\n        \"sku\": \"string\",\n        \"product_id\": \"string\",\n        \"properties\": {},\n        \"item_id\": \"string\",\n        \"return_reason\": 762,\n        \"return_message\": \"string\",\n        \"mid_code\": \"US1234567\",\n        \"material_content\": \"100% Cotton\",\n        \"intended_use\": \"Personal use\",\n        \"manufacturer_product_id\": \"ABC-12345\",\n        \"manufacturer_product_id_std\": \"01234567890128\",\n        \"dangerous_goods\": {\n          \"chemical_record_identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"regulation_set\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"packaging_type_quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"packaging_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"packaging_instruction_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"id_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"class_division_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"unit_of_measurement\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"proper_shipping_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"commodity_regulated_level_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"transportation_mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"emergency_contact_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"emergency_contact_phone\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"adr_packing_group_letter\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"local_proper_shipping_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"transport_category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tunnel_restriction_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dds_reference\": \"25FIYPEK0A7573\",\n        \"taric_doc_code\": \"Y142\"\n      },\n      {\n        \"hs_code\": \"string\",\n        \"weight\": \"string\",\n        \"quantity\": 3753,\n        \"description\": \"string\",\n        \"value\": 10.5,\n        \"origin_country\": \"string\",\n        \"sku\": \"string\",\n        \"product_id\": \"string\",\n        \"properties\": {},\n        \"item_id\": \"string\",\n        \"return_reason\": 7006,\n        \"return_message\": \"string\",\n        \"mid_code\": \"US1234567\",\n        \"material_content\": \"100% Cotton\",\n        \"intended_use\": \"Personal use\",\n        \"manufacturer_product_id\": \"ABC-12345\",\n        \"manufacturer_product_id_std\": \"01234567890128\",\n        \"dangerous_goods\": {\n          \"chemical_record_identifier\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"regulation_set\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"packaging_type_quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"packaging_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"packaging_instruction_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"id_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"class_division_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quantity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"unit_of_measurement\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"proper_shipping_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"commodity_regulated_level_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"transportation_mode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"emergency_contact_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"emergency_contact_phone\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"adr_packing_group_letter\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"local_proper_shipping_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"transport_category\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tunnel_restriction_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weight_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"dds_reference\": \"25FIYPEK0A7573\",\n        \"taric_doc_code\": \"Y142\"\n      }\n    ],\n    \"postal_code\": \"string\",\n    \"external_reference\": \"string\",\n    \"reference\": \"0\",\n    \"shipment\": {\n      \"id\": 5367,\n      \"name\": \"string\"\n    },\n    \"status\": {\n      \"id\": 6160,\n      \"message\": \"string\"\n    },\n    \"documents\": [\n      {\n        \"type\": \"cn23\",\n        \"size\": \"string\",\n        \"link\": \"string\"\n      },\n      {\n        \"type\": \"cp71\",\n        \"size\": \"string\",\n        \"link\": \"string\"\n      }\n    ],\n    \"telephone\": \"string\",\n    \"to_service_point\": \"string\",\n    \"to_state\": \"string\",\n    \"total_insured_value\": 4613,\n    \"total_order_value_currency\": \"string\",\n    \"total_order_value\": \"string\",\n    \"tracking_number\": \"string\",\n    \"tracking_url\": \"string\",\n    \"weight\": \"string\",\n    \"type\": \"letter\",\n    \"colli_uuid\": \"string\",\n    \"collo_nr\": 3476,\n    \"collo_count\": 1408,\n    \"is_return\": false,\n    \"awb_tracking_number\": \"string\",\n    \"box_number\": 3429,\n    \"length\": \"string\",\n    \"width\": \"string\",\n    \"height\": \"string\",\n    \"shipping_method_checkout_name\": \"string\",\n    \"customs_declaration\": {},\n    \"note\": \"string\",\n    \"errors\": {\n      \"non_field_errors\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"customs_information\": {\n      \"customs_invoice_nr\": \"INV-123\",\n      \"customs_shipment_type\": 2,\n      \"export_type\": \"private\",\n      \"invoice_date\": \"2023-10-06\",\n      \"discount_granted\": \"14.99\",\n      \"freight_costs\": \"4.65\",\n      \"insurance_costs\": \"3.60\",\n      \"other_costs\": \"1.20\",\n      \"general_notes\": \"Compliance: Goods comply with international safety standards (CE certified).\",\n      \"additional_declaration_statements\": [\n        \"With reference to the above shipment, I understate that the content is not made of leather parts of animal species protected by the Washington Convention.\",\n        \"With reference to the above shipment, I understate that the content is not made of leather parts of animal species protected by the Washington Convention.\"\n      ],\n      \"importer_of_record\": {\n        \"name\": \"string\",\n        \"address_1\": \"string\",\n        \"city\": \"string\",\n        \"postal_code\": \"string\",\n        \"country_code\": \"st\",\n        \"company_name\": \"string\",\n        \"address_2\": \"string\",\n        \"house_number\": \"string\",\n        \"country_state\": \"IT-RM\",\n        \"telephone\": \"string\",\n        \"email\": \"string\"\n      },\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"receiver\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"importer_of_record\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"return_data\": {\n        \"return_postal_code\": \"string\",\n        \"outbound_tracking_number\": \"BE123456789\",\n        \"outbound_shipment_date\": \"2020-11-27\",\n        \"outbound_carrier_name\": \"DHL\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1e86e80-e991-447e-b219-ed019b8cd6fc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the parcel you want to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9585bb09-2ebd-46cc-8da9-36a6f110ac51",
+          "name": "Cancel a parcel",
+          "request": {
+            "name": "Cancel a parcel",
+            "description": {
+              "content": "Cancel an announced parcel (if supported by the carrier) or delete an unannounced parcel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcels",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the parcel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "331dbeb2-545c-4242-a8a1-0b4cef521538",
+              "name": "Cancelled\n- The parcel has been cancelled if all valid conditions apply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the parcel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"cancelled\",\n  \"message\": \"Parcel has been cancelled\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7f0437b-dd1d-4a4f-b6a6-9017fa1912db",
+              "name": "Parcel cancelation has been queued\n- The parcel having the status of ready to send (1000) will be watched for 14 days and if nothing nothing has changed to the parcel, it will be cancelled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the parcel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2fbd6b40-f5e5-46d7-bba7-0e4c4d992456",
+              "name": "Cancellation rejected\n- When parcel has the status of 2000 which means it is already cancelled.\n- After period of 42 days of the parcel being announced we cannot cancel it and will let you know about it through a response message.\n- When parcel has the status ode (11) saying that it’s delivered it will not do anything to the parcel and your request will be rejected.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the parcel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fa568858-346f-4682-b46c-12a6f2b60289",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the parcel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a7bb61b4-17c8-4cae-870f-6905c02610a0",
+              "name": "Deleted\n- Happens when the parcel announcement has failed, the parcel status contains id of 1002 and you try to cancel it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the parcel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Gone",
+              "code": 410,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc2defd1-7fd1-4b70-8615-ee2b117f815b",
+          "name": "Retrieve a return portal URL",
+          "request": {
+            "name": "Retrieve a return portal URL",
+            "description": {
+              "content": "Check which of your branded return portals is associated with a specific parcel using the parcel's `id`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcels",
+                ":id",
+                "return_portal_url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the parcel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "40f7895d-9da0-426e-a403-58a497c15cdc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":id",
+                    "return_portal_url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the parcel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"http://mybrand.returns-portal.com/initiate/\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69ff9906-0155-4d21-91be-08093d91ccf7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    ":id",
+                    "return_portal_url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the parcel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "eafd7d98-b426-49c3-8a23-4cd0918bb155",
+    "name": "Parcels",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "At the core of the Sendcloud Shipping API is the Parcels resource. Parcels are data objects which can be announced, and have a shipping method and shipping label assigned to them. You can also think of parcels as **shipments**.\nYou can use this resource to perform a number of activities:\n\n* Create a parcel and immediately announce it\n* Create a parcel and choose not to announce it (no shipping label is created)\n* Update the details, or create a label, for an unannounced parcel\n* Cancel an announced parcel\n\n<!-- theme: info -->\n> International parcels require more information than domestic parcels. Certain customs documents must be created when shipping to countries outside the EU. For Sendcloud to successfully generate these documents, all the necessary information must be available in your parcel request. Read more in-depth information on [international shipping and its requirements](/docs/shipping/international-shipping/).\n\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

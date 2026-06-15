@@ -1,0 +1,1978 @@
+{
+  "info": {
+    "_postman_id": "e87a7824-d2bb-4712-9445-2b6a259eb619",
+    "name": "Integrations",
+    "description": "The Integrations API lets you manage some aspects of your integrations, and set and retrieve available shop order statuses.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:35.000Z",
+    "updatedAt": "2026-06-05T15:16:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e87a7824-d2bb-4712-9445-2b6a259eb619"
+  },
+  "item": [
+    {
+      "name": "integrations",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "logs",
+              "item": [
+                {
+                  "name": "Retrieve exception logs for a specific integration",
+                  "id": "423e14c5-a4f8-475e-a2f8-7e3565ba2a49",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrations/:id/logs?cursor=<dateTime>&page_size=25",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrations",
+                        ":id",
+                        "logs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Cursor for pagination. Use the value from the `Link` response header to fetch the next page.",
+                          "key": "cursor",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Number of results per page.",
+                          "key": "page_size",
+                          "value": "25"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "886f3224-0e1e-4131-b809-8c64b4cfdf6f",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The id of the integration"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve exception logs for a specific integration. These logs are created when integrations have problems making API requests to shop systems."
+                  },
+                  "response": [
+                    {
+                      "id": "bf91dc15-5713-41b8-bc34-d186c45c06b8",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/integrations/:id/logs?cursor=<dateTime>&page_size=25",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrations",
+                            ":id",
+                            "logs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Cursor for pagination. Use the value from the `Link` response header to fetch the next page.",
+                              "key": "cursor",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Number of results per page.",
+                              "key": "page_size",
+                              "value": "25"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "Contains the URL for the next page of results (RFC 5988). Example: `<https://panel.sendcloud.sc/api/v3/integrations/{id}/logs?cursor=2023-03-01T02:02:00&page_size=25>; rel=\"next\"`",
+                            "type": "text/plain"
+                          },
+                          "key": "Link",
+                          "value": "<string>"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"base_url\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"integration_id\": \"<integer,null>\",\n      \"full_url\": \"<string,null>\",\n      \"method\": \"<string>\",\n      \"response_code\": \"<integer,null>\",\n      \"response\": {\n        \"headers\": null,\n        \"body\": {}\n      },\n      \"request\": null,\n      \"created_at\": \"<dateTime>\",\n      \"exception_type\": \"<string,null>\",\n      \"exception\": \"<string,null>\",\n      \"protected\": \"<boolean>\",\n      \"additional_data\": \"\"\n    },\n    {\n      \"base_url\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"integration_id\": \"<integer,null>\",\n      \"full_url\": \"<string,null>\",\n      \"method\": \"<string>\",\n      \"response_code\": \"<integer,null>\",\n      \"response\": null,\n      \"request\": {\n        \"headers\": {},\n        \"payload\": {}\n      },\n      \"created_at\": \"<dateTime>\",\n      \"exception_type\": \"<string,null>\",\n      \"exception\": \"<string,null>\",\n      \"protected\": \"<boolean>\",\n      \"additional_data\": \"\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:36.000Z",
+                      "updatedAt": "2026-06-05T15:16:36.000Z",
+                      "uid": "35240-bf91dc15-5713-41b8-bc34-d186c45c06b8"
+                    },
+                    {
+                      "id": "a8b104b1-ca81-4fe6-a270-152bdbaac9d8",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/integrations/:id/logs?cursor=<dateTime>&page_size=25",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrations",
+                            ":id",
+                            "logs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Cursor for pagination. Use the value from the `Link` response header to fetch the next page.",
+                              "key": "cursor",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Number of results per page.",
+                              "key": "page_size",
+                              "value": "25"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": 32168751,\n      \"code\": \"dolor proident\",\n      \"detail\": 87952845\n    },\n    {\n      \"status\": \"mollit id\",\n      \"code\": true,\n      \"detail\": true\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:36.000Z",
+                      "updatedAt": "2026-06-05T15:16:36.000Z",
+                      "uid": "35240-a8b104b1-ca81-4fe6-a270-152bdbaac9d8"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-423e14c5-a4f8-475e-a2f8-7e3565ba2a49"
+                },
+                {
+                  "name": "Create integration exception logs",
+                  "id": "950c7661-4f0e-4769-b9ca-db90820258e0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"base_url\": \"<string>\",\n  \"full_url\": \"<string,null>\",\n  \"method\": \"\",\n  \"response_code\": \"<integer,null>\",\n  \"response\": null,\n  \"request\": null,\n  \"created_at\": \"<string,null-date-time>\",\n  \"exception_type\": \"<string,null>\",\n  \"exception\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/integrations/:id/logs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrations",
+                        ":id",
+                        "logs"
+                      ],
+                      "variable": [
+                        {
+                          "id": "57e85979-76c9-45db-a3a2-931459d64716",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The id of the integration"
+                        }
+                      ]
+                    },
+                    "description": "Create integration exception logs, which will appear in the connection issue log screen of the user's integration."
+                  },
+                  "response": [
+                    {
+                      "id": "edcb4776-1117-4540-8c16-72b19e139eb7",
+                      "name": "Created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"base_url\": \"<string>\",\n  \"full_url\": \"<string,null>\",\n  \"method\": \"\",\n  \"response_code\": \"<integer,null>\",\n  \"response\": null,\n  \"request\": null,\n  \"created_at\": \"<string,null-date-time>\",\n  \"exception_type\": \"<string,null>\",\n  \"exception\": \"<string,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integrations/:id/logs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrations",
+                            ":id",
+                            "logs"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"base_url\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"integration_id\": \"<integer,null>\",\n    \"full_url\": \"<string,null>\",\n    \"method\": \"<string>\",\n    \"response_code\": \"<integer,null>\",\n    \"response\": null,\n    \"request\": null,\n    \"created_at\": \"<dateTime>\",\n    \"exception_type\": \"<string,null>\",\n    \"exception\": \"<string,null>\",\n    \"protected\": \"<boolean>\",\n    \"additional_data\": \"\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:16:36.000Z",
+                      "updatedAt": "2026-06-05T15:16:36.000Z",
+                      "uid": "35240-edcb4776-1117-4540-8c16-72b19e139eb7"
+                    },
+                    {
+                      "id": "c7da97fd-f099-4e1e-ba28-6d435e7010ba",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"base_url\": \"<string>\",\n  \"full_url\": \"<string,null>\",\n  \"method\": \"\",\n  \"response_code\": \"<integer,null>\",\n  \"response\": null,\n  \"request\": null,\n  \"created_at\": \"<string,null-date-time>\",\n  \"exception_type\": \"<string,null>\",\n  \"exception\": \"<string,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integrations/:id/logs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrations",
+                            ":id",
+                            "logs"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": 32168751,\n      \"code\": \"dolor proident\",\n      \"detail\": 87952845\n    },\n    {\n      \"status\": \"mollit id\",\n      \"code\": true,\n      \"detail\": true\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:36.000Z",
+                      "updatedAt": "2026-06-05T15:16:36.000Z",
+                      "uid": "35240-c7da97fd-f099-4e1e-ba28-6d435e7010ba"
+                    },
+                    {
+                      "id": "500178a0-482b-4cd0-bae1-2b0ca32d7547",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"base_url\": \"<string>\",\n  \"full_url\": \"<string,null>\",\n  \"method\": \"\",\n  \"response_code\": \"<integer,null>\",\n  \"response\": null,\n  \"request\": null,\n  \"created_at\": \"<string,null-date-time>\",\n  \"exception_type\": \"<string,null>\",\n  \"exception\": \"<string,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/integrations/:id/logs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrations",
+                            ":id",
+                            "logs"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": 32168751,\n      \"code\": \"dolor proident\",\n      \"detail\": 87952845\n    },\n    {\n      \"status\": \"mollit id\",\n      \"code\": true,\n      \"detail\": true\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:36.000Z",
+                      "updatedAt": "2026-06-05T15:16:36.000Z",
+                      "uid": "35240-500178a0-482b-4cd0-bae1-2b0ca32d7547"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-950c7661-4f0e-4769-b9ca-db90820258e0"
+                }
+              ],
+              "id": "29991afc-4c08-4cab-8185-9856bf01ada7",
+              "createdAt": "2026-06-05T15:16:36.000Z",
+              "updatedAt": "2026-06-05T15:16:36.000Z",
+              "uid": "35240-29991afc-4c08-4cab-8185-9856bf01ada7"
+            },
+            {
+              "name": "Delete an integration",
+              "id": "9f2680a8-e967-4eaf-9b26-387cc73bdaca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/integrations/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f61831a9-4f03-4cc2-8fbb-8b42e452fc9b",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) Filtering on the Sendcloud integration ID"
+                    }
+                  ]
+                },
+                "description": "Safely delete one of your integrations from the Sendcloud system"
+              },
+              "response": [
+                {
+                  "id": "09b602aa-4b9e-4aa9-9417-22cd57780c9b",
+                  "name": "No content",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrations/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrations",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-09b602aa-4b9e-4aa9-9417-22cd57780c9b"
+                },
+                {
+                  "id": "c7593aa9-dd30-4ba2-9c92-1bdca67c15e5",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrations/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrations",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": 32168751,\n      \"code\": \"dolor proident\",\n      \"detail\": 87952845\n    },\n    {\n      \"status\": \"mollit id\",\n      \"code\": true,\n      \"detail\": true\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-c7593aa9-dd30-4ba2-9c92-1bdca67c15e5"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:36.000Z",
+              "updatedAt": "2026-06-05T15:16:36.000Z",
+              "uid": "35240-9f2680a8-e967-4eaf-9b26-387cc73bdaca"
+            },
+            {
+              "name": "Update certain parts of an integration",
+              "id": "e0a4bdf0-2f00-4ea1-8867-f3cfa2082d8c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shop_name\": \"<string>\",\n  \"shop_url\": \"<uri>\",\n  \"service_point_enabled\": \"<boolean>\",\n  \"service_point_carriers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhook_active\": \"<boolean>\",\n  \"webhook_url\": \"<string,null-uri>\",\n  \"feedback_type\": \"none\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/integrations/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "546c2c5b-6f9e-4a47-96d1-8092ea9907fb",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) Filtering on the Sendcloud integration ID"
+                    }
+                  ]
+                },
+                "description": "Update the shop name, shop URL, service point settings, webhook settings, and feedback type of an integration."
+              },
+              "response": [
+                {
+                  "id": "4ab910e1-bf57-4d1d-9a52-ade0905834dc",
+                  "name": "No content",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"shop_name\": \"<string>\",\n  \"shop_url\": \"<uri>\",\n  \"service_point_enabled\": \"<boolean>\",\n  \"service_point_carriers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhook_active\": \"<boolean>\",\n  \"webhook_url\": \"<string,null-uri>\",\n  \"feedback_type\": \"none\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/integrations/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrations",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-4ab910e1-bf57-4d1d-9a52-ade0905834dc"
+                },
+                {
+                  "id": "ec24d46f-6685-456d-ac9b-49ba80263981",
+                  "name": "Webhook URL required when enable webhook is set to `true`.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"shop_name\": \"<string>\",\n  \"shop_url\": \"<uri>\",\n  \"service_point_enabled\": \"<boolean>\",\n  \"service_point_carriers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhook_active\": \"<boolean>\",\n  \"webhook_url\": \"<string,null-uri>\",\n  \"feedback_type\": \"none\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/integrations/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrations",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": 32168751,\n      \"code\": \"dolor proident\",\n      \"detail\": 87952845\n    },\n    {\n      \"status\": \"mollit id\",\n      \"code\": true,\n      \"detail\": true\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-ec24d46f-6685-456d-ac9b-49ba80263981"
+                },
+                {
+                  "id": "de4cc3fb-5ca8-455f-9213-1a8c0393844e",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"shop_name\": \"<string>\",\n  \"shop_url\": \"<uri>\",\n  \"service_point_enabled\": \"<boolean>\",\n  \"service_point_carriers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhook_active\": \"<boolean>\",\n  \"webhook_url\": \"<string,null-uri>\",\n  \"feedback_type\": \"none\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/integrations/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrations",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": 32168751,\n      \"code\": \"dolor proident\",\n      \"detail\": 87952845\n    },\n    {\n      \"status\": \"mollit id\",\n      \"code\": true,\n      \"detail\": true\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-de4cc3fb-5ca8-455f-9213-1a8c0393844e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:36.000Z",
+              "updatedAt": "2026-06-05T15:16:36.000Z",
+              "uid": "35240-e0a4bdf0-2f00-4ea1-8867-f3cfa2082d8c"
+            },
+            {
+              "name": "Retrieve an integration",
+              "id": "6c138b69-92b2-4ad8-8605-607acaf72d12",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/integrations/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "44aa1c40-821f-4b57-886b-18b828145c97",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) Filtering on the Sendcloud integration ID"
+                    }
+                  ]
+                },
+                "description": "Get a valid integration from the Sendcloud system"
+              },
+              "response": [
+                {
+                  "id": "2107115f-e688-4f27-9fcb-19f6ca116535",
+                  "name": "Retrieved integration corresponding to the provided integration_id",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrations/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrations",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"shop_name\": \"<string>\",\n    \"shop_url\": \"<uri>\",\n    \"service_point_enabled\": \"<boolean>\",\n    \"service_point_carriers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"webhook_active\": \"<boolean>\",\n    \"webhook_url\": \"<string,null-uri>\",\n    \"feedback_type\": \"none\",\n    \"id\": \"<integer>\",\n    \"type\": \"<string>\",\n    \"started_failing_at\": \"<string,null-date-time>\",\n    \"last_fetched_at\": \"<string,null-date-time>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-2107115f-e688-4f27-9fcb-19f6ca116535"
+                },
+                {
+                  "id": "6bf759c2-4d67-4de8-a867-5c20c966eafb",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrations/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrations",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": 32168751,\n      \"code\": \"dolor proident\",\n      \"detail\": 87952845\n    },\n    {\n      \"status\": \"mollit id\",\n      \"code\": true,\n      \"detail\": true\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-6bf759c2-4d67-4de8-a867-5c20c966eafb"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:36.000Z",
+              "updatedAt": "2026-06-05T15:16:36.000Z",
+              "uid": "35240-6c138b69-92b2-4ad8-8605-607acaf72d12"
+            }
+          ],
+          "id": "e25914db-4c70-45bc-b4bb-bd616340687c",
+          "createdAt": "2026-06-05T15:16:36.000Z",
+          "updatedAt": "2026-06-05T15:16:36.000Z",
+          "uid": "35240-e25914db-4c70-45bc-b4bb-bd616340687c"
+        },
+        {
+          "name": "logs",
+          "item": [
+            {
+              "name": "Retrieve all integration exception logs",
+              "id": "8fd9d05a-2078-4edc-b6be-864841c9abc9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/integrations/logs?cursor=<dateTime>&page_size=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrations",
+                    "logs"
+                  ],
+                  "query": [
+                    {
+                      "description": "Cursor for pagination. Use the value from the `Link` response header to fetch the next page.",
+                      "key": "cursor",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Number of results per page.",
+                      "key": "page_size",
+                      "value": "25"
+                    }
+                  ]
+                },
+                "description": "Retrieve all integration exception logs. These logs are created when integrations have problems making API requests to shop systems."
+              },
+              "response": [
+                {
+                  "id": "6bba392a-0fbc-4b67-b518-75b2c2857fc0",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrations/logs?cursor=<dateTime>&page_size=25",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrations",
+                        "logs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Cursor for pagination. Use the value from the `Link` response header to fetch the next page.",
+                          "key": "cursor",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Number of results per page.",
+                          "key": "page_size",
+                          "value": "25"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Contains the URL for the next page of results (RFC 5988). Example: `<https://panel.sendcloud.sc/api/v3/integrations/logs?cursor=2023-03-01T02:02:00&page_size=25>; rel=\"next\"`",
+                        "type": "text/plain"
+                      },
+                      "key": "Link",
+                      "value": "<string>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"base_url\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"integration_id\": \"<integer,null>\",\n      \"full_url\": \"<string,null>\",\n      \"method\": \"<string>\",\n      \"response_code\": \"<integer,null>\",\n      \"response\": {\n        \"headers\": null,\n        \"body\": {}\n      },\n      \"request\": null,\n      \"created_at\": \"<dateTime>\",\n      \"exception_type\": \"<string,null>\",\n      \"exception\": \"<string,null>\",\n      \"protected\": \"<boolean>\",\n      \"additional_data\": \"\"\n    },\n    {\n      \"base_url\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"integration_id\": \"<integer,null>\",\n      \"full_url\": \"<string,null>\",\n      \"method\": \"<string>\",\n      \"response_code\": \"<integer,null>\",\n      \"response\": null,\n      \"request\": {\n        \"headers\": {},\n        \"payload\": {}\n      },\n      \"created_at\": \"<dateTime>\",\n      \"exception_type\": \"<string,null>\",\n      \"exception\": \"<string,null>\",\n      \"protected\": \"<boolean>\",\n      \"additional_data\": \"\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-6bba392a-0fbc-4b67-b518-75b2c2857fc0"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:36.000Z",
+              "updatedAt": "2026-06-05T15:16:36.000Z",
+              "uid": "35240-8fd9d05a-2078-4edc-b6be-864841c9abc9"
+            }
+          ],
+          "id": "258910e1-7032-4691-971c-612469177054",
+          "createdAt": "2026-06-05T15:16:36.000Z",
+          "updatedAt": "2026-06-05T15:16:36.000Z",
+          "uid": "35240-258910e1-7032-4691-971c-612469177054"
+        },
+        {
+          "name": "Retrieve a list of integrations",
+          "id": "771263bd-72d5-4aa1-90cc-bf56781a2c4e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/integrations?sort=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "integrations"
+              ],
+              "query": [
+                {
+                  "description": "Set the order for the response items:\n- Sorting is supported by the `integration_type`, `created_at`, `updated_at`, `last_fetch`, and `failing_since` attributes in the response object.\n- To sort the response in descending order, add the prefix `-` to the query param value.\n- By default, the items will be ordered by `last_fetch` and then `created_at`.\n",
+                  "key": "sort",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve all valid integrations from the Sendcloud system for a given user."
+          },
+          "response": [
+            {
+              "id": "51ed9db7-4e4f-4642-ab2b-f5a1ca41d8ae",
+              "name": "All valid integrations from the Sendcloud System for a given user.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/integrations?sort=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "integrations"
+                  ],
+                  "query": [
+                    {
+                      "description": "Set the order for the response items:\n- Sorting is supported by the `integration_type`, `created_at`, `updated_at`, `last_fetch`, and `failing_since` attributes in the response object.\n- To sort the response in descending order, add the prefix `-` to the query param value.\n- By default, the items will be ordered by `last_fetch` and then `created_at`.\n",
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-06-05T15:16:36.000Z",
+              "updatedAt": "2026-06-05T15:16:36.000Z",
+              "uid": "35240-51ed9db7-4e4f-4642-ab2b-f5a1ca41d8ae"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:36.000Z",
+          "updatedAt": "2026-06-05T15:16:36.000Z",
+          "uid": "35240-771263bd-72d5-4aa1-90cc-bf56781a2c4e"
+        }
+      ],
+      "id": "be3e6761-1274-4300-b95b-0ae057c5fbe4",
+      "createdAt": "2026-06-05T15:16:36.000Z",
+      "updatedAt": "2026-06-05T15:16:36.000Z",
+      "uid": "35240-be3e6761-1274-4300-b95b-0ae057c5fbe4"
+    },
+    {
+      "name": "shop-order-statuses",
+      "item": [
+        {
+          "name": "mapping",
+          "item": [
+            {
+              "name": "Retrieve custom status mapping for an integration",
+              "id": "83e7e4e0-9be4-4d7a-ad4d-7d3c1333aefd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/shop-order-statuses/mapping?integration_id=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shop-order-statuses",
+                    "mapping"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Filter response on `integration_id`.",
+                      "key": "integration_id",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Fetch a map of available shop order statuses and Sendcloud's internal status category for the integration.\n"
+              },
+              "response": [
+                {
+                  "id": "115399a8-5465-470e-b19e-95e23ff25f42",
+                  "name": "Custom status mapping for an integration.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/shop-order-statuses/mapping?integration_id=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "shop-order-statuses",
+                        "mapping"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Filter response on `integration_id`.",
+                          "key": "integration_id",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"integration_id\": \"<integer>\",\n    \"mapping\": [\n      {\n        \"status_category\": \"READY_TO_SEND\",\n        \"external_id\": \"<string,null>\",\n        \"is_valid\": \"<boolean>\"\n      },\n      {\n        \"status_category\": \"DELIVERED\",\n        \"external_id\": \"<string,null>\",\n        \"is_valid\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-115399a8-5465-470e-b19e-95e23ff25f42"
+                },
+                {
+                  "id": "5d9ee51d-a0c0-4304-a4ae-122ddb70a5f8",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/shop-order-statuses/mapping?integration_id=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "shop-order-statuses",
+                        "mapping"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Filter response on `integration_id`.",
+                          "key": "integration_id",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": 32168751,\n      \"code\": \"dolor proident\",\n      \"detail\": 87952845\n    },\n    {\n      \"status\": \"mollit id\",\n      \"code\": true,\n      \"detail\": true\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-5d9ee51d-a0c0-4304-a4ae-122ddb70a5f8"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:36.000Z",
+              "updatedAt": "2026-06-05T15:16:36.000Z",
+              "uid": "35240-83e7e4e0-9be4-4d7a-ad4d-7d3c1333aefd"
+            },
+            {
+              "name": "Create or update custom status mapping for an integration",
+              "id": "71446b09-e426-4f05-aff5-f4fd906e00d1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"mapping\": [\n    {\n      \"status_category\": \"IN_TRANSIT\",\n      \"external_id\": \"<string,null>\"\n    },\n    {\n      \"status_category\": \"CANCEL\",\n      \"external_id\": \"<string,null>\"\n    },\n    {\n      \"status_category\": \"DELIVERED\",\n      \"external_id\": \"<string,null>\"\n    },\n    {\n      \"status_category\": \"DELIVERED\",\n      \"external_id\": \"<string,null>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/shop-order-statuses/mapping",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shop-order-statuses",
+                    "mapping"
+                  ]
+                },
+                "description": "Upsert a map of available shop order statuses and Sendcloud's internal status category for an integration"
+              },
+              "response": [
+                {
+                  "id": "2131b760-86f3-4d3a-8112-0a8e7dba757a",
+                  "name": "OK.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"mapping\": [\n    {\n      \"status_category\": \"IN_TRANSIT\",\n      \"external_id\": \"<string,null>\"\n    },\n    {\n      \"status_category\": \"CANCEL\",\n      \"external_id\": \"<string,null>\"\n    },\n    {\n      \"status_category\": \"DELIVERED\",\n      \"external_id\": \"<string,null>\"\n    },\n    {\n      \"status_category\": \"DELIVERED\",\n      \"external_id\": \"<string,null>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/shop-order-statuses/mapping",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "shop-order-statuses",
+                        "mapping"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<null>",
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-2131b760-86f3-4d3a-8112-0a8e7dba757a"
+                },
+                {
+                  "id": "8a70991d-cc7a-4b0b-a7e1-d40d2f27575b",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"mapping\": [\n    {\n      \"status_category\": \"IN_TRANSIT\",\n      \"external_id\": \"<string,null>\"\n    },\n    {\n      \"status_category\": \"CANCEL\",\n      \"external_id\": \"<string,null>\"\n    },\n    {\n      \"status_category\": \"DELIVERED\",\n      \"external_id\": \"<string,null>\"\n    },\n    {\n      \"status_category\": \"DELIVERED\",\n      \"external_id\": \"<string,null>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/shop-order-statuses/mapping",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "shop-order-statuses",
+                        "mapping"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": 32168751,\n      \"code\": \"dolor proident\",\n      \"detail\": 87952845\n    },\n    {\n      \"status\": \"mollit id\",\n      \"code\": true,\n      \"detail\": true\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:36.000Z",
+                  "updatedAt": "2026-06-05T15:16:36.000Z",
+                  "uid": "35240-8a70991d-cc7a-4b0b-a7e1-d40d2f27575b"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:36.000Z",
+              "updatedAt": "2026-06-05T15:16:36.000Z",
+              "uid": "35240-71446b09-e426-4f05-aff5-f4fd906e00d1"
+            }
+          ],
+          "id": "5abc0580-6206-411c-853c-09ff365ae30c",
+          "createdAt": "2026-06-05T15:16:36.000Z",
+          "updatedAt": "2026-06-05T15:16:36.000Z",
+          "uid": "35240-5abc0580-6206-411c-853c-09ff365ae30c"
+        },
+        {
+          "name": "Retrieve shop order statuses for an integration",
+          "id": "bb7e9a06-6bed-4dbc-b39d-03fa2549f372",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/shop-order-statuses?integration_id=<integer>&language=nl-nl&show_deleted=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "shop-order-statuses"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Filter response on `integration_id`.",
+                  "key": "integration_id",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Get a response for the specified language.",
+                  "key": "language",
+                  "value": "nl-nl"
+                },
+                {
+                  "description": "Get all currently available and historical statuses.",
+                  "key": "show_deleted",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "Fetch all available shop order statuses for the Prestashop v2 integration, in the default or selected language."
+          },
+          "response": [
+            {
+              "id": "5ab60f8d-e7e0-4fd0-b6bc-1ced56e2d4d8",
+              "name": "All available shop order statuses for a given integration, in default or selected language.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/shop-order-statuses?integration_id=<integer>&language=nl-nl&show_deleted=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shop-order-statuses"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Filter response on `integration_id`.",
+                      "key": "integration_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Get a response for the specified language.",
+                      "key": "language",
+                      "value": "nl-nl"
+                    },
+                    {
+                      "description": "Get all currently available and historical statuses.",
+                      "key": "show_deleted",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"external_id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"deleted_at\": \"<string,null-date-time>\",\n      \"translations\": [\n        {\n          \"status\": \"<string>\",\n          \"language\": \"en-us\"\n        }\n      ]\n    },\n    {\n      \"external_id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"deleted_at\": \"<string,null-date-time>\",\n      \"translations\": [\n        {\n          \"status\": \"<string>\",\n          \"language\": \"fr-fr\"\n        }\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:16:36.000Z",
+              "updatedAt": "2026-06-05T15:16:36.000Z",
+              "uid": "35240-5ab60f8d-e7e0-4fd0-b6bc-1ced56e2d4d8"
+            },
+            {
+              "id": "8ac0397c-feb1-4f51-b5a3-b0e265ec0f44",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/shop-order-statuses?integration_id=<integer>&language=nl-nl&show_deleted=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shop-order-statuses"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Filter response on `integration_id`.",
+                      "key": "integration_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Get a response for the specified language.",
+                      "key": "language",
+                      "value": "nl-nl"
+                    },
+                    {
+                      "description": "Get all currently available and historical statuses.",
+                      "key": "show_deleted",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": 32168751,\n      \"code\": \"dolor proident\",\n      \"detail\": 87952845\n    },\n    {\n      \"status\": \"mollit id\",\n      \"code\": true,\n      \"detail\": true\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:16:36.000Z",
+              "updatedAt": "2026-06-05T15:16:36.000Z",
+              "uid": "35240-8ac0397c-feb1-4f51-b5a3-b0e265ec0f44"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:36.000Z",
+          "updatedAt": "2026-06-05T15:16:36.000Z",
+          "uid": "35240-bb7e9a06-6bed-4dbc-b39d-03fa2549f372"
+        },
+        {
+          "name": "Create or overwrite shop order statuses",
+          "id": "09798f8b-e621-4717-853e-8eab8d487cc6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"statuses\": [\n    {\n      \"external_id\": \"<string>\",\n      \"translations\": [\n        {\n          \"status\": \"<string>\",\n          \"language\": \"en-gb\"\n        }\n      ]\n    },\n    {\n      \"external_id\": \"<string>\",\n      \"translations\": [\n        {\n          \"status\": \"<string>\",\n          \"language\": \"en-gb\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/shop-order-statuses",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "shop-order-statuses"
+              ]
+            },
+            "description": "Insert shop-specific custom statuses into the Sendcloud system."
+          },
+          "response": [
+            {
+              "id": "cf46655f-7d96-4ad9-91d6-b4f16e077814",
+              "name": "OK.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"statuses\": [\n    {\n      \"external_id\": \"<string>\",\n      \"translations\": [\n        {\n          \"status\": \"<string>\",\n          \"language\": \"en-gb\"\n        }\n      ]\n    },\n    {\n      \"external_id\": \"<string>\",\n      \"translations\": [\n        {\n          \"status\": \"<string>\",\n          \"language\": \"en-gb\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/shop-order-statuses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shop-order-statuses"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<null>",
+              "createdAt": "2026-06-05T15:16:36.000Z",
+              "updatedAt": "2026-06-05T15:16:36.000Z",
+              "uid": "35240-cf46655f-7d96-4ad9-91d6-b4f16e077814"
+            },
+            {
+              "id": "be4ac1a7-afb6-4a74-a3e4-73c3e8f00652",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"statuses\": [\n    {\n      \"external_id\": \"<string>\",\n      \"translations\": [\n        {\n          \"status\": \"<string>\",\n          \"language\": \"en-gb\"\n        }\n      ]\n    },\n    {\n      \"external_id\": \"<string>\",\n      \"translations\": [\n        {\n          \"status\": \"<string>\",\n          \"language\": \"en-gb\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/shop-order-statuses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "shop-order-statuses"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": 32168751,\n      \"code\": \"dolor proident\",\n      \"detail\": 87952845\n    },\n    {\n      \"status\": \"mollit id\",\n      \"code\": true,\n      \"detail\": true\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:16:36.000Z",
+              "updatedAt": "2026-06-05T15:16:36.000Z",
+              "uid": "35240-be4ac1a7-afb6-4a74-a3e4-73c3e8f00652"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:36.000Z",
+          "updatedAt": "2026-06-05T15:16:36.000Z",
+          "uid": "35240-09798f8b-e621-4717-853e-8eab8d487cc6"
+        }
+      ],
+      "id": "734b71c3-6b6c-4e6c-9eeb-5089de1c8c5e",
+      "createdAt": "2026-06-05T15:16:36.000Z",
+      "updatedAt": "2026-06-05T15:16:36.000Z",
+      "uid": "35240-734b71c3-6b6c-4e6c-9eeb-5089de1c8c5e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://panel.sendcloud.sc/api/v3"
+    }
+  ]
+}

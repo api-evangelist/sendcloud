@@ -1,0 +1,1222 @@
+{
+  "info": {
+    "_postman_id": "49ec4e0c-5040-4c96-9c60-18bc85b9830a",
+    "name": "Orders",
+    "description": "The Orders API lets you manage your orders within Sendcloud. You can create and update orders in batch, retrieve a list of orders per integration, retrieve an order, partially update an order, and delete an order.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:26.000Z",
+    "updatedAt": "2026-06-05T15:16:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-49ec4e0c-5040-4c96-9c60-18bc85b9830a"
+  },
+  "item": [
+    {
+      "name": "orders",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve an order",
+              "id": "4d0f0afe-02d4-4ce4-b403-8e0b1e278d29",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "975dce62-6925-44e7-96f3-1a487eb68036",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) Filtering on the Sendcloud order ID"
+                    }
+                  ]
+                },
+                "description": "Find a specific order by its order ID."
+              },
+              "response": [
+                {
+                  "id": "2e01174a-6e45-4a96-98fb-146d7176a023",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"order_details\": {\n      \"integration\": {\n        \"id\": \"<integer>\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"order_created_at\": \"<dateTime>\",\n      \"order_items\": [\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"GBP\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"consectetur_8e\": \"sunt nulla\",\n            \"dolore_14\": false,\n            \"mollit_ac\": \"culpa ad proident\",\n            \"consequat8d7\": 2023037\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"EUR\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"cm\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"g\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"gal\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"L\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"Ground\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"III\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Net\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"EUR\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"pariatur__0\": -41033151.28826095,\n            \"pariatur_e95\": false\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"mm\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"kg\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"ml\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"ADR\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"L\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"PAX\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"III\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Gross\"\n          }\n        }\n      ],\n      \"order_updated_at\": \"<dateTime>\",\n      \"notes\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"payment_details\": {\n      \"total_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"is_cash_on_delivery\": \"<boolean,null>\",\n      \"subtotal_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"estimated_shipping_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"estimated_tax_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"invoice_date\": \"<string,null>\",\n      \"discount_granted\": {\n        \"value\": \"11870.339\",\n        \"currency\": \"<string,null>\"\n      },\n      \"insurance_costs\": {\n        \"value\": \"81634291529.923\",\n        \"currency\": \"<string,null>\"\n      },\n      \"freight_costs\": {\n        \"value\": \"277520\",\n        \"currency\": \"<string,null>\"\n      },\n      \"other_costs\": {\n        \"value\": \"7914470697\",\n        \"currency\": \"<string,null>\"\n      }\n    },\n    \"id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"modified_at\": \"<dateTime>\",\n    \"customs_details\": null,\n    \"customer_details\": {\n      \"name\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"billing_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_details\": {\n      \"is_local_pickup\": \"<boolean,null>\",\n      \"delivery_indicator\": \"<string>\",\n      \"measurement\": {\n        \"dimension\": {\n          \"length\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\",\n          \"unit\": \"in\"\n        },\n        \"weight\": {\n          \"value\": \"<number>\",\n          \"unit\": \"g\"\n        },\n        \"volume\": {\n          \"value\": \"<integer>\",\n          \"unit\": \"cm3\"\n        }\n      },\n      \"ship_with\": {\n        \"type\": \"shipping_option_code\",\n        \"properties\": {\n          \"shipping_option_code\": \"<string,null>\",\n          \"contract_id\": \"<integer,null>\"\n        }\n      }\n    },\n    \"service_point_details\": {\n      \"id\": \"<string>\",\n      \"post_number\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"type\": \"<string>\",\n      \"extra_data\": {\n        \"laboris3f\": -79936872.34950411\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:26.000Z",
+                  "updatedAt": "2026-06-05T15:16:26.000Z",
+                  "uid": "35240-2e01174a-6e45-4a96-98fb-146d7176a023"
+                },
+                {
+                  "id": "b2bf834e-085b-41ec-8f44-c02c9cc35df7",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": \"dolor Lorem labore\",\n      \"code\": -17948358,\n      \"detail\": -69123272\n    },\n    {\n      \"status\": \"qui sit\",\n      \"code\": true,\n      \"detail\": -98444978.4694514\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:26.000Z",
+                  "updatedAt": "2026-06-05T15:16:26.000Z",
+                  "uid": "35240-b2bf834e-085b-41ec-8f44-c02c9cc35df7"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:26.000Z",
+              "updatedAt": "2026-06-05T15:16:26.000Z",
+              "uid": "35240-4d0f0afe-02d4-4ce4-b403-8e0b1e278d29"
+            },
+            {
+              "name": "Delete an order",
+              "id": "624b1d37-d503-44df-b6d6-330c70601423",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "772171e2-716d-4595-bc8b-0f6f450f0765",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) Filtering on the Sendcloud order ID"
+                    }
+                  ]
+                },
+                "description": "Delete an order by its unique id."
+              },
+              "response": [
+                {
+                  "id": "f8656050-7e0b-413a-8a5c-747f666ea8a4",
+                  "name": "No content",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:26.000Z",
+                  "updatedAt": "2026-06-05T15:16:26.000Z",
+                  "uid": "35240-f8656050-7e0b-413a-8a5c-747f666ea8a4"
+                },
+                {
+                  "id": "bc58f28e-ccf7-47a8-abd5-0d98b721e11f",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": \"dolor Lorem labore\",\n      \"code\": -17948358,\n      \"detail\": -69123272\n    },\n    {\n      \"status\": \"qui sit\",\n      \"code\": true,\n      \"detail\": -98444978.4694514\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:26.000Z",
+                  "updatedAt": "2026-06-05T15:16:26.000Z",
+                  "uid": "35240-bc58f28e-ccf7-47a8-abd5-0d98b721e11f"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:26.000Z",
+              "updatedAt": "2026-06-05T15:16:26.000Z",
+              "uid": "35240-624b1d37-d503-44df-b6d6-330c70601423"
+            },
+            {
+              "name": "Update an order",
+              "id": "3fd4c22b-c9b6-432a-87cb-5cfb52bfdc82",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"order_id\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"modified_at\": \"<dateTime>\",\n  \"order_details\": {\n    \"integration\": {\n      \"id\": \"<integer>\"\n    },\n    \"status\": {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"order_created_at\": \"<dateTime>\",\n    \"order_updated_at\": \"<dateTime>\",\n    \"order_items\": [\n      {\n        \"item_id\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"hs_code\": \"<string>\",\n        \"country_of_origin\": \"<string>\",\n        \"properties\": {\n          \"Excepteur__\": true,\n          \"tempor_57\": 88846921\n        },\n        \"unit_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"total_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"measurement\": {\n          \"dimension\": {\n            \"length\": \"<number>\",\n            \"width\": \"<number>\",\n            \"height\": \"<number>\",\n            \"unit\": \"in\"\n          },\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"kg\"\n          },\n          \"volume\": {\n            \"value\": \"<integer>\",\n            \"unit\": \"l\"\n          }\n        },\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\",\n        \"delivery_dates\": null\n      },\n      {\n        \"item_id\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"hs_code\": \"<string>\",\n        \"country_of_origin\": \"<string>\",\n        \"properties\": {\n          \"elit_6\": 59694773.52057138,\n          \"sedf8\": 1928639.8737182468,\n          \"cupidatat6\": \"quis nisi\"\n        },\n        \"unit_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"total_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"measurement\": {\n          \"dimension\": {\n            \"length\": \"<number>\",\n            \"width\": \"<number>\",\n            \"height\": \"<number>\",\n            \"unit\": \"in\"\n          },\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"kg\"\n          },\n          \"volume\": {\n            \"value\": \"<integer>\",\n            \"unit\": \"l\"\n          }\n        },\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\",\n        \"delivery_dates\": {\n          \"handover_at\": \"<dateTime>\",\n          \"deliver_at\": \"<dateTime>\"\n        }\n      }\n    ],\n    \"notes\": \"<string,null>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"payment_details\": {\n    \"total_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"GBP\"\n    },\n    \"subtotal_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"GBP\"\n    },\n    \"estimated_shipping_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"USD\"\n    },\n    \"estimated_tax_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"USD\"\n    },\n    \"status\": {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"invoice_date\": \"<string,null>\",\n    \"discount_granted\": {\n      \"value\": \"9815999\",\n      \"currency\": \"<string,null>\"\n    },\n    \"insurance_costs\": {\n      \"value\": \"60993969\",\n      \"currency\": \"<string,null>\"\n    },\n    \"freight_costs\": {\n      \"value\": \"36407304\",\n      \"currency\": \"<string,null>\"\n    },\n    \"other_costs\": {\n      \"value\": \"9511735.400\",\n      \"currency\": \"<string,null>\"\n    }\n  },\n  \"customs_details\": {\n    \"commercial_invoice_number\": \"<string>\",\n    \"shipment_type\": \"gift\",\n    \"export_type\": \"private\",\n    \"tax_numbers\": null\n  },\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"billing_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"is_local_pickup\": \"<boolean,null>\",\n    \"delivery_indicator\": \"<string>\",\n    \"measurement\": {\n      \"dimension\": {\n        \"length\": \"<number>\",\n        \"width\": \"<number>\",\n        \"height\": \"<number>\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"volume\": {\n        \"value\": \"<integer>\",\n        \"unit\": \"ml\"\n      }\n    },\n    \"ship_with\": {\n      \"type\": \"shipping_option_code\",\n      \"properties\": {\n        \"shipping_option_code\": \"<string,null>\",\n        \"contract_id\": \"<integer,null>\"\n      }\n    }\n  },\n  \"service_point_details\": {\n    \"id\": \"<string>\",\n    \"post_number\": \"<string>\",\n    \"latitude\": \"<string>\",\n    \"longitude\": \"<string>\",\n    \"type\": \"<string>\",\n    \"extra_data\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7f108ae2-0d99-4944-9cd5-e2dafe435102",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) Filtering on the Sendcloud order ID"
+                    }
+                  ]
+                },
+                "description": "Partially update some fields of an order."
+              },
+              "response": [
+                {
+                  "id": "6dede9ab-c46f-46db-864a-9c45057ffe4c",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"order_id\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"modified_at\": \"<dateTime>\",\n  \"order_details\": {\n    \"integration\": {\n      \"id\": \"<integer>\"\n    },\n    \"status\": {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"order_created_at\": \"<dateTime>\",\n    \"order_updated_at\": \"<dateTime>\",\n    \"order_items\": [\n      {\n        \"item_id\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"hs_code\": \"<string>\",\n        \"country_of_origin\": \"<string>\",\n        \"properties\": {\n          \"Excepteur__\": true,\n          \"tempor_57\": 88846921\n        },\n        \"unit_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"total_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"measurement\": {\n          \"dimension\": {\n            \"length\": \"<number>\",\n            \"width\": \"<number>\",\n            \"height\": \"<number>\",\n            \"unit\": \"in\"\n          },\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"kg\"\n          },\n          \"volume\": {\n            \"value\": \"<integer>\",\n            \"unit\": \"l\"\n          }\n        },\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\",\n        \"delivery_dates\": null\n      },\n      {\n        \"item_id\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"hs_code\": \"<string>\",\n        \"country_of_origin\": \"<string>\",\n        \"properties\": {\n          \"elit_6\": 59694773.52057138,\n          \"sedf8\": 1928639.8737182468,\n          \"cupidatat6\": \"quis nisi\"\n        },\n        \"unit_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"total_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"measurement\": {\n          \"dimension\": {\n            \"length\": \"<number>\",\n            \"width\": \"<number>\",\n            \"height\": \"<number>\",\n            \"unit\": \"in\"\n          },\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"kg\"\n          },\n          \"volume\": {\n            \"value\": \"<integer>\",\n            \"unit\": \"l\"\n          }\n        },\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\",\n        \"delivery_dates\": {\n          \"handover_at\": \"<dateTime>\",\n          \"deliver_at\": \"<dateTime>\"\n        }\n      }\n    ],\n    \"notes\": \"<string,null>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"payment_details\": {\n    \"total_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"GBP\"\n    },\n    \"subtotal_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"GBP\"\n    },\n    \"estimated_shipping_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"USD\"\n    },\n    \"estimated_tax_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"USD\"\n    },\n    \"status\": {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"invoice_date\": \"<string,null>\",\n    \"discount_granted\": {\n      \"value\": \"9815999\",\n      \"currency\": \"<string,null>\"\n    },\n    \"insurance_costs\": {\n      \"value\": \"60993969\",\n      \"currency\": \"<string,null>\"\n    },\n    \"freight_costs\": {\n      \"value\": \"36407304\",\n      \"currency\": \"<string,null>\"\n    },\n    \"other_costs\": {\n      \"value\": \"9511735.400\",\n      \"currency\": \"<string,null>\"\n    }\n  },\n  \"customs_details\": {\n    \"commercial_invoice_number\": \"<string>\",\n    \"shipment_type\": \"gift\",\n    \"export_type\": \"private\",\n    \"tax_numbers\": null\n  },\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"billing_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"is_local_pickup\": \"<boolean,null>\",\n    \"delivery_indicator\": \"<string>\",\n    \"measurement\": {\n      \"dimension\": {\n        \"length\": \"<number>\",\n        \"width\": \"<number>\",\n        \"height\": \"<number>\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"volume\": {\n        \"value\": \"<integer>\",\n        \"unit\": \"ml\"\n      }\n    },\n    \"ship_with\": {\n      \"type\": \"shipping_option_code\",\n      \"properties\": {\n        \"shipping_option_code\": \"<string,null>\",\n        \"contract_id\": \"<integer,null>\"\n      }\n    }\n  },\n  \"service_point_details\": {\n    \"id\": \"<string>\",\n    \"post_number\": \"<string>\",\n    \"latitude\": \"<string>\",\n    \"longitude\": \"<string>\",\n    \"type\": \"<string>\",\n    \"extra_data\": {}\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<integer>\",\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:26.000Z",
+                  "updatedAt": "2026-06-05T15:16:26.000Z",
+                  "uid": "35240-6dede9ab-c46f-46db-864a-9c45057ffe4c"
+                },
+                {
+                  "id": "8271f57c-f097-4068-a476-cb210cc69986",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"order_id\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"modified_at\": \"<dateTime>\",\n  \"order_details\": {\n    \"integration\": {\n      \"id\": \"<integer>\"\n    },\n    \"status\": {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"order_created_at\": \"<dateTime>\",\n    \"order_updated_at\": \"<dateTime>\",\n    \"order_items\": [\n      {\n        \"item_id\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"hs_code\": \"<string>\",\n        \"country_of_origin\": \"<string>\",\n        \"properties\": {\n          \"Excepteur__\": true,\n          \"tempor_57\": 88846921\n        },\n        \"unit_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"total_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"measurement\": {\n          \"dimension\": {\n            \"length\": \"<number>\",\n            \"width\": \"<number>\",\n            \"height\": \"<number>\",\n            \"unit\": \"in\"\n          },\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"kg\"\n          },\n          \"volume\": {\n            \"value\": \"<integer>\",\n            \"unit\": \"l\"\n          }\n        },\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\",\n        \"delivery_dates\": null\n      },\n      {\n        \"item_id\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"hs_code\": \"<string>\",\n        \"country_of_origin\": \"<string>\",\n        \"properties\": {\n          \"elit_6\": 59694773.52057138,\n          \"sedf8\": 1928639.8737182468,\n          \"cupidatat6\": \"quis nisi\"\n        },\n        \"unit_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"total_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"measurement\": {\n          \"dimension\": {\n            \"length\": \"<number>\",\n            \"width\": \"<number>\",\n            \"height\": \"<number>\",\n            \"unit\": \"in\"\n          },\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"kg\"\n          },\n          \"volume\": {\n            \"value\": \"<integer>\",\n            \"unit\": \"l\"\n          }\n        },\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\",\n        \"delivery_dates\": {\n          \"handover_at\": \"<dateTime>\",\n          \"deliver_at\": \"<dateTime>\"\n        }\n      }\n    ],\n    \"notes\": \"<string,null>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"payment_details\": {\n    \"total_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"GBP\"\n    },\n    \"subtotal_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"GBP\"\n    },\n    \"estimated_shipping_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"USD\"\n    },\n    \"estimated_tax_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"USD\"\n    },\n    \"status\": {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"invoice_date\": \"<string,null>\",\n    \"discount_granted\": {\n      \"value\": \"9815999\",\n      \"currency\": \"<string,null>\"\n    },\n    \"insurance_costs\": {\n      \"value\": \"60993969\",\n      \"currency\": \"<string,null>\"\n    },\n    \"freight_costs\": {\n      \"value\": \"36407304\",\n      \"currency\": \"<string,null>\"\n    },\n    \"other_costs\": {\n      \"value\": \"9511735.400\",\n      \"currency\": \"<string,null>\"\n    }\n  },\n  \"customs_details\": {\n    \"commercial_invoice_number\": \"<string>\",\n    \"shipment_type\": \"gift\",\n    \"export_type\": \"private\",\n    \"tax_numbers\": null\n  },\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"billing_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"is_local_pickup\": \"<boolean,null>\",\n    \"delivery_indicator\": \"<string>\",\n    \"measurement\": {\n      \"dimension\": {\n        \"length\": \"<number>\",\n        \"width\": \"<number>\",\n        \"height\": \"<number>\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"volume\": {\n        \"value\": \"<integer>\",\n        \"unit\": \"ml\"\n      }\n    },\n    \"ship_with\": {\n      \"type\": \"shipping_option_code\",\n      \"properties\": {\n        \"shipping_option_code\": \"<string,null>\",\n        \"contract_id\": \"<integer,null>\"\n      }\n    }\n  },\n  \"service_point_details\": {\n    \"id\": \"<string>\",\n    \"post_number\": \"<string>\",\n    \"latitude\": \"<string>\",\n    \"longitude\": \"<string>\",\n    \"type\": \"<string>\",\n    \"extra_data\": {}\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": \"dolor Lorem labore\",\n      \"code\": -17948358,\n      \"detail\": -69123272\n    },\n    {\n      \"status\": \"qui sit\",\n      \"code\": true,\n      \"detail\": -98444978.4694514\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:26.000Z",
+                  "updatedAt": "2026-06-05T15:16:26.000Z",
+                  "uid": "35240-8271f57c-f097-4068-a476-cb210cc69986"
+                },
+                {
+                  "id": "8900be92-8d2a-4890-a398-714c50a2a3d6",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"order_id\": \"<string>\",\n  \"order_number\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"modified_at\": \"<dateTime>\",\n  \"order_details\": {\n    \"integration\": {\n      \"id\": \"<integer>\"\n    },\n    \"status\": {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"order_created_at\": \"<dateTime>\",\n    \"order_updated_at\": \"<dateTime>\",\n    \"order_items\": [\n      {\n        \"item_id\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"hs_code\": \"<string>\",\n        \"country_of_origin\": \"<string>\",\n        \"properties\": {\n          \"Excepteur__\": true,\n          \"tempor_57\": 88846921\n        },\n        \"unit_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"total_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"measurement\": {\n          \"dimension\": {\n            \"length\": \"<number>\",\n            \"width\": \"<number>\",\n            \"height\": \"<number>\",\n            \"unit\": \"in\"\n          },\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"kg\"\n          },\n          \"volume\": {\n            \"value\": \"<integer>\",\n            \"unit\": \"l\"\n          }\n        },\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\",\n        \"delivery_dates\": null\n      },\n      {\n        \"item_id\": \"<string>\",\n        \"product_id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"sku\": \"<string>\",\n        \"hs_code\": \"<string>\",\n        \"country_of_origin\": \"<string>\",\n        \"properties\": {\n          \"elit_6\": 59694773.52057138,\n          \"sedf8\": 1928639.8737182468,\n          \"cupidatat6\": \"quis nisi\"\n        },\n        \"unit_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"total_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"measurement\": {\n          \"dimension\": {\n            \"length\": \"<number>\",\n            \"width\": \"<number>\",\n            \"height\": \"<number>\",\n            \"unit\": \"in\"\n          },\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"kg\"\n          },\n          \"volume\": {\n            \"value\": \"<integer>\",\n            \"unit\": \"l\"\n          }\n        },\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\",\n        \"delivery_dates\": {\n          \"handover_at\": \"<dateTime>\",\n          \"deliver_at\": \"<dateTime>\"\n        }\n      }\n    ],\n    \"notes\": \"<string,null>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"payment_details\": {\n    \"total_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"GBP\"\n    },\n    \"subtotal_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"GBP\"\n    },\n    \"estimated_shipping_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"USD\"\n    },\n    \"estimated_tax_price\": {\n      \"value\": \"<number>\",\n      \"currency\": \"USD\"\n    },\n    \"status\": {\n      \"code\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"invoice_date\": \"<string,null>\",\n    \"discount_granted\": {\n      \"value\": \"9815999\",\n      \"currency\": \"<string,null>\"\n    },\n    \"insurance_costs\": {\n      \"value\": \"60993969\",\n      \"currency\": \"<string,null>\"\n    },\n    \"freight_costs\": {\n      \"value\": \"36407304\",\n      \"currency\": \"<string,null>\"\n    },\n    \"other_costs\": {\n      \"value\": \"9511735.400\",\n      \"currency\": \"<string,null>\"\n    }\n  },\n  \"customs_details\": {\n    \"commercial_invoice_number\": \"<string>\",\n    \"shipment_type\": \"gift\",\n    \"export_type\": \"private\",\n    \"tax_numbers\": null\n  },\n  \"customer_details\": {\n    \"name\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"billing_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"shipping_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"shipping_details\": {\n    \"is_local_pickup\": \"<boolean,null>\",\n    \"delivery_indicator\": \"<string>\",\n    \"measurement\": {\n      \"dimension\": {\n        \"length\": \"<number>\",\n        \"width\": \"<number>\",\n        \"height\": \"<number>\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"volume\": {\n        \"value\": \"<integer>\",\n        \"unit\": \"ml\"\n      }\n    },\n    \"ship_with\": {\n      \"type\": \"shipping_option_code\",\n      \"properties\": {\n        \"shipping_option_code\": \"<string,null>\",\n        \"contract_id\": \"<integer,null>\"\n      }\n    }\n  },\n  \"service_point_details\": {\n    \"id\": \"<string>\",\n    \"post_number\": \"<string>\",\n    \"latitude\": \"<string>\",\n    \"longitude\": \"<string>\",\n    \"type\": \"<string>\",\n    \"extra_data\": {}\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": \"dolor Lorem labore\",\n      \"code\": -17948358,\n      \"detail\": -69123272\n    },\n    {\n      \"status\": \"qui sit\",\n      \"code\": true,\n      \"detail\": -98444978.4694514\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:26.000Z",
+                  "updatedAt": "2026-06-05T15:16:26.000Z",
+                  "uid": "35240-8900be92-8d2a-4890-a398-714c50a2a3d6"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:26.000Z",
+              "updatedAt": "2026-06-05T15:16:26.000Z",
+              "uid": "35240-3fd4c22b-c9b6-432a-87cb-5cfb52bfdc82"
+            }
+          ],
+          "id": "30e64960-78d8-4765-b58f-0220054a7010",
+          "createdAt": "2026-06-05T15:16:26.000Z",
+          "updatedAt": "2026-06-05T15:16:26.000Z",
+          "uid": "35240-30e64960-78d8-4765-b58f-0220054a7010"
+        },
+        {
+          "name": "Create/Update orders in batch",
+          "id": "6df4238d-f7e3-49d5-9f7f-7717ef7c6948",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"order_details\": {\n      \"integration\": {\n        \"id\": \"<integer>\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"order_created_at\": \"<dateTime>\",\n      \"order_items\": [\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"fugiat_4\": 81420527.47211319,\n            \"Ut969\": 13648538\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"in\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"kg\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"gal\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"KG\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"LQ\",\n            \"transportation_mode\": \"PAX\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"I\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Net\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"GBP\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"dolor_f\": 92837839\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"m\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"g\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"ml\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"ADR\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"G\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"PAX\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"I\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Gross\"\n          }\n        }\n      ],\n      \"order_updated_at\": \"<dateTime>\",\n      \"notes\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"payment_details\": {\n      \"total_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"is_cash_on_delivery\": \"<boolean,null>\",\n      \"subtotal_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"estimated_shipping_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"estimated_tax_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"invoice_date\": \"<string,null>\",\n      \"discount_granted\": {\n        \"value\": \"4728909\",\n        \"currency\": \"<string,null>\"\n      },\n      \"insurance_costs\": {\n        \"value\": \"142958\",\n        \"currency\": \"<string,null>\"\n      },\n      \"freight_costs\": {\n        \"value\": \"00.1592222\",\n        \"currency\": \"<string,null>\"\n      },\n      \"other_costs\": {\n        \"value\": \"70.998694\",\n        \"currency\": \"<string,null>\"\n      }\n    },\n    \"id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"modified_at\": \"<dateTime>\",\n    \"customs_details\": {\n      \"commercial_invoice_number\": \"<string>\",\n      \"shipment_type\": \"returned_goods\",\n      \"export_type\": \"commercial_b2c\",\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ],\n        \"receiver\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ],\n        \"importer_of_record\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ]\n      }\n    },\n    \"customer_details\": {\n      \"name\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"billing_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_details\": {\n      \"is_local_pickup\": \"<boolean,null>\",\n      \"delivery_indicator\": \"<string>\",\n      \"measurement\": {\n        \"dimension\": {\n          \"length\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\",\n          \"unit\": \"in\"\n        },\n        \"weight\": {\n          \"value\": \"<number>\",\n          \"unit\": \"lbs\"\n        },\n        \"volume\": {\n          \"value\": \"<integer>\",\n          \"unit\": \"ml\"\n        }\n      },\n      \"ship_with\": {\n        \"type\": \"shipping_option_code\",\n        \"properties\": {\n          \"shipping_option_code\": \"<string,null>\",\n          \"contract_id\": \"<integer,null>\"\n        }\n      }\n    },\n    \"service_point_details\": {\n      \"id\": \"<string>\",\n      \"post_number\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"type\": \"<string>\",\n      \"extra_data\": {\n        \"aute_62f\": \"non est in\",\n        \"id_\": false,\n        \"anim_0c\": -35845519.32255504\n      }\n    }\n  },\n  {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"order_details\": {\n      \"integration\": {\n        \"id\": \"<integer>\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"order_created_at\": \"<dateTime>\",\n      \"order_items\": [\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"EUR\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"Lorem_12_\": \"\",\n            \"esse__6\": true,\n            \"aute_88\": false,\n            \"dolore_b3\": \"amet\"\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"ft\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"kg\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"ml\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"L\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"CAO\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"I\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Gross\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"GBP\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"laborum_390\": -48575619,\n            \"voluptate0e3\": false\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"EUR\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"yd\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"kg\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"ml\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"G\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"Ground\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"III\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Net\"\n          }\n        }\n      ],\n      \"order_updated_at\": \"<dateTime>\",\n      \"notes\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"payment_details\": {\n      \"total_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"is_cash_on_delivery\": \"<boolean,null>\",\n      \"subtotal_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"GBP\"\n      },\n      \"estimated_shipping_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"estimated_tax_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"invoice_date\": \"<string,null>\",\n      \"discount_granted\": {\n        \"value\": \"966465.543086180\",\n        \"currency\": \"<string,null>\"\n      },\n      \"insurance_costs\": {\n        \"value\": \"759.682811641\",\n        \"currency\": \"<string,null>\"\n      },\n      \"freight_costs\": {\n        \"value\": \"1471588613.9570\",\n        \"currency\": \"<string,null>\"\n      },\n      \"other_costs\": {\n        \"value\": \"422394\",\n        \"currency\": \"<string,null>\"\n      }\n    },\n    \"id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"modified_at\": \"<dateTime>\",\n    \"customs_details\": {\n      \"commercial_invoice_number\": \"<string>\",\n      \"shipment_type\": \"commercial_sample\",\n      \"export_type\": \"commercial_b2c\",\n      \"tax_numbers\": null\n    },\n    \"customer_details\": {\n      \"name\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"billing_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_details\": {\n      \"is_local_pickup\": \"<boolean,null>\",\n      \"delivery_indicator\": \"<string>\",\n      \"measurement\": {\n        \"dimension\": {\n          \"length\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\",\n          \"unit\": \"cm\"\n        },\n        \"weight\": {\n          \"value\": \"<number>\",\n          \"unit\": \"oz\"\n        },\n        \"volume\": {\n          \"value\": \"<integer>\",\n          \"unit\": \"gal\"\n        }\n      },\n      \"ship_with\": {\n        \"type\": \"shipping_option_code\",\n        \"properties\": {\n          \"shipping_option_code\": \"<string,null>\",\n          \"contract_id\": \"<integer,null>\"\n        }\n      }\n    },\n    \"service_point_details\": {\n      \"id\": \"<string>\",\n      \"post_number\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"type\": \"<string>\",\n      \"extra_data\": {\n        \"tempor4\": \"sint enim nisi\"\n      }\n    }\n  }\n]",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            },
+            "description": "Use this endpoint to insert orders into a Sendcloud API integration."
+          },
+          "response": [
+            {
+              "id": "4fd86869-f9b7-47a5-acdc-f85b188afeeb",
+              "name": "OK.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"order_details\": {\n      \"integration\": {\n        \"id\": \"<integer>\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"order_created_at\": \"<dateTime>\",\n      \"order_items\": [\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"fugiat_4\": 81420527.47211319,\n            \"Ut969\": 13648538\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"in\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"kg\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"gal\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"KG\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"LQ\",\n            \"transportation_mode\": \"PAX\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"I\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Net\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"GBP\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"dolor_f\": 92837839\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"m\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"g\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"ml\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"ADR\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"G\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"PAX\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"I\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Gross\"\n          }\n        }\n      ],\n      \"order_updated_at\": \"<dateTime>\",\n      \"notes\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"payment_details\": {\n      \"total_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"is_cash_on_delivery\": \"<boolean,null>\",\n      \"subtotal_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"estimated_shipping_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"estimated_tax_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"invoice_date\": \"<string,null>\",\n      \"discount_granted\": {\n        \"value\": \"4728909\",\n        \"currency\": \"<string,null>\"\n      },\n      \"insurance_costs\": {\n        \"value\": \"142958\",\n        \"currency\": \"<string,null>\"\n      },\n      \"freight_costs\": {\n        \"value\": \"00.1592222\",\n        \"currency\": \"<string,null>\"\n      },\n      \"other_costs\": {\n        \"value\": \"70.998694\",\n        \"currency\": \"<string,null>\"\n      }\n    },\n    \"id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"modified_at\": \"<dateTime>\",\n    \"customs_details\": {\n      \"commercial_invoice_number\": \"<string>\",\n      \"shipment_type\": \"returned_goods\",\n      \"export_type\": \"commercial_b2c\",\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ],\n        \"receiver\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ],\n        \"importer_of_record\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ]\n      }\n    },\n    \"customer_details\": {\n      \"name\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"billing_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_details\": {\n      \"is_local_pickup\": \"<boolean,null>\",\n      \"delivery_indicator\": \"<string>\",\n      \"measurement\": {\n        \"dimension\": {\n          \"length\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\",\n          \"unit\": \"in\"\n        },\n        \"weight\": {\n          \"value\": \"<number>\",\n          \"unit\": \"lbs\"\n        },\n        \"volume\": {\n          \"value\": \"<integer>\",\n          \"unit\": \"ml\"\n        }\n      },\n      \"ship_with\": {\n        \"type\": \"shipping_option_code\",\n        \"properties\": {\n          \"shipping_option_code\": \"<string,null>\",\n          \"contract_id\": \"<integer,null>\"\n        }\n      }\n    },\n    \"service_point_details\": {\n      \"id\": \"<string>\",\n      \"post_number\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"type\": \"<string>\",\n      \"extra_data\": {\n        \"aute_62f\": \"non est in\",\n        \"id_\": false,\n        \"anim_0c\": -35845519.32255504\n      }\n    }\n  },\n  {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"order_details\": {\n      \"integration\": {\n        \"id\": \"<integer>\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"order_created_at\": \"<dateTime>\",\n      \"order_items\": [\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"EUR\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"Lorem_12_\": \"\",\n            \"esse__6\": true,\n            \"aute_88\": false,\n            \"dolore_b3\": \"amet\"\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"ft\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"kg\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"ml\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"L\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"CAO\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"I\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Gross\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"GBP\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"laborum_390\": -48575619,\n            \"voluptate0e3\": false\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"EUR\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"yd\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"kg\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"ml\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"G\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"Ground\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"III\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Net\"\n          }\n        }\n      ],\n      \"order_updated_at\": \"<dateTime>\",\n      \"notes\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"payment_details\": {\n      \"total_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"is_cash_on_delivery\": \"<boolean,null>\",\n      \"subtotal_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"GBP\"\n      },\n      \"estimated_shipping_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"estimated_tax_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"invoice_date\": \"<string,null>\",\n      \"discount_granted\": {\n        \"value\": \"966465.543086180\",\n        \"currency\": \"<string,null>\"\n      },\n      \"insurance_costs\": {\n        \"value\": \"759.682811641\",\n        \"currency\": \"<string,null>\"\n      },\n      \"freight_costs\": {\n        \"value\": \"1471588613.9570\",\n        \"currency\": \"<string,null>\"\n      },\n      \"other_costs\": {\n        \"value\": \"422394\",\n        \"currency\": \"<string,null>\"\n      }\n    },\n    \"id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"modified_at\": \"<dateTime>\",\n    \"customs_details\": {\n      \"commercial_invoice_number\": \"<string>\",\n      \"shipment_type\": \"commercial_sample\",\n      \"export_type\": \"commercial_b2c\",\n      \"tax_numbers\": null\n    },\n    \"customer_details\": {\n      \"name\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"billing_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_details\": {\n      \"is_local_pickup\": \"<boolean,null>\",\n      \"delivery_indicator\": \"<string>\",\n      \"measurement\": {\n        \"dimension\": {\n          \"length\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\",\n          \"unit\": \"cm\"\n        },\n        \"weight\": {\n          \"value\": \"<number>\",\n          \"unit\": \"oz\"\n        },\n        \"volume\": {\n          \"value\": \"<integer>\",\n          \"unit\": \"gal\"\n        }\n      },\n      \"ship_with\": {\n        \"type\": \"shipping_option_code\",\n        \"properties\": {\n          \"shipping_option_code\": \"<string,null>\",\n          \"contract_id\": \"<integer,null>\"\n        }\n      }\n    },\n    \"service_point_details\": {\n      \"id\": \"<string>\",\n      \"post_number\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"type\": \"<string>\",\n      \"extra_data\": {\n        \"tempor4\": \"sint enim nisi\"\n      }\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<integer>\",\n      \"order_id\": \"<string>\",\n      \"order_number\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"order_id\": \"<string>\",\n      \"order_number\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:16:26.000Z",
+              "updatedAt": "2026-06-05T15:16:26.000Z",
+              "uid": "35240-4fd86869-f9b7-47a5-acdc-f85b188afeeb"
+            },
+            {
+              "id": "4f05e6c1-45ab-4f32-93aa-1b15de84c800",
+              "name": "Bad Request - Validation errors or business rule violations.\n\n**Error Response Structure**\n\nAll errors use JSON Pointer notation in the `source.pointer` field to indicate the exact location of the problem:\n\n- `[N]` indicates which order in the batch array",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"order_details\": {\n      \"integration\": {\n        \"id\": \"<integer>\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"order_created_at\": \"<dateTime>\",\n      \"order_items\": [\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"fugiat_4\": 81420527.47211319,\n            \"Ut969\": 13648538\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"in\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"kg\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"gal\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"KG\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"LQ\",\n            \"transportation_mode\": \"PAX\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"I\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Net\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"GBP\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"dolor_f\": 92837839\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"m\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"g\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"ml\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"ADR\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"G\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"PAX\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"I\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Gross\"\n          }\n        }\n      ],\n      \"order_updated_at\": \"<dateTime>\",\n      \"notes\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"payment_details\": {\n      \"total_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"is_cash_on_delivery\": \"<boolean,null>\",\n      \"subtotal_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"estimated_shipping_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"estimated_tax_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"invoice_date\": \"<string,null>\",\n      \"discount_granted\": {\n        \"value\": \"4728909\",\n        \"currency\": \"<string,null>\"\n      },\n      \"insurance_costs\": {\n        \"value\": \"142958\",\n        \"currency\": \"<string,null>\"\n      },\n      \"freight_costs\": {\n        \"value\": \"00.1592222\",\n        \"currency\": \"<string,null>\"\n      },\n      \"other_costs\": {\n        \"value\": \"70.998694\",\n        \"currency\": \"<string,null>\"\n      }\n    },\n    \"id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"modified_at\": \"<dateTime>\",\n    \"customs_details\": {\n      \"commercial_invoice_number\": \"<string>\",\n      \"shipment_type\": \"returned_goods\",\n      \"export_type\": \"commercial_b2c\",\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ],\n        \"receiver\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ],\n        \"importer_of_record\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ]\n      }\n    },\n    \"customer_details\": {\n      \"name\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"billing_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_details\": {\n      \"is_local_pickup\": \"<boolean,null>\",\n      \"delivery_indicator\": \"<string>\",\n      \"measurement\": {\n        \"dimension\": {\n          \"length\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\",\n          \"unit\": \"in\"\n        },\n        \"weight\": {\n          \"value\": \"<number>\",\n          \"unit\": \"lbs\"\n        },\n        \"volume\": {\n          \"value\": \"<integer>\",\n          \"unit\": \"ml\"\n        }\n      },\n      \"ship_with\": {\n        \"type\": \"shipping_option_code\",\n        \"properties\": {\n          \"shipping_option_code\": \"<string,null>\",\n          \"contract_id\": \"<integer,null>\"\n        }\n      }\n    },\n    \"service_point_details\": {\n      \"id\": \"<string>\",\n      \"post_number\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"type\": \"<string>\",\n      \"extra_data\": {\n        \"aute_62f\": \"non est in\",\n        \"id_\": false,\n        \"anim_0c\": -35845519.32255504\n      }\n    }\n  },\n  {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"order_details\": {\n      \"integration\": {\n        \"id\": \"<integer>\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"order_created_at\": \"<dateTime>\",\n      \"order_items\": [\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"EUR\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"Lorem_12_\": \"\",\n            \"esse__6\": true,\n            \"aute_88\": false,\n            \"dolore_b3\": \"amet\"\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"USD\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"ft\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"kg\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"ml\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"L\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"CAO\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"I\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Gross\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"total_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"GBP\"\n          },\n          \"item_id\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"variant_id\": \"<string>\",\n          \"image_url\": \"<string>\",\n          \"description\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"hs_code\": \"<string>\",\n          \"country_of_origin\": \"<string>\",\n          \"properties\": {\n            \"laborum_390\": -48575619,\n            \"voluptate0e3\": false\n          },\n          \"unit_price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"EUR\"\n          },\n          \"measurement\": {\n            \"dimension\": {\n              \"length\": \"<number>\",\n              \"width\": \"<number>\",\n              \"height\": \"<number>\",\n              \"unit\": \"yd\"\n            },\n            \"weight\": {\n              \"value\": \"<number>\",\n              \"unit\": \"kg\"\n            },\n            \"volume\": {\n              \"value\": \"<integer>\",\n              \"unit\": \"ml\"\n            }\n          },\n          \"ean\": \"<string>\",\n          \"delivery_dates\": {\n            \"handover_at\": \"<string,null-date-time>\",\n            \"deliver_at\": \"<string,null-date-time>\"\n          },\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"G\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"Ground\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"III\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Net\"\n          }\n        }\n      ],\n      \"order_updated_at\": \"<dateTime>\",\n      \"notes\": \"<string>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"payment_details\": {\n      \"total_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"status\": {\n        \"code\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"is_cash_on_delivery\": \"<boolean,null>\",\n      \"subtotal_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"GBP\"\n      },\n      \"estimated_shipping_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"estimated_tax_price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"invoice_date\": \"<string,null>\",\n      \"discount_granted\": {\n        \"value\": \"966465.543086180\",\n        \"currency\": \"<string,null>\"\n      },\n      \"insurance_costs\": {\n        \"value\": \"759.682811641\",\n        \"currency\": \"<string,null>\"\n      },\n      \"freight_costs\": {\n        \"value\": \"1471588613.9570\",\n        \"currency\": \"<string,null>\"\n      },\n      \"other_costs\": {\n        \"value\": \"422394\",\n        \"currency\": \"<string,null>\"\n      }\n    },\n    \"id\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"modified_at\": \"<dateTime>\",\n    \"customs_details\": {\n      \"commercial_invoice_number\": \"<string>\",\n      \"shipment_type\": \"commercial_sample\",\n      \"export_type\": \"commercial_b2c\",\n      \"tax_numbers\": null\n    },\n    \"customer_details\": {\n      \"name\": \"<string>\",\n      \"phone_number\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"billing_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_address\": {\n      \"name\": \"<string>\",\n      \"company_name\": \"<string>\",\n      \"address_line_1\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"address_line_2\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"po_box\": \"<string,null>\",\n      \"state_province_code\": \"<string>\",\n      \"country_code\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"shipping_details\": {\n      \"is_local_pickup\": \"<boolean,null>\",\n      \"delivery_indicator\": \"<string>\",\n      \"measurement\": {\n        \"dimension\": {\n          \"length\": \"<number>\",\n          \"width\": \"<number>\",\n          \"height\": \"<number>\",\n          \"unit\": \"cm\"\n        },\n        \"weight\": {\n          \"value\": \"<number>\",\n          \"unit\": \"oz\"\n        },\n        \"volume\": {\n          \"value\": \"<integer>\",\n          \"unit\": \"gal\"\n        }\n      },\n      \"ship_with\": {\n        \"type\": \"shipping_option_code\",\n        \"properties\": {\n          \"shipping_option_code\": \"<string,null>\",\n          \"contract_id\": \"<integer,null>\"\n        }\n      }\n    },\n    \"service_point_details\": {\n      \"id\": \"<string>\",\n      \"post_number\": \"<string>\",\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\",\n      \"type\": \"<string>\",\n      \"extra_data\": {\n        \"tempor4\": \"sint enim nisi\"\n      }\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"dolor Lorem labore\",\n      \"code\": -17948358,\n      \"detail\": -69123272\n    },\n    {\n      \"status\": \"qui sit\",\n      \"code\": true,\n      \"detail\": -98444978.4694514\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:16:26.000Z",
+              "updatedAt": "2026-06-05T15:16:26.000Z",
+              "uid": "35240-4f05e6c1-45ab-4f32-93aa-1b15de84c800"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:26.000Z",
+          "updatedAt": "2026-06-05T15:16:26.000Z",
+          "uid": "35240-6df4238d-f7e3-49d5-9f7f-7717ef7c6948"
+        },
+        {
+          "name": "Retrieve a list of orders",
+          "id": "28f20c5c-aea6-4c22-b67b-80b245acc162",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/orders?integration=<integer>&order_number=<string>&order_id=<string>&status=<string>&order_created_at=<date>&order_created_at_min=<date>&order_created_at_max=<date>&order_updated_at=<date>&order_updated_at_min=<date>&order_updated_at_max=<date>&sort=<string>&page_size=100&cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ],
+              "query": [
+                {
+                  "description": "Filter orders by one or more integration IDs. Use a comma separated list, e.g. `integration=41,68,419`.\n\nYou can get your integration IDs from the [Retrieve a list of integrations](/api/v3/integrations/retrieve-a-list-of-integrations) endpoint.",
+                  "key": "integration",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Filter orders by a specific order number, e.g. `order_number=ORDER_284565`. The filtering is case insensitive.",
+                  "key": "order_number",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter orders by a specific order id, e.g. `order_id=1896e94b-c01b-4e73-a9e7-57f51c8a4c77`. The filtering is case insensitive.",
+                  "key": "order_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter orders based on their status, e.g. `status=unshipped`. The filtering is case insensitive.",
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Find orders that were created on a specific date, e.g. `order_created_at=2023-04-28`.",
+                  "key": "order_created_at",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Find orders that were created at or after a specific date, e.g. `order_created_at_min=2023-04-28`.",
+                  "key": "order_created_at_min",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Find orders that were created at or before a specific date, e.g. `order_created_at_max=2023-04-28`.",
+                  "key": "order_created_at_max",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Find orders that were updated on a specific date, e.g. `order_updated_at=2023-04-28`.",
+                  "key": "order_updated_at",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Find orders that were updated at or after a specific date, e.g. `order_updated_at_min=2023-04-28`.",
+                  "key": "order_updated_at_min",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Find orders that were updated at or before a specific date, e.g. `order_updated_at_max=2023-04-28`.",
+                  "key": "order_updated_at_max",
+                  "value": "<date>"
+                },
+                {
+                  "description": "Sort the orders in the response by using one or more of the following values:\n - `integration`: Sort by the integration ID of the retrieved orders; to sort in descending order, use `-integration`\n - `order_number`: Sort by the order number of the retrieved orders; to sort in descending order, use `-order_number`.\n - `order_created_at`: Sort by the date of an order creation of the retrieved orders; to sort in descending order, use `-order_created_at`\n - `order_updated_at`: Sort by the date of an order update of the retrieved orders; to sort in descending order, use `-order_updated_at`\n - `pk`: Sort by the ID (autogenerated internal ID) of the retrieved orders; to sort in descending order, use `-pk`\n\nAdditional information about this query:\n - Any valid combination of the above values is supported, e.g. `sort=integration,-order_created_at`. \n - In case of conflicting `sort` values, e.g. `/?sort=integration,-integration`, the conflicting value will be ignored.\n - If the `sort` query parameter is not set, the sorting of the retrieved orders will default to `-pk`.\n - If an unsupported `sort` value is provided, the results will be sorted by the default (`-pk`).",
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The maximum number of results to be returned per page",
+                  "key": "page_size",
+                  "value": "100"
+                },
+                {
+                  "description": "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n  - `o`: Offset\n  - `r`: Reverse\n  - `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`.",
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Get a list of orders filtered by integration, order number, order ID, order status, creation date, and update date. You can also optionally sort the results and pass a `cursor` value."
+          },
+          "response": [
+            {
+              "id": "58127a8c-0b76-46a7-b2ef-57376170c02b",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders?integration=<integer>&order_number=<string>&order_id=<string>&status=<string>&order_created_at=<date>&order_created_at_min=<date>&order_created_at_max=<date>&order_updated_at=<date>&order_updated_at_min=<date>&order_updated_at_max=<date>&sort=<string>&page_size=100&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter orders by one or more integration IDs. Use a comma separated list, e.g. `integration=41,68,419`.\n\nYou can get your integration IDs from the [Retrieve a list of integrations](/api/v3/integrations/retrieve-a-list-of-integrations) endpoint.",
+                      "key": "integration",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter orders by a specific order number, e.g. `order_number=ORDER_284565`. The filtering is case insensitive.",
+                      "key": "order_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter orders by a specific order id, e.g. `order_id=1896e94b-c01b-4e73-a9e7-57f51c8a4c77`. The filtering is case insensitive.",
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter orders based on their status, e.g. `status=unshipped`. The filtering is case insensitive.",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Find orders that were created on a specific date, e.g. `order_created_at=2023-04-28`.",
+                      "key": "order_created_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were created at or after a specific date, e.g. `order_created_at_min=2023-04-28`.",
+                      "key": "order_created_at_min",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were created at or before a specific date, e.g. `order_created_at_max=2023-04-28`.",
+                      "key": "order_created_at_max",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were updated on a specific date, e.g. `order_updated_at=2023-04-28`.",
+                      "key": "order_updated_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were updated at or after a specific date, e.g. `order_updated_at_min=2023-04-28`.",
+                      "key": "order_updated_at_min",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were updated at or before a specific date, e.g. `order_updated_at_max=2023-04-28`.",
+                      "key": "order_updated_at_max",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Sort the orders in the response by using one or more of the following values:\n - `integration`: Sort by the integration ID of the retrieved orders; to sort in descending order, use `-integration`\n - `order_number`: Sort by the order number of the retrieved orders; to sort in descending order, use `-order_number`.\n - `order_created_at`: Sort by the date of an order creation of the retrieved orders; to sort in descending order, use `-order_created_at`\n - `order_updated_at`: Sort by the date of an order update of the retrieved orders; to sort in descending order, use `-order_updated_at`\n - `pk`: Sort by the ID (autogenerated internal ID) of the retrieved orders; to sort in descending order, use `-pk`\n\nAdditional information about this query:\n - Any valid combination of the above values is supported, e.g. `sort=integration,-order_created_at`. \n - In case of conflicting `sort` values, e.g. `/?sort=integration,-integration`, the conflicting value will be ignored.\n - If the `sort` query parameter is not set, the sorting of the retrieved orders will default to `-pk`.\n - If an unsupported `sort` value is provided, the results will be sorted by the default (`-pk`).",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to be returned per page",
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "description": "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n  - `o`: Offset\n  - `r`: Reverse\n  - `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`.",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Links to related resources in the [RFC 5988](https://tools.ietf.org/html/rfc5988#section-5) format. This includes the links with the `next` and `prev` types for the next and the previous pages.",
+                    "type": "text/plain"
+                  },
+                  "key": "Link",
+                  "value": "<string>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"order_id\": \"<string>\",\n      \"order_number\": \"<string>\",\n      \"order_details\": {\n        \"integration\": {\n          \"id\": \"<integer>\"\n        },\n        \"status\": {\n          \"code\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        \"order_created_at\": \"<dateTime>\",\n        \"order_items\": [\n          {\n            \"name\": \"<string>\",\n            \"quantity\": \"<integer>\",\n            \"total_price\": {\n              \"value\": \"<number>\",\n              \"currency\": \"EUR\"\n            },\n            \"item_id\": \"<string>\",\n            \"product_id\": \"<string>\",\n            \"variant_id\": \"<string>\",\n            \"image_url\": \"<string>\",\n            \"description\": \"<string>\",\n            \"sku\": \"<string>\",\n            \"hs_code\": \"<string>\",\n            \"country_of_origin\": \"<string>\",\n            \"properties\": {\n              \"dolore13\": -34833723.3803143,\n              \"est2c3\": 2963007,\n              \"nullac\": \"dolore nulla amet\"\n            },\n            \"unit_price\": {\n              \"value\": \"<number>\",\n              \"currency\": \"EUR\"\n            },\n            \"measurement\": {\n              \"dimension\": {\n                \"length\": \"<number>\",\n                \"width\": \"<number>\",\n                \"height\": \"<number>\",\n                \"unit\": \"ft\"\n              },\n              \"weight\": {\n                \"value\": \"<number>\",\n                \"unit\": \"g\"\n              },\n              \"volume\": {\n                \"value\": \"<integer>\",\n                \"unit\": \"m3\"\n              }\n            },\n            \"ean\": \"<string>\",\n            \"delivery_dates\": {\n              \"handover_at\": \"<string,null-date-time>\",\n              \"deliver_at\": \"<string,null-date-time>\"\n            },\n            \"mid_code\": \"<string,null>\",\n            \"material_content\": \"<string,null>\",\n            \"intended_use\": \"<string,null>\",\n            \"dangerous_goods\": {\n              \"chemical_record_identifier\": \"<string>\",\n              \"regulation_set\": \"IATA\",\n              \"packaging_type_quantity\": \"<string>\",\n              \"packaging_type\": \"<string>\",\n              \"packaging_instruction_code\": \"<string>\",\n              \"id_number\": \"<string>\",\n              \"class_division_number\": \"<string>\",\n              \"quantity\": \"<string>\",\n              \"unit_of_measurement\": \"KG\",\n              \"proper_shipping_name\": \"<string>\",\n              \"commodity_regulated_level_code\": \"EQ\",\n              \"transportation_mode\": \"Highway\",\n              \"emergency_contact_name\": \"<string>\",\n              \"emergency_contact_phone\": \"<string>\",\n              \"adr_packing_group_letter\": \"III\",\n              \"local_proper_shipping_name\": \"<string>\",\n              \"transport_category\": \"<string>\",\n              \"tunnel_restriction_code\": \"<string>\",\n              \"weight_type\": \"Net\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"quantity\": \"<integer>\",\n            \"total_price\": {\n              \"value\": \"<number>\",\n              \"currency\": \"EUR\"\n            },\n            \"item_id\": \"<string>\",\n            \"product_id\": \"<string>\",\n            \"variant_id\": \"<string>\",\n            \"image_url\": \"<string>\",\n            \"description\": \"<string>\",\n            \"sku\": \"<string>\",\n            \"hs_code\": \"<string>\",\n            \"country_of_origin\": \"<string>\",\n            \"properties\": {\n              \"ea_cd\": 32520037.465291813\n            },\n            \"unit_price\": {\n              \"value\": \"<number>\",\n              \"currency\": \"EUR\"\n            },\n            \"measurement\": {\n              \"dimension\": {\n                \"length\": \"<number>\",\n                \"width\": \"<number>\",\n                \"height\": \"<number>\",\n                \"unit\": \"ft\"\n              },\n              \"weight\": {\n                \"value\": \"<number>\",\n                \"unit\": \"g\"\n              },\n              \"volume\": {\n                \"value\": \"<integer>\",\n                \"unit\": \"ml\"\n              }\n            },\n            \"ean\": \"<string>\",\n            \"delivery_dates\": {\n              \"handover_at\": \"<string,null-date-time>\",\n              \"deliver_at\": \"<string,null-date-time>\"\n            },\n            \"mid_code\": \"<string,null>\",\n            \"material_content\": \"<string,null>\",\n            \"intended_use\": \"<string,null>\",\n            \"dangerous_goods\": {\n              \"chemical_record_identifier\": \"<string>\",\n              \"regulation_set\": \"IATA\",\n              \"packaging_type_quantity\": \"<string>\",\n              \"packaging_type\": \"<string>\",\n              \"packaging_instruction_code\": \"<string>\",\n              \"id_number\": \"<string>\",\n              \"class_division_number\": \"<string>\",\n              \"quantity\": \"<string>\",\n              \"unit_of_measurement\": \"G\",\n              \"proper_shipping_name\": \"<string>\",\n              \"commodity_regulated_level_code\": \"LQ\",\n              \"transportation_mode\": \"Ground\",\n              \"emergency_contact_name\": \"<string>\",\n              \"emergency_contact_phone\": \"<string>\",\n              \"adr_packing_group_letter\": \"II\",\n              \"local_proper_shipping_name\": \"<string>\",\n              \"transport_category\": \"<string>\",\n              \"tunnel_restriction_code\": \"<string>\",\n              \"weight_type\": \"Net\"\n            }\n          }\n        ],\n        \"order_updated_at\": \"<dateTime>\",\n        \"notes\": \"<string>\",\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"payment_details\": {\n        \"total_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"EUR\"\n        },\n        \"status\": {\n          \"code\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        \"is_cash_on_delivery\": \"<boolean,null>\",\n        \"subtotal_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"GBP\"\n        },\n        \"estimated_shipping_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"GBP\"\n        },\n        \"estimated_tax_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"invoice_date\": \"<string,null>\",\n        \"discount_granted\": {\n          \"value\": \"7467.7112\",\n          \"currency\": \"<string,null>\"\n        },\n        \"insurance_costs\": {\n          \"value\": \"4272231034\",\n          \"currency\": \"<string,null>\"\n        },\n        \"freight_costs\": {\n          \"value\": \"1181170277.2\",\n          \"currency\": \"<string,null>\"\n        },\n        \"other_costs\": {\n          \"value\": \"2666.3161\",\n          \"currency\": \"<string,null>\"\n        }\n      },\n      \"id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"modified_at\": \"<dateTime>\",\n      \"customs_details\": null,\n      \"customer_details\": {\n        \"name\": \"<string>\",\n        \"phone_number\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      \"billing_address\": {\n        \"name\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"address_line_1\": \"<string>\",\n        \"house_number\": \"<string>\",\n        \"address_line_2\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"city\": \"<string>\",\n        \"po_box\": \"<string,null>\",\n        \"state_province_code\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"email\": \"<email>\",\n        \"phone_number\": \"<string>\"\n      },\n      \"shipping_address\": {\n        \"name\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"address_line_1\": \"<string>\",\n        \"house_number\": \"<string>\",\n        \"address_line_2\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"city\": \"<string>\",\n        \"po_box\": \"<string,null>\",\n        \"state_province_code\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"email\": \"<email>\",\n        \"phone_number\": \"<string>\"\n      },\n      \"shipping_details\": {\n        \"is_local_pickup\": \"<boolean,null>\",\n        \"delivery_indicator\": \"<string>\",\n        \"measurement\": {\n          \"dimension\": {\n            \"length\": \"<number>\",\n            \"width\": \"<number>\",\n            \"height\": \"<number>\",\n            \"unit\": \"cm\"\n          },\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"kg\"\n          },\n          \"volume\": {\n            \"value\": \"<integer>\",\n            \"unit\": \"l\"\n          }\n        },\n        \"ship_with\": {\n          \"type\": \"shipping_option_code\",\n          \"properties\": {\n            \"shipping_option_code\": \"<string,null>\",\n            \"contract_id\": \"<integer,null>\"\n          }\n        }\n      },\n      \"service_point_details\": {\n        \"id\": \"<string>\",\n        \"post_number\": \"<string>\",\n        \"latitude\": \"<string>\",\n        \"longitude\": \"<string>\",\n        \"type\": \"<string>\",\n        \"extra_data\": {\n          \"ut62\": \"et cupidatat laboris pariatur\"\n        }\n      }\n    },\n    {\n      \"order_id\": \"<string>\",\n      \"order_number\": \"<string>\",\n      \"order_details\": {\n        \"integration\": {\n          \"id\": \"<integer>\"\n        },\n        \"status\": {\n          \"code\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        \"order_created_at\": \"<dateTime>\",\n        \"order_items\": [\n          {\n            \"name\": \"<string>\",\n            \"quantity\": \"<integer>\",\n            \"total_price\": {\n              \"value\": \"<number>\",\n              \"currency\": \"EUR\"\n            },\n            \"item_id\": \"<string>\",\n            \"product_id\": \"<string>\",\n            \"variant_id\": \"<string>\",\n            \"image_url\": \"<string>\",\n            \"description\": \"<string>\",\n            \"sku\": \"<string>\",\n            \"hs_code\": \"<string>\",\n            \"country_of_origin\": \"<string>\",\n            \"properties\": {\n              \"irure0ea\": false\n            },\n            \"unit_price\": {\n              \"value\": \"<number>\",\n              \"currency\": \"GBP\"\n            },\n            \"measurement\": {\n              \"dimension\": {\n                \"length\": \"<number>\",\n                \"width\": \"<number>\",\n                \"height\": \"<number>\",\n                \"unit\": \"mm\"\n              },\n              \"weight\": {\n                \"value\": \"<number>\",\n                \"unit\": \"g\"\n              },\n              \"volume\": {\n                \"value\": \"<integer>\",\n                \"unit\": \"ml\"\n              }\n            },\n            \"ean\": \"<string>\",\n            \"delivery_dates\": {\n              \"handover_at\": \"<string,null-date-time>\",\n              \"deliver_at\": \"<string,null-date-time>\"\n            },\n            \"mid_code\": \"<string,null>\",\n            \"material_content\": \"<string,null>\",\n            \"intended_use\": \"<string,null>\",\n            \"dangerous_goods\": {\n              \"chemical_record_identifier\": \"<string>\",\n              \"regulation_set\": \"ADR\",\n              \"packaging_type_quantity\": \"<string>\",\n              \"packaging_type\": \"<string>\",\n              \"packaging_instruction_code\": \"<string>\",\n              \"id_number\": \"<string>\",\n              \"class_division_number\": \"<string>\",\n              \"quantity\": \"<string>\",\n              \"unit_of_measurement\": \"ML\",\n              \"proper_shipping_name\": \"<string>\",\n              \"commodity_regulated_level_code\": \"EQ\",\n              \"transportation_mode\": \"PAX\",\n              \"emergency_contact_name\": \"<string>\",\n              \"emergency_contact_phone\": \"<string>\",\n              \"adr_packing_group_letter\": \"III\",\n              \"local_proper_shipping_name\": \"<string>\",\n              \"transport_category\": \"<string>\",\n              \"tunnel_restriction_code\": \"<string>\",\n              \"weight_type\": \"Gross\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"quantity\": \"<integer>\",\n            \"total_price\": {\n              \"value\": \"<number>\",\n              \"currency\": \"USD\"\n            },\n            \"item_id\": \"<string>\",\n            \"product_id\": \"<string>\",\n            \"variant_id\": \"<string>\",\n            \"image_url\": \"<string>\",\n            \"description\": \"<string>\",\n            \"sku\": \"<string>\",\n            \"hs_code\": \"<string>\",\n            \"country_of_origin\": \"<string>\",\n            \"properties\": {\n              \"nisi8f4\": 33211671,\n              \"Excepteurbf1\": -69880034,\n              \"elitd\": true\n            },\n            \"unit_price\": {\n              \"value\": \"<number>\",\n              \"currency\": \"GBP\"\n            },\n            \"measurement\": {\n              \"dimension\": {\n                \"length\": \"<number>\",\n                \"width\": \"<number>\",\n                \"height\": \"<number>\",\n                \"unit\": \"mm\"\n              },\n              \"weight\": {\n                \"value\": \"<number>\",\n                \"unit\": \"oz\"\n              },\n              \"volume\": {\n                \"value\": \"<integer>\",\n                \"unit\": \"l\"\n              }\n            },\n            \"ean\": \"<string>\",\n            \"delivery_dates\": {\n              \"handover_at\": \"<string,null-date-time>\",\n              \"deliver_at\": \"<string,null-date-time>\"\n            },\n            \"mid_code\": \"<string,null>\",\n            \"material_content\": \"<string,null>\",\n            \"intended_use\": \"<string,null>\",\n            \"dangerous_goods\": {\n              \"chemical_record_identifier\": \"<string>\",\n              \"regulation_set\": \"IATA\",\n              \"packaging_type_quantity\": \"<string>\",\n              \"packaging_type\": \"<string>\",\n              \"packaging_instruction_code\": \"<string>\",\n              \"id_number\": \"<string>\",\n              \"class_division_number\": \"<string>\",\n              \"quantity\": \"<string>\",\n              \"unit_of_measurement\": \"G\",\n              \"proper_shipping_name\": \"<string>\",\n              \"commodity_regulated_level_code\": \"EQ\",\n              \"transportation_mode\": \"Ground\",\n              \"emergency_contact_name\": \"<string>\",\n              \"emergency_contact_phone\": \"<string>\",\n              \"adr_packing_group_letter\": \"I\",\n              \"local_proper_shipping_name\": \"<string>\",\n              \"transport_category\": \"<string>\",\n              \"tunnel_restriction_code\": \"<string>\",\n              \"weight_type\": \"Gross\"\n            }\n          }\n        ],\n        \"order_updated_at\": \"<dateTime>\",\n        \"notes\": \"<string>\",\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"payment_details\": {\n        \"total_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"GBP\"\n        },\n        \"status\": {\n          \"code\": \"<string>\",\n          \"message\": \"<string>\"\n        },\n        \"is_cash_on_delivery\": \"<boolean,null>\",\n        \"subtotal_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"USD\"\n        },\n        \"estimated_shipping_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"EUR\"\n        },\n        \"estimated_tax_price\": {\n          \"value\": \"<number>\",\n          \"currency\": \"GBP\"\n        },\n        \"invoice_date\": \"<string,null>\",\n        \"discount_granted\": {\n          \"value\": \"53\",\n          \"currency\": \"<string,null>\"\n        },\n        \"insurance_costs\": {\n          \"value\": \"209081592\",\n          \"currency\": \"<string,null>\"\n        },\n        \"freight_costs\": {\n          \"value\": \"1366970132.52006\",\n          \"currency\": \"<string,null>\"\n        },\n        \"other_costs\": {\n          \"value\": \"1623.1912\",\n          \"currency\": \"<string,null>\"\n        }\n      },\n      \"id\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"modified_at\": \"<dateTime>\",\n      \"customs_details\": {\n        \"commercial_invoice_number\": \"<string>\",\n        \"shipment_type\": \"commercial_goods\",\n        \"export_type\": \"private\",\n        \"tax_numbers\": {\n          \"sender\": [\n            {\n              \"name\": \"<string,null>\",\n              \"country_code\": \"<string,null>\",\n              \"value\": \"<string,null>\"\n            },\n            {\n              \"name\": \"<string,null>\",\n              \"country_code\": \"<string,null>\",\n              \"value\": \"<string,null>\"\n            }\n          ],\n          \"receiver\": [\n            {\n              \"name\": \"<string,null>\",\n              \"country_code\": \"<string,null>\",\n              \"value\": \"<string,null>\"\n            },\n            {\n              \"name\": \"<string,null>\",\n              \"country_code\": \"<string,null>\",\n              \"value\": \"<string,null>\"\n            }\n          ],\n          \"importer_of_record\": [\n            {\n              \"name\": \"<string,null>\",\n              \"country_code\": \"<string,null>\",\n              \"value\": \"<string,null>\"\n            },\n            {\n              \"name\": \"<string,null>\",\n              \"country_code\": \"<string,null>\",\n              \"value\": \"<string,null>\"\n            }\n          ]\n        }\n      },\n      \"customer_details\": {\n        \"name\": \"<string>\",\n        \"phone_number\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      \"billing_address\": {\n        \"name\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"address_line_1\": \"<string>\",\n        \"house_number\": \"<string>\",\n        \"address_line_2\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"city\": \"<string>\",\n        \"po_box\": \"<string,null>\",\n        \"state_province_code\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"email\": \"<email>\",\n        \"phone_number\": \"<string>\"\n      },\n      \"shipping_address\": {\n        \"name\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"address_line_1\": \"<string>\",\n        \"house_number\": \"<string>\",\n        \"address_line_2\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"city\": \"<string>\",\n        \"po_box\": \"<string,null>\",\n        \"state_province_code\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"email\": \"<email>\",\n        \"phone_number\": \"<string>\"\n      },\n      \"shipping_details\": {\n        \"is_local_pickup\": \"<boolean,null>\",\n        \"delivery_indicator\": \"<string>\",\n        \"measurement\": {\n          \"dimension\": {\n            \"length\": \"<number>\",\n            \"width\": \"<number>\",\n            \"height\": \"<number>\",\n            \"unit\": \"mm\"\n          },\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"lbs\"\n          },\n          \"volume\": {\n            \"value\": \"<integer>\",\n            \"unit\": \"m3\"\n          }\n        },\n        \"ship_with\": {\n          \"type\": \"shipping_option_code\",\n          \"properties\": {\n            \"shipping_option_code\": \"<string,null>\",\n            \"contract_id\": \"<integer,null>\"\n          }\n        }\n      },\n      \"service_point_details\": {\n        \"id\": \"<string>\",\n        \"post_number\": \"<string>\",\n        \"latitude\": \"<string>\",\n        \"longitude\": \"<string>\",\n        \"type\": \"<string>\",\n        \"extra_data\": {\n          \"anim_1\": true,\n          \"laborum_cd\": true\n        }\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:16:26.000Z",
+              "updatedAt": "2026-06-05T15:16:26.000Z",
+              "uid": "35240-58127a8c-0b76-46a7-b2ef-57376170c02b"
+            },
+            {
+              "id": "ca45a44d-85bf-4734-a274-2972fa251cdd",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders?integration=<integer>&order_number=<string>&order_id=<string>&status=<string>&order_created_at=<date>&order_created_at_min=<date>&order_created_at_max=<date>&order_updated_at=<date>&order_updated_at_min=<date>&order_updated_at_max=<date>&sort=<string>&page_size=100&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter orders by one or more integration IDs. Use a comma separated list, e.g. `integration=41,68,419`.\n\nYou can get your integration IDs from the [Retrieve a list of integrations](/api/v3/integrations/retrieve-a-list-of-integrations) endpoint.",
+                      "key": "integration",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter orders by a specific order number, e.g. `order_number=ORDER_284565`. The filtering is case insensitive.",
+                      "key": "order_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter orders by a specific order id, e.g. `order_id=1896e94b-c01b-4e73-a9e7-57f51c8a4c77`. The filtering is case insensitive.",
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter orders based on their status, e.g. `status=unshipped`. The filtering is case insensitive.",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Find orders that were created on a specific date, e.g. `order_created_at=2023-04-28`.",
+                      "key": "order_created_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were created at or after a specific date, e.g. `order_created_at_min=2023-04-28`.",
+                      "key": "order_created_at_min",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were created at or before a specific date, e.g. `order_created_at_max=2023-04-28`.",
+                      "key": "order_created_at_max",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were updated on a specific date, e.g. `order_updated_at=2023-04-28`.",
+                      "key": "order_updated_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were updated at or after a specific date, e.g. `order_updated_at_min=2023-04-28`.",
+                      "key": "order_updated_at_min",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were updated at or before a specific date, e.g. `order_updated_at_max=2023-04-28`.",
+                      "key": "order_updated_at_max",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Sort the orders in the response by using one or more of the following values:\n - `integration`: Sort by the integration ID of the retrieved orders; to sort in descending order, use `-integration`\n - `order_number`: Sort by the order number of the retrieved orders; to sort in descending order, use `-order_number`.\n - `order_created_at`: Sort by the date of an order creation of the retrieved orders; to sort in descending order, use `-order_created_at`\n - `order_updated_at`: Sort by the date of an order update of the retrieved orders; to sort in descending order, use `-order_updated_at`\n - `pk`: Sort by the ID (autogenerated internal ID) of the retrieved orders; to sort in descending order, use `-pk`\n\nAdditional information about this query:\n - Any valid combination of the above values is supported, e.g. `sort=integration,-order_created_at`. \n - In case of conflicting `sort` values, e.g. `/?sort=integration,-integration`, the conflicting value will be ignored.\n - If the `sort` query parameter is not set, the sorting of the retrieved orders will default to `-pk`.\n - If an unsupported `sort` value is provided, the results will be sorted by the default (`-pk`).",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to be returned per page",
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "description": "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n  - `o`: Offset\n  - `r`: Reverse\n  - `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`.",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"dolor Lorem labore\",\n      \"code\": -17948358,\n      \"detail\": -69123272\n    },\n    {\n      \"status\": \"qui sit\",\n      \"code\": true,\n      \"detail\": -98444978.4694514\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:16:26.000Z",
+              "updatedAt": "2026-06-05T15:16:26.000Z",
+              "uid": "35240-ca45a44d-85bf-4734-a274-2972fa251cdd"
+            },
+            {
+              "id": "f462c68f-4d41-4efd-a8bc-e38db99d94fa",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/orders?integration=<integer>&order_number=<string>&order_id=<string>&status=<string>&order_created_at=<date>&order_created_at_min=<date>&order_created_at_max=<date>&order_updated_at=<date>&order_updated_at_min=<date>&order_updated_at_max=<date>&sort=<string>&page_size=100&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter orders by one or more integration IDs. Use a comma separated list, e.g. `integration=41,68,419`.\n\nYou can get your integration IDs from the [Retrieve a list of integrations](/api/v3/integrations/retrieve-a-list-of-integrations) endpoint.",
+                      "key": "integration",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Filter orders by a specific order number, e.g. `order_number=ORDER_284565`. The filtering is case insensitive.",
+                      "key": "order_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter orders by a specific order id, e.g. `order_id=1896e94b-c01b-4e73-a9e7-57f51c8a4c77`. The filtering is case insensitive.",
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter orders based on their status, e.g. `status=unshipped`. The filtering is case insensitive.",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Find orders that were created on a specific date, e.g. `order_created_at=2023-04-28`.",
+                      "key": "order_created_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were created at or after a specific date, e.g. `order_created_at_min=2023-04-28`.",
+                      "key": "order_created_at_min",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were created at or before a specific date, e.g. `order_created_at_max=2023-04-28`.",
+                      "key": "order_created_at_max",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were updated on a specific date, e.g. `order_updated_at=2023-04-28`.",
+                      "key": "order_updated_at",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were updated at or after a specific date, e.g. `order_updated_at_min=2023-04-28`.",
+                      "key": "order_updated_at_min",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Find orders that were updated at or before a specific date, e.g. `order_updated_at_max=2023-04-28`.",
+                      "key": "order_updated_at_max",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Sort the orders in the response by using one or more of the following values:\n - `integration`: Sort by the integration ID of the retrieved orders; to sort in descending order, use `-integration`\n - `order_number`: Sort by the order number of the retrieved orders; to sort in descending order, use `-order_number`.\n - `order_created_at`: Sort by the date of an order creation of the retrieved orders; to sort in descending order, use `-order_created_at`\n - `order_updated_at`: Sort by the date of an order update of the retrieved orders; to sort in descending order, use `-order_updated_at`\n - `pk`: Sort by the ID (autogenerated internal ID) of the retrieved orders; to sort in descending order, use `-pk`\n\nAdditional information about this query:\n - Any valid combination of the above values is supported, e.g. `sort=integration,-order_created_at`. \n - In case of conflicting `sort` values, e.g. `/?sort=integration,-integration`, the conflicting value will be ignored.\n - If the `sort` query parameter is not set, the sorting of the retrieved orders will default to `-pk`.\n - If an unsupported `sort` value is provided, the results will be sorted by the default (`-pk`).",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of results to be returned per page",
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "description": "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n  - `o`: Offset\n  - `r`: Reverse\n  - `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`.",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"dolor Lorem labore\",\n      \"code\": -17948358,\n      \"detail\": -69123272\n    },\n    {\n      \"status\": \"qui sit\",\n      \"code\": true,\n      \"detail\": -98444978.4694514\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:16:26.000Z",
+              "updatedAt": "2026-06-05T15:16:26.000Z",
+              "uid": "35240-f462c68f-4d41-4efd-a8bc-e38db99d94fa"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:26.000Z",
+          "updatedAt": "2026-06-05T15:16:26.000Z",
+          "uid": "35240-28f20c5c-aea6-4c22-b67b-80b245acc162"
+        }
+      ],
+      "id": "65d6a3eb-8665-4004-bd90-fbef54a0d8fa",
+      "createdAt": "2026-06-05T15:16:26.000Z",
+      "updatedAt": "2026-06-05T15:16:26.000Z",
+      "uid": "35240-65d6a3eb-8665-4004-bd90-fbef54a0d8fa"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://panel.sendcloud.sc/api/v3"
+    }
+  ]
+}

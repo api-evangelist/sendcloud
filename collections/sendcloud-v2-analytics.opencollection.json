@@ -1,0 +1,560 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Analytics",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Parcels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve parcel-insights series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/insights/parcels/series",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "period start date"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "period end date"
+              },
+              {
+                "name": "carrier_code",
+                "value": "",
+                "type": "query",
+                "description": "filter by carrier"
+              },
+              {
+                "name": "from_country",
+                "value": "",
+                "type": "query",
+                "description": "origin country"
+              },
+              {
+                "name": "to_country",
+                "value": "",
+                "type": "query",
+                "description": "destination country"
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "query",
+                "description": "integrations"
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "the size of one point"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "incoming or outgoing"
+              },
+              {
+                "name": "brand_id",
+                "value": "",
+                "type": "query",
+                "description": "filtering by brand id"
+              },
+              {
+                "name": "product_name",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product name"
+              },
+              {
+                "name": "product_sku",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product sku"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns data about parcels as a series, e.g. the number of parcels per day/month/year over a specified period."
+        },
+        {
+          "info": {
+            "name": "Retrieve parcel-insights buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/insights/parcels/buckets",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "period start date (announced)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "period end date (announced)"
+              },
+              {
+                "name": "carrier_code",
+                "value": "",
+                "type": "query",
+                "description": "filter by carriers"
+              },
+              {
+                "name": "from_country",
+                "value": "",
+                "type": "query",
+                "description": "origin country code"
+              },
+              {
+                "name": "to_country",
+                "value": "",
+                "type": "query",
+                "description": "destination country code"
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "query",
+                "description": "integrations"
+              },
+              {
+                "name": "group_by",
+                "value": "",
+                "type": "query",
+                "description": "group by category"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "number of the buckets"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "incoming or outgoing"
+              },
+              {
+                "name": "brand_id",
+                "value": "",
+                "type": "query",
+                "description": "filtering by brand id"
+              },
+              {
+                "name": "product_name",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product name"
+              },
+              {
+                "name": "product_sku",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product sku"
+              }
+            ]
+          },
+          "docs": "Returns data about parcels as buckets. Buckets should be grouped by any category, for example by country."
+        },
+        {
+          "info": {
+            "name": "Retrieve parcels counts summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/insights/parcels/counts-summary",
+            "params": [
+              {
+                "name": "carrier_code",
+                "value": "",
+                "type": "query",
+                "description": "filter by carrier"
+              },
+              {
+                "name": "from_country",
+                "value": "",
+                "type": "query",
+                "description": "origin country"
+              },
+              {
+                "name": "to_country",
+                "value": "",
+                "type": "query",
+                "description": "destination country"
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "query",
+                "description": "integrations"
+              },
+              {
+                "name": "last_days",
+                "value": "",
+                "type": "query",
+                "description": "value for the last number of days"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "incoming or outgoing parcels"
+              },
+              {
+                "name": "brand_id",
+                "value": "",
+                "type": "query",
+                "description": "filtering by brand id"
+              },
+              {
+                "name": "product_name",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product name"
+              },
+              {
+                "name": "product_sku",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product sku"
+              }
+            ]
+          },
+          "docs": "Returns number of parcels for the last number of days selected."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve product-insights series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/insights/products/series",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "period start date"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "period end date"
+              },
+              {
+                "name": "carrier_code",
+                "value": "",
+                "type": "query",
+                "description": "filter by carrier"
+              },
+              {
+                "name": "from_country",
+                "value": "",
+                "type": "query",
+                "description": "origin country"
+              },
+              {
+                "name": "to_country",
+                "value": "",
+                "type": "query",
+                "description": "destination country"
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "query",
+                "description": "integrations"
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "the size of one point"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "incoming or outgoing"
+              },
+              {
+                "name": "brand_id",
+                "value": "",
+                "type": "query",
+                "description": "filtering by brand id"
+              },
+              {
+                "name": "product_name",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product name"
+              },
+              {
+                "name": "product_sku",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product sku"
+              }
+            ]
+          },
+          "docs": "Returns data about products as a series, e.g. the number of products per day/month/year over a specified period."
+        },
+        {
+          "info": {
+            "name": "Retrieve product-insights buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/insights/products/buckets",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "period start date (announced)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "period end date (announced)"
+              },
+              {
+                "name": "carrier_code",
+                "value": "",
+                "type": "query",
+                "description": "filter by carriers"
+              },
+              {
+                "name": "from_country",
+                "value": "",
+                "type": "query",
+                "description": "origin country code"
+              },
+              {
+                "name": "to_country",
+                "value": "",
+                "type": "query",
+                "description": "destination country code"
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "query",
+                "description": "integrations"
+              },
+              {
+                "name": "group_by",
+                "value": "",
+                "type": "query",
+                "description": "group by category"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "number of the buckets"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "incoming or outgoing"
+              },
+              {
+                "name": "brand_id",
+                "value": "",
+                "type": "query",
+                "description": "filtering by brand id"
+              },
+              {
+                "name": "product_name",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product name"
+              },
+              {
+                "name": "product_sku",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product sku"
+              }
+            ]
+          },
+          "docs": "Returns data about products as buckets. Buckets should be grouped by any category, for example by country."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transit times",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve carrier transit times",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/insights/carriers/transit-times",
+            "params": [
+              {
+                "name": "carrier_code",
+                "value": "",
+                "type": "query",
+                "description": "selection of carriers"
+              },
+              {
+                "name": "from_country",
+                "value": "",
+                "type": "query",
+                "description": "origin country"
+              },
+              {
+                "name": "to_country",
+                "value": "",
+                "type": "query",
+                "description": "destination country"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "first delivery start date"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "first delivery end date"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the average transit time of a parcel per carrier.\nYou can filter the results by origin and destination country, as well as by start and end dates."
+        },
+        {
+          "info": {
+            "name": "Retrieve shipping method transit times",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/insights/shipping-methods/transit-times",
+            "params": [
+              {
+                "name": "shipping_method_code",
+                "value": "",
+                "type": "query",
+                "description": "selection of shipping methods"
+              },
+              {
+                "name": "from_country",
+                "value": "",
+                "type": "query",
+                "description": "origin country"
+              },
+              {
+                "name": "to_country",
+                "value": "",
+                "type": "query",
+                "description": "destination country"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "first delivery start date"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "first delivery end date"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the average transit time of a parcel per shipping method and carrier.\nYou can filter the results by origin and destination country, as well as start and end dates."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User Carriers and Shipping Methods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all shipping methods used by user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/analytics/shipping-methods"
+          },
+          "docs": "Returns a list of all shipping methods ever used by a user."
+        },
+        {
+          "info": {
+            "name": "Retrieve all carriers used by user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/analytics/carriers"
+          },
+          "docs": "Returns a list of all carriers ever used by a user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

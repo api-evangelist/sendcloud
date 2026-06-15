@@ -1,0 +1,931 @@
+{
+  "item": [
+    {
+      "id": "ec9c07f5-0afb-45f1-bc61-977e9109fb8e",
+      "name": "Service Points",
+      "description": {
+        "content": "Service Points API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f30e856e-ecb6-4a04-8c51-13ca7278b262",
+          "name": "Retrieve a list of service points",
+          "request": {
+            "name": "Retrieve a list of service points",
+            "description": {
+              "content": "Find service points for selected carriers in a given area.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service-points"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>",
+                  "description": "(Required) Country to retrieve service points for, as an ISO 3166-1 alpha-2 code."
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "Carrier codes to filter results by."
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "Carrier codes to filter results by."
+                },
+                {
+                  "disabled": false,
+                  "key": "use_integration_carriers",
+                  "value": "<boolean>",
+                  "description": "Filters service points to carriers enabled in the authenticated integration's settings."
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "Free-text address used as the reference point for the search."
+                },
+                {
+                  "disabled": false,
+                  "key": "address_street",
+                  "value": "<string>",
+                  "description": "Street of the reference address."
+                },
+                {
+                  "disabled": false,
+                  "key": "address_house_number",
+                  "value": "<string>",
+                  "description": "House number of the reference address."
+                },
+                {
+                  "disabled": false,
+                  "key": "address_postal_code",
+                  "value": "<string>",
+                  "description": "Postal code of the reference address."
+                },
+                {
+                  "disabled": false,
+                  "key": "address_city",
+                  "value": "<string>",
+                  "description": "City of the reference address."
+                },
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<double>",
+                  "description": "Latitude of the reference point."
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<double>",
+                  "description": "Longitude of the reference point."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne_latitude",
+                  "value": "<double>",
+                  "description": "Latitude of the north-east corner of the bounding box."
+                },
+                {
+                  "disabled": false,
+                  "key": "ne_longitude",
+                  "value": "<double>",
+                  "description": "Longitude of the north-east corner of the bounding box."
+                },
+                {
+                  "disabled": false,
+                  "key": "sw_latitude",
+                  "value": "<double>",
+                  "description": "Latitude of the south-west corner of the bounding box."
+                },
+                {
+                  "disabled": false,
+                  "key": "sw_longitude",
+                  "value": "<double>",
+                  "description": "Longitude of the south-west corner of the bounding box."
+                },
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "<integer>",
+                  "description": "Search radius in meters from the reference point."
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_service_point_id",
+                  "value": "<string>",
+                  "description": "Carrier-specific identifiers of the service points to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_service_point_id",
+                  "value": "<string>",
+                  "description": "Carrier-specific identifiers of the service points to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_shop_type",
+                  "value": "<string>",
+                  "description": "Filters results by carrier-specific shop type."
+                },
+                {
+                  "disabled": false,
+                  "key": "general_shop_type",
+                  "value": "<string>",
+                  "description": "Filters results by general shop type. Use this to narrow results without having to handle each carrier's specific shop types separately."
+                },
+                {
+                  "disabled": false,
+                  "key": "general_shop_type",
+                  "value": "<string>",
+                  "description": "Filters results by general shop type. Use this to narrow results without having to handle each carrier's specific shop types separately."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of service points to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f1fa5921-8d92-40e1-ae97-91bb92d10828",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service-points"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "dhl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "use_integration_carriers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "Stadhuisplein 10, Eindhoven"
+                    },
+                    {
+                      "key": "address_street",
+                      "value": "Stadhuisplein"
+                    },
+                    {
+                      "key": "address_house_number",
+                      "value": "10"
+                    },
+                    {
+                      "key": "address_postal_code",
+                      "value": "5611 EM"
+                    },
+                    {
+                      "key": "address_city",
+                      "value": "Eindhoven"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "51.435046"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "5.479507"
+                    },
+                    {
+                      "key": "ne_latitude",
+                      "value": "51.49"
+                    },
+                    {
+                      "key": "ne_longitude",
+                      "value": "5.57"
+                    },
+                    {
+                      "key": "sw_latitude",
+                      "value": "51.38"
+                    },
+                    {
+                      "key": "sw_longitude",
+                      "value": "5.36"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "carrier_service_point_id",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "carrier_service_point_id",
+                      "value": "NL98765"
+                    },
+                    {
+                      "key": "carrier_shop_type",
+                      "value": "packStation"
+                    },
+                    {
+                      "key": "general_shop_type",
+                      "value": "servicepoint"
+                    },
+                    {
+                      "key": "general_shop_type",
+                      "value": "locker"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"results\": [\n      {\n        \"id\": 1000001,\n        \"name\": \"Stadhuisplein Parcel Shop\",\n        \"carrier\": {\n          \"code\": \"dhl\",\n          \"name\": \"DHL\",\n          \"logo_url\": \"https://cdn.sendcloud.com/global-media/dhl/img/logo.svg\",\n          \"icon_url\": \"https://cdn.sendcloud.com/global-media/dhl/img/icon.svg\"\n        },\n        \"carrier_service_point_id\": \"NL-00001\",\n        \"carrier_shop_type\": \"paketshop\",\n        \"general_shop_type\": \"servicepoint\",\n        \"address\": {\n          \"street\": \"Stadhuisplein\",\n          \"house_number\": \"1\",\n          \"postal_code\": \"5611 EM\",\n          \"city\": \"Eindhoven\",\n          \"country_code\": \"NL\"\n        },\n        \"position\": {\n          \"latitude\": 51.438022,\n          \"longitude\": 5.478543\n        },\n        \"contact\": {\n          \"email\": \"\",\n          \"phone\": \"\"\n        },\n        \"opening_times\": {\n          \"monday\": [\n            {\n              \"start_time\": \"09:00\",\n              \"end_time\": \"17:00\"\n            }\n          ],\n          \"tuesday\": [\n            {\n              \"start_time\": \"09:00\",\n              \"end_time\": \"17:00\"\n            }\n          ],\n          \"wednesday\": [\n            {\n              \"start_time\": \"09:00\",\n              \"end_time\": \"17:00\"\n            }\n          ],\n          \"thursday\": [\n            {\n              \"start_time\": \"09:00\",\n              \"end_time\": \"17:00\"\n            }\n          ],\n          \"friday\": [\n            {\n              \"start_time\": \"09:00\",\n              \"end_time\": \"17:00\"\n            }\n          ],\n          \"saturday\": null,\n          \"sunday\": null\n        },\n        \"is_open_tomorrow\": true,\n        \"next_open_at\": \"2026-03-11T09:00:00+01:00\",\n        \"is_expired\": false,\n        \"distance\": 85\n      },\n      {\n        \"id\": 1000002,\n        \"name\": \"Stationsplein Parcel Locker\",\n        \"carrier\": {\n          \"code\": \"postnl\",\n          \"name\": \"PostNL\",\n          \"logo_url\": \"https://cdn.sendcloud.com/global-media/postnl/img/logo.svg\",\n          \"icon_url\": \"https://cdn.sendcloud.com/global-media/postnl/img/icon.svg\"\n        },\n        \"carrier_service_point_id\": \"NL-00002\",\n        \"carrier_shop_type\": \"pakketautomaat\",\n        \"general_shop_type\": \"locker\",\n        \"address\": {\n          \"street\": \"Stationsplein\",\n          \"house_number\": \"1\",\n          \"postal_code\": \"5611 AC\",\n          \"city\": \"Eindhoven\",\n          \"country_code\": \"NL\"\n        },\n        \"position\": {\n          \"latitude\": 51.443218,\n          \"longitude\": 5.4816\n        },\n        \"contact\": {\n          \"email\": \"\",\n          \"phone\": \"\"\n        },\n        \"opening_times\": {\n          \"monday\": [\n            {\n              \"start_time\": \"10:00\",\n              \"end_time\": \"21:00\"\n            }\n          ],\n          \"tuesday\": [\n            {\n              \"start_time\": \"10:00\",\n              \"end_time\": \"21:00\"\n            }\n          ],\n          \"wednesday\": [\n            {\n              \"start_time\": \"10:00\",\n              \"end_time\": \"21:00\"\n            }\n          ],\n          \"thursday\": null,\n          \"friday\": [\n            {\n              \"start_time\": \"10:00\",\n              \"end_time\": \"21:00\"\n            }\n          ],\n          \"saturday\": [\n            {\n              \"start_time\": \"10:00\",\n              \"end_time\": \"21:00\"\n            }\n          ],\n          \"sunday\": null\n        },\n        \"is_open_tomorrow\": false,\n        \"next_open_at\": \"2026-03-13T10:00:00+01:00\",\n        \"is_expired\": false,\n        \"distance\": 919\n      }\n    ],\n    \"geocoding\": {\n      \"status\": \"matched\",\n      \"precision\": \"street\",\n      \"formatted_address\": \"Stadhuisplein 10, 5611 EM Eindhoven, Nederland\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c304f5c-2e62-4f09-8718-cc0c66d4c13a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service-points"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "dhl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "use_integration_carriers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "Stadhuisplein 10, Eindhoven"
+                    },
+                    {
+                      "key": "address_street",
+                      "value": "Stadhuisplein"
+                    },
+                    {
+                      "key": "address_house_number",
+                      "value": "10"
+                    },
+                    {
+                      "key": "address_postal_code",
+                      "value": "5611 EM"
+                    },
+                    {
+                      "key": "address_city",
+                      "value": "Eindhoven"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "51.435046"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "5.479507"
+                    },
+                    {
+                      "key": "ne_latitude",
+                      "value": "51.49"
+                    },
+                    {
+                      "key": "ne_longitude",
+                      "value": "5.57"
+                    },
+                    {
+                      "key": "sw_latitude",
+                      "value": "51.38"
+                    },
+                    {
+                      "key": "sw_longitude",
+                      "value": "5.36"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "carrier_service_point_id",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "carrier_service_point_id",
+                      "value": "NL98765"
+                    },
+                    {
+                      "key": "carrier_shop_type",
+                      "value": "packStation"
+                    },
+                    {
+                      "key": "general_shop_type",
+                      "value": "servicepoint"
+                    },
+                    {
+                      "key": "general_shop_type",
+                      "value": "locker"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"400\",\n      \"code\": \"required\",\n      \"detail\": \"Field required\",\n      \"source\": {\n        \"parameter\": \"country_code\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "634406cc-a2f7-4d76-afb0-8030cab6a295",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service-points"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "dhl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "use_integration_carriers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "Stadhuisplein 10, Eindhoven"
+                    },
+                    {
+                      "key": "address_street",
+                      "value": "Stadhuisplein"
+                    },
+                    {
+                      "key": "address_house_number",
+                      "value": "10"
+                    },
+                    {
+                      "key": "address_postal_code",
+                      "value": "5611 EM"
+                    },
+                    {
+                      "key": "address_city",
+                      "value": "Eindhoven"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "51.435046"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "5.479507"
+                    },
+                    {
+                      "key": "ne_latitude",
+                      "value": "51.49"
+                    },
+                    {
+                      "key": "ne_longitude",
+                      "value": "5.57"
+                    },
+                    {
+                      "key": "sw_latitude",
+                      "value": "51.38"
+                    },
+                    {
+                      "key": "sw_longitude",
+                      "value": "5.36"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "carrier_service_point_id",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "carrier_service_point_id",
+                      "value": "NL98765"
+                    },
+                    {
+                      "key": "carrier_shop_type",
+                      "value": "packStation"
+                    },
+                    {
+                      "key": "general_shop_type",
+                      "value": "servicepoint"
+                    },
+                    {
+                      "key": "general_shop_type",
+                      "value": "locker"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"503\",\n      \"code\": null,\n      \"detail\": \"The address could not be resolved at this time. Try again later.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f795559-b85d-4a64-82ac-d187532252ca",
+          "name": "Retrieve a service point",
+          "request": {
+            "name": "Retrieve a service point",
+            "description": {
+              "content": "Retrieve a single service point.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service-points",
+                ":service_point_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "service_point_id",
+                  "description": "(Required) Unique Sendcloud identifier of the service point."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b299bb4f-cfe1-4443-91de-5bab23d32bed",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service-points",
+                    ":service_point_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "service_point_id",
+                      "description": "(Required) Unique Sendcloud identifier of the service point."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 1000002,\n    \"name\": \"Stationsplein Parcel Locker\",\n    \"carrier\": {\n      \"code\": \"postnl\",\n      \"name\": \"PostNL\",\n      \"logo_url\": \"https://cdn.sendcloud.com/global-media/postnl/img/logo.svg\",\n      \"icon_url\": \"https://cdn.sendcloud.com/global-media/postnl/img/icon.svg\"\n    },\n    \"carrier_service_point_id\": \"NL-00002\",\n    \"carrier_shop_type\": \"pakketautomaat\",\n    \"general_shop_type\": \"locker\",\n    \"address\": {\n      \"street\": \"Stationsplein\",\n      \"house_number\": \"1\",\n      \"postal_code\": \"5611 AC\",\n      \"city\": \"Eindhoven\",\n      \"country_code\": \"NL\"\n    },\n    \"position\": {\n      \"latitude\": 51.443218,\n      \"longitude\": 5.4816\n    },\n    \"contact\": {\n      \"email\": \"\",\n      \"phone\": \"\"\n    },\n    \"opening_times\": {\n      \"monday\": [\n        {\n          \"start_time\": \"10:00\",\n          \"end_time\": \"21:00\"\n        }\n      ],\n      \"tuesday\": [\n        {\n          \"start_time\": \"10:00\",\n          \"end_time\": \"21:00\"\n        }\n      ],\n      \"wednesday\": [\n        {\n          \"start_time\": \"10:00\",\n          \"end_time\": \"21:00\"\n        }\n      ],\n      \"thursday\": null,\n      \"friday\": [\n        {\n          \"start_time\": \"10:00\",\n          \"end_time\": \"21:00\"\n        }\n      ],\n      \"saturday\": [\n        {\n          \"start_time\": \"10:00\",\n          \"end_time\": \"21:00\"\n        }\n      ],\n      \"sunday\": null\n    },\n    \"is_open_tomorrow\": false,\n    \"next_open_at\": \"2026-03-13T10:00:00+01:00\",\n    \"is_expired\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fc47963-f572-4919-9b71-db03faf31393",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service-points",
+                    ":service_point_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "service_point_id",
+                      "description": "(Required) Unique Sendcloud identifier of the service point."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"404\",\n      \"code\": \"not_found\",\n      \"detail\": \"The service point could not be found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68b3c855-024e-4abe-b404-d078d3c67e4b",
+          "name": "Check availability of a service point",
+          "request": {
+            "name": "Check availability of a service point",
+            "description": {
+              "content": "Check whether a service point is currently available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service-points",
+                ":service_point_id",
+                "check-availability"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "service_point_id",
+                  "description": "(Required) Unique Sendcloud identifier of the service point."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5338ce96-12ef-4ca6-822b-3e4295110652",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service-points",
+                    ":service_point_id",
+                    "check-availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "service_point_id",
+                      "description": "(Required) Unique Sendcloud identifier of the service point."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"is_available\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7577869-8df0-4e84-be20-949d5e966650",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service-points",
+                    ":service_point_id",
+                    "check-availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "service_point_id",
+                      "description": "(Required) Unique Sendcloud identifier of the service point."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"404\",\n      \"code\": \"not_found\",\n      \"detail\": \"The service point could not be found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4035b5a7-fc75-47f0-8a62-470274e215b3",
+    "name": "Service Points API [BETA]",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Search service points to display and select in checkout and delivery flows.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

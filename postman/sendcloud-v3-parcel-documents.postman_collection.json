@@ -1,0 +1,591 @@
+{
+  "info": {
+    "_postman_id": "f0371c78-618d-4ed6-bc6b-47f75e1c9e70",
+    "name": "Parcel documents API",
+    "description": "For international shipments, customs documentation is generated alongside the shipping label. These documents can be downloaded separately from the shipping label in various formats and resolutions via this API.\n\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:32.000Z",
+    "updatedAt": "2026-06-05T15:16:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f0371c78-618d-4ed6-bc6b-47f75e1c9e70"
+  },
+  "item": [
+    {
+      "name": "parcels",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "documents",
+              "item": [
+                {
+                  "name": "{type}",
+                  "item": [
+                    {
+                      "name": "Retrieve a parcel document",
+                      "id": "cf755b93-7591-4462-88ff-3da12cc19592",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "basic",
+                          "basic": [
+                            {
+                              "key": "username",
+                              "value": "{{basicAuthUsername}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "password",
+                              "value": "{{basicAuthPassword}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/pdf"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/parcels/:id/documents/:type?dpi=72&paper_size=A5",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "parcels",
+                            ":id",
+                            "documents",
+                            ":type"
+                          ],
+                          "query": [
+                            {
+                              "description": "DPI, or dots per inch, refers to the printing resolution of your shipping labels. Labels must be printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\n\nUse the following table to find the appropriate DPI for each file format:\n\n| File format | Default DPI | Valid DPI |\n|-------------|-------------|-----------|\n| pdf         | 72          | 72        |\n| png         | 300         | 150, 300  |\n\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n",
+                              "key": "dpi",
+                              "value": "72"
+                            },
+                            {
+                              "description": "The paper size of the document you would like to retrieve. Paper size can be one of:\n\n- A4\n- A5\n- A6\n\nOmitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.\n",
+                              "key": "paper_size",
+                              "value": "A5"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "3096d68d-8452-4933-a3d6-99fdffdae8cf",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) Identifier of the parcel which you want to retrieve a document from"
+                            },
+                            {
+                              "id": "14511447-2090-4d6e-9bb3-12dd6e055eee",
+                              "key": "type",
+                              "value": "air-waybill",
+                              "description": "(Required) Document type you want to retrieve."
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a specific document for a given parcel, and download it in your preferred format and resolution."
+                      },
+                      "response": [
+                        {
+                          "id": "62f649ce-e964-4db1-a457-4520cea6bc05",
+                          "name": "Requested parcel document file",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/pdf"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/parcels/:id/documents/:type?dpi=72&paper_size=A5",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "parcels",
+                                ":id",
+                                "documents",
+                                ":type"
+                              ],
+                              "query": [
+                                {
+                                  "description": "DPI, or dots per inch, refers to the printing resolution of your shipping labels. Labels must be printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\n\nUse the following table to find the appropriate DPI for each file format:\n\n| File format | Default DPI | Valid DPI |\n|-------------|-------------|-----------|\n| pdf         | 72          | 72        |\n| png         | 300         | 150, 300  |\n\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n",
+                                  "key": "dpi",
+                                  "value": "72"
+                                },
+                                {
+                                  "description": "The paper size of the document you would like to retrieve. Paper size can be one of:\n\n- A4\n- A5\n- A6\n\nOmitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.\n",
+                                  "key": "paper_size",
+                                  "value": "A5"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "type"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/pdf"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<binary>",
+                          "createdAt": "2026-06-05T15:16:32.000Z",
+                          "updatedAt": "2026-06-05T15:16:32.000Z",
+                          "uid": "35240-62f649ce-e964-4db1-a457-4520cea6bc05"
+                        },
+                        {
+                          "id": "62a0e764-ca0a-4952-bfaf-c31d0ac25c4a",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/parcels/:id/documents/:type?dpi=72&paper_size=A5",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "parcels",
+                                ":id",
+                                "documents",
+                                ":type"
+                              ],
+                              "query": [
+                                {
+                                  "description": "DPI, or dots per inch, refers to the printing resolution of your shipping labels. Labels must be printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\n\nUse the following table to find the appropriate DPI for each file format:\n\n| File format | Default DPI | Valid DPI |\n|-------------|-------------|-----------|\n| pdf         | 72          | 72        |\n| png         | 300         | 150, 300  |\n\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n",
+                                  "key": "dpi",
+                                  "value": "72"
+                                },
+                                {
+                                  "description": "The paper size of the document you would like to retrieve. Paper size can be one of:\n\n- A4\n- A5\n- A6\n\nOmitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.\n",
+                                  "key": "paper_size",
+                                  "value": "A5"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "type"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-06-05T15:16:32.000Z",
+                          "updatedAt": "2026-06-05T15:16:32.000Z",
+                          "uid": "35240-62a0e764-ca0a-4952-bfaf-c31d0ac25c4a"
+                        },
+                        {
+                          "id": "a77e575a-dff1-49fa-8dc3-3c7c13bbd972",
+                          "name": "Document type requested is not available for the parcel",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/parcels/:id/documents/:type?dpi=72&paper_size=A5",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "parcels",
+                                ":id",
+                                "documents",
+                                ":type"
+                              ],
+                              "query": [
+                                {
+                                  "description": "DPI, or dots per inch, refers to the printing resolution of your shipping labels. Labels must be printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\n\nUse the following table to find the appropriate DPI for each file format:\n\n| File format | Default DPI | Valid DPI |\n|-------------|-------------|-----------|\n| pdf         | 72          | 72        |\n| png         | 300         | 150, 300  |\n\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n",
+                                  "key": "dpi",
+                                  "value": "72"
+                                },
+                                {
+                                  "description": "The paper size of the document you would like to retrieve. Paper size can be one of:\n\n- A4\n- A5\n- A6\n\nOmitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.\n",
+                                  "key": "paper_size",
+                                  "value": "A5"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "type"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-06-05T15:16:32.000Z",
+                          "updatedAt": "2026-06-05T15:16:32.000Z",
+                          "uid": "35240-a77e575a-dff1-49fa-8dc3-3c7c13bbd972"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:16:32.000Z",
+                      "updatedAt": "2026-06-05T15:16:32.000Z",
+                      "uid": "35240-cf755b93-7591-4462-88ff-3da12cc19592"
+                    }
+                  ],
+                  "id": "565fa024-c365-4f72-b2c3-dc57c3432cc8",
+                  "createdAt": "2026-06-05T15:16:32.000Z",
+                  "updatedAt": "2026-06-05T15:16:32.000Z",
+                  "uid": "35240-565fa024-c365-4f72-b2c3-dc57c3432cc8"
+                }
+              ],
+              "id": "be49790e-735b-473a-8cc3-48c999ac87d0",
+              "createdAt": "2026-06-05T15:16:32.000Z",
+              "updatedAt": "2026-06-05T15:16:32.000Z",
+              "uid": "35240-be49790e-735b-473a-8cc3-48c999ac87d0"
+            }
+          ],
+          "id": "7ff0c03f-b90d-4ff9-9370-b32ac42c2696",
+          "createdAt": "2026-06-05T15:16:32.000Z",
+          "updatedAt": "2026-06-05T15:16:32.000Z",
+          "uid": "35240-7ff0c03f-b90d-4ff9-9370-b32ac42c2696"
+        }
+      ],
+      "id": "3b5df3e3-fc75-424f-ae56-64385ab2eae8",
+      "createdAt": "2026-06-05T15:16:32.000Z",
+      "updatedAt": "2026-06-05T15:16:32.000Z",
+      "uid": "35240-3b5df3e3-fc75-424f-ae56-64385ab2eae8"
+    },
+    {
+      "name": "parcel-documents",
+      "item": [
+        {
+          "name": "{type}",
+          "item": [
+            {
+              "name": "Retrieve multiple parcel documents",
+              "id": "aa5d3286-c324-4917-989d-b0f5386df0aa",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/parcel-documents/:type?parcels=<integer>&paper_size=A5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "parcel-documents",
+                    ":type"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Parcels for which you want to retrieve the documents",
+                      "key": "parcels",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The paper size of the document you would like to retrieve. Paper size can be one of:\n\n- A4\n- A5\n- A6\n\nOmitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.\n",
+                      "key": "paper_size",
+                      "value": "A5"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "df2afa58-e015-4aee-a503-005d0ecd5dc9",
+                      "key": "type",
+                      "value": "air-waybill",
+                      "description": "(Required) Document type you want to retrieve."
+                    }
+                  ]
+                },
+                "description": "Download multiple parcel documents of the same type in bulk."
+              },
+              "response": [
+                {
+                  "id": "742dab37-4271-4517-9e60-2f04e019faea",
+                  "name": "Requested parcel document files of a specific type.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/pdf"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/parcel-documents/:type?parcels=<integer>&paper_size=A5",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "parcel-documents",
+                        ":type"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Parcels for which you want to retrieve the documents",
+                          "key": "parcels",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The paper size of the document you would like to retrieve. Paper size can be one of:\n\n- A4\n- A5\n- A6\n\nOmitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.\n",
+                          "key": "paper_size",
+                          "value": "A5"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/pdf"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<binary>",
+                  "createdAt": "2026-06-05T15:16:32.000Z",
+                  "updatedAt": "2026-06-05T15:16:32.000Z",
+                  "uid": "35240-742dab37-4271-4517-9e60-2f04e019faea"
+                },
+                {
+                  "id": "44a6e251-a746-4630-83bd-d73aaf8bf49b",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/parcel-documents/:type?parcels=<integer>&paper_size=A5",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "parcel-documents",
+                        ":type"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Parcels for which you want to retrieve the documents",
+                          "key": "parcels",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The paper size of the document you would like to retrieve. Paper size can be one of:\n\n- A4\n- A5\n- A6\n\nOmitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.\n",
+                          "key": "paper_size",
+                          "value": "A5"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-06-05T15:16:32.000Z",
+                  "updatedAt": "2026-06-05T15:16:32.000Z",
+                  "uid": "35240-44a6e251-a746-4630-83bd-d73aaf8bf49b"
+                },
+                {
+                  "id": "0d5e6acc-4e0c-4576-89bb-6bd74350ec1f",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/parcel-documents/:type?parcels=<integer>&paper_size=A5",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "parcel-documents",
+                        ":type"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Parcels for which you want to retrieve the documents",
+                          "key": "parcels",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The paper size of the document you would like to retrieve. Paper size can be one of:\n\n- A4\n- A5\n- A6\n\nOmitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.\n",
+                          "key": "paper_size",
+                          "value": "A5"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "type"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-06-05T15:16:32.000Z",
+                  "updatedAt": "2026-06-05T15:16:32.000Z",
+                  "uid": "35240-0d5e6acc-4e0c-4576-89bb-6bd74350ec1f"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:32.000Z",
+              "updatedAt": "2026-06-05T15:16:32.000Z",
+              "uid": "35240-aa5d3286-c324-4917-989d-b0f5386df0aa"
+            }
+          ],
+          "id": "67e01c80-77b0-4c70-b0eb-852e05fb66b9",
+          "createdAt": "2026-06-05T15:16:32.000Z",
+          "updatedAt": "2026-06-05T15:16:32.000Z",
+          "uid": "35240-67e01c80-77b0-4c70-b0eb-852e05fb66b9"
+        }
+      ],
+      "id": "5486db4d-d8d8-4c4e-8112-aade3ff62de3",
+      "createdAt": "2026-06-05T15:16:32.000Z",
+      "updatedAt": "2026-06-05T15:16:32.000Z",
+      "uid": "35240-5486db4d-d8d8-4c4e-8112-aade3ff62de3"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://panel.sendcloud.sc/api/v3"
+    }
+  ]
+}

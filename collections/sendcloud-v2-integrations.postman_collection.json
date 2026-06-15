@@ -1,0 +1,2275 @@
+{
+  "item": [
+    {
+      "id": "d84da374-e756-4a2f-8da5-ac3f937e89b4",
+      "name": "Integrations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e134883a-27fb-4364-927f-daa9503af3d4",
+          "name": "Retrieve a list of integrations",
+          "request": {
+            "name": "Retrieve a list of integrations",
+            "description": {
+              "content": "Retrieve information about all the shop integrations currently connected to your Sendcloud account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ordering",
+                  "value": "<string>",
+                  "description": "Specifies the field used to order the resulting response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ef4803b4-4a75-42a6-97ff-d3ae37947f32",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ordering",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 123,\n    \"shop_name\": \"Integration #1\",\n    \"shop_url\": \"https://example.com\",\n    \"system\": \"api / amazon / magento\",\n    \"failing_since\": \"2019-08-24T14:15:22Z\",\n    \"last_fetch\": \"2019-08-24T14:15:22Z\",\n    \"last_updated_at\": \"2019-08-24T14:15:22Z\",\n    \"service_point_enabled\": true,\n    \"service_point_carriers\": [\n      \"ups\"\n    ],\n    \"webhook_active\": true,\n    \"webhook_url\": \"https://example.com\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f363c7ab-ae8e-41d9-ae91-f6bc73840b11",
+          "name": "Retrieve an integration",
+          "request": {
+            "name": "Retrieve an integration",
+            "description": {
+              "content": "Retrieve information about a specific integration using its `id`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the integration"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "aca92a19-265a-4d4a-8dff-c0c810db6ab9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 123,\n  \"shop_name\": \"Integration #1\",\n  \"shop_url\": \"https://example.com\",\n  \"system\": \"api / amazon / magento\",\n  \"failing_since\": \"2019-08-24T14:15:22Z\",\n  \"last_fetch\": \"2019-08-24T14:15:22Z\",\n  \"last_updated_at\": \"2019-08-24T14:15:22Z\",\n  \"service_point_enabled\": true,\n  \"service_point_carriers\": [\n    \"ups\"\n  ],\n  \"webhook_active\": true,\n  \"webhook_url\": \"https://example.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f96bef8f-f98f-446d-8b08-041427c745bb",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"request\": \"api/v2/integrations/\",\n    \"message\": \"No Integration matches the given query.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9da165f3-45d8-4832-a590-ad093cb4cd4e",
+          "name": "Update an integration",
+          "request": {
+            "name": "Update an integration",
+            "description": {
+              "content": "Update settings for a specific integration using its `id`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the integration"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shop_url\": \"<uri>\",\n  \"service_point_enabled\": \"<boolean>\",\n  \"service_point_carriers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhook_active\": \"<boolean>\",\n  \"webhook_url\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ebdfd77b-9f3d-48f7-8433-abf18fbe93d7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shop_name\": \"Integration #1\",\n  \"shop_url\": \"https://example.com\",\n  \"service_point_enabled\": true,\n  \"service_point_carriers\": [\n    \"ups\"\n  ],\n  \"webhook_active\": true,\n  \"webhook_url\": \"https://example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shop_name\": \"Integration #1\",\n  \"shop_url\": \"https://example.com\",\n  \"last_updated_at\": \"2019-08-24T14:15:22Z\",\n  \"service_point_enabled\": true,\n  \"service_point_carriers\": [\n    \"ups\"\n  ],\n  \"webhook_active\": true,\n  \"webhook_url\": \"https://example.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8095802-3185-4bac-a493-f3d76d635351",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shop_name\": \"Integration #1\",\n  \"shop_url\": \"https://example.com\",\n  \"service_point_enabled\": true,\n  \"service_point_carriers\": [\n    \"ups\"\n  ],\n  \"webhook_active\": true,\n  \"webhook_url\": \"https://example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"request\": \"api/v2/integrations/\",\n    \"message\": \"{'settings': ['webhook_active: This field may not be null.', 'webhook_url: This field may not be null.']}\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5358dfd-ed27-4565-8161-0a5ce84215ac",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shop_name\": \"Integration #1\",\n  \"shop_url\": \"https://example.com\",\n  \"service_point_enabled\": true,\n  \"service_point_carriers\": [\n    \"ups\"\n  ],\n  \"webhook_active\": true,\n  \"webhook_url\": \"https://example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"request\": \"api/v2/integrations/\",\n    \"message\": \"No Integration matches the given query.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b23ad05-a192-4bc4-847b-e72a9d8801ce",
+          "name": "Partially update an integration",
+          "request": {
+            "name": "Partially update an integration",
+            "description": {
+              "content": "Partially update settings for a specific integration using its `id`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the integration"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shop_url\": \"<uri>\",\n  \"service_point_enabled\": \"<boolean>\",\n  \"service_point_carriers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhook_active\": \"<boolean>\",\n  \"webhook_url\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "487e8690-715b-4342-a90a-df7050357194",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shop_name\": \"Integration #1\",\n  \"shop_url\": \"https://example.com\",\n  \"last_updated_at\": \"2019-08-24T14:15:22Z\",\n  \"service_point_enabled\": true,\n  \"service_point_carriers\": [\n    \"ups\"\n  ],\n  \"webhook_active\": true,\n  \"webhook_url\": \"https://example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shop_name\": \"Integration #1\",\n  \"shop_url\": \"https://example.com\",\n  \"last_updated_at\": \"2019-08-24T14:15:22Z\",\n  \"service_point_enabled\": true,\n  \"service_point_carriers\": [\n    \"ups\"\n  ],\n  \"webhook_active\": true,\n  \"webhook_url\": \"https://example.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a96baf4c-be7e-4489-9c33-d10f83bf7f97",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shop_name\": \"Integration #1\",\n  \"shop_url\": \"https://example.com\",\n  \"last_updated_at\": \"2019-08-24T14:15:22Z\",\n  \"service_point_enabled\": true,\n  \"service_point_carriers\": [\n    \"ups\"\n  ],\n  \"webhook_active\": true,\n  \"webhook_url\": \"https://example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"request\": \"api/v2/integrations/\",\n    \"message\": \"{'settings': ['webhook_active: This field may not be null.', 'webhook_url: This field may not be null.']}\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4824fb96-3a25-495c-9742-0990a2c98ddd",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shop_name\": \"Integration #1\",\n  \"shop_url\": \"https://example.com\",\n  \"last_updated_at\": \"2019-08-24T14:15:22Z\",\n  \"service_point_enabled\": true,\n  \"service_point_carriers\": [\n    \"ups\"\n  ],\n  \"webhook_active\": true,\n  \"webhook_url\": \"https://example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"request\": \"api/v2/integrations/\",\n    \"message\": \"No Integration matches the given query.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fbd8f3bd-71b9-4ba1-8339-cd2c5132c446",
+          "name": "Delete an integration",
+          "request": {
+            "name": "Delete an integration",
+            "description": {
+              "content": "Delete a shop integration from the Sendcloud system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the integration"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1792d3b6-1924-4d06-80c9-000db66b4997",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2695ae27-85c2-4a3a-8ae5-dd81377ab86d",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"request\": \"api/v2/integrations/\",\n    \"message\": \"No Integration matches the given query.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00290823-51fc-4923-8e2e-6bce8033520b",
+          "name": "Retrieve all integration exception logs",
+          "request": {
+            "name": "Retrieve all integration exception logs",
+            "description": {
+              "content": "Retrieve all integration exception logs. These logs are created when integrations have problems making API requests to shop systems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                "logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d1a5fb12-6e51-434a-9ada-282fd11314c8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"https://example.com\",\n  \"previous\": \"https://example.com\",\n  \"results\": [\n    {\n      \"id\": 123,\n      \"base_url\": \"https://example.com\",\n      \"full_url\": \"https://example.com/order-note.json\",\n      \"method\": \"POST\",\n      \"response_code\": 495,\n      \"response\": {\n        \"headers\": {\n          \"Cache-Control\": \"max-age=3600\",\n          \"Content-Type\": \"text/html; charset=utf-8\",\n          \"Connection\": \"keep-alive\"\n        },\n        \"body\": \"<!doctype html>\\n<html>\\n <head>\\n <title>SSL Certificate Error</title>\\n </head>\\n </html>\\n\"\n      },\n      \"request\": {\n        \"headers\": {\n          \"Cache-Control\": \"max-age=3600\",\n          \"Content-Type\": \"text/html; charset=utf-8\",\n          \"Connection\": \"keep-alive\"\n        },\n        \"payload\": {\n          \"order_note\": {\n            \"note\": \"Success\"\n          }\n        }\n      },\n      \"created_at\": \"2023-03-01T02:02:00+01:00\",\n      \"exception_type\": \"requests.exceptions.SSLError\",\n      \"exception\": \"An SSL error occurred\",\n      \"protected\": false\n    },\n    {\n      \"id\": 124,\n      \"integration_id\": 123,\n      \"user_id\": 123,\n      \"base_url\": \"https://example.com\",\n      \"full_url\": \"https://example.com/order-note.json\",\n      \"method\": \"POST\",\n      \"response_code\": 404,\n      \"response\": {},\n      \"request\": {\n        \"headers\": {\n          \"Cache-Control\": \"max-age=3600\",\n          \"Content-Type\": \"text/html; charset=utf-8\",\n          \"Connection\": \"keep-alive\"\n        },\n        \"payload\": {}\n      },\n      \"created_at\": \"2023-03-01T02:02:00+01:00\",\n      \"exception\": \"PageNotFound\",\n      \"protected\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17b1fca2-e3c8-45cb-be0f-51e962b018ff",
+          "name": "Retrieve exception logs for a specific integration",
+          "request": {
+            "name": "Retrieve exception logs for a specific integration",
+            "description": {
+              "content": "Retrieve exception logs for a specific integration. These logs are created when integrations have problems making API requests to shop systems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":id",
+                "logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the integration to which the shipments belong"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a95183ae-468f-4f63-90d0-d2e117dac367",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"https://example.com\",\n  \"previous\": \"https://example.com\",\n  \"results\": [\n    {\n      \"id\": 123,\n      \"base_url\": \"https://example.com\",\n      \"full_url\": \"https://example.com/order-note.json\",\n      \"method\": \"POST\",\n      \"response_code\": 495,\n      \"response\": {\n        \"headers\": {\n          \"Cache-Control\": \"max-age=3600\",\n          \"Content-Type\": \"text/html; charset=utf-8\",\n          \"Connection\": \"keep-alive\"\n        },\n        \"body\": \"<!doctype html>\\n<html>\\n <head>\\n <title>SSL Certificate Error</title>\\n </head>\\n </html>\\n\"\n      },\n      \"request\": {\n        \"headers\": {\n          \"Cache-Control\": \"max-age=3600\",\n          \"Content-Type\": \"text/html; charset=utf-8\",\n          \"Connection\": \"keep-alive\"\n        },\n        \"payload\": {\n          \"order_note\": {\n            \"note\": \"Success\"\n          }\n        }\n      },\n      \"created_at\": \"2023-03-01T02:02:00+01:00\",\n      \"exception_type\": \"requests.exceptions.SSLError\",\n      \"exception\": \"An SSL error occurred\",\n      \"protected\": false\n    },\n    {\n      \"id\": 124,\n      \"integration_id\": 123,\n      \"user_id\": 123,\n      \"base_url\": \"https://example.com\",\n      \"full_url\": \"https://example.com/order-note.json\",\n      \"method\": \"POST\",\n      \"response_code\": 404,\n      \"response\": {},\n      \"request\": {\n        \"headers\": {\n          \"Cache-Control\": \"max-age=3600\",\n          \"Content-Type\": \"text/html; charset=utf-8\",\n          \"Connection\": \"keep-alive\"\n        },\n        \"payload\": {}\n      },\n      \"created_at\": \"2023-03-01T02:02:00+01:00\",\n      \"exception\": \"PageNotFound\",\n      \"protected\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a393797a-8991-43bf-93b7-e48eb1aacfa0",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"request\": \"api/v2/integrations/\",\n    \"message\": \"No Integration matches the given query.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c38a0c3-7eb5-4182-bebe-369b04c65ff1",
+          "name": "Create integration exceptions logs",
+          "request": {
+            "name": "Create integration exceptions logs",
+            "description": {
+              "content": "Create integration exception logs, which will appear in the connection issue log screen of the user's integration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":id",
+                "logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the integration to which the shipments belong"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"base_url\": \"<string>\",\n  \"integration_id\": \"<integer,null>\",\n  \"user_id\": \"<integer>\",\n  \"full_url\": \"<string,null>\",\n  \"method\": \"<string>\",\n  \"response_code\": \"<integer,null>\",\n  \"response\": {\n    \"headers\": \"<object>\",\n    \"body\": \"<object>\"\n  },\n  \"request\": {\n    \"headers\": \"<object>\",\n    \"payload\": \"<object>\"\n  },\n  \"created_at\": \"<dateTime>\",\n  \"exception_type\": \"<string,null>\",\n  \"exception\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b02edd0f-a838-4640-9f08-c9acf2d89334",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": 123,\n  \"user_id\": 123,\n  \"base_url\": \"https://example.com\",\n  \"full_url\": \"https://example.com/order-note.json\",\n  \"method\": \"POST\",\n  \"response_code\": 495,\n  \"response\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"body\": \"<!doctype html>\\n<html>\\n <head>\\n <title>SSL Certificate Error</title>\\n </head>\\n </html>\\n\"\n  },\n  \"request\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"payload\": {\n      \"order_note\": {\n        \"note\": \"Success\"\n      }\n    }\n  },\n  \"created_at\": \"2023-03-01T02:02:00+01:00\",\n  \"exception_type\": \"requests.exceptions.SSLError\",\n  \"exception\": \"An SSL error occurred\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 123,\n  \"integration_id\": 123,\n  \"user_id\": 123,\n  \"base_url\": \"https://example.com\",\n  \"full_url\": \"https://example.com/order-note.json\",\n  \"method\": \"POST\",\n  \"response_code\": 495,\n  \"response\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"body\": \"<!doctype html>\\n<html>\\n <head>\\n <title>SSL Certificate Error</title>\\n </head>\\n </html>\\n\"\n  },\n  \"request\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"payload\": {\n      \"order_note\": {\n        \"note\": \"Success\"\n      }\n    }\n  },\n  \"created_at\": \"2023-03-01T02:02:00+01:00\",\n  \"exception_type\": \"requests.exceptions.SSLError\",\n  \"exception\": \"An SSL error occurred\",\n  \"protected\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b4714bb-d670-4e47-99d7-268de0c5564f",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": 123,\n  \"user_id\": 123,\n  \"base_url\": \"https://example.com\",\n  \"full_url\": \"https://example.com/order-note.json\",\n  \"method\": \"POST\",\n  \"response_code\": 495,\n  \"response\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"body\": \"<!doctype html>\\n<html>\\n <head>\\n <title>SSL Certificate Error</title>\\n </head>\\n </html>\\n\"\n  },\n  \"request\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"payload\": {\n      \"order_note\": {\n        \"note\": \"Success\"\n      }\n    }\n  },\n  \"created_at\": \"2023-03-01T02:02:00+01:00\",\n  \"exception_type\": \"requests.exceptions.SSLError\",\n  \"exception\": \"An SSL error occurred\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"request\": \"api/v2/integrations/12/logs\",\n    \"message\": \"{'exception': ['This field may not be null.', ]}\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d51a4f50-089f-4afe-a006-b4c31a3737a2",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": 123,\n  \"user_id\": 123,\n  \"base_url\": \"https://example.com\",\n  \"full_url\": \"https://example.com/order-note.json\",\n  \"method\": \"POST\",\n  \"response_code\": 495,\n  \"response\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"body\": \"<!doctype html>\\n<html>\\n <head>\\n <title>SSL Certificate Error</title>\\n </head>\\n </html>\\n\"\n  },\n  \"request\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"payload\": {\n      \"order_note\": {\n        \"note\": \"Success\"\n      }\n    }\n  },\n  \"created_at\": \"2023-03-01T02:02:00+01:00\",\n  \"exception_type\": \"requests.exceptions.SSLError\",\n  \"exception\": \"An SSL error occurred\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"request\": \"api/v2/integrations/\",\n    \"message\": \"No Integration matches the given query.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9dd194fc-dd7d-49e5-8df2-8a8a43279e03",
+      "name": "Shipments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0b3e7705-c1d0-40fe-afad-9da7abb42bfe",
+          "name": "Retrieve a list of shipments",
+          "request": {
+            "name": "Retrieve a list of shipments",
+            "description": {
+              "content": "Retrieve a list of orders that were imported from a specific webshop integration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":id",
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "The cursor query string will be used as the pivot value to filter results. If no value is provided, the service must return the first page. The value is Base64 encoded GET parameters. example:\n  For a cursor string there are 3 possible parameters to encode:\n  - o: Offset\n  - r: Reverse\n  - p: Position\n  Combine into GET parameters. Example: r=1&p=300\n  Base 64 encoded it would become: cj0xJnA9MzAw\n  GET parameter in url would be https://some.url.com/api/endpoint/?cursor=cj0xJnA9MzAw\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Displays orders from the given `start_date`, including the set date. It defaults to one year ago."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "Displays orders up to the given `end_date`, including the set date. It defaults to the current date."
+                },
+                {
+                  "disabled": false,
+                  "key": "external_order_ids",
+                  "value": "<string>",
+                  "description": "Filters results to shipments where their `external_order_id` matches one of the user provided ones."
+                },
+                {
+                  "disabled": false,
+                  "key": "external_order_ids",
+                  "value": "<string>",
+                  "description": "Filters results to shipments where their `external_order_id` matches one of the user provided ones."
+                },
+                {
+                  "disabled": false,
+                  "key": "external_shipment_ids",
+                  "value": "<string>",
+                  "description": "Filters results to shipments where their `external_shipments_id` matches one of the user provided ones."
+                },
+                {
+                  "disabled": false,
+                  "key": "external_shipment_ids",
+                  "value": "<string>",
+                  "description": "Filters results to shipments where their `external_shipments_id` matches one of the user provided ones."
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_rules",
+                  "value": "<boolean>",
+                  "description": "Enable shipping rules when retrieving orders. This will have an impact on the `allowed_shipping_methods`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_number",
+                  "value": "<string>",
+                  "description": "Filters results to shipments on `order_number`."
+                },
+                {
+                  "disabled": false,
+                  "key": "sender_address",
+                  "value": "<integer>",
+                  "description": "Allows to specify a sender address id to display proper `allowed_shipping_methods`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the integration to which the shipments belong"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "690cd083-5f0c-422a-8e6c-c74c665f884d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "cj0xJnA9MzAw"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "external_order_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_order_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_shipment_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_shipment_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shipping_rules",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "order_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sender_address",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"next\": \"https://example.com\",\n  \"previous\": \"https://example.com\",\n  \"results\": [\n    {\n      \"address\": \"Lansdown Glade\",\n      \"address_2\": \"string\",\n      \"allowed_shipping_methods\": [\n        0\n      ],\n      \"barcode\": \"string\",\n      \"city\": \"Oss\",\n      \"company_name\": \"string\",\n      \"country\": \"AW\",\n      \"created_at\": \"2019-08-24T14:15:22Z\",\n      \"currency\": \"EUR\",\n      \"customs_invoice_nr\": \"120\",\n      \"customs_shipment_type\": 0,\n      \"email\": \"user@example.com\",\n      \"external_order_id\": \"555413\",\n      \"external_shipment_id\": \"777413\",\n      \"house_number\": \"15\",\n      \"integration\": 0,\n      \"name\": \"John Doe\",\n      \"order_number\": \"OXSDFGHTD-12\",\n      \"order_status\": {\n        \"id\": \"fulfilled\",\n        \"message\": \"Fulfilled\"\n      },\n      \"parcel_items\": [\n        {\n          \"description\": \"Very orange color\",\n          \"hs_code\": \"01013000\",\n          \"origin_country\": \"AW\",\n          \"product_id\": \"1458734634\",\n          \"properties\": {\n            \"size\": \"small\",\n            \"colour\": \"red\"\n          },\n          \"quantity\": 2,\n          \"sku\": \"WW-DR-GR-XS-001\",\n          \"value\": \"3.5\",\n          \"weight\": \"1\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\"\n        }\n      ],\n      \"payment_status\": {\n        \"id\": \"paid\",\n        \"message\": \"Paid\"\n      },\n      \"postal_code\": \"5341\",\n      \"sender_address\": 12345,\n      \"shipment_uuid\": \"6b436cb2-65a4-482c-9d25-38be7868ff00\",\n      \"shipping_method\": 12345,\n      \"shipping_method_checkout_name\": \"string\",\n      \"telephone\": \"string\",\n      \"to_post_number\": \"string\",\n      \"to_service_point\": 0,\n      \"to_state\": \"string\",\n      \"total_order_value\": \"string\",\n      \"updated_at\": \"2019-08-24T14:15:22Z\",\n      \"weight\": \"string\",\n      \"checkout_payload\": {\n        \"sender_address_id\": 0,\n        \"shipping_product\": {\n          \"code\": \"postnl:standard\",\n          \"name\": \"PostNL Standard\",\n          \"selected_functionalities\": {\n            \"age_check\": 18,\n            \"last_mile\": \"home_delivery\",\n            \"first_mile\": \"pickup_dropoff\",\n            \"multicollo\": true,\n            \"form_factor\": \"parcel\",\n            \"service_area\": \"domestic\",\n            \"weekend_delivery\": \"saturday\",\n            \"delivery_deadline\": \"best_effort\",\n            \"direct_contract_only\": false\n          }\n        },\n        \"delivery_method_type\": \"string\",\n        \"delivery_method_data\": {\n          \"delivery_date\": \"2019-08-24T14:15:22Z\",\n          \"formatted_delivery_date\": \"string\",\n          \"parcel_handover_date\": \"2019-08-24T14:15:22Z\"\n        }\n      },\n      \"width\": \"string\",\n      \"height\": \"string\",\n      \"length\": \"string\",\n      \"customs_details\": {\n        \"discount_granted\": \"3.99\",\n        \"insurance_costs\": \"9.99\",\n        \"freight_costs\": \"5.99\",\n        \"other_costs\": \"2.99\",\n        \"tax_numbers\": {\n          \"sender\": [\n            {\n              \"tax_number\": {\n                \"name\": \"VAT\",\n                \"country\": \"NL\",\n                \"value\": \"NL987654321B02\"\n              }\n            }\n          ],\n          \"receiver\": [\n            {\n              \"tax_number\": {\n                \"name\": \"VAT\",\n                \"country\": \"DE\",\n                \"value\": \"DE123456789B03\"\n              }\n            }\n          ],\n          \"importer_of_records\": [\n            {\n              \"tax_number\": {\n                \"name\": \"VAT\",\n                \"country\": \"NL\",\n                \"value\": \"NL975318642B01\"\n              }\n            }\n          ]\n        }\n      },\n      \"shipment_created_at\": \"2019-09-25T14:15:22Z\",\n      \"shipment_updated_at\": \"2019-09-25T14:15:22Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56cacf2a-d0c0-4e80-bba3-c12abb761d76",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "cj0xJnA9MzAw"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "external_order_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_order_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_shipment_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_shipment_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shipping_rules",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "order_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sender_address",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"request\": \"api/v2/integrations/1/shipments/\",\n    \"message\": \"No ShipmentBlob matches the given query.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2511ded0-d946-469b-82d9-aa37ff2669a9",
+          "name": "Create or update a list of shipments",
+          "request": {
+            "name": "Create or update a list of shipments",
+            "description": {
+              "content": "Insert shipments (or 'orders') into an API integration from your shop system, and have them appear in your Sendcloud account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":id",
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the integration to which the shipments belong"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"address\": \"<string>\",\n    \"address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"currency\": \"<string,null>\",\n    \"customs_invoice_nr\": \"<string>\",\n    \"customs_shipment_type\": \"<integer,null>\",\n    \"email\": \"<email>\",\n    \"external_order_id\": \"<string>\",\n    \"external_shipment_id\": \"<string,null>\",\n    \"house_number\": \"<string>\",\n    \"name\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"order_status\": {\n      \"id\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"parcel_items\": [\n      {\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"value\": \"<decimal>\",\n        \"hs_code\": \"<string>\",\n        \"origin_country\": \"<string,null>\",\n        \"product_id\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string,null>\"\n        },\n        \"sku\": \"<string>\",\n        \"weight\": \"<string,null-decimal>\",\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"value\": \"<decimal>\",\n        \"hs_code\": \"<string>\",\n        \"origin_country\": \"<string,null>\",\n        \"product_id\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string,null>\"\n        },\n        \"sku\": \"<string>\",\n        \"weight\": \"<string,null-decimal>\",\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\"\n      }\n    ],\n    \"payment_status\": {\n      \"id\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"postal_code\": \"<string>\",\n    \"shipping_method_checkout_name\": \"<string>\",\n    \"telephone\": \"<string>\",\n    \"to_post_number\": \"<string>\",\n    \"to_service_point\": \"<integer,null>\",\n    \"to_state\": \"<string,null>\",\n    \"updated_at\": \"<dateTime>\",\n    \"shipping_method\": \"<integer,null>\",\n    \"total_order_value\": \"<string,null-decimal>\",\n    \"weight\": \"<string,null-decimal>\",\n    \"checkout_payload\": {\n      \"sender_address_id\": \"<integer>\",\n      \"shipping_product\": \"<object>\",\n      \"delivery_method_type\": \"<string>\",\n      \"delivery_method_data\": {\n        \"delivery_date\": \"<dateTime>\",\n        \"formatted_delivery_date\": \"<string>\",\n        \"parcel_handover_date\": \"<dateTime>\"\n      }\n    },\n    \"width\": \"<string,null-decimal>\",\n    \"height\": \"<string,null-decimal>\",\n    \"length\": \"<string,null-decimal>\",\n    \"customs_details\": {\n      \"discount_granted\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"insurance_costs\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"freight_costs\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"other_costs\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ],\n        \"receiver\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ],\n        \"importer_of_records\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ]\n      }\n    }\n  },\n  {\n    \"address\": \"<string>\",\n    \"address_2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"country\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"currency\": \"<string,null>\",\n    \"customs_invoice_nr\": \"<string>\",\n    \"customs_shipment_type\": \"<integer,null>\",\n    \"email\": \"<email>\",\n    \"external_order_id\": \"<string>\",\n    \"external_shipment_id\": \"<string,null>\",\n    \"house_number\": \"<string>\",\n    \"name\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"order_status\": {\n      \"id\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"parcel_items\": [\n      {\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"value\": \"<decimal>\",\n        \"hs_code\": \"<string>\",\n        \"origin_country\": \"<string,null>\",\n        \"product_id\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string,null>\",\n          \"key_1\": \"<string,null>\"\n        },\n        \"sku\": \"<string>\",\n        \"weight\": \"<string,null-decimal>\",\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"quantity\": \"<integer>\",\n        \"value\": \"<decimal>\",\n        \"hs_code\": \"<string>\",\n        \"origin_country\": \"<string,null>\",\n        \"product_id\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string,null>\"\n        },\n        \"sku\": \"<string>\",\n        \"weight\": \"<string,null-decimal>\",\n        \"mid_code\": \"<string,null>\",\n        \"material_content\": \"<string,null>\",\n        \"intended_use\": \"<string,null>\"\n      }\n    ],\n    \"payment_status\": {\n      \"id\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"postal_code\": \"<string>\",\n    \"shipping_method_checkout_name\": \"<string>\",\n    \"telephone\": \"<string>\",\n    \"to_post_number\": \"<string>\",\n    \"to_service_point\": \"<integer,null>\",\n    \"to_state\": \"<string,null>\",\n    \"updated_at\": \"<dateTime>\",\n    \"shipping_method\": \"<integer,null>\",\n    \"total_order_value\": \"<string,null-decimal>\",\n    \"weight\": \"<string,null-decimal>\",\n    \"checkout_payload\": {\n      \"sender_address_id\": \"<integer>\",\n      \"shipping_product\": \"<object>\",\n      \"delivery_method_type\": \"<string>\",\n      \"delivery_method_data\": {\n        \"delivery_date\": \"<dateTime>\",\n        \"formatted_delivery_date\": \"<string>\",\n        \"parcel_handover_date\": \"<dateTime>\"\n      }\n    },\n    \"width\": \"<string,null-decimal>\",\n    \"height\": \"<string,null-decimal>\",\n    \"length\": \"<string,null-decimal>\",\n    \"customs_details\": {\n      \"discount_granted\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"insurance_costs\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"freight_costs\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"other_costs\": {\n        \"value\": \"<string,null>\",\n        \"currency\": \"<string,null>\"\n      },\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ],\n        \"receiver\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ],\n        \"importer_of_records\": [\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          },\n          {\n            \"name\": \"<string,null>\",\n            \"country_code\": \"<string,null>\",\n            \"value\": \"<string,null>\"\n          }\n        ]\n      }\n    }\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7ad2817b-e249-4fe2-b50f-539566bc9927",
+              "name": "List with references to created shipments, or the errors that occurred while creating the shipment.\nWhen a shipment can't be created, the response will contain an entry for the object with the errors.\nThis object will have a path to each field containing errors, listing the error(s) it contains.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"address\": \"Lansdown Glade\",\n    \"address_2\": \"string\",\n    \"city\": \"Oss\",\n    \"company_name\": \"string\",\n    \"country\": \"AW\",\n    \"created_at\": \"2019-08-24T14:15:22Z\",\n    \"currency\": \"EUR\",\n    \"customs_invoice_nr\": \"120\",\n    \"customs_shipment_type\": 0,\n    \"email\": \"user@example.com\",\n    \"external_order_id\": \"555413\",\n    \"external_shipment_id\": \"777413\",\n    \"house_number\": \"15\",\n    \"name\": \"John Doe\",\n    \"order_number\": \"OXSDFGHTD-12\",\n    \"order_status\": {\n      \"id\": \"fulfilled\",\n      \"message\": \"Fulfilled\"\n    },\n    \"parcel_items\": [\n      {\n        \"description\": \"Very orange color\",\n        \"hs_code\": \"01013000\",\n        \"origin_country\": \"AW\",\n        \"product_id\": \"1458734634\",\n        \"properties\": {\n          \"size\": \"small\",\n          \"colour\": \"red\"\n        },\n        \"quantity\": 2,\n        \"sku\": \"WW-DR-GR-XS-001\",\n        \"value\": \"3.5\",\n        \"weight\": \"1\",\n        \"mid_code\": \"NLOZR92MEL\",\n        \"material_content\": \"100% Cotton\",\n        \"intended_use\": \"Personal use\"\n      }\n    ],\n    \"payment_status\": {\n      \"id\": \"paid\",\n      \"message\": \"Paid\"\n    },\n    \"postal_code\": \"5341\",\n    \"shipping_method\": 12345,\n    \"shipping_method_checkout_name\": \"string\",\n    \"telephone\": \"string\",\n    \"to_post_number\": \"string\",\n    \"to_service_point\": 0,\n    \"to_state\": \"string\",\n    \"total_order_value\": \"string\",\n    \"updated_at\": \"2019-08-24T14:15:22Z\",\n    \"weight\": \"string\",\n    \"checkout_payload\": {\n      \"sender_address_id\": 0,\n      \"shipping_product\": {\n        \"code\": \"postnl:standard\",\n        \"name\": \"PostNL Standard\",\n        \"selected_functionalities\": {\n          \"age_check\": 18,\n          \"last_mile\": \"home_delivery\",\n          \"first_mile\": \"pickup_dropoff\",\n          \"multicollo\": true,\n          \"form_factor\": \"parcel\",\n          \"service_area\": \"domestic\",\n          \"weekend_delivery\": \"saturday\",\n          \"delivery_deadline\": \"best_effort\",\n          \"direct_contract_only\": false\n        }\n      },\n      \"delivery_method_type\": \"string\",\n      \"delivery_method_data\": {\n        \"delivery_date\": \"2019-08-24T14:15:22Z\",\n        \"formatted_delivery_date\": \"string\",\n        \"parcel_handover_date\": \"2019-08-24T14:15:22Z\"\n      }\n    },\n    \"width\": \"string\",\n    \"height\": \"string\",\n    \"length\": \"string\",\n    \"customs_details\": {\n      \"discount_granted\": \"3.99\",\n      \"insurance_costs\": \"9.99\",\n      \"freight_costs\": \"5.99\",\n      \"other_costs\": \"2.99\",\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"tax_number\": {\n              \"name\": \"VAT\",\n              \"country\": \"NL\",\n              \"value\": \"NL987654321B02\"\n            }\n          }\n        ],\n        \"receiver\": [\n          {\n            \"tax_number\": {\n              \"name\": \"VAT\",\n              \"country\": \"DE\",\n              \"value\": \"DE123456789B03\"\n            }\n          }\n        ],\n        \"importer_of_records\": [\n          {\n            \"tax_number\": {\n              \"name\": \"VAT\",\n              \"country\": \"NL\",\n              \"value\": \"NL975318642B01\"\n            }\n          }\n        ]\n      }\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"external_order_id\": \"1175584\",\n    \"external_shipment_id\": \"777413\",\n    \"shipment_uuid\": \"6b436cb2-65a4-482c-9d25-38be7868ff00\",\n    \"status\": \"created\"\n  },\n  {\n    \"error\": {\n      \"checkout_payload\": {\n        \"delivery_method_data\": {\n          \"delivery_date\": [\n            \"This field is required.\"\n          ]\n        }\n      }\n    },\n    \"external_order_id\": \"1184635\",\n    \"external_shipment_id\": \"\",\n    \"status\": \"error\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3222920a-0b6e-4d0e-a48d-8e1c68387824",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"address\": \"Lansdown Glade\",\n    \"address_2\": \"string\",\n    \"city\": \"Oss\",\n    \"company_name\": \"string\",\n    \"country\": \"AW\",\n    \"created_at\": \"2019-08-24T14:15:22Z\",\n    \"currency\": \"EUR\",\n    \"customs_invoice_nr\": \"120\",\n    \"customs_shipment_type\": 0,\n    \"email\": \"user@example.com\",\n    \"external_order_id\": \"555413\",\n    \"external_shipment_id\": \"777413\",\n    \"house_number\": \"15\",\n    \"name\": \"John Doe\",\n    \"order_number\": \"OXSDFGHTD-12\",\n    \"order_status\": {\n      \"id\": \"fulfilled\",\n      \"message\": \"Fulfilled\"\n    },\n    \"parcel_items\": [\n      {\n        \"description\": \"Very orange color\",\n        \"hs_code\": \"01013000\",\n        \"origin_country\": \"AW\",\n        \"product_id\": \"1458734634\",\n        \"properties\": {\n          \"size\": \"small\",\n          \"colour\": \"red\"\n        },\n        \"quantity\": 2,\n        \"sku\": \"WW-DR-GR-XS-001\",\n        \"value\": \"3.5\",\n        \"weight\": \"1\",\n        \"mid_code\": \"NLOZR92MEL\",\n        \"material_content\": \"100% Cotton\",\n        \"intended_use\": \"Personal use\"\n      }\n    ],\n    \"payment_status\": {\n      \"id\": \"paid\",\n      \"message\": \"Paid\"\n    },\n    \"postal_code\": \"5341\",\n    \"shipping_method\": 12345,\n    \"shipping_method_checkout_name\": \"string\",\n    \"telephone\": \"string\",\n    \"to_post_number\": \"string\",\n    \"to_service_point\": 0,\n    \"to_state\": \"string\",\n    \"total_order_value\": \"string\",\n    \"updated_at\": \"2019-08-24T14:15:22Z\",\n    \"weight\": \"string\",\n    \"checkout_payload\": {\n      \"sender_address_id\": 0,\n      \"shipping_product\": {\n        \"code\": \"postnl:standard\",\n        \"name\": \"PostNL Standard\",\n        \"selected_functionalities\": {\n          \"age_check\": 18,\n          \"last_mile\": \"home_delivery\",\n          \"first_mile\": \"pickup_dropoff\",\n          \"multicollo\": true,\n          \"form_factor\": \"parcel\",\n          \"service_area\": \"domestic\",\n          \"weekend_delivery\": \"saturday\",\n          \"delivery_deadline\": \"best_effort\",\n          \"direct_contract_only\": false\n        }\n      },\n      \"delivery_method_type\": \"string\",\n      \"delivery_method_data\": {\n        \"delivery_date\": \"2019-08-24T14:15:22Z\",\n        \"formatted_delivery_date\": \"string\",\n        \"parcel_handover_date\": \"2019-08-24T14:15:22Z\"\n      }\n    },\n    \"width\": \"string\",\n    \"height\": \"string\",\n    \"length\": \"string\",\n    \"customs_details\": {\n      \"discount_granted\": \"3.99\",\n      \"insurance_costs\": \"9.99\",\n      \"freight_costs\": \"5.99\",\n      \"other_costs\": \"2.99\",\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"tax_number\": {\n              \"name\": \"VAT\",\n              \"country\": \"NL\",\n              \"value\": \"NL987654321B02\"\n            }\n          }\n        ],\n        \"receiver\": [\n          {\n            \"tax_number\": {\n              \"name\": \"VAT\",\n              \"country\": \"DE\",\n              \"value\": \"DE123456789B03\"\n            }\n          }\n        ],\n        \"importer_of_records\": [\n          {\n            \"tax_number\": {\n              \"name\": \"VAT\",\n              \"country\": \"NL\",\n              \"value\": \"NL975318642B01\"\n            }\n          }\n        ]\n      }\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "72215bd1-0fe2-4e4b-a84f-42bed2bc5e68",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"address\": \"Lansdown Glade\",\n    \"address_2\": \"string\",\n    \"city\": \"Oss\",\n    \"company_name\": \"string\",\n    \"country\": \"AW\",\n    \"created_at\": \"2019-08-24T14:15:22Z\",\n    \"currency\": \"EUR\",\n    \"customs_invoice_nr\": \"120\",\n    \"customs_shipment_type\": 0,\n    \"email\": \"user@example.com\",\n    \"external_order_id\": \"555413\",\n    \"external_shipment_id\": \"777413\",\n    \"house_number\": \"15\",\n    \"name\": \"John Doe\",\n    \"order_number\": \"OXSDFGHTD-12\",\n    \"order_status\": {\n      \"id\": \"fulfilled\",\n      \"message\": \"Fulfilled\"\n    },\n    \"parcel_items\": [\n      {\n        \"description\": \"Very orange color\",\n        \"hs_code\": \"01013000\",\n        \"origin_country\": \"AW\",\n        \"product_id\": \"1458734634\",\n        \"properties\": {\n          \"size\": \"small\",\n          \"colour\": \"red\"\n        },\n        \"quantity\": 2,\n        \"sku\": \"WW-DR-GR-XS-001\",\n        \"value\": \"3.5\",\n        \"weight\": \"1\",\n        \"mid_code\": \"NLOZR92MEL\",\n        \"material_content\": \"100% Cotton\",\n        \"intended_use\": \"Personal use\"\n      }\n    ],\n    \"payment_status\": {\n      \"id\": \"paid\",\n      \"message\": \"Paid\"\n    },\n    \"postal_code\": \"5341\",\n    \"shipping_method\": 12345,\n    \"shipping_method_checkout_name\": \"string\",\n    \"telephone\": \"string\",\n    \"to_post_number\": \"string\",\n    \"to_service_point\": 0,\n    \"to_state\": \"string\",\n    \"total_order_value\": \"string\",\n    \"updated_at\": \"2019-08-24T14:15:22Z\",\n    \"weight\": \"string\",\n    \"checkout_payload\": {\n      \"sender_address_id\": 0,\n      \"shipping_product\": {\n        \"code\": \"postnl:standard\",\n        \"name\": \"PostNL Standard\",\n        \"selected_functionalities\": {\n          \"age_check\": 18,\n          \"last_mile\": \"home_delivery\",\n          \"first_mile\": \"pickup_dropoff\",\n          \"multicollo\": true,\n          \"form_factor\": \"parcel\",\n          \"service_area\": \"domestic\",\n          \"weekend_delivery\": \"saturday\",\n          \"delivery_deadline\": \"best_effort\",\n          \"direct_contract_only\": false\n        }\n      },\n      \"delivery_method_type\": \"string\",\n      \"delivery_method_data\": {\n        \"delivery_date\": \"2019-08-24T14:15:22Z\",\n        \"formatted_delivery_date\": \"string\",\n        \"parcel_handover_date\": \"2019-08-24T14:15:22Z\"\n      }\n    },\n    \"width\": \"string\",\n    \"height\": \"string\",\n    \"length\": \"string\",\n    \"customs_details\": {\n      \"discount_granted\": \"3.99\",\n      \"insurance_costs\": \"9.99\",\n      \"freight_costs\": \"5.99\",\n      \"other_costs\": \"2.99\",\n      \"tax_numbers\": {\n        \"sender\": [\n          {\n            \"tax_number\": {\n              \"name\": \"VAT\",\n              \"country\": \"NL\",\n              \"value\": \"NL987654321B02\"\n            }\n          }\n        ],\n        \"receiver\": [\n          {\n            \"tax_number\": {\n              \"name\": \"VAT\",\n              \"country\": \"DE\",\n              \"value\": \"DE123456789B03\"\n            }\n          }\n        ],\n        \"importer_of_records\": [\n          {\n            \"tax_number\": {\n              \"name\": \"VAT\",\n              \"country\": \"NL\",\n              \"value\": \"NL975318642B01\"\n            }\n          }\n        ]\n      }\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"request\": \"api/v2/integrations/1/shipments/\",\n    \"message\": \"No ShipmentBlob matches the given query.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a04e504-b231-4e9f-8642-86c2a8b06383",
+          "name": "Delete a shipment",
+          "request": {
+            "name": "Delete a shipment",
+            "description": {
+              "content": "Allows you to delete a shipment from Sendcloud, e.g. if it has been canceled or deleted in your shop system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":id",
+                "shipments",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the integration to which the shipments belong"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shipment_uuid\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "859a8cf0-eb26-4138-b026-f3f789995a29",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "shipments",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipment_uuid\": \"39874b59-2a68-4a3d-8e00-aeb9e0540d00\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c7202b4b-c413-4936-91df-544c1ca5f663",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "shipments",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipment_uuid\": \"39874b59-2a68-4a3d-8e00-aeb9e0540d00\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"request\": \"api/v2/integrations/1234/shipments/delete\",\n    \"message\": \"Missing shipment_uuid or the pair external_order_id and external_shipment_id\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68540d2b-9b80-4b2a-9081-e4c125e2df97",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "shipments",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration to which the shipments belong"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shipment_uuid\": \"39874b59-2a68-4a3d-8e00-aeb9e0540d00\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"request\": \"api/v2/integrations/1/shipments/\",\n    \"message\": \"No ShipmentBlob matches the given query.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ffe5df45-2e94-467c-bf71-b339750f2903",
+    "name": "Integrations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Integrations API allows you to retrieve, update and add orders to custom webshop integrations.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

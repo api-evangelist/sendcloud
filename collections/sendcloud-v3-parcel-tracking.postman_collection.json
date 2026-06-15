@@ -1,0 +1,465 @@
+{
+  "item": [
+    {
+      "id": "7d845617-9806-4d75-aeab-d278fb04867d",
+      "name": "Parcel Tracking",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cc978ee3-bd79-4543-8da1-95406631ee26",
+          "name": "Retrieve tracking information for a parcel",
+          "request": {
+            "name": "Retrieve tracking information for a parcel",
+            "description": {
+              "content": "Get information about a parcel, including its current status and recent tracking events, using its tracking number",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcels",
+                "tracking",
+                ":tracking_number"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tracking_number",
+                  "description": "(Required) Parcel tracking number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2c99d535-a117-4bf7-a7a5-2fa1c1f5c0bc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    "tracking",
+                    ":tracking_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tracking_number",
+                      "description": "(Required) Parcel tracking number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"announced_at\": \"2024-01-01T00:00:00Z\",\n  \"created_at\": \"2024-01-01T00:00:00Z\",\n  \"details\": {\n    \"brand_id\": 123,\n    \"expected_delivery_date\": \"2024-01-03\",\n    \"integration_id\": 456,\n    \"is_mail_box\": false,\n    \"is_return\": false,\n    \"is_to_service_point\": false\n  },\n  \"events\": [\n    {\n      \"event_at\": \"2024-01-02T00:00:00Z\",\n      \"event_type\": \"carrier\",\n      \"status_code\": \"accepted\",\n      \"status_description\": \"Parcel has been accepted by the carrier.\",\n      \"status_type\": \"success\",\n      \"sub_status_code\": \"none\"\n    }\n  ],\n  \"from_address\": {\n    \"address_line_1\": \"33 rue de Stalingrad\",\n    \"address_line_2\": \"\",\n    \"city\": \"Cermenate\",\n    \"company_name\": \"Company\",\n    \"country_code\": \"IT\",\n    \"email\": \"billing@mail.com\",\n    \"house_number\": \"45\",\n    \"name\": \"Laurent Kuchto\",\n    \"phone_number\": \"\",\n    \"po_box\": \"12345\",\n    \"postal_code\": \"78500\",\n    \"state_province_code\": \"IT-CO\"\n  },\n  \"parcel_items\": [\n    {\n      \"description\": \"T-Shirt XL\",\n      \"hs_code\": \"620520\",\n      \"intended_use\": \"Personal use\",\n      \"item_id\": \"5552\",\n      \"material_content\": \"100% Cotton\",\n      \"mid_code\": \"NLOZR92MEL\",\n      \"origin_country\": \"NL\",\n      \"product_id\": \"19284\",\n      \"properties\": {\n        \"color\": \"green\",\n        \"size\": \"red\"\n      },\n      \"quantity\": 1,\n      \"sku\": \"TS1234\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"value\": \"6.15\"\n      },\n      \"weight\": {\n        \"unit\": \"kg\",\n        \"value\": 0.4\n      }\n    }\n  ],\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"contract_id\": 517,\n      \"shipping_option_code\": \"postnl:standard\"\n    }\n  },\n  \"source_id\": \"123\",\n  \"to_address\": {\n    \"address_line_1\": \"33 rue de Stalingrad\",\n    \"address_line_2\": \"\",\n    \"city\": \"Cermenate\",\n    \"company_name\": \"Company\",\n    \"country_code\": \"IT\",\n    \"email\": \"billing@mail.com\",\n    \"house_number\": \"45\",\n    \"name\": \"Laurent Kuchto\",\n    \"phone_number\": \"\",\n    \"po_box\": \"12345\",\n    \"postal_code\": \"78500\",\n    \"state_province_code\": \"IT-CO\"\n  },\n  \"tracking_numbers\": [\n    {\n      \"carrier_code\": \"postnl\",\n      \"tracking_number\": \"123456789\",\n      \"tracking_url\": \"https://example.com\"\n    }\n  ],\n  \"updated_at\": \"2024-01-01T00:00:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46108dd1-628c-4a74-ab5c-80adb04a26eb",
+              "name": "Parcel does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    "tracking",
+                    ":tracking_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tracking_number",
+                      "description": "(Required) Parcel tracking number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Parcel does not exist\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "983af763-400e-47b4-a23b-1ba49a2505d7",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    "tracking",
+                    ":tracking_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tracking_number",
+                      "description": "(Required) Parcel tracking number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e03337d-a878-447e-a718-283f7ba03805",
+          "name": "Create an external parcel for tracking",
+          "request": {
+            "name": "Create an external parcel for tracking",
+            "description": {
+              "content": "Register an external parcel in the Sendcloud system for tracking, based on the provided details. It requires a valid tracking number and parcel information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parcels",
+                "tracking"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"announced_at\": \"<dateTime>\",\n  \"from_address\": {\n    \"country_code\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"address_line_1\": \"<string,null>\",\n    \"address_line_2\": \"<string,null>\",\n    \"city\": \"<string,null>\",\n    \"company_name\": \"<string,null>\",\n    \"email\": \"<string,null-email>\",\n    \"house_number\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone_number\": \"<string,null>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string,null>\"\n  },\n  \"ship_with\": {\n    \"type\": \"<string>\",\n    \"properties\": {\n      \"shipping_option_code\": \"<string>\",\n      \"contract_id\": \"<integer>\",\n      \"user_shipping_method_name\": \"<string,null>\",\n      \"user_shipping_method_id\": \"<string,null>\"\n    }\n  },\n  \"shipment\": {\n    \"source_id\": \"<string>\",\n    \"external_reference_id\": \"<string>\",\n    \"order\": {\n      \"source_id\": \"<string>\",\n      \"order_number\": \"<string>\",\n      \"source_external_id\": \"<string>\",\n      \"total_order_price\": \"<null>\"\n    },\n    \"price\": \"<null>\"\n  },\n  \"source_id\": \"<string>\",\n  \"to_address\": {\n    \"country_code\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"address_line_1\": \"<string,null>\",\n    \"address_line_2\": \"<string,null>\",\n    \"city\": \"<string,null>\",\n    \"company_name\": \"<string,null>\",\n    \"email\": \"<string,null-email>\",\n    \"house_number\": \"<string,null>\",\n    \"name\": \"<string,null>\",\n    \"phone_number\": \"<string,null>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string,null>\"\n  },\n  \"tracking_number\": {\n    \"carrier_code\": \"<string>\",\n    \"tracking_number\": \"<string>\",\n    \"tracking_identifier\": \"<string>\",\n    \"tracking_url\": \"<string>\"\n  },\n  \"details\": {\n    \"brand_id\": \"<integer>\",\n    \"integration_id\": \"<integer>\",\n    \"is_return\": \"<boolean>\"\n  },\n  \"insurance\": {\n    \"insured_value\": \"<null>\",\n    \"policy_id\": \"<string>\"\n  },\n  \"parcel_items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"measurements\": {\n    \"dimension\": {\n      \"length\": \"<number>\",\n      \"width\": \"<number>\",\n      \"height\": \"<number>\",\n      \"unit\": \"<string>\"\n    },\n    \"weight\": {\n      \"value\": \"<number>\",\n      \"unit\": \"<string>\"\n    },\n    \"volume\": {\n      \"value\": \"<integer>\",\n      \"unit\": \"<string>\"\n    }\n  },\n  \"return_price\": \"<null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7f2228ee-4f6b-4e46-b281-7cc100aaa7c9",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    "tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"announced_at\": \"<dateTime>\",\n  \"from_address\": {\n    \"country_code\": \"NL\",\n    \"postal_code\": \"1013 AB\",\n    \"address_line_1\": \"Stadhuisplein\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"city\": \"Eindhoven\",\n    \"company_name\": \"Sendcloud\",\n    \"email\": \"johndoe@gmail.com\",\n    \"house_number\": \"50\",\n    \"name\": \"John Doe\",\n    \"phone_number\": \"+319881729999\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\"\n  },\n  \"ship_with\": {\n    \"type\": \"string\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard/insured=3000\",\n      \"contract_id\": 517,\n      \"user_shipping_method_name\": \"Express Delivery\",\n      \"user_shipping_method_id\": \"express-001\"\n    }\n  },\n  \"shipment\": {\n    \"source_id\": \"string\",\n    \"external_reference_id\": \"string\",\n    \"order\": {\n      \"source_id\": \"string\",\n      \"order_number\": \"string\",\n      \"source_external_id\": \"string\",\n      \"total_order_price\": null\n    },\n    \"price\": null\n  },\n  \"source_id\": \"<string>\",\n  \"to_address\": {\n    \"country_code\": \"NL\",\n    \"postal_code\": \"1013 AB\",\n    \"address_line_1\": \"Stadhuisplein\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"city\": \"Eindhoven\",\n    \"company_name\": \"Sendcloud\",\n    \"email\": \"johndoe@gmail.com\",\n    \"house_number\": \"50\",\n    \"name\": \"John Doe\",\n    \"phone_number\": \"+319881729999\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\"\n  },\n  \"tracking_number\": {\n    \"carrier_code\": \"string\",\n    \"tracking_number\": \"BARCODE123\",\n    \"tracking_identifier\": \"aBcdEF\",\n    \"tracking_url\": \"https://tracking.carrier.com/tracking_number\"\n  },\n  \"details\": {\n    \"brand_id\": 4607,\n    \"integration_id\": 5357,\n    \"is_return\": true\n  },\n  \"insurance\": {\n    \"insured_value\": null,\n    \"policy_id\": \"string\"\n  },\n  \"parcel_items\": [\n    {\n      \"description\": \"T-Shirt XL\",\n      \"hs_code\": \"620520\",\n      \"price\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"quantity\": 1,\n      \"weight\": {\n        \"value\": 14.5,\n        \"unit\": \"g\"\n      },\n      \"item_id\": \"5552\",\n      \"origin_country\": \"NL\",\n      \"sku\": \"TS1234\",\n      \"product_id\": \"19284\",\n      \"mid_code\": \"NLOZR92MEL\",\n      \"material_content\": \"100% Cotton\",\n      \"intended_use\": \"Personal use\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"string\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"string\",\n        \"packaging_type\": \"string\",\n        \"packaging_instruction_code\": \"string\",\n        \"id_number\": \"string\",\n        \"class_division_number\": \"string\",\n        \"quantity\": \"string\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"string\",\n        \"commodity_regulated_level_code\": \"EQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"string\",\n        \"emergency_contact_phone\": \"string\",\n        \"adr_packing_group_letter\": \"II\",\n        \"local_proper_shipping_name\": \"string\",\n        \"transport_category\": \"string\",\n        \"tunnel_restriction_code\": \"string\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"25FIYPEK0A7573\",\n      \"taric_doc_code\": \"Y142\",\n      \"manufacturer_product_id\": \"ABC-12345\",\n      \"manufacturer_product_id_std\": \"01234567890128\",\n      \"properties\": {\n        \"size\": \"red\",\n        \"color\": \"green\"\n      }\n    },\n    {\n      \"description\": \"T-Shirt XL\",\n      \"hs_code\": \"620520\",\n      \"price\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"quantity\": 1,\n      \"weight\": {\n        \"value\": 14.5,\n        \"unit\": \"g\"\n      },\n      \"item_id\": \"5552\",\n      \"origin_country\": \"NL\",\n      \"sku\": \"TS1234\",\n      \"product_id\": \"19284\",\n      \"mid_code\": \"NLOZR92MEL\",\n      \"material_content\": \"100% Cotton\",\n      \"intended_use\": \"Personal use\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"string\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"string\",\n        \"packaging_type\": \"string\",\n        \"packaging_instruction_code\": \"string\",\n        \"id_number\": \"string\",\n        \"class_division_number\": \"string\",\n        \"quantity\": \"string\",\n        \"unit_of_measurement\": \"L\",\n        \"proper_shipping_name\": \"string\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"string\",\n        \"emergency_contact_phone\": \"string\",\n        \"adr_packing_group_letter\": \"II\",\n        \"local_proper_shipping_name\": \"string\",\n        \"transport_category\": \"string\",\n        \"tunnel_restriction_code\": \"string\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"25FIYPEK0A7573\",\n      \"taric_doc_code\": \"Y142\",\n      \"manufacturer_product_id\": \"ABC-12345\",\n      \"manufacturer_product_id_std\": \"01234567890128\",\n      \"properties\": {\n        \"size\": \"red\",\n        \"color\": \"green\"\n      }\n    }\n  ],\n  \"measurements\": {\n    \"dimension\": {\n      \"length\": 15,\n      \"width\": 20.5,\n      \"height\": 37,\n      \"unit\": \"mm\"\n    },\n    \"weight\": {\n      \"value\": 14.5,\n      \"unit\": \"g\"\n    },\n    \"volume\": {\n      \"value\": 5,\n      \"unit\": \"l\"\n    }\n  },\n  \"return_price\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"announced_at\": \"2024-01-01T00:00:00Z\",\n  \"created_at\": \"2024-01-01T00:00:00Z\",\n  \"details\": {\n    \"brand_id\": 123,\n    \"integration_id\": 456,\n    \"is_return\": false\n  },\n  \"from_address\": {\n    \"address_line_1\": \"33 rue de Stalingrad\",\n    \"address_line_2\": \"\",\n    \"city\": \"Cermenate\",\n    \"company_name\": \"Company\",\n    \"country_code\": \"IT\",\n    \"email\": \"billing@mail.com\",\n    \"house_number\": \"45\",\n    \"name\": \"Laurent Kuchto\",\n    \"phone_number\": \"\",\n    \"po_box\": \"12345\",\n    \"postal_code\": \"78500\",\n    \"state_province_code\": \"IT-CO\"\n  },\n  \"parcel_items\": [\n    {\n      \"description\": \"T-Shirt XL\",\n      \"hs_code\": \"620520\",\n      \"intended_use\": \"Personal use\",\n      \"item_id\": \"5552\",\n      \"material_content\": \"100% Cotton\",\n      \"mid_code\": \"NLOZR92MEL\",\n      \"origin_country\": \"NL\",\n      \"product_id\": \"19284\",\n      \"properties\": {\n        \"color\": \"green\",\n        \"size\": \"red\"\n      },\n      \"quantity\": 1,\n      \"sku\": \"TS1234\",\n      \"source_id\": \"123abc\",\n      \"price\": {\n        \"currency\": \"EUR\",\n        \"value\": \"6.15\"\n      },\n      \"weight\": {\n        \"unit\": \"kg\",\n        \"value\": 0.4\n      }\n    }\n  ],\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"contract_id\": 517,\n      \"shipping_option_code\": \"postnl:standard\"\n    }\n  },\n  \"source_id\": \"1234\",\n  \"to_address\": {\n    \"address_line_1\": \"33 rue de Stalingrad\",\n    \"address_line_2\": \"\",\n    \"city\": \"Cermenate\",\n    \"company_name\": \"Company\",\n    \"country_code\": \"IT\",\n    \"email\": \"billing@mail.com\",\n    \"house_number\": \"45\",\n    \"name\": \"Laurent Kuchto\",\n    \"phone_number\": \"\",\n    \"po_box\": \"12345\",\n    \"postal_code\": \"78500\",\n    \"state_province_code\": \"IT-CO\"\n  },\n  \"tracking_numbers\": [\n    {\n      \"carrier_code\": \"dhl\",\n      \"tracking_number\": \"TRACK123456789\",\n      \"tracking_url\": \"https://track.carrier.com/TRACK123456789\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b29a2412-bca6-4f9e-bddc-43f35d856159",
+              "name": "Parcel or tracking number already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    "tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"announced_at\": \"<dateTime>\",\n  \"from_address\": {\n    \"country_code\": \"NL\",\n    \"postal_code\": \"1013 AB\",\n    \"address_line_1\": \"Stadhuisplein\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"city\": \"Eindhoven\",\n    \"company_name\": \"Sendcloud\",\n    \"email\": \"johndoe@gmail.com\",\n    \"house_number\": \"50\",\n    \"name\": \"John Doe\",\n    \"phone_number\": \"+319881729999\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\"\n  },\n  \"ship_with\": {\n    \"type\": \"string\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard/insured=3000\",\n      \"contract_id\": 517,\n      \"user_shipping_method_name\": \"Express Delivery\",\n      \"user_shipping_method_id\": \"express-001\"\n    }\n  },\n  \"shipment\": {\n    \"source_id\": \"string\",\n    \"external_reference_id\": \"string\",\n    \"order\": {\n      \"source_id\": \"string\",\n      \"order_number\": \"string\",\n      \"source_external_id\": \"string\",\n      \"total_order_price\": null\n    },\n    \"price\": null\n  },\n  \"source_id\": \"<string>\",\n  \"to_address\": {\n    \"country_code\": \"NL\",\n    \"postal_code\": \"1013 AB\",\n    \"address_line_1\": \"Stadhuisplein\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"city\": \"Eindhoven\",\n    \"company_name\": \"Sendcloud\",\n    \"email\": \"johndoe@gmail.com\",\n    \"house_number\": \"50\",\n    \"name\": \"John Doe\",\n    \"phone_number\": \"+319881729999\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\"\n  },\n  \"tracking_number\": {\n    \"carrier_code\": \"string\",\n    \"tracking_number\": \"BARCODE123\",\n    \"tracking_identifier\": \"aBcdEF\",\n    \"tracking_url\": \"https://tracking.carrier.com/tracking_number\"\n  },\n  \"details\": {\n    \"brand_id\": 4607,\n    \"integration_id\": 5357,\n    \"is_return\": true\n  },\n  \"insurance\": {\n    \"insured_value\": null,\n    \"policy_id\": \"string\"\n  },\n  \"parcel_items\": [\n    {\n      \"description\": \"T-Shirt XL\",\n      \"hs_code\": \"620520\",\n      \"price\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"quantity\": 1,\n      \"weight\": {\n        \"value\": 14.5,\n        \"unit\": \"g\"\n      },\n      \"item_id\": \"5552\",\n      \"origin_country\": \"NL\",\n      \"sku\": \"TS1234\",\n      \"product_id\": \"19284\",\n      \"mid_code\": \"NLOZR92MEL\",\n      \"material_content\": \"100% Cotton\",\n      \"intended_use\": \"Personal use\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"string\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"string\",\n        \"packaging_type\": \"string\",\n        \"packaging_instruction_code\": \"string\",\n        \"id_number\": \"string\",\n        \"class_division_number\": \"string\",\n        \"quantity\": \"string\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"string\",\n        \"commodity_regulated_level_code\": \"EQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"string\",\n        \"emergency_contact_phone\": \"string\",\n        \"adr_packing_group_letter\": \"II\",\n        \"local_proper_shipping_name\": \"string\",\n        \"transport_category\": \"string\",\n        \"tunnel_restriction_code\": \"string\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"25FIYPEK0A7573\",\n      \"taric_doc_code\": \"Y142\",\n      \"manufacturer_product_id\": \"ABC-12345\",\n      \"manufacturer_product_id_std\": \"01234567890128\",\n      \"properties\": {\n        \"size\": \"red\",\n        \"color\": \"green\"\n      }\n    },\n    {\n      \"description\": \"T-Shirt XL\",\n      \"hs_code\": \"620520\",\n      \"price\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"quantity\": 1,\n      \"weight\": {\n        \"value\": 14.5,\n        \"unit\": \"g\"\n      },\n      \"item_id\": \"5552\",\n      \"origin_country\": \"NL\",\n      \"sku\": \"TS1234\",\n      \"product_id\": \"19284\",\n      \"mid_code\": \"NLOZR92MEL\",\n      \"material_content\": \"100% Cotton\",\n      \"intended_use\": \"Personal use\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"string\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"string\",\n        \"packaging_type\": \"string\",\n        \"packaging_instruction_code\": \"string\",\n        \"id_number\": \"string\",\n        \"class_division_number\": \"string\",\n        \"quantity\": \"string\",\n        \"unit_of_measurement\": \"L\",\n        \"proper_shipping_name\": \"string\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"string\",\n        \"emergency_contact_phone\": \"string\",\n        \"adr_packing_group_letter\": \"II\",\n        \"local_proper_shipping_name\": \"string\",\n        \"transport_category\": \"string\",\n        \"tunnel_restriction_code\": \"string\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"25FIYPEK0A7573\",\n      \"taric_doc_code\": \"Y142\",\n      \"manufacturer_product_id\": \"ABC-12345\",\n      \"manufacturer_product_id_std\": \"01234567890128\",\n      \"properties\": {\n        \"size\": \"red\",\n        \"color\": \"green\"\n      }\n    }\n  ],\n  \"measurements\": {\n    \"dimension\": {\n      \"length\": 15,\n      \"width\": 20.5,\n      \"height\": 37,\n      \"unit\": \"mm\"\n    },\n    \"weight\": {\n      \"value\": 14.5,\n      \"unit\": \"g\"\n    },\n    \"volume\": {\n      \"value\": 5,\n      \"unit\": \"l\"\n    }\n  },\n  \"return_price\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Parcel or tracking number already exists\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4ec1b57-dab9-44f3-a4b1-cfa414011433",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parcels",
+                    "tracking"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"announced_at\": \"<dateTime>\",\n  \"from_address\": {\n    \"country_code\": \"NL\",\n    \"postal_code\": \"1013 AB\",\n    \"address_line_1\": \"Stadhuisplein\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"city\": \"Eindhoven\",\n    \"company_name\": \"Sendcloud\",\n    \"email\": \"johndoe@gmail.com\",\n    \"house_number\": \"50\",\n    \"name\": \"John Doe\",\n    \"phone_number\": \"+319881729999\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\"\n  },\n  \"ship_with\": {\n    \"type\": \"string\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard/insured=3000\",\n      \"contract_id\": 517,\n      \"user_shipping_method_name\": \"Express Delivery\",\n      \"user_shipping_method_id\": \"express-001\"\n    }\n  },\n  \"shipment\": {\n    \"source_id\": \"string\",\n    \"external_reference_id\": \"string\",\n    \"order\": {\n      \"source_id\": \"string\",\n      \"order_number\": \"string\",\n      \"source_external_id\": \"string\",\n      \"total_order_price\": null\n    },\n    \"price\": null\n  },\n  \"source_id\": \"<string>\",\n  \"to_address\": {\n    \"country_code\": \"NL\",\n    \"postal_code\": \"1013 AB\",\n    \"address_line_1\": \"Stadhuisplein\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"city\": \"Eindhoven\",\n    \"company_name\": \"Sendcloud\",\n    \"email\": \"johndoe@gmail.com\",\n    \"house_number\": \"50\",\n    \"name\": \"John Doe\",\n    \"phone_number\": \"+319881729999\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\"\n  },\n  \"tracking_number\": {\n    \"carrier_code\": \"string\",\n    \"tracking_number\": \"BARCODE123\",\n    \"tracking_identifier\": \"aBcdEF\",\n    \"tracking_url\": \"https://tracking.carrier.com/tracking_number\"\n  },\n  \"details\": {\n    \"brand_id\": 4607,\n    \"integration_id\": 5357,\n    \"is_return\": true\n  },\n  \"insurance\": {\n    \"insured_value\": null,\n    \"policy_id\": \"string\"\n  },\n  \"parcel_items\": [\n    {\n      \"description\": \"T-Shirt XL\",\n      \"hs_code\": \"620520\",\n      \"price\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"quantity\": 1,\n      \"weight\": {\n        \"value\": 14.5,\n        \"unit\": \"g\"\n      },\n      \"item_id\": \"5552\",\n      \"origin_country\": \"NL\",\n      \"sku\": \"TS1234\",\n      \"product_id\": \"19284\",\n      \"mid_code\": \"NLOZR92MEL\",\n      \"material_content\": \"100% Cotton\",\n      \"intended_use\": \"Personal use\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"string\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"string\",\n        \"packaging_type\": \"string\",\n        \"packaging_instruction_code\": \"string\",\n        \"id_number\": \"string\",\n        \"class_division_number\": \"string\",\n        \"quantity\": \"string\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"string\",\n        \"commodity_regulated_level_code\": \"EQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"string\",\n        \"emergency_contact_phone\": \"string\",\n        \"adr_packing_group_letter\": \"II\",\n        \"local_proper_shipping_name\": \"string\",\n        \"transport_category\": \"string\",\n        \"tunnel_restriction_code\": \"string\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"25FIYPEK0A7573\",\n      \"taric_doc_code\": \"Y142\",\n      \"manufacturer_product_id\": \"ABC-12345\",\n      \"manufacturer_product_id_std\": \"01234567890128\",\n      \"properties\": {\n        \"size\": \"red\",\n        \"color\": \"green\"\n      }\n    },\n    {\n      \"description\": \"T-Shirt XL\",\n      \"hs_code\": \"620520\",\n      \"price\": {\n        \"value\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"currency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"quantity\": 1,\n      \"weight\": {\n        \"value\": 14.5,\n        \"unit\": \"g\"\n      },\n      \"item_id\": \"5552\",\n      \"origin_country\": \"NL\",\n      \"sku\": \"TS1234\",\n      \"product_id\": \"19284\",\n      \"mid_code\": \"NLOZR92MEL\",\n      \"material_content\": \"100% Cotton\",\n      \"intended_use\": \"Personal use\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"string\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"string\",\n        \"packaging_type\": \"string\",\n        \"packaging_instruction_code\": \"string\",\n        \"id_number\": \"string\",\n        \"class_division_number\": \"string\",\n        \"quantity\": \"string\",\n        \"unit_of_measurement\": \"L\",\n        \"proper_shipping_name\": \"string\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"string\",\n        \"emergency_contact_phone\": \"string\",\n        \"adr_packing_group_letter\": \"II\",\n        \"local_proper_shipping_name\": \"string\",\n        \"transport_category\": \"string\",\n        \"tunnel_restriction_code\": \"string\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"25FIYPEK0A7573\",\n      \"taric_doc_code\": \"Y142\",\n      \"manufacturer_product_id\": \"ABC-12345\",\n      \"manufacturer_product_id_std\": \"01234567890128\",\n      \"properties\": {\n        \"size\": \"red\",\n        \"color\": \"green\"\n      }\n    }\n  ],\n  \"measurements\": {\n    \"dimension\": {\n      \"length\": 15,\n      \"width\": 20.5,\n      \"height\": 37,\n      \"unit\": \"mm\"\n    },\n    \"weight\": {\n      \"value\": 14.5,\n      \"unit\": \"g\"\n    },\n    \"volume\": {\n      \"value\": 5,\n      \"unit\": \"l\"\n    }\n  },\n  \"return_price\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "65a29843-cbd5-47cd-9b4a-8ac1f19fd3a7",
+    "name": "Parcel Tracking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Parcel Tracking API allows you to register parcels for tracking and retrieve parcel information by tracking number\nIt supports creating and managing parcel tracking details, including associated addresses, measurements, and insurance\n\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

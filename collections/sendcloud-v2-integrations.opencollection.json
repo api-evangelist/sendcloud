@@ -1,0 +1,350 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Integrations",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/integrations",
+            "params": [
+              {
+                "name": "ordering",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the field used to order the resulting response"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve information about all the shop integrations currently connected to your Sendcloud account."
+        },
+        {
+          "info": {
+            "name": "Retrieve an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/integrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve information about a specific integration using its `id`."
+        },
+        {
+          "info": {
+            "name": "Update an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://panel.sendcloud.sc/api/v2/integrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update settings for a specific integration using its `id`."
+        },
+        {
+          "info": {
+            "name": "Partially update an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://panel.sendcloud.sc/api/v2/integrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Partially update settings for a specific integration using its `id`."
+        },
+        {
+          "info": {
+            "name": "Delete an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://panel.sendcloud.sc/api/v2/integrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a shop integration from the Sendcloud system."
+        },
+        {
+          "info": {
+            "name": "Retrieve all integration exception logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/integrations/logs",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve all integration exception logs. These logs are created when integrations have problems making API requests to shop systems."
+        },
+        {
+          "info": {
+            "name": "Retrieve exception logs for a specific integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/integrations/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration to which the shipments belong"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve exception logs for a specific integration. These logs are created when integrations have problems making API requests to shop systems."
+        },
+        {
+          "info": {
+            "name": "Create integration exceptions logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v2/integrations/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration to which the shipments belong"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create integration exception logs, which will appear in the connection issue log screen of the user's integration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Shipments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of shipments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/integrations/:id/shipments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration to which the shipments belong"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor query string will be used as the pivot value to filter results. If no value is provided, the service must return the first page. The value is Base64 encoded GET parameters. example:\n  For a cursor string there are 3 possible parameters to encode:\n  - o: Offset\n  - r: Reverse\n  - p: Position\n  Combine into GET parameters. Example: r=1&p=300\n  Base 64 encoded it would become: cj0xJnA9MzAw\n  GET parameter in url would be https://some.url.com/api/endpoint/?cursor=cj0xJnA9MzAw\n"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Displays orders from the given `start_date`, including the set date. It defaults to one year ago."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Displays orders up to the given `end_date`, including the set date. It defaults to the current date."
+              },
+              {
+                "name": "external_order_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to shipments where their `external_order_id` matches one of the user provided ones."
+              },
+              {
+                "name": "external_shipment_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to shipments where their `external_shipments_id` matches one of the user provided ones."
+              },
+              {
+                "name": "shipping_rules",
+                "value": "",
+                "type": "query",
+                "description": "Enable shipping rules when retrieving orders. This will have an impact on the `allowed_shipping_methods`."
+              },
+              {
+                "name": "order_number",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to shipments on `order_number`."
+              },
+              {
+                "name": "sender_address",
+                "value": "",
+                "type": "query",
+                "description": "Allows to specify a sender address id to display proper `allowed_shipping_methods`."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a list of orders that were imported from a specific webshop integration."
+        },
+        {
+          "info": {
+            "name": "Create or update a list of shipments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v2/integrations/:id/shipments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration to which the shipments belong"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Insert shipments (or 'orders') into an API integration from your shop system, and have them appear in your Sendcloud account."
+        },
+        {
+          "info": {
+            "name": "Delete a shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v2/integrations/:id/shipments/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration to which the shipments belong"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Allows you to delete a shipment from Sendcloud, e.g. if it has been canceled or deleted in your shop system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,324 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shipments",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shipments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create and announce a shipment synchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/shipments/announce",
+            "headers": [
+              {
+                "name": "Sendcloud-Partner-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This endpoint **announces a shipment synchronously** under your API credentials."
+        },
+        {
+          "info": {
+            "name": "Retrieve shipments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/shipments",
+            "params": [
+              {
+                "name": "parcel_status",
+                "value": "",
+                "type": "query",
+                "description": "Returns shipments that have the requested status. For a list of possible statuses, see the [Retrieve a list of parcel statuses](/api/v3/parcel-statuses/retrieve-a-list-of-parcel-statuses) endpoint."
+              },
+              {
+                "name": "tracking_number",
+                "value": "",
+                "type": "query",
+                "description": "Returns shipments that match a specified tracking number"
+              },
+              {
+                "name": "external_reference_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns shipments that match a specified external reference"
+              },
+              {
+                "name": "order_number",
+                "value": "",
+                "type": "query",
+                "description": "Returns a shipment that matches a specific `order_number` property from your shipments"
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns all shipments that matches a specific `integration_id` property from your shipments"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Returns all shipments which have been updated in our system before a given time. Use the ISO 8601 datetime format."
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Returns all shipments which have been updated in our system after a given time. Use the ISO 8601 datetime format."
+              },
+              {
+                "name": "announced_before",
+                "value": "",
+                "type": "query",
+                "description": "Returns all shipments which have been announced to the carrier before the given time. Use the ISO 8601 datetime format."
+              },
+              {
+                "name": "announced_after",
+                "value": "",
+                "type": "query",
+                "description": "Returns all shipments which have been announced to the carrier after the given time. Use the ISO 8601 datetime format."
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter results using a comma-separated list of *parcels IDs*. The list may not contain more than 100 IDs."
+              },
+              {
+                "name": "shipment_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter results using a comma-separated list of *shipments IDs*. The list may not contain more than 100 IDs."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n- `o`: Offset\n- `r`: Reverse\n- `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to be returned in the response."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This endpoint allows you to retrieve a list of all the shipments which you have created or imported into your Sendcloud account under your API credentials. You can filter the results based on several query parameters.\n\nThis endpoint uses cursor-based pagination via `Link` headers. See [Pagination](/api/v3/pagination) for details."
+        },
+        {
+          "info": {
+            "name": "Create and announce a shipment asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/shipments",
+            "headers": [
+              {
+                "name": "Sendcloud-Partner-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This endpoint **announces a shipment asynchronously** under your API credentials."
+        },
+        {
+          "info": {
+            "name": "Create a shipment with rules and/or defaults and announce it synchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/shipments/announce-with-shipping-rules",
+            "headers": [
+              {
+                "name": "Sendcloud-Partner-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create and announce a shipment applying shipping rules and/or defaults"
+        },
+        {
+          "info": {
+            "name": "Create a shipment with rules and/or defaults and announce it asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/shipments/create-with-shipping-rules",
+            "headers": [
+              {
+                "name": "Sendcloud-Partner-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create and announce a shipment applying shipping rules and/or defaults asynchronously."
+        },
+        {
+          "info": {
+            "name": "Retrieve a shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/shipments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the shipment you want to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This endpoint allows you to retrieve a specific shipment created under your Sendcloud credentials, based on the shipment `id`."
+        },
+        {
+          "info": {
+            "name": "Cancel a shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/shipments/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the shipment"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Use this endpoint to cancel an announced shipment, if the carrier supports cancellation."
+        },
+        {
+          "info": {
+            "name": "Retrieve a return portal URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/shipments/:id/return-portal-url",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the shipment"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a return portal link for a specific shipment using the shipment's id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Address",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate an address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/addresses/validate",
+            "headers": [
+              {
+                "name": "Sendcloud-Partner-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This address validation endpoint allows you to validate shipping addresses before using them.\nBy validating addresses in advance, you can ensure that the shipping information is accurate and complete,\nreducing the risk of delivery issues and improving overall shipping efficiency.\nProviding the carrier helps to tailor the address validation process according to specific carrier requirements.\nUsing additional validation methods can further enhance the accuracy of the address verification.\n\nThe def"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,48 @@
+{
+  "item": [
+    {
+      "id": "4b1062c6-31fb-4e05-a604-0e282cd8aa3b",
+      "name": "Webhooks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.shop_url.com/webhook",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Sendcloud-Signature"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "81bb52d3-847e-45a8-b03b-3e16c7c5b6cb",
+    "name": "Webhooks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Sendcloud is able to actively communicate updates in a parcel (such as updates in the delivery status) to your application using webhooks.\n\nYou should specify an API endpoint in which Sendcloud will make requests to, whenever a change occurs. You can set this using the webhook_url field in your integration settings in Sendcloud.\n\n> **Important:** Webhooks are scoped to the integration they are configured on. You will only receive webhook events for parcels and actions that belong to that specific integration. If you have multiple integrations, each one needs its own webhook configuration to receive events for its parcels.\n\nTo verify a request is coming from Sendcloud, Sendcloud is signing each request that we send to your endpoint using a HMAC signature (Hash-based Message Authentication Code) with SHA256 algorithm and the `Secret Key` or the `Webhook Signature Key` as secret, depending on your integration type.\n\nFor your store to validate that the webhook is coming from us, you should hash the message received from us using your secret and compare against the Sendcloud-Signature header received from us.\n\n```php\n<?php\n// From example:\n// $data = \"{\\\"key\\\": \\\"value\\\"}\";\n// $secret_key = \"secretkey\";\n// hashed data from example: 1eed4b3d41f4653ac64fd56f1bf1cbfd349e4482cbc11dff7134bd93e5da4b0a\n$secret_key = \"secretkey\";\n$data = $_POST;\n$Sendcloud_Signature = apache_request_headers()['Sendcloud-Signature'];\n$hashed_signature = hash_hmac ( \"sha256\" , $data , $secret_key );\n// You can compare the hashed signature from example with the one you can hash yourself using the example $data variable.\nassert(\"1eed4b3d41f4653ac64fd56f1bf1cbfd349e4482cbc11dff7134bd93e5da4b0a\" == $hashed_signature);\n```\n\n```python\nimport hmac\nimport json\n\ndata = {'key': 'value'}\nmessage = json.dumps(data)\nsignature = hmac.new(key='secretkey'.encode('utf-8'), msg=message.encode('utf-8'), digestmod='sha256')\nsignature.hexdigest()\n\n> '1eed4b3d41f4653ac64fd56f1bf1cbfd349e4482cbc11dff7134bd93e5da4b0a'\n```\n\n**To receive the parcel data for every update that happens in a parcel, you need to:**\n- Visit your Integration settings within the Sendcloud platform.\n- Enable the webhook feedback checkbox.\n- Set the webhook url to your application that will process the data received. * You can also test if the webhook works by sending a test webhook to your application by clicking on “Test API Webhook” button.\n- Save the shop settings.\n\n**Additional notes:**\n- Please note that the data your application will receive is the same as the payload you would get when retrieving information about a specific parcel.\n- If for any reason the call to your webhook fails, Sendcloud will retry sending the update 10 times with an exponential delay. Starting with a 5 minute delay, and a maximum delay of 1 hour between retries. If after 10 tries, the call is still failing, Sendcloud will stop trying, and report the issue to your Failed Request logs.\n- Because your shop might be unreachable for some time, the webhook arrival order might be scattered (unordered) which is why each webhook includes a timestamp which can be used to identify which webhook is the later one.\n- For return parcels, you will receive webhook updates only if the outgoing shipment was created through the API Shop.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

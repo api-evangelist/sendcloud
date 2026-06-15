@@ -1,0 +1,1749 @@
+{
+  "info": {
+    "_postman_id": "4f74dd4b-7050-4751-854e-ec03baa62c6b",
+    "name": "Labels",
+    "description": "Once a parcel has been announced, you can use the **Labels API** to request a PDF shipping label in order to print it and attach it to the box.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:40.000Z",
+    "updatedAt": "2026-06-05T15:16:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4f74dd4b-7050-4751-854e-ec03baa62c6b"
+  },
+  "item": [
+    {
+      "name": "labels",
+      "item": [
+        {
+          "name": "{parcel_id}",
+          "item": [
+            {
+              "name": "Retrieve a label for a specific parcel",
+              "id": "4513b796-66f5-4078-b8cc-4622b1f0cf61",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/labels/:parcel_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "labels",
+                    ":parcel_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "fbbea590-93eb-4b2f-aa96-17ba74578ff6",
+                      "key": "parcel_id",
+                      "value": "<integer>",
+                      "description": "(Required) Unique parcel identifier"
+                    }
+                  ]
+                },
+                "description": "You will receive URLs to download the labels in PDF format, for both normal and label printers. You can get the `id` of a parcel from the [Create a parcel or parcels](/api/v2/parcels/create-a-parcel-or-parcels) endpoint."
+              },
+              "response": [
+                {
+                  "id": "56791334-0807-4e9a-a40d-19b578fff9f5",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/:parcel_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        ":parcel_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "parcel_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"label\": {\n    \"normal_printer\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"label_printer\": \"<string>\"\n  },\n  \"customs_declaration\": {\n    \"normal_printer\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-56791334-0807-4e9a-a40d-19b578fff9f5"
+                },
+                {
+                  "id": "1b999e3a-5cc2-4a82-b3b6-2f33fd25a3d2",
+                  "name": "Not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/:parcel_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        ":parcel_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "parcel_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-1b999e3a-5cc2-4a82-b3b6-2f33fd25a3d2"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:41.000Z",
+              "updatedAt": "2026-06-05T15:16:41.000Z",
+              "uid": "35240-4513b796-66f5-4078-b8cc-4622b1f0cf61"
+            }
+          ],
+          "id": "5d486ac7-8270-42a6-aac8-9b385dcb5383",
+          "createdAt": "2026-06-05T15:16:41.000Z",
+          "updatedAt": "2026-06-05T15:16:41.000Z",
+          "uid": "35240-5d486ac7-8270-42a6-aac8-9b385dcb5383"
+        },
+        {
+          "name": "normal_printer",
+          "item": [
+            {
+              "name": "{parcel_id}",
+              "item": [
+                {
+                  "name": "Retrieve a PDF label",
+                  "id": "fc2df2e2-0f15-48b7-ba77-a535538acb1a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/pdf"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/normal_printer/:parcel_id?start_from=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        "normal_printer",
+                        ":parcel_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right",
+                          "key": "start_from",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "6f14abcf-374b-40b2-88e9-24592291f57d",
+                          "key": "parcel_id",
+                          "value": "<integer>",
+                          "description": "(Required) Unique parcel identifier"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a shipping label for a specific parcel in PDF format for a normal printer."
+                  },
+                  "response": [
+                    {
+                      "id": "a76d1aad-b1d4-439d-b912-731f18a13c4c",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/pdf"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/labels/normal_printer/:parcel_id?start_from=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "labels",
+                            "normal_printer",
+                            ":parcel_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right",
+                              "key": "start_from",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "parcel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/pdf"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<binary>",
+                      "createdAt": "2026-06-05T15:16:41.000Z",
+                      "updatedAt": "2026-06-05T15:16:41.000Z",
+                      "uid": "35240-a76d1aad-b1d4-439d-b912-731f18a13c4c"
+                    },
+                    {
+                      "id": "363ed23b-d156-4c28-976e-550519f1b641",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/labels/normal_printer/:parcel_id?start_from=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "labels",
+                            "normal_printer",
+                            ":parcel_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right",
+                              "key": "start_from",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "parcel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:16:41.000Z",
+                      "updatedAt": "2026-06-05T15:16:41.000Z",
+                      "uid": "35240-363ed23b-d156-4c28-976e-550519f1b641"
+                    },
+                    {
+                      "id": "403a380a-0bce-4fe1-b884-b83246364af1",
+                      "name": "Not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/labels/normal_printer/:parcel_id?start_from=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "labels",
+                            "normal_printer",
+                            ":parcel_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right",
+                              "key": "start_from",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "parcel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-06-05T15:16:41.000Z",
+                      "updatedAt": "2026-06-05T15:16:41.000Z",
+                      "uid": "35240-403a380a-0bce-4fe1-b884-b83246364af1"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-fc2df2e2-0f15-48b7-ba77-a535538acb1a"
+                }
+              ],
+              "id": "7bdb0b10-23b6-4c41-aace-3f0da9698344",
+              "createdAt": "2026-06-05T15:16:41.000Z",
+              "updatedAt": "2026-06-05T15:16:41.000Z",
+              "uid": "35240-7bdb0b10-23b6-4c41-aace-3f0da9698344"
+            },
+            {
+              "name": "Retrieve multiple PDF labels",
+              "id": "d458e9a8-a547-4958-b107-fac34794e03b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/labels/normal_printer?ids=<integer>,<integer>&start_from=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "labels",
+                    "normal_printer"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Comma separated parcel ids",
+                      "key": "ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "description": "(Required) The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right",
+                      "key": "start_from",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Retrieve PDF label documents suitable for normal printers for multiple different parcels at the same time."
+              },
+              "response": [
+                {
+                  "id": "c2a33b18-cefd-4596-b245-bc07ffc2ffe6",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/pdf"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/normal_printer?ids=<integer>,<integer>&start_from=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        "normal_printer"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma separated parcel ids",
+                          "key": "ids",
+                          "value": "<integer>,<integer>"
+                        },
+                        {
+                          "description": "(Required) The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right",
+                          "key": "start_from",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/pdf"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<binary>",
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-c2a33b18-cefd-4596-b245-bc07ffc2ffe6"
+                },
+                {
+                  "id": "11bca7ec-fe9a-4c39-afd6-a595918c0089",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/normal_printer?ids=<integer>,<integer>&start_from=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        "normal_printer"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma separated parcel ids",
+                          "key": "ids",
+                          "value": "<integer>,<integer>"
+                        },
+                        {
+                          "description": "(Required) The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right",
+                          "key": "start_from",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-11bca7ec-fe9a-4c39-afd6-a595918c0089"
+                },
+                {
+                  "id": "b1cbcfd7-c931-4a2e-8d5f-11d3f9de1bc7",
+                  "name": "Not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/normal_printer?ids=<integer>,<integer>&start_from=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        "normal_printer"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma separated parcel ids",
+                          "key": "ids",
+                          "value": "<integer>,<integer>"
+                        },
+                        {
+                          "description": "(Required) The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right",
+                          "key": "start_from",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-b1cbcfd7-c931-4a2e-8d5f-11d3f9de1bc7"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:41.000Z",
+              "updatedAt": "2026-06-05T15:16:41.000Z",
+              "uid": "35240-d458e9a8-a547-4958-b107-fac34794e03b"
+            }
+          ],
+          "id": "0a912b95-22ab-4a0a-b6d1-d5d24b291d6e",
+          "createdAt": "2026-06-05T15:16:41.000Z",
+          "updatedAt": "2026-06-05T15:16:41.000Z",
+          "uid": "35240-0a912b95-22ab-4a0a-b6d1-d5d24b291d6e"
+        },
+        {
+          "name": "label_printer",
+          "item": [
+            {
+              "name": "{parcel_id}",
+              "item": [
+                {
+                  "name": "Retrieve a specific PDF label for a label printer",
+                  "id": "44c0d8b6-e498-4833-a9a1-0d71d697b3a3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/pdf"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/label_printer/:parcel_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        "label_printer",
+                        ":parcel_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d8542074-d689-4a30-a48a-2857920df4d4",
+                          "key": "parcel_id",
+                          "value": "<integer>",
+                          "description": "(Required) Unique parcel identifier"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a shipping label for a specific parcel in PDF format for a label printer."
+                  },
+                  "response": [
+                    {
+                      "id": "80b2715a-83df-4206-b714-a7db7ac407de",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/pdf"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/labels/label_printer/:parcel_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "labels",
+                            "label_printer",
+                            ":parcel_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parcel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/pdf"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<binary>",
+                      "createdAt": "2026-06-05T15:16:41.000Z",
+                      "updatedAt": "2026-06-05T15:16:41.000Z",
+                      "uid": "35240-80b2715a-83df-4206-b714-a7db7ac407de"
+                    },
+                    {
+                      "id": "bf501b63-9d70-4085-8e07-298ac92f85d6",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/labels/label_printer/:parcel_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "labels",
+                            "label_printer",
+                            ":parcel_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parcel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:16:41.000Z",
+                      "updatedAt": "2026-06-05T15:16:41.000Z",
+                      "uid": "35240-bf501b63-9d70-4085-8e07-298ac92f85d6"
+                    },
+                    {
+                      "id": "8cd161ec-4e78-4ce6-a3cb-3a0537fced2a",
+                      "name": "Not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/labels/label_printer/:parcel_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "labels",
+                            "label_printer",
+                            ":parcel_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parcel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-06-05T15:16:41.000Z",
+                      "updatedAt": "2026-06-05T15:16:41.000Z",
+                      "uid": "35240-8cd161ec-4e78-4ce6-a3cb-3a0537fced2a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-44c0d8b6-e498-4833-a9a1-0d71d697b3a3"
+                }
+              ],
+              "id": "608167e9-77f7-4e49-b06b-46fc47672c18",
+              "createdAt": "2026-06-05T15:16:41.000Z",
+              "updatedAt": "2026-06-05T15:16:41.000Z",
+              "uid": "35240-608167e9-77f7-4e49-b06b-46fc47672c18"
+            },
+            {
+              "name": "Retrieve PDF labels for a label printer",
+              "id": "d351af49-b432-4535-9e2d-5e627ed08a9c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/labels/label_printer?ids=<integer>,<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "labels",
+                    "label_printer"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Comma separated parcel ids",
+                      "key": "ids",
+                      "value": "<integer>,<integer>"
+                    }
+                  ]
+                },
+                "description": "Retrieve PDF label documents suitable for label printers for multiple different parcels at the same time."
+              },
+              "response": [
+                {
+                  "id": "d50a7c1e-39ff-4e26-b875-cb2d94d97ad9",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/pdf"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/label_printer?ids=<integer>,<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        "label_printer"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma separated parcel ids",
+                          "key": "ids",
+                          "value": "<integer>,<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/pdf"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<binary>",
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-d50a7c1e-39ff-4e26-b875-cb2d94d97ad9"
+                },
+                {
+                  "id": "abf607db-5fdd-4ac3-83a1-4e0c6cf6796b",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/label_printer?ids=<integer>,<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        "label_printer"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma separated parcel ids",
+                          "key": "ids",
+                          "value": "<integer>,<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-abf607db-5fdd-4ac3-83a1-4e0c6cf6796b"
+                },
+                {
+                  "id": "3f3bb78f-7528-43d7-a81b-663315bc416b",
+                  "name": "Not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/labels/label_printer?ids=<integer>,<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "labels",
+                        "label_printer"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma separated parcel ids",
+                          "key": "ids",
+                          "value": "<integer>,<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-3f3bb78f-7528-43d7-a81b-663315bc416b"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:41.000Z",
+              "updatedAt": "2026-06-05T15:16:41.000Z",
+              "uid": "35240-d351af49-b432-4535-9e2d-5e627ed08a9c"
+            }
+          ],
+          "id": "84e270f0-3e21-48d9-8d3e-3ac51122b45f",
+          "createdAt": "2026-06-05T15:16:41.000Z",
+          "updatedAt": "2026-06-05T15:16:41.000Z",
+          "uid": "35240-84e270f0-3e21-48d9-8d3e-3ac51122b45f"
+        },
+        {
+          "name": "Bulk PDF label printing",
+          "id": "9a16d3f2-c9d6-4b6e-a6e2-1ffc11dcd736",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": {\n    \"parcels\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/labels",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "labels"
+              ]
+            },
+            "description": "Request multiple shipping labels for an array of parcels at the same time. You will receive URLs to download the labels in PDF format, for both normal and label printers."
+          },
+          "response": [
+            {
+              "id": "320d348e-5163-44c5-8203-228feac676ed",
+              "name": "OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": {\n    \"parcels\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/labels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "labels"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"label\": {\n    \"normal_printer\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"label_printer\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:16:41.000Z",
+              "updatedAt": "2026-06-05T15:16:41.000Z",
+              "uid": "35240-320d348e-5163-44c5-8203-228feac676ed"
+            },
+            {
+              "id": "b4f786a6-e677-49db-9808-03db57f4a3cd",
+              "name": "Not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label\": {\n    \"parcels\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/labels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "labels"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-06-05T15:16:41.000Z",
+              "updatedAt": "2026-06-05T15:16:41.000Z",
+              "uid": "35240-b4f786a6-e677-49db-9808-03db57f4a3cd"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:41.000Z",
+          "updatedAt": "2026-06-05T15:16:41.000Z",
+          "uid": "35240-9a16d3f2-c9d6-4b6e-a6e2-1ffc11dcd736"
+        }
+      ],
+      "id": "6f26c488-6225-4ee9-91c1-43839d25878d",
+      "createdAt": "2026-06-05T15:16:41.000Z",
+      "updatedAt": "2026-06-05T15:16:41.000Z",
+      "uid": "35240-6f26c488-6225-4ee9-91c1-43839d25878d"
+    },
+    {
+      "name": "customs_declaration",
+      "item": [
+        {
+          "name": "normal_printer",
+          "item": [
+            {
+              "name": "{parcel_id}",
+              "item": [
+                {
+                  "name": "Retrieve a customs declaration PDF",
+                  "id": "0835ad77-8398-441a-b992-670a856d8bd5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/pdf"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customs_declaration/normal_printer/:parcel_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customs_declaration",
+                        "normal_printer",
+                        ":parcel_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0e567df7-a757-48c6-8d90-d697716aa92d",
+                          "key": "parcel_id",
+                          "value": "<integer>",
+                          "description": "(Required) Unique parcel identifier"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve the customs documents associated with a label in PDF format for a normal printer."
+                  },
+                  "response": [
+                    {
+                      "id": "21f94e29-2a68-4ba4-b270-324d338a90e2",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/pdf"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/customs_declaration/normal_printer/:parcel_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customs_declaration",
+                            "normal_printer",
+                            ":parcel_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parcel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/pdf"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "Deprecation",
+                          "value": "<string>"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "Sunset",
+                          "value": "<string>"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<binary>",
+                      "createdAt": "2026-06-05T15:16:41.000Z",
+                      "updatedAt": "2026-06-05T15:16:41.000Z",
+                      "uid": "35240-21f94e29-2a68-4ba4-b270-324d338a90e2"
+                    },
+                    {
+                      "id": "b579a713-9588-44ee-8ccd-7f3e10d246c8",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/customs_declaration/normal_printer/:parcel_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customs_declaration",
+                            "normal_printer",
+                            ":parcel_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parcel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:16:41.000Z",
+                      "updatedAt": "2026-06-05T15:16:41.000Z",
+                      "uid": "35240-b579a713-9588-44ee-8ccd-7f3e10d246c8"
+                    },
+                    {
+                      "id": "40b9b5aa-ff55-4af0-807a-2a926656c74c",
+                      "name": "Not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/customs_declaration/normal_printer/:parcel_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customs_declaration",
+                            "normal_printer",
+                            ":parcel_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "parcel_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-06-05T15:16:41.000Z",
+                      "updatedAt": "2026-06-05T15:16:41.000Z",
+                      "uid": "35240-40b9b5aa-ff55-4af0-807a-2a926656c74c"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-0835ad77-8398-441a-b992-670a856d8bd5"
+                }
+              ],
+              "id": "6d3039f3-a962-48aa-a2e3-8d4ca867dc23",
+              "createdAt": "2026-06-05T15:16:41.000Z",
+              "updatedAt": "2026-06-05T15:16:41.000Z",
+              "uid": "35240-6d3039f3-a962-48aa-a2e3-8d4ca867dc23"
+            },
+            {
+              "name": "Retrieve multiple customs declaration PDFs",
+              "id": "f7bee8fc-9d01-4db0-b22b-b3d2ce83256b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/customs_declaration/normal_printer?ids=<integer>,<integer>&start_from=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "customs_declaration",
+                    "normal_printer"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Comma separated parcel ids",
+                      "key": "ids",
+                      "value": "<integer>,<integer>"
+                    },
+                    {
+                      "description": "(Required) The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right",
+                      "key": "start_from",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Retrieve PDF customs documents suitable for normal printers for multiple different parcels at the same time."
+              },
+              "response": [
+                {
+                  "id": "9d06d7b6-48c5-4c44-bf9d-0a519e4104e3",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/pdf"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customs_declaration/normal_printer?ids=<integer>,<integer>&start_from=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customs_declaration",
+                        "normal_printer"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma separated parcel ids",
+                          "key": "ids",
+                          "value": "<integer>,<integer>"
+                        },
+                        {
+                          "description": "(Required) The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right",
+                          "key": "start_from",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/pdf"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "Deprecation",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "Sunset",
+                      "value": "<string>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<binary>",
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-9d06d7b6-48c5-4c44-bf9d-0a519e4104e3"
+                },
+                {
+                  "id": "58fbf8ea-caae-49cb-a7f1-ad40400df872",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customs_declaration/normal_printer?ids=<integer>,<integer>&start_from=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customs_declaration",
+                        "normal_printer"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma separated parcel ids",
+                          "key": "ids",
+                          "value": "<integer>,<integer>"
+                        },
+                        {
+                          "description": "(Required) The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right",
+                          "key": "start_from",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-58fbf8ea-caae-49cb-a7f1-ad40400df872"
+                },
+                {
+                  "id": "e3e19814-2589-4239-b125-51981188cbdf",
+                  "name": "Not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customs_declaration/normal_printer?ids=<integer>,<integer>&start_from=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customs_declaration",
+                        "normal_printer"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Comma separated parcel ids",
+                          "key": "ids",
+                          "value": "<integer>,<integer>"
+                        },
+                        {
+                          "description": "(Required) The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right",
+                          "key": "start_from",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-06-05T15:16:41.000Z",
+                  "updatedAt": "2026-06-05T15:16:41.000Z",
+                  "uid": "35240-e3e19814-2589-4239-b125-51981188cbdf"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:41.000Z",
+              "updatedAt": "2026-06-05T15:16:41.000Z",
+              "uid": "35240-f7bee8fc-9d01-4db0-b22b-b3d2ce83256b"
+            }
+          ],
+          "id": "977b3320-d335-4f4b-8e2d-37f9134a39ac",
+          "createdAt": "2026-06-05T15:16:41.000Z",
+          "updatedAt": "2026-06-05T15:16:41.000Z",
+          "uid": "35240-977b3320-d335-4f4b-8e2d-37f9134a39ac"
+        }
+      ],
+      "id": "5c0c8661-db25-4be0-8dba-a71083c18143",
+      "createdAt": "2026-06-05T15:16:41.000Z",
+      "updatedAt": "2026-06-05T15:16:41.000Z",
+      "uid": "35240-5c0c8661-db25-4be0-8dba-a71083c18143"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://panel.sendcloud.sc/api/v2"
+    }
+  ]
+}

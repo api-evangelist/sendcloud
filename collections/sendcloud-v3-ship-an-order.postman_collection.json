@@ -1,0 +1,514 @@
+{
+  "item": [
+    {
+      "id": "b777596c-72a7-4222-9006-b826ba28b377",
+      "name": "Ship an Order",
+      "description": {
+        "content": "OrderLabelAPI",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cb086b45-14c8-4a0c-834e-746f4be81ad0",
+          "name": "Request a label for one or more orders asynchronously",
+          "request": {
+            "name": "Request a label for one or more orders asynchronously",
+            "description": {
+              "content": "Request a label for a single or multiple orders. This endpoint will fail gracefully if some orders cannot be processed, returning any successfully created labels along with error details for the orders that failed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "create-labels-async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f39e63f6-3d87-4862-b182-5154f2b0ef82",
+              "name": "Information about the created parcels.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "create-labels-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": 70,\n  \"orders\": [\n    {\n      \"order_number\": \"ORDER-25763\",\n      \"apply_shipping_rules\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"parcel_id\": 420,\n      \"parcels_ids\": [\n        420\n      ],\n      \"shipment_id\": \"511\",\n      \"order_id\": \"593c853e-ca90-4ab4-953c-fd2f47dd8dc3\",\n      \"order_number\": \"ORD-2024-00174\"\n    },\n    {\n      \"parcel_id\": 4428,\n      \"parcels_ids\": [\n        4428\n      ],\n      \"shipment_id\": \"512\",\n      \"order_id\": \"23458265234\",\n      \"order_number\": \"ORD-2024-00166\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be5f0280-096e-4d6b-956c-3270099100c8",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "create-labels-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": 70,\n  \"orders\": [\n    {\n      \"order_number\": \"ORDER-25763\",\n      \"apply_shipping_rules\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"Input should be a valid string\",\n      \"status\": \"400\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/orders/0/order_id\"\n      },\n      \"code\": \"invalid\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99f93288-c9aa-47d7-823f-5d793f4384ba",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "create-labels-async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": 70,\n  \"orders\": [\n    {\n      \"order_number\": \"ORDER-25763\",\n      \"apply_shipping_rules\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"404\",\n      \"code\": \"not_found\",\n      \"title\": \"Not found\",\n      \"detail\": \"The page you have requested could not be found.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "305ef97b-7a16-4466-85f7-59ea61794be9",
+          "name": "Request a label for a single order synchronously",
+          "request": {
+            "name": "Request a label for a single order synchronously",
+            "description": {
+              "content": "Request a label for a single order and wait for the results. The label and any other documents will be provided in the response to this request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "create-label-sync"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ccc8b74c-143f-417b-9671-e6ec2717dcae",
+              "name": "Parcel ID along with generated label.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "create-label-sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": 70,\n  \"label_details\": {\n    \"mime_type\": \"application/pdf\",\n    \"dpi\": 72\n  },\n  \"order\": {\n    \"order_number\": \"ORDER-25763\",\n    \"apply_shipping_rules\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"parcel_id\": 420,\n      \"shipment_id\": \"511\",\n      \"order_id\": \"593c853e-ca90-4ab4-953c-fd2f47dd8dc3\",\n      \"order_number\": \"ORD-2024-00174\",\n      \"ship_with\": {\n        \"type\": \"shipping_option_code\",\n        \"properties\": {\n          \"contract_id\": 517,\n          \"shipping_option_code\": \"postnl:standard\"\n        }\n      },\n      \"tracking_number\": \"ABCD1234567890\",\n      \"tracking_url\": \"https://test.shipping-portal.com/tracking/?tracking_number=abcd1234567890&country=nl&postal_code=1234AB\",\n      \"label\": {\n        \"file\": \"<base64-encoded-pdf-data>\",\n        \"mime_type\": \"application/pdf\",\n        \"dpi\": 72\n      },\n      \"documents\": [\n        {\n          \"type\": \"label\",\n          \"size\": \"a6\",\n          \"link\": \"https://panel.sendcloud.sc/api/v3/parcels/1234567890/documents/label\"\n        }\n      ]\n    },\n    {\n      \"parcel_id\": 4428,\n      \"shipment_id\": \"512\",\n      \"order_id\": \"23458265234\",\n      \"order_number\": \"ORD-2024-00166\",\n      \"ship_with\": {\n        \"type\": \"shipping_option_code\",\n        \"properties\": {\n          \"contract_id\": 517,\n          \"shipping_option_code\": \"postnl:standard\"\n        }\n      },\n      \"tracking_number\": \"ABCD1234567890\",\n      \"tracking_url\": \"https://test.shipping-portal.com/tracking/?tracking_number=abcd1234567890&country=nl&postal_code=1234AB\",\n      \"label\": {\n        \"file\": \"<base64-encoded-pdf-data>\",\n        \"mime_type\": \"application/pdf\",\n        \"dpi\": 72\n      },\n      \"documents\": [\n        {\n          \"type\": \"label\",\n          \"size\": \"a6\",\n          \"link\": \"https://panel.sendcloud.sc/api/v3/parcels/1234567890/documents/label\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7f05dd0-8739-4310-a425-8289bc07ec62",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "create-label-sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": 70,\n  \"label_details\": {\n    \"mime_type\": \"application/pdf\",\n    \"dpi\": 72\n  },\n  \"order\": {\n    \"order_number\": \"ORDER-25763\",\n    \"apply_shipping_rules\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"400\",\n      \"code\": \"invalid\",\n      \"title\": \"Invalid\",\n      \"detail\": \"Input should be a valid string.\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/order/order_id\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ff4df4e-5fd9-47b8-b6cb-4170232fc3f5",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "create-label-sync"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": 70,\n  \"label_details\": {\n    \"mime_type\": \"application/pdf\",\n    \"dpi\": 72\n  },\n  \"order\": {\n    \"order_number\": \"ORDER-25763\",\n    \"apply_shipping_rules\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"404\",\n      \"code\": \"not_found\",\n      \"title\": \"Not found\",\n      \"detail\": \"The page you have requested could not be found.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "22798810-a46a-4ab5-9d97-6b3318335a63",
+    "name": "Ship an Order",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sendcloud Ship an Order API\n\n## What can you do with this API?\n\n- [Create Labels for orders](/docs/orders/ship-an-order/).\n\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

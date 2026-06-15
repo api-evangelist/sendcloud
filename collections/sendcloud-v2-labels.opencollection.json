@@ -1,0 +1,240 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Labels",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a label for a specific parcel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/labels/:parcel_id",
+            "params": [
+              {
+                "name": "parcel_id",
+                "value": "1",
+                "type": "path",
+                "description": "Unique parcel identifier"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "You will receive URLs to download the labels in PDF format, for both normal and label printers. You can get the `id` of a parcel from the [Create a parcel or parcels](/api/v2/parcels/create-a-parcel-or-parcels) endpoint."
+        },
+        {
+          "info": {
+            "name": "Bulk PDF label printing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v2/labels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Request multiple shipping labels for an array of parcels at the same time. You will receive URLs to download the labels in PDF format, for both normal and label printers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Label Download",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a PDF label",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/labels/normal_printer/:parcel_id",
+            "params": [
+              {
+                "name": "parcel_id",
+                "value": "1",
+                "type": "path",
+                "description": "Unique parcel identifier"
+              },
+              {
+                "name": "start_from",
+                "value": "",
+                "type": "query",
+                "description": "The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a shipping label for a specific parcel in PDF format for a normal printer."
+        },
+        {
+          "info": {
+            "name": "Retrieve multiple PDF labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/labels/normal_printer",
+            "params": [
+              {
+                "name": "ids",
+                "value": "1,2,3",
+                "type": "query",
+                "description": "Comma separated parcel ids"
+              },
+              {
+                "name": "start_from",
+                "value": "",
+                "type": "query",
+                "description": "The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve PDF label documents suitable for normal printers for multiple different parcels at the same time."
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific PDF label for a label printer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/labels/label_printer/:parcel_id",
+            "params": [
+              {
+                "name": "parcel_id",
+                "value": "1",
+                "type": "path",
+                "description": "Unique parcel identifier"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a shipping label for a specific parcel in PDF format for a label printer."
+        },
+        {
+          "info": {
+            "name": "Retrieve PDF labels for a label printer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/labels/label_printer",
+            "params": [
+              {
+                "name": "ids",
+                "value": "1,2,3",
+                "type": "query",
+                "description": "Comma separated parcel ids"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve PDF label documents suitable for label printers for multiple different parcels at the same time."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Customs Documents Download",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a customs declaration PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/customs_declaration/normal_printer/:parcel_id",
+            "params": [
+              {
+                "name": "parcel_id",
+                "value": "1",
+                "type": "path",
+                "description": "Unique parcel identifier"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve the customs documents associated with a label in PDF format for a normal printer."
+        },
+        {
+          "info": {
+            "name": "Retrieve multiple customs declaration PDFs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/customs_declaration/normal_printer",
+            "params": [
+              {
+                "name": "ids",
+                "value": "1,2,3",
+                "type": "query",
+                "description": "Comma separated parcel ids"
+              },
+              {
+                "name": "start_from",
+                "value": "",
+                "type": "query",
+                "description": "The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve PDF customs documents suitable for normal printers for multiple different parcels at the same time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

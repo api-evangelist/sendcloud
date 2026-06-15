@@ -1,0 +1,702 @@
+{
+  "info": {
+    "_postman_id": "2bc31b6e-3509-4789-a83d-a4e57751ebdf",
+    "name": "Reporting",
+    "description": "The Reporting API lets you generate and download CSV reports containing data related to your Sendcloud account for tracking and analysis purposes.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:37.000Z",
+    "updatedAt": "2026-06-05T15:16:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2bc31b6e-3509-4789-a83d-a4e57751ebdf"
+  },
+  "item": [
+    {
+      "name": "reporting",
+      "item": [
+        {
+          "name": "parcels",
+          "item": [
+            {
+              "name": "{report_id}",
+              "item": [
+                {
+                  "name": "Retrieve a parcels report",
+                  "id": "4180f1c7-3e12-49f3-9c5b-7214cdea78da",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reporting/parcels/:report_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reporting",
+                        "parcels",
+                        ":report_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f5631281-62a0-48aa-be1a-68fd51d04b8f",
+                          "key": "report_id",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier of the report."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a parcels report by id, including its current status and download URL when ready."
+                  },
+                  "response": [
+                    {
+                      "id": "9d6dc7bb-7799-443f-8601-4395cc16e117",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reporting/parcels/:report_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reporting",
+                            "parcels",
+                            ":report_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "report_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"organization_id\": \"<integer>\",\n  \"status\": \"ready\",\n  \"status_message\": \"<string>\",\n  \"fields\": [\n    \"carrier_code\",\n    \"from_address_postal_code\"\n  ],\n  \"filters\": {\n    \"announced_after\": \"<dateTime>\",\n    \"announced_before\": \"<dateTime>\",\n    \"direction\": \"incoming\",\n    \"integration_id\": \"<integer>\",\n    \"brand_id\": \"<integer>\",\n    \"shipping_option_code\": \"<string>\",\n    \"updated_after\": \"<dateTime>\",\n    \"updated_before\": \"<dateTime>\"\n  },\n  \"url\": \"<string,null-uri>\",\n  \"expires_at\": \"<string,null-date-time>\",\n  \"updated_at\": \"<dateTime>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:16:38.000Z",
+                      "updatedAt": "2026-06-05T15:16:38.000Z",
+                      "uid": "35240-9d6dc7bb-7799-443f-8601-4395cc16e117"
+                    },
+                    {
+                      "id": "5ea014e6-67fd-421c-8c9e-ace30471671f",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reporting/parcels/:report_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reporting",
+                            "parcels",
+                            ":report_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "report_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": 44538289.57504803,\n      \"code\": 59491601.58356008,\n      \"detail\": 38550983.423278004\n    },\n    {\n      \"status\": true,\n      \"code\": 27403857.46458389,\n      \"detail\": 50833206.4570241\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:38.000Z",
+                      "updatedAt": "2026-06-05T15:16:38.000Z",
+                      "uid": "35240-5ea014e6-67fd-421c-8c9e-ace30471671f"
+                    },
+                    {
+                      "id": "b6a85816-47e3-41a0-aaee-19cc42241e44",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reporting/parcels/:report_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reporting",
+                            "parcels",
+                            ":report_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "report_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": 44538289.57504803,\n      \"code\": 59491601.58356008,\n      \"detail\": 38550983.423278004\n    },\n    {\n      \"status\": true,\n      \"code\": 27403857.46458389,\n      \"detail\": 50833206.4570241\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:38.000Z",
+                      "updatedAt": "2026-06-05T15:16:38.000Z",
+                      "uid": "35240-b6a85816-47e3-41a0-aaee-19cc42241e44"
+                    },
+                    {
+                      "id": "8f45a973-9e7b-4c1b-8f1c-15d1d021bf5a",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reporting/parcels/:report_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reporting",
+                            "parcels",
+                            ":report_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "report_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"status\": 44538289.57504803,\n      \"code\": 59491601.58356008,\n      \"detail\": 38550983.423278004\n    },\n    {\n      \"status\": true,\n      \"code\": 27403857.46458389,\n      \"detail\": 50833206.4570241\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:38.000Z",
+                      "updatedAt": "2026-06-05T15:16:38.000Z",
+                      "uid": "35240-8f45a973-9e7b-4c1b-8f1c-15d1d021bf5a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:38.000Z",
+                  "updatedAt": "2026-06-05T15:16:38.000Z",
+                  "uid": "35240-4180f1c7-3e12-49f3-9c5b-7214cdea78da"
+                }
+              ],
+              "id": "da661b66-d11e-4414-8cd7-aeb19b4b0104",
+              "createdAt": "2026-06-05T15:16:38.000Z",
+              "updatedAt": "2026-06-05T15:16:38.000Z",
+              "uid": "35240-da661b66-d11e-4414-8cd7-aeb19b4b0104"
+            },
+            {
+              "name": "Create a parcels report",
+              "id": "ed8228f0-e361-4f68-96e6-2ceba8fb1157",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"contract_id\"\n  ],\n  \"filters\": {\n    \"announced_after\": \"<dateTime>\",\n    \"announced_before\": \"<dateTime>\",\n    \"direction\": \"outgoing\",\n    \"integration_id\": \"<integer>\",\n    \"brand_id\": \"<integer>\",\n    \"shipping_option_code\": \"<string>\",\n    \"updated_after\": \"<dateTime>\",\n    \"updated_before\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reporting/parcels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reporting",
+                    "parcels"
+                  ]
+                },
+                "description": "Generate a CSV report containing information about outgoing or incoming parcels."
+              },
+              "response": [
+                {
+                  "id": "aaf7cf62-fc62-46ea-9fa6-8ffac3bad5e7",
+                  "name": "Accepted",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fields\": [\n    \"contract_id\"\n  ],\n  \"filters\": {\n    \"announced_after\": \"<dateTime>\",\n    \"announced_before\": \"<dateTime>\",\n    \"direction\": \"outgoing\",\n    \"integration_id\": \"<integer>\",\n    \"brand_id\": \"<integer>\",\n    \"shipping_option_code\": \"<string>\",\n    \"updated_after\": \"<dateTime>\",\n    \"updated_before\": \"<dateTime>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reporting/parcels",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reporting",
+                        "parcels"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"organization_id\": \"<integer>\",\n  \"status\": \"ready\",\n  \"status_message\": \"<string>\",\n  \"fields\": [\n    \"carrier_code\",\n    \"from_address_postal_code\"\n  ],\n  \"filters\": {\n    \"announced_after\": \"<dateTime>\",\n    \"announced_before\": \"<dateTime>\",\n    \"direction\": \"incoming\",\n    \"integration_id\": \"<integer>\",\n    \"brand_id\": \"<integer>\",\n    \"shipping_option_code\": \"<string>\",\n    \"updated_after\": \"<dateTime>\",\n    \"updated_before\": \"<dateTime>\"\n  },\n  \"url\": \"<string,null-uri>\",\n  \"expires_at\": \"<string,null-date-time>\",\n  \"updated_at\": \"<dateTime>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-06-05T15:16:38.000Z",
+                  "updatedAt": "2026-06-05T15:16:38.000Z",
+                  "uid": "35240-aaf7cf62-fc62-46ea-9fa6-8ffac3bad5e7"
+                },
+                {
+                  "id": "68d93868-f429-496a-9758-87a948051c1a",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fields\": [\n    \"contract_id\"\n  ],\n  \"filters\": {\n    \"announced_after\": \"<dateTime>\",\n    \"announced_before\": \"<dateTime>\",\n    \"direction\": \"outgoing\",\n    \"integration_id\": \"<integer>\",\n    \"brand_id\": \"<integer>\",\n    \"shipping_option_code\": \"<string>\",\n    \"updated_after\": \"<dateTime>\",\n    \"updated_before\": \"<dateTime>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reporting/parcels",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reporting",
+                        "parcels"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": 44538289.57504803,\n      \"code\": 59491601.58356008,\n      \"detail\": 38550983.423278004\n    },\n    {\n      \"status\": true,\n      \"code\": 27403857.46458389,\n      \"detail\": 50833206.4570241\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:38.000Z",
+                  "updatedAt": "2026-06-05T15:16:38.000Z",
+                  "uid": "35240-68d93868-f429-496a-9758-87a948051c1a"
+                },
+                {
+                  "id": "bcd2389e-7d00-447e-b57d-8ca44f41df03",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fields\": [\n    \"contract_id\"\n  ],\n  \"filters\": {\n    \"announced_after\": \"<dateTime>\",\n    \"announced_before\": \"<dateTime>\",\n    \"direction\": \"outgoing\",\n    \"integration_id\": \"<integer>\",\n    \"brand_id\": \"<integer>\",\n    \"shipping_option_code\": \"<string>\",\n    \"updated_after\": \"<dateTime>\",\n    \"updated_before\": \"<dateTime>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reporting/parcels",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reporting",
+                        "parcels"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": 44538289.57504803,\n      \"code\": 59491601.58356008,\n      \"detail\": 38550983.423278004\n    },\n    {\n      \"status\": true,\n      \"code\": 27403857.46458389,\n      \"detail\": 50833206.4570241\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:38.000Z",
+                  "updatedAt": "2026-06-05T15:16:38.000Z",
+                  "uid": "35240-bcd2389e-7d00-447e-b57d-8ca44f41df03"
+                },
+                {
+                  "id": "fb5bb796-ae22-4b4f-bede-9ca7f6a32609",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fields\": [\n    \"contract_id\"\n  ],\n  \"filters\": {\n    \"announced_after\": \"<dateTime>\",\n    \"announced_before\": \"<dateTime>\",\n    \"direction\": \"outgoing\",\n    \"integration_id\": \"<integer>\",\n    \"brand_id\": \"<integer>\",\n    \"shipping_option_code\": \"<string>\",\n    \"updated_after\": \"<dateTime>\",\n    \"updated_before\": \"<dateTime>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reporting/parcels",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reporting",
+                        "parcels"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": 44538289.57504803,\n      \"code\": 59491601.58356008,\n      \"detail\": 38550983.423278004\n    },\n    {\n      \"status\": true,\n      \"code\": 27403857.46458389,\n      \"detail\": 50833206.4570241\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:38.000Z",
+                  "updatedAt": "2026-06-05T15:16:38.000Z",
+                  "uid": "35240-fb5bb796-ae22-4b4f-bede-9ca7f6a32609"
+                },
+                {
+                  "id": "b2808035-c45b-4bde-8eab-52e955b0ba9e",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fields\": [\n    \"contract_id\"\n  ],\n  \"filters\": {\n    \"announced_after\": \"<dateTime>\",\n    \"announced_before\": \"<dateTime>\",\n    \"direction\": \"outgoing\",\n    \"integration_id\": \"<integer>\",\n    \"brand_id\": \"<integer>\",\n    \"shipping_option_code\": \"<string>\",\n    \"updated_after\": \"<dateTime>\",\n    \"updated_before\": \"<dateTime>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reporting/parcels",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reporting",
+                        "parcels"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": 44538289.57504803,\n      \"code\": 59491601.58356008,\n      \"detail\": 38550983.423278004\n    },\n    {\n      \"status\": true,\n      \"code\": 27403857.46458389,\n      \"detail\": 50833206.4570241\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:38.000Z",
+                  "updatedAt": "2026-06-05T15:16:38.000Z",
+                  "uid": "35240-b2808035-c45b-4bde-8eab-52e955b0ba9e"
+                },
+                {
+                  "id": "b6d343df-aa60-4f19-8c72-86ef82322c72",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fields\": [\n    \"contract_id\"\n  ],\n  \"filters\": {\n    \"announced_after\": \"<dateTime>\",\n    \"announced_before\": \"<dateTime>\",\n    \"direction\": \"outgoing\",\n    \"integration_id\": \"<integer>\",\n    \"brand_id\": \"<integer>\",\n    \"shipping_option_code\": \"<string>\",\n    \"updated_after\": \"<dateTime>\",\n    \"updated_before\": \"<dateTime>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/reporting/parcels",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reporting",
+                        "parcels"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"status\": 44538289.57504803,\n      \"code\": 59491601.58356008,\n      \"detail\": 38550983.423278004\n    },\n    {\n      \"status\": true,\n      \"code\": 27403857.46458389,\n      \"detail\": 50833206.4570241\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:38.000Z",
+                  "updatedAt": "2026-06-05T15:16:38.000Z",
+                  "uid": "35240-b6d343df-aa60-4f19-8c72-86ef82322c72"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:38.000Z",
+              "updatedAt": "2026-06-05T15:16:38.000Z",
+              "uid": "35240-ed8228f0-e361-4f68-96e6-2ceba8fb1157"
+            }
+          ],
+          "id": "89aea642-ea54-41e0-9652-29039d547370",
+          "createdAt": "2026-06-05T15:16:38.000Z",
+          "updatedAt": "2026-06-05T15:16:38.000Z",
+          "uid": "35240-89aea642-ea54-41e0-9652-29039d547370"
+        }
+      ],
+      "id": "0c11d061-d86b-4b72-9f83-7abed1dd0af4",
+      "createdAt": "2026-06-05T15:16:38.000Z",
+      "updatedAt": "2026-06-05T15:16:38.000Z",
+      "uid": "35240-0c11d061-d86b-4b72-9f83-7abed1dd0af4"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://panel.sendcloud.sc/api/v3"
+    }
+  ]
+}

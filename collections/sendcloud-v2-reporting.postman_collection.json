@@ -1,0 +1,360 @@
+{
+  "item": [
+    {
+      "id": "87074183-bcf4-453a-8ac0-18c2cfa29a91",
+      "name": "Reporting",
+      "description": {
+        "content": "Generate data exports and reports.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d55cbf0a-c2a6-4a9b-b31c-bc005dcd952f",
+          "name": "Create a parcels report",
+          "request": {
+            "name": "Create a parcels report",
+            "description": {
+              "content": "Generate a CSV report containing information about outgoing or incoming parcels.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reporting",
+                "parcels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": {\n    \"direction\": \"<string>\",\n    \"integration_id\": \"<integer>\",\n    \"updated_after\": \"<dateTime>\",\n    \"updated_before\": \"<dateTime>\",\n    \"announced_after\": \"<dateTime>\",\n    \"announced_before\": \"<dateTime>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f188af4f-b078-40ae-85df-ee0f54506c55",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reporting",
+                    "parcels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"carrier_status\",\n    \"destination_city\"\n  ],\n  \"filters\": {\n    \"direction\": \"outgoing\",\n    \"integration_id\": 5994,\n    \"updated_after\": \"1997-08-20T08:44:26.928Z\",\n    \"updated_before\": \"1988-09-14T00:24:25.617Z\",\n    \"announced_after\": \"2008-08-22T14:46:51.849Z\",\n    \"announced_before\": \"1999-11-27T21:36:19.245Z\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"filters\": {\n    \"direction\": \"outgoing\",\n    \"integration_id\": 7785,\n    \"updated_after\": \"1967-12-19T03:30:09.682Z\",\n    \"updated_before\": \"1974-05-07T07:47:00.145Z\",\n    \"announced_after\": \"1956-07-28T11:56:31.479Z\",\n    \"announced_before\": \"1963-12-05T15:18:24.099Z\"\n  },\n  \"fields\": [\n    \"tracking_number\",\n    \"created_at\"\n  ],\n  \"id\": \"419f3be0-2f49-434b-bee4-d8cff9cf7d01\",\n  \"user_id\": 1,\n  \"status\": \"ready\",\n  \"status_message\": \"The report is ready\",\n  \"url\": \"https://reporting-service.s3.eu-central-1.amazonaws.com/reports/report-type/2021-08-09/afc46bb9-95d3-4880-80f7-660da3e68b5c.csv\",\n  \"expires_at\": \"2022-07-14T08:38:10.226217Z\",\n  \"updated_at\": \"2022-07-14T08:23:10.226265Z\",\n  \"created_at\": \"2022-07-14T08:23:10.226265Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d883a6d1-b1a0-4f84-bf4e-b86b7c8035f3",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reporting",
+                    "parcels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fields\": [\n    \"carrier_status\",\n    \"destination_city\"\n  ],\n  \"filters\": {\n    \"direction\": \"outgoing\",\n    \"integration_id\": 5994,\n    \"updated_after\": \"1997-08-20T08:44:26.928Z\",\n    \"updated_before\": \"1988-09-14T00:24:25.617Z\",\n    \"announced_after\": \"2008-08-22T14:46:51.849Z\",\n    \"announced_before\": \"1999-11-27T21:36:19.245Z\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"body\",\n        \"fields\"\n      ],\n      \"msg\": \"value is not a valid enumeration member; permitted: 'parcel_id', 'direction', 'carrier_code', 'carrier_name', 'from_company_name', 'contract_id', 'contract_type', 'origin_city', 'origin_postal_code', 'origin_country_code', 'origin_country_name', 'destination_city', 'destination_postal_code', 'destination_country_code', 'destination_country_name', 'order_number', 'tracking_number', 'created_at', 'updated_at', 'announced_at', 'shipped_at', 'first_delivery_at', 'arrived_at', 'shipping_method', 'shipping_method_name', 'price', 'global_status_slug', 'carrier_status', 'integration_id', 'integration_type', 'weight'\",\n      \"type\": \"type_error.enum\",\n      \"ctx\": {\n        \"enum_values\": [\n          \"parcel_id\",\n          \"direction\",\n          \"carrier_code\",\n          \"carrier_name\",\n          \"from_company_name\",\n          \"contract_id\",\n          \"contract_type\",\n          \"origin_city\",\n          \"origin_postal_code\",\n          \"origin_country_code\",\n          \"origin_country_name\",\n          \"destination_city\",\n          \"destination_postal_code\",\n          \"destination_country_code\",\n          \"destination_country_name\",\n          \"order_number\",\n          \"tracking_number\",\n          \"created_at\",\n          \"updated_at\",\n          \"announced_at\",\n          \"shipped_at\",\n          \"first_delivery_at\",\n          \"arrived_at\",\n          \"shipping_method\",\n          \"shipping_method_name\",\n          \"price\",\n          \"global_status_slug\",\n          \"carrier_status\",\n          \"integration_id\",\n          \"integration_type\",\n          \"weight\"\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fab97db8-6318-45aa-889e-28b37edaa697",
+          "name": "Retrieve a parcels report",
+          "request": {
+            "name": "Retrieve a parcels report",
+            "description": {
+              "content": "Generate a URL to download a parcels report in CSV format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reporting",
+                "parcels",
+                ":report_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "report_id",
+                  "description": "(Required) Report id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e0c62c4d-817e-4fe8-90c1-e3ca9a26d266",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reporting",
+                    "parcels",
+                    ":report_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "report_id",
+                      "description": "(Required) Report id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"filters\": {\n    \"direction\": \"outgoing\",\n    \"integration_id\": 7785,\n    \"updated_after\": \"1967-12-19T03:30:09.682Z\",\n    \"updated_before\": \"1974-05-07T07:47:00.145Z\",\n    \"announced_after\": \"1956-07-28T11:56:31.479Z\",\n    \"announced_before\": \"1963-12-05T15:18:24.099Z\"\n  },\n  \"fields\": [\n    \"tracking_number\",\n    \"created_at\"\n  ],\n  \"id\": \"419f3be0-2f49-434b-bee4-d8cff9cf7d01\",\n  \"user_id\": 1,\n  \"status\": \"ready\",\n  \"status_message\": \"The report is ready\",\n  \"url\": \"https://reporting-service.s3.eu-central-1.amazonaws.com/reports/report-type/2021-08-09/afc46bb9-95d3-4880-80f7-660da3e68b5c.csv\",\n  \"expires_at\": \"2022-07-14T08:38:10.226217Z\",\n  \"updated_at\": \"2022-07-14T08:23:10.226265Z\",\n  \"created_at\": \"2022-07-14T08:23:10.226265Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3df6c569-8fbb-465b-bf93-1ca6a89ef23d",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reporting",
+                    "parcels",
+                    ":report_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "report_id",
+                      "description": "(Required) Report id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"loc\": [\n    \"path\",\n    \"path\"\n  ],\n  \"msg\": \"value is not a valid uuid\",\n  \"type\": \"type_error.uuid\",\n  \"ctx\": {\n    \"enum_values\": [\n      \"carrier_status\",\n      \"arrived_at\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "879b2903-e961-4e89-bf51-382b51ed7774",
+    "name": "Reporting",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Reporting API allows you to generate and download a CSV report containing data related to your Sendcloud account for tracking and analysis purposes.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

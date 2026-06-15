@@ -1,0 +1,2309 @@
+{
+  "item": [
+    {
+      "id": "8121f978-54e5-4078-bdbf-d5f1570432b8",
+      "name": "Parcels",
+      "description": {
+        "content": "Get insights about parcels",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e2b804a1-d639-480a-b152-aee7eac0c852",
+          "name": "Retrieve parcel-insights series",
+          "request": {
+            "name": "Retrieve parcel-insights series",
+            "description": {
+              "content": "Returns data about parcels as a series, e.g. the number of parcels per day/month/year over a specified period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insights",
+                "parcels",
+                "series"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) period start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) period end date"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "filter by carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country",
+                  "value": "<string>",
+                  "description": "origin country"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country",
+                  "value": "<string>",
+                  "description": "destination country"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "<string>",
+                  "description": "(Required) the size of one point"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "incoming or outgoing"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cf25ffac-9a03-4f69-94f4-fd315cf5a323",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "parcels",
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"series\": [\n    {\n      \"value\": 358,\n      \"start_date\": \"2017-12-10\",\n      \"end_date\": \"2020-12-10\",\n      \"missing_data\": [\n        {\n          \"start_date\": \"2018-12-10\",\n          \"end_date\": \"2019-12-10\",\n          \"reason_code\": \"not-available\"\n        },\n        {\n          \"start_date\": \"2019-12-10\",\n          \"end_date\": \"2020-12-10\",\n          \"reason_code\": \"partly-available\"\n        }\n      ]\n    },\n    {\n      \"value\": 188,\n      \"start_date\": \"2021-12-10\",\n      \"end_date\": \"2022-12-10\",\n      \"missing_data\": [\n        {\n          \"start_date\": \"2021-12-10\",\n          \"end_date\": \"2022-12-10\",\n          \"reason_code\": \"missing-filter-property\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5eddfeda-4964-41d7-88e0-612b8ff5eb8b",
+              "name": "Unprocessable Entity (WebDAV)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "parcels",
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"query\",\n        \"start_date\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b53834c4-a2b0-4d5f-9e11-390273087f90",
+          "name": "Retrieve parcel-insights buckets",
+          "request": {
+            "name": "Retrieve parcel-insights buckets",
+            "description": {
+              "content": "Returns data about parcels as buckets. Buckets should be grouped by any category, for example by country.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insights",
+                "parcels",
+                "buckets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) period start date (announced)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) period end date (announced)"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "filter by carriers"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country",
+                  "value": "<string>",
+                  "description": "origin country code"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country",
+                  "value": "<string>",
+                  "description": "destination country code"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_by",
+                  "value": "<string>",
+                  "description": "(Required) group by category"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<string>",
+                  "description": "number of the buckets"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "incoming or outgoing"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74d30204-062c-4c02-ad7f-08f06469f75d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "parcels",
+                    "buckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "5"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"buckets\": [\n    {\n      \"key\": \"UK\",\n      \"value\": 10,\n      \"percentage\": 12.24,\n      \"missing_data\": [\n        {\n          \"start_date\": \"2018-12-10\",\n          \"end_date\": \"2019-12-10\",\n          \"reason_code\": \"partly-available\"\n        }\n      ]\n    },\n    {\n      \"key\": \"DE\",\n      \"value\": 8,\n      \"percentage\": 9.85,\n      \"missing_data\": [\n        {\n          \"start_date\": \"2018-12-10\",\n          \"end_date\": \"2019-12-10\",\n          \"reason_code\": \"not-available\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0df9a8cd-3c99-4ee1-a9d7-38086e07a66b",
+              "name": "Unprocessable Entity (WebDAV)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "parcels",
+                    "buckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "5"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"query\",\n        \"start_date\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa68a199-f13c-4c54-a3b3-46d184d2c21a",
+          "name": "Retrieve parcels counts summary",
+          "request": {
+            "name": "Retrieve parcels counts summary",
+            "description": {
+              "content": "Returns number of parcels for the last number of days selected.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insights",
+                "parcels",
+                "counts-summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "filter by carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country",
+                  "value": "<string>",
+                  "description": "origin country"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country",
+                  "value": "<string>",
+                  "description": "destination country"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_days",
+                  "value": "<integer>",
+                  "description": "(Required) value for the last number of days"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "incoming or outgoing parcels"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e39d8701-142e-4748-8795-a02f967fef76",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "parcels",
+                    "counts-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "last_days",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": [\n    {\n      \"last_days\": 7,\n      \"value\": 368\n    },\n    {\n      \"last_days\": 14,\n      \"value\": 668\n    },\n    {\n      \"last_days\": 30,\n      \"value\": 1253\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf4b7e5d-dc55-4625-ac7c-553bee9cf055",
+              "name": "Unprocessable Entity (WebDAV)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "parcels",
+                    "counts-summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "last_days",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"query\",\n        \"last-days\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0ee86bb3-a48e-40c0-8373-071bd46a8310",
+      "name": "Products",
+      "description": {
+        "content": "Get insights about products",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "73b90f84-b866-4f72-91ff-5bb3aea6488c",
+          "name": "Retrieve product-insights series",
+          "request": {
+            "name": "Retrieve product-insights series",
+            "description": {
+              "content": "Returns data about products as a series, e.g. the number of products per day/month/year over a specified period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insights",
+                "products",
+                "series"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) period start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) period end date"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "filter by carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country",
+                  "value": "<string>",
+                  "description": "origin country"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country",
+                  "value": "<string>",
+                  "description": "destination country"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "<string>",
+                  "description": "(Required) the size of one point"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "incoming or outgoing"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "25b01020-ec7e-4ad6-971c-ecfad70351ec",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "products",
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"series\": [\n    {\n      \"value\": 358,\n      \"start_date\": \"2017-12-10\",\n      \"end_date\": \"2020-12-10\",\n      \"missing_data\": [\n        {\n          \"start_date\": \"2018-12-10\",\n          \"end_date\": \"2019-12-10\",\n          \"reason_code\": \"not-available\"\n        },\n        {\n          \"start_date\": \"2019-12-10\",\n          \"end_date\": \"2020-12-10\",\n          \"reason_code\": \"partly-available\"\n        }\n      ]\n    },\n    {\n      \"value\": 188,\n      \"start_date\": \"2021-12-10\",\n      \"end_date\": \"2022-12-10\",\n      \"missing_data\": [\n        {\n          \"start_date\": \"2021-12-10\",\n          \"end_date\": \"2022-12-10\",\n          \"reason_code\": \"missing-filter-property\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "537eaa30-a7f8-42ab-a2da-80b5882938ec",
+              "name": "Unprocessable Entity (WebDAV)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "products",
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"query\",\n        \"start_date\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "697aa6ca-f433-4405-b713-50731c1e92ef",
+          "name": "Retrieve product-insights buckets",
+          "request": {
+            "name": "Retrieve product-insights buckets",
+            "description": {
+              "content": "Returns data about products as buckets. Buckets should be grouped by any category, for example by country.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insights",
+                "products",
+                "buckets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) period start date (announced)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) period end date (announced)"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "filter by carriers"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country",
+                  "value": "<string>",
+                  "description": "origin country code"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country",
+                  "value": "<string>",
+                  "description": "destination country code"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_by",
+                  "value": "<string>",
+                  "description": "(Required) group by category"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<string>",
+                  "description": "number of the buckets"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "incoming or outgoing"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b244d5b0-599d-4442-800b-34721915e1bb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "products",
+                    "buckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "5"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"buckets\": [\n    {\n      \"key\": \"UK\",\n      \"value\": 10,\n      \"percentage\": 12.24,\n      \"missing_data\": [\n        {\n          \"start_date\": \"2018-12-10\",\n          \"end_date\": \"2019-12-10\",\n          \"reason_code\": \"partly-available\"\n        }\n      ]\n    },\n    {\n      \"key\": \"DE\",\n      \"value\": 8,\n      \"percentage\": 9.85,\n      \"missing_data\": [\n        {\n          \"start_date\": \"2018-12-10\",\n          \"end_date\": \"2019-12-10\",\n          \"reason_code\": \"partly-available\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27feb282-7ab4-4230-a6f6-e79ffb8cfafa",
+              "name": "Unprocessable Entity (WebDAV)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "products",
+                    "buckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "5"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"query\",\n        \"start_date\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e4ea35c7-6038-4afc-bdb0-0e63fa60fb3c",
+      "name": "Transit times",
+      "description": {
+        "content": "Get insights about average transit times per carriers and shipping methods",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7b084f8b-832d-4a31-b710-182789d18a71",
+          "name": "Retrieve carrier transit times",
+          "request": {
+            "name": "Retrieve carrier transit times",
+            "description": {
+              "content": "Retrieves the average transit time of a parcel per carrier.\nYou can filter the results by origin and destination country, as well as by start and end dates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insights",
+                "carriers",
+                "transit-times"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "(Required) selection of carriers"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "(Required) selection of carriers"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country",
+                  "value": "<string>",
+                  "description": "origin country"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country",
+                  "value": "<string>",
+                  "description": "destination country"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "first delivery start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "first delivery end date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "343c014b-2a03-464f-bb29-e2a96c8cb345",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "carriers",
+                    "transit-times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2020-12-31"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2022-12-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transit_times\": [\n    {\n      \"user_id\": \"1234\",\n      \"carrier_code\": \"postnl\",\n      \"from_country\": \"NL\",\n      \"to_country\": \"DE\",\n      \"start_date\": \"2022-12-31\",\n      \"end_date\": \"2023-11-17\",\n      \"total_parcels\": 2406,\n      \"transit_time\": 82\n    },\n    {\n      \"user_id\": \"1234\",\n      \"carrier_code\": \"dhl\",\n      \"from_country\": \"DE\",\n      \"to_country\": \"AT\",\n      \"start_date\": \"2021-12-31\",\n      \"end_date\": \"2022-12-31\",\n      \"total_parcels\": 75422,\n      \"transit_time\": 51\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3175955c-3a6e-4f40-a8c8-30d580879829",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "carriers",
+                    "transit-times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2020-12-31"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2022-12-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"query\",\n        \"carrier-code\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad05a2f8-2b31-4b64-9cee-30a66614a58a",
+          "name": "Retrieve shipping method transit times",
+          "request": {
+            "name": "Retrieve shipping method transit times",
+            "description": {
+              "content": "Retrieves the average transit time of a parcel per shipping method and carrier.\nYou can filter the results by origin and destination country, as well as start and end dates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insights",
+                "shipping-methods",
+                "transit-times"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shipping_method_code",
+                  "value": "<string>",
+                  "description": "(Required) selection of shipping methods"
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_method_code",
+                  "value": "<string>",
+                  "description": "(Required) selection of shipping methods"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country",
+                  "value": "<string>",
+                  "description": "origin country"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country",
+                  "value": "<string>",
+                  "description": "destination country"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "first delivery start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "first delivery end date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0d6e76cd-9d85-490e-9184-12234f0c7bc8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "shipping-methods",
+                    "transit-times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shipping_method_code",
+                      "value": "postnl:standard/kg=0-23"
+                    },
+                    {
+                      "key": "shipping_method_code",
+                      "value": "postnl:standard/kg=0-23"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2021-12-31"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2022-12-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transit_times\": [\n    {\n      \"user_id\": \"1234\",\n      \"carrier_code\": \"postnl\",\n      \"shipping_method_code\": \"postnl:standard/kg=0-23\",\n      \"from_country\": \"NL\",\n      \"to_country\": \"DE\",\n      \"start_date\": \"2022-12-31\",\n      \"end_date\": \"2023-12-31\",\n      \"total_parcels\": 240,\n      \"transit_time\": 92\n    },\n    {\n      \"user_id\": \"1234\",\n      \"carrier_code\": \"dhl\",\n      \"shipping_method_code\": \"dhl:complete/standard\",\n      \"from_country\": \"DE\",\n      \"to_country\": \"AT\",\n      \"start_date\": \"2022-12-31\",\n      \"end_date\": \"2023-12-31\",\n      \"total_parcels\": 752,\n      \"transit_time\": 53\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79267fce-4632-45f3-bd5d-b6c86d897103",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "shipping-methods",
+                    "transit-times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shipping_method_code",
+                      "value": "postnl:standard/kg=0-23"
+                    },
+                    {
+                      "key": "shipping_method_code",
+                      "value": "postnl:standard/kg=0-23"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2021-12-31"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2022-12-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"query\",\n        \"carrier-code\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    },\n    {\n      \"loc\": [\n        \"query\",\n        \"shipping-method-code\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "dc520b3f-0a1d-4dc9-9175-4b2fd7641143",
+      "name": "User Carriers and Shipping Methods",
+      "description": {
+        "content": "Get list of carriers and shipping methods a user ever used",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7f93a44f-d644-49ea-a27a-1c09372962b5",
+          "name": "Retrieve all shipping methods used by user",
+          "request": {
+            "name": "Retrieve all shipping methods used by user",
+            "description": {
+              "content": "Returns a list of all shipping methods ever used by a user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "shipping-methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efb9dce5-d688-47e6-9c6f-4f0ffd5a4187",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "shipping-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipping_methods\": [\n    {\n      \"code\": \"postnl:standard/kg=0-23\",\n      \"carrier_code\": \"postnl\"\n    },\n    {\n      \"code\": \"dhl:complete/standard\",\n      \"carrier_code\": \"dhl\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63149e93-463c-458f-a21e-1267c8140f2e",
+          "name": "Retrieve all carriers used by user",
+          "request": {
+            "name": "Retrieve all carriers used by user",
+            "description": {
+              "content": "Returns a list of all carriers ever used by a user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "carriers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d324899-2a67-4b13-837d-0765b4e957a6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carriers\": [\n    {\n      \"code\": \"postnl\"\n    },\n    {\n      \"code\": \"dhl\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4c1b3e9e-6871-4524-8da3-eca4ee6a5d02",
+    "name": "Analytics",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Analytics API lets you query for insights about parcels, products and transit times.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

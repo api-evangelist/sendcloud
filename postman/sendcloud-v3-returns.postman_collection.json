@@ -1,0 +1,1110 @@
+{
+  "info": {
+    "_postman_id": "0bc4492a-cc8d-49d6-b01a-38c3a1bcc0a6",
+    "name": "Returns",
+    "description": "The Sendcloud **Returns API** lets you create standalone returns easily and efficiently, so you can seamlessly incorporate returns into your existing workflow, ERP or WMS system. This API can be used in conjunction with other core Sendcloud features or independently.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:28.000Z",
+    "updatedAt": "2026-06-05T15:16:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0bc4492a-cc8d-49d6-b01a-38c3a1bcc0a6"
+  },
+  "item": [
+    {
+      "name": "returns",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "cancel",
+              "item": [
+                {
+                  "name": "Request cancellation of a return",
+                  "id": "d1bf4cef-0ede-4cf5-b9c8-f4424f20fa68",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/returns/:id/cancel",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "returns",
+                        ":id",
+                        "cancel"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3ab28ceb-262e-4780-bf9f-b001605e6acd",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The internal Sendcloud id of this return"
+                        }
+                      ]
+                    },
+                    "description": "You can request cancellation for a return by providing the return `id` to this endpoint."
+                  },
+                  "response": [
+                    {
+                      "id": "51a27d9c-205e-4d20-a891-08e14817a679",
+                      "name": "Cancellation has successfully been requested",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/returns/:id/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "returns",
+                            ":id",
+                            "cancel"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:16:29.000Z",
+                      "updatedAt": "2026-06-05T15:16:29.000Z",
+                      "uid": "35240-51a27d9c-205e-4d20-a891-08e14817a679"
+                    },
+                    {
+                      "id": "78c71c2f-1f76-4fae-b0ff-7c2e46ea79ef",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/returns/:id/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "returns",
+                            ":id",
+                            "cancel"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:16:29.000Z",
+                      "updatedAt": "2026-06-05T15:16:29.000Z",
+                      "uid": "35240-78c71c2f-1f76-4fae-b0ff-7c2e46ea79ef"
+                    },
+                    {
+                      "id": "5739ed28-3ea6-4cd0-a520-e3f818ee1e9d",
+                      "name": "Conflict",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/returns/:id/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "returns",
+                            ":id",
+                            "cancel"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"code\": \"<integer>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"code\": \"<integer>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:29.000Z",
+                      "updatedAt": "2026-06-05T15:16:29.000Z",
+                      "uid": "35240-5739ed28-3ea6-4cd0-a520-e3f818ee1e9d"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:29.000Z",
+                  "updatedAt": "2026-06-05T15:16:29.000Z",
+                  "uid": "35240-d1bf4cef-0ede-4cf5-b9c8-f4424f20fa68"
+                }
+              ],
+              "id": "2168fce9-f511-4474-973e-8e4e46555f8e",
+              "createdAt": "2026-06-05T15:16:29.000Z",
+              "updatedAt": "2026-06-05T15:16:29.000Z",
+              "uid": "35240-2168fce9-f511-4474-973e-8e4e46555f8e"
+            },
+            {
+              "name": "Retrieve a return",
+              "id": "d4961624-ec20-4b98-9919-e3ef3f67bd70",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/returns/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "returns",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ecc583a2-8867-4eaa-99bd-cd6ac2b8b79c",
+                      "key": "id",
+                      "value": "<integer>",
+                      "description": "(Required) The internal Sendcloud id of this return"
+                    }
+                  ]
+                },
+                "description": "Retrieve information about a specific return parcel based on the return `id`."
+              },
+              "response": [
+                {
+                  "id": "67b8c491-6a2f-401a-af2a-1bde4986e5f5",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/returns/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "returns",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"shipping_product\": {\n    \"code\": \"<string>\"\n  },\n  \"shipping_option\": {\n    \"code\": \"<string,null>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"g\"\n  },\n  \"send_tracking_emails\": false,\n  \"is_cancellable\": \"<boolean>\",\n  \"status_history\": [\n    {\n      \"carrier_update_timestamp\": \"<dateTime>\",\n      \"parcel_status_history_id\": \"<string>\",\n      \"parent_status\": \"<string>\",\n      \"carrier_code\": \"<string>\",\n      \"carrier_message\": \"<string>\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"cm\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"g\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"WHI\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"KKQ\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"EQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"exercitationa\": -68670627.85174873\n      },\n      \"variant_id\": \"<string,null>\",\n      \"return_reason\": {\n        \"id\": \"<long>\",\n        \"description\": \"<string>\"\n      }\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"g\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"ZRV\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"YTQ\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"L\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"EQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"in_c\": -7818580.737611741\n      },\n      \"variant_id\": \"<string,null>\",\n      \"return_reason\": {\n        \"id\": \"<long>\",\n        \"description\": \"<string>\"\n      }\n    }\n  ],\n  \"brand_id\": \"<integer>\",\n  \"label_url\": \"<string,null>\",\n  \"label\": {\n    \"normal_printer\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"label_printer\": \"<string>\"\n  },\n  \"label_cost\": {\n    \"value\": \"<number>\",\n    \"currency\": \"GBP\"\n  },\n  \"insurance\": \"<boolean>\",\n  \"tracking_number\": \"<string,null>\",\n  \"tracking_url\": \"<string,null>\",\n  \"delivered_at\": \"<number,null>\",\n  \"delivered_at_iso\": \"<string,null-date-time>\",\n  \"reason\": {\n    \"id\": \"<long>\",\n    \"description\": \"<string>\"\n  },\n  \"refund\": {\n    \"refund_type\": \"money\",\n    \"message\": \"<string,null>\"\n  },\n  \"return_fee\": {\n    \"value\": \"<number>\",\n    \"currency\": \"XBB\"\n  },\n  \"order_number\": \"<string>\",\n  \"contract\": \"<integer>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"customs_shipment_type\": 0,\n  \"delivery_option\": \"drop_off_point\",\n  \"images\": [\n    {\n      \"product_id\": \"<string,null>\",\n      \"uploaded_image\": \"<uri>\",\n      \"thumbnail_image\": \"<string,null-uri>\",\n      \"description\": \"<string,null>\"\n    },\n    {\n      \"product_id\": \"<string,null>\",\n      \"uploaded_image\": \"<uri>\",\n      \"thumbnail_image\": \"<string,null-uri>\",\n      \"description\": \"<string,null>\"\n    }\n  ],\n  \"status\": \"request_rejected\",\n  \"customs_information\": null,\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"null\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"parcel_announcement_error\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:29.000Z",
+                  "updatedAt": "2026-06-05T15:16:29.000Z",
+                  "uid": "35240-67b8c491-6a2f-401a-af2a-1bde4986e5f5"
+                },
+                {
+                  "id": "c9466900-eb07-4f6b-8c96-78794f2ce634",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/returns/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "returns",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:29.000Z",
+                  "updatedAt": "2026-06-05T15:16:29.000Z",
+                  "uid": "35240-c9466900-eb07-4f6b-8c96-78794f2ce634"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:29.000Z",
+              "updatedAt": "2026-06-05T15:16:29.000Z",
+              "uid": "35240-d4961624-ec20-4b98-9919-e3ef3f67bd70"
+            }
+          ],
+          "id": "fbc9b0c0-c653-4742-81ed-de7cd5bc890f",
+          "createdAt": "2026-06-05T15:16:29.000Z",
+          "updatedAt": "2026-06-05T15:16:29.000Z",
+          "uid": "35240-fbc9b0c0-c653-4742-81ed-de7cd5bc890f"
+        },
+        {
+          "name": "validate",
+          "item": [
+            {
+              "name": "Validate a return",
+              "id": "1f76ee48-c4a2-4208-b2e3-943589f5e8df",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": 16,\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"country\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"5287\",\n      \"delivery_deadline\": null,\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"dropoff\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"mailbox\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"ddp\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"mailbox\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"express\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"d\",\n      \"service_area\": \"international\",\n      \"signature\": \"<boolean>\",\n      \"size\": null,\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"sunday\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"kg\"\n  },\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"in\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"RHP\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"MQW\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"KG\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"ea_44f\": 26912395\n      },\n      \"variant_id\": \"<string,null>\"\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TXG\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TOI\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"Duis_4c9\": 52250786,\n        \"ea_f\": false\n      },\n      \"variant_id\": \"<string,null>\"\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"GBP\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"FDP\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"delivery_option\": \"drop_off_point\",\n  \"customs_information\": null,\n  \"apply_rules\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/returns/validate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "returns",
+                    "validate"
+                  ]
+                },
+                "description": "Check if a return can be announced **without** actually creating the return, or announcing it with the carrier."
+              },
+              "response": [
+                {
+                  "id": "a905f2b9-6d19-4410-ad85-7312bdfc3014",
+                  "name": "Your return passed all validation",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                        "key": "Sendcloud-Partner-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": 16,\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"country\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"5287\",\n      \"delivery_deadline\": null,\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"dropoff\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"mailbox\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"ddp\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"mailbox\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"express\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"d\",\n      \"service_area\": \"international\",\n      \"signature\": \"<boolean>\",\n      \"size\": null,\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"sunday\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"kg\"\n  },\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"in\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"RHP\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"MQW\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"KG\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"ea_44f\": 26912395\n      },\n      \"variant_id\": \"<string,null>\"\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TXG\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TOI\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"Duis_4c9\": 52250786,\n        \"ea_f\": false\n      },\n      \"variant_id\": \"<string,null>\"\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"GBP\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"FDP\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"delivery_option\": \"drop_off_point\",\n  \"customs_information\": null,\n  \"apply_rules\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/returns/validate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "returns",
+                        "validate"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": 16,\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"zonal\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"9083\",\n      \"delivery_deadline\": null,\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"dropoff\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"long\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"dap_np\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"home_delivery\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"express\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"a+\",\n      \"service_area\": null,\n      \"signature\": \"<boolean>\",\n      \"size\": \"m\",\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"saturday\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": \"<number>\",\n  \"dimensions\": {\n    \"height\": \"<number>\",\n    \"width\": \"<number>\",\n    \"length\": \"<number>\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"kg\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"WNF\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"YJN\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"L\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"EQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"enim_9\": \"labore esse non\"\n      },\n      \"variant_id\": \"<string,null>\"\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"oz\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"SQC\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"IHP\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"L\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"EQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"velit_0\": \"voluptate\",\n        \"incididunt_8\": \"irure laboris pariatur\"\n      },\n      \"variant_id\": \"<string,null>\"\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"GBP\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"NSC\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_shipment_type\": 1,\n  \"delivery_option\": \"in_store\"\n}",
+                  "createdAt": "2026-06-05T15:16:29.000Z",
+                  "updatedAt": "2026-06-05T15:16:29.000Z",
+                  "uid": "35240-a905f2b9-6d19-4410-ad85-7312bdfc3014"
+                },
+                {
+                  "id": "106c63a9-5cd2-4c2f-8ccf-56f7dec6ea54",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                        "key": "Sendcloud-Partner-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": 16,\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"country\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"5287\",\n      \"delivery_deadline\": null,\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"dropoff\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"mailbox\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"ddp\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"mailbox\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"express\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"d\",\n      \"service_area\": \"international\",\n      \"signature\": \"<boolean>\",\n      \"size\": null,\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"sunday\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"kg\"\n  },\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"in\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"RHP\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"MQW\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"KG\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"ea_44f\": 26912395\n      },\n      \"variant_id\": \"<string,null>\"\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TXG\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TOI\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"Duis_4c9\": 52250786,\n        \"ea_f\": false\n      },\n      \"variant_id\": \"<string,null>\"\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"GBP\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"FDP\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"delivery_option\": \"drop_off_point\",\n  \"customs_information\": null,\n  \"apply_rules\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/returns/validate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "returns",
+                        "validate"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\",\n      \"code\": \"min_value\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\",\n      \"code\": \"invalid\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:29.000Z",
+                  "updatedAt": "2026-06-05T15:16:29.000Z",
+                  "uid": "35240-106c63a9-5cd2-4c2f-8ccf-56f7dec6ea54"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:29.000Z",
+              "updatedAt": "2026-06-05T15:16:29.000Z",
+              "uid": "35240-1f76ee48-c4a2-4208-b2e3-943589f5e8df"
+            }
+          ],
+          "id": "bd0f55ff-ebe2-4872-bf1b-1d91f559d09d",
+          "createdAt": "2026-06-05T15:16:29.000Z",
+          "updatedAt": "2026-06-05T15:16:29.000Z",
+          "uid": "35240-bd0f55ff-ebe2-4872-bf1b-1d91f559d09d"
+        },
+        {
+          "name": "announce-synchronously",
+          "item": [
+            {
+              "name": "Create a return synchronously",
+              "id": "898310fd-2a64-4638-bf45-a996afa4f04e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": 16,\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"country\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"5287\",\n      \"delivery_deadline\": null,\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"dropoff\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"mailbox\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"ddp\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"mailbox\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"express\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"d\",\n      \"service_area\": \"international\",\n      \"signature\": \"<boolean>\",\n      \"size\": null,\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"sunday\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"kg\"\n  },\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"in\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"RHP\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"MQW\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"KG\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"ea_44f\": 26912395\n      },\n      \"variant_id\": \"<string,null>\"\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TXG\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TOI\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"Duis_4c9\": 52250786,\n        \"ea_f\": false\n      },\n      \"variant_id\": \"<string,null>\"\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"GBP\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"FDP\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"delivery_option\": \"drop_off_point\",\n  \"customs_information\": null,\n  \"apply_rules\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/returns/announce-synchronously",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "returns",
+                    "announce-synchronously"
+                  ]
+                },
+                "description": "Create a return synchronously, i.e. wait for a response from the carrier before continuing."
+              },
+              "response": [
+                {
+                  "id": "8082610f-6129-439a-b25d-90d380756297",
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                        "key": "Sendcloud-Partner-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": 16,\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"country\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"5287\",\n      \"delivery_deadline\": null,\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"dropoff\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"mailbox\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"ddp\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"mailbox\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"express\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"d\",\n      \"service_area\": \"international\",\n      \"signature\": \"<boolean>\",\n      \"size\": null,\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"sunday\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"kg\"\n  },\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"in\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"RHP\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"MQW\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"KG\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"ea_44f\": 26912395\n      },\n      \"variant_id\": \"<string,null>\"\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TXG\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TOI\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"Duis_4c9\": 52250786,\n        \"ea_f\": false\n      },\n      \"variant_id\": \"<string,null>\"\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"GBP\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"FDP\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"delivery_option\": \"drop_off_point\",\n  \"customs_information\": null,\n  \"apply_rules\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/returns/announce-synchronously",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "returns",
+                        "announce-synchronously"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"return_id\": \"<integer>\",\n  \"parcel_id\": \"<integer>\",\n  \"multi_collo_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:29.000Z",
+                  "updatedAt": "2026-06-05T15:16:29.000Z",
+                  "uid": "35240-8082610f-6129-439a-b25d-90d380756297"
+                },
+                {
+                  "id": "33405d4c-df30-4265-853b-113db3d86f83",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                        "key": "Sendcloud-Partner-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": 16,\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"country\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"5287\",\n      \"delivery_deadline\": null,\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"dropoff\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"mailbox\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"ddp\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"mailbox\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"express\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"d\",\n      \"service_area\": \"international\",\n      \"signature\": \"<boolean>\",\n      \"size\": null,\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"sunday\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"kg\"\n  },\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"in\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"RHP\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"MQW\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"KG\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"ea_44f\": 26912395\n      },\n      \"variant_id\": \"<string,null>\"\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TXG\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TOI\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"Duis_4c9\": 52250786,\n        \"ea_f\": false\n      },\n      \"variant_id\": \"<string,null>\"\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"GBP\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"FDP\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"delivery_option\": \"drop_off_point\",\n  \"customs_information\": null,\n  \"apply_rules\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/returns/announce-synchronously",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "returns",
+                        "announce-synchronously"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"request\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:29.000Z",
+                  "updatedAt": "2026-06-05T15:16:29.000Z",
+                  "uid": "35240-33405d4c-df30-4265-853b-113db3d86f83"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:29.000Z",
+              "updatedAt": "2026-06-05T15:16:29.000Z",
+              "uid": "35240-898310fd-2a64-4638-bf45-a996afa4f04e"
+            }
+          ],
+          "id": "c9f776ca-6edb-4b54-9950-7b7fad4767b6",
+          "createdAt": "2026-06-05T15:16:29.000Z",
+          "updatedAt": "2026-06-05T15:16:29.000Z",
+          "uid": "35240-c9f776ca-6edb-4b54-9950-7b7fad4767b6"
+        },
+        {
+          "name": "Create a return",
+          "id": "9387c4b7-469b-4f71-b72a-31dc7f0c3848",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": 16,\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"country\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"5287\",\n      \"delivery_deadline\": null,\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"dropoff\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"mailbox\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"ddp\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"mailbox\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"express\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"d\",\n      \"service_area\": \"international\",\n      \"signature\": \"<boolean>\",\n      \"size\": null,\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"sunday\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"kg\"\n  },\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"in\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"RHP\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"MQW\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"KG\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"ea_44f\": 26912395\n      },\n      \"variant_id\": \"<string,null>\"\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TXG\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TOI\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"Duis_4c9\": 52250786,\n        \"ea_f\": false\n      },\n      \"variant_id\": \"<string,null>\"\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"GBP\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"FDP\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"delivery_option\": \"drop_off_point\",\n  \"customs_information\": null,\n  \"apply_rules\": false\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/returns",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "returns"
+              ]
+            },
+            "description": "Create a standalone return"
+          },
+          "response": [
+            {
+              "id": "f94bcc59-28ce-44c4-a3b2-97cfea6c845a",
+              "name": "Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": 16,\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"country\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"5287\",\n      \"delivery_deadline\": null,\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"dropoff\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"mailbox\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"ddp\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"mailbox\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"express\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"d\",\n      \"service_area\": \"international\",\n      \"signature\": \"<boolean>\",\n      \"size\": null,\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"sunday\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"kg\"\n  },\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"in\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"RHP\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"MQW\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"KG\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"ea_44f\": 26912395\n      },\n      \"variant_id\": \"<string,null>\"\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TXG\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TOI\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"Duis_4c9\": 52250786,\n        \"ea_f\": false\n      },\n      \"variant_id\": \"<string,null>\"\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"GBP\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"FDP\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"delivery_option\": \"drop_off_point\",\n  \"customs_information\": null,\n  \"apply_rules\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/returns",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "returns"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"return_id\": \"<integer>\",\n  \"parcel_id\": \"<integer>\",\n  \"multi_collo_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "createdAt": "2026-06-05T15:16:29.000Z",
+              "updatedAt": "2026-06-05T15:16:29.000Z",
+              "uid": "35240-f94bcc59-28ce-44c4-a3b2-97cfea6c845a"
+            },
+            {
+              "id": "f897dd3a-7ef8-42e8-a526-9e17424b6402",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"to_address\": {\n    \"name\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_product_code\",\n    \"shipping_option_code\": \"<string>\",\n    \"shipping_product_code\": \"<string>\",\n    \"functionalities\": {\n      \"age_check\": 16,\n      \"b2b\": \"<boolean>\",\n      \"b2c\": \"<boolean>\",\n      \"boxable\": \"<boolean>\",\n      \"bulky_goods\": \"<boolean>\",\n      \"carrier_billing_type\": \"country\",\n      \"cash_on_delivery\": \"<integer,null>\",\n      \"dangerous_goods\": \"<boolean>\",\n      \"delivery_attempts\": \"<integer,null>\",\n      \"delivery_before\": \"5287\",\n      \"delivery_deadline\": null,\n      \"direct_contract_only\": \"<boolean>\",\n      \"eco_delivery\": \"<boolean>\",\n      \"first_mile\": \"dropoff\",\n      \"flex_delivery\": \"<boolean>\",\n      \"form_factor\": \"mailbox\",\n      \"fragile_goods\": \"<boolean>\",\n      \"fresh_goods\": \"<boolean>\",\n      \"harmonized_label\": \"<boolean>\",\n      \"id_check\": \"<boolean>\",\n      \"incoterm\": \"ddp\",\n      \"insurance\": \"<integer,null>\",\n      \"last_mile\": \"mailbox\",\n      \"manually\": \"<boolean>\",\n      \"multicollo\": \"<boolean>\",\n      \"neighbor_delivery\": \"<boolean>\",\n      \"non_conveyable\": \"<boolean>\",\n      \"personalized_delivery\": \"<boolean>\",\n      \"premium\": \"<boolean>\",\n      \"priority\": \"express\",\n      \"registered_delivery\": \"<boolean>\",\n      \"returns\": \"<boolean>\",\n      \"segment\": \"d\",\n      \"service_area\": \"international\",\n      \"signature\": \"<boolean>\",\n      \"size\": null,\n      \"sorted\": \"<boolean>\",\n      \"surcharge\": \"<boolean>\",\n      \"tracked\": \"<boolean>\",\n      \"tyres\": \"<boolean>\",\n      \"weekend_delivery\": \"sunday\",\n      \"ers\": \"<boolean>\",\n      \"pick_up\": \"<boolean>\",\n      \"labelless\": \"<boolean>\"\n    },\n    \"contract\": \"<integer>\"\n  },\n  \"weight\": {\n    \"value\": \"<number>\",\n    \"unit\": \"kg\"\n  },\n  \"dimensions\": {\n    \"length\": \"<number>\",\n    \"width\": \"<number>\",\n    \"height\": \"<number>\",\n    \"unit\": \"in\"\n  },\n  \"collo_count\": 1,\n  \"parcel_items\": [\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"RHP\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"MQW\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"ADR\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"KG\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"Highway\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"III\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Net\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"ea_44f\": 26912395\n      },\n      \"variant_id\": \"<string,null>\"\n    },\n    {\n      \"item_id\": \"<string,null>\",\n      \"description\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"lbs\"\n      },\n      \"price\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TXG\"\n      },\n      \"value\": {\n        \"value\": \"<number>\",\n        \"currency\": \"TOI\"\n      },\n      \"hs_code\": \"<string>\",\n      \"origin_country\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"product_id\": \"<string>\",\n      \"return_reason_id\": \"<string,null>\",\n      \"return_message\": \"<string,null>\",\n      \"mid_code\": \"<string,null>\",\n      \"material_content\": \"<string,null>\",\n      \"intended_use\": \"<string,null>\",\n      \"dangerous_goods\": {\n        \"chemical_record_identifier\": \"<string>\",\n        \"regulation_set\": \"IATA\",\n        \"packaging_type_quantity\": \"<string>\",\n        \"packaging_type\": \"<string>\",\n        \"packaging_instruction_code\": \"<string>\",\n        \"id_number\": \"<string>\",\n        \"class_division_number\": \"<string>\",\n        \"quantity\": \"<string>\",\n        \"unit_of_measurement\": \"G\",\n        \"proper_shipping_name\": \"<string>\",\n        \"commodity_regulated_level_code\": \"LQ\",\n        \"transportation_mode\": \"CAO\",\n        \"emergency_contact_name\": \"<string>\",\n        \"emergency_contact_phone\": \"<string>\",\n        \"adr_packing_group_letter\": \"I\",\n        \"local_proper_shipping_name\": \"<string>\",\n        \"transport_category\": \"<string>\",\n        \"tunnel_restriction_code\": \"<string>\",\n        \"weight_type\": \"Gross\"\n      },\n      \"dds_reference\": \"<string,null>\",\n      \"taric_doc_code\": \"<string,null>\",\n      \"manufacturer_product_id\": \"<string,null>\",\n      \"manufacturer_product_id_std\": \"<string,null>\",\n      \"properties\": {\n        \"Duis_4c9\": 52250786,\n        \"ea_f\": false\n      },\n      \"variant_id\": \"<string,null>\"\n    }\n  ],\n  \"send_tracking_emails\": false,\n  \"brand_id\": \"<integer>\",\n  \"total_insured_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"GBP\"\n  },\n  \"order_number\": \"<string>\",\n  \"total_order_value\": {\n    \"value\": \"<number>\",\n    \"currency\": \"FDP\"\n  },\n  \"external_reference\": \"<string>\",\n  \"customs_invoice_nr\": \"<string,null>\",\n  \"delivery_option\": \"drop_off_point\",\n  \"customs_information\": null,\n  \"apply_rules\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/returns",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "returns"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\",\n      \"code\": \"min_value\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\",\n      \"code\": \"invalid\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:16:29.000Z",
+              "updatedAt": "2026-06-05T15:16:29.000Z",
+              "uid": "35240-f897dd3a-7ef8-42e8-a526-9e17424b6402"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:29.000Z",
+          "updatedAt": "2026-06-05T15:16:29.000Z",
+          "uid": "35240-9387c4b7-469b-4f71-b72a-31dc7f0c3848"
+        },
+        {
+          "name": "Retrieve a list of returns",
+          "id": "6b3d8599-807f-47b1-b82f-f67b9b7b98f9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/returns?cursor=<string>&from_date=<string>&to_date=<string>&parent_parcel_status=sorting&page_size=<number>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "returns"
+              ],
+              "query": [
+                {
+                  "description": "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n- `o`: Offset\n- `r`: Reverse\n- `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`.",
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Excludes all returns before this datetime",
+                  "key": "from_date",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Excludes all returns after this datetime",
+                  "key": "to_date",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Search for returns with this parent status",
+                  "key": "parent_parcel_status",
+                  "value": "sorting"
+                },
+                {
+                  "description": "Refers to the number of items per page",
+                  "key": "page_size",
+                  "value": "<number>"
+                }
+              ]
+            },
+            "description": "Retrieve a list of returns which have been created under your API credentials."
+          },
+          "response": [
+            {
+              "id": "1037e84d-6e51-4dec-b7dd-069b3bb6c117",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/returns?cursor=<string>&from_date=<string>&to_date=<string>&parent_parcel_status=sorting&page_size=<number>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "returns"
+                  ],
+                  "query": [
+                    {
+                      "description": "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n- `o`: Offset\n- `r`: Reverse\n- `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`.",
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Excludes all returns before this datetime",
+                      "key": "from_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Excludes all returns after this datetime",
+                      "key": "to_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Search for returns with this parent status",
+                      "key": "parent_parcel_status",
+                      "value": "sorting"
+                    },
+                    {
+                      "description": "Refers to the number of items per page",
+                      "key": "page_size",
+                      "value": "<number>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"next\": \"<string>\",\n  \"previous\": \"<string>\",\n  \"data\": [\n    {\n      \"from_address\": {\n        \"name\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"address_line_1\": \"<string>\",\n        \"house_number\": \"<string>\",\n        \"address_line_2\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"city\": \"<string>\",\n        \"po_box\": \"<string,null>\",\n        \"state_province_code\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"email\": \"<email>\",\n        \"phone_number\": \"<string>\"\n      },\n      \"to_address\": {\n        \"name\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"address_line_1\": \"<string>\",\n        \"house_number\": \"<string>\",\n        \"address_line_2\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"city\": \"<string>\",\n        \"po_box\": \"<string,null>\",\n        \"state_province_code\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"email\": \"<email>\",\n        \"phone_number\": \"<string>\"\n      },\n      \"shipping_product\": {\n        \"code\": \"<string>\"\n      },\n      \"shipping_option\": {\n        \"code\": \"<string,null>\"\n      },\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"g\"\n      },\n      \"send_tracking_emails\": false,\n      \"is_cancellable\": \"<boolean>\",\n      \"status_history\": [\n        {\n          \"carrier_update_timestamp\": \"<dateTime>\",\n          \"parcel_status_history_id\": \"<string>\",\n          \"parent_status\": \"<string>\",\n          \"carrier_code\": \"<string>\",\n          \"carrier_message\": \"<string>\"\n        }\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"dimensions\": {\n        \"length\": \"<number>\",\n        \"width\": \"<number>\",\n        \"height\": \"<number>\",\n        \"unit\": \"cm\"\n      },\n      \"collo_count\": 1,\n      \"parcel_items\": [\n        {\n          \"item_id\": \"<string,null>\",\n          \"description\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"g\"\n          },\n          \"price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"WGH\"\n          },\n          \"value\": {\n            \"value\": \"<number>\",\n            \"currency\": \"EXW\"\n          },\n          \"hs_code\": \"<string>\",\n          \"origin_country\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"return_reason_id\": \"<string,null>\",\n          \"return_message\": \"<string,null>\",\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"L\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"Ground\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"I\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Gross\"\n          },\n          \"dds_reference\": \"<string,null>\",\n          \"taric_doc_code\": \"<string,null>\",\n          \"manufacturer_product_id\": \"<string,null>\",\n          \"manufacturer_product_id_std\": \"<string,null>\",\n          \"properties\": {\n            \"reprehenderit_3\": \"nostrud quis dolor ut\"\n          },\n          \"variant_id\": \"<string,null>\",\n          \"return_reason\": {\n            \"id\": \"<long>\",\n            \"description\": \"<string>\"\n          }\n        },\n        {\n          \"item_id\": \"<string,null>\",\n          \"description\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"g\"\n          },\n          \"price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"NPG\"\n          },\n          \"value\": {\n            \"value\": \"<number>\",\n            \"currency\": \"EPQ\"\n          },\n          \"hs_code\": \"<string>\",\n          \"origin_country\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"return_reason_id\": \"<string,null>\",\n          \"return_message\": \"<string,null>\",\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"G\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"Highway\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"III\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Gross\"\n          },\n          \"dds_reference\": \"<string,null>\",\n          \"taric_doc_code\": \"<string,null>\",\n          \"manufacturer_product_id\": \"<string,null>\",\n          \"manufacturer_product_id_std\": \"<string,null>\",\n          \"properties\": {\n            \"sed_743\": \"in aliquip aute\",\n            \"sit0\": false,\n            \"et_f_2\": 21642943.48694828,\n            \"voluptate91\": \"incididunt\"\n          },\n          \"variant_id\": \"<string,null>\",\n          \"return_reason\": {\n            \"id\": \"<long>\",\n            \"description\": \"<string>\"\n          }\n        }\n      ],\n      \"brand_id\": \"<integer>\",\n      \"label_url\": \"<string,null>\",\n      \"label\": {\n        \"normal_printer\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"label_printer\": \"<string>\"\n      },\n      \"label_cost\": {\n        \"value\": \"<number>\",\n        \"currency\": \"USD\"\n      },\n      \"insurance\": \"<boolean>\",\n      \"tracking_number\": \"<string,null>\",\n      \"tracking_url\": \"<string,null>\",\n      \"delivered_at\": \"<number,null>\",\n      \"delivered_at_iso\": \"<string,null-date-time>\",\n      \"reason\": {\n        \"id\": \"<long>\",\n        \"description\": \"<string>\"\n      },\n      \"refund\": {\n        \"refund_type\": \"exchange\",\n        \"message\": \"<string,null>\"\n      },\n      \"return_fee\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EGQ\"\n      },\n      \"order_number\": \"<string>\",\n      \"contract\": \"<integer>\",\n      \"customs_invoice_nr\": \"<string,null>\",\n      \"customs_shipment_type\": 2,\n      \"delivery_option\": \"drop_off_point\",\n      \"images\": [\n        {\n          \"product_id\": \"<string,null>\",\n          \"uploaded_image\": \"<uri>\",\n          \"thumbnail_image\": \"<string,null-uri>\",\n          \"description\": \"<string,null>\"\n        },\n        {\n          \"product_id\": \"<string,null>\",\n          \"uploaded_image\": \"<uri>\",\n          \"thumbnail_image\": \"<string,null-uri>\",\n          \"description\": \"<string,null>\"\n        }\n      ],\n      \"status\": \"awaiting_payment\",\n      \"customs_information\": null,\n      \"errors\": [\n        {\n          \"id\": \"<string>\",\n          \"links\": {\n            \"about\": \"<string>\"\n          },\n          \"status\": \"<string>\",\n          \"code\": \"invalid_choice\",\n          \"title\": \"<string>\",\n          \"detail\": \"<string>\",\n          \"source\": {\n            \"pointer\": \"<string>\",\n            \"parameter\": \"<string>\",\n            \"header\": \"<string>\"\n          },\n          \"meta\": {}\n        },\n        {\n          \"id\": \"<string>\",\n          \"links\": {\n            \"about\": \"<string>\"\n          },\n          \"status\": \"<string>\",\n          \"code\": \"required\",\n          \"title\": \"<string>\",\n          \"detail\": \"<string>\",\n          \"source\": {\n            \"pointer\": \"<string>\",\n            \"parameter\": \"<string>\",\n            \"header\": \"<string>\"\n          },\n          \"meta\": {}\n        }\n      ]\n    },\n    {\n      \"from_address\": {\n        \"name\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"address_line_1\": \"<string>\",\n        \"house_number\": \"<string>\",\n        \"address_line_2\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"city\": \"<string>\",\n        \"po_box\": \"<string,null>\",\n        \"state_province_code\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"email\": \"<email>\",\n        \"phone_number\": \"<string>\"\n      },\n      \"to_address\": {\n        \"name\": \"<string>\",\n        \"company_name\": \"<string>\",\n        \"address_line_1\": \"<string>\",\n        \"house_number\": \"<string>\",\n        \"address_line_2\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"city\": \"<string>\",\n        \"po_box\": \"<string,null>\",\n        \"state_province_code\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"email\": \"<email>\",\n        \"phone_number\": \"<string>\"\n      },\n      \"shipping_product\": {\n        \"code\": \"<string>\"\n      },\n      \"shipping_option\": {\n        \"code\": \"<string,null>\"\n      },\n      \"weight\": {\n        \"value\": \"<number>\",\n        \"unit\": \"kg\"\n      },\n      \"send_tracking_emails\": false,\n      \"is_cancellable\": \"<boolean>\",\n      \"status_history\": [\n        {\n          \"carrier_update_timestamp\": \"<dateTime>\",\n          \"parcel_status_history_id\": \"<string>\",\n          \"parent_status\": \"<string>\",\n          \"carrier_code\": \"<string>\",\n          \"carrier_message\": \"<string>\"\n        }\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"dimensions\": {\n        \"length\": \"<number>\",\n        \"width\": \"<number>\",\n        \"height\": \"<number>\",\n        \"unit\": \"cm\"\n      },\n      \"collo_count\": 1,\n      \"parcel_items\": [\n        {\n          \"item_id\": \"<string,null>\",\n          \"description\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"oz\"\n          },\n          \"price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"MRM\"\n          },\n          \"value\": {\n            \"value\": \"<number>\",\n            \"currency\": \"MDQ\"\n          },\n          \"hs_code\": \"<string>\",\n          \"origin_country\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"return_reason_id\": \"<string,null>\",\n          \"return_message\": \"<string,null>\",\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"IATA\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"KG\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"Ground\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"I\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Gross\"\n          },\n          \"dds_reference\": \"<string,null>\",\n          \"taric_doc_code\": \"<string,null>\",\n          \"manufacturer_product_id\": \"<string,null>\",\n          \"manufacturer_product_id_std\": \"<string,null>\",\n          \"properties\": {\n            \"qui3\": false\n          },\n          \"variant_id\": \"<string,null>\",\n          \"return_reason\": {\n            \"id\": \"<long>\",\n            \"description\": \"<string>\"\n          }\n        },\n        {\n          \"item_id\": \"<string,null>\",\n          \"description\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"weight\": {\n            \"value\": \"<number>\",\n            \"unit\": \"oz\"\n          },\n          \"price\": {\n            \"value\": \"<number>\",\n            \"currency\": \"QUO\"\n          },\n          \"value\": {\n            \"value\": \"<number>\",\n            \"currency\": \"BAU\"\n          },\n          \"hs_code\": \"<string>\",\n          \"origin_country\": \"<string>\",\n          \"sku\": \"<string>\",\n          \"product_id\": \"<string>\",\n          \"return_reason_id\": \"<string,null>\",\n          \"return_message\": \"<string,null>\",\n          \"mid_code\": \"<string,null>\",\n          \"material_content\": \"<string,null>\",\n          \"intended_use\": \"<string,null>\",\n          \"dangerous_goods\": {\n            \"chemical_record_identifier\": \"<string>\",\n            \"regulation_set\": \"ADR\",\n            \"packaging_type_quantity\": \"<string>\",\n            \"packaging_type\": \"<string>\",\n            \"packaging_instruction_code\": \"<string>\",\n            \"id_number\": \"<string>\",\n            \"class_division_number\": \"<string>\",\n            \"quantity\": \"<string>\",\n            \"unit_of_measurement\": \"L\",\n            \"proper_shipping_name\": \"<string>\",\n            \"commodity_regulated_level_code\": \"EQ\",\n            \"transportation_mode\": \"Highway\",\n            \"emergency_contact_name\": \"<string>\",\n            \"emergency_contact_phone\": \"<string>\",\n            \"adr_packing_group_letter\": \"II\",\n            \"local_proper_shipping_name\": \"<string>\",\n            \"transport_category\": \"<string>\",\n            \"tunnel_restriction_code\": \"<string>\",\n            \"weight_type\": \"Gross\"\n          },\n          \"dds_reference\": \"<string,null>\",\n          \"taric_doc_code\": \"<string,null>\",\n          \"manufacturer_product_id\": \"<string,null>\",\n          \"manufacturer_product_id_std\": \"<string,null>\",\n          \"properties\": {\n            \"culpa1\": 4054363.8997495323,\n            \"nullaf42\": \"veniam laborum dolor anim incididunt\",\n            \"velitcf\": false\n          },\n          \"variant_id\": \"<string,null>\",\n          \"return_reason\": {\n            \"id\": \"<long>\",\n            \"description\": \"<string>\"\n          }\n        }\n      ],\n      \"brand_id\": \"<integer>\",\n      \"label_url\": \"<string,null>\",\n      \"label\": {\n        \"normal_printer\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"label_printer\": \"<string>\"\n      },\n      \"label_cost\": {\n        \"value\": \"<number>\",\n        \"currency\": \"EUR\"\n      },\n      \"insurance\": \"<boolean>\",\n      \"tracking_number\": \"<string,null>\",\n      \"tracking_url\": \"<string,null>\",\n      \"delivered_at\": \"<number,null>\",\n      \"delivered_at_iso\": \"<string,null-date-time>\",\n      \"reason\": {\n        \"id\": \"<long>\",\n        \"description\": \"<string>\"\n      },\n      \"refund\": {\n        \"refund_type\": \"money\",\n        \"message\": \"<string,null>\"\n      },\n      \"return_fee\": {\n        \"value\": \"<number>\",\n        \"currency\": \"FLZ\"\n      },\n      \"order_number\": \"<string>\",\n      \"contract\": \"<integer>\",\n      \"customs_invoice_nr\": \"<string,null>\",\n      \"customs_shipment_type\": 2,\n      \"delivery_option\": \"drop_off_labelless\",\n      \"images\": [\n        {\n          \"product_id\": \"<string,null>\",\n          \"uploaded_image\": \"<uri>\",\n          \"thumbnail_image\": \"<string,null-uri>\",\n          \"description\": \"<string,null>\"\n        },\n        {\n          \"product_id\": \"<string,null>\",\n          \"uploaded_image\": \"<uri>\",\n          \"thumbnail_image\": \"<string,null-uri>\",\n          \"description\": \"<string,null>\"\n        }\n      ],\n      \"status\": \"requested\",\n      \"customs_information\": {\n        \"invoice_number\": \"<string>\",\n        \"export_reason\": \"returned_goods\",\n        \"export_type\": \"commercial_b2c\",\n        \"invoice_date\": \"<date>\",\n        \"discount_granted\": \"<null>\",\n        \"freight_costs\": \"<null>\",\n        \"insurance_costs\": \"<null>\",\n        \"other_costs\": \"<null>\",\n        \"general_notes\": \"<string>\",\n        \"additional_declaration_statements\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"importer_of_record\": {\n          \"name\": \"<string>\",\n          \"address_line_1\": \"<string>\",\n          \"city\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"country_code\": \"<string>\",\n          \"company_name\": \"<string>\",\n          \"address_line_2\": \"<string>\",\n          \"house_number\": \"<string>\",\n          \"state_province_code\": \"<string>\",\n          \"telephone\": \"<string>\",\n          \"email\": \"<string>\"\n        },\n        \"tax_numbers\": {\n          \"sender\": [\n            {\n              \"name\": \"INN\",\n              \"country_code\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"name\": \"DUN\",\n              \"country_code\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ],\n          \"receiver\": [\n            {\n              \"name\": \"KPP\",\n              \"country_code\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"name\": \"VAT\",\n              \"country_code\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ],\n          \"importer_of_record\": [\n            {\n              \"name\": \"GST\",\n              \"country_code\": \"<string>\",\n              \"value\": \"<string>\"\n            },\n            {\n              \"name\": \"INN\",\n              \"country_code\": \"<string>\",\n              \"value\": \"<string>\"\n            }\n          ]\n        },\n        \"return_data\": null\n      },\n      \"errors\": [\n        {\n          \"id\": \"<string>\",\n          \"links\": {\n            \"about\": \"<string>\"\n          },\n          \"status\": \"<string>\",\n          \"code\": \"non_field_errors\",\n          \"title\": \"<string>\",\n          \"detail\": \"<string>\",\n          \"source\": {\n            \"pointer\": \"<string>\",\n            \"parameter\": \"<string>\",\n            \"header\": \"<string>\"\n          },\n          \"meta\": {}\n        },\n        {\n          \"id\": \"<string>\",\n          \"links\": {\n            \"about\": \"<string>\"\n          },\n          \"status\": \"<string>\",\n          \"code\": \"parcel_announcement_error\",\n          \"title\": \"<string>\",\n          \"detail\": \"<string>\",\n          \"source\": {\n            \"pointer\": \"<string>\",\n            \"parameter\": \"<string>\",\n            \"header\": \"<string>\"\n          },\n          \"meta\": {}\n        }\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:16:29.000Z",
+              "updatedAt": "2026-06-05T15:16:29.000Z",
+              "uid": "35240-1037e84d-6e51-4dec-b7dd-069b3bb6c117"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:29.000Z",
+          "updatedAt": "2026-06-05T15:16:29.000Z",
+          "uid": "35240-6b3d8599-807f-47b1-b82f-f67b9b7b98f9"
+        }
+      ],
+      "id": "06e0e5a3-5c53-4091-ab2f-37f6b18efd6b",
+      "createdAt": "2026-06-05T15:16:29.000Z",
+      "updatedAt": "2026-06-05T15:16:29.000Z",
+      "uid": "35240-06e0e5a3-5c53-4091-ab2f-37f6b18efd6b"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://panel.sendcloud.sc/api/v3"
+    }
+  ]
+}

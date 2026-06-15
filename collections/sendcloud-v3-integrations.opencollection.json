@@ -1,0 +1,320 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Integrations",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/integrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Filtering on the Sendcloud integration ID"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a valid integration from the Sendcloud system"
+        },
+        {
+          "info": {
+            "name": "Update certain parts of an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://panel.sendcloud.sc/api/v3/integrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Filtering on the Sendcloud integration ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update the shop name, shop URL, service point settings, webhook settings, and feedback type of an integration."
+        },
+        {
+          "info": {
+            "name": "Delete an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://panel.sendcloud.sc/api/v3/integrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Filtering on the Sendcloud integration ID"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Safely delete one of your integrations from the Sendcloud system"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/integrations",
+            "params": [
+              {
+                "name": "sort",
+                "value": "updated_at",
+                "type": "query",
+                "description": "Set the order for the response items:\n- Sorting is supported by the `integration_type`, `created_at`, `updated_at`, `last_fetch`, and `failing_since` attributes in the response object.\n- To sort the response in descending order, add the prefix `-` to the query param value.\n- By default, the items will be ordered by `last_fetch` and then `created_at`.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve all valid integrations from the Sendcloud system for a given user."
+        },
+        {
+          "info": {
+            "name": "Retrieve shop order statuses for an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/shop-order-statuses",
+            "params": [
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter response on `integration_id`."
+              },
+              {
+                "name": "language",
+                "value": "en-gb",
+                "type": "query",
+                "description": "Get a response for the specified language."
+              },
+              {
+                "name": "show_deleted",
+                "value": "true",
+                "type": "query",
+                "description": "Get all currently available and historical statuses."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Fetch all available shop order statuses for the Prestashop v2 integration, in the default or selected language."
+        },
+        {
+          "info": {
+            "name": "Create or overwrite shop order statuses",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/shop-order-statuses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Insert shop-specific custom statuses into the Sendcloud system."
+        },
+        {
+          "info": {
+            "name": "Retrieve custom status mapping for an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/shop-order-statuses/mapping",
+            "params": [
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter response on `integration_id`."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Fetch a map of available shop order statuses and Sendcloud's internal status category for the integration.\n"
+        },
+        {
+          "info": {
+            "name": "Create or update custom status mapping for an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/shop-order-statuses/mapping",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Upsert a map of available shop order statuses and Sendcloud's internal status category for an integration"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Exception logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all integration exception logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/integrations/logs",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "2023-03-01T02:02:00+01:00",
+                "type": "query",
+                "description": "Cursor for pagination. Use the value from the `Link` response header to fetch the next page."
+              },
+              {
+                "name": "page_size",
+                "value": "25",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve all integration exception logs. These logs are created when integrations have problems making API requests to shop systems."
+        },
+        {
+          "info": {
+            "name": "Retrieve exception logs for a specific integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/integrations/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration"
+              },
+              {
+                "name": "cursor",
+                "value": "2023-03-01T02:02:00+01:00",
+                "type": "query",
+                "description": "Cursor for pagination. Use the value from the `Link` response header to fetch the next page."
+              },
+              {
+                "name": "page_size",
+                "value": "25",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve exception logs for a specific integration. These logs are created when integrations have problems making API requests to shop systems."
+        },
+        {
+          "info": {
+            "name": "Create integration exception logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/integrations/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create integration exception logs, which will appear in the connection issue log screen of the user's integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

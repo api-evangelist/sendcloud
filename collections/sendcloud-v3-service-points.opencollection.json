@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Service Points API [BETA]",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service Points",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of service points",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/service-points",
+            "params": [
+              {
+                "name": "country_code",
+                "value": "",
+                "type": "query",
+                "description": "Country to retrieve service points for, as an ISO 3166-1 alpha-2 code."
+              },
+              {
+                "name": "carrier_code",
+                "value": "",
+                "type": "query",
+                "description": "Carrier codes to filter results by."
+              },
+              {
+                "name": "use_integration_carriers",
+                "value": "",
+                "type": "query",
+                "description": "Filters service points to carriers enabled in the authenticated integration's settings."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Free-text address used as the reference point for the search."
+              },
+              {
+                "name": "address_street",
+                "value": "",
+                "type": "query",
+                "description": "Street of the reference address."
+              },
+              {
+                "name": "address_house_number",
+                "value": "",
+                "type": "query",
+                "description": "House number of the reference address."
+              },
+              {
+                "name": "address_postal_code",
+                "value": "",
+                "type": "query",
+                "description": "Postal code of the reference address."
+              },
+              {
+                "name": "address_city",
+                "value": "",
+                "type": "query",
+                "description": "City of the reference address."
+              },
+              {
+                "name": "latitude",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the reference point."
+              },
+              {
+                "name": "longitude",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the reference point."
+              },
+              {
+                "name": "ne_latitude",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the north-east corner of the bounding box."
+              },
+              {
+                "name": "ne_longitude",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the north-east corner of the bounding box."
+              },
+              {
+                "name": "sw_latitude",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the south-west corner of the bounding box."
+              },
+              {
+                "name": "sw_longitude",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the south-west corner of the bounding box."
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Search radius in meters from the reference point."
+              },
+              {
+                "name": "carrier_service_point_id",
+                "value": "",
+                "type": "query",
+                "description": "Carrier-specific identifiers of the service points to return."
+              },
+              {
+                "name": "carrier_shop_type",
+                "value": "",
+                "type": "query",
+                "description": "Filters results by carrier-specific shop type."
+              },
+              {
+                "name": "general_shop_type",
+                "value": "",
+                "type": "query",
+                "description": "Filters results by general shop type. Use this to narrow results without having to handle each carrier's specific shop types separately."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of service points to return."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Find service points for selected carriers in a given area."
+        },
+        {
+          "info": {
+            "name": "Retrieve a service point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/service-points/:service_point_id",
+            "params": [
+              {
+                "name": "service_point_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique Sendcloud identifier of the service point."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a single service point."
+        },
+        {
+          "info": {
+            "name": "Check availability of a service point",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/service-points/:service_point_id/check-availability",
+            "params": [
+              {
+                "name": "service_point_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique Sendcloud identifier of the service point."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Check whether a service point is currently available."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

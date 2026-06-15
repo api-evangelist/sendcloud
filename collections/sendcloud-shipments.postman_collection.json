@@ -1,0 +1,2571 @@
+{
+  "item": [
+    {
+      "id": "69ef35f8-119d-415a-a171-a5d31dea2986",
+      "name": "Shipments",
+      "description": {
+        "content": "Shipments API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "810645a5-b52a-419a-a132-4c8840a98e8c",
+          "name": "Create and announce a shipment synchronously",
+          "request": {
+            "name": "Create and announce a shipment synchronously",
+            "description": {
+              "content": "This endpoint **announces a shipment synchronously** under your API credentials.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipments",
+                "announce"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c8d8af85-8229-41a9-b435-db659a83c5ae",
+              "name": "Shipment response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    "announce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label_details\": {\n    \"mime_type\": \"application/pdf\",\n    \"dpi\": 72\n  },\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Insulindelaan 115\",\n    \"house_number\": \"115\",\n    \"postal_code\": \"5642CV\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"john.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 678\"\n  },\n  \"from_address\": {\n    \"name\": \"Marie Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein 10\",\n    \"address_line_2\": \"2e verdieping\",\n    \"house_number\": \"10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"marie.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 478\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard\",\n      \"contract_id\": 517\n    }\n  },\n  \"order_number\": \"1234567890\",\n  \"total_order_price\": {\n    \"currency\": \"EUR\",\n    \"value\": \"11.11\"\n  },\n  \"parcels\": [\n    {\n      \"dimensions\": {\n        \"length\": \"5.00\",\n        \"width\": \"15.00\",\n        \"height\": \"20.00\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"1.320\",\n        \"unit\": \"kg\"\n      },\n      \"label_notes\": [\n        \"I live at the blue door\",\n        \"The doorbell isn't working\"\n      ],\n      \"parcel_items\": [\n        {\n          \"item_id\": \"5552\",\n          \"description\": \"T-Shirt XL\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 0.3,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"NL\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"manufacturer_product_id\": \"ABC-12345\",\n          \"manufacturer_product_id_std\": \"01234567890128\",\n          \"properties\": {\n            \"size\": \"XL\",\n            \"color\": \"green\"\n          }\n        },\n        {\n          \"item_id\": \"98712\",\n          \"description\": \"Sneakers 42\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 1.02,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"US\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"properties\": {\n            \"size\": 42,\n            \"color\": \"black\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"XXX-Shipment-id\",\n    \"label_details\": {\n      \"mime_type\": \"application/pdf\",\n      \"dpi\": 72\n    },\n    \"order_number\": \"1234567890\",\n    \"total_order_price\": {\n      \"currency\": \"EUR\",\n      \"value\": \"11.11\"\n    },\n    \"parcels\": [\n      {\n        \"id\": 383707309,\n        \"status\": {\n          \"code\": \"READY_TO_SEND\",\n          \"message\": \"Ready to send\"\n        },\n        \"documents\": [\n          {\n            \"type\": \"label\",\n            \"size\": \"a6\",\n            \"link\": \"https://panel.sendcloud.sc/api/v3/parcels/383707309/documents/label\"\n          }\n        ],\n        \"dimensions\": {\n          \"width\": \"15.00\",\n          \"length\": \"5.00\",\n          \"height\": \"20.00\",\n          \"unit\": \"cm\"\n        },\n        \"weight\": {\n          \"value\": \"1.320\",\n          \"unit\": \"kg\"\n        },\n        \"tracking_url\": \"https://tracking.eu-central-1-0.sendcloud.sc/forward?carrier=postnl&code=3SYZXG8498635&destination=NL&lang=en-us&source=NL&type=parcel&verification=5642+CV&servicepoint_verification=&created_at=2024-06-06\",\n        \"tracking_number\": \"3SYZXG8498635\",\n        \"additional_carrier_data\": {\n          \"awb_tracking_number\": null,\n          \"box_number\": null\n        },\n        \"created_at\": \"2024-06-06T17:11:14.616615Z\",\n        \"updated_at\": \"2024-06-06T17:11:14.648081Z\",\n        \"announced_at\": \"2024-06-06T17:11:14.712398Z\",\n        \"label_notes\": [\n          \"I live at the blue door\",\n          \"The doorbell isn't working\"\n        ],\n        \"package_type\": \"package\",\n        \"parcel_items\": [\n          {\n            \"item_id\": \"5552\",\n            \"description\": \"T-Shirt XL\",\n            \"quantity\": 1,\n            \"weight\": {\n              \"value\": 0.3,\n              \"unit\": \"kg\"\n            },\n            \"price\": {\n              \"value\": \"12.65\",\n              \"currency\": \"EUR\"\n            },\n            \"hs_code\": \"620520\",\n            \"origin_country\": \"NL\",\n            \"sku\": \"TS1234\",\n            \"product_id\": \"19284\",\n            \"mid_code\": \"NLOZR92MEL\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\",\n            \"dds_reference\": \"25FIYPEK0A7573\",\n            \"taric_doc_code\": \"Y142\",\n            \"manufacturer_product_id\": null,\n            \"manufacturer_product_id_std\": \"09876543210987\",\n            \"properties\": {\n              \"size\": \"XL\",\n              \"color\": \"green\"\n            }\n          },\n          {\n            \"item_id\": \"98712\",\n            \"description\": \"Sneakers 42\",\n            \"quantity\": 1,\n            \"weight\": {\n              \"value\": 1.02,\n              \"unit\": \"kg\"\n            },\n            \"price\": {\n              \"value\": \"12.65\",\n              \"currency\": \"EUR\"\n            },\n            \"hs_code\": \"620520\",\n            \"origin_country\": \"US\",\n            \"sku\": \"TS1234\",\n            \"product_id\": \"19284\",\n            \"mid_code\": \"US1234567\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\",\n            \"dds_reference\": \"25FIYPEK0A7573\",\n            \"taric_doc_code\": \"Y142\",\n            \"properties\": {\n              \"size\": 42,\n              \"color\": \"black\"\n            }\n          }\n        ]\n      }\n    ],\n    \"from_address\": {\n      \"address_line_1\": \"Stadhuisplein 10\",\n      \"address_line_2\": \"2e verdieping\",\n      \"city\": \"Eindhoven\",\n      \"company_name\": \"Sendcloud\",\n      \"country_code\": \"NL\",\n      \"email\": \"marie.doe@sendcloud.com\",\n      \"house_number\": \"10\",\n      \"name\": \"Marie Doe\",\n      \"phone_number\": \"+31612345678\",\n      \"postal_code\": \"5611 EM\",\n      \"po_box\": \"PO Box 678\"\n    },\n    \"to_address\": {\n      \"address_line_1\": \"Insulindelaan\",\n      \"address_line_2\": \"\",\n      \"city\": \"Eindhoven\",\n      \"company_name\": \"Sendcloud\",\n      \"country_code\": \"NL\",\n      \"email\": \"john.doe@sendcloud.com\",\n      \"house_number\": \"115\",\n      \"name\": \"John Doe\",\n      \"phone_number\": \"+31612345678\",\n      \"postal_code\": \"5642 CV\",\n      \"po_box\": \"PO Box 483\"\n    },\n    \"ship_with\": {\n      \"type\": \"shipping_option_code\",\n      \"properties\": {\n        \"shipping_option_code\": \"postnl:standard\",\n        \"contract_id\": 517\n      }\n    },\n    \"customs_information\": null,\n    \"carrier\": {\n      \"code\": \"postnl\",\n      \"name\": \"PostNL\"\n    },\n    \"errors\": []\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02bf079d-2f1b-429c-83bd-de73e6afaca7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    "announce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label_details\": {\n    \"mime_type\": \"application/pdf\",\n    \"dpi\": 72\n  },\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Insulindelaan 115\",\n    \"house_number\": \"115\",\n    \"postal_code\": \"5642CV\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"john.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 678\"\n  },\n  \"from_address\": {\n    \"name\": \"Marie Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein 10\",\n    \"address_line_2\": \"2e verdieping\",\n    \"house_number\": \"10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"marie.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 478\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard\",\n      \"contract_id\": 517\n    }\n  },\n  \"order_number\": \"1234567890\",\n  \"total_order_price\": {\n    \"currency\": \"EUR\",\n    \"value\": \"11.11\"\n  },\n  \"parcels\": [\n    {\n      \"dimensions\": {\n        \"length\": \"5.00\",\n        \"width\": \"15.00\",\n        \"height\": \"20.00\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"1.320\",\n        \"unit\": \"kg\"\n      },\n      \"label_notes\": [\n        \"I live at the blue door\",\n        \"The doorbell isn't working\"\n      ],\n      \"parcel_items\": [\n        {\n          \"item_id\": \"5552\",\n          \"description\": \"T-Shirt XL\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 0.3,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"NL\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"manufacturer_product_id\": \"ABC-12345\",\n          \"manufacturer_product_id_std\": \"01234567890128\",\n          \"properties\": {\n            \"size\": \"XL\",\n            \"color\": \"green\"\n          }\n        },\n        {\n          \"item_id\": \"98712\",\n          \"description\": \"Sneakers 42\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 1.02,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"US\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"properties\": {\n            \"size\": 42,\n            \"color\": \"black\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"This field is required.\",\n      \"status\": \"400\",\n      \"source\": {\n        \"pointer\": \"/to_address/name\"\n      },\n      \"code\": \"required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac65e7f6-3628-4f82-a008-e55dd65d0a2b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    "announce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"label_details\": {\n    \"mime_type\": \"application/pdf\",\n    \"dpi\": 72\n  },\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Insulindelaan 115\",\n    \"house_number\": \"115\",\n    \"postal_code\": \"5642CV\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"john.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 678\"\n  },\n  \"from_address\": {\n    \"name\": \"Marie Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein 10\",\n    \"address_line_2\": \"2e verdieping\",\n    \"house_number\": \"10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"marie.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 478\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard\",\n      \"contract_id\": 517\n    }\n  },\n  \"order_number\": \"1234567890\",\n  \"total_order_price\": {\n    \"currency\": \"EUR\",\n    \"value\": \"11.11\"\n  },\n  \"parcels\": [\n    {\n      \"dimensions\": {\n        \"length\": \"5.00\",\n        \"width\": \"15.00\",\n        \"height\": \"20.00\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"1.320\",\n        \"unit\": \"kg\"\n      },\n      \"label_notes\": [\n        \"I live at the blue door\",\n        \"The doorbell isn't working\"\n      ],\n      \"parcel_items\": [\n        {\n          \"item_id\": \"5552\",\n          \"description\": \"T-Shirt XL\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 0.3,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"NL\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"manufacturer_product_id\": \"ABC-12345\",\n          \"manufacturer_product_id_std\": \"01234567890128\",\n          \"properties\": {\n            \"size\": \"XL\",\n            \"color\": \"green\"\n          }\n        },\n        {\n          \"item_id\": \"98712\",\n          \"description\": \"Sneakers 42\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 1.02,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"US\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"properties\": {\n            \"size\": 42,\n            \"color\": \"black\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"title\": \"Not found\",\n      \"detail\": \"The partner ID was not found.\",\n      \"status\": \"404\",\n      \"code\": \"not_found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "adadf276-7cf4-4532-935e-0ca761ded0e3",
+          "name": "Retrieve shipments",
+          "request": {
+            "name": "Retrieve shipments",
+            "description": {
+              "content": "This endpoint allows you to retrieve a list of all the shipments which you have created or imported into your Sendcloud account under your API credentials. You can filter the results based on several query parameters.\n\nThis endpoint uses cursor-based pagination via `Link` headers. See [Pagination](/api/v3/pagination) for details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "parcel_status",
+                  "value": "<string>",
+                  "description": "Returns shipments that have the requested status. For a list of possible statuses, see the [Retrieve a list of parcel statuses](/api/v3/parcel-statuses/retrieve-a-list-of-parcel-statuses) endpoint."
+                },
+                {
+                  "disabled": false,
+                  "key": "tracking_number",
+                  "value": "<string>",
+                  "description": "Returns shipments that match a specified tracking number"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_reference_id",
+                  "value": "<string>",
+                  "description": "Returns shipments that match a specified external reference"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_number",
+                  "value": "<string>",
+                  "description": "Returns a shipment that matches a specific `order_number` property from your shipments"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<string>",
+                  "description": "Returns all shipments that matches a specific `integration_id` property from your shipments"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_before",
+                  "value": "<string>",
+                  "description": "Returns all shipments which have been updated in our system before a given time. Use the ISO 8601 datetime format."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<string>",
+                  "description": "Returns all shipments which have been updated in our system after a given time. Use the ISO 8601 datetime format."
+                },
+                {
+                  "disabled": false,
+                  "key": "announced_before",
+                  "value": "<string>",
+                  "description": "Returns all shipments which have been announced to the carrier before the given time. Use the ISO 8601 datetime format."
+                },
+                {
+                  "disabled": false,
+                  "key": "announced_after",
+                  "value": "<string>",
+                  "description": "Returns all shipments which have been announced to the carrier after the given time. Use the ISO 8601 datetime format."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "Filter results using a comma-separated list of *parcels IDs*. The list may not contain more than 100 IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "shipment_uuids",
+                  "value": "<string>",
+                  "description": "Filter results using a comma-separated list of *shipments IDs*. The list may not contain more than 100 IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n- `o`: Offset\n- `r`: Reverse\n- `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "40",
+                  "description": "The maximum number of items to be returned in the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a97aa177-1cc5-4b8a-9044-de3a5c398600",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parcel_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tracking_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "announced_before",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "announced_after",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "13579,24680,12345"
+                    },
+                    {
+                      "key": "shipment_uuids",
+                      "value": "4df31240-daef-40bf-81fc-7a83184073e6,adbb3dce-9756-42b0-838d-a478a5236289"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "cj0xJnA9MzAw"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The pagination links, according to the web linking specification (RFC8288).",
+                  "key": "Link",
+                  "value": "<https://panel.sendcloud.sc/api/v3/shipments/?cursor=cj0xJnA9MjUzNTQyMzM3>; rel=\"prev\", <https://panel.sendcloud.sc/api/v3/shipments/?cursor=cD0yNTM1NDIyODI%3D>; rel=\"next\""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"XXX-Shipment-id\",\n      \"order_number\": \"1234567890\",\n      \"total_order_price\": {\n        \"currency\": \"EUR\",\n        \"value\": \"11.11\"\n      },\n      \"parcels\": [\n        {\n          \"id\": 383707309,\n          \"status\": {\n            \"code\": \"CANCELLED\",\n            \"message\": \"Cancelled\"\n          },\n          \"documents\": [\n            {\n              \"type\": \"label\",\n              \"size\": \"a6\",\n              \"link\": \"https://panel.sendcloud.sc/api/v3/parcels/383707309/documents/label\"\n            }\n          ],\n          \"dimensions\": {\n            \"width\": \"15.00\",\n            \"length\": \"5.00\",\n            \"height\": \"20.00\",\n            \"unit\": \"cm\"\n          },\n          \"weight\": {\n            \"value\": \"1.320\",\n            \"unit\": \"kg\"\n          },\n          \"tracking_url\": \"https://tracking.eu-central-1-0.sendcloud.sc/forward?carrier=postnl&code=3SYZXG5051720&destination=NL&lang=en-us&source=NL&type=parcel&verification=5642+CV&servicepoint_verification=&created_at=2024-06-07\",\n          \"tracking_number\": \"3SYZXG5051720\",\n          \"additional_carrier_data\": {\n            \"awb_tracking_number\": null,\n            \"box_number\": null\n          },\n          \"created_at\": \"2024-06-07T09:02:18.864105Z\",\n          \"updated_at\": \"2024-06-07T09:32:22.804278Z\",\n          \"announced_at\": \"2024-06-07T09:02:19.480225Z\",\n          \"label_notes\": [\n            \"I live at the blue door\",\n            \"The doorbell isn’t working\"\n          ],\n          \"package_type\": \"package\",\n          \"parcel_items\": [\n            {\n              \"item_id\": \"5552\",\n              \"description\": \"T-Shirt XL\",\n              \"quantity\": 1,\n              \"weight\": {\n                \"value\": \"0.3\",\n                \"unit\": \"kg\"\n              },\n              \"price\": {\n                \"value\": \"12.65\",\n                \"currency\": \"EUR\"\n              },\n              \"hs_code\": \"620520\",\n              \"origin_country\": \"NL\",\n              \"sku\": \"TS1234\",\n              \"product_id\": \"19284\",\n              \"mid_code\": \"NLOZR92MEL\",\n              \"material_content\": \"100% Cotton\",\n              \"intended_use\": \"Personal use\",\n              \"dds_reference\": \"25FIYPEK0A7573\",\n              \"taric_doc_code\": \"Y142\",\n              \"manufacturer_product_id\": null,\n              \"manufacturer_product_id_std\": \"09876543210987\",\n              \"properties\": {\n                \"size\": \"XL\",\n                \"color\": \"green\"\n              }\n            },\n            {\n              \"item_id\": \"98712\",\n              \"description\": \"Sneakers 42\",\n              \"quantity\": 1,\n              \"weight\": {\n                \"value\": \"1.02\",\n                \"unit\": \"kg\"\n              },\n              \"price\": {\n                \"value\": \"12.65\",\n                \"currency\": \"EUR\"\n              },\n              \"hs_code\": \"620520\",\n              \"origin_country\": \"US\",\n              \"sku\": \"TS1234\",\n              \"product_id\": \"19284\",\n              \"mid_code\": \"US1234567\",\n              \"material_content\": \"100% Cotton\",\n              \"intended_use\": \"Personal use\",\n              \"dds_reference\": \"25FIYPEK0A7573\",\n              \"taric_doc_code\": \"Y142\",\n              \"properties\": {\n                \"size\": 42,\n                \"color\": \"black\"\n              }\n            }\n          ]\n        }\n      ],\n      \"from_address\": {\n        \"address_line_1\": \"Stadhuisplein 10\",\n        \"address_line_2\": \"2e verdieping\",\n        \"city\": \"Eindhoven\",\n        \"company_name\": \"Sendcloud\",\n        \"country_code\": \"NL\",\n        \"email\": \"marie.doe@sendcloud.com\",\n        \"house_number\": \"10\",\n        \"name\": \"Marie Doe\",\n        \"phone_number\": \"+31612345678\",\n        \"postal_code\": \"5611 EM\",\n        \"po_box\": \"PO Box 678\"\n      },\n      \"to_address\": {\n        \"address_line_1\": \"Insulindelaan\",\n        \"address_line_2\": \"\",\n        \"city\": \"Eindhoven\",\n        \"company_name\": \"Sendcloud\",\n        \"country_code\": \"NL\",\n        \"email\": \"john.doe@sendcloud.com\",\n        \"house_number\": \"115\",\n        \"name\": \"John Doe\",\n        \"phone_number\": \"+31612345678\",\n        \"postal_code\": \"5642 CV\",\n        \"po_box\": \"PO Box 483\"\n      },\n      \"ship_with\": {\n        \"type\": \"shipping_option_code\",\n        \"properties\": {\n          \"shipping_option_code\": \"postnl:standard\",\n          \"contract_id\": 517\n        }\n      },\n      \"customs_information\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7d87055-a1b5-409c-85b0-6b3930e1fbda",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parcel_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tracking_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "announced_before",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "announced_after",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "13579,24680,12345"
+                    },
+                    {
+                      "key": "shipment_uuids",
+                      "value": "4df31240-daef-40bf-81fc-7a83184073e6,adbb3dce-9756-42b0-838d-a478a5236289"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "cj0xJnA9MzAw"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"Validation failed, announced_after is not a datetime\",\n      \"status\": \"404\",\n      \"source\": {\n        \"pointer\": \"/list_shipments/filters\"\n      },\n      \"code\": \"validation_error\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ebab009-ef07-4b98-834e-161dd0c5ac4c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parcel_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tracking_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external_reference_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "announced_before",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "announced_after",
+                      "value": "2018-02-26T11:01:47.505309+00:00"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "13579,24680,12345"
+                    },
+                    {
+                      "key": "shipment_uuids",
+                      "value": "4df31240-daef-40bf-81fc-7a83184073e6,adbb3dce-9756-42b0-838d-a478a5236289"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "cj0xJnA9MzAw"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"Invalid cursor\",\n      \"status\": \"404\",\n      \"source\": {\n        \"pointer\": \"/data\"\n      },\n      \"code\": \"not_found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bca5004d-cb7b-4b9e-a59b-f60bf9f30f31",
+          "name": "Create and announce a shipment asynchronously",
+          "request": {
+            "name": "Create and announce a shipment asynchronously",
+            "description": {
+              "content": "This endpoint **announces a shipment asynchronously** under your API credentials.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "27e59817-2ce9-415c-b503-6e40755dab77",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Insulindelaan 115\",\n    \"house_number\": \"115\",\n    \"postal_code\": \"5642CV\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"john.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 678\"\n  },\n  \"from_address\": {\n    \"name\": \"Marie Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein 10\",\n    \"address_line_2\": \"2e verdieping\",\n    \"house_number\": \"10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"marie.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 478\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard\",\n      \"contract_id\": 517\n    }\n  },\n  \"order_number\": \"1234567890\",\n  \"total_order_price\": {\n    \"currency\": \"EUR\",\n    \"value\": \"11.11\"\n  },\n  \"parcels\": [\n    {\n      \"dimensions\": {\n        \"length\": \"5.00\",\n        \"width\": \"15.00\",\n        \"height\": \"20.00\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"1.320\",\n        \"unit\": \"kg\"\n      },\n      \"parcel_items\": [\n        {\n          \"item_id\": \"5552\",\n          \"description\": \"T-Shirt XL\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 0.3,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"NL\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"manufacturer_product_id\": null,\n          \"manufacturer_product_id_std\": \"09876543210987\",\n          \"properties\": {\n            \"size\": \"XL\",\n            \"color\": \"green\"\n          }\n        },\n        {\n          \"item_id\": \"98712\",\n          \"description\": \"Sneakers 42\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 1.02,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"US\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"properties\": {\n            \"size\": 42,\n            \"color\": \"black\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"XXX-Shipment-id\",\n    \"order_number\": \"1234567890\",\n    \"total_order_price\": {\n      \"currency\": \"EUR\",\n      \"value\": \"11.11\"\n    },\n    \"parcels\": [\n      {\n        \"status\": {\n          \"code\": \"ANNOUNCING\",\n          \"message\": \"Being announced\"\n        },\n        \"documents\": [],\n        \"dimensions\": {\n          \"width\": \"15.00\",\n          \"length\": \"5.00\",\n          \"height\": \"20.00\",\n          \"unit\": \"cm\"\n        },\n        \"weight\": {\n          \"value\": \"1.320\",\n          \"unit\": \"kg\"\n        },\n        \"tracking_url\": null,\n        \"tracking_number\": \"\",\n        \"additional_carrier_data\": {\n          \"awb_tracking_number\": null,\n          \"box_number\": null\n        },\n        \"created_at\": \"2024-06-06T17:11:14.616615Z\",\n        \"updated_at\": \"2024-06-06T17:11:14.648081Z\",\n        \"announced_at\": null,\n        \"parcel_items\": [\n          {\n            \"item_id\": \"5552\",\n            \"description\": \"T-Shirt XL\",\n            \"quantity\": 1,\n            \"weight\": {\n              \"value\": 0.3,\n              \"unit\": \"kg\"\n            },\n            \"price\": {\n              \"value\": \"12.65\",\n              \"currency\": \"EUR\"\n            },\n            \"hs_code\": \"620520\",\n            \"origin_country\": \"NL\",\n            \"sku\": \"TS1234\",\n            \"product_id\": \"19284\",\n            \"mid_code\": \"NLOZR92MEL\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\",\n            \"dds_reference\": \"25FIYPEK0A7573\",\n            \"taric_doc_code\": \"Y142\",\n            \"properties\": {\n              \"size\": \"XL\",\n              \"color\": \"green\"\n            }\n          },\n          {\n            \"item_id\": \"98712\",\n            \"description\": \"Sneakers 42\",\n            \"quantity\": 1,\n            \"weight\": {\n              \"value\": 1.02,\n              \"unit\": \"kg\"\n            },\n            \"price\": {\n              \"value\": \"12.65\",\n              \"currency\": \"EUR\"\n            },\n            \"hs_code\": \"620520\",\n            \"origin_country\": \"US\",\n            \"sku\": \"TS1234\",\n            \"product_id\": \"19284\",\n            \"mid_code\": \"US1234567\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\",\n            \"dds_reference\": \"25FIYPEK0A7573\",\n            \"taric_doc_code\": \"Y142\",\n            \"manufacturer_product_id\": \"ABC-12345\",\n            \"manufacturer_product_id_std\": \"01234567890128\",\n            \"properties\": {\n              \"size\": 42,\n              \"color\": \"black\"\n            }\n          }\n        ]\n      }\n    ],\n    \"from_address\": {\n      \"address_line_1\": \"Stadhuisplein 10\",\n      \"address_line_2\": \"2e verdieping\",\n      \"city\": \"Eindhoven\",\n      \"company_name\": \"Sendcloud\",\n      \"country_code\": \"NL\",\n      \"email\": \"marie.doe@sendcloud.com\",\n      \"house_number\": \"10\",\n      \"name\": \"Marie Doe\",\n      \"phone_number\": \"+31612345678\",\n      \"postal_code\": \"5611 EM\",\n      \"po_box\": \"PO Box 678\"\n    },\n    \"to_address\": {\n      \"address_line_1\": \"Insulindelaan\",\n      \"address_line_2\": \"\",\n      \"city\": \"Eindhoven\",\n      \"company_name\": \"Sendcloud\",\n      \"country_code\": \"NL\",\n      \"email\": \"john.doe@sendcloud.com\",\n      \"house_number\": \"115\",\n      \"name\": \"John Doe\",\n      \"phone_number\": \"+31612345678\",\n      \"postal_code\": \"5642 CV\",\n      \"po_box\": \"PO Box 478\"\n    },\n    \"ship_with\": {\n      \"type\": \"shipping_option_code\",\n      \"properties\": {\n        \"shipping_option_code\": \"postnl:standard\",\n        \"contract_id\": 517\n      }\n    },\n    \"customs_information\": null,\n    \"carrier\": {\n      \"code\": \"postnl\",\n      \"name\": \"PostNL\"\n    },\n    \"errors\": []\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76a75cb7-58a4-4796-a9d1-7da52b1ea92e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Insulindelaan 115\",\n    \"house_number\": \"115\",\n    \"postal_code\": \"5642CV\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"john.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 678\"\n  },\n  \"from_address\": {\n    \"name\": \"Marie Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein 10\",\n    \"address_line_2\": \"2e verdieping\",\n    \"house_number\": \"10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"marie.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 478\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard\",\n      \"contract_id\": 517\n    }\n  },\n  \"order_number\": \"1234567890\",\n  \"total_order_price\": {\n    \"currency\": \"EUR\",\n    \"value\": \"11.11\"\n  },\n  \"parcels\": [\n    {\n      \"dimensions\": {\n        \"length\": \"5.00\",\n        \"width\": \"15.00\",\n        \"height\": \"20.00\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"1.320\",\n        \"unit\": \"kg\"\n      },\n      \"parcel_items\": [\n        {\n          \"item_id\": \"5552\",\n          \"description\": \"T-Shirt XL\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 0.3,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"NL\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"manufacturer_product_id\": null,\n          \"manufacturer_product_id_std\": \"09876543210987\",\n          \"properties\": {\n            \"size\": \"XL\",\n            \"color\": \"green\"\n          }\n        },\n        {\n          \"item_id\": \"98712\",\n          \"description\": \"Sneakers 42\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 1.02,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"US\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"properties\": {\n            \"size\": 42,\n            \"color\": \"black\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"This field is required.\",\n      \"status\": \"400\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/to_address/name\"\n      },\n      \"code\": \"required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75c54e53-6530-4141-b61a-fc421de2bac3",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Insulindelaan 115\",\n    \"house_number\": \"115\",\n    \"postal_code\": \"5642CV\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"john.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 678\"\n  },\n  \"from_address\": {\n    \"name\": \"Marie Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein 10\",\n    \"address_line_2\": \"2e verdieping\",\n    \"house_number\": \"10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"marie.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 478\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard\",\n      \"contract_id\": 517\n    }\n  },\n  \"order_number\": \"1234567890\",\n  \"total_order_price\": {\n    \"currency\": \"EUR\",\n    \"value\": \"11.11\"\n  },\n  \"parcels\": [\n    {\n      \"dimensions\": {\n        \"length\": \"5.00\",\n        \"width\": \"15.00\",\n        \"height\": \"20.00\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"1.320\",\n        \"unit\": \"kg\"\n      },\n      \"parcel_items\": [\n        {\n          \"item_id\": \"5552\",\n          \"description\": \"T-Shirt XL\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 0.3,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"NL\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"manufacturer_product_id\": null,\n          \"manufacturer_product_id_std\": \"09876543210987\",\n          \"properties\": {\n            \"size\": \"XL\",\n            \"color\": \"green\"\n          }\n        },\n        {\n          \"item_id\": \"98712\",\n          \"description\": \"Sneakers 42\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 1.02,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"US\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"properties\": {\n            \"size\": 42,\n            \"color\": \"black\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"title\": \"Not found\",\n      \"detail\": \"The partner ID was not found.\",\n      \"status\": \"404\",\n      \"code\": \"not_found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9633a1ad-2c3f-47af-8fa3-e443382e99f3",
+          "name": "Create a shipment with rules and/or defaults and announce it synchronously",
+          "request": {
+            "name": "Create a shipment with rules and/or defaults and announce it synchronously",
+            "description": {
+              "content": "Create and announce a shipment applying shipping rules and/or defaults",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipments",
+                "announce-with-shipping-rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "40e709fd-d4cf-4132-abf6-e83706ce07d7",
+              "name": "Shipment response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    "announce-with-shipping-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apply_shipping_defaults\": true,\n  \"apply_shipping_rules\": true,\n  \"delivery_indicator\": \"DHL home delivery\",\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Insulindelaan 115\",\n    \"house_number\": \"115\",\n    \"postal_code\": \"5642CV\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"john.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 678\"\n  },\n  \"from_address\": {\n    \"name\": \"Marie Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein 10\",\n    \"address_line_2\": \"2e verdieping\",\n    \"house_number\": \"10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"marie.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 478\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard\",\n      \"contract_id\": 517\n    }\n  },\n  \"order_number\": \"1234567890\",\n  \"total_order_price\": {\n    \"currency\": \"EUR\",\n    \"value\": \"11.11\"\n  },\n  \"parcels\": [\n    {\n      \"dimensions\": {\n        \"length\": \"5.00\",\n        \"width\": \"15.00\",\n        \"height\": \"20.00\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"1.320\",\n        \"unit\": \"kg\"\n      },\n      \"parcel_items\": [\n        {\n          \"item_id\": \"5552\",\n          \"description\": \"T-Shirt XL\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 0.3,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"NL\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"manufacturer_product_id\": \"XYZ-98765\",\n          \"manufacturer_product_id_std\": null,\n          \"properties\": {\n            \"size\": \"XL\",\n            \"color\": \"green\"\n          }\n        },\n        {\n          \"item_id\": \"98712\",\n          \"description\": \"Sneakers 42\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 1.02,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"US\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"properties\": {\n            \"size\": 42,\n            \"color\": \"black\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"XXX-Shipment-id\",\n    \"label_details\": {\n      \"mime_type\": \"application/pdf\",\n      \"dpi\": 72\n    },\n    \"order_number\": \"1234567890\",\n    \"total_order_price\": {\n      \"currency\": \"EUR\",\n      \"value\": \"11.11\"\n    },\n    \"parcels\": [\n      {\n        \"id\": 383707309,\n        \"status\": {\n          \"code\": \"READY_TO_SEND\",\n          \"message\": \"Ready to send\"\n        },\n        \"documents\": [\n          {\n            \"type\": \"label\",\n            \"size\": \"a6\",\n            \"link\": \"https://panel.sendcloud.sc/api/v3/parcels/383707309/documents/label\"\n          }\n        ],\n        \"dimensions\": {\n          \"width\": \"15.00\",\n          \"length\": \"5.00\",\n          \"height\": \"20.00\",\n          \"unit\": \"cm\"\n        },\n        \"weight\": {\n          \"value\": \"1.320\",\n          \"unit\": \"kg\"\n        },\n        \"tracking_url\": \"https://tracking.eu-central-1-0.sendcloud.sc/forward?carrier=postnl&code=3SYZXG8498635&destination=NL&lang=en-us&source=NL&type=parcel&verification=5642+CV&servicepoint_verification=&created_at=2024-06-06\",\n        \"tracking_number\": \"3SYZXG8498635\",\n        \"additional_carrier_data\": {\n          \"awb_tracking_number\": null,\n          \"box_number\": null\n        },\n        \"created_at\": \"2024-06-06T17:11:14.616615Z\",\n        \"updated_at\": \"2024-06-06T17:11:14.648081Z\",\n        \"announced_at\": \"2024-06-06T17:11:14.712398Z\",\n        \"label_notes\": [\n          \"I live at the blue door\",\n          \"The doorbell isn't working\"\n        ],\n        \"package_type\": \"package\",\n        \"parcel_items\": [\n          {\n            \"item_id\": \"5552\",\n            \"description\": \"T-Shirt XL\",\n            \"quantity\": 1,\n            \"weight\": {\n              \"value\": 0.3,\n              \"unit\": \"kg\"\n            },\n            \"price\": {\n              \"value\": \"12.65\",\n              \"currency\": \"EUR\"\n            },\n            \"hs_code\": \"620520\",\n            \"origin_country\": \"NL\",\n            \"sku\": \"TS1234\",\n            \"product_id\": \"19284\",\n            \"mid_code\": \"NLOZR92MEL\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\",\n            \"dds_reference\": \"25FIYPEK0A7573\",\n            \"taric_doc_code\": \"Y142\",\n            \"manufacturer_product_id\": null,\n            \"manufacturer_product_id_std\": \"09876543210987\",\n            \"properties\": {\n              \"size\": \"XL\",\n              \"color\": \"green\"\n            }\n          },\n          {\n            \"item_id\": \"98712\",\n            \"description\": \"Sneakers 42\",\n            \"quantity\": 1,\n            \"weight\": {\n              \"value\": 1.02,\n              \"unit\": \"kg\"\n            },\n            \"price\": {\n              \"value\": \"12.65\",\n              \"currency\": \"EUR\"\n            },\n            \"hs_code\": \"620520\",\n            \"origin_country\": \"US\",\n            \"sku\": \"TS1234\",\n            \"product_id\": \"19284\",\n            \"mid_code\": \"US1234567\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\",\n            \"dds_reference\": \"25FIYPEK0A7573\",\n            \"taric_doc_code\": \"Y142\",\n            \"properties\": {\n              \"size\": 42,\n              \"color\": \"black\"\n            }\n          }\n        ]\n      }\n    ],\n    \"from_address\": {\n      \"address_line_1\": \"Stadhuisplein 10\",\n      \"address_line_2\": \"2e verdieping\",\n      \"city\": \"Eindhoven\",\n      \"company_name\": \"Sendcloud\",\n      \"country_code\": \"NL\",\n      \"email\": \"marie.doe@sendcloud.com\",\n      \"house_number\": \"10\",\n      \"name\": \"Marie Doe\",\n      \"phone_number\": \"+31612345678\",\n      \"postal_code\": \"5611 EM\",\n      \"po_box\": \"PO Box 678\"\n    },\n    \"to_address\": {\n      \"address_line_1\": \"Insulindelaan\",\n      \"address_line_2\": \"\",\n      \"city\": \"Eindhoven\",\n      \"company_name\": \"Sendcloud\",\n      \"country_code\": \"NL\",\n      \"email\": \"john.doe@sendcloud.com\",\n      \"house_number\": \"115\",\n      \"name\": \"John Doe\",\n      \"phone_number\": \"+31612345678\",\n      \"postal_code\": \"5642 CV\",\n      \"po_box\": \"PO Box 483\"\n    },\n    \"ship_with\": {\n      \"type\": \"shipping_option_code\",\n      \"properties\": {\n        \"shipping_option_code\": \"postnl:standard\",\n        \"contract_id\": 517\n      }\n    },\n    \"customs_information\": null,\n    \"carrier\": {\n      \"code\": \"postnl\",\n      \"name\": \"PostNL\"\n    },\n    \"errors\": [],\n    \"applied_shipping_rules\": [\n      {\n        \"rule\": {\n          \"id\": 315157,\n          \"name\": \"Ship with PostNL for NL\"\n        },\n        \"result\": {\n          \"shipping_option_code\": \"postnl:standard\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b6ea7d4-6bfa-4474-a05e-a7ade08ff002",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    "announce-with-shipping-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apply_shipping_defaults\": true,\n  \"apply_shipping_rules\": true,\n  \"delivery_indicator\": \"DHL home delivery\",\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Insulindelaan 115\",\n    \"house_number\": \"115\",\n    \"postal_code\": \"5642CV\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"john.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 678\"\n  },\n  \"from_address\": {\n    \"name\": \"Marie Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein 10\",\n    \"address_line_2\": \"2e verdieping\",\n    \"house_number\": \"10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"marie.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 478\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard\",\n      \"contract_id\": 517\n    }\n  },\n  \"order_number\": \"1234567890\",\n  \"total_order_price\": {\n    \"currency\": \"EUR\",\n    \"value\": \"11.11\"\n  },\n  \"parcels\": [\n    {\n      \"dimensions\": {\n        \"length\": \"5.00\",\n        \"width\": \"15.00\",\n        \"height\": \"20.00\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"1.320\",\n        \"unit\": \"kg\"\n      },\n      \"parcel_items\": [\n        {\n          \"item_id\": \"5552\",\n          \"description\": \"T-Shirt XL\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 0.3,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"NL\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"manufacturer_product_id\": \"XYZ-98765\",\n          \"manufacturer_product_id_std\": null,\n          \"properties\": {\n            \"size\": \"XL\",\n            \"color\": \"green\"\n          }\n        },\n        {\n          \"item_id\": \"98712\",\n          \"description\": \"Sneakers 42\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 1.02,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"US\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"properties\": {\n            \"size\": 42,\n            \"color\": \"black\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"This field is required.\",\n      \"status\": \"400\",\n      \"source\": {\n        \"pointer\": \"/to_address/name\"\n      },\n      \"code\": \"required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3aca564e-798e-4662-a766-a454b59b2dd6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    "announce-with-shipping-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apply_shipping_defaults\": true,\n  \"apply_shipping_rules\": true,\n  \"delivery_indicator\": \"DHL home delivery\",\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Insulindelaan 115\",\n    \"house_number\": \"115\",\n    \"postal_code\": \"5642CV\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"john.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 678\"\n  },\n  \"from_address\": {\n    \"name\": \"Marie Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein 10\",\n    \"address_line_2\": \"2e verdieping\",\n    \"house_number\": \"10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"marie.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 478\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard\",\n      \"contract_id\": 517\n    }\n  },\n  \"order_number\": \"1234567890\",\n  \"total_order_price\": {\n    \"currency\": \"EUR\",\n    \"value\": \"11.11\"\n  },\n  \"parcels\": [\n    {\n      \"dimensions\": {\n        \"length\": \"5.00\",\n        \"width\": \"15.00\",\n        \"height\": \"20.00\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"1.320\",\n        \"unit\": \"kg\"\n      },\n      \"parcel_items\": [\n        {\n          \"item_id\": \"5552\",\n          \"description\": \"T-Shirt XL\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 0.3,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"NL\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"manufacturer_product_id\": \"XYZ-98765\",\n          \"manufacturer_product_id_std\": null,\n          \"properties\": {\n            \"size\": \"XL\",\n            \"color\": \"green\"\n          }\n        },\n        {\n          \"item_id\": \"98712\",\n          \"description\": \"Sneakers 42\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 1.02,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"US\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"properties\": {\n            \"size\": 42,\n            \"color\": \"black\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"title\": \"Not found\",\n      \"detail\": \"The partner ID was not found.\",\n      \"status\": \"404\",\n      \"code\": \"not_found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25e43772-1701-4f47-a912-df09be473263",
+          "name": "Create a shipment with rules and/or defaults and announce it asynchronously",
+          "request": {
+            "name": "Create a shipment with rules and/or defaults and announce it asynchronously",
+            "description": {
+              "content": "Create and announce a shipment applying shipping rules and/or defaults asynchronously.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipments",
+                "create-with-shipping-rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "50405a35-1318-43c3-8f06-7e12b3c60f54",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    "create-with-shipping-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apply_shipping_defaults\": true,\n  \"apply_shipping_rules\": true,\n  \"delivery_indicator\": \"DHL home delivery\",\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Insulindelaan 115\",\n    \"house_number\": \"115\",\n    \"postal_code\": \"5642CV\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"john.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 678\"\n  },\n  \"from_address\": {\n    \"name\": \"Marie Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein 10\",\n    \"address_line_2\": \"2e verdieping\",\n    \"house_number\": \"10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"marie.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 478\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard\",\n      \"contract_id\": 517\n    }\n  },\n  \"order_number\": \"1234567890\",\n  \"total_order_price\": {\n    \"currency\": \"EUR\",\n    \"value\": \"11.11\"\n  },\n  \"parcels\": [\n    {\n      \"dimensions\": {\n        \"length\": \"5.00\",\n        \"width\": \"15.00\",\n        \"height\": \"20.00\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"1.320\",\n        \"unit\": \"kg\"\n      },\n      \"parcel_items\": [\n        {\n          \"item_id\": \"5552\",\n          \"description\": \"T-Shirt XL\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 0.3,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"NL\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"manufacturer_product_id\": \"XYZ-98765\",\n          \"manufacturer_product_id_std\": null,\n          \"properties\": {\n            \"size\": \"XL\",\n            \"color\": \"green\"\n          }\n        },\n        {\n          \"item_id\": \"98712\",\n          \"description\": \"Sneakers 42\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 1.02,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"US\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"properties\": {\n            \"size\": 42,\n            \"color\": \"black\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"XXX-Shipment-id\",\n    \"order_number\": \"1234567890\",\n    \"total_order_price\": {\n      \"currency\": \"EUR\",\n      \"value\": \"11.11\"\n    },\n    \"parcels\": [\n      {\n        \"status\": {\n          \"code\": \"ANNOUNCING\",\n          \"message\": \"Being announced\"\n        },\n        \"documents\": [],\n        \"dimensions\": {\n          \"width\": \"15.00\",\n          \"length\": \"5.00\",\n          \"height\": \"20.00\",\n          \"unit\": \"cm\"\n        },\n        \"weight\": {\n          \"value\": \"1.320\",\n          \"unit\": \"kg\"\n        },\n        \"tracking_url\": null,\n        \"tracking_number\": \"\",\n        \"additional_carrier_data\": {\n          \"awb_tracking_number\": null,\n          \"box_number\": null\n        },\n        \"created_at\": \"2024-06-06T17:11:14.616615Z\",\n        \"updated_at\": \"2024-06-06T17:11:14.648081Z\",\n        \"announced_at\": null,\n        \"parcel_items\": [\n          {\n            \"item_id\": \"5552\",\n            \"description\": \"T-Shirt XL\",\n            \"quantity\": 1,\n            \"weight\": {\n              \"value\": 0.3,\n              \"unit\": \"kg\"\n            },\n            \"price\": {\n              \"value\": \"12.65\",\n              \"currency\": \"EUR\"\n            },\n            \"hs_code\": \"620520\",\n            \"origin_country\": \"NL\",\n            \"sku\": \"TS1234\",\n            \"product_id\": \"19284\",\n            \"mid_code\": \"NLOZR92MEL\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\",\n            \"dds_reference\": \"25FIYPEK0A7573\",\n            \"taric_doc_code\": \"Y142\",\n            \"manufacturer_product_id\": \"ABC-12345\",\n            \"manufacturer_product_id_std\": \"01234567890128\",\n            \"properties\": {\n              \"size\": \"XL\",\n              \"color\": \"green\"\n            }\n          },\n          {\n            \"item_id\": \"98712\",\n            \"description\": \"Sneakers 42\",\n            \"quantity\": 1,\n            \"weight\": {\n              \"value\": 1.02,\n              \"unit\": \"kg\"\n            },\n            \"price\": {\n              \"value\": \"12.65\",\n              \"currency\": \"EUR\"\n            },\n            \"hs_code\": \"620520\",\n            \"origin_country\": \"US\",\n            \"sku\": \"TS1234\",\n            \"product_id\": \"19284\",\n            \"mid_code\": \"US1234567\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\",\n            \"dds_reference\": \"25FIYPEK0A7573\",\n            \"taric_doc_code\": \"Y142\",\n            \"properties\": {\n              \"size\": 42,\n              \"color\": \"black\"\n            }\n          }\n        ]\n      }\n    ],\n    \"from_address\": {\n      \"address_line_1\": \"Stadhuisplein 10\",\n      \"address_line_2\": \"2e verdieping\",\n      \"city\": \"Eindhoven\",\n      \"company_name\": \"Sendcloud\",\n      \"country_code\": \"NL\",\n      \"email\": \"marie.doe@sendcloud.com\",\n      \"house_number\": \"10\",\n      \"name\": \"Marie Doe\",\n      \"phone_number\": \"+31612345678\",\n      \"postal_code\": \"5611 EM\",\n      \"po_box\": \"PO Box 678\"\n    },\n    \"to_address\": {\n      \"address_line_1\": \"Insulindelaan\",\n      \"address_line_2\": \"\",\n      \"city\": \"Eindhoven\",\n      \"company_name\": \"Sendcloud\",\n      \"country_code\": \"NL\",\n      \"email\": \"john.doe@sendcloud.com\",\n      \"house_number\": \"115\",\n      \"name\": \"John Doe\",\n      \"phone_number\": \"+31612345678\",\n      \"postal_code\": \"5642 CV\",\n      \"po_box\": \"PO Box 478\"\n    },\n    \"ship_with\": {\n      \"type\": \"shipping_option_code\",\n      \"properties\": {\n        \"shipping_option_code\": \"postnl:standard\",\n        \"contract_id\": 517\n      }\n    },\n    \"customs_information\": null,\n    \"carrier\": {\n      \"code\": \"postnl\",\n      \"name\": \"PostNL\"\n    },\n    \"errors\": [],\n    \"applied_shipping_rules\": [\n      {\n        \"rule\": {\n          \"id\": 315157,\n          \"name\": \"Ship with PostNL for NL\"\n        },\n        \"result\": {\n          \"shipping_option_code\": \"postnl:standard\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f54a340-df0f-4021-987b-3ad2f879aea9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    "create-with-shipping-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apply_shipping_defaults\": true,\n  \"apply_shipping_rules\": true,\n  \"delivery_indicator\": \"DHL home delivery\",\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Insulindelaan 115\",\n    \"house_number\": \"115\",\n    \"postal_code\": \"5642CV\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"john.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 678\"\n  },\n  \"from_address\": {\n    \"name\": \"Marie Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein 10\",\n    \"address_line_2\": \"2e verdieping\",\n    \"house_number\": \"10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"marie.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 478\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard\",\n      \"contract_id\": 517\n    }\n  },\n  \"order_number\": \"1234567890\",\n  \"total_order_price\": {\n    \"currency\": \"EUR\",\n    \"value\": \"11.11\"\n  },\n  \"parcels\": [\n    {\n      \"dimensions\": {\n        \"length\": \"5.00\",\n        \"width\": \"15.00\",\n        \"height\": \"20.00\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"1.320\",\n        \"unit\": \"kg\"\n      },\n      \"parcel_items\": [\n        {\n          \"item_id\": \"5552\",\n          \"description\": \"T-Shirt XL\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 0.3,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"NL\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"manufacturer_product_id\": \"XYZ-98765\",\n          \"manufacturer_product_id_std\": null,\n          \"properties\": {\n            \"size\": \"XL\",\n            \"color\": \"green\"\n          }\n        },\n        {\n          \"item_id\": \"98712\",\n          \"description\": \"Sneakers 42\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 1.02,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"US\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"properties\": {\n            \"size\": 42,\n            \"color\": \"black\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"This field is required.\",\n      \"status\": \"400\",\n      \"source\": {\n        \"pointer\": \"/data/attributes/to_address/name\"\n      },\n      \"code\": \"required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c0afec1-8b1e-4387-bc04-8ec986b7300c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    "create-with-shipping-rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apply_shipping_defaults\": true,\n  \"apply_shipping_rules\": true,\n  \"delivery_indicator\": \"DHL home delivery\",\n  \"to_address\": {\n    \"name\": \"John Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Insulindelaan 115\",\n    \"house_number\": \"115\",\n    \"postal_code\": \"5642CV\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"john.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 678\"\n  },\n  \"from_address\": {\n    \"name\": \"Marie Doe\",\n    \"company_name\": \"Sendcloud\",\n    \"address_line_1\": \"Stadhuisplein 10\",\n    \"address_line_2\": \"2e verdieping\",\n    \"house_number\": \"10\",\n    \"postal_code\": \"5611 EM\",\n    \"city\": \"Eindhoven\",\n    \"country_code\": \"NL\",\n    \"phone_number\": \"+31612345678\",\n    \"email\": \"marie.doe@sendcloud.com\",\n    \"po_box\": \"PO Box 478\"\n  },\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"postnl:standard\",\n      \"contract_id\": 517\n    }\n  },\n  \"order_number\": \"1234567890\",\n  \"total_order_price\": {\n    \"currency\": \"EUR\",\n    \"value\": \"11.11\"\n  },\n  \"parcels\": [\n    {\n      \"dimensions\": {\n        \"length\": \"5.00\",\n        \"width\": \"15.00\",\n        \"height\": \"20.00\",\n        \"unit\": \"cm\"\n      },\n      \"weight\": {\n        \"value\": \"1.320\",\n        \"unit\": \"kg\"\n      },\n      \"parcel_items\": [\n        {\n          \"item_id\": \"5552\",\n          \"description\": \"T-Shirt XL\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 0.3,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"NL\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"NLOZR92MEL\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"manufacturer_product_id\": \"XYZ-98765\",\n          \"manufacturer_product_id_std\": null,\n          \"properties\": {\n            \"size\": \"XL\",\n            \"color\": \"green\"\n          }\n        },\n        {\n          \"item_id\": \"98712\",\n          \"description\": \"Sneakers 42\",\n          \"quantity\": 1,\n          \"weight\": {\n            \"value\": 1.02,\n            \"unit\": \"kg\"\n          },\n          \"price\": {\n            \"value\": \"12.65\",\n            \"currency\": \"EUR\"\n          },\n          \"hs_code\": \"620520\",\n          \"origin_country\": \"US\",\n          \"sku\": \"TS1234\",\n          \"product_id\": \"19284\",\n          \"mid_code\": \"US1234567\",\n          \"material_content\": \"100% Cotton\",\n          \"intended_use\": \"Personal use\",\n          \"dds_reference\": \"25FIYPEK0A7573\",\n          \"taric_doc_code\": \"Y142\",\n          \"properties\": {\n            \"size\": 42,\n            \"color\": \"black\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"title\": \"Not found\",\n      \"detail\": \"The partner ID was not found.\",\n      \"status\": \"404\",\n      \"code\": \"not_found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfbea4be-66ae-43f0-b3a3-3643480ddf45",
+          "name": "Validate an address",
+          "request": {
+            "name": "Validate an address",
+            "description": {
+              "content": "This address validation endpoint allows you to validate shipping addresses before using them.\nBy validating addresses in advance, you can ensure that the shipping information is accurate and complete,\nreducing the risk of delivery issues and improving overall shipping efficiency.\nProviding the carrier helps to tailor the address validation process according to specific carrier requirements.\nUsing additional validation methods can further enhance the accuracy of the address verification.\n\nThe default Sendcloud validation, will always be applied, has in 2 steps:\n1. checks the address against the carrier limits\n(e.g. maximum length of the address line, existence of the postal code for the country, etc.). \nsee also [Carrier address limits](/docs/shipments/address-field-limits#address-field-limits).\n\n2. optimizes (washes) the address to fit within the carrier limits.\n(e.g. deduplication of address lines, abbreviations, etc.)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "addresses",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are <a href=\"https://www.sendcloud.com/ecosystem/\" target=\"_blank\"> an official Sendcloud Tech Partner</a>, you can provide this additional request header for the system to recognize you. Sendcloud Partner UUID is provided to Sendcloud partners. The token is not required but if the header is set, the system will try to validate it. An unknown UUID will cause the 404 return, whilst an invalid one will return 400.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": {\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\"\n  },\n  \"carrier_code\": \"<string>\",\n  \"validation_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "86d92ee6-2008-4ae2-abd3-c86a186d8480",
+              "name": "Address validation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addresses",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are <a href=\"https://www.sendcloud.com/ecosystem/\" target=\"_blank\"> an official Sendcloud Tech Partner</a>, you can provide this additional request header for the system to recognize you. Sendcloud Partner UUID is provided to Sendcloud partners. The token is not required but if the header is set, the system will try to validate it. An unknown UUID will cause the 404 return, whilst an invalid one will return 400.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "550e8400-e29b-41d4-a716-446655440000"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"address_line_1\": \"Stadhuisplein\",\n    \"house_number\": \"50\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"postal_code\": \"1013 AB\",\n    \"city\": \"Eindhoven\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\",\n    \"country_code\": \"NL\"\n  },\n  \"carrier_code\": \"trunkrs\",\n  \"validation_methods\": [\n    \"here\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"input_address_is_valid\": false,\n  \"results\": [\n    {\n      \"address\": {\n        \"address_line_1\": \"Stadhuisplein\",\n        \"house_number\": \"50\",\n        \"address_line_2\": \"Apartment 17B\",\n        \"postal_code\": \"1013 AB\",\n        \"city\": \"Eindhoven\",\n        \"po_box\": \"string\",\n        \"state_province_code\": \"IT-RM\",\n        \"country_code\": \"NL\"\n      },\n      \"recommended\": false,\n      \"analysis\": {\n        \"validation_result\": {\n          \"is_valid\": false\n        },\n        \"changed_attributes\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"address\": {\n        \"address_line_1\": \"Stadhuisplein\",\n        \"house_number\": \"50\",\n        \"address_line_2\": \"Apartment 17B\",\n        \"postal_code\": \"1013 AB\",\n        \"city\": \"Eindhoven\",\n        \"po_box\": \"string\",\n        \"state_province_code\": \"IT-RM\",\n        \"country_code\": \"NL\"\n      },\n      \"recommended\": true,\n      \"analysis\": {\n        \"validation_result\": {\n          \"is_valid\": true\n        },\n        \"changed_attributes\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43e99b0a-457e-4bc3-b3ae-0171a4f69a9c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addresses",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are <a href=\"https://www.sendcloud.com/ecosystem/\" target=\"_blank\"> an official Sendcloud Tech Partner</a>, you can provide this additional request header for the system to recognize you. Sendcloud Partner UUID is provided to Sendcloud partners. The token is not required but if the header is set, the system will try to validate it. An unknown UUID will cause the 404 return, whilst an invalid one will return 400.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "550e8400-e29b-41d4-a716-446655440000"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"address_line_1\": \"Stadhuisplein\",\n    \"house_number\": \"50\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"postal_code\": \"1013 AB\",\n    \"city\": \"Eindhoven\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\",\n    \"country_code\": \"NL\"\n  },\n  \"carrier_code\": \"trunkrs\",\n  \"validation_methods\": [\n    \"here\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"This field is required.\",\n      \"status\": \"400\",\n      \"source\": {\n        \"pointer\": \"/address/carrier_code\"\n      },\n      \"code\": \"required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cc9d5b1-523f-4e36-835e-6ef640ef7445",
+          "name": "Retrieve a shipment",
+          "request": {
+            "name": "Retrieve a shipment",
+            "description": {
+              "content": "This endpoint allows you to retrieve a specific shipment created under your Sendcloud credentials, based on the shipment `id`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the shipment you want to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fedad864-d838-4dde-9c7d-ccc6c05b010e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the shipment you want to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"XXX-Shipment-id\",\n    \"from_address\": {\n      \"address_line_1\": \"Stadhuisplein 10\",\n      \"address_line_2\": \"2e verdieping\",\n      \"city\": \"Eindhoven\",\n      \"company_name\": \"Sendcloud\",\n      \"country_code\": \"NL\",\n      \"email\": \"marie.doe@sendcloud.com\",\n      \"house_number\": \"10\",\n      \"name\": \"Marie Doe\",\n      \"phone_number\": \"+31612345678\",\n      \"postal_code\": \"5611 EM\",\n      \"po_box\": \"PO Box 678\"\n    },\n    \"to_address\": {\n      \"address_line_1\": \"Insulindelaan\",\n      \"address_line_2\": \"\",\n      \"city\": \"Eindhoven\",\n      \"company_name\": \"Sendcloud\",\n      \"country_code\": \"NL\",\n      \"email\": \"john.doe@sendcloud.com\",\n      \"house_number\": \"115\",\n      \"name\": \"John Doe\",\n      \"phone_number\": \"+31612345678\",\n      \"postal_code\": \"5642 CV\",\n      \"po_box\": \"PO Box 478\"\n    },\n    \"ship_with\": {\n      \"type\": \"shipping_option_code\",\n      \"properties\": {\n        \"shipping_option_code\": \"dhl_express:worldwide/incoterm=dap\",\n        \"contract_id\": 4195\n      }\n    },\n    \"customs_information\": null,\n    \"errors\": [],\n    \"order_number\": \"1234567890\",\n    \"total_order_price\": {\n      \"currency\": \"EUR\",\n      \"value\": \"11.11\"\n    },\n    \"parcels\": [\n      {\n        \"id\": 383707309,\n        \"status\": {\n          \"code\": \"CANCELLED\",\n          \"message\": \"Cancelled\"\n        },\n        \"documents\": [\n          {\n            \"type\": \"label\",\n            \"size\": \"a6\",\n            \"link\": \"https://panel.sendcloud.sc/api/v3/parcels/383559021/documents/label\"\n          }\n        ],\n        \"dimensions\": {\n          \"width\": \"15.00\",\n          \"length\": \"5.00\",\n          \"height\": \"20.00\",\n          \"unit\": \"cm\"\n        },\n        \"weight\": {\n          \"value\": \"1.320\",\n          \"unit\": \"kg\"\n        },\n        \"tracking_url\": \"https://tracking.eu-central-1-0.sendcloud.sc/forward?carrier=postnl&code=3SYZXG8498635&destination=NL&lang=en-us&source=NL&type=parcel&verification=5642+CV&servicepoint_verification=&created_at=2024-06-06\",\n        \"tracking_number\": \"3SYZXG8498635\",\n        \"additional_carrier_data\": {\n          \"awb_tracking_number\": null,\n          \"box_number\": null\n        },\n        \"created_at\": \"2024-06-06T17:11:14.616615Z\",\n        \"updated_at\": \"2024-06-06T17:41:16.998357Z\",\n        \"announced_at\": \"2024-06-06T17:11:15.247645Z\",\n        \"label_notes\": [\n          \"I live at the blue door\",\n          \"The doorbell isn't working\"\n        ],\n        \"package_type\": \"package\",\n        \"parcel_items\": [\n          {\n            \"item_id\": \"5552\",\n            \"description\": \"T-Shirt XL\",\n            \"quantity\": 1,\n            \"weight\": {\n              \"value\": 0.3,\n              \"unit\": \"kg\"\n            },\n            \"price\": {\n              \"value\": \"12.65\",\n              \"currency\": \"EUR\"\n            },\n            \"hs_code\": \"620520\",\n            \"origin_country\": \"NL\",\n            \"sku\": \"TS1234\",\n            \"product_id\": \"19284\",\n            \"mid_code\": \"NLOZR92MEL\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\",\n            \"dds_reference\": \"25FIYPEK0A7573\",\n            \"taric_doc_code\": \"Y142\",\n            \"manufacturer_product_id\": \"ABC-12345\",\n            \"manufacturer_product_id_std\": \"01234567890128\",\n            \"properties\": {\n              \"size\": \"XL\",\n              \"color\": \"green\"\n            }\n          },\n          {\n            \"item_id\": \"98712\",\n            \"description\": \"Sneakers 42\",\n            \"quantity\": 1,\n            \"weight\": {\n              \"value\": 1.02,\n              \"unit\": \"kg\"\n            },\n            \"price\": {\n              \"value\": \"12.65\",\n              \"currency\": \"EUR\"\n            },\n            \"hs_code\": \"620520\",\n            \"origin_country\": \"US\",\n            \"sku\": \"TS1234\",\n            \"product_id\": \"19284\",\n            \"mid_code\": \"US1234567\",\n            \"material_content\": \"100% Cotton\",\n            \"intended_use\": \"Personal use\",\n            \"dds_reference\": \"25FIYPEK0A7573\",\n            \"taric_doc_code\": \"Y142\",\n            \"properties\": {\n              \"size\": 42,\n              \"color\": \"black\"\n            }\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef519375-13e7-420a-9416-37ad4c9c0c63",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the shipment you want to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a41ce33-5127-4f18-831e-18a8e9bb85e1",
+          "name": "Cancel a shipment",
+          "request": {
+            "name": "Cancel a shipment",
+            "description": {
+              "content": "Use this endpoint to cancel an announced shipment, if the carrier supports cancellation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipments",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the shipment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "06b6411e-7a1c-45ff-b9e9-7f1e26920771",
+              "name": "Cancelled\n- The shipment has been cancelled if all valid conditions apply.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"status\": \"cancelled\",\n    \"message\": \"Shipment has been cancelled\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4cd453d-6eea-4f20-b2ce-abca55c69d4a",
+              "name": "Shipment cancellation has been queued\n- The shipment having the status of ready to send (1000) will be watched for 14 days and if nothing nothing has changed to the shipment, it will be cancelled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"status\": \"queued\",\n    \"message\": \"Shipment cancellation has been queued\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c30416d3-b88c-4d3f-a114-c1a45574dfba",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"404\",\n      \"code\": \"not_found\",\n      \"detail\": \"Not found\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cec3e2eb-5206-4362-82be-8d883f422478",
+              "name": "Cancellation rejected\n- When shipment has the status of 2000 which means it is already cancelled.\n- After period of 42 days of the shipment being announced we cannot cancel it and will let you know about it through a response message.\n- When shipment has the status code (11) saying that it’s delivered it will not do anything to the shipment and your request will be rejected.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"409\",\n      \"code\": \"invalid\",\n      \"detail\": \"This shipment is already being cancelled.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bac4a275-18f3-4363-8e59-b0f43d5e9cbf",
+          "name": "Retrieve a return portal URL",
+          "request": {
+            "name": "Retrieve a return portal URL",
+            "description": {
+              "content": "Retrieve a return portal link for a specific shipment using the shipment's id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shipments",
+                ":id",
+                "return-portal-url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the shipment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e1b14299-1633-4b03-a6be-7bd7aea624f8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    ":id",
+                    "return-portal-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"url\": \"http://mybrand.returns-portal.com/initiate/\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79f2351a-8bbb-471e-85e3-e8fd2021db7c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shipments",
+                    ":id",
+                    "return-portal-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the shipment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"404\",\n      \"code\": \"not_found\",\n      \"detail\": \"No return portal is configured for this shipment.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4fd3ec17-4fe8-4062-b19f-947a566c6087",
+      "name": "Address",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3de98c45-160d-403f-8fa7-be96f0e89b14",
+          "name": "Validate an address",
+          "request": {
+            "name": "Validate an address",
+            "description": {
+              "content": "This address validation endpoint allows you to validate shipping addresses before using them.\nBy validating addresses in advance, you can ensure that the shipping information is accurate and complete,\nreducing the risk of delivery issues and improving overall shipping efficiency.\nProviding the carrier helps to tailor the address validation process according to specific carrier requirements.\nUsing additional validation methods can further enhance the accuracy of the address verification.\n\nThe default Sendcloud validation, will always be applied, has in 2 steps:\n1. checks the address against the carrier limits\n(e.g. maximum length of the address line, existence of the postal code for the country, etc.). \nsee also [Carrier address limits](/docs/shipments/address-field-limits#address-field-limits).\n\n2. optimizes (washes) the address to fit within the carrier limits.\n(e.g. deduplication of address lines, abbreviations, etc.)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "addresses",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are <a href=\"https://www.sendcloud.com/ecosystem/\" target=\"_blank\"> an official Sendcloud Tech Partner</a>, you can provide this additional request header for the system to recognize you. Sendcloud Partner UUID is provided to Sendcloud partners. The token is not required but if the header is set, the system will try to validate it. An unknown UUID will cause the 404 return, whilst an invalid one will return 400.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": {\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\"\n  },\n  \"carrier_code\": \"<string>\",\n  \"validation_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ec34cd3-818b-483b-983c-9e588801f0ac",
+              "name": "Address validation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addresses",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are <a href=\"https://www.sendcloud.com/ecosystem/\" target=\"_blank\"> an official Sendcloud Tech Partner</a>, you can provide this additional request header for the system to recognize you. Sendcloud Partner UUID is provided to Sendcloud partners. The token is not required but if the header is set, the system will try to validate it. An unknown UUID will cause the 404 return, whilst an invalid one will return 400.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "550e8400-e29b-41d4-a716-446655440000"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"address_line_1\": \"Stadhuisplein\",\n    \"house_number\": \"50\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"postal_code\": \"1013 AB\",\n    \"city\": \"Eindhoven\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\",\n    \"country_code\": \"NL\"\n  },\n  \"carrier_code\": \"trunkrs\",\n  \"validation_methods\": [\n    \"here\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"input_address_is_valid\": false,\n  \"results\": [\n    {\n      \"address\": {\n        \"address_line_1\": \"Stadhuisplein\",\n        \"house_number\": \"50\",\n        \"address_line_2\": \"Apartment 17B\",\n        \"postal_code\": \"1013 AB\",\n        \"city\": \"Eindhoven\",\n        \"po_box\": \"string\",\n        \"state_province_code\": \"IT-RM\",\n        \"country_code\": \"NL\"\n      },\n      \"recommended\": false,\n      \"analysis\": {\n        \"validation_result\": {\n          \"is_valid\": false\n        },\n        \"changed_attributes\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"address\": {\n        \"address_line_1\": \"Stadhuisplein\",\n        \"house_number\": \"50\",\n        \"address_line_2\": \"Apartment 17B\",\n        \"postal_code\": \"1013 AB\",\n        \"city\": \"Eindhoven\",\n        \"po_box\": \"string\",\n        \"state_province_code\": \"IT-RM\",\n        \"country_code\": \"NL\"\n      },\n      \"recommended\": true,\n      \"analysis\": {\n        \"validation_result\": {\n          \"is_valid\": true\n        },\n        \"changed_attributes\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "caa3ae97-7a82-455d-8dad-e6771ce31462",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addresses",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are <a href=\"https://www.sendcloud.com/ecosystem/\" target=\"_blank\"> an official Sendcloud Tech Partner</a>, you can provide this additional request header for the system to recognize you. Sendcloud Partner UUID is provided to Sendcloud partners. The token is not required but if the header is set, the system will try to validate it. An unknown UUID will cause the 404 return, whilst an invalid one will return 400.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "550e8400-e29b-41d4-a716-446655440000"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"address_line_1\": \"Stadhuisplein\",\n    \"house_number\": \"50\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"postal_code\": \"1013 AB\",\n    \"city\": \"Eindhoven\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\",\n    \"country_code\": \"NL\"\n  },\n  \"carrier_code\": \"trunkrs\",\n  \"validation_methods\": [\n    \"here\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"This field is required.\",\n      \"status\": \"400\",\n      \"source\": {\n        \"pointer\": \"/address/carrier_code\"\n      },\n      \"code\": \"required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d2de6e23-e879-42a7-a156-4135ca26ce5e",
+      "name": "Returns",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ae6aa947-e2d5-4a56-b4b3-0e0868a3e6e3",
+          "name": "Validate an address",
+          "request": {
+            "name": "Validate an address",
+            "description": {
+              "content": "This address validation endpoint allows you to validate shipping addresses before using them.\nBy validating addresses in advance, you can ensure that the shipping information is accurate and complete,\nreducing the risk of delivery issues and improving overall shipping efficiency.\nProviding the carrier helps to tailor the address validation process according to specific carrier requirements.\nUsing additional validation methods can further enhance the accuracy of the address verification.\n\nThe default Sendcloud validation, will always be applied, has in 2 steps:\n1. checks the address against the carrier limits\n(e.g. maximum length of the address line, existence of the postal code for the country, etc.). \nsee also [Carrier address limits](/docs/shipments/address-field-limits#address-field-limits).\n\n2. optimizes (washes) the address to fit within the carrier limits.\n(e.g. deduplication of address lines, abbreviations, etc.)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "addresses",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "If you are <a href=\"https://www.sendcloud.com/ecosystem/\" target=\"_blank\"> an official Sendcloud Tech Partner</a>, you can provide this additional request header for the system to recognize you. Sendcloud Partner UUID is provided to Sendcloud partners. The token is not required but if the header is set, the system will try to validate it. An unknown UUID will cause the 404 return, whilst an invalid one will return 400.",
+                "key": "Sendcloud-Partner-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": {\n    \"address_line_1\": \"<string>\",\n    \"house_number\": \"<string>\",\n    \"address_line_2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"city\": \"<string>\",\n    \"po_box\": \"<string,null>\",\n    \"state_province_code\": \"<string>\",\n    \"country_code\": \"<string>\"\n  },\n  \"carrier_code\": \"<string>\",\n  \"validation_methods\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f214792d-7f9c-4376-a071-e55f9f45b94a",
+              "name": "Address validation successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addresses",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are <a href=\"https://www.sendcloud.com/ecosystem/\" target=\"_blank\"> an official Sendcloud Tech Partner</a>, you can provide this additional request header for the system to recognize you. Sendcloud Partner UUID is provided to Sendcloud partners. The token is not required but if the header is set, the system will try to validate it. An unknown UUID will cause the 404 return, whilst an invalid one will return 400.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "550e8400-e29b-41d4-a716-446655440000"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"address_line_1\": \"Stadhuisplein\",\n    \"house_number\": \"50\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"postal_code\": \"1013 AB\",\n    \"city\": \"Eindhoven\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\",\n    \"country_code\": \"NL\"\n  },\n  \"carrier_code\": \"trunkrs\",\n  \"validation_methods\": [\n    \"here\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"input_address_is_valid\": true,\n  \"results\": [\n    {\n      \"address\": {\n        \"address_line_1\": \"Stadhuisplein\",\n        \"house_number\": \"50\",\n        \"address_line_2\": \"Apartment 17B\",\n        \"postal_code\": \"1013 AB\",\n        \"city\": \"Eindhoven\",\n        \"po_box\": \"string\",\n        \"state_province_code\": \"IT-RM\",\n        \"country_code\": \"NL\"\n      },\n      \"recommended\": false,\n      \"analysis\": {\n        \"validation_result\": {\n          \"is_valid\": true\n        },\n        \"changed_attributes\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"address\": {\n        \"address_line_1\": \"Stadhuisplein\",\n        \"house_number\": \"50\",\n        \"address_line_2\": \"Apartment 17B\",\n        \"postal_code\": \"1013 AB\",\n        \"city\": \"Eindhoven\",\n        \"po_box\": \"string\",\n        \"state_province_code\": \"IT-RM\",\n        \"country_code\": \"NL\"\n      },\n      \"recommended\": false,\n      \"analysis\": {\n        \"validation_result\": {\n          \"is_valid\": false\n        },\n        \"changed_attributes\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95d47baa-7c50-4061-9397-3fcc0e1bf105",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addresses",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "If you are <a href=\"https://www.sendcloud.com/ecosystem/\" target=\"_blank\"> an official Sendcloud Tech Partner</a>, you can provide this additional request header for the system to recognize you. Sendcloud Partner UUID is provided to Sendcloud partners. The token is not required but if the header is set, the system will try to validate it. An unknown UUID will cause the 404 return, whilst an invalid one will return 400.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "550e8400-e29b-41d4-a716-446655440000"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"address_line_1\": \"Stadhuisplein\",\n    \"house_number\": \"50\",\n    \"address_line_2\": \"Apartment 17B\",\n    \"postal_code\": \"1013 AB\",\n    \"city\": \"Eindhoven\",\n    \"po_box\": \"string\",\n    \"state_province_code\": \"IT-RM\",\n    \"country_code\": \"NL\"\n  },\n  \"carrier_code\": \"trunkrs\",\n  \"validation_methods\": [\n    \"here\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"detail\": \"This field is required.\",\n      \"status\": \"400\",\n      \"source\": {\n        \"pointer\": \"/address/carrier_code\"\n      },\n      \"code\": \"required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bc21c48f-3488-4c4b-865e-97d34c7468d2",
+    "name": "Shipments",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

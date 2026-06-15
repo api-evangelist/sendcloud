@@ -1,0 +1,2282 @@
+{
+  "info": {
+    "_postman_id": "25b05371-1e90-464e-8f88-6462ec0943c2",
+    "name": "Event Subscriptions API",
+    "description": "**BETA** - The Event Subscriptions API allows you to subscribe to parcel events and have them delivered to external endpoints such as webhooks or Klaviyo.\n\nThis API uses a two-part model:\n- **Connections** define _where_ events are delivered (e.g., a webhook URL or a Klaviyo account).\n- **Subscriptions** define _which_ events are routed to a connection.\n\nAll resources are scoped to the authenticated user's organization.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:34.000Z",
+    "updatedAt": "2026-06-05T15:16:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-25b05371-1e90-464e-8f88-6462ec0943c2"
+  },
+  "item": [
+    {
+      "name": "event-subscriptions",
+      "item": [
+        {
+          "name": "connections",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "authorization",
+                  "item": [
+                    {
+                      "name": "Start OAuth2 authorization",
+                      "id": "57b8aab5-ab40-4a6d-95cb-a0def283e3eb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "basic",
+                          "basic": [
+                            {
+                              "key": "username",
+                              "value": "{{basicAuthUsername}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "password",
+                              "value": "{{basicAuthPassword}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/connections/:id/authorization",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "connections",
+                            ":id",
+                            "authorization"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5d07bca2-f917-4384-9fcd-1b8faac1ce55",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) The id of the connection to authorize."
+                            }
+                          ]
+                        },
+                        "description": "Initiate the OAuth2 authorization flow for a connection that requires it (e.g., Klaviyo). Returns an authorization URL to redirect the user to."
+                      },
+                      "response": [
+                        {
+                          "id": "4bf676dc-9513-4a19-a9c5-f7abfe1418d5",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/event-subscriptions/connections/:id/authorization",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "event-subscriptions",
+                                "connections",
+                                ":id",
+                                "authorization"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"authorization_url\": \"<uri>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:16:35.000Z",
+                          "updatedAt": "2026-06-05T15:16:35.000Z",
+                          "uid": "35240-4bf676dc-9513-4a19-a9c5-f7abfe1418d5"
+                        },
+                        {
+                          "id": "bc598a4b-85fd-4229-8ed5-f1dd47a6765c",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/event-subscriptions/connections/:id/authorization",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "event-subscriptions",
+                                "connections",
+                                ":id",
+                                "authorization"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-06-05T15:16:35.000Z",
+                          "updatedAt": "2026-06-05T15:16:35.000Z",
+                          "uid": "35240-bc598a4b-85fd-4229-8ed5-f1dd47a6765c"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:16:34.000Z",
+                      "updatedAt": "2026-06-05T15:16:34.000Z",
+                      "uid": "35240-57b8aab5-ab40-4a6d-95cb-a0def283e3eb"
+                    }
+                  ],
+                  "id": "80f0ea12-6fea-4bf0-a666-3a46ff50a87f",
+                  "createdAt": "2026-06-05T15:16:34.000Z",
+                  "updatedAt": "2026-06-05T15:16:34.000Z",
+                  "uid": "35240-80f0ea12-6fea-4bf0-a666-3a46ff50a87f"
+                },
+                {
+                  "name": "Get a connection",
+                  "id": "1aea0ed4-ca75-4254-92ae-6d179cb7ec32",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/connections/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "connections",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e947b44f-bd5f-4907-bc24-bf97483e6770",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The id of the connection."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a specific connection by its id."
+                  },
+                  "response": [
+                    {
+                      "id": "85a2f2ea-d0c2-4a07-9439-8745c6caf83f",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/connections/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "connections",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<long>\",\n    \"type\": \"klaviyo\",\n    \"configuration\": {},\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-85a2f2ea-d0c2-4a07-9439-8745c6caf83f"
+                    },
+                    {
+                      "id": "0a611f03-6d8a-4576-aa50-cc76efab976e",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/connections/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "connections",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-0a611f03-6d8a-4576-aa50-cc76efab976e"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:34.000Z",
+                  "updatedAt": "2026-06-05T15:16:34.000Z",
+                  "uid": "35240-1aea0ed4-ca75-4254-92ae-6d179cb7ec32"
+                },
+                {
+                  "name": "Update a connection",
+                  "id": "b94df7e5-2643-4d7d-8944-9faf71e94f45",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"webhook\",\n  \"configuration\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/connections/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "connections",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6fa9f804-2684-4456-9c27-9b20f562d31f",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The id of the connection."
+                        }
+                      ]
+                    },
+                    "description": "Update an existing connection by its id. Only the fields provided in the request body will be updated."
+                  },
+                  "response": [
+                    {
+                      "id": "a2a75d31-a2d3-46dd-bff6-bf5b96e4bcd8",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"webhook\",\n  \"configuration\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/connections/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "connections",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<long>\",\n    \"type\": \"klaviyo\",\n    \"configuration\": {},\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-a2a75d31-a2d3-46dd-bff6-bf5b96e4bcd8"
+                    },
+                    {
+                      "id": "fd1005f6-9eda-4221-a9b5-da680195aa85",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"webhook\",\n  \"configuration\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/connections/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "connections",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-fd1005f6-9eda-4221-a9b5-da680195aa85"
+                    },
+                    {
+                      "id": "0b887999-e955-4808-bf46-91c167d02039",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"webhook\",\n  \"configuration\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/connections/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "connections",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-0b887999-e955-4808-bf46-91c167d02039"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:34.000Z",
+                  "updatedAt": "2026-06-05T15:16:34.000Z",
+                  "uid": "35240-b94df7e5-2643-4d7d-8944-9faf71e94f45"
+                },
+                {
+                  "name": "Delete a connection",
+                  "id": "29b3abb0-4b0e-4d5a-8e35-5111cb6927d1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/connections/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "connections",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "52c5bf72-110e-40ea-be19-b836ee402f3f",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The id of the connection."
+                        }
+                      ]
+                    },
+                    "description": "Delete a specific connection by its id. Any subscriptions associated with this connection will also be deleted."
+                  },
+                  "response": [
+                    {
+                      "id": "353cada7-ba46-4ef2-a73f-0aaeacb84566",
+                      "name": "No Content",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/connections/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "connections",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-353cada7-ba46-4ef2-a73f-0aaeacb84566"
+                    },
+                    {
+                      "id": "1e0f85fd-f800-47f7-88ff-c6ec07ad5e8c",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/connections/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "connections",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-1e0f85fd-f800-47f7-88ff-c6ec07ad5e8c"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:34.000Z",
+                  "updatedAt": "2026-06-05T15:16:34.000Z",
+                  "uid": "35240-29b3abb0-4b0e-4d5a-8e35-5111cb6927d1"
+                }
+              ],
+              "id": "6c35fd29-20d3-417d-9039-299a55d218b9",
+              "createdAt": "2026-06-05T15:16:34.000Z",
+              "updatedAt": "2026-06-05T15:16:34.000Z",
+              "uid": "35240-6c35fd29-20d3-417d-9039-299a55d218b9"
+            },
+            {
+              "name": "Create a connection",
+              "id": "2e53d485-b091-49a4-984c-b849b4be98f2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"klaviyo\",\n  \"configuration\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/event-subscriptions/connections",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event-subscriptions",
+                    "connections"
+                  ]
+                },
+                "description": "Create a new connection to an external endpoint where event notifications will be delivered."
+              },
+              "response": [
+                {
+                  "id": "72d83aa1-6847-4165-8e51-b6fda6e6b211",
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"klaviyo\",\n  \"configuration\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/connections",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "connections"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<long>\",\n    \"type\": \"klaviyo\",\n    \"configuration\": {},\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:35.000Z",
+                  "updatedAt": "2026-06-05T15:16:35.000Z",
+                  "uid": "35240-72d83aa1-6847-4165-8e51-b6fda6e6b211"
+                },
+                {
+                  "id": "c6176873-bf69-4b74-9036-8483b062c3f5",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"klaviyo\",\n  \"configuration\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/connections",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "connections"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-06-05T15:16:35.000Z",
+                  "updatedAt": "2026-06-05T15:16:35.000Z",
+                  "uid": "35240-c6176873-bf69-4b74-9036-8483b062c3f5"
+                },
+                {
+                  "id": "5d2b8e3b-ec83-4348-814c-eff7e0a943cb",
+                  "name": "Throttled",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"klaviyo\",\n  \"configuration\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/connections",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "connections"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:35.000Z",
+                  "updatedAt": "2026-06-05T15:16:35.000Z",
+                  "uid": "35240-5d2b8e3b-ec83-4348-814c-eff7e0a943cb"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:34.000Z",
+              "updatedAt": "2026-06-05T15:16:34.000Z",
+              "uid": "35240-2e53d485-b091-49a4-984c-b849b4be98f2"
+            },
+            {
+              "name": "List connections",
+              "id": "01a2d914-0369-4715-b89a-d19af3a7d59a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event-subscriptions/connections?connection_type=webhook",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event-subscriptions",
+                    "connections"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by connection type.",
+                      "key": "connection_type",
+                      "value": "webhook"
+                    }
+                  ]
+                },
+                "description": "Retrieve all connections for the authenticated user's organization."
+              },
+              "response": [
+                {
+                  "id": "b8309d85-76a8-45f1-8dd5-031bb04ccf7c",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/connections?connection_type=webhook",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "connections"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by connection type.",
+                          "key": "connection_type",
+                          "value": "webhook"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<long>\",\n      \"type\": \"webhook\",\n      \"configuration\": {},\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"type\": \"webhook\",\n      \"configuration\": {},\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:35.000Z",
+                  "updatedAt": "2026-06-05T15:16:35.000Z",
+                  "uid": "35240-b8309d85-76a8-45f1-8dd5-031bb04ccf7c"
+                },
+                {
+                  "id": "5463073d-7a1b-4dad-bca0-024e5abc65f1",
+                  "name": "Throttled",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/connections?connection_type=webhook",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "connections"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by connection type.",
+                          "key": "connection_type",
+                          "value": "webhook"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:35.000Z",
+                  "updatedAt": "2026-06-05T15:16:35.000Z",
+                  "uid": "35240-5463073d-7a1b-4dad-bca0-024e5abc65f1"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:34.000Z",
+              "updatedAt": "2026-06-05T15:16:34.000Z",
+              "uid": "35240-01a2d914-0369-4715-b89a-d19af3a7d59a"
+            }
+          ],
+          "id": "bd1decc9-6cb3-4e72-899a-292548231f0c",
+          "createdAt": "2026-06-05T15:16:34.000Z",
+          "updatedAt": "2026-06-05T15:16:34.000Z",
+          "uid": "35240-bd1decc9-6cb3-4e72-899a-292548231f0c"
+        },
+        {
+          "name": "subscriptions",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Get a subscription",
+                  "id": "3d12ffd4-2404-4856-a1e5-a1b6d5d32f4f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2c5d948a-ea6d-483c-a9d3-d3f2ce2d6879",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The id of the subscription."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a specific subscription by its id."
+                  },
+                  "response": [
+                    {
+                      "id": "39c80fa7-73c0-4343-96a9-b183fce090e0",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/subscriptions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "subscriptions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<long>\",\n    \"connection_id\": \"<long>\",\n    \"event_type\": \"parcels.event.created\",\n    \"is_active\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-39c80fa7-73c0-4343-96a9-b183fce090e0"
+                    },
+                    {
+                      "id": "659ca188-213b-4bd2-bf72-015fa0e43603",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/subscriptions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "subscriptions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-659ca188-213b-4bd2-bf72-015fa0e43603"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:34.000Z",
+                  "updatedAt": "2026-06-05T15:16:34.000Z",
+                  "uid": "35240-3d12ffd4-2404-4856-a1e5-a1b6d5d32f4f"
+                },
+                {
+                  "name": "Update a subscription",
+                  "id": "0edd4741-af8c-414d-9c47-7014b19d728c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"connection_id\": \"<long>\",\n  \"event_type\": \"parcels.event.created\",\n  \"is_active\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2fb3ebdb-e0e7-4fe7-bd9d-4ebe5655d3eb",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The id of the subscription."
+                        }
+                      ]
+                    },
+                    "description": "Update an existing subscription by its id. Only the fields provided in the request body will be updated."
+                  },
+                  "response": [
+                    {
+                      "id": "6afd0bda-47b6-4d03-be3b-a89c948532c1",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"connection_id\": \"<long>\",\n  \"event_type\": \"parcels.event.created\",\n  \"is_active\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/subscriptions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "subscriptions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<long>\",\n    \"connection_id\": \"<long>\",\n    \"event_type\": \"parcels.event.created\",\n    \"is_active\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-6afd0bda-47b6-4d03-be3b-a89c948532c1"
+                    },
+                    {
+                      "id": "adc11e3f-530d-4084-9110-bdea5f5ee4d0",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"connection_id\": \"<long>\",\n  \"event_type\": \"parcels.event.created\",\n  \"is_active\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/subscriptions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "subscriptions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-adc11e3f-530d-4084-9110-bdea5f5ee4d0"
+                    },
+                    {
+                      "id": "d96be234-3069-430e-b746-926f06ca6b42",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"connection_id\": \"<long>\",\n  \"event_type\": \"parcels.event.created\",\n  \"is_active\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/subscriptions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "subscriptions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-d96be234-3069-430e-b746-926f06ca6b42"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:34.000Z",
+                  "updatedAt": "2026-06-05T15:16:34.000Z",
+                  "uid": "35240-0edd4741-af8c-414d-9c47-7014b19d728c"
+                },
+                {
+                  "name": "Delete a subscription",
+                  "id": "78596d13-e3bc-4438-84fc-623c02878558",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/subscriptions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "subscriptions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ea51cf77-a383-47d9-9b12-c10677a9a402",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) The id of the subscription."
+                        }
+                      ]
+                    },
+                    "description": "Delete a specific subscription by its id. Event delivery for this subscription will stop immediately."
+                  },
+                  "response": [
+                    {
+                      "id": "b2b70b2b-e3f7-459a-9847-08702d15a200",
+                      "name": "No Content",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/subscriptions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "subscriptions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-b2b70b2b-e3f7-459a-9847-08702d15a200"
+                    },
+                    {
+                      "id": "171021fc-c600-48a1-9fb1-948125f1cee9",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/subscriptions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "subscriptions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-06-05T15:16:35.000Z",
+                      "updatedAt": "2026-06-05T15:16:35.000Z",
+                      "uid": "35240-171021fc-c600-48a1-9fb1-948125f1cee9"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:34.000Z",
+                  "updatedAt": "2026-06-05T15:16:34.000Z",
+                  "uid": "35240-78596d13-e3bc-4438-84fc-623c02878558"
+                }
+              ],
+              "id": "863279c0-1bb6-489f-8b91-a2709de901dc",
+              "createdAt": "2026-06-05T15:16:34.000Z",
+              "updatedAt": "2026-06-05T15:16:34.000Z",
+              "uid": "35240-863279c0-1bb6-489f-8b91-a2709de901dc"
+            },
+            {
+              "name": "Create a subscription",
+              "id": "1fcaa85a-5552-44d3-84c2-aae8244bb27e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"connection_id\": \"<long>\",\n  \"event_type\": \"parcels.event.created\",\n  \"is_active\": true\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/event-subscriptions/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event-subscriptions",
+                    "subscriptions"
+                  ]
+                },
+                "description": "Create a new subscription that routes events of a specific type to a connection."
+              },
+              "response": [
+                {
+                  "id": "5aea3932-3878-4690-92f1-ba901c572094",
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"connection_id\": \"<long>\",\n  \"event_type\": \"parcels.event.created\",\n  \"is_active\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/subscriptions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "subscriptions"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<long>\",\n    \"connection_id\": \"<long>\",\n    \"event_type\": \"parcels.event.created\",\n    \"is_active\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:35.000Z",
+                  "updatedAt": "2026-06-05T15:16:35.000Z",
+                  "uid": "35240-5aea3932-3878-4690-92f1-ba901c572094"
+                },
+                {
+                  "id": "acbde048-ed2f-4a5f-9ffc-83955b466335",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"connection_id\": \"<long>\",\n  \"event_type\": \"parcels.event.created\",\n  \"is_active\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/subscriptions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "subscriptions"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-06-05T15:16:35.000Z",
+                  "updatedAt": "2026-06-05T15:16:35.000Z",
+                  "uid": "35240-acbde048-ed2f-4a5f-9ffc-83955b466335"
+                },
+                {
+                  "id": "f65bbb1d-648d-4368-bed0-57d7b22002e9",
+                  "name": "Throttled",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"connection_id\": \"<long>\",\n  \"event_type\": \"parcels.event.created\",\n  \"is_active\": true\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/subscriptions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "subscriptions"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:35.000Z",
+                  "updatedAt": "2026-06-05T15:16:35.000Z",
+                  "uid": "35240-f65bbb1d-648d-4368-bed0-57d7b22002e9"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:34.000Z",
+              "updatedAt": "2026-06-05T15:16:34.000Z",
+              "uid": "35240-1fcaa85a-5552-44d3-84c2-aae8244bb27e"
+            },
+            {
+              "name": "List subscriptions",
+              "id": "c0c67b23-2772-4596-aa46-cb83584ee423",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/event-subscriptions/subscriptions?event_type=<string>&is_active=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "event-subscriptions",
+                    "subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by event type.",
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by active status.",
+                      "key": "is_active",
+                      "value": "<boolean>"
+                    }
+                  ]
+                },
+                "description": "Retrieve all subscriptions for the authenticated user's organization."
+              },
+              "response": [
+                {
+                  "id": "021fe6cb-13d7-4582-bcb7-7b70b6624258",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/subscriptions?event_type=<string>&is_active=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "subscriptions"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by event type.",
+                          "key": "event_type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by active status.",
+                          "key": "is_active",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<long>\",\n      \"connection_id\": \"<long>\",\n      \"event_type\": \"parcels.event.created\",\n      \"is_active\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<long>\",\n      \"connection_id\": \"<long>\",\n      \"event_type\": \"parcels.event.created\",\n      \"is_active\": \"<boolean>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:35.000Z",
+                  "updatedAt": "2026-06-05T15:16:35.000Z",
+                  "uid": "35240-021fe6cb-13d7-4582-bcb7-7b70b6624258"
+                },
+                {
+                  "id": "52d16610-ce52-45cf-bf3c-700b4f73b14e",
+                  "name": "Throttled",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/event-subscriptions/subscriptions?event_type=<string>&is_active=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "event-subscriptions",
+                        "subscriptions"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by event type.",
+                          "key": "event_type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by active status.",
+                          "key": "is_active",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:35.000Z",
+                  "updatedAt": "2026-06-05T15:16:35.000Z",
+                  "uid": "35240-52d16610-ce52-45cf-bf3c-700b4f73b14e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:34.000Z",
+              "updatedAt": "2026-06-05T15:16:34.000Z",
+              "uid": "35240-c0c67b23-2772-4596-aa46-cb83584ee423"
+            }
+          ],
+          "id": "b62e2716-b7fb-45cb-9710-cef3f4267c2b",
+          "createdAt": "2026-06-05T15:16:34.000Z",
+          "updatedAt": "2026-06-05T15:16:34.000Z",
+          "uid": "35240-b62e2716-b7fb-45cb-9710-cef3f4267c2b"
+        },
+        {
+          "name": "broadcast",
+          "item": [
+            {
+              "name": "test",
+              "item": [
+                {
+                  "name": "{subscription_id}",
+                  "item": [
+                    {
+                      "name": "Broadcast test event",
+                      "id": "c3a3e911-f09d-40b6-b0fa-03f59181e46f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "basic",
+                          "basic": [
+                            {
+                              "key": "username",
+                              "value": "{{basicAuthUsername}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "password",
+                              "value": "{{basicAuthPassword}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/event-subscriptions/broadcast/test/:subscription_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "event-subscriptions",
+                            "broadcast",
+                            "test",
+                            ":subscription_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5664753a-901d-4e81-a12a-1b8d5ef78606",
+                              "key": "subscription_id",
+                              "value": "<integer>",
+                              "description": "(Required) The id of the subscription to send a test event to."
+                            }
+                          ]
+                        },
+                        "description": "Send a test event to the connection endpoint configured for a specific subscription. Use this to verify that your connection is set up correctly before relying on it for production events."
+                      },
+                      "response": [
+                        {
+                          "id": "cf61f443-dae4-4545-b072-8c05417e5bd1",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/event-subscriptions/broadcast/test/:subscription_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "event-subscriptions",
+                                "broadcast",
+                                "test",
+                                ":subscription_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subscription_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"success\": \"<boolean>\",\n    \"status_code\": \"<integer>\",\n    \"response_body\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:16:35.000Z",
+                          "updatedAt": "2026-06-05T15:16:35.000Z",
+                          "uid": "35240-cf61f443-dae4-4545-b072-8c05417e5bd1"
+                        },
+                        {
+                          "id": "f3d045d7-f48e-4829-933f-73708dd9af13",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/event-subscriptions/broadcast/test/:subscription_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "event-subscriptions",
+                                "broadcast",
+                                "test",
+                                ":subscription_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subscription_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-06-05T15:16:35.000Z",
+                          "updatedAt": "2026-06-05T15:16:35.000Z",
+                          "uid": "35240-f3d045d7-f48e-4829-933f-73708dd9af13"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:16:34.000Z",
+                      "updatedAt": "2026-06-05T15:16:34.000Z",
+                      "uid": "35240-c3a3e911-f09d-40b6-b0fa-03f59181e46f"
+                    }
+                  ],
+                  "id": "5bf2d0ab-8430-4840-8128-6cccdafce6c2",
+                  "createdAt": "2026-06-05T15:16:34.000Z",
+                  "updatedAt": "2026-06-05T15:16:34.000Z",
+                  "uid": "35240-5bf2d0ab-8430-4840-8128-6cccdafce6c2"
+                }
+              ],
+              "id": "37856952-6e99-4da0-82a7-285105eef8e1",
+              "createdAt": "2026-06-05T15:16:34.000Z",
+              "updatedAt": "2026-06-05T15:16:34.000Z",
+              "uid": "35240-37856952-6e99-4da0-82a7-285105eef8e1"
+            }
+          ],
+          "id": "3ba978ab-a8c7-4bcd-824c-db6d96300065",
+          "createdAt": "2026-06-05T15:16:34.000Z",
+          "updatedAt": "2026-06-05T15:16:34.000Z",
+          "uid": "35240-3ba978ab-a8c7-4bcd-824c-db6d96300065"
+        }
+      ],
+      "id": "821c974f-245a-4a38-b710-38139163a71b",
+      "createdAt": "2026-06-05T15:16:34.000Z",
+      "updatedAt": "2026-06-05T15:16:34.000Z",
+      "uid": "35240-821c974f-245a-4a38-b710-38139163a71b"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://panel.sendcloud.sc/api/v3"
+    }
+  ]
+}

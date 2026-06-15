@@ -1,0 +1,261 @@
+{
+  "info": {
+    "_postman_id": "4a479bf7-d61b-40ee-a1f4-18c0694290c5",
+    "name": "Parcel Documents",
+    "description": "For international shipments, customs documentation is generated alongside the shipping label. These documents can be downloaded separately from the shipping label in various formats and resolutions via this endpoint.\n\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:17:18.000Z",
+    "updatedAt": "2026-06-05T15:17:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4a479bf7-d61b-40ee-a1f4-18c0694290c5"
+  },
+  "item": [
+    {
+      "name": "parcels",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "documents",
+              "item": [
+                {
+                  "name": "{type}",
+                  "item": [
+                    {
+                      "name": "Retrieve parcel documents",
+                      "id": "8a6cfab6-5c63-4b98-904c-a18f73ebe386",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "basic",
+                          "basic": [
+                            {
+                              "key": "username",
+                              "value": "{{basicAuthUsername}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "password",
+                              "value": "{{basicAuthPassword}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/pdf"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/parcels/:id/documents/:type?dpi=72&raw=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "parcels",
+                            ":id",
+                            "documents",
+                            ":type"
+                          ],
+                          "query": [
+                            {
+                              "description": "DPI refers to the printing resolution of your shipping labels. It's important that labels are printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\nUse following amounts for appropriate result:\n<table>\n  <thead>\n    <tr>\n      <th>File format</th>\n      <th>Default DPI</th>\n      <th>Valid DPI</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>pdf</td>\n      <td>72</td>\n      <td>72</td>\n    </tr>\n    <tr>\n      <td>png</td>\n      <td>300</td>\n      <td>150, 300</td>\n    </tr>\n  </tbody>\n</table>\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n",
+                              "key": "dpi",
+                              "value": "72"
+                            },
+                            {
+                              "description": "There have been identified cases where custom documents, internally rendered, will only include some of the necessary information, mainly due to some restrictions. Using the raw query param, one can request to receive the document in the originally received format by the carrier. This temporary solution to the problem allows the normal operations of the affected customers. As such, you can expect this property to be sunsetted shortly once the necessary changes have been implemented.",
+                              "key": "raw",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "9bce36a5-ffda-4001-a662-0bf3b7ae4ce0",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) Identifier of the parcel which you want to retrieve a document from"
+                            },
+                            {
+                              "id": "9ae2abca-af1f-42ef-a36f-2136e45558c0",
+                              "key": "type",
+                              "value": "cn23",
+                              "description": "(Required) Document type you want to retrieve for this parcel"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a document for a given parcel by providing the parcel `id` and document `type`."
+                      },
+                      "response": [
+                        {
+                          "id": "f37be188-1661-4d49-9d63-44ed3b77cfc0",
+                          "name": "Requested parcel document file",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/pdf"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/parcels/:id/documents/:type?dpi=72&raw=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "parcels",
+                                ":id",
+                                "documents",
+                                ":type"
+                              ],
+                              "query": [
+                                {
+                                  "description": "DPI refers to the printing resolution of your shipping labels. It's important that labels are printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\nUse following amounts for appropriate result:\n<table>\n  <thead>\n    <tr>\n      <th>File format</th>\n      <th>Default DPI</th>\n      <th>Valid DPI</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>pdf</td>\n      <td>72</td>\n      <td>72</td>\n    </tr>\n    <tr>\n      <td>png</td>\n      <td>300</td>\n      <td>150, 300</td>\n    </tr>\n  </tbody>\n</table>\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n",
+                                  "key": "dpi",
+                                  "value": "72"
+                                },
+                                {
+                                  "description": "There have been identified cases where custom documents, internally rendered, will only include some of the necessary information, mainly due to some restrictions. Using the raw query param, one can request to receive the document in the originally received format by the carrier. This temporary solution to the problem allows the normal operations of the affected customers. As such, you can expect this property to be sunsetted shortly once the necessary changes have been implemented.",
+                                  "key": "raw",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "type"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/pdf"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<binary>",
+                          "createdAt": "2026-06-05T15:17:19.000Z",
+                          "updatedAt": "2026-06-05T15:17:19.000Z",
+                          "uid": "35240-f37be188-1661-4d49-9d63-44ed3b77cfc0"
+                        },
+                        {
+                          "id": "e88f8181-b54a-44e8-8d81-97a9c3200c80",
+                          "name": "Document type requested is not available for the parcel",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/parcels/:id/documents/:type?dpi=72&raw=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "parcels",
+                                ":id",
+                                "documents",
+                                ":type"
+                              ],
+                              "query": [
+                                {
+                                  "description": "DPI refers to the printing resolution of your shipping labels. It's important that labels are printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\nUse following amounts for appropriate result:\n<table>\n  <thead>\n    <tr>\n      <th>File format</th>\n      <th>Default DPI</th>\n      <th>Valid DPI</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>pdf</td>\n      <td>72</td>\n      <td>72</td>\n    </tr>\n    <tr>\n      <td>png</td>\n      <td>300</td>\n      <td>150, 300</td>\n    </tr>\n  </tbody>\n</table>\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n",
+                                  "key": "dpi",
+                                  "value": "72"
+                                },
+                                {
+                                  "description": "There have been identified cases where custom documents, internally rendered, will only include some of the necessary information, mainly due to some restrictions. Using the raw query param, one can request to receive the document in the originally received format by the carrier. This temporary solution to the problem allows the normal operations of the affected customers. As such, you can expect this property to be sunsetted shortly once the necessary changes have been implemented.",
+                                  "key": "raw",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "type"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"request\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:17:19.000Z",
+                          "updatedAt": "2026-06-05T15:17:19.000Z",
+                          "uid": "35240-e88f8181-b54a-44e8-8d81-97a9c3200c80"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:17:19.000Z",
+                      "updatedAt": "2026-06-05T15:17:19.000Z",
+                      "uid": "35240-8a6cfab6-5c63-4b98-904c-a18f73ebe386"
+                    }
+                  ],
+                  "id": "8492e898-86e3-424a-a0f4-fdff44b6743b",
+                  "createdAt": "2026-06-05T15:17:19.000Z",
+                  "updatedAt": "2026-06-05T15:17:19.000Z",
+                  "uid": "35240-8492e898-86e3-424a-a0f4-fdff44b6743b"
+                }
+              ],
+              "id": "1ca2634c-b9dc-43a1-8705-16730dca3ee9",
+              "createdAt": "2026-06-05T15:17:19.000Z",
+              "updatedAt": "2026-06-05T15:17:19.000Z",
+              "uid": "35240-1ca2634c-b9dc-43a1-8705-16730dca3ee9"
+            }
+          ],
+          "id": "666698ca-e8ba-420f-9815-531c6767c5ec",
+          "createdAt": "2026-06-05T15:17:19.000Z",
+          "updatedAt": "2026-06-05T15:17:19.000Z",
+          "uid": "35240-666698ca-e8ba-420f-9815-531c6767c5ec"
+        }
+      ],
+      "id": "218fbf6b-a99e-43cf-a3dc-3e084b77fe1c",
+      "createdAt": "2026-06-05T15:17:19.000Z",
+      "updatedAt": "2026-06-05T15:17:19.000Z",
+      "uid": "35240-218fbf6b-a99e-43cf-a3dc-3e084b77fe1c"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://panel.sendcloud.sc/api/v2"
+    }
+  ]
+}

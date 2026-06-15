@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Parcel documents API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Parcel Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a parcel document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/parcels/:id/documents/:type",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the parcel which you want to retrieve a document from"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Document type you want to retrieve."
+              },
+              {
+                "name": "dpi",
+                "value": "",
+                "type": "query",
+                "description": "DPI, or dots per inch, refers to the printing resolution of your shipping labels. Labels must be printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\n\nUse the following table to find the appropriate DPI for each file format:\n\n| File format | Default DPI | Valid DPI |\n|-------------|-------------|-----------|\n| pdf         | 72          | 72        |\n| png         | 300         | 150, 300  |\n\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n"
+              },
+              {
+                "name": "paper_size",
+                "value": "",
+                "type": "query",
+                "description": "The paper size of the document you would like to retrieve. Paper size can be one of:\n\n- A4\n- A5\n- A6\n\nOmitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a specific document for a given parcel, and download it in your preferred format and resolution."
+        },
+        {
+          "info": {
+            "name": "Retrieve multiple parcel documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/parcel-documents/:type",
+            "params": [
+              {
+                "name": "parcels",
+                "value": "",
+                "type": "query",
+                "description": "Parcels for which you want to retrieve the documents"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Document type you want to retrieve."
+              },
+              {
+                "name": "paper_size",
+                "value": "",
+                "type": "query",
+                "description": "The paper size of the document you would like to retrieve. Paper size can be one of:\n\n- A4\n- A5\n- A6\n\nOmitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.\n"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Download multiple parcel documents of the same type in bulk."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

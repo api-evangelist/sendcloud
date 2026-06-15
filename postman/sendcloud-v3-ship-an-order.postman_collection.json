@@ -1,0 +1,551 @@
+{
+  "info": {
+    "_postman_id": "8264e827-9611-4346-b2bb-1b8cb57bf88b",
+    "name": "Ship an Order",
+    "description": "The Sendcloud Ship an Order API\n\n## What can you do with this API?\n\n- [Create Labels for orders](/docs/orders/ship-an-order/).\n\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:27.000Z",
+    "updatedAt": "2026-06-05T15:16:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8264e827-9611-4346-b2bb-1b8cb57bf88b"
+  },
+  "item": [
+    {
+      "name": "orders",
+      "item": [
+        {
+          "name": "create-labels-async",
+          "item": [
+            {
+              "name": "Request a label for one or more orders asynchronously",
+              "id": "23e5e7b8-af99-4f17-b016-00098d852e88",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"orders\": [\n    {\n      \"order_id\": \"<string>\",\n      \"parcels\": [\n        {\n          \"parcel_items\": [\n            {\n              \"item_id\": \"<string>\",\n              \"quantity\": \"<integer>\"\n            },\n            {\n              \"item_id\": \"<string>\",\n              \"quantity\": \"<integer>\"\n            }\n          ],\n          \"dimensions\": {\n            \"length\": \"<string>\",\n            \"width\": \"<string>\",\n            \"height\": \"<string>\",\n            \"unit\": \"m\"\n          },\n          \"weight\": {\n            \"value\": \"<string>\",\n            \"unit\": \"kg\"\n          }\n        }\n      ],\n      \"order_number\": \"<string>\",\n      \"apply_shipping_rules\": false\n    }\n  ],\n  \"sender_address_id\": \"<integer>\",\n  \"brand_id\": \"<integer>\",\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"<string,null>\",\n      \"contract_id\": \"<integer,null>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/create-labels-async",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "create-labels-async"
+                  ]
+                },
+                "description": "Request a label for a single or multiple orders. This endpoint will fail gracefully if some orders cannot be processed, returning any successfully created labels along with error details for the orders that failed."
+              },
+              "response": [
+                {
+                  "id": "6c6a3a01-2e8a-4d3d-9594-1888bb63f2ea",
+                  "name": "Information about the created parcels.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                        "key": "Sendcloud-Partner-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"orders\": [\n    {\n      \"order_id\": \"<string>\",\n      \"parcels\": [\n        {\n          \"parcel_items\": [\n            {\n              \"item_id\": \"<string>\",\n              \"quantity\": \"<integer>\"\n            },\n            {\n              \"item_id\": \"<string>\",\n              \"quantity\": \"<integer>\"\n            }\n          ],\n          \"dimensions\": {\n            \"length\": \"<string>\",\n            \"width\": \"<string>\",\n            \"height\": \"<string>\",\n            \"unit\": \"m\"\n          },\n          \"weight\": {\n            \"value\": \"<string>\",\n            \"unit\": \"kg\"\n          }\n        }\n      ],\n      \"order_number\": \"<string>\",\n      \"apply_shipping_rules\": false\n    }\n  ],\n  \"sender_address_id\": \"<integer>\",\n  \"brand_id\": \"<integer>\",\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"<string,null>\",\n      \"contract_id\": \"<integer,null>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/create-labels-async",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "create-labels-async"
+                      ]
+                    }
+                  },
+                  "status": "Accepted",
+                  "code": 202,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"shipment_id\": \"<string>\",\n      \"order_id\": \"<string>\",\n      \"order_number\": \"<string>\",\n      \"ship_with\": {\n        \"type\": \"shipping_option_code\",\n        \"properties\": {\n          \"shipping_option_code\": \"<string,null>\",\n          \"contract_id\": \"<integer,null>\"\n        }\n      },\n      \"parcel_id\": \"<integer>\",\n      \"parcels_ids\": [\n        \"<integer>\",\n        \"<integer>\"\n      ]\n    },\n    {\n      \"shipment_id\": \"<string>\",\n      \"order_id\": \"<string>\",\n      \"order_number\": \"<string>\",\n      \"ship_with\": {\n        \"type\": \"shipping_option_code\",\n        \"properties\": {\n          \"shipping_option_code\": \"<string,null>\",\n          \"contract_id\": \"<integer,null>\"\n        }\n      },\n      \"parcel_id\": \"<integer>\",\n      \"parcels_ids\": [\n        \"<integer>\",\n        \"<integer>\"\n      ]\n    }\n  ],\n  \"errors\": [\n    {\n      \"status\": \"<string>\",\n      \"code\": \"invalid_choice\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"title\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"status\": \"<string>\",\n      \"code\": \"parcel_announcement_error\",\n      \"detail\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"title\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:16:27.000Z",
+                  "updatedAt": "2026-06-05T15:16:27.000Z",
+                  "uid": "35240-6c6a3a01-2e8a-4d3d-9594-1888bb63f2ea"
+                },
+                {
+                  "id": "0aaa97f3-55cf-482f-8684-87d2bcc74280",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                        "key": "Sendcloud-Partner-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"orders\": [\n    {\n      \"order_id\": \"<string>\",\n      \"parcels\": [\n        {\n          \"parcel_items\": [\n            {\n              \"item_id\": \"<string>\",\n              \"quantity\": \"<integer>\"\n            },\n            {\n              \"item_id\": \"<string>\",\n              \"quantity\": \"<integer>\"\n            }\n          ],\n          \"dimensions\": {\n            \"length\": \"<string>\",\n            \"width\": \"<string>\",\n            \"height\": \"<string>\",\n            \"unit\": \"m\"\n          },\n          \"weight\": {\n            \"value\": \"<string>\",\n            \"unit\": \"kg\"\n          }\n        }\n      ],\n      \"order_number\": \"<string>\",\n      \"apply_shipping_rules\": false\n    }\n  ],\n  \"sender_address_id\": \"<integer>\",\n  \"brand_id\": \"<integer>\",\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"<string,null>\",\n      \"contract_id\": \"<integer,null>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/create-labels-async",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "create-labels-async"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-06-05T15:16:27.000Z",
+                  "updatedAt": "2026-06-05T15:16:27.000Z",
+                  "uid": "35240-0aaa97f3-55cf-482f-8684-87d2bcc74280"
+                },
+                {
+                  "id": "d64219b7-de4f-4721-9f3c-8c5f8565f095",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                        "key": "Sendcloud-Partner-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"orders\": [\n    {\n      \"order_id\": \"<string>\",\n      \"parcels\": [\n        {\n          \"parcel_items\": [\n            {\n              \"item_id\": \"<string>\",\n              \"quantity\": \"<integer>\"\n            },\n            {\n              \"item_id\": \"<string>\",\n              \"quantity\": \"<integer>\"\n            }\n          ],\n          \"dimensions\": {\n            \"length\": \"<string>\",\n            \"width\": \"<string>\",\n            \"height\": \"<string>\",\n            \"unit\": \"m\"\n          },\n          \"weight\": {\n            \"value\": \"<string>\",\n            \"unit\": \"kg\"\n          }\n        }\n      ],\n      \"order_number\": \"<string>\",\n      \"apply_shipping_rules\": false\n    }\n  ],\n  \"sender_address_id\": \"<integer>\",\n  \"brand_id\": \"<integer>\",\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"<string,null>\",\n      \"contract_id\": \"<integer,null>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/create-labels-async",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "create-labels-async"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-06-05T15:16:27.000Z",
+                  "updatedAt": "2026-06-05T15:16:27.000Z",
+                  "uid": "35240-d64219b7-de4f-4721-9f3c-8c5f8565f095"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:27.000Z",
+              "updatedAt": "2026-06-05T15:16:27.000Z",
+              "uid": "35240-23e5e7b8-af99-4f17-b016-00098d852e88"
+            }
+          ],
+          "id": "7f9e9159-b921-4904-aa9b-8a3cafb3a8bb",
+          "createdAt": "2026-06-05T15:16:27.000Z",
+          "updatedAt": "2026-06-05T15:16:27.000Z",
+          "uid": "35240-7f9e9159-b921-4904-aa9b-8a3cafb3a8bb"
+        },
+        {
+          "name": "create-label-sync",
+          "item": [
+            {
+              "name": "Request a label for a single order synchronously",
+              "id": "97897fa4-8a0f-4031-be59-0f5c4440468e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                    "key": "Sendcloud-Partner-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"order\": {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"apply_shipping_rules\": false\n  },\n  \"sender_address_id\": \"<integer>\",\n  \"brand_id\": \"<integer>\",\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"<string,null>\",\n      \"contract_id\": \"<integer,null>\"\n    }\n  },\n  \"label_details\": {\n    \"mime_type\": \"application/pdf\",\n    \"dpi\": 72\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/orders/create-label-sync",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "orders",
+                    "create-label-sync"
+                  ]
+                },
+                "description": "Request a label for a single order and wait for the results. The label and any other documents will be provided in the response to this request."
+              },
+              "response": [
+                {
+                  "id": "8f00c842-794b-4346-9bee-2f69710a41de",
+                  "name": "Parcel ID along with generated label.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                        "key": "Sendcloud-Partner-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"order\": {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"apply_shipping_rules\": false\n  },\n  \"sender_address_id\": \"<integer>\",\n  \"brand_id\": \"<integer>\",\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"<string,null>\",\n      \"contract_id\": \"<integer,null>\"\n    }\n  },\n  \"label_details\": {\n    \"mime_type\": \"application/pdf\",\n    \"dpi\": 72\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/create-label-sync",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "create-label-sync"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"shipment_id\": \"<string>\",\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"ship_with\": {\n      \"type\": \"shipping_option_code\",\n      \"properties\": {\n        \"shipping_option_code\": \"<string,null>\",\n        \"contract_id\": \"<integer,null>\"\n      }\n    },\n    \"parcel_id\": \"<integer>\",\n    \"label_details\": {\n      \"file\": \"<string>\",\n      \"mime_type\": \"application/pdf\",\n      \"dpi\": 72\n    },\n    \"documents\": [\n      {\n        \"type\": \"cn23\",\n        \"document_type\": \"label\",\n        \"size\": \"a6\",\n        \"link\": \"<string>\"\n      },\n      {\n        \"type\": \"cn23-default\",\n        \"document_type\": \"air-waybill\",\n        \"size\": \"a6\",\n        \"link\": \"<string>\"\n      }\n    ],\n    \"tracking_number\": \"<string>\",\n    \"tracking_url\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:27.000Z",
+                  "updatedAt": "2026-06-05T15:16:27.000Z",
+                  "uid": "35240-8f00c842-794b-4346-9bee-2f69710a41de"
+                },
+                {
+                  "id": "5beb7571-6acf-451b-a90d-51d6633c6fd2",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                        "key": "Sendcloud-Partner-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"order\": {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"apply_shipping_rules\": false\n  },\n  \"sender_address_id\": \"<integer>\",\n  \"brand_id\": \"<integer>\",\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"<string,null>\",\n      \"contract_id\": \"<integer,null>\"\n    }\n  },\n  \"label_details\": {\n    \"mime_type\": \"application/pdf\",\n    \"dpi\": 72\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/create-label-sync",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "create-label-sync"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-06-05T15:16:27.000Z",
+                  "updatedAt": "2026-06-05T15:16:27.000Z",
+                  "uid": "35240-5beb7571-6acf-451b-a90d-51d6633c6fd2"
+                },
+                {
+                  "id": "f48cd597-d335-4970-b0a0-96c2ce65d637",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "If you are an official [Sendcloud Tech Partner](https://www.sendcloud.com/ecosystem/), send your unique Sendcloud Partner UUID as a request header for the system to recognize you.\n\nThe header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.",
+                        "key": "Sendcloud-Partner-Id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"integration_id\": \"<integer>\",\n  \"order\": {\n    \"order_id\": \"<string>\",\n    \"order_number\": \"<string>\",\n    \"apply_shipping_rules\": false\n  },\n  \"sender_address_id\": \"<integer>\",\n  \"brand_id\": \"<integer>\",\n  \"ship_with\": {\n    \"type\": \"shipping_option_code\",\n    \"properties\": {\n      \"shipping_option_code\": \"<string,null>\",\n      \"contract_id\": \"<integer,null>\"\n    }\n  },\n  \"label_details\": {\n    \"mime_type\": \"application/pdf\",\n    \"dpi\": 72\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/orders/create-label-sync",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "orders",
+                        "create-label-sync"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-06-05T15:16:27.000Z",
+                  "updatedAt": "2026-06-05T15:16:27.000Z",
+                  "uid": "35240-f48cd597-d335-4970-b0a0-96c2ce65d637"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:27.000Z",
+              "updatedAt": "2026-06-05T15:16:27.000Z",
+              "uid": "35240-97897fa4-8a0f-4031-be59-0f5c4440468e"
+            }
+          ],
+          "id": "7a36c220-b38c-48dd-a463-880bb28b57de",
+          "createdAt": "2026-06-05T15:16:27.000Z",
+          "updatedAt": "2026-06-05T15:16:27.000Z",
+          "uid": "35240-7a36c220-b38c-48dd-a463-880bb28b57de"
+        }
+      ],
+      "id": "008ad26b-d2a7-44a9-80cd-d9c35e6f0862",
+      "createdAt": "2026-06-05T15:16:27.000Z",
+      "updatedAt": "2026-06-05T15:16:27.000Z",
+      "uid": "35240-008ad26b-d2a7-44a9-80cd-d9c35e6f0862"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://panel.sendcloud.sc/api/v3"
+    }
+  ]
+}

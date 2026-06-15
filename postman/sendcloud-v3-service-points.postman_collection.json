@@ -1,0 +1,927 @@
+{
+  "info": {
+    "_postman_id": "96eecb9b-4025-45cc-a5ee-372e16f23d28",
+    "name": "Service Points API [BETA]",
+    "description": "Search service points to display and select in checkout and delivery flows.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:29.000Z",
+    "updatedAt": "2026-06-05T15:16:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-96eecb9b-4025-45cc-a5ee-372e16f23d28"
+  },
+  "item": [
+    {
+      "name": "service-points",
+      "item": [
+        {
+          "name": "{service_point_id}",
+          "item": [
+            {
+              "name": "check-availability",
+              "item": [
+                {
+                  "name": "Check availability of a service point",
+                  "id": "915114fc-503c-4ec3-9837-b61261d14dc2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/service-points/:service_point_id/check-availability",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service-points",
+                        ":service_point_id",
+                        "check-availability"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4d1e7000-caed-4341-83ec-7275bde460d1",
+                          "key": "service_point_id",
+                          "value": "<long>",
+                          "description": "(Required) Unique Sendcloud identifier of the service point."
+                        }
+                      ]
+                    },
+                    "description": "Check whether a service point is currently available."
+                  },
+                  "response": [
+                    {
+                      "id": "8663b9db-1171-41cb-873b-1f5c35dca528",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service-points/:service_point_id/check-availability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service-points",
+                            ":service_point_id",
+                            "check-availability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "service_point_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"is_available\": \"<boolean>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:16:30.000Z",
+                      "updatedAt": "2026-06-05T15:16:30.000Z",
+                      "uid": "35240-8663b9db-1171-41cb-873b-1f5c35dca528"
+                    },
+                    {
+                      "id": "d3610b12-6749-4bb0-9e35-86fa3e22597b",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service-points/:service_point_id/check-availability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service-points",
+                            ":service_point_id",
+                            "check-availability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "service_point_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-06-05T15:16:30.000Z",
+                      "updatedAt": "2026-06-05T15:16:30.000Z",
+                      "uid": "35240-d3610b12-6749-4bb0-9e35-86fa3e22597b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:30.000Z",
+                  "updatedAt": "2026-06-05T15:16:30.000Z",
+                  "uid": "35240-915114fc-503c-4ec3-9837-b61261d14dc2"
+                }
+              ],
+              "id": "75aad9e6-bdc1-4442-ad6e-fcd668e29b9d",
+              "createdAt": "2026-06-05T15:16:30.000Z",
+              "updatedAt": "2026-06-05T15:16:30.000Z",
+              "uid": "35240-75aad9e6-bdc1-4442-ad6e-fcd668e29b9d"
+            },
+            {
+              "name": "Retrieve a service point",
+              "id": "79087481-d93b-4f55-8e8f-a157828f95d0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{basicAuthUsername}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{basicAuthPassword}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/service-points/:service_point_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "service-points",
+                    ":service_point_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "109f9362-8267-4bdb-b178-57c4e3d05cfb",
+                      "key": "service_point_id",
+                      "value": "<long>",
+                      "description": "(Required) Unique Sendcloud identifier of the service point."
+                    }
+                  ]
+                },
+                "description": "Retrieve a single service point."
+              },
+              "response": [
+                {
+                  "id": "8bb1fac8-a5d2-4763-8edb-7b59594ecb51",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/service-points/:service_point_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service-points",
+                        ":service_point_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "service_point_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"carrier\": {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"logo_url\": \"<string,null-uri>\",\n      \"icon_url\": \"<string,null-uri>\"\n    },\n    \"carrier_service_point_id\": \"<string>\",\n    \"carrier_shop_type\": \"<string,null>\",\n    \"general_shop_type\": \"carrier_depot\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"house_number\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country_code\": \"<string>\"\n    },\n    \"position\": {\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\"\n    },\n    \"contact\": {\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\"\n    },\n    \"opening_times\": {\n      \"monday\": [\n        {\n          \"start_time\": \"<string>\",\n          \"end_time\": \"<string>\"\n        }\n      ],\n      \"tuesday\": [\n        {\n          \"start_time\": \"<string>\",\n          \"end_time\": \"<string>\"\n        }\n      ],\n      \"wednesday\": [\n        {\n          \"start_time\": \"<string>\",\n          \"end_time\": \"<string>\"\n        }\n      ],\n      \"thursday\": [\n        {\n          \"start_time\": \"<string>\",\n          \"end_time\": \"<string>\"\n        }\n      ],\n      \"friday\": [\n        {\n          \"start_time\": \"<string>\",\n          \"end_time\": \"<string>\"\n        }\n      ],\n      \"saturday\": [\n        {\n          \"start_time\": \"<string>\",\n          \"end_time\": \"<string>\"\n        }\n      ],\n      \"sunday\": [\n        {\n          \"start_time\": \"<string>\",\n          \"end_time\": \"<string>\"\n        }\n      ]\n    },\n    \"is_open_tomorrow\": \"<boolean>\",\n    \"next_open_at\": \"<string,null-date-time>\",\n    \"is_expired\": \"<boolean>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:30.000Z",
+                  "updatedAt": "2026-06-05T15:16:30.000Z",
+                  "uid": "35240-8bb1fac8-a5d2-4763-8edb-7b59594ecb51"
+                },
+                {
+                  "id": "afa0f3e6-b10a-4f0f-b038-7225d26be1d3",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/service-points/:service_point_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service-points",
+                        ":service_point_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "service_point_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-06-05T15:16:30.000Z",
+                  "updatedAt": "2026-06-05T15:16:30.000Z",
+                  "uid": "35240-afa0f3e6-b10a-4f0f-b038-7225d26be1d3"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:30.000Z",
+              "updatedAt": "2026-06-05T15:16:30.000Z",
+              "uid": "35240-79087481-d93b-4f55-8e8f-a157828f95d0"
+            }
+          ],
+          "id": "75e2e097-cf57-4f6c-9da1-4d10d2bb1de2",
+          "createdAt": "2026-06-05T15:16:30.000Z",
+          "updatedAt": "2026-06-05T15:16:30.000Z",
+          "uid": "35240-75e2e097-cf57-4f6c-9da1-4d10d2bb1de2"
+        },
+        {
+          "name": "Retrieve a list of service points",
+          "id": "2e2e01fd-9020-4f08-8f38-33bc868a4097",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/service-points?country_code=<string>&carrier_code=<string>&carrier_code=<string>&use_integration_carriers=<boolean>&address=<string>&address_street=<string>&address_house_number=<string>&address_postal_code=<string>&address_city=<string>&latitude=<double>&longitude=<double>&ne_latitude=<double>&ne_longitude=<double>&sw_latitude=<double>&sw_longitude=<double>&radius=<integer>&carrier_service_point_id=<string>&carrier_service_point_id=<string>&carrier_shop_type=<string>&general_shop_type=post_office&general_shop_type=carrier_depot&limit=100",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "service-points"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Country to retrieve service points for, as an ISO 3166-1 alpha-2 code.",
+                  "key": "country_code",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Carrier codes to filter results by.",
+                  "key": "carrier_code",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Carrier codes to filter results by.",
+                  "key": "carrier_code",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters service points to carriers enabled in the authenticated integration's settings.",
+                  "key": "use_integration_carriers",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "Free-text address used as the reference point for the search.",
+                  "key": "address",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Street of the reference address.",
+                  "key": "address_street",
+                  "value": "<string>"
+                },
+                {
+                  "description": "House number of the reference address.",
+                  "key": "address_house_number",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Postal code of the reference address.",
+                  "key": "address_postal_code",
+                  "value": "<string>"
+                },
+                {
+                  "description": "City of the reference address.",
+                  "key": "address_city",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Latitude of the reference point.",
+                  "key": "latitude",
+                  "value": "<double>"
+                },
+                {
+                  "description": "Longitude of the reference point.",
+                  "key": "longitude",
+                  "value": "<double>"
+                },
+                {
+                  "description": "Latitude of the north-east corner of the bounding box.",
+                  "key": "ne_latitude",
+                  "value": "<double>"
+                },
+                {
+                  "description": "Longitude of the north-east corner of the bounding box.",
+                  "key": "ne_longitude",
+                  "value": "<double>"
+                },
+                {
+                  "description": "Latitude of the south-west corner of the bounding box.",
+                  "key": "sw_latitude",
+                  "value": "<double>"
+                },
+                {
+                  "description": "Longitude of the south-west corner of the bounding box.",
+                  "key": "sw_longitude",
+                  "value": "<double>"
+                },
+                {
+                  "description": "Search radius in meters from the reference point.",
+                  "key": "radius",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Carrier-specific identifiers of the service points to return.",
+                  "key": "carrier_service_point_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Carrier-specific identifiers of the service points to return.",
+                  "key": "carrier_service_point_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters results by carrier-specific shop type.",
+                  "key": "carrier_shop_type",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filters results by general shop type. Use this to narrow results without having to handle each carrier's specific shop types separately.",
+                  "key": "general_shop_type",
+                  "value": "post_office"
+                },
+                {
+                  "description": "Filters results by general shop type. Use this to narrow results without having to handle each carrier's specific shop types separately.",
+                  "key": "general_shop_type",
+                  "value": "carrier_depot"
+                },
+                {
+                  "description": "Maximum number of service points to return.",
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Find service points for selected carriers in a given area."
+          },
+          "response": [
+            {
+              "id": "75c4381b-b87f-4051-a7e6-761d2702be3f",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/service-points?country_code=<string>&carrier_code=<string>&use_integration_carriers=<boolean>&address=<string>&address_street=<string>&address_house_number=<string>&address_postal_code=<string>&address_city=<string>&latitude=<double>&longitude=<double>&ne_latitude=<double>&ne_longitude=<double>&sw_latitude=<double>&sw_longitude=<double>&radius=<integer>&carrier_service_point_id=<string>&carrier_shop_type=<string>&general_shop_type=carrier_depot&limit=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "service-points"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Country to retrieve service points for, as an ISO 3166-1 alpha-2 code.",
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Carrier codes to filter results by.",
+                      "key": "carrier_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters service points to carriers enabled in the authenticated integration's settings.",
+                      "key": "use_integration_carriers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Free-text address used as the reference point for the search.",
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Street of the reference address.",
+                      "key": "address_street",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "House number of the reference address.",
+                      "key": "address_house_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Postal code of the reference address.",
+                      "key": "address_postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "City of the reference address.",
+                      "key": "address_city",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Latitude of the reference point.",
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude of the reference point.",
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Latitude of the north-east corner of the bounding box.",
+                      "key": "ne_latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude of the north-east corner of the bounding box.",
+                      "key": "ne_longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Latitude of the south-west corner of the bounding box.",
+                      "key": "sw_latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude of the south-west corner of the bounding box.",
+                      "key": "sw_longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Search radius in meters from the reference point.",
+                      "key": "radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Carrier-specific identifiers of the service points to return.",
+                      "key": "carrier_service_point_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters results by carrier-specific shop type.",
+                      "key": "carrier_shop_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters results by general shop type. Use this to narrow results without having to handle each carrier's specific shop types separately.",
+                      "key": "general_shop_type",
+                      "value": "carrier_depot"
+                    },
+                    {
+                      "description": "Maximum number of service points to return.",
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"results\": [\n      {\n        \"address\": {\n          \"street\": \"<string>\",\n          \"house_number\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"city\": \"<string>\",\n          \"country_code\": \"<string>\"\n        },\n        \"carrier\": {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"logo_url\": \"<string,null-uri>\",\n          \"icon_url\": \"<string,null-uri>\"\n        },\n        \"carrier_service_point_id\": \"<string>\",\n        \"carrier_shop_type\": \"<string,null>\",\n        \"contact\": {\n          \"email\": \"<string>\",\n          \"phone\": \"<string>\"\n        },\n        \"distance\": \"<integer,null>\",\n        \"general_shop_type\": \"post_office\",\n        \"id\": \"<long>\",\n        \"is_expired\": \"<boolean>\",\n        \"is_open_tomorrow\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"next_open_at\": \"<string,null-date-time>\",\n        \"opening_times\": {\n          \"monday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ],\n          \"tuesday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ],\n          \"wednesday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ],\n          \"thursday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ],\n          \"friday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ],\n          \"saturday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ],\n          \"sunday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ]\n        },\n        \"position\": {\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        }\n      },\n      {\n        \"address\": {\n          \"street\": \"<string>\",\n          \"house_number\": \"<string>\",\n          \"postal_code\": \"<string>\",\n          \"city\": \"<string>\",\n          \"country_code\": \"<string>\"\n        },\n        \"carrier\": {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"logo_url\": \"<string,null-uri>\",\n          \"icon_url\": \"<string,null-uri>\"\n        },\n        \"carrier_service_point_id\": \"<string>\",\n        \"carrier_shop_type\": \"<string,null>\",\n        \"contact\": {\n          \"email\": \"<string>\",\n          \"phone\": \"<string>\"\n        },\n        \"distance\": \"<integer,null>\",\n        \"general_shop_type\": \"carrier_depot\",\n        \"id\": \"<long>\",\n        \"is_expired\": \"<boolean>\",\n        \"is_open_tomorrow\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"next_open_at\": \"<string,null-date-time>\",\n        \"opening_times\": {\n          \"monday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ],\n          \"tuesday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ],\n          \"wednesday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ],\n          \"thursday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ],\n          \"friday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ],\n          \"saturday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ],\n          \"sunday\": [\n            {\n              \"start_time\": \"<string>\",\n              \"end_time\": \"<string>\"\n            }\n          ]\n        },\n        \"position\": {\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        }\n      }\n    ],\n    \"geocoding\": {\n      \"status\": \"matched\",\n      \"precision\": \"street\",\n      \"formatted_address\": \"<string,null>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T15:16:30.000Z",
+              "updatedAt": "2026-06-05T15:16:30.000Z",
+              "uid": "35240-75c4381b-b87f-4051-a7e6-761d2702be3f"
+            },
+            {
+              "id": "f851987a-af3a-4d14-a4b9-4d4fc3967c40",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/service-points?country_code=<string>&carrier_code=<string>&use_integration_carriers=<boolean>&address=<string>&address_street=<string>&address_house_number=<string>&address_postal_code=<string>&address_city=<string>&latitude=<double>&longitude=<double>&ne_latitude=<double>&ne_longitude=<double>&sw_latitude=<double>&sw_longitude=<double>&radius=<integer>&carrier_service_point_id=<string>&carrier_shop_type=<string>&general_shop_type=carrier_depot&limit=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "service-points"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Country to retrieve service points for, as an ISO 3166-1 alpha-2 code.",
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Carrier codes to filter results by.",
+                      "key": "carrier_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters service points to carriers enabled in the authenticated integration's settings.",
+                      "key": "use_integration_carriers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Free-text address used as the reference point for the search.",
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Street of the reference address.",
+                      "key": "address_street",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "House number of the reference address.",
+                      "key": "address_house_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Postal code of the reference address.",
+                      "key": "address_postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "City of the reference address.",
+                      "key": "address_city",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Latitude of the reference point.",
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude of the reference point.",
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Latitude of the north-east corner of the bounding box.",
+                      "key": "ne_latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude of the north-east corner of the bounding box.",
+                      "key": "ne_longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Latitude of the south-west corner of the bounding box.",
+                      "key": "sw_latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude of the south-west corner of the bounding box.",
+                      "key": "sw_longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Search radius in meters from the reference point.",
+                      "key": "radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Carrier-specific identifiers of the service points to return.",
+                      "key": "carrier_service_point_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters results by carrier-specific shop type.",
+                      "key": "carrier_shop_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters results by general shop type. Use this to narrow results without having to handle each carrier's specific shop types separately.",
+                      "key": "general_shop_type",
+                      "value": "carrier_depot"
+                    },
+                    {
+                      "description": "Maximum number of service points to return.",
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": {}\n}",
+              "createdAt": "2026-06-05T15:16:30.000Z",
+              "updatedAt": "2026-06-05T15:16:30.000Z",
+              "uid": "35240-f851987a-af3a-4d14-a4b9-4d4fc3967c40"
+            },
+            {
+              "id": "b8b71a18-ce65-4d34-8047-c14b79826d3b",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/service-points?country_code=<string>&carrier_code=<string>&use_integration_carriers=<boolean>&address=<string>&address_street=<string>&address_house_number=<string>&address_postal_code=<string>&address_city=<string>&latitude=<double>&longitude=<double>&ne_latitude=<double>&ne_longitude=<double>&sw_latitude=<double>&sw_longitude=<double>&radius=<integer>&carrier_service_point_id=<string>&carrier_shop_type=<string>&general_shop_type=carrier_depot&limit=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "service-points"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Country to retrieve service points for, as an ISO 3166-1 alpha-2 code.",
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Carrier codes to filter results by.",
+                      "key": "carrier_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters service points to carriers enabled in the authenticated integration's settings.",
+                      "key": "use_integration_carriers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Free-text address used as the reference point for the search.",
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Street of the reference address.",
+                      "key": "address_street",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "House number of the reference address.",
+                      "key": "address_house_number",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Postal code of the reference address.",
+                      "key": "address_postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "City of the reference address.",
+                      "key": "address_city",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Latitude of the reference point.",
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude of the reference point.",
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Latitude of the north-east corner of the bounding box.",
+                      "key": "ne_latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude of the north-east corner of the bounding box.",
+                      "key": "ne_longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Latitude of the south-west corner of the bounding box.",
+                      "key": "sw_latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Longitude of the south-west corner of the bounding box.",
+                      "key": "sw_longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "description": "Search radius in meters from the reference point.",
+                      "key": "radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Carrier-specific identifiers of the service points to return.",
+                      "key": "carrier_service_point_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters results by carrier-specific shop type.",
+                      "key": "carrier_shop_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filters results by general shop type. Use this to narrow results without having to handle each carrier's specific shop types separately.",
+                      "key": "general_shop_type",
+                      "value": "carrier_depot"
+                    },
+                    {
+                      "description": "Maximum number of service points to return.",
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": {}\n}",
+              "createdAt": "2026-06-05T15:16:30.000Z",
+              "updatedAt": "2026-06-05T15:16:30.000Z",
+              "uid": "35240-b8b71a18-ce65-4d34-8047-c14b79826d3b"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:30.000Z",
+          "updatedAt": "2026-06-05T15:16:30.000Z",
+          "uid": "35240-2e2e01fd-9020-4f08-8f38-33bc868a4097"
+        }
+      ],
+      "id": "4aeedb33-8598-49ad-a875-15a76098d4a6",
+      "createdAt": "2026-06-05T15:16:30.000Z",
+      "updatedAt": "2026-06-05T15:16:30.000Z",
+      "uid": "35240-4aeedb33-8598-49ad-a875-15a76098d4a6"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://panel.sendcloud.sc/api/v3"
+    }
+  ]
+}

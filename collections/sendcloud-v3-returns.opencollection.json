@@ -1,0 +1,192 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Returns",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Returns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of returns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/returns",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n- `o`: Offset\n- `r`: Reverse\n- `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`."
+              },
+              {
+                "name": "from_date",
+                "value": "2022-04-06 00:00:00",
+                "type": "query",
+                "description": "Excludes all returns before this datetime"
+              },
+              {
+                "name": "to_date",
+                "value": "2022-04-07 00:00:00",
+                "type": "query",
+                "description": "Excludes all returns after this datetime"
+              },
+              {
+                "name": "parent_parcel_status",
+                "value": "",
+                "type": "query",
+                "description": "Search for returns with this parent status"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Refers to the number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a list of returns which have been created under your API credentials."
+        },
+        {
+          "info": {
+            "name": "Create a return",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/returns",
+            "headers": [
+              {
+                "name": "Sendcloud-Partner-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a standalone return"
+        },
+        {
+          "info": {
+            "name": "Retrieve a return",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/returns/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The internal Sendcloud id of this return"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve information about a specific return parcel based on the return `id`."
+        },
+        {
+          "info": {
+            "name": "Request cancellation of a return",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://panel.sendcloud.sc/api/v3/returns/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Sendcloud unique identifier of this return"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "You can request cancellation for a return by providing the return `id` to this endpoint."
+        },
+        {
+          "info": {
+            "name": "Validate a return",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/returns/validate",
+            "headers": [
+              {
+                "name": "Sendcloud-Partner-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Check if a return can be announced **without** actually creating the return, or announcing it with the carrier."
+        },
+        {
+          "info": {
+            "name": "Create a return synchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/returns/announce-synchronously",
+            "headers": [
+              {
+                "name": "Sendcloud-Partner-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a return synchronously, i.e. wait for a response from the carrier before continuing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

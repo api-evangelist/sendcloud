@@ -1,0 +1,17 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Webhooks",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Sendcloud-Signature",
+      "value": "{{Sendcloud-Signature}}",
+      "placement": "header"
+    }
+  },
+  "items": [],
+  "bundled": true
+}

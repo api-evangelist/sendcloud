@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ship an Order",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ship an Order",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request a label for one or more orders asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/orders/create-labels-async",
+            "headers": [
+              {
+                "name": "Sendcloud-Partner-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Request a label for a single or multiple orders. This endpoint will fail gracefully if some orders cannot be processed, returning any successfully created labels along with error details for the orders that failed."
+        },
+        {
+          "info": {
+            "name": "Request a label for a single order synchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/orders/create-label-sync",
+            "headers": [
+              {
+                "name": "Sendcloud-Partner-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Request a label for a single order and wait for the results. The label and any other documents will be provided in the response to this request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1220 @@
+{
+  "info": {
+    "_postman_id": "bc8aff32-8df6-4333-9e7a-e3438414ea22",
+    "name": "Analytics",
+    "description": "The Analytics API exposes aggregated shipping insights derived from your account's shipping activity. The current release covers carrier and shipping option transit times.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:36.000Z",
+    "updatedAt": "2026-06-05T15:16:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bc8aff32-8df6-4333-9e7a-e3438414ea22"
+  },
+  "item": [
+    {
+      "name": "analytics",
+      "item": [
+        {
+          "name": "transit-times",
+          "item": [
+            {
+              "name": "carriers",
+              "item": [
+                {
+                  "name": "Retrieve carrier transit times",
+                  "id": "ed28b102-2d17-48e3-97f0-85bb5c92ea87",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/transit-times/carriers?carrier_code=<string>&from_country_code=<string>&from_country_code=<string>&to_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "transit-times",
+                        "carriers"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) One or more carrier codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                          "key": "carrier_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                          "key": "from_country_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                          "key": "from_country_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                          "key": "to_country_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                          "key": "to_country_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                          "key": "start_date",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                          "key": "end_date",
+                          "value": "<date>"
+                        }
+                      ]
+                    },
+                    "description": "Returns aggregated transit-time statistics per carrier, optionally filtered by origin and destination country and a date window."
+                  },
+                  "response": [
+                    {
+                      "id": "70e4117a-6c87-4ffa-9f6d-a3804c2110e1",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/carriers?carrier_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "carriers"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more carrier codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "carrier_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"transit_times\": [\n    {\n      \"carrier_code\": \"<string>\",\n      \"from_country_code\": \"<string,null>\",\n      \"to_country_code\": \"<string,null>\",\n      \"start_date\": \"<dateTime>\",\n      \"end_date\": \"<dateTime>\",\n      \"total_parcels\": \"<integer>\",\n      \"transit_time_hours\": \"<float>\",\n      \"transit_time_days\": \"<integer>\"\n    },\n    {\n      \"carrier_code\": \"<string>\",\n      \"from_country_code\": \"<string,null>\",\n      \"to_country_code\": \"<string,null>\",\n      \"start_date\": \"<dateTime>\",\n      \"end_date\": \"<dateTime>\",\n      \"total_parcels\": \"<integer>\",\n      \"transit_time_hours\": \"<float>\",\n      \"transit_time_days\": \"<integer>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-70e4117a-6c87-4ffa-9f6d-a3804c2110e1"
+                    },
+                    {
+                      "id": "067b1da0-dbe2-413a-adea-1103644e333b",
+                      "name": "Bad Request. Returned when a request parameter fails validation or the request is semantically invalid. The `source.parameter` field identifies the offending input.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/carriers?carrier_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "carriers"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more carrier codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "carrier_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"required\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"invalid\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-067b1da0-dbe2-413a-adea-1103644e333b"
+                    },
+                    {
+                      "id": "bf4244d8-812e-4e13-a004-32ee3a768825",
+                      "name": "Unauthorized. Returned when authentication credentials are missing or invalid. Make sure you're using your **Public Key** as the username and **Secret Key** as the password (HTTP Basic Auth), or a valid OAuth 2.0 access token.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/carriers?carrier_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "carriers"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more carrier codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "carrier_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"required\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"invalid\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-bf4244d8-812e-4e13-a004-32ee3a768825"
+                    },
+                    {
+                      "id": "03a58b2b-ed44-4b2d-a878-df591c97733b",
+                      "name": "Forbidden. Returned when your account doesn't have access to this endpoint.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/carriers?carrier_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "carriers"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more carrier codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "carrier_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"required\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"invalid\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-03a58b2b-ed44-4b2d-a878-df591c97733b"
+                    },
+                    {
+                      "id": "abe9e151-0360-499c-9437-c143ef031a43",
+                      "name": "Not Found. Returned when the analytics data source has not been provisioned for your organization. A successful query with no matching rows returns `200` with an empty `transit_times` array instead.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/carriers?carrier_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "carriers"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more carrier codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "carrier_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"required\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"invalid\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-abe9e151-0360-499c-9437-c143ef031a43"
+                    },
+                    {
+                      "id": "15c13f82-4c8e-4815-bd09-98d507703336",
+                      "name": "Internal Server Error. Returned when the analytics data source is unreachable, times out, or returns an unexpected error. Safe to retry, but if it persists, contact support and include the request ID from the `X-Request-Id` response header.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/carriers?carrier_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "carriers"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more carrier codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "carrier_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"required\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"invalid\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-15c13f82-4c8e-4815-bd09-98d507703336"
+                    },
+                    {
+                      "id": "5b567eb2-3015-47d6-8ac0-c30714e8586b",
+                      "name": "Bad Gateway. Returned when a request to an external service fails with an unexpected status. Safe to retry, but if it persists, contact support and include the request ID from the `X-Request-Id` response header.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/carriers?carrier_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "carriers"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more carrier codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "carrier_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Gateway",
+                      "code": 502,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"required\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"invalid\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-5b567eb2-3015-47d6-8ac0-c30714e8586b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:37.000Z",
+                  "updatedAt": "2026-06-05T15:16:37.000Z",
+                  "uid": "35240-ed28b102-2d17-48e3-97f0-85bb5c92ea87"
+                }
+              ],
+              "id": "56d0c7cd-9df2-4560-916e-f569198ea12f",
+              "createdAt": "2026-06-05T15:16:37.000Z",
+              "updatedAt": "2026-06-05T15:16:37.000Z",
+              "uid": "35240-56d0c7cd-9df2-4560-916e-f569198ea12f"
+            },
+            {
+              "name": "shipping-options",
+              "item": [
+                {
+                  "name": "Retrieve shipping option transit times",
+                  "id": "b5f16e58-8fe7-4c9c-b401-028e2c1398bf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/transit-times/shipping-options?shipping_option_code=<string>&from_country_code=<string>&from_country_code=<string>&to_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "transit-times",
+                        "shipping-options"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) One or more shipping option codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                          "key": "shipping_option_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                          "key": "from_country_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                          "key": "from_country_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                          "key": "to_country_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                          "key": "to_country_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                          "key": "start_date",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                          "key": "end_date",
+                          "value": "<date>"
+                        }
+                      ]
+                    },
+                    "description": "Returns aggregated transit-time statistics per shipping option, optionally filtered by origin and destination country and a date window."
+                  },
+                  "response": [
+                    {
+                      "id": "11160553-4361-4b4d-b052-f668652dcb31",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/shipping-options?shipping_option_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "shipping-options"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more shipping option codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "shipping_option_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"transit_times\": [\n    {\n      \"shipping_option_code\": \"<string>\",\n      \"from_country_code\": \"<string,null>\",\n      \"to_country_code\": \"<string,null>\",\n      \"start_date\": \"<dateTime>\",\n      \"end_date\": \"<dateTime>\",\n      \"total_parcels\": \"<integer>\",\n      \"transit_time_hours\": \"<float>\",\n      \"transit_time_days\": \"<integer>\"\n    },\n    {\n      \"shipping_option_code\": \"<string>\",\n      \"from_country_code\": \"<string,null>\",\n      \"to_country_code\": \"<string,null>\",\n      \"start_date\": \"<dateTime>\",\n      \"end_date\": \"<dateTime>\",\n      \"total_parcels\": \"<integer>\",\n      \"transit_time_hours\": \"<float>\",\n      \"transit_time_days\": \"<integer>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-11160553-4361-4b4d-b052-f668652dcb31"
+                    },
+                    {
+                      "id": "2538f78d-86e9-4bab-8890-d48fd6293e75",
+                      "name": "Bad Request. Returned when one or more request parameters fail validation (missing required parameters, country codes that aren't two characters, `shipping_option_code` outside its length bounds, dates outside the supported format) or when the request its",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/shipping-options?shipping_option_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "shipping-options"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more shipping option codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "shipping_option_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"required\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"invalid\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-2538f78d-86e9-4bab-8890-d48fd6293e75"
+                    },
+                    {
+                      "id": "008087b1-d872-4c89-97ad-db91b32d96cc",
+                      "name": "Unauthorized. Returned when authentication credentials are missing or invalid. Make sure you're using your **Public Key** as the username and **Secret Key** as the password (HTTP Basic Auth), or a valid OAuth 2.0 access token.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/shipping-options?shipping_option_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "shipping-options"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more shipping option codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "shipping_option_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"required\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"invalid\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-008087b1-d872-4c89-97ad-db91b32d96cc"
+                    },
+                    {
+                      "id": "57fa7bd7-0397-41a0-991e-e9157d87cd52",
+                      "name": "Forbidden. Returned when your account doesn't have access to this endpoint.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/shipping-options?shipping_option_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "shipping-options"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more shipping option codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "shipping_option_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"required\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"invalid\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-57fa7bd7-0397-41a0-991e-e9157d87cd52"
+                    },
+                    {
+                      "id": "fc17f1ac-835b-44c1-b0bc-f621ca5fa7f1",
+                      "name": "Not Found. Returned when the analytics data source has not been provisioned for your organization. A successful query with no matching rows returns `200` with an empty `transit_times` array instead.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/shipping-options?shipping_option_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "shipping-options"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more shipping option codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "shipping_option_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"required\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"invalid\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-fc17f1ac-835b-44c1-b0bc-f621ca5fa7f1"
+                    },
+                    {
+                      "id": "3deca9d3-ae22-4152-9888-4cf6f5506f0a",
+                      "name": "Internal Server Error. Returned when the analytics data source is unreachable, times out, or returns an unexpected error. Safe to retry, but if it persists, contact support and include the request ID from the `X-Request-Id` response header.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/shipping-options?shipping_option_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "shipping-options"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more shipping option codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "shipping_option_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"required\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"invalid\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-3deca9d3-ae22-4152-9888-4cf6f5506f0a"
+                    },
+                    {
+                      "id": "6006fea7-231f-4add-ad3e-24855993f0fe",
+                      "name": "Bad Gateway. Returned when a request to an external service fails with an unexpected status. Safe to retry, but if it persists, contact support and include the request ID from the `X-Request-Id` response header.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/analytics/transit-times/shipping-options?shipping_option_code=<string>&from_country_code=<string>&to_country_code=<string>&start_date=<date>&end_date=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "analytics",
+                            "transit-times",
+                            "shipping-options"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) One or more shipping option codes to retrieve transit times for. Repeat the parameter to pass multiple values.",
+                              "key": "shipping_option_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "from_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.",
+                              "key": "to_country_code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.",
+                              "key": "start_date",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.",
+                              "key": "end_date",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Gateway",
+                      "code": 502,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"required\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"about\": \"<string>\"\n      },\n      \"status\": \"<string>\",\n      \"code\": \"invalid\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\",\n        \"header\": \"<string>\"\n      },\n      \"meta\": {}\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:37.000Z",
+                      "updatedAt": "2026-06-05T15:16:37.000Z",
+                      "uid": "35240-6006fea7-231f-4add-ad3e-24855993f0fe"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:37.000Z",
+                  "updatedAt": "2026-06-05T15:16:37.000Z",
+                  "uid": "35240-b5f16e58-8fe7-4c9c-b401-028e2c1398bf"
+                }
+              ],
+              "id": "20f654a8-91d8-4dc4-a6a7-42d5d11a630d",
+              "createdAt": "2026-06-05T15:16:37.000Z",
+              "updatedAt": "2026-06-05T15:16:37.000Z",
+              "uid": "35240-20f654a8-91d8-4dc4-a6a7-42d5d11a630d"
+            }
+          ],
+          "id": "92727779-8468-4814-9691-ac3824916ddd",
+          "createdAt": "2026-06-05T15:16:37.000Z",
+          "updatedAt": "2026-06-05T15:16:37.000Z",
+          "uid": "35240-92727779-8468-4814-9691-ac3824916ddd"
+        }
+      ],
+      "id": "8454f0c1-ff52-4937-b622-884cad49cc14",
+      "createdAt": "2026-06-05T15:16:37.000Z",
+      "updatedAt": "2026-06-05T15:16:37.000Z",
+      "uid": "35240-8454f0c1-ff52-4937-b622-884cad49cc14"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://panel.sendcloud.sc/api/v3"
+    }
+  ]
+}

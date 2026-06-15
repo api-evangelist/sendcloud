@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Analytics",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve carrier transit times",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/analytics/transit-times/carriers",
+            "params": [
+              {
+                "name": "carrier_code",
+                "value": "",
+                "type": "query",
+                "description": "One or more carrier codes to retrieve transit times for. Repeat the parameter to pass multiple values."
+              },
+              {
+                "name": "from_country_code",
+                "value": "",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values."
+              },
+              {
+                "name": "to_country_code",
+                "value": "",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values."
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns aggregated transit-time statistics per carrier, optionally filtered by origin and destination country and a date window."
+        },
+        {
+          "info": {
+            "name": "Retrieve shipping option transit times",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/analytics/transit-times/shipping-options",
+            "params": [
+              {
+                "name": "shipping_option_code",
+                "value": "",
+                "type": "query",
+                "description": "One or more shipping option codes to retrieve transit times for. Repeat the parameter to pass multiple values."
+              },
+              {
+                "name": "from_country_code",
+                "value": "",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values."
+              },
+              {
+                "name": "to_country_code",
+                "value": "",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values."
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns aggregated transit-time statistics per shipping option, optionally filtered by origin and destination country and a date window."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

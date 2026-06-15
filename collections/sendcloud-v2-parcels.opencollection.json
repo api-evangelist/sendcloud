@@ -1,0 +1,216 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Parcels",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Parcels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve parcels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/parcels",
+            "params": [
+              {
+                "name": "parcel_status",
+                "value": "",
+                "type": "query",
+                "description": "Returns parcels that have the requested status. For a list of possible statuses, see the [Retrieve a list of parcel statuses](/api/v2/parcel-statuses/retrieve-a-list-of-parcel-statuses) endpoint."
+              },
+              {
+                "name": "tracking_number",
+                "value": "",
+                "type": "query",
+                "description": "Returns parcels that match a specified tracking number"
+              },
+              {
+                "name": "external_reference",
+                "value": "",
+                "type": "query",
+                "description": "Returns parcels that match a specified external reference"
+              },
+              {
+                "name": "order_number",
+                "value": "",
+                "type": "query",
+                "description": "Returns an order that matches a specific `order_number` property from your parcels"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Returns all orders which have been updated in our system after a given time. You can use the value of ISO 8601 DateTime string like this"
+              },
+              {
+                "name": "announced_after",
+                "value": "",
+                "type": "query",
+                "description": "Returns all orders which have been announced to the carrier after the given time. You can use the value of ISO 8601 DateTime string like this"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter results using a list of Parcel IDs. This is a comma separated list of IDs, it may not contain more then 100 IDs."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Next and previous token that is used to paginate. The token is included in the response."
+              },
+              {
+                "name": "errors",
+                "value": "",
+                "type": "query",
+                "description": "If you are using this API for development purposes, you might want to use the errors query string in the URL. This allows you to visualize errors from the carrier."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This endpoint allows you to retrieve a list of all the parcels which you have created or imported into your Sendcloud account under your API credentials. You can filter the results based on the query parameters provided below, in order to retrieve a specific parcel or list of parcels which match the defined criteria."
+        },
+        {
+          "info": {
+            "name": "Create a parcel or parcels",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v2/parcels",
+            "headers": [
+              {
+                "name": "Sendcloud-Partner-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "errors",
+                "value": "",
+                "type": "query",
+                "description": "When making an API request, the errors query parameter can be used to determine the type of errors that should be included in the response. If `verbose` is specified, the response will only contain errors that Sendcloud has validated. These errors may include shipment details such as invalid addresses or missing postal codes. On the other hand, if `verbose-carrier` is specified, the response will include errors originating from the carriers side of the shipping process. These errors may result from technical or validation problems, such as connection failures or issues with the carrier`s systems, that prevent the shipment from being processed. More details are described on the page [Handling parcel errors](/docs/shipping/handling-parcel-errors)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create one or multiple parcels, either to be immediately announced to the carrier, or to be created for later announcement."
+        },
+        {
+          "info": {
+            "name": "Update a parcel",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://panel.sendcloud.sc/api/v2/parcels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a parcel which has **not yet been announced**, either to make changes to the original parcel data, or to request a shipping label if one hasn't yet been created."
+        },
+        {
+          "info": {
+            "name": "Retrieve a parcel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/parcels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the parcel you want to retrieve"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve a specific parcel by its `id`."
+        },
+        {
+          "info": {
+            "name": "Cancel a parcel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v2/parcels/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the parcel"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Cancel an announced parcel (if supported by the carrier) or delete an unannounced parcel."
+        },
+        {
+          "info": {
+            "name": "Retrieve a return portal URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/parcels/:id/return_portal_url",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the parcel"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Check which of your branded return portals is associated with a specific parcel using the parcel's `id`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

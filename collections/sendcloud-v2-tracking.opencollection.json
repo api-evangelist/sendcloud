@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tracking parcels",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve tracking information of a parcel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v2/tracking/:tracking_number",
+            "params": [
+              {
+                "name": "tracking_number",
+                "value": "ISDUS939HHCXL29J",
+                "type": "path",
+                "description": "The tracking number that the user received"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Fetches detailed tracking information, including the status history of the parcel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
