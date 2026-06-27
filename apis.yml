@@ -22,7 +22,7 @@ apis:
       - url: json-structure/sendcloud-shipment-structure.json
         type: JSONStructure
       - url: examples/sendcloud-announce-shipment-example.json
-        type: Example
+        type: Examples
     description: >-
       Create, announce, retrieve, and cancel outgoing shipments and their associated parcels on the Sendcloud platform.
       Supports synchronous and asynchronous announcement, shipping-rules-driven defaults, address validation, multicollo
@@ -79,7 +79,7 @@ apis:
       - url: json-structure/sendcloud-return-structure.json
         type: JSONStructure
       - url: examples/sendcloud-create-return-example.json
-        type: Example
+        type: Examples
     description: >-
       Create, validate, list, announce, and cancel return shipments. Supports drop-off at service point, in-store, home
       pickup, and postbox delivery options across European carriers.
@@ -103,7 +103,7 @@ apis:
       - url: json-schema/sendcloud-servicepointaddress-schema.json
         type: JSONSchema
       - url: examples/sendcloud-list-service-points-example.json
-        type: Example
+        type: Examples
     description: >-
       Look up parcel-shop, locker, and post-office drop-off / pickup locations across 160+ European carriers, filter by
       country, postcode, carrier, and radius, and check service-point availability.
@@ -370,45 +370,42 @@ specificationVersion: '0.19'
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/sendcloud/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/sendcloud-announce-shipment-return-portal-workflow.yml
-        name: Sendcloud Announce a Shipment and Get its Return Portal URL
-        summary: Announce a shipment synchronously, then retrieve the return portal URL customers use to create a return.
-      - url: arazzo/sendcloud-announce-shipment-with-label-workflow.yml
-        name: Sendcloud Announce a Shipment with Label
-        summary: Announce a shipment synchronously, then verify it and read its label document link.
-      - url: arazzo/sendcloud-bulk-print-labels-workflow.yml
-        name: Sendcloud Bulk Print Labels for Recent Parcels
-        summary: List parcels filtered by status, then request a single bulk PDF of their labels.
-      - url: arazzo/sendcloud-cancel-shipment-workflow.yml
-        name: Sendcloud Cancel a Shipment with Confirmation
-        summary: Look up a shipment by id, then cancel it and branch on whether cancellation was immediate or queued.
-      - url: arazzo/sendcloud-create-parcel-fetch-label-workflow.yml
-        name: Sendcloud Create a Parcel and Fetch its Label
-        summary: Create a parcel with a label request, then retrieve its PDF label download URLs.
-      - url: arazzo/sendcloud-create-parcel-return-portal-workflow.yml
-        name: Sendcloud Create a Parcel and Get its Return Portal URL
-        summary: Create a labelled parcel, then retrieve the return portal URL a customer can use to start a return.
-      - url: arazzo/sendcloud-create-parcel-track-shipment-workflow.yml
-        name: Sendcloud Create a Parcel and Track its Shipment
-        summary: Create a labelled parcel, then poll its tracking until it is en route.
-      - url: arazzo/sendcloud-create-return-cancel-if-cancellable-workflow.yml
-        name: Sendcloud Create a Return and Cancel It If Cancellable
-        summary: Create a standalone return, inspect it, and request cancellation only when it is still cancellable.
-      - url: arazzo/sendcloud-register-external-parcel-track-workflow.yml
-        name: Sendcloud Register an External Parcel and Track It
-        summary: Register a parcel labelled outside Sendcloud for tracking, then retrieve its tracking record.
-      - url: arazzo/sendcloud-ship-order-async-poll-parcel-workflow.yml
-        name: Sendcloud Ship an Order Asynchronously and Poll the Parcel
-        summary: Request a label for an order asynchronously, then poll the created parcel until it has a label.
-      - url: arazzo/sendcloud-ship-order-sync-track-workflow.yml
-        name: Sendcloud Ship an Order Synchronously and Track It
-        summary: Request a label for an order synchronously, then pull its v3 tracking detail.
-      - url: arazzo/sendcloud-validate-create-return-workflow.yml
-        name: Sendcloud Validate and Create a Return
-        summary: Validate a return payload, create the return, then retrieve its full detail.
+  - type: Arazzo
+    url: arazzo/sendcloud-announce-shipment-return-portal-workflow.yml
+    name: Sendcloud Announce a Shipment and Get its Return Portal URL
+  - type: Arazzo
+    url: arazzo/sendcloud-announce-shipment-with-label-workflow.yml
+    name: Sendcloud Announce a Shipment with Label
+  - type: Arazzo
+    url: arazzo/sendcloud-bulk-print-labels-workflow.yml
+    name: Sendcloud Bulk Print Labels for Recent Parcels
+  - type: Arazzo
+    url: arazzo/sendcloud-cancel-shipment-workflow.yml
+    name: Sendcloud Cancel a Shipment with Confirmation
+  - type: Arazzo
+    url: arazzo/sendcloud-create-parcel-fetch-label-workflow.yml
+    name: Sendcloud Create a Parcel and Fetch its Label
+  - type: Arazzo
+    url: arazzo/sendcloud-create-parcel-return-portal-workflow.yml
+    name: Sendcloud Create a Parcel and Get its Return Portal URL
+  - type: Arazzo
+    url: arazzo/sendcloud-create-parcel-track-shipment-workflow.yml
+    name: Sendcloud Create a Parcel and Track its Shipment
+  - type: Arazzo
+    url: arazzo/sendcloud-create-return-cancel-if-cancellable-workflow.yml
+    name: Sendcloud Create a Return and Cancel It If Cancellable
+  - type: Arazzo
+    url: arazzo/sendcloud-register-external-parcel-track-workflow.yml
+    name: Sendcloud Register an External Parcel and Track It
+  - type: Arazzo
+    url: arazzo/sendcloud-ship-order-async-poll-parcel-workflow.yml
+    name: Sendcloud Ship an Order Asynchronously and Poll the Parcel
+  - type: Arazzo
+    url: arazzo/sendcloud-ship-order-sync-track-workflow.yml
+    name: Sendcloud Ship an Order Synchronously and Track It
+  - type: Arazzo
+    url: arazzo/sendcloud-validate-create-return-workflow.yml
+    name: Sendcloud Validate and Create a Return
   - type: Website
     url: https://www.sendcloud.com
   - type: DeveloperPortal
@@ -419,7 +416,7 @@ common:
     url: https://sendcloud.dev/api/v3/
   - type: GettingStarted
     url: https://sendcloud.dev/docs/getting-started/
-  - type: Quickstart
+  - type: GettingStarted
     url: https://sendcloud.dev/docs/getting-started/
   - type: Authentication
     url: https://sendcloud.dev/docs/getting-started/authentication/
@@ -451,7 +448,7 @@ common:
     url: https://github.com/Sendcloud
   - type: LinkedIn
     url: https://www.linkedin.com/company/sendcloud/
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://sendcloud.dev/llms.txt
   - url: rules/sendcloud-rules.yml
     type: SpectralRules
@@ -465,17 +462,17 @@ common:
     type: RateLimits
   - url: finops/sendcloud-finops.yml
     type: FinOps
-  - type: SDK
+  - type: SDKs
     url: https://github.com/Sendcloud/SendCloud-API-PHP-Wrapper
-  - type: SDK
+  - type: SDKs
     url: https://github.com/Sendcloud/api-integration-example
-  - type: Integration
+  - type: Integrations
     url: https://github.com/Sendcloud/prestashop-thirtybees-module
-  - type: Integration
+  - type: Integrations
     url: https://github.com/Sendcloud/sendcloud
-  - type: Integration
+  - type: Integrations
     url: https://github.com/Sendcloud/salesforce-b2c-commerce-cartridge
-  - type: Integration
+  - type: Integrations
     url: https://github.com/Sendcloud/spp-integration-example
   - type: Features
     data:
