@@ -368,6 +368,10 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: TrustCenter
+    url: security/sendcloud-trust-center.yml
+  - type: DomainSecurity
+    url: security/sendcloud-domain-security.yml
   - type: Authentication
     url: authentication/sendcloud-authentication.yml
   - type: OAuthScopes
