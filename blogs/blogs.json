@@ -2,13 +2,14 @@
   "repo": "sendcloud",
   "feeds": [
     {
-      "source": "https://www.sendcloud.com/blog/",
-      "feed_url": "",
+      "source": "https://www.sendcloud.com/pricing/",
+      "feed_url": "https://www.sendcloud.com/pricing/",
+      "title": "",
       "saved": 0,
-      "method": "agent-scrape"
+      "method": "none"
     }
   ],
-  "post_count": 9,
-  "fetched": "2026-06-27T13:09:22Z",
-  "agent_pulled": "2026-06-27"
+  "post_count": 14,
+  "fetched": "2026-07-11T11:50:51Z",
+  "agent_pulled": "2026-07-04"
 }
