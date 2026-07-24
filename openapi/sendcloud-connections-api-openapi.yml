@@ -1,0 +1,480 @@
+openapi: 3.1.0
+info:
+  title: Shipments Address Connections API
+  version: 3.0.0
+  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: Connections
+paths:
+  /event-subscriptions/connections:
+    post:
+      summary: Create a connection
+      description: Create a new connection to an external endpoint where event notifications will be delivered.
+      tags:
+      - Connections
+      operationId: sc-public-v3-scp-post-create_connection
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/event-subscriptions/create-a-connection
+        content: "Create a new connection that defines an external endpoint for event delivery.\n\n**Webhook connections** require a `url` and optionally authentication configuration. Supported authentication types are `none`, `bearer`, `basic`, and `api_key`.\n\n**Klaviyo connections** require only the `type` field set to `klaviyo` with an empty `configuration` object. After creating the connection, use the [Start OAuth2 authorization](/api/v3/event-subscriptions/start-oauth2-authorization) endpoint to connect your Klaviyo account.\n\n<Info>\n  Webhook URLs must be publicly accessible and respond with a `2xx` status code to acknowledge event delivery.\n</Info>"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/connection-create-request'
+            examples:
+              WebhookConnection:
+                summary: Create a webhook connection with bearer auth
+                value:
+                  type: webhook
+                  configuration:
+                    url: https://example.com/webhooks/sendcloud
+                    auth_type: bearer
+                    auth_config:
+                      token: my-secret-token
+                    extra_headers:
+                      X-Custom-Header: my-value
+              WebhookConnectionNoAuth:
+                summary: Create a webhook connection without auth
+                value:
+                  type: webhook
+                  configuration:
+                    url: https://example.com/webhooks/sendcloud
+                    auth_type: none
+              KlaviyoConnection:
+                summary: Create a Klaviyo connection
+                value:
+                  type: klaviyo
+                  configuration: {}
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: Connection created
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/connection'
+              examples:
+                WebhookCreated:
+                  summary: Webhook connection created
+                  value:
+                    data:
+                      id: 1
+                      type: webhook
+                      configuration:
+                        url: https://example.com/webhooks/sendcloud
+                        auth_type: bearer
+                        extra_headers:
+                          X-Custom-Header: my-value
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+                KlaviyoCreated:
+                  summary: Klaviyo connection created
+                  value:
+                    data:
+                      id: 2
+                      type: klaviyo
+                      configuration: {}
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+              examples:
+                ValidationError:
+                  summary: Validation error
+                  value:
+                    errors:
+                    - detail: This field is required.
+                      status: '400'
+                      source:
+                        pointer: /data/type
+                      code: required
+        '429':
+          description: Throttled
+    get:
+      summary: List connections
+      description: Retrieve all connections for the authenticated user's organization.
+      tags:
+      - Connections
+      operationId: sc-public-v3-scp-get-list_connections
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/event-subscriptions/list-connections
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - webhook
+          - klaviyo
+        in: query
+        name: connection_type
+        description: Filter by connection type.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: List of connections
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/connection'
+                required:
+                - data
+              examples:
+                ListConnections:
+                  summary: List of connections
+                  value:
+                    data:
+                    - id: 1
+                      type: webhook
+                      configuration:
+                        url: https://example.com/webhooks/sendcloud
+                        auth_type: bearer
+                        extra_headers:
+                          X-Custom-Header: my-value
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+                    - id: 2
+                      type: klaviyo
+                      configuration: {}
+                      created_at: '2026-01-16T09:00:00Z'
+                      updated_at: '2026-01-16T09:00:00Z'
+        '429':
+          description: Throttled
+  /event-subscriptions/connections/{id}:
+    parameters:
+    - schema:
+        type: integer
+      in: path
+      name: id
+      description: The id of the connection.
+      required: true
+    get:
+      summary: Get a connection
+      description: Retrieve a specific connection by its id.
+      tags:
+      - Connections
+      operationId: sc-public-v3-scp-get-connection
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/event-subscriptions/get-a-connection
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: Connection details
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/connection'
+              examples:
+                GetConnection:
+                  summary: Get a webhook connection
+                  value:
+                    data:
+                      id: 1
+                      type: webhook
+                      configuration:
+                        url: https://example.com/webhooks/sendcloud
+                        auth_type: bearer
+                        extra_headers:
+                          X-Custom-Header: my-value
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-15T10:30:00Z'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+    patch:
+      summary: Update a connection
+      description: Update an existing connection by its id. Only the fields provided in the request body will be updated.
+      tags:
+      - Connections
+      operationId: sc-public-v3-scp-patch-connection
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/event-subscriptions/update-a-connection
+        content: "Update the configuration of an existing connection.\n\nOnly the fields provided in the request body will be updated. For example, you can update just the webhook URL or authentication settings without changing other fields.\n\n<Warning>\n  Updating a connection's configuration may affect all subscriptions that use this connection.\n</Warning>"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/connection-update-request'
+            examples:
+              UpdateWebhookUrl:
+                summary: Update the webhook URL
+                value:
+                  configuration:
+                    url: https://example.com/webhooks/sendcloud-v2
+              UpdateAuth:
+                summary: Update authentication settings
+                value:
+                  configuration:
+                    auth_type: api_key
+                    auth_config:
+                      header_name: X-Api-Key
+                      api_key: my-new-api-key
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: Updated connection
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/connection'
+              examples:
+                UpdatedConnection:
+                  summary: Updated webhook connection
+                  value:
+                    data:
+                      id: 1
+                      type: webhook
+                      configuration:
+                        url: https://example.com/webhooks/sendcloud-v2
+                        auth_type: api_key
+                        extra_headers:
+                          X-Custom-Header: my-value
+                      created_at: '2026-01-15T10:30:00Z'
+                      updated_at: '2026-01-20T14:00:00Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+              examples:
+                ValidationError:
+                  summary: Validation error
+                  value:
+                    errors:
+                    - detail: Enter a valid URL.
+                      status: '400'
+                      source:
+                        pointer: /data/configuration/url
+                      code: invalid
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+    delete:
+      summary: Delete a connection
+      description: Delete a specific connection by its id. Any subscriptions associated with this connection will also be deleted.
+      tags:
+      - Connections
+      operationId: sc-public-v3-scp-delete-connection
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/event-subscriptions/delete-a-connection
+        content: "Delete a connection and all its associated subscriptions.\n\n<Warning>\n  This action is irreversible. All subscriptions linked to this connection will be permanently deleted and event delivery will stop immediately.\n</Warning>"
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+components:
+  schemas:
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
+    connection-update-request:
+      title: Update Connection request
+      description: Request body for updating an existing connection. All fields are optional.
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of connection.
+          enum:
+          - webhook
+          - klaviyo
+        configuration:
+          type: object
+          description: 'The configuration for the connection. The shape depends on the connection type.
+
+
+            For `webhook` connections, see the webhook configuration fields.
+
+            For `klaviyo` connections, configuration can be an empty object as credentials are managed via OAuth2.'
+    connection:
+      title: Connection
+      description: A connection defines an external endpoint where event notifications are delivered.
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          minimum: 1
+          description: Unique identifier of the connection.
+        type:
+          type: string
+          description: The type of connection.
+          enum:
+          - webhook
+          - klaviyo
+        configuration:
+          type: object
+          description: The configuration for the connection. The shape depends on the connection type.
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time when the connection was created, in ISO 8601 format.
+        updated_at:
+          type: string
+          format: date-time
+          description: The date and time when the connection was last updated, in ISO 8601 format.
+    connection-create-request:
+      title: Create Connection request
+      description: Request body for creating a new connection.
+      type: object
+      required:
+      - type
+      - configuration
+      properties:
+        type:
+          type: string
+          description: The type of connection.
+          enum:
+          - webhook
+          - klaviyo
+        configuration:
+          type: object
+          description: 'The configuration for the connection. The shape depends on the connection type.
+
+
+            For `webhook` connections, see the webhook configuration fields.
+
+            For `klaviyo` connections, configuration can be an empty object as credentials are managed via OAuth2.'
+    ErrorObject:
+      title: Error
+      type: object
+      description: Error in a JSON:API error format
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the error.
+        links:
+          type: object
+          description: A set of hyperlinks that provide additional information about the error.
+          properties:
+            about:
+              type: string
+              description: A URL that provides additional information about the error.
+        status:
+          type: string
+          format: int32
+          description: The HTTP status code of the error.
+          minLength: 1
+        code:
+          type: string
+          description: A unique error code for the error, in snake case format.
+          minLength: 1
+          enum:
+          - unknown_field
+          - invalid
+          - forbidden
+          - invalid_choice
+          - min_value
+          - 'null'
+          - not_found
+          - required
+          - not_a_list
+          - non_field_errors
+          - authentication_failed
+          - validation_error
+          - parcel_announcement_error
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          minLength: 1
+        detail:
+          type: string
+          description: A human-readable explanation of the error.
+          minLength: 1
+        source:
+          type: object
+          description: An object that identifies the source of the error within the request payload.
+          properties:
+            pointer:
+              type: string
+              description: A `JSON` pointer to the location of the error within the request payload.
+            parameter:
+              type: string
+              description: The name of the `query` parameter that caused the error.
+            header:
+              type: string
+              description: The name of the `header` parameter that caused the error.
+        meta:
+          type: object
+          description: Additional metadata about the error.
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.

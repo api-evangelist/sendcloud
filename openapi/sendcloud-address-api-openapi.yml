@@ -1,0 +1,310 @@
+openapi: 3.1.0
+info:
+  title: Shipments Address API
+  version: 3.0.0
+  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: Address
+paths:
+  /addresses/validate:
+    post:
+      summary: Validate an address
+      tags:
+      - Address
+      operationId: sc-public-v3-scp-post-validate_address
+      security:
+      - HTTPBasicAuth: []
+      description: "This address validation endpoint allows you to validate shipping addresses before using them.\nBy validating addresses in advance, you can ensure that the shipping information is accurate and complete,\nreducing the risk of delivery issues and improving overall shipping efficiency.\nProviding the carrier helps to tailor the address validation process according to specific carrier requirements.\nUsing additional validation methods can further enhance the accuracy of the address verification.\n\nThe default Sendcloud validation, will always be applied, has in 2 steps:\n1. checks the address against the carrier limits\n(e.g. maximum length of the address line, existence of the postal code for the country, etc.). \nsee also [Carrier address limits](/docs/shipments/address-field-limits#address-field-limits).\n\n2. optimizes (washes) the address to fit within the carrier limits.\n(e.g. deduplication of address lines, abbreviations, etc.)"
+      x-mint:
+        href: /api/v3/address/validate
+        content: 'This address validation endpoint allows you to validate shipping addresses before using them.
+
+          By validating addresses in advance, you can ensure that the shipping information is accurate and complete,
+
+          reducing the risk of delivery issues and improving overall shipping efficiency.
+
+          Providing the carrier helps to tailor the address validation process according to specific carrier requirements.
+
+          Using additional validation methods can further enhance the accuracy of the address verification.
+
+
+          The default Sendcloud validation, will always be applied, has in 2 steps:
+
+          1. checks the address against the carrier limits
+
+          (e.g. maximum length of the address line, existence of the postal code for the country, etc.).
+
+          see also [Carrier address limits](/docs/shipments/address-field-limits#address-field-limits).
+
+
+          2. optimizes (washes) the address to fit within the carrier limits.
+
+          (e.g. deduplication of address lines, abbreviations, etc.)'
+      responses:
+        '200':
+          description: Address validation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/address-washer-response'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+              examples:
+                Failed:
+                  summary: Failed to validate the address
+                  value:
+                    errors:
+                    - detail: This field is required.
+                      status: '400'
+                      source:
+                        pointer: /address/carrier_code
+                      code: required
+      parameters:
+      - schema:
+          type: string
+          example: 550e8400-e29b-41d4-a716-446655440000
+        in: header
+        description: If you are <a href="https://www.sendcloud.com/ecosystem/" target="_blank"> an official Sendcloud Tech Partner</a>, you can provide this additional request header for the system to recognize you. Sendcloud Partner UUID is provided to Sendcloud partners. The token is not required but if the header is set, the system will try to validate it. An unknown UUID will cause the 404 return, whilst an invalid one will return 400.
+        name: Sendcloud-Partner-Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/address-washer-request'
+components:
+  schemas:
+    address-washer-request:
+      title: Address Washer Request
+      description: Address Washer Request object model
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/raw-address'
+        carrier_code:
+          description: The code of the carrier to be used for the address validation. Only carriers available to your account can be used.
+          type: string
+          example: trunkrs
+        validation_methods:
+          description: 'An array of optional address validation methods to be applied
+
+            The default Sendcloud validation will always be applied.
+
+            '
+          type: array
+          items:
+            $ref: '#/components/schemas/address-validation-method-enum'
+          example:
+          - here
+      required:
+      - address
+      - carrier_code
+    errors:
+      title: Errors
+      description: A standardized format for errors in [JSON:API](https://jsonapi.org/format/#error-objects) responses.
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/ErrorObject'
+        - required:
+          - status
+          - code
+          - detail
+    raw-address:
+      title: Raw address
+      type: object
+      description: Raw address object
+      properties:
+        address_line_1:
+          type: string
+          example: Stadhuisplein
+          description: First line of the address
+        house_number:
+          type: string
+          example: '50'
+          description: House number of the address
+        address_line_2:
+          type: string
+          description: Additional address information, e.g. 2nd level
+          example: Apartment 17B
+        postal_code:
+          type: string
+          example: 1013 AB
+          description: Zip code of the address
+          minLength: 1
+        city:
+          type: string
+          example: Eindhoven
+          description: City of the address
+          minLength: 1
+        po_box:
+          type:
+          - string
+          - 'null'
+          description: Code required in case of PO Box or post locker delivery
+        state_province_code:
+          type: string
+          example: IT-RM
+          description: The character state code of the customer represented as ISO 3166-2 code. This field is required for certain countries. See [international shipping](/docs/shipments/international-shipping#required-fields-for-international-shipments) for details.
+        country_code:
+          type: string
+          example: NL
+          description: The country code of the customer represented as ISO 3166-1 alpha-2
+          minLength: 1
+    address-validation-method-enum:
+      title: Address validation method enum
+      type: string
+      enum:
+      - here
+    ErrorObject:
+      title: Error
+      type: object
+      description: Error in a JSON:API error format
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the error.
+        links:
+          type: object
+          description: A set of hyperlinks that provide additional information about the error.
+          properties:
+            about:
+              type: string
+              description: A URL that provides additional information about the error.
+        status:
+          type: string
+          format: int32
+          description: The HTTP status code of the error.
+          minLength: 1
+        code:
+          type: string
+          description: A unique error code for the error, in snake case format.
+          minLength: 1
+          enum:
+          - unknown_field
+          - invalid
+          - forbidden
+          - invalid_choice
+          - min_value
+          - 'null'
+          - not_found
+          - required
+          - not_a_list
+          - non_field_errors
+          - authentication_failed
+          - validation_error
+          - parcel_announcement_error
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          minLength: 1
+        detail:
+          type: string
+          description: A human-readable explanation of the error.
+          minLength: 1
+        source:
+          type: object
+          description: An object that identifies the source of the error within the request payload.
+          properties:
+            pointer:
+              type: string
+              description: A `JSON` pointer to the location of the error within the request payload.
+            parameter:
+              type: string
+              description: The name of the `query` parameter that caused the error.
+            header:
+              type: string
+              description: The name of the `header` parameter that caused the error.
+        meta:
+          type: object
+          description: Additional metadata about the error.
+    address-washer-response:
+      title: Address Washer Response
+      description: Address Washer Response object model
+      type: object
+      properties:
+        input_address_is_valid:
+          type: boolean
+          description: Indicates if the input address is valid.
+        results:
+          description: The results of the address validation.
+          type: array
+          items:
+            type: object
+            properties:
+              address:
+                $ref: '#/components/schemas/raw-address'
+              recommended:
+                type: boolean
+                description: Indicates if the address is recommended after validation.
+              analysis:
+                type: object
+                description: Analysis details of the address validation.
+                properties:
+                  validation_result:
+                    type: object
+                    description: The result of the validation process.
+                    properties:
+                      is_valid:
+                        type: boolean
+                        description: Indicates if the address is valid.
+                      reasons:
+                        type: array
+                        description: List of reasons for the validation result.
+                        items:
+                          type: string
+                          oneOf:
+                          - const: ADDRESS_TOO_LONG
+                            title: address_lines:too_long
+                            description: The address line exceeds the maximum length.
+                          - const: HOUSE_NUMBER_TOO_LONG
+                            title: house_number:too_long
+                            description: The house number exceeds the maximum length.
+                          - const: HOUSE_NUMBER_TOO_SHORT
+                            title: house_number:too_short
+                            description: The house number is too short.
+                          - const: ADDRESS_NOT_VALID
+                            title: address:does_not_exist
+                            description: The address does not exist.
+                          - const: COUNTRY_CODE_MISSING
+                            title: country_code:missing
+                            description: The country code is missing.
+                          - const: POSTAL_CODE_MISSING
+                            title: postal_code:missing
+                            description: The postal code is missing.
+                          - const: STATE_MISSING
+                            title: state:missing
+                            description: The state is missing.
+                          - const: PROVINCE_MISSING
+                            title: province:missing
+                            description: The province is missing.
+                  changed_attributes:
+                    type: array
+                    description: List of changed attributes.
+                    items:
+                      type: string
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.

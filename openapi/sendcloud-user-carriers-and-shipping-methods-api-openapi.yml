@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: Shipments Address User Carriers and Shipping Methods API
+  version: 3.0.0
+  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: User Carriers and Shipping Methods
+  description: Get list of carriers and shipping methods a user ever used
+paths:
+  /analytics/shipping-methods:
+    get:
+      summary: Retrieve all shipping methods used by user
+      x-mint:
+        href: /api/v2/analytics/retrieve-all-shipping-methods-used-by-user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserShippingMethods'
+              examples:
+                TransitShippingTimes:
+                  summary: Retrieve all shipping methods used by user
+                  value:
+                    shipping_methods:
+                    - code: postnl:standard/kg=0-23
+                      carrier_code: postnl
+                    - code: dhl:complete/standard
+                      carrier_code: dhl
+      operationId: sc-public-v2-analytics-get-user_shipping_methods
+      description: Returns a list of all shipping methods ever used by a user.
+      tags:
+      - User Carriers and Shipping Methods
+      security: []
+  /analytics/carriers:
+    get:
+      summary: Retrieve all carriers used by user
+      x-mint:
+        href: /api/v2/analytics/retrieve-all-carriers-used-by-user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCarriers'
+              examples:
+                Carriers:
+                  summary: Retrieve all carriers used by user
+                  value:
+                    carriers:
+                    - code: postnl
+                    - code: dhl
+      operationId: sc-public-v2-analytics-get-user_carriers
+      description: Returns a list of all carriers ever used by a user.
+      tags:
+      - User Carriers and Shipping Methods
+      security: []
+components:
+  schemas:
+    UserCarriers:
+      type: object
+      description: All carriers used by user
+      properties:
+        carriers:
+          type: array
+          description: array of carrier objects
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: postnl
+            required:
+            - code
+      required:
+      - carriers
+    UserShippingMethods:
+      type: object
+      description: All shipping methods used by user
+      title: User Shipping Methods Object
+      properties:
+        shipping_methods:
+          type: array
+          description: array of shipping method objects
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: express-postnl-1-3kg
+              carrier_code:
+                type: string
+                example: postnl
+            required:
+            - code
+            - carrier_code
+      required:
+      - shipping_methods
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.

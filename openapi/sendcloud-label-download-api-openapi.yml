@@ -1,0 +1,194 @@
+openapi: 3.1.0
+info:
+  title: Shipments Address Label Download API
+  version: 3.0.0
+  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: Label Download
+paths:
+  /labels/normal_printer/{parcel_id}:
+    parameters:
+    - $ref: '#/components/parameters/path-parcel-id'
+    - $ref: '#/components/parameters/query-start-from'
+    get:
+      operationId: sc-public-v2-scp-get-label_document_normal_printer
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v2/labels/retrieve-a-pdf-label
+        content: "<Warning>\n  **API v2 is entering maintenance mode.** New users should start with API v3 to access our latest features and improved performance. Already using v2? Don't worry, your current integration remains fully functional. Read more about [maintenance mode](/docs/getting-started/api-version-guide), or check out the [migration guide for API v3](/docs/getting-started/migration-guidelines-for-api-v3).\n</Warning>"
+      summary: Retrieve a PDF label
+      description: Retrieve a shipping label for a specific parcel in PDF format for a normal printer.
+      tags:
+      - Label Download
+      responses:
+        '200':
+          $ref: '#/components/responses/label_pdf_document_response'
+        '400':
+          $ref: '#/components/responses/error_400_bad_request'
+        '404':
+          $ref: '#/components/responses/error_404_not_found'
+  /labels/normal_printer:
+    parameters:
+    - $ref: '#/components/parameters/path-parcel-ids'
+    - $ref: '#/components/parameters/query-start-from'
+    get:
+      operationId: sc-public-v2-scp-get-label_document_multiple_normal_printer
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v2/labels/retrieve-multiple-pdf-labels
+        content: "<Warning>\n  **API v2 is entering maintenance mode.** New users should start with API v3 to access our latest features and improved performance. Already using v2? Don't worry, your current integration remains fully functional. Read more about [maintenance mode](/docs/getting-started/api-version-guide), or check out the [migration guide for API v3](/docs/getting-started/migration-guidelines-for-api-v3).\n</Warning>"
+      summary: Retrieve multiple PDF labels
+      description: Retrieve PDF label documents suitable for normal printers for multiple different parcels at the same time.
+      tags:
+      - Label Download
+      responses:
+        '200':
+          $ref: '#/components/responses/label_pdf_document_response'
+        '400':
+          $ref: '#/components/responses/error_400_bad_request'
+        '404':
+          $ref: '#/components/responses/error_404_not_found'
+  /labels/label_printer/{parcel_id}:
+    parameters:
+    - $ref: '#/components/parameters/path-parcel-id'
+    get:
+      operationId: sc-public-v2-scp-get-label_document_label_printer
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v2/labels/retrieve-a-specific-pdf-label-for-a-label-printer
+        content: "<Warning>\n  **API v2 is entering maintenance mode.** New users should start with API v3 to access our latest features and improved performance. Already using v2? Don't worry, your current integration remains fully functional. Read more about [maintenance mode](/docs/getting-started/api-version-guide), or check out the [migration guide for API v3](/docs/getting-started/migration-guidelines-for-api-v3).\n</Warning>"
+      summary: Retrieve a specific PDF label for a label printer
+      description: Retrieve a shipping label for a specific parcel in PDF format for a label printer.
+      tags:
+      - Label Download
+      responses:
+        '200':
+          $ref: '#/components/responses/label_pdf_document_response'
+        '400':
+          $ref: '#/components/responses/error_400_bad_request'
+        '404':
+          $ref: '#/components/responses/error_404_not_found'
+  /labels/label_printer:
+    parameters:
+    - $ref: '#/components/parameters/path-parcel-ids'
+    get:
+      operationId: sc-public-v2-scp-get-label_document_multiple_label_printer
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v2/labels/retrieve-pdf-labels-for-a-label-printer
+        content: "<Warning>\n  **API v2 is entering maintenance mode.** New users should start with API v3 to access our latest features and improved performance. Already using v2? Don't worry, your current integration remains fully functional. Read more about [maintenance mode](/docs/getting-started/api-version-guide), or check out the [migration guide for API v3](/docs/getting-started/migration-guidelines-for-api-v3).\n</Warning>"
+      summary: Retrieve PDF labels for a label printer
+      description: Retrieve PDF label documents suitable for label printers for multiple different parcels at the same time.
+      tags:
+      - Label Download
+      responses:
+        '200':
+          $ref: '#/components/responses/label_pdf_document_response'
+        '400':
+          $ref: '#/components/responses/error_400_bad_request'
+        '404':
+          $ref: '#/components/responses/error_404_not_found'
+components:
+  parameters:
+    path-parcel-id:
+      schema:
+        type: integer
+        minimum: 1
+      name: parcel_id
+      in: path
+      description: Unique parcel identifier
+      required: true
+      example: 1
+    query-start-from:
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 3
+      name: start_from
+      in: query
+      required: true
+      description: 'The position of the label on an A4 page.
+
+
+        0 - Top left
+
+        1 - Top right
+
+        2 - Bottom left
+
+        3 - Bottom right'
+    path-parcel-ids:
+      schema:
+        type: array
+        minLength: 1
+        items:
+          type: integer
+      name: ids
+      in: query
+      description: Comma separated parcel ids
+      required: true
+      explode: false
+      example:
+      - 1
+      - 2
+      - 3
+  responses:
+    label_pdf_document_response:
+      description: OK
+      content:
+        application/pdf:
+          schema:
+            type: string
+            format: binary
+            title: Label PDF document
+            description: Label PDF document ready to print
+    error_404_not_found:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            example: {}
+          example: {}
+    error_400_bad_request:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+                title: Error response message
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.

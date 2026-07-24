@@ -1,0 +1,364 @@
+openapi: 3.1.0
+info:
+  title: Shipments Address Reporting API
+  version: 3.0.0
+  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: Reporting
+  description: Generate data exports and reports.
+paths:
+  /reporting/parcels:
+    post:
+      tags:
+      - Reporting
+      summary: Create a parcels report
+      x-mint:
+        href: /api/v2/reporting/create-a-parcels-report
+        content: 'The parcels included in the report will depend on the `filters` provided, and the columns will be determined by the `fields` parameter.
+
+
+          Use this endpoint to create the report and obtain the report `id`, which you will use to obtain the actual CSV download via the [Retrieve a parcels report](/api/v2/reporting/retrieve-a-parcels-report) endpoint.'
+      description: Generate a CSV report containing information about outgoing or incoming parcels.
+      operationId: sc-public-v2-reporting_analytics-post-parcels_report
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParcelsReportRequest'
+        required: true
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelsReport'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+              examples:
+                ValidationError:
+                  summary: Validation Error
+                  value:
+                    detail:
+                    - loc:
+                      - body
+                      - fields
+                      msg: 'value is not a valid enumeration member; permitted: ''parcel_id'', ''direction'', ''carrier_code'', ''carrier_name'', ''from_company_name'', ''contract_id'', ''contract_type'', ''origin_city'', ''origin_postal_code'', ''origin_country_code'', ''origin_country_name'', ''destination_city'', ''destination_postal_code'', ''destination_country_code'', ''destination_country_name'', ''order_number'', ''tracking_number'', ''created_at'', ''updated_at'', ''announced_at'', ''shipped_at'', ''first_delivery_at'', ''arrived_at'', ''shipping_method'', ''shipping_method_name'', ''price'', ''global_status_slug'', ''carrier_status'', ''integration_id'', ''integration_type'', ''weight'''
+                      type: type_error.enum
+                      ctx:
+                        enum_values:
+                        - parcel_id
+                        - direction
+                        - carrier_code
+                        - carrier_name
+                        - from_company_name
+                        - contract_id
+                        - contract_type
+                        - origin_city
+                        - origin_postal_code
+                        - origin_country_code
+                        - origin_country_name
+                        - destination_city
+                        - destination_postal_code
+                        - destination_country_code
+                        - destination_country_name
+                        - order_number
+                        - tracking_number
+                        - created_at
+                        - updated_at
+                        - announced_at
+                        - shipped_at
+                        - first_delivery_at
+                        - arrived_at
+                        - shipping_method
+                        - shipping_method_name
+                        - price
+                        - global_status_slug
+                        - carrier_status
+                        - integration_id
+                        - integration_type
+                        - weight
+  /reporting/parcels/{report_id}:
+    parameters:
+    - schema:
+        type: integer
+      name: report_id
+      in: path
+      required: true
+      description: The report unique identifier
+    get:
+      tags:
+      - Reporting
+      summary: Retrieve a parcels report
+      x-mint:
+        href: /api/v2/reporting/retrieve-a-parcels-report
+        content: "The report `id` is the one you obtained via the [Create a parcels report](/api/v2/reporting/create-a-parcels-report) endpoint.\n\nDepending on the size of the report, it may not be immediately available for download. The status of the report is indicated in the response body under the `status_message` field.\n    \nThe report will expire after a certain amount of time, after which you will have to generate it again. The time of expiry is indicated in the response body under the `expires_at` field."
+      description: Generate a URL to download a parcels report in CSV format.
+      operationId: sc-public-v2-reporting_analytics-get-parcels_report
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      parameters:
+      - required: true
+        schema:
+          title: Report Id
+          type: string
+          format: uuid
+        name: report_id
+        in: path
+        description: Report id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelsReport'
+        '422':
+          $ref: '#/components/responses/422'
+components:
+  schemas:
+    ReportStatus:
+      title: Report Status
+      enum:
+      - queued
+      - generating
+      - ready
+      - failed
+      - expired
+      type: string
+      description: The report status
+    ParcelsReportFields:
+      title: Parcel Report Fields
+      enum:
+      - parcel_id
+      - direction
+      - carrier_code
+      - carrier_name
+      - from_company_name
+      - contract_id
+      - contract_type
+      - origin_city
+      - origin_postal_code
+      - origin_country_code
+      - origin_country_name
+      - destination_city
+      - destination_postal_code
+      - destination_country_code
+      - destination_country_name
+      - order_number
+      - tracking_number
+      - created_at
+      - updated_at
+      - announced_at
+      - shipped_at
+      - first_delivery_at
+      - arrived_at
+      - shipping_method
+      - shipping_method_name
+      - price
+      - global_status_slug
+      - carrier_status
+      - integration_id
+      - integration_type
+      - weight
+      type: string
+      description: The parcel fields to include for the report
+    HTTPError:
+      title: HTTP Error Object
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      title: Error
+      type: object
+      properties:
+        loc:
+          type: array
+          description: The location that the error occured
+          items:
+            type: string
+            example: path
+        msg:
+          type: string
+          example: value is not a valid uuid
+          description: A description of the error
+        type:
+          type: string
+          example: type_error.uuid
+        ctx:
+          type: object
+          description: Provides a list of possible fields to be used
+          properties:
+            enum_values:
+              type: array
+              items:
+                $ref: '#/components/schemas/ParcelsReportFields'
+      required:
+      - loc
+      - msg
+      - type
+    ParcelsReportFilter:
+      title: Parcels Report Filters Object
+      type: object
+      properties:
+        direction:
+          allOf:
+          - $ref: '#/components/schemas/ParcelDirections'
+          description: Includes only the parcels that are sent (`outgoing`) or returned (`incoming`).
+        integration_id:
+          type: integer
+          title: Integration Id
+          description: Includes only the parcels created by the shop integration with the provided id.
+          minimum: 1
+        updated_after:
+          title: Updated After
+          type: string
+          description: "Includes only the parcels which have been updated in our system after your given time.\n\nYou can use the value of ISO 8601 DateTime string like this:\n - 2018-02-26T11:01:47.505309+00:00\n - 2018-02-26T11:01:47\n - 2018-02-26\n\nNote: the default timezone is UTC\n"
+          format: date-time
+        updated_before:
+          title: Updated Before
+          type: string
+          description: "Includes only the parcels which have been updated in our system before your given time.\n\nYou can use the value of ISO 8601 DateTime string like this:\n - 2018-02-26T11:01:47.505309+00:00\n - 2018-02-26T11:01:47\n - 2018-02-26\n\nNote: the default timezone is UTC\n"
+          format: date-time
+        announced_after:
+          title: Announced After
+          type: string
+          description: "Includes only the parcels which have been announced in our system after your given time.\n\nYou can use the value of ISO 8601 DateTime string like this:\n - 2018-02-26T11:01:47.505309+00:00\n - 2018-02-26T11:01:47\n - 2018-02-26\n\nNote: the default timezone is UTC\n"
+          format: date-time
+        announced_before:
+          title: Announced Before
+          type: string
+          description: "Includes only the parcels which have been announced in our system before your given time.\n\nYou can use the value of ISO 8601 DateTime string like this:\n - 2018-02-26T11:01:47.505309+00:00\n - 2018-02-26T11:01:47\n - 2018-02-26\n\nNote: the default timezone is UTC\n"
+          format: date-time
+      description: A parcels report filter
+    ParcelDirections:
+      type: string
+      title: Parcel Directions
+      enum:
+      - incoming
+      - outgoing
+      description: The direction of the parcel
+      example: outgoing
+    ParcelsReport:
+      title: Parcels Report Object
+      type: object
+      description: 'Report information
+
+
+        This model contains information about the creation of a report and the
+
+        status of processing such report.'
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The unique identifier for the report.
+          format: uuid
+          example: 419f3be0-2f49-434b-bee4-d8cff9cf7d01
+        user_id:
+          type: integer
+          title: User Id
+          description: Id of the user that created the report.
+          minimum: 1
+          example: 1
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ReportStatus'
+          description: Current status of the report.
+          example: ready
+        status_message:
+          title: Status Message
+          type: string
+          description: Description of the status of the report.
+          example: The report is ready
+        filters:
+          $ref: '#/components/schemas/ParcelsReportFilter'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParcelsReportFields'
+        url:
+          title: Url
+          maxLength: 65536
+          minLength: 1
+          type: string
+          description: URL to download the report.
+          format: uri
+          example: https://reporting-service.s3.eu-central-1.amazonaws.com/reports/report-type/2021-08-09/afc46bb9-95d3-4880-80f7-660da3e68b5c.csv
+        expires_at:
+          type: string
+          title: Expires At
+          description: When the report will expire.
+          format: date-time
+          example: '2022-07-14T08:38:10.226217Z'
+        updated_at:
+          type: string
+          title: Updated At
+          description: When was the report last updated.
+          format: date-time
+          example: '2022-07-14T08:23:10.226265Z'
+        created_at:
+          type: string
+          title: Created At
+          description: When was the report created.
+          format: date-time
+          example: '2022-07-14T08:23:10.226265Z'
+      required:
+      - filters
+      - fields
+    ParcelsReportRequest:
+      title: Parcels Report Request Object
+      required:
+      - fields
+      - filters
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParcelsReportFields'
+        filters:
+          $ref: '#/components/schemas/ParcelsReportFilter'
+      description: A parcel report request
+  responses:
+    '422':
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.

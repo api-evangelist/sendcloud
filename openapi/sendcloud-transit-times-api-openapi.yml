@@ -1,0 +1,343 @@
+openapi: 3.1.0
+info:
+  title: Shipments Address Transit times API
+  version: 3.0.0
+  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: Transit times
+  description: Get insights about average transit times per carriers and shipping methods
+paths:
+  /insights/carriers/transit-times:
+    get:
+      summary: Retrieve carrier transit times
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarrierTransitTime'
+              examples:
+                TransitTimes:
+                  summary: Retrieve Carriers transit times
+                  value:
+                    transit_times:
+                    - user_id: '1234'
+                      carrier_code: postnl
+                      from_country: NL
+                      to_country: DE
+                      start_date: '2022-12-31'
+                      end_date: '2023-11-17'
+                      total_parcels: 2406
+                      transit_time: 82
+                    - user_id: '1234'
+                      carrier_code: dhl
+                      from_country: DE
+                      to_country: AT
+                      start_date: '2021-12-31'
+                      end_date: '2022-12-31'
+                      total_parcels: 75422
+                      transit_time: 51
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ValidationError:
+                  summary: Validation error
+                  value:
+                    detail:
+                    - loc:
+                      - query
+                      - carrier-code
+                      msg: field required
+                      type: value_error.missing
+      operationId: sc-public-v2-analytics-get-carrier_transit_times
+      description: 'Retrieves the average transit time of a parcel per carrier.
+
+        You can filter the results by origin and destination country, as well as by start and end dates.'
+      tags:
+      - Transit times
+      x-mint:
+        href: /api/v2/analytics/retrieve-carrier-transit-times
+      security:
+      - HTTPBasicAuth: []
+      parameters:
+      - schema:
+          type: array
+          items:
+            type: string
+            example: postnl
+        in: query
+        name: carrier_code
+        description: selection of carriers
+        required: true
+      - schema:
+          type: string
+          example: DE
+        in: query
+        name: from_country
+        description: origin country
+      - schema:
+          type: string
+          example: NL
+        in: query
+        name: to_country
+        description: destination country
+      - schema:
+          type: string
+          format: date
+          example: '2020-12-31'
+        in: query
+        name: start_date
+        description: first delivery start date
+      - schema:
+          type: string
+          format: date
+          example: '2022-12-31'
+        in: query
+        name: end_date
+        description: first delivery end date
+  /insights/shipping-methods/transit-times:
+    get:
+      summary: Retrieve shipping method transit times
+      x-mint:
+        href: /api/v2/analytics/retrieve-shipping-method-transit-times
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShippingMethodTransitTime'
+              examples:
+                TransitTimes:
+                  summary: Retrieve Shipping method transit times
+                  value:
+                    transit_times:
+                    - user_id: '1234'
+                      carrier_code: postnl
+                      shipping_method_code: postnl:standard/kg=0-23
+                      from_country: NL
+                      to_country: DE
+                      start_date: '2022-12-31'
+                      end_date: '2023-12-31'
+                      total_parcels: 240
+                      transit_time: 92
+                    - user_id: '1234'
+                      carrier_code: dhl
+                      shipping_method_code: dhl:complete/standard
+                      from_country: DE
+                      to_country: AT
+                      start_date: '2022-12-31'
+                      end_date: '2023-12-31'
+                      total_parcels: 752
+                      transit_time: 53
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ValidationError:
+                  summary: Validation Error
+                  value:
+                    detail:
+                    - loc:
+                      - query
+                      - carrier-code
+                      msg: field required
+                      type: value_error.missing
+                    - loc:
+                      - query
+                      - shipping-method-code
+                      msg: field required
+                      type: value_error.missing
+      operationId: sc-public-v2-analytics-get-shipping_method_transit_times
+      description: 'Retrieves the average transit time of a parcel per shipping method and carrier.
+
+        You can filter the results by origin and destination country, as well as start and end dates.'
+      tags:
+      - Transit times
+      security:
+      - HTTPBasicAuth: []
+      parameters:
+      - schema:
+          type: array
+          items:
+            type: string
+            example: postnl:standard/kg=0-23
+        in: query
+        name: shipping_method_code
+        description: selection of shipping methods
+        required: true
+      - schema:
+          type: string
+          example: DE
+        in: query
+        name: from_country
+        description: origin country
+      - schema:
+          type: string
+          example: NL
+        in: query
+        name: to_country
+        description: destination country
+      - schema:
+          type: string
+          format: date
+          example: '2021-12-31'
+        in: query
+        name: start_date
+        description: first delivery start date
+      - schema:
+          type: string
+          format: date
+          example: '2022-12-31'
+        in: query
+        name: end_date
+        description: first delivery end date
+components:
+  schemas:
+    Errors:
+      title: Errors Object
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    ShippingMethodTransitTime:
+      type: object
+      title: User Shipping Method Transit Times Object
+      properties:
+        transit_times:
+          type: array
+          description: array of transit time objects
+          items:
+            type: object
+            properties:
+              user_id:
+                type: string
+                example: '12345'
+              carrier_code:
+                type: string
+                example: postnl
+              shipping_method_code:
+                type: string
+                example: express-postnl-1-3kg
+              from_country:
+                type: string
+                example: ES
+              to_country:
+                type: string
+                example: AT
+              start_date:
+                type: string
+                format: date
+              end_date:
+                type: string
+                format: date
+              total_parcels:
+                type: integer
+                description: total number of parcels matching the filters
+                minimum: 0
+              transit_time:
+                type: number
+                description: average transit times for the matching parcels
+                minimum: 0
+            required:
+            - user_id
+            - shipping_method_code
+            - total_parcels
+            - transit_time
+      required:
+      - transit_times
+    ErrorItem:
+      title: Error Item Object
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            type: string
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+    CarrierTransitTime:
+      type: object
+      title: User Carrier Transit Times Object
+      properties:
+        transit_times:
+          type: array
+          description: array of transit time objects
+          items:
+            type: object
+            properties:
+              user_id:
+                type: string
+                example: '12345'
+              carrier_code:
+                type: string
+                example: postnl
+              to_country:
+                type: string
+                example: DE
+              from_country:
+                type: string
+                example: NL
+              start_date:
+                type: string
+                format: date
+              end_date:
+                type: string
+                format: date
+              total_parcels:
+                type: integer
+                description: total number of parcels matching the filters
+                minimum: 0
+              transit_time:
+                type: number
+                description: average transit times for the matching parcels
+                minimum: 0
+            required:
+            - user_id
+            - carrier_code
+            - total_parcels
+            - transit_time
+      required:
+      - transit_times
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.

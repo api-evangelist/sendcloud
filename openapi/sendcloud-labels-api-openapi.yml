@@ -1,0 +1,190 @@
+openapi: 3.1.0
+info:
+  title: Shipments Address Labels API
+  version: 3.0.0
+  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: Labels
+paths:
+  /labels/{parcel_id}:
+    parameters:
+    - $ref: '#/components/parameters/path-parcel-id'
+    get:
+      operationId: sc-public-v2-scp-get-label_by_parcel_id
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v2/labels/retrieve-a-label-for-a-specific-parcel
+        content: "<Warning>\n  **API v2 is entering maintenance mode.** New users should start with API v3 to access our latest features and improved performance. Already using v2? Don't worry, your current integration remains fully functional. Read more about [maintenance mode](/docs/getting-started/api-version-guide), or check out the [migration guide for API v3](/docs/getting-started/migration-guidelines-for-api-v3).\n</Warning>"
+      summary: Retrieve a label for a specific parcel
+      description: You will receive URLs to download the labels in PDF format, for both normal and label printers. You can get the `id` of a parcel from the [Create a parcel or parcels](/api/v2/parcels/create-a-parcel-or-parcels) endpoint.
+      tags:
+      - Labels
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelSingleResponse'
+              examples:
+                RetrieveLabel:
+                  summary: Retrieve Label
+                  value:
+                    label:
+                      normal_printer:
+                      - https://panel.sendcloud.sc/api/v2/label/normal_printer/1234?start_from=0
+                      - https://panel.sendcloud.sc/api/v2/label/normal_printer/1234?start_from=1
+                      - https://panel.sendcloud.sc/api/v2/label/normal_printer/1234?start_from=2
+                      - https://panel.sendcloud.sc/api/v2/label/normal_printer/1234?start_from=3
+                      label_printer: https://panel.sendcloud.sc/api/v2/label/label_printer/1234
+                    customs_declaration: {}
+        '404':
+          $ref: '#/components/responses/error_404_not_found'
+  /labels:
+    post:
+      operationId: sc-public-v2-scp-post-label_by_parcel_ids
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v2/labels/bulk-pdf-label-printing
+        content: "<Warning>\n  **API v2 is entering maintenance mode.** New users should start with API v3 to access our latest features and improved performance. Already using v2? Don't worry, your current integration remains fully functional. Read more about [maintenance mode](/docs/getting-started/api-version-guide), or check out the [migration guide for API v3](/docs/getting-started/migration-guidelines-for-api-v3).\n</Warning>"
+      summary: Bulk PDF label printing
+      description: Request multiple shipping labels for an array of parcels at the same time. You will receive URLs to download the labels in PDF format, for both normal and label printers.
+      tags:
+      - Labels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                label:
+                  type: object
+                  properties:
+                    parcels:
+                      type: array
+                      items:
+                        type: integer
+                        minimum: 1
+                      example:
+                      - 1
+                      - 2
+                      - 3
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabelMultipleResponse'
+              examples:
+                BulkPDFLabels:
+                  summary: Bulk PDF label printing
+                  value:
+                    label:
+                      normal_printer:
+                      - https://panel.sendcloud.sc/api/v2/label/normal_printer?ids=1,2,3?start_from=0
+                      - https://panel.sendcloud.sc/api/v2/label/normal_printer?ids=1,2,3?start_from=1
+                      - https://panel.sendcloud.sc/api/v2/label/normal_printer?ids=1,2,3?start_from=2
+                      - https://panel.sendcloud.sc/api/v2/label/normal_printer?ids=1,2,3?start_from=3
+                      label_printer: https://panel.sendcloud.sc/api/v2/label/label_printer?ids=1,2,3
+        '404':
+          $ref: '#/components/responses/error_404_not_found'
+components:
+  responses:
+    error_404_not_found:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            example: {}
+          example: {}
+  parameters:
+    path-parcel-id:
+      schema:
+        type: integer
+        minimum: 1
+      name: parcel_id
+      in: path
+      description: Unique parcel identifier
+      required: true
+      example: 1
+  schemas:
+    LabelSingleResponse:
+      title: Single Label response
+      properties:
+        label:
+          type: object
+          title: Label object
+          description: Label
+          properties:
+            normal_printer:
+              title: URLs of labels documents in PDF format for normal printers for each position of an A4 size page
+              type: array
+              minLength: 4
+              maxLength: 4
+              items:
+                type: string
+                example: https://panel.sendcloud.sc/api/v2/label/normal_printer/1234?start_from=0
+            label_printer:
+              title: URL of label document in PDF format for label printers
+              type: string
+              example: https://panel.sendcloud.sc/api/v2/label/label_printer/1234
+        customs_declaration:
+          title: Customs documents associated with the label
+          deprecated: true
+          type: object
+          properties:
+            normal_printer:
+              type: string
+              title: Normal printer PDF url
+              description: URL that links to the customs documentation associated with the label in PDF format
+          example: {}
+    LabelMultipleResponse:
+      title: Multi-Label response
+      description: Response for multiple labels in bulk
+      properties:
+        label:
+          type: object
+          title: Label object
+          description: Label
+          properties:
+            normal_printer:
+              title: URLs of labels documents in PDF format for normal printers for each position of an A4 size page
+              type: array
+              minLength: 4
+              maxLength: 4
+              items:
+                type: string
+                example: https://panel.sendcloud.sc/api/v2/label/normal_printer/1234?start_from=0
+            label_printer:
+              title: URL of label document in PDF format for label printers
+              type: string
+              example: https://panel.sendcloud.sc/api/v2/label/label_printer/1234?hash=bbfd669ee9ebb19408b85b33d
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.

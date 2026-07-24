@@ -1,0 +1,434 @@
+openapi: 3.1.0
+info:
+  title: Shipments Address Products API
+  version: 3.0.0
+  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: Products
+  description: Get insights about products
+paths:
+  /insights/products/series:
+    get:
+      summary: Retrieve product-insights series
+      tags:
+      - Products
+      x-mint:
+        href: /api/v2/analytics/retrieve-product-insights-series
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Series'
+              examples:
+                Series:
+                  summary: Series
+                  value:
+                    series:
+                    - value: 358
+                      start_date: '2017-12-10'
+                      end_date: '2020-12-10'
+                      missing_data:
+                      - start_date: '2018-12-10'
+                        end_date: '2019-12-10'
+                        reason_code: not-available
+                      - start_date: '2019-12-10'
+                        end_date: '2020-12-10'
+                        reason_code: partly-available
+                    - value: 188
+                      start_date: '2021-12-10'
+                      end_date: '2022-12-10'
+                      missing_data:
+                      - start_date: '2021-12-10'
+                        end_date: '2022-12-10'
+                        reason_code: missing-filter-property
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                BadRequest:
+                  summary: Bad request
+                  value:
+                    detail:
+                    - loc:
+                      - query
+                      - start_date
+                      msg: field required
+                      type: value_error.missing
+      operationId: sc-public-v2-analytics-get-products_series
+      description: Returns data about products as a series, e.g. the number of products per day/month/year over a specified period.
+      security: []
+      parameters:
+      - schema:
+          type: string
+          format: date
+        in: query
+        name: start_date
+        required: true
+        description: period start date
+      - schema:
+          type: string
+          format: date
+        in: query
+        name: end_date
+        required: true
+        description: period end date
+      - schema:
+          type: string
+          example: postnl
+        in: query
+        name: carrier_code
+        description: filter by carrier
+      - schema:
+          type: string
+          example: DE
+        in: query
+        name: from_country
+        description: origin country
+      - schema:
+          type: string
+          example: NL
+        in: query
+        name: to_country
+        description: destination country
+      - schema:
+          type: array
+          items:
+            type: integer
+            example: 124523
+        allowEmptyValue: true
+        in: query
+        name: integration_id
+        description: integrations
+      - schema:
+          type: string
+          enum:
+          - days
+          - months
+          - years
+        in: query
+        name: granularity
+        description: the size of one point
+        required: true
+      - schema:
+          type: string
+          enum:
+          - incoming
+          - outgoing
+        in: query
+        name: direction
+        description: incoming or outgoing
+      - schema:
+          type: array
+          items:
+            type: integer
+        in: query
+        name: brand_id
+        description: filtering by brand id
+        allowEmptyValue: true
+      - schema:
+          type: array
+          items:
+            type: string
+        in: query
+        name: product_name
+        description: filtering by product name
+      - schema:
+          type: array
+          items:
+            type: string
+        in: query
+        name: product_sku
+        description: filtering by product sku
+  /insights/products/buckets:
+    get:
+      summary: Retrieve product-insights buckets
+      tags:
+      - Products
+      x-mint:
+        href: /api/v2/analytics/retrieve-product-insights-buckets
+      description: Returns data about products as buckets. Buckets should be grouped by any category, for example by country.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Buckets'
+              examples:
+                Buckets:
+                  summary: Buckets
+                  value:
+                    buckets:
+                    - key: UK
+                      value: 10
+                      percentage: 12.24
+                      missing_data:
+                      - start_date: '2018-12-10'
+                        end_date: '2019-12-10'
+                        reason_code: partly-available
+                    - key: DE
+                      value: 8
+                      percentage: 9.85
+                      missing_data:
+                      - start_date: '2018-12-10'
+                        end_date: '2019-12-10'
+                        reason_code: partly-available
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                BadRequest:
+                  summary: Unprocessable Entity (WebDAV)
+                  value:
+                    detail:
+                    - loc:
+                      - query
+                      - start_date
+                      msg: field required
+                      type: value_error.missing
+      operationId: sc-public-v2-analytics-get-products_buckets
+      parameters:
+      - schema:
+          type: string
+          format: date
+        in: query
+        name: start_date
+        description: period start date (announced)
+        required: true
+      - schema:
+          type: string
+          format: date
+        in: query
+        name: end_date
+        description: period end date (announced)
+        required: true
+      - schema:
+          type: string
+          example: postnl
+        in: query
+        name: carrier_code
+        description: filter by carriers
+      - schema:
+          type: string
+          example: DE
+        in: query
+        name: from_country
+        description: origin country code
+      - schema:
+          type: string
+          example: NL
+        in: query
+        name: to_country
+        description: destination country code
+      - schema:
+          type: array
+          items:
+            type: integer
+            example: 124523
+        allowEmptyValue: true
+        in: query
+        name: integration_id
+        description: integrations
+      - schema:
+          type: string
+          enum:
+          - integration
+          - description
+          - return_reason
+          - brand
+        in: query
+        name: group_by
+        description: group by category
+        required: true
+      - schema:
+          type: string
+          minLength: 0
+          example: '5'
+        in: query
+        name: size
+        description: number of the buckets
+      - schema:
+          type: string
+          enum:
+          - incoming
+          - outgoing
+        in: query
+        name: direction
+        description: incoming or outgoing
+      - schema:
+          type: array
+          items:
+            type: integer
+        in: query
+        name: brand_id
+        description: filtering by brand id
+        allowEmptyValue: true
+      - schema:
+          type: array
+          items:
+            type: string
+        in: query
+        name: product_name
+        description: filtering by product name
+      - schema:
+          type: array
+          items:
+            type: string
+        in: query
+        name: product_sku
+        description: filtering by product sku
+      security: []
+components:
+  schemas:
+    ErrorItem:
+      title: Error Item Object
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            type: string
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+    Errors:
+      title: Errors Object
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    Series:
+      type: object
+      title: Analytics Series Object
+      description: Parcels/Products data represented in series
+      properties:
+        series:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: integer
+                example: 0
+                minimum: 0
+                description: Number of parcels/products for the period
+              start_date:
+                type: string
+                format: date
+              end_date:
+                type: string
+                format: date
+              missing_data:
+                type: array
+                items:
+                  type: object
+                  description: Periods when data is missing
+                  properties:
+                    start_date:
+                      type: string
+                      format: date
+                    end_date:
+                      type: string
+                      format: date
+                    reason_code:
+                      type: string
+                      enum:
+                      - missing-grouping-property
+                      - missing-filter-property
+                      - not-available
+                      - partly-available
+            required:
+            - value
+            - start_date
+            - end_date
+            - missing_data
+      required:
+      - series
+    Buckets:
+      type: object
+      title: Analytics Buckets Object
+      description: Parcel/Products data grouped into buckets.
+      properties:
+        buckets:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: bucket key
+              value:
+                type: integer
+                minimum: 0
+                description: Number of parcels/products in bucket
+              percentage:
+                type: number
+                minimum: 0
+                description: Percent of all parcels/products this bucket has
+              missing_data:
+                type: array
+                description: Periods when data is missing
+                items:
+                  type: object
+                  properties:
+                    start_date:
+                      type: string
+                      format: date
+                    end_date:
+                      type: string
+                      format: date
+                    reason_code:
+                      type: string
+                      enum:
+                      - missing-grouping-property
+                      - missing-filter-property
+                      - not-available
+                      - partly-available
+            required:
+            - key
+            - value
+            - percentage
+            - missing_data
+      required:
+      - buckets
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.

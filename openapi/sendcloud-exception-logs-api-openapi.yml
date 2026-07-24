@@ -1,0 +1,628 @@
+openapi: 3.1.0
+info:
+  title: Shipments Address Exception logs API
+  version: 3.0.0
+  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: Exception logs
+  description: Integration exception logs API
+paths:
+  /integrations/logs:
+    get:
+      summary: Retrieve all integration exception logs
+      operationId: sc-public-v3-integrations-get-retrieve_integrations_logs
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/integrations/retrieve-all-integration-exception-logs
+        content: 'Integration exception logs might be generated, for example:
+
+
+          - if some resource cannot be found
+
+          - if API credentials are no longer valid
+
+
+          Each log record may contain information about the request and response, the status code and code exception, and can be used as a reference to identify issues between Sendcloud and a webshop.
+
+
+          Pagination is cursor-based. Use the `cursor` query parameter to navigate through pages. The `Link` response header contains the URL for the next page when more results are available.'
+      description: Retrieve all integration exception logs. These logs are created when integrations have problems making API requests to shop systems.
+      tags:
+      - Exception logs
+      parameters:
+      - in: query
+        name: cursor
+        schema:
+          type: string
+          format: date-time
+        description: Cursor for pagination. Use the value from the `Link` response header to fetch the next page.
+        example: '2023-03-01T02:02:00+01:00'
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 25
+        description: Number of results per page.
+        example: 25
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+              description: 'Contains the URL for the next page of results (RFC 5988). Example: `<https://panel.sendcloud.sc/api/v3/integrations/logs?cursor=2023-03-01T02:02:00&page_size=25>; rel="next"`'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/integration-log'
+              examples:
+                RetrieveIntegrationLogs:
+                  summary: Retrieve a list of integration logs
+                  value:
+                    data:
+                    - id: 123
+                      base_url: https://example.com
+                      full_url: https://example.com/order-note.json
+                      method: POST
+                      response_code: 495
+                      response:
+                        headers:
+                          Cache-Control: max-age=3600
+                          Content-Type: text/html; charset=utf-8
+                          Connection: keep-alive
+                        body: "<!doctype html>\n<html>\n <head>\n <title>SSL Certificate Error</title>\n </head>\n </html>\n"
+                      request:
+                        headers:
+                          Cache-Control: max-age=3600
+                          Content-Type: text/html; charset=utf-8
+                          Connection: keep-alive
+                        payload:
+                          order_note:
+                            note: Success
+                      created_at: '2023-03-01T02:02:00+01:00'
+                      exception_type: requests.exceptions.SSLError
+                      exception: An SSL error occurred
+                      protected: false
+                      additional_data: ''
+  /integrations/{id}/logs:
+    parameters:
+    - schema:
+        type: integer
+      name: id
+      in: path
+      required: true
+      description: The id of the integration
+    get:
+      summary: Retrieve exception logs for a specific integration
+      operationId: sc-public-v3-integrations-get-retrieve_integration_logs
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/integrations/retrieve-exception-logs-for-a-specific-integration
+        content: 'Integration exception logs might be generated, for example:
+
+
+          - if some resource cannot be found
+
+          - if API credentials are no longer valid
+
+
+          Each log record may contain information about the request and response, the status code and code exception, and can be used as a reference to identify issues between Sendcloud and a webshop.
+
+
+          Pagination is cursor-based. Use the `cursor` query parameter to navigate through pages. The `Link` response header contains the URL for the next page when more results are available.'
+      description: Retrieve exception logs for a specific integration. These logs are created when integrations have problems making API requests to shop systems.
+      tags:
+      - Exception logs
+      parameters:
+      - in: query
+        name: cursor
+        schema:
+          type: string
+          format: date-time
+        description: Cursor for pagination. Use the value from the `Link` response header to fetch the next page.
+        example: '2023-03-01T02:02:00+01:00'
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 25
+        description: Number of results per page.
+        example: 25
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+              description: 'Contains the URL for the next page of results (RFC 5988). Example: `<https://panel.sendcloud.sc/api/v3/integrations/{id}/logs?cursor=2023-03-01T02:02:00&page_size=25>; rel="next"`'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/integration-log'
+              examples:
+                RetrieveIntegrationLogs:
+                  summary: Retrieve a list of integration logs
+                  value:
+                    data:
+                    - id: 123
+                      base_url: https://example.com
+                      full_url: https://example.com/order-note.json
+                      method: POST
+                      response_code: 495
+                      response:
+                        headers:
+                          Cache-Control: max-age=3600
+                          Content-Type: text/html; charset=utf-8
+                          Connection: keep-alive
+                        body: "<!doctype html>\n<html>\n <head>\n <title>SSL Certificate Error</title>\n </head>\n </html>\n"
+                      request:
+                        headers:
+                          Cache-Control: max-age=3600
+                          Content-Type: text/html; charset=utf-8
+                          Connection: keep-alive
+                        payload:
+                          order_note:
+                            note: Success
+                      created_at: '2023-03-01T02:02:00+01:00'
+                      exception_type: requests.exceptions.SSLError
+                      exception: An SSL error occurred
+                      protected: false
+                      additional_data: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+              examples:
+                IntegrationDoesNotExist:
+                  summary: Integration does not exist
+                  value:
+                    errors:
+                    - status: 404
+                      code: not_found
+                      title: Not Found
+                      detail: The Integration could not be found with the search criteria given
+    post:
+      summary: Create integration exception logs
+      operationId: sc-public-v3-integrations-post-create_integration_logs
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/integrations/create-integration-exception-logs
+      description: Create integration exception logs, which will appear in the connection issue log screen of the user's integration.
+      tags:
+      - Exception logs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/integration-log-create'
+            examples:
+              CreateIntegrationLog:
+                summary: Create an integration log
+                value:
+                  base_url: https://example.com
+                  full_url: https://example.com/order-note.json
+                  method: POST
+                  response_code: 495
+                  response:
+                    headers:
+                      Cache-Control: max-age=3600
+                      Content-Type: text/html; charset=utf-8
+                      Connection: keep-alive
+                    body: "<!doctype html>\n<html>\n <head>\n <title>SSL Certificate Error</title>\n </head>\n </html>\n"
+                  request:
+                    headers:
+                      Cache-Control: max-age=3600
+                      Content-Type: text/html; charset=utf-8
+                      Connection: keep-alive
+                    payload:
+                      order_note:
+                        note: Success
+                  created_at: '2023-03-01T02:02:00+01:00'
+                  exception_type: requests.exceptions.SSLError
+                  exception: An SSL error occurred
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/integration-log'
+              examples:
+                CreateIntegrationLog:
+                  summary: Create an integration log
+                  value:
+                    data:
+                      id: 123
+                      integration_id: 123
+                      base_url: https://example.com
+                      full_url: https://example.com/order-note.json
+                      method: POST
+                      response_code: 495
+                      response:
+                        headers:
+                          Cache-Control: max-age=3600
+                          Content-Type: text/html; charset=utf-8
+                          Connection: keep-alive
+                        body: "<!doctype html>\n<html>\n <head>\n <title>SSL Certificate Error</title>\n </head>\n </html>\n"
+                      request:
+                        headers:
+                          Cache-Control: max-age=3600
+                          Content-Type: text/html; charset=utf-8
+                          Connection: keep-alive
+                        payload:
+                          order_note:
+                            note: Success
+                      created_at: '2023-03-01T02:02:00+01:00'
+                      exception_type: requests.exceptions.SSLError
+                      exception: An SSL error occurred
+                      protected: false
+                      additional_data: ''
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+              examples:
+                ExtraFieldsNotPermitted:
+                  summary: Extra fields are not permitted
+                  value:
+                    errors:
+                    - status: 400
+                      code: extra_forbidden
+                      title: Extra Forbidden
+                      detail: Extra inputs are not permitted
+                      source:
+                        pointer: body/unknown_field
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+              examples:
+                IntegrationDoesNotExist:
+                  summary: Integration does not exist
+                  value:
+                    errors:
+                    - status: 404
+                      code: not_found
+                      title: Not Found
+                      detail: The Integration could not be found with the search criteria given
+components:
+  schemas:
+    ErrorObject:
+      title: Error
+      type: object
+      description: Error in a JSON:API error format
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the error.
+        links:
+          type: object
+          description: A set of hyperlinks that provide additional information about the error.
+          properties:
+            about:
+              type: string
+              description: A URL that provides additional information about the error.
+        status:
+          type: string
+          format: int32
+          description: The HTTP status code of the error.
+          minLength: 1
+        code:
+          type: string
+          description: A unique error code for the error, in snake case format.
+          minLength: 1
+          enum:
+          - unknown_field
+          - invalid
+          - forbidden
+          - invalid_choice
+          - min_value
+          - 'null'
+          - not_found
+          - required
+          - not_a_list
+          - non_field_errors
+          - authentication_failed
+          - validation_error
+          - parcel_announcement_error
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          minLength: 1
+        detail:
+          type: string
+          description: A human-readable explanation of the error.
+          minLength: 1
+        source:
+          type: object
+          description: An object that identifies the source of the error within the request payload.
+          properties:
+            pointer:
+              type: string
+              description: A `JSON` pointer to the location of the error within the request payload.
+            parameter:
+              type: string
+              description: The name of the `query` parameter that caused the error.
+            header:
+              type: string
+              description: The name of the `header` parameter that caused the error.
+        meta:
+          type: object
+          description: Additional metadata about the error.
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
+    integration-log-create:
+      type: object
+      title: Integration Log Create Object
+      description: Request body for creating an integration exception log.
+      properties:
+        base_url:
+          description: Base shop URL
+          type: string
+          example: https://example.com
+          minLength: 1
+        full_url:
+          description: Full path to resource where error happened
+          type:
+          - string
+          - 'null'
+          example: https://example.com/order-note.json
+        method:
+          type:
+          - string
+          - 'null'
+          description: HTTP method that caused an error
+          example: POST
+          default: ''
+        response_code:
+          type:
+          - integer
+          - 'null'
+          description: Standard HTTP error code
+          example: 495
+          minimum: 0
+        response:
+          type:
+          - object
+          - 'null'
+          title: Response object
+          description: Response JSON containing response body and headers
+          properties:
+            headers:
+              title: HTTP headers
+              description: HTTP headers which were sent within a response
+              type:
+              - object
+              - 'null'
+            body:
+              title: HTTP response body
+              description: HTTP response body
+              type:
+              - string
+              - object
+              - 'null'
+        request:
+          type:
+          - object
+          - 'null'
+          title: Request object
+          description: Request JSON containing request body and headers
+          properties:
+            headers:
+              title: HTTP headers
+              description: HTTP headers which were sent within a request
+              type:
+              - object
+              - string
+              - 'null'
+            payload:
+              title: HTTP request body
+              description: HTTP request body
+              type:
+              - object
+              - string
+              - 'null'
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp indicating when an exception occurred. If not provided, the current date will be used.
+          example: '2023-03-01T02:02:00+01:00'
+        exception_type:
+          type:
+          - string
+          - 'null'
+          description: Internal field to store Python exception type. We use this field to suggest our users the ways how they can fix issues.
+          example: requests.exceptions.SSLError
+        exception:
+          type:
+          - string
+          - 'null'
+          title: Exception text
+          description: Human readable description of exception
+          example: An SSL error occurred
+      required:
+      - base_url
+      additionalProperties: false
+    integration-log:
+      type: object
+      title: Integration Log Object
+      description: An integration exception log record containing information about a failed API request to a shop system.
+      properties:
+        id:
+          type: integer
+          title: ID
+          description: ID of the log record
+          minimum: 1
+          example: 123
+          readOnly: true
+        integration_id:
+          type:
+          - integer
+          - 'null'
+          description: ID of the integration to which this log belongs
+          minimum: 1
+          example: 123
+        base_url:
+          description: Base shop URL
+          type: string
+          example: https://example.com
+          minLength: 1
+        full_url:
+          description: Full path to resource where error happened
+          type:
+          - string
+          - 'null'
+          example: https://example.com/order-note.json
+        method:
+          type: string
+          description: HTTP method that caused an error
+          example: POST
+        response_code:
+          type:
+          - integer
+          - 'null'
+          description: Standard HTTP error code
+          example: 495
+          minimum: 0
+        response:
+          type:
+          - object
+          - 'null'
+          title: Response object
+          description: Response JSON containing response body and headers
+          properties:
+            headers:
+              title: HTTP headers
+              description: HTTP headers which were sent within a response
+              type:
+              - object
+              - 'null'
+            body:
+              title: HTTP response body
+              description: HTTP response body
+              type:
+              - string
+              - object
+              - 'null'
+        request:
+          type:
+          - object
+          - 'null'
+          title: Request object
+          description: Request JSON containing request body and headers
+          properties:
+            headers:
+              title: HTTP headers
+              description: HTTP headers which were sent within a request
+              type:
+              - object
+              - string
+              - 'null'
+            payload:
+              title: HTTP request body
+              description: HTTP request body
+              type:
+              - object
+              - string
+              - 'null'
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp indicating when an exception occurred
+          example: '2023-03-01T02:02:00+01:00'
+        exception_type:
+          type:
+          - string
+          - 'null'
+          description: Internal field to store Python exception type. We use this field to suggest our users the ways how they can fix issues.
+          example: requests.exceptions.SSLError
+        exception:
+          type:
+          - string
+          - 'null'
+          title: Exception text
+          description: Human readable description of exception
+          example: An SSL error occurred
+        protected:
+          type: boolean
+          description: An indication whether or not request/response is obfuscated
+          example: false
+          readOnly: true
+        additional_data:
+          type:
+          - object
+          - string
+          description: Additional data associated with the log entry
+          default: ''
+      required:
+      - base_url
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.

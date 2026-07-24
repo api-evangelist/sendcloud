@@ -1,0 +1,163 @@
+openapi: 3.1.0
+info:
+  title: Shipments Address OAuth2 API
+  version: 3.0.0
+  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: OAuth2
+paths:
+  /event-subscriptions/connections/{id}/authorization:
+    parameters:
+    - schema:
+        type: integer
+      in: path
+      name: id
+      description: The id of the connection to authorize.
+      required: true
+    post:
+      summary: Start OAuth2 authorization
+      description: Initiate the OAuth2 authorization flow for a connection that requires it (e.g., Klaviyo). Returns an authorization URL to redirect the user to.
+      tags:
+      - OAuth2
+      operationId: sc-public-v3-scp-post-start_authorization
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/event-subscriptions/start-oauth2-authorization
+        content: "Start the OAuth2 authorization flow for a Klaviyo connection. This endpoint returns an authorization URL that the user should be redirected to in their browser.\n\nAfter the user authorizes access, the OAuth provider will redirect back to the Sendcloud callback URL, completing the connection setup.\n\n<Steps>\n  <Step title=\"Create a Klaviyo connection\">\n    Use the [Create a connection](/api/v3/event-subscriptions/create-a-connection) endpoint with `type: \"klaviyo\"`.\n  </Step>\n  <Step title=\"Start OAuth2 authorization\">\n    Call this endpoint to get the authorization URL.\n  </Step>\n  <Step title=\"Redirect the user\">\n    Open the `authorization_url` in the user's browser to complete the OAuth2 flow.\n  </Step>\n</Steps>"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: OAuth2 authorization URL
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/connection-authorization-response'
+              examples:
+                AuthorizationUrl:
+                  summary: OAuth2 authorization URL
+                  value:
+                    data:
+                      authorization_url: https://www.klaviyo.com/oauth/authorize?client_id=sendcloud&response_type=code&redirect_uri=https%3A%2F%2Fpanel.sendcloud.sc%2Fapi%2Fv3%2Fevent-subscriptions%2Fconnections%2Fauthorization%2Fcallback&state=abc123
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+components:
+  schemas:
+    connection-authorization-response:
+      title: Authorization Response
+      description: Response containing the OAuth2 authorization URL for connecting external services like Klaviyo.
+      type: object
+      properties:
+        authorization_url:
+          type: string
+          format: uri
+          description: The URL to redirect the user to for OAuth2 authorization with the external service.
+    ErrorObject:
+      title: Error
+      type: object
+      description: Error in a JSON:API error format
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the error.
+        links:
+          type: object
+          description: A set of hyperlinks that provide additional information about the error.
+          properties:
+            about:
+              type: string
+              description: A URL that provides additional information about the error.
+        status:
+          type: string
+          format: int32
+          description: The HTTP status code of the error.
+          minLength: 1
+        code:
+          type: string
+          description: A unique error code for the error, in snake case format.
+          minLength: 1
+          enum:
+          - unknown_field
+          - invalid
+          - forbidden
+          - invalid_choice
+          - min_value
+          - 'null'
+          - not_found
+          - required
+          - not_a_list
+          - non_field_errors
+          - authentication_failed
+          - validation_error
+          - parcel_announcement_error
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          minLength: 1
+        detail:
+          type: string
+          description: A human-readable explanation of the error.
+          minLength: 1
+        source:
+          type: object
+          description: An object that identifies the source of the error within the request payload.
+          properties:
+            pointer:
+              type: string
+              description: A `JSON` pointer to the location of the error within the request payload.
+            parameter:
+              type: string
+              description: The name of the `query` parameter that caused the error.
+            header:
+              type: string
+              description: The name of the `header` parameter that caused the error.
+        meta:
+          type: object
+          description: Additional metadata about the error.
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.

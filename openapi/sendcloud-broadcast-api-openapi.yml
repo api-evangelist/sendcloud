@@ -1,0 +1,177 @@
+openapi: 3.1.0
+info:
+  title: Shipments Address Broadcast API
+  version: 3.0.0
+  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: Broadcast
+paths:
+  /event-subscriptions/broadcast/test/{subscription_id}:
+    parameters:
+    - schema:
+        type: integer
+      in: path
+      name: subscription_id
+      description: The id of the subscription to send a test event to.
+      required: true
+    post:
+      summary: Broadcast test event
+      description: Send a test event to the connection endpoint configured for a specific subscription. Use this to verify that your connection is set up correctly before relying on it for production events.
+      tags:
+      - Broadcast
+      operationId: sc-public-v3-scp-post-test_broadcast
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/event-subscriptions/test-event-delivery
+        content: "Send a test event to the connection endpoint configured for this subscription. This is useful for verifying that your webhook URL or Klaviyo integration is set up correctly.\n\nThe test event will contain a sample payload matching the subscription's event type.\n\n<Info>\n  The test broadcast will use the same authentication and headers configured on the connection.\n</Info>"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: Test broadcast result
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/broadcast-result'
+              examples:
+                SuccessfulBroadcast:
+                  summary: Successful test broadcast
+                  value:
+                    data:
+                      success: true
+                      status_code: 200
+                      response_body: OK
+                FailedBroadcast:
+                  summary: Failed test broadcast
+                  value:
+                    data:
+                      success: false
+                      status_code: 500
+                      response_body: Internal Server Error
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+components:
+  schemas:
+    ErrorObject:
+      title: Error
+      type: object
+      description: Error in a JSON:API error format
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the error.
+        links:
+          type: object
+          description: A set of hyperlinks that provide additional information about the error.
+          properties:
+            about:
+              type: string
+              description: A URL that provides additional information about the error.
+        status:
+          type: string
+          format: int32
+          description: The HTTP status code of the error.
+          minLength: 1
+        code:
+          type: string
+          description: A unique error code for the error, in snake case format.
+          minLength: 1
+          enum:
+          - unknown_field
+          - invalid
+          - forbidden
+          - invalid_choice
+          - min_value
+          - 'null'
+          - not_found
+          - required
+          - not_a_list
+          - non_field_errors
+          - authentication_failed
+          - validation_error
+          - parcel_announcement_error
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          minLength: 1
+        detail:
+          type: string
+          description: A human-readable explanation of the error.
+          minLength: 1
+        source:
+          type: object
+          description: An object that identifies the source of the error within the request payload.
+          properties:
+            pointer:
+              type: string
+              description: A `JSON` pointer to the location of the error within the request payload.
+            parameter:
+              type: string
+              description: The name of the `query` parameter that caused the error.
+            header:
+              type: string
+              description: The name of the `header` parameter that caused the error.
+        meta:
+          type: object
+          description: Additional metadata about the error.
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
+    broadcast-result:
+      title: Broadcast Result
+      description: The result of a test event broadcast to a subscription's connection endpoint.
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the test event was successfully delivered.
+        status_code:
+          type: integer
+          description: The HTTP status code returned by the connection endpoint.
+        response_body:
+          type: string
+          description: The response body returned by the connection endpoint.
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.

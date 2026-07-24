@@ -1,0 +1,432 @@
+openapi: 3.1.0
+info:
+  title: Shipments Address Subscriptions API
+  version: 3.0.0
+  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: Subscriptions
+paths:
+  /event-subscriptions/subscriptions:
+    post:
+      summary: Create a subscription
+      description: Create a new subscription that routes events of a specific type to a connection.
+      tags:
+      - Subscriptions
+      operationId: sc-public-v3-scp-post-create_subscription
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/event-subscriptions/create-a-subscription
+        content: "Create a subscription that routes a specific event type to a connection for delivery.\n\nA subscription links an event type (e.g., `parcels.event.created`) to a connection endpoint. When the event occurs, the event payload is delivered to the connection's configured endpoint.\n\n<Info>\n  Subscriptions are active by default. Set `is_active` to `false` to create a paused subscription.\n</Info>"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subscription-create-request'
+            examples:
+              CreateSubscription:
+                summary: Create a subscription for parcel events
+                value:
+                  connection_id: 1
+                  event_type: parcels.event.created
+                  is_active: true
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: Subscription created
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/subscription'
+              examples:
+                SubscriptionCreated:
+                  summary: Subscription created
+                  value:
+                    data:
+                      id: 1
+                      connection_id: 1
+                      event_type: parcels.event.created
+                      is_active: true
+                      created_at: '2026-01-15T11:00:00Z'
+                      updated_at: '2026-01-15T11:00:00Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+              examples:
+                ValidationError:
+                  summary: Validation error
+                  value:
+                    errors:
+                    - detail: This field is required.
+                      status: '400'
+                      source:
+                        pointer: /data/connection_id
+                      code: required
+        '429':
+          description: Throttled
+    get:
+      summary: List subscriptions
+      description: Retrieve all subscriptions for the authenticated user's organization.
+      tags:
+      - Subscriptions
+      operationId: sc-public-v3-scp-get-list_subscriptions
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/event-subscriptions/list-subscriptions
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: event_type
+        description: Filter by event type.
+      - schema:
+          type: boolean
+        in: query
+        name: is_active
+        description: Filter by active status.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: List of subscriptions
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/subscription'
+                required:
+                - data
+              examples:
+                ListSubscriptions:
+                  summary: List of subscriptions
+                  value:
+                    data:
+                    - id: 1
+                      connection_id: 1
+                      event_type: parcels.event.created
+                      is_active: true
+                      created_at: '2026-01-15T11:00:00Z'
+                      updated_at: '2026-01-15T11:00:00Z'
+                    - id: 2
+                      connection_id: 2
+                      event_type: parcels.event.created
+                      is_active: false
+                      created_at: '2026-01-16T09:15:00Z'
+                      updated_at: '2026-01-16T09:15:00Z'
+        '429':
+          description: Throttled
+  /event-subscriptions/subscriptions/{id}:
+    parameters:
+    - schema:
+        type: integer
+      in: path
+      name: id
+      description: The id of the subscription.
+      required: true
+    get:
+      summary: Get a subscription
+      description: Retrieve a specific subscription by its id.
+      tags:
+      - Subscriptions
+      operationId: sc-public-v3-scp-get-subscription
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/event-subscriptions/get-a-subscription
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: Subscription details
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/subscription'
+              examples:
+                GetSubscription:
+                  summary: Get a subscription
+                  value:
+                    data:
+                      id: 1
+                      connection_id: 1
+                      event_type: parcels.event.created
+                      is_active: true
+                      created_at: '2026-01-15T11:00:00Z'
+                      updated_at: '2026-01-15T11:00:00Z'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+    patch:
+      summary: Update a subscription
+      description: Update an existing subscription by its id. Only the fields provided in the request body will be updated.
+      tags:
+      - Subscriptions
+      operationId: sc-public-v3-scp-patch-subscription
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/event-subscriptions/update-a-subscription
+        content: "Update an existing subscription. You can change the connection, event type, or toggle the active state.\n\n<Info>\n  Set `is_active` to `false` to pause event delivery without deleting the subscription.\n</Info>"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subscription-update-request'
+            examples:
+              PauseSubscription:
+                summary: Pause a subscription
+                value:
+                  is_active: false
+              ChangeConnection:
+                summary: Route events to a different connection
+                value:
+                  connection_id: 2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: Updated subscription
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/subscription'
+              examples:
+                UpdatedSubscription:
+                  summary: Updated subscription
+                  value:
+                    data:
+                      id: 1
+                      connection_id: 2
+                      event_type: parcels.event.created
+                      is_active: false
+                      created_at: '2026-01-15T11:00:00Z'
+                      updated_at: '2026-01-20T14:30:00Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+    delete:
+      summary: Delete a subscription
+      description: Delete a specific subscription by its id. Event delivery for this subscription will stop immediately.
+      tags:
+      - Subscriptions
+      operationId: sc-public-v3-scp-delete-subscription
+      security:
+      - HTTPBasicAuth: []
+      - OAuth2ClientCreds: []
+      x-mint:
+        href: /api/v3/event-subscriptions/delete-a-subscription
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+components:
+  schemas:
+    subscription:
+      title: Subscription
+      description: A subscription routes a specific event type to a connection for delivery.
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          minimum: 1
+          description: Unique identifier of the subscription.
+        connection_id:
+          type: integer
+          format: int64
+          minimum: 1
+          description: The identifier of the connection this subscription delivers events to.
+        event_type:
+          type: string
+          description: The type of event this subscription listens for.
+          enum:
+          - parcels.event.created
+        is_active:
+          type: boolean
+          description: Whether the subscription is currently active and delivering events.
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time when the subscription was created, in ISO 8601 format.
+        updated_at:
+          type: string
+          format: date-time
+          description: The date and time when the subscription was last updated, in ISO 8601 format.
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
+    subscription-create-request:
+      title: Create Subscription request
+      description: Request body for creating a new subscription.
+      type: object
+      required:
+      - connection_id
+      - event_type
+      properties:
+        connection_id:
+          type: integer
+          format: int64
+          minimum: 1
+          description: The identifier of the connection to deliver events to.
+        event_type:
+          type: string
+          description: The type of event to subscribe to.
+          enum:
+          - parcels.event.created
+        is_active:
+          type: boolean
+          description: Whether the subscription should be active immediately. Defaults to `true`.
+          default: true
+    subscription-update-request:
+      title: Update Subscription request
+      description: Request body for updating an existing subscription. All fields are optional.
+      type: object
+      properties:
+        connection_id:
+          type: integer
+          format: int64
+          minimum: 1
+          description: The identifier of the connection to deliver events to.
+        event_type:
+          type: string
+          description: The type of event to subscribe to.
+          enum:
+          - parcels.event.created
+        is_active:
+          type: boolean
+          description: Whether the subscription should be active.
+    ErrorObject:
+      title: Error
+      type: object
+      description: Error in a JSON:API error format
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the error.
+        links:
+          type: object
+          description: A set of hyperlinks that provide additional information about the error.
+          properties:
+            about:
+              type: string
+              description: A URL that provides additional information about the error.
+        status:
+          type: string
+          format: int32
+          description: The HTTP status code of the error.
+          minLength: 1
+        code:
+          type: string
+          description: A unique error code for the error, in snake case format.
+          minLength: 1
+          enum:
+          - unknown_field
+          - invalid
+          - forbidden
+          - invalid_choice
+          - min_value
+          - 'null'
+          - not_found
+          - required
+          - not_a_list
+          - non_field_errors
+          - authentication_failed
+          - validation_error
+          - parcel_announcement_error
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          minLength: 1
+        detail:
+          type: string
+          description: A human-readable explanation of the error.
+          minLength: 1
+        source:
+          type: object
+          description: An object that identifies the source of the error within the request payload.
+          properties:
+            pointer:
+              type: string
+              description: A `JSON` pointer to the location of the error within the request payload.
+            parameter:
+              type: string
+              description: The name of the `query` parameter that caused the error.
+            header:
+              type: string
+              description: The name of the `header` parameter that caused the error.
+        meta:
+          type: object
+          description: Additional metadata about the error.
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.
