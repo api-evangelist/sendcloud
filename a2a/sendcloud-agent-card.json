@@ -1,0 +1,38 @@
+{
+  "name": "Sendcloud API Developer Portal",
+  "url": "https://sendcloud.dev/",
+  "version": "1.0.0",
+  "protocolVersion": "0.3",
+  "preferredTransport": "HTTP+JSON",
+  "supportedInterfaces": [
+    {
+      "url": "https://sendcloud.dev/",
+      "protocolBinding": "HTTP+JSON",
+      "protocolVersion": "0.3"
+    }
+  ],
+  "provider": {
+    "url": "https://sendcloud.dev/",
+    "organization": "Sendcloud API Developer Portal"
+  },
+  "documentationUrl": "https://sendcloud.dev/",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "sendcloud",
+      "name": "Sendcloud",
+      "description": "Use when building shipping integrations, creating shipments and labels, managing orders and returns, tracking parcels, or automating fulfillment workflows. Reach for this skill when working with e-commerce platforms, logistics APIs, or any system that needs to handle shipping operations programmatically.",
+      "tags": [],
+      "url": "https://sendcloud.dev/.well-known/agent-skills/sendcloud/skill.md"
+    }
+  ]
+}
