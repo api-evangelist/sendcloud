@@ -1,0 +1,330 @@
+openapi: 3.1.0
+info:
+  title: Tracking parcels
+  version: 2.0.0
+  contact:
+    name: Sendcloud API Support
+    url: https://www.sendcloud.dev
+    email: contact@sendcloud.com
+  description: >-
+    The Tracking API allows you to obtain the status of a given parcel at any
+    point during the delivery journey, across all Sendcloud supported carriers.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://panel.sendcloud.sc/api/v2
+    description: Production
+tags:
+  - name: Tracking
+paths:
+  /tracking/{tracking_number}:
+    parameters:
+      - schema:
+          type: string
+        name: tracking_number
+        in: path
+        required: true
+        example: ISDUS939HHCXL29J
+        description: The tracking number that the user received
+    get:
+      summary: Retrieve tracking information of a parcel
+      description: >-
+        Fetches detailed tracking information, including the status history of
+        the parcel.
+      x-mint:
+        href: /api/v2/tracking/retrieve-tracking-information-of-a-parcel
+        content: |-
+          <Warning>
+            **API v2 is entering maintenance mode.** New users should start with API v3 to access our latest features and improved performance. Already using v2? Don't worry, your current integration remains fully functional. Read more about [maintenance mode](/docs/getting-started/api-version-guide), or check out the [migration guide for API v3](/docs/getting-started/migration-guidelines-for-api-v3).
+          </Warning>
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetailedTrackingBlob'
+              examples:
+                TrackingDetails:
+                  summary: Detailed tracking information for a parcel
+                  value:
+                    parcel_id: '629'
+                    carrier_code: postnl
+                    created_at: '2022-01-25 14:42:03.277703+00:00'
+                    carrier_tracking_url: >-
+                      https://tracking.sendcloud.sc/forward?carrier=postnl&code=3SYZXG132912330&destination=NL&lang=en-us&source=NL&type=parcel&verification=5611+EM&servicepoint_verification=&created_at=2022-01-25
+                    sendcloud_tracking_url: >-
+                      https://my-bakery.shipping-portal.com/tracking/?country=nl&tracking_number=3SYZXG132959174&postal_code=5611+EM
+                    is_return: false
+                    is_to_service_point: false
+                    is_mail_box: false
+                    expected_delivery_date: '2022-01-26'
+                    statuses:
+                      - carrier_update_timestamp: '2022-01-25 14:43:13.615997+00:00'
+                        parcel_status_history_id: '8'
+                        parent_status: shipment-on-route
+                        carrier_code: postnl
+                        carrier_message: ''
+                      - carrier_update_timestamp: '2022-01-25 14:42:06.318296+00:00'
+                        parcel_status_history_id: '7'
+                        parent_status: ready-to-send
+                        carrier_code: ''
+                        carrier_message: Ready to send
+                      - carrier_update_timestamp: '2022-01-25 14:42:03.298949+00:00'
+                        parcel_status_history_id: '6'
+                        parent_status: announcing
+                        carrier_code: ''
+                        carrier_message: Being announced
+        '404':
+          description: >-
+            Not Found.
+
+             When the parcel cannot be found, the response is returned as an XML document from AWS S3.
+
+            Detailed information about the error structure can be found in the
+            S3 documentation:
+
+
+            https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses
+          content:
+            application/xml:
+              schema:
+                type: object
+                xml:
+                  name: Error
+                properties:
+                  Code:
+                    type: string
+                    example: NoSuchKey
+                  Message:
+                    type: string
+                    example: The specified key does not exist.
+                  Key:
+                    type: string
+                    example: v2/103/AHDJ290827.json
+                  RequestId:
+                    type: string
+                    example: D4W06G972XFZYM6
+                  HostId:
+                    type: string
+                    example: >-
+                      icweEyuSLyXQoikNKR5ndkrbCZL55s7NbFIYbLn25OQqKn1REF1RE5YOUd7XHRUlDSWzOY=
+              examples:
+                NotFound:
+                  summary: Not Found
+                  value:
+                    Code: NoSuchKey
+                    Message: The specified key does not exist.
+                    Key: v2/103/AHDJ290827.json
+                    RequestId: D4W06G972XFZYM6
+                    HostId: >-
+                      icweEyuSLyXQoikNKR5ndkrbCZL55s7NbFIYbLn25OQqKn1REF1RE5YOUd7XHRUlDSWzOY=
+        '429':
+          description: >-
+            Requests to our API are limited on a per Sendcloud account basis. If
+            you have multiple API keys per Sendcloud account, the budget is
+            shared between these keys. If you get rate limited, we return an
+            empty response with HTTP status code 429.
+      operationId: sc-public-v2-tracking-get-detailed_tracking_information
+      security:
+        - HTTPBasicAuth: []
+        - OAuth2ClientCreds: []
+      tags:
+        - Tracking
+components:
+  schemas:
+    DetailedTrackingBlob:
+      title: Detailed Tracking Blob Object
+      description: A definition of a detailed tracking blob.
+      type: object
+      properties:
+        parcel_id:
+          type: string
+          description: Unique ID for the parcel
+          example: '629'
+        carrier_code:
+          $ref: '#/components/schemas/carrier'
+        created_at:
+          type: string
+          description: >-
+            Timestamp (ISO format) that indicates when the parcel was first
+            tracked by Sendcloud’s systems.
+          example: '2022-01-25 14:42:03.277703+00:00'
+        carrier_tracking_url:
+          type: string
+          description: Link to the carrier’s Tracking page for this parcel
+          example: >-
+            https://tracking.sendcloud.sc/forward?carrier=postnl&code=3SYZXG132912330&destination=NL&lang=en-us&source=NL&type=parcel&verification=5611+EM&servicepoint_verification=&created_at=2022-01-25
+        sendcloud_tracking_url:
+          type: string
+          description: >-
+            Link to Sendcloud’s Tracking page for this parcel. Returns a valid
+            URL only if the tracking page for the brand associated with the
+            parcel has been published.
+          example: >-
+            https://my-bakery.shipping-portal.com/tracking/?country=nl&tracking_number=3SYZXG132912330&postal_code=5611+EM
+        is_return:
+          type: boolean
+          description: >-
+            Indicates whether this parcel is a return (incoming) shipment to the
+            merchant.
+          example: false
+        is_to_service_point:
+          type: boolean
+          description: >-
+            Indicates whether this parcel is delivered to a service point (e.g.
+            a supermarket, as opposed to a home address)
+          example: false
+        is_mail_box:
+          type: boolean
+          description: Indicates whether this parcel will be delivered to a mail box
+          example: false
+        expected_delivery_date:
+          type: string
+          description: Day when the parcel will be delivered (estimate, no timestamp)
+          example: '2022-01-26'
+          format: date
+        statuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetailedTrackingBlobStatus'
+    DetailedTrackingBlobStatus:
+      title: Detailed Tracking Blob Status Object
+      description: List of shipping statuses for the parcel
+      type: object
+      properties:
+        carrier_update_timestamp:
+          type: string
+          description: >-
+            Timestamp (ISO format): when did the carrier move the parcel to this
+            status
+          example: '2022-01-25 16:42:03.277703+00:00'
+        parcel_status_history_id:
+          type: string
+          description: ID of the historical status
+          example: '1270787363'
+        parent_status:
+          type: string
+          description: >-
+            Current delivery status of the parcel. Aggregates variations of
+            status messages sent by multiple carriers with similar meanings,
+            into one user-friendly status message issued by Sendcloud.
+          example: delivered
+        carrier_code:
+          $ref: '#/components/schemas/carrier'
+        carrier_message:
+          type: string
+          description: >-
+            Status description specified by the carrier, more detailed than
+            parent_status
+          example: Shipment delivered, no signature
+    carrier:
+      type: string
+      title: Carrier Code
+      enum:
+        - amazon
+        - bol
+        - bpost
+        - brt
+        - budbee
+        - chronopost
+        - cirro
+        - colisprive
+        - colissimo
+        - correos
+        - correos_express
+        - ctt_express
+        - dbschenker
+        - delivengo
+        - dhl
+        - dhl_2_man_handling
+        - dhl_de
+        - dhl_ecommerce
+        - dhl_express
+        - dhl_parcel_gb
+        - dhl_parcel_iberia
+        - dp
+        - dpd
+        - dpd_at
+        - dpd_fr
+        - dpd_gb
+        - dpd_local
+        - evri_international
+        - fadello
+        - fairsenden
+        - fedex
+        - fedexcrossborder
+        - fietskoeriers
+        - geodis
+        - glovo
+        - gls_de
+        - gls_es
+        - gls_eu
+        - gls_it
+        - gls_nl
+        - hermes_at
+        - hermes_c2c_gb
+        - hermes_de
+        - hermes_gb
+        - hived
+        - homerr
+        - hurby
+        - inpost_es
+        - inpost_gb
+        - inpost_it
+        - inpost_pl
+        - lettresuivie
+        - mhi
+        - mondial_relay
+        - mrw
+        - nacex
+        - paack
+        - parcelforce
+        - plx
+        - postat
+        - poste_italiane
+        - poste_it_delivery
+        - postnl
+        - postnl_fulfilment
+        - postnl_large
+        - postnord
+        - rjp
+        - rjpv2
+        - royal_mail
+        - sandd
+        - sendcloud
+        - seur
+        - skymail
+        - spring
+        - storeshippers
+        - tipsa
+        - tnt_it
+        - transforce
+        - trunkrs
+        - ups
+        - van_straaten
+        - viatim
+        - yodel
+      description: A carrier represented by a Sendcloud code
+      example: postnl
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: >-
+        Basic Authentication using API key and secrets is currently the main
+        authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: >-
+        OAuth2 is a standardized protocol for authorization that allows users to
+        share their private resources stored on one site with another site
+        without having to provide their credentials. OAuth2 Client Credentials
+        Grant workflow. This workflow is typically used for server-to-server
+        interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.
