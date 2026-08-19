@@ -1916,7 +1916,7 @@ integrations:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 common:
   - type: AgentCard
     url: a2a/sendcloud-a2a.yml
