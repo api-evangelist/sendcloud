@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shipments Address Customs Documents Download API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customs Documents Download",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a customs declaration PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/customs_declaration/normal_printer/:parcel_id",
+            "params": [
+              {
+                "name": "parcel_id",
+                "value": "1",
+                "type": "path",
+                "description": "Unique parcel identifier"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve the customs documents associated with a label in PDF format for a normal printer."
+        },
+        {
+          "info": {
+            "name": "Retrieve multiple customs declaration PDFs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/customs_declaration/normal_printer",
+            "params": [
+              {
+                "name": "ids",
+                "value": "1,2,3",
+                "type": "query",
+                "description": "Comma separated parcel ids"
+              },
+              {
+                "name": "start_from",
+                "value": "",
+                "type": "query",
+                "description": "The position of the label on an A4 page.\n\n0 - Top left\n1 - Top right\n2 - Bottom left\n3 - Bottom right"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve PDF customs documents suitable for normal printers for multiple different parcels at the same time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shipments Address Transit times API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transit times",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve carrier transit times",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/insights/carriers/transit-times",
+            "params": [
+              {
+                "name": "carrier_code",
+                "value": "",
+                "type": "query",
+                "description": "selection of carriers"
+              },
+              {
+                "name": "from_country",
+                "value": "",
+                "type": "query",
+                "description": "origin country"
+              },
+              {
+                "name": "to_country",
+                "value": "",
+                "type": "query",
+                "description": "destination country"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "first delivery start date"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "first delivery end date"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the average transit time of a parcel per carrier.\nYou can filter the results by origin and destination country, as well as by start and end dates."
+        },
+        {
+          "info": {
+            "name": "Retrieve shipping method transit times",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/insights/shipping-methods/transit-times",
+            "params": [
+              {
+                "name": "shipping_method_code",
+                "value": "",
+                "type": "query",
+                "description": "selection of shipping methods"
+              },
+              {
+                "name": "from_country",
+                "value": "",
+                "type": "query",
+                "description": "origin country"
+              },
+              {
+                "name": "to_country",
+                "value": "",
+                "type": "query",
+                "description": "destination country"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "first delivery start date"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "first delivery end date"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the average transit time of a parcel per shipping method and carrier.\nYou can filter the results by origin and destination country, as well as start and end dates."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

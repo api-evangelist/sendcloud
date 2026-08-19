@@ -1,0 +1,694 @@
+{
+  "item": [
+    {
+      "id": "471036df-abe5-4d5e-a636-9fa2e8fbf453",
+      "name": "Products",
+      "description": {
+        "content": "Get insights about products",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9fd604f2-9ae6-4894-aeec-55ad52db4103",
+          "name": "Retrieve product-insights series",
+          "request": {
+            "name": "Retrieve product-insights series",
+            "description": {
+              "content": "Returns data about products as a series, e.g. the number of products per day/month/year over a specified period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insights",
+                "products",
+                "series"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) period start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) period end date"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "filter by carrier"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country",
+                  "value": "<string>",
+                  "description": "origin country"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country",
+                  "value": "<string>",
+                  "description": "destination country"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "<string>",
+                  "description": "(Required) the size of one point"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "incoming or outgoing"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "606445d7-d5b9-49ba-a73c-d5f516e7e6ce",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "products",
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"series\": [\n    {\n      \"value\": 358,\n      \"start_date\": \"2017-12-10\",\n      \"end_date\": \"2020-12-10\",\n      \"missing_data\": [\n        {\n          \"start_date\": \"2018-12-10\",\n          \"end_date\": \"2019-12-10\",\n          \"reason_code\": \"not-available\"\n        },\n        {\n          \"start_date\": \"2019-12-10\",\n          \"end_date\": \"2020-12-10\",\n          \"reason_code\": \"partly-available\"\n        }\n      ]\n    },\n    {\n      \"value\": 188,\n      \"start_date\": \"2021-12-10\",\n      \"end_date\": \"2022-12-10\",\n      \"missing_data\": [\n        {\n          \"start_date\": \"2021-12-10\",\n          \"end_date\": \"2022-12-10\",\n          \"reason_code\": \"missing-filter-property\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9d6322d-1c9f-4527-8444-c94da7b8a605",
+              "name": "Unprocessable Entity (WebDAV)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "products",
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"query\",\n        \"start_date\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "489343e0-b0cb-44fc-b476-3a2171cb95ca",
+          "name": "Retrieve product-insights buckets",
+          "request": {
+            "name": "Retrieve product-insights buckets",
+            "description": {
+              "content": "Returns data about products as buckets. Buckets should be grouped by any category, for example by country.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insights",
+                "products",
+                "buckets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) period start date (announced)"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) period end date (announced)"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "filter by carriers"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country",
+                  "value": "<string>",
+                  "description": "origin country code"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country",
+                  "value": "<string>",
+                  "description": "destination country code"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "integration_id",
+                  "value": "<integer>",
+                  "description": "integrations"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_by",
+                  "value": "<string>",
+                  "description": "(Required) group by category"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "<string>",
+                  "description": "number of the buckets"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "incoming or outgoing"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "brand_id",
+                  "value": "<integer>",
+                  "description": "filtering by brand id"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_name",
+                  "value": "<string>",
+                  "description": "filtering by product name"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                },
+                {
+                  "disabled": false,
+                  "key": "product_sku",
+                  "value": "<string>",
+                  "description": "filtering by product sku"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c15a698-4fd2-41ce-a43e-6d6db44a4e34",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "products",
+                    "buckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "5"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"buckets\": [\n    {\n      \"key\": \"UK\",\n      \"value\": 10,\n      \"percentage\": 12.24,\n      \"missing_data\": [\n        {\n          \"start_date\": \"2018-12-10\",\n          \"end_date\": \"2019-12-10\",\n          \"reason_code\": \"partly-available\"\n        }\n      ]\n    },\n    {\n      \"key\": \"DE\",\n      \"value\": 8,\n      \"percentage\": 9.85,\n      \"missing_data\": [\n        {\n          \"start_date\": \"2018-12-10\",\n          \"end_date\": \"2019-12-10\",\n          \"reason_code\": \"partly-available\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "860b35ee-c20c-4883-8799-c166af65beb2",
+              "name": "Unprocessable Entity (WebDAV)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "products",
+                    "buckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "integration_id",
+                      "value": "124523"
+                    },
+                    {
+                      "key": "group_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "5"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "brand_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product_sku",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"query\",\n        \"start_date\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a521a4e8-4a9f-4fd0-ad91-15bcd2725328",
+    "name": "Shipments Address Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

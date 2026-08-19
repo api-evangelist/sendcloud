@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shipments Address User Carriers and Shipping Methods API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Carriers and Shipping Methods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all shipping methods used by user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/analytics/shipping-methods"
+          },
+          "docs": "Returns a list of all shipping methods ever used by a user."
+        },
+        {
+          "info": {
+            "name": "Retrieve all carriers used by user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/analytics/carriers"
+          },
+          "docs": "Returns a list of all carriers ever used by a user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

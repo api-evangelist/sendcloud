@@ -1,0 +1,605 @@
+{
+  "item": [
+    {
+      "id": "8558d032-6beb-4d6e-8f3f-b195cede4bc6",
+      "name": "Exception logs",
+      "description": {
+        "content": "Integration exception logs API",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca297f82-2d3c-4e0b-89b9-f9deef3706e5",
+          "name": "Retrieve all integration exception logs",
+          "request": {
+            "name": "Retrieve all integration exception logs",
+            "description": {
+              "content": "Retrieve all integration exception logs. These logs are created when integrations have problems making API requests to shop systems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                "logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<dateTime>",
+                  "description": "Cursor for pagination. Use the value from the `Link` response header to fetch the next page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "25",
+                  "description": "Number of results per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "105f61e6-2ef6-429b-99f9-c4e3c02edb30",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "2023-03-01T02:02:00+01:00"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Contains the URL for the next page of results (RFC 5988). Example: `<https://panel.sendcloud.sc/api/v3/integrations/logs?cursor=2023-03-01T02:02:00&page_size=25>; rel=\"next\"`",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 123,\n      \"base_url\": \"https://example.com\",\n      \"full_url\": \"https://example.com/order-note.json\",\n      \"method\": \"POST\",\n      \"response_code\": 495,\n      \"response\": {\n        \"headers\": {\n          \"Cache-Control\": \"max-age=3600\",\n          \"Content-Type\": \"text/html; charset=utf-8\",\n          \"Connection\": \"keep-alive\"\n        },\n        \"body\": \"<!doctype html>\\n<html>\\n <head>\\n <title>SSL Certificate Error</title>\\n </head>\\n </html>\\n\"\n      },\n      \"request\": {\n        \"headers\": {\n          \"Cache-Control\": \"max-age=3600\",\n          \"Content-Type\": \"text/html; charset=utf-8\",\n          \"Connection\": \"keep-alive\"\n        },\n        \"payload\": {\n          \"order_note\": {\n            \"note\": \"Success\"\n          }\n        }\n      },\n      \"created_at\": \"2023-03-01T02:02:00+01:00\",\n      \"exception_type\": \"requests.exceptions.SSLError\",\n      \"exception\": \"An SSL error occurred\",\n      \"protected\": false,\n      \"additional_data\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1266c90e-6619-44ad-920e-7fb97eff92ca",
+          "name": "Retrieve exception logs for a specific integration",
+          "request": {
+            "name": "Retrieve exception logs for a specific integration",
+            "description": {
+              "content": "Retrieve exception logs for a specific integration. These logs are created when integrations have problems making API requests to shop systems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":id",
+                "logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<dateTime>",
+                  "description": "Cursor for pagination. Use the value from the `Link` response header to fetch the next page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "25",
+                  "description": "Number of results per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the integration"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "10be717f-133a-436e-93b4-66a056f4a148",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "2023-03-01T02:02:00+01:00"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Contains the URL for the next page of results (RFC 5988). Example: `<https://panel.sendcloud.sc/api/v3/integrations/{id}/logs?cursor=2023-03-01T02:02:00&page_size=25>; rel=\"next\"`",
+                  "key": "Link",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 123,\n      \"base_url\": \"https://example.com\",\n      \"full_url\": \"https://example.com/order-note.json\",\n      \"method\": \"POST\",\n      \"response_code\": 495,\n      \"response\": {\n        \"headers\": {\n          \"Cache-Control\": \"max-age=3600\",\n          \"Content-Type\": \"text/html; charset=utf-8\",\n          \"Connection\": \"keep-alive\"\n        },\n        \"body\": \"<!doctype html>\\n<html>\\n <head>\\n <title>SSL Certificate Error</title>\\n </head>\\n </html>\\n\"\n      },\n      \"request\": {\n        \"headers\": {\n          \"Cache-Control\": \"max-age=3600\",\n          \"Content-Type\": \"text/html; charset=utf-8\",\n          \"Connection\": \"keep-alive\"\n        },\n        \"payload\": {\n          \"order_note\": {\n            \"note\": \"Success\"\n          }\n        }\n      },\n      \"created_at\": \"2023-03-01T02:02:00+01:00\",\n      \"exception_type\": \"requests.exceptions.SSLError\",\n      \"exception\": \"An SSL error occurred\",\n      \"protected\": false,\n      \"additional_data\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "101f6767-7ce8-438b-bc60-b4204a0d0aba",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "2023-03-01T02:02:00+01:00"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": 404,\n      \"code\": \"not_found\",\n      \"title\": \"Not Found\",\n      \"detail\": \"The Integration could not be found with the search criteria given\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e9851bd-cd9c-4473-ae91-9414e531d875",
+          "name": "Create integration exception logs",
+          "request": {
+            "name": "Create integration exception logs",
+            "description": {
+              "content": "Create integration exception logs, which will appear in the connection issue log screen of the user's integration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                ":id",
+                "logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The id of the integration"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"base_url\": \"<string>\",\n  \"full_url\": \"<string,null>\",\n  \"method\": \"\",\n  \"response_code\": \"<integer,null>\",\n  \"response\": {\n    \"headers\": \"<object>\",\n    \"body\": \"<object>\"\n  },\n  \"request\": {\n    \"headers\": \"<object>\",\n    \"payload\": \"<object>\"\n  },\n  \"created_at\": \"<string,null-date-time>\",\n  \"exception_type\": \"<string,null>\",\n  \"exception\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e4f5cc1d-5494-4ff3-9bf3-41a6d5a1735f",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_url\": \"https://example.com\",\n  \"full_url\": \"https://example.com/order-note.json\",\n  \"method\": \"POST\",\n  \"response_code\": 495,\n  \"response\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"body\": \"<!doctype html>\\n<html>\\n <head>\\n <title>SSL Certificate Error</title>\\n </head>\\n </html>\\n\"\n  },\n  \"request\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"payload\": {\n      \"order_note\": {\n        \"note\": \"Success\"\n      }\n    }\n  },\n  \"created_at\": \"2023-03-01T02:02:00+01:00\",\n  \"exception_type\": \"requests.exceptions.SSLError\",\n  \"exception\": \"An SSL error occurred\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": 123,\n    \"integration_id\": 123,\n    \"base_url\": \"https://example.com\",\n    \"full_url\": \"https://example.com/order-note.json\",\n    \"method\": \"POST\",\n    \"response_code\": 495,\n    \"response\": {\n      \"headers\": {\n        \"Cache-Control\": \"max-age=3600\",\n        \"Content-Type\": \"text/html; charset=utf-8\",\n        \"Connection\": \"keep-alive\"\n      },\n      \"body\": \"<!doctype html>\\n<html>\\n <head>\\n <title>SSL Certificate Error</title>\\n </head>\\n </html>\\n\"\n    },\n    \"request\": {\n      \"headers\": {\n        \"Cache-Control\": \"max-age=3600\",\n        \"Content-Type\": \"text/html; charset=utf-8\",\n        \"Connection\": \"keep-alive\"\n      },\n      \"payload\": {\n        \"order_note\": {\n          \"note\": \"Success\"\n        }\n      }\n    },\n    \"created_at\": \"2023-03-01T02:02:00+01:00\",\n    \"exception_type\": \"requests.exceptions.SSLError\",\n    \"exception\": \"An SSL error occurred\",\n    \"protected\": false,\n    \"additional_data\": \"\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11fcd76d-0b31-41c6-a20f-02fe64e10b0a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_url\": \"https://example.com\",\n  \"full_url\": \"https://example.com/order-note.json\",\n  \"method\": \"POST\",\n  \"response_code\": 495,\n  \"response\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"body\": \"<!doctype html>\\n<html>\\n <head>\\n <title>SSL Certificate Error</title>\\n </head>\\n </html>\\n\"\n  },\n  \"request\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"payload\": {\n      \"order_note\": {\n        \"note\": \"Success\"\n      }\n    }\n  },\n  \"created_at\": \"2023-03-01T02:02:00+01:00\",\n  \"exception_type\": \"requests.exceptions.SSLError\",\n  \"exception\": \"An SSL error occurred\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": 400,\n      \"code\": \"extra_forbidden\",\n      \"title\": \"Extra Forbidden\",\n      \"detail\": \"Extra inputs are not permitted\",\n      \"source\": {\n        \"pointer\": \"body/unknown_field\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d309af3-455e-4c46-a46a-c0087d3a21c2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    ":id",
+                    "logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The id of the integration"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_url\": \"https://example.com\",\n  \"full_url\": \"https://example.com/order-note.json\",\n  \"method\": \"POST\",\n  \"response_code\": 495,\n  \"response\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"body\": \"<!doctype html>\\n<html>\\n <head>\\n <title>SSL Certificate Error</title>\\n </head>\\n </html>\\n\"\n  },\n  \"request\": {\n    \"headers\": {\n      \"Cache-Control\": \"max-age=3600\",\n      \"Content-Type\": \"text/html; charset=utf-8\",\n      \"Connection\": \"keep-alive\"\n    },\n    \"payload\": {\n      \"order_note\": {\n        \"note\": \"Success\"\n      }\n    }\n  },\n  \"created_at\": \"2023-03-01T02:02:00+01:00\",\n  \"exception_type\": \"requests.exceptions.SSLError\",\n  \"exception\": \"An SSL error occurred\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": 404,\n      \"code\": \"not_found\",\n      \"title\": \"Not Found\",\n      \"detail\": \"The Integration could not be found with the search criteria given\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e6a4900a-eb68-48ad-8fa4-2e60c35202ae",
+    "name": "Shipments Address Exception logs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

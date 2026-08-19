@@ -1,0 +1,240 @@
+{
+  "item": [
+    {
+      "id": "9a758a91-7990-4a0a-b9cb-98f2436e957c",
+      "name": "Tracking",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "182c3e41-15d0-48ea-8ee2-02415c0c1148",
+          "name": "Retrieve tracking information of a parcel",
+          "request": {
+            "name": "Retrieve tracking information of a parcel",
+            "description": {
+              "content": "Fetches detailed tracking information, including the status history of the parcel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tracking",
+                ":tracking_number"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tracking_number",
+                  "description": "(Required) The tracking number that the user received"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "edbe6f96-4d31-4ac8-a7ce-067dca5b0028",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    ":tracking_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tracking_number",
+                      "description": "(Required) The tracking number that the user received"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"parcel_id\": \"629\",\n  \"carrier_code\": \"postnl\",\n  \"created_at\": \"2022-01-25 14:42:03.277703+00:00\",\n  \"carrier_tracking_url\": \"https://tracking.sendcloud.sc/forward?carrier=postnl&code=3SYZXG132912330&destination=NL&lang=en-us&source=NL&type=parcel&verification=5611+EM&servicepoint_verification=&created_at=2022-01-25\",\n  \"sendcloud_tracking_url\": \"https://my-bakery.shipping-portal.com/tracking/?country=nl&tracking_number=3SYZXG132959174&postal_code=5611+EM\",\n  \"is_return\": false,\n  \"is_to_service_point\": false,\n  \"is_mail_box\": false,\n  \"expected_delivery_date\": \"2022-01-26\",\n  \"statuses\": [\n    {\n      \"carrier_update_timestamp\": \"2022-01-25 14:43:13.615997+00:00\",\n      \"parcel_status_history_id\": \"8\",\n      \"parent_status\": \"shipment-on-route\",\n      \"carrier_code\": \"postnl\",\n      \"carrier_message\": \"\"\n    },\n    {\n      \"carrier_update_timestamp\": \"2022-01-25 14:42:06.318296+00:00\",\n      \"parcel_status_history_id\": \"7\",\n      \"parent_status\": \"ready-to-send\",\n      \"carrier_code\": \"\",\n      \"carrier_message\": \"Ready to send\"\n    },\n    {\n      \"carrier_update_timestamp\": \"2022-01-25 14:42:03.298949+00:00\",\n      \"parcel_status_history_id\": \"6\",\n      \"parent_status\": \"announcing\",\n      \"carrier_code\": \"\",\n      \"carrier_message\": \"Being announced\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d560ea51-19c4-41ab-82eb-c1393d1ee1c6",
+              "name": "Not Found.\n\n When the parcel cannot be found, the response is returned as an XML document from AWS S3.\n\nDetailed information about the error structure can be found in the S3 documentation:\n\nhttps://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#RESTErrorResponses",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    ":tracking_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tracking_number",
+                      "description": "(Required) The tracking number that the user received"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error>\n  <Code>NoSuchKey</Code>\n  <Message>The specified key does not exist.</Message>\n  <Key>v2/103/AHDJ290827.json</Key>\n  <RequestId>D4W06G972XFZYM6</RequestId>\n  <HostId>icweEyuSLyXQoikNKR5ndkrbCZL55s7NbFIYbLn25OQqKn1REF1RE5YOUd7XHRUlDSWzOY=</HostId>\n</Error>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "2084fa10-9210-47dc-ae5a-81956f61c014",
+              "name": "Requests to our API are limited on a per Sendcloud account basis. If you have multiple API keys per Sendcloud account, the budget is shared between these keys. If you get rate limited, we return an empty response with HTTP status code 429.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tracking",
+                    ":tracking_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tracking_number",
+                      "description": "(Required) The tracking number that the user received"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c6c5128d-08d6-40d7-a3ff-2d2d177f7848",
+    "name": "Shipments Address Tracking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

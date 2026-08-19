@@ -1,0 +1,176 @@
+{
+  "item": [
+    {
+      "id": "b41236d1-3fae-4329-97a8-d3819037d5fa",
+      "name": "User Carriers and Shipping Methods",
+      "description": {
+        "content": "Get list of carriers and shipping methods a user ever used",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "80bb4983-6bfb-4f08-8e7f-8ca9a8d2bf75",
+          "name": "Retrieve all shipping methods used by user",
+          "request": {
+            "name": "Retrieve all shipping methods used by user",
+            "description": {
+              "content": "Returns a list of all shipping methods ever used by a user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "shipping-methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cd8221c-a0a2-4280-bd7e-d0649a9cd55a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "shipping-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipping_methods\": [\n    {\n      \"code\": \"postnl:standard/kg=0-23\",\n      \"carrier_code\": \"postnl\"\n    },\n    {\n      \"code\": \"dhl:complete/standard\",\n      \"carrier_code\": \"dhl\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95720cb7-e86b-433f-acd4-9dd22e167611",
+          "name": "Retrieve all carriers used by user",
+          "request": {
+            "name": "Retrieve all carriers used by user",
+            "description": {
+              "content": "Returns a list of all carriers ever used by a user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "analytics",
+                "carriers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "507cc2dd-eecf-496a-9839-197385c83ca4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "analytics",
+                    "carriers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"carriers\": [\n    {\n      \"code\": \"postnl\"\n    },\n    {\n      \"code\": \"dhl\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "449f55b5-9228-49bd-9c35-58d43ec32f23",
+    "name": "Shipments Address User Carriers and Shipping Methods API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}

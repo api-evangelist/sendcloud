@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shipments Address Exception logs API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Exception logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all integration exception logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/integrations/logs",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "2023-03-01T02:02:00+01:00",
+                "type": "query",
+                "description": "Cursor for pagination. Use the value from the `Link` response header to fetch the next page."
+              },
+              {
+                "name": "page_size",
+                "value": "25",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve all integration exception logs. These logs are created when integrations have problems making API requests to shop systems."
+        },
+        {
+          "info": {
+            "name": "Retrieve exception logs for a specific integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/integrations/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration"
+              },
+              {
+                "name": "cursor",
+                "value": "2023-03-01T02:02:00+01:00",
+                "type": "query",
+                "description": "Cursor for pagination. Use the value from the `Link` response header to fetch the next page."
+              },
+              {
+                "name": "page_size",
+                "value": "25",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieve exception logs for a specific integration. These logs are created when integrations have problems making API requests to shop systems."
+        },
+        {
+          "info": {
+            "name": "Create integration exception logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://panel.sendcloud.sc/api/v3/integrations/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the integration"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create integration exception logs, which will appear in the connection issue log screen of the user's integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

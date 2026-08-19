@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shipments Address Products API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve product-insights series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/insights/products/series",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "period start date"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "period end date"
+              },
+              {
+                "name": "carrier_code",
+                "value": "",
+                "type": "query",
+                "description": "filter by carrier"
+              },
+              {
+                "name": "from_country",
+                "value": "",
+                "type": "query",
+                "description": "origin country"
+              },
+              {
+                "name": "to_country",
+                "value": "",
+                "type": "query",
+                "description": "destination country"
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "query",
+                "description": "integrations"
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "the size of one point"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "incoming or outgoing"
+              },
+              {
+                "name": "brand_id",
+                "value": "",
+                "type": "query",
+                "description": "filtering by brand id"
+              },
+              {
+                "name": "product_name",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product name"
+              },
+              {
+                "name": "product_sku",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product sku"
+              }
+            ]
+          },
+          "docs": "Returns data about products as a series, e.g. the number of products per day/month/year over a specified period."
+        },
+        {
+          "info": {
+            "name": "Retrieve product-insights buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://panel.sendcloud.sc/api/v3/insights/products/buckets",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "period start date (announced)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "period end date (announced)"
+              },
+              {
+                "name": "carrier_code",
+                "value": "",
+                "type": "query",
+                "description": "filter by carriers"
+              },
+              {
+                "name": "from_country",
+                "value": "",
+                "type": "query",
+                "description": "origin country code"
+              },
+              {
+                "name": "to_country",
+                "value": "",
+                "type": "query",
+                "description": "destination country code"
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "query",
+                "description": "integrations"
+              },
+              {
+                "name": "group_by",
+                "value": "",
+                "type": "query",
+                "description": "group by category"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "number of the buckets"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "incoming or outgoing"
+              },
+              {
+                "name": "brand_id",
+                "value": "",
+                "type": "query",
+                "description": "filtering by brand id"
+              },
+              {
+                "name": "product_name",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product name"
+              },
+              {
+                "name": "product_sku",
+                "value": "",
+                "type": "query",
+                "description": "filtering by product sku"
+              }
+            ]
+          },
+          "docs": "Returns data about products as buckets. Buckets should be grouped by any category, for example by country."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

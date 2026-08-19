@@ -1,0 +1,484 @@
+{
+  "item": [
+    {
+      "id": "7b3f5987-8b41-4c30-a19c-ece6dca77f1f",
+      "name": "Transit times",
+      "description": {
+        "content": "Get insights about average transit times per carriers and shipping methods",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "40eef5d2-111a-407c-be77-af06365264af",
+          "name": "Retrieve carrier transit times",
+          "request": {
+            "name": "Retrieve carrier transit times",
+            "description": {
+              "content": "Retrieves the average transit time of a parcel per carrier.\nYou can filter the results by origin and destination country, as well as by start and end dates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insights",
+                "carriers",
+                "transit-times"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "(Required) selection of carriers"
+                },
+                {
+                  "disabled": false,
+                  "key": "carrier_code",
+                  "value": "<string>",
+                  "description": "(Required) selection of carriers"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country",
+                  "value": "<string>",
+                  "description": "origin country"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country",
+                  "value": "<string>",
+                  "description": "destination country"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "first delivery start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "first delivery end date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "63d2a12b-1712-4564-9d1e-67e9242a6c75",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "carriers",
+                    "transit-times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2020-12-31"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2022-12-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transit_times\": [\n    {\n      \"user_id\": \"1234\",\n      \"carrier_code\": \"postnl\",\n      \"from_country\": \"NL\",\n      \"to_country\": \"DE\",\n      \"start_date\": \"2022-12-31\",\n      \"end_date\": \"2023-11-17\",\n      \"total_parcels\": 2406,\n      \"transit_time\": 82\n    },\n    {\n      \"user_id\": \"1234\",\n      \"carrier_code\": \"dhl\",\n      \"from_country\": \"DE\",\n      \"to_country\": \"AT\",\n      \"start_date\": \"2021-12-31\",\n      \"end_date\": \"2022-12-31\",\n      \"total_parcels\": 75422,\n      \"transit_time\": 51\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "402e37a5-5ac0-401b-a61e-6db52efe6d0f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "carriers",
+                    "transit-times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "carrier_code",
+                      "value": "postnl"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2020-12-31"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2022-12-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"query\",\n        \"carrier-code\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8e64e52-e6f5-4516-abde-3192f998047c",
+          "name": "Retrieve shipping method transit times",
+          "request": {
+            "name": "Retrieve shipping method transit times",
+            "description": {
+              "content": "Retrieves the average transit time of a parcel per shipping method and carrier.\nYou can filter the results by origin and destination country, as well as start and end dates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "insights",
+                "shipping-methods",
+                "transit-times"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "shipping_method_code",
+                  "value": "<string>",
+                  "description": "(Required) selection of shipping methods"
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_method_code",
+                  "value": "<string>",
+                  "description": "(Required) selection of shipping methods"
+                },
+                {
+                  "disabled": false,
+                  "key": "from_country",
+                  "value": "<string>",
+                  "description": "origin country"
+                },
+                {
+                  "disabled": false,
+                  "key": "to_country",
+                  "value": "<string>",
+                  "description": "destination country"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "first delivery start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "first delivery end date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e3975dfe-2ee6-4952-b32e-2e645467da00",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "shipping-methods",
+                    "transit-times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shipping_method_code",
+                      "value": "postnl:standard/kg=0-23"
+                    },
+                    {
+                      "key": "shipping_method_code",
+                      "value": "postnl:standard/kg=0-23"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2021-12-31"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2022-12-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transit_times\": [\n    {\n      \"user_id\": \"1234\",\n      \"carrier_code\": \"postnl\",\n      \"shipping_method_code\": \"postnl:standard/kg=0-23\",\n      \"from_country\": \"NL\",\n      \"to_country\": \"DE\",\n      \"start_date\": \"2022-12-31\",\n      \"end_date\": \"2023-12-31\",\n      \"total_parcels\": 240,\n      \"transit_time\": 92\n    },\n    {\n      \"user_id\": \"1234\",\n      \"carrier_code\": \"dhl\",\n      \"shipping_method_code\": \"dhl:complete/standard\",\n      \"from_country\": \"DE\",\n      \"to_country\": \"AT\",\n      \"start_date\": \"2022-12-31\",\n      \"end_date\": \"2023-12-31\",\n      \"total_parcels\": 752,\n      \"transit_time\": 53\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed9ee516-2a13-4e91-8565-4e57570649ee",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "insights",
+                    "shipping-methods",
+                    "transit-times"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "shipping_method_code",
+                      "value": "postnl:standard/kg=0-23"
+                    },
+                    {
+                      "key": "shipping_method_code",
+                      "value": "postnl:standard/kg=0-23"
+                    },
+                    {
+                      "key": "from_country",
+                      "value": "DE"
+                    },
+                    {
+                      "key": "to_country",
+                      "value": "NL"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2021-12-31"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2022-12-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"query\",\n        \"carrier-code\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    },\n    {\n      \"loc\": [\n        \"query\",\n        \"shipping-method-code\"\n      ],\n      \"msg\": \"field required\",\n      \"type\": \"value_error.missing\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://panel.sendcloud.sc/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0d2b6a34-8c92-4bea-af8e-95ee5e150727",
+    "name": "Shipments Address Transit times API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.\n\nContact Support:\n Name: Sendcloud API Support\n Email: contact@sendcloud.com",
+      "type": "text/plain"
+    }
+  }
+}
