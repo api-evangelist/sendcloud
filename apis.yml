@@ -476,6 +476,8 @@ apis:
   humanURL: https://sendcloud.dev/api/v3/shipments/
   baseURL: https://panel.sendcloud.sc/api/v3
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
@@ -710,6 +712,8 @@ apis:
   humanURL: https://sendcloud.dev/api/v3/shipments/
   baseURL: https://panel.sendcloud.sc/api/v3
   tags:
+  - Authentication
+  tags_raw:
   - OAuth2
   properties:
   - type: OpenAPI
@@ -788,6 +792,8 @@ apis:
   humanURL: https://sendcloud.dev/api/v3/shipments/
   baseURL: https://panel.sendcloud.sc/api/v3
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -1100,6 +1106,8 @@ apis:
   humanURL: https://sendcloud.dev/api/v3/shipments/
   baseURL: https://panel.sendcloud.sc/api/v3
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -1568,6 +1576,8 @@ apis:
   humanURL: https://sendcloud.dev/api/v3/shipments/
   baseURL: https://panel.sendcloud.sc/api/v3
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
@@ -1876,6 +1886,15 @@ apis:
     url: https://sendcloud.dev/api/v2/parcel-documents/
 name: Sendcloud
 tags:
+  - Shipping
+  - Logistics
+  - E-Commerce
+  - Carriers
+  - Labels
+  - Returns
+  - Tracking
+  - Europe
+tags_raw:
   - Shipping
   - Logistics
   - Ecommerce
