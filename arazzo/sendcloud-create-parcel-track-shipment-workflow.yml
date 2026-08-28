@@ -12,10 +12,10 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: parcelsApi
-  url: ../openapi/sendcloud-v2-parcels-openapi.yml
+  url: ../openapi/sendcloud-parcels-api-openapi.yml
   type: openapi
 - name: trackingApi
-  url: ../openapi/sendcloud-v2-tracking-openapi.yml
+  url: ../openapi/sendcloud-tracking-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-parcel-track-shipment

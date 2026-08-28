@@ -12,7 +12,7 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: returnsApi
-  url: ../openapi/sendcloud-v3-returns-openapi.yml
+  url: ../openapi/sendcloud-returns-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-return-cancel-if-cancellable

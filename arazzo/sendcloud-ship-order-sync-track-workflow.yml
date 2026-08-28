@@ -11,11 +11,11 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: shipAnOrderApi
-  url: ../openapi/sendcloud-v3-ship-an-order-openapi.yml
-  type: openapi
 - name: parcelTrackingApi
-  url: ../openapi/sendcloud-v3-parcel-tracking-openapi.yml
+  url: ../openapi/sendcloud-parcel-tracking-api-openapi.yml
+  type: openapi
+- name: shipAnOrderApi
+  url: ../openapi/sendcloud-ship-an-order-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: ship-order-sync-track

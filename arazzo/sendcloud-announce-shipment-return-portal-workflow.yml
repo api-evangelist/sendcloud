@@ -11,7 +11,7 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: shipmentsApi
-  url: ../openapi/sendcloud-shipments-openapi.yml
+  url: ../openapi/sendcloud-shipments-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: announce-shipment-return-portal

@@ -10,11 +10,11 @@ info:
     be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: parcelsApi
-  url: ../openapi/sendcloud-v2-parcels-openapi.yml
-  type: openapi
 - name: labelsApi
-  url: ../openapi/sendcloud-v2-labels-openapi.yml
+  url: ../openapi/sendcloud-labels-api-openapi.yml
+  type: openapi
+- name: parcelsApi
+  url: ../openapi/sendcloud-parcels-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: bulk-print-labels
