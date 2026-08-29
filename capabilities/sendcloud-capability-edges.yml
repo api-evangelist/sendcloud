@@ -1,0 +1,74 @@
+slug: sendcloud
+provider: Sendcloud
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Parcel Tracking
+  spec_file: sendcloud-parcel-tracking-api-openapi.yml
+  capability_id: BC-2510.20
+  capability_id_l1: BC-2510
+  capability_name: Shipment Tracking Management
+  confidence: 0.9
+  evidence: The Parcel Tracking API allows you to register parcels for tracking and retrieve parcel information
+    by tracking number
+  reason: Registers parcels for tracking and resolves status by tracking number across carriers — squarely
+    shipment visibility and tracking.
+- tag: Tracking
+  spec_file: sendcloud-tracking-api-openapi.yml
+  capability_id: BC-2510.20
+  capability_id_l1: BC-2510
+  capability_name: Shipment Tracking Management
+  confidence: 0.9
+  evidence: '"allows you to obtain the status of a given parcel at any point during the delivery journey,
+    across all Sendcloud supported carriers"'
+  reason: Explicit multi-carrier parcel status resolution and retrieval — shipment tracking management.
+- tag: Analytics
+  spec_file: sendcloud-analytics-api-openapi.yml
+  capability_id: BC-2420.60
+  capability_id_l1: BC-2420
+  capability_name: Operational Performance Management
+  confidence: 0.75
+  evidence: Retrieve carrier transit times; 'aggregated shipping insights derived from your account's
+    shipping activity... covers carrier and shipping option transit times'
+  reason: Operations expose measured transit times per carrier and shipping option, which is operational
+    measurement of transit time / service-level performance. Some ambiguity versus general management
+    reporting, hence 0.75.
+- tag: Customs Documents Download
+  spec_file: sendcloud-customs-documents-download-api-openapi.yml
+  capability_id: BC-2480.20
+  capability_id_l1: BC-2480
+  capability_name: Customs Declaration Management
+  confidence: 0.7
+  evidence: GET /customs_declaration/normal_printer/{parcel_id}  Retrieve a customs declaration PDF
+  reason: Operations produce customs declaration documents for announced parcels, i.e. cross-border customs
+    declaration output. Ambiguity remains between customs declaration management and general cargo documentation,
+    hence 0.7.
+- tag: Subscriptions
+  spec_file: sendcloud-subscriptions-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.7
+  evidence: '"allows you to subscribe to parcel events and have them delivered to external endpoints such
+    as webhooks or Klaviyo"; "Create a subscription"'
+  reason: Purely the lifecycle of outbound event/webhook subscriptions on the vendor's developer platform
+    — not a subscription-commerce or transport capability.
+- tag: Transit times
+  spec_file: sendcloud-transit-times-api-openapi.yml
+  capability_id: BC-2420.60
+  capability_id_l1: BC-2420
+  capability_name: Operational Performance Management
+  confidence: 0.7
+  evidence: '"Retrieve carrier transit times", "Retrieve shipping method transit times"; schema CarrierTransitTime'
+  reason: Analytics over realised transit times by carrier and shipping method is operational performance
+    measurement of transport service; L2 explicitly names transit times.
