@@ -1,16 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Address Shipments API
-  version: 3.0.0
-  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
-  contact:
-    name: Sendcloud API Support
-    email: contact@sendcloud.com
+  title: Sendcloud Shipments API
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: '1.0'
+  description: 'Operations tagged Shipments across 2 of this provider''s published API definitions: sendcloud-shipments-openapi.yml, sendcloud-v2-integrations-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+- url: https://panel.sendcloud.sc/api/v2
   description: Sendcloud Production
 tags:
 - name: Shipments
@@ -720,6 +719,9 @@ paths:
       security:
       - HTTPBasicAuth: []
       - OAuth2ClientCreds: []
+    servers:
+    - url: https://panel.sendcloud.sc/api/v3
+      description: Sendcloud Production
   /shipments:
     get:
       summary: Retrieve shipments
@@ -1785,6 +1787,9 @@ paths:
                         size: XL
                         color: green
         description: ''
+    servers:
+    - url: https://panel.sendcloud.sc/api/v3
+      description: Sendcloud Production
   /shipments/announce-with-shipping-rules:
     post:
       summary: Create a shipment with rules and/or defaults and announce it synchronously
@@ -2625,6 +2630,9 @@ paths:
                         size: 42
                         color: black
         description: ''
+    servers:
+    - url: https://panel.sendcloud.sc/api/v3
+      description: Sendcloud Production
   /shipments/create-with-shipping-rules:
     post:
       summary: Create a shipment with rules and/or defaults and announce it asynchronously
@@ -3472,6 +3480,9 @@ paths:
                         size: 42
                         color: black
         description: ''
+    servers:
+    - url: https://panel.sendcloud.sc/api/v3
+      description: Sendcloud Production
   /addresses/validate:
     post:
       summary: Validate an address
@@ -3541,6 +3552,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/address-washer-request'
+    servers:
+    - url: https://panel.sendcloud.sc/api/v3
+      description: Sendcloud Production
   /shipments/{id}:
     parameters:
     - schema:
@@ -3687,6 +3701,9 @@ paths:
       security:
       - HTTPBasicAuth: []
       - OAuth2ClientCreds: []
+    servers:
+    - url: https://panel.sendcloud.sc/api/v3
+      description: Sendcloud Production
   /shipments/{id}/cancel:
     parameters:
     - schema:
@@ -3772,6 +3789,9 @@ paths:
                     - status: '409'
                       code: invalid
                       detail: This shipment is already being cancelled.
+    servers:
+    - url: https://panel.sendcloud.sc/api/v3
+      description: Sendcloud Production
   /shipments/{id}/return-portal-url:
     parameters:
     - schema:
@@ -3835,6 +3855,9 @@ paths:
                     - status: '404'
                       code: not_found
                       detail: No return portal is configured for this shipment.
+    servers:
+    - url: https://panel.sendcloud.sc/api/v3
+      description: Sendcloud Production
   /integrations/{id}/shipments:
     parameters:
     - name: id
@@ -4183,6 +4206,9 @@ paths:
                           country: NL
                           value: NL975318642B01
         description: ''
+    servers:
+    - url: https://panel.sendcloud.sc/api/v2
+      description: Sendcloud Production
   /integrations/{id}/shipments/delete:
     parameters:
     - schema:
@@ -4274,447 +4300,22 @@ paths:
                       message: Must be a valid UUID.
         '404':
           $ref: '#/components/responses/404-Shipments'
+    servers:
+    - url: https://panel.sendcloud.sc/api/v2
+      description: Sendcloud Production
 components:
   schemas:
-    label-details:
-      title: Label details Object
-      description: 'Describes the format and resolution of the label.
-
-
-        **Note**: If you request a label in ZPL format and the carrier supports native ZPL, then it won''t be possible to download the label in any other format later.'
+    status:
+      title: Status Object
       type: object
+      description: Status object for a parcel
       properties:
-        mime_type:
+        code:
           type: string
-          default: application/pdf
-          enum:
-          - application/pdf
-          - application/zpl
-          - image/png
-          example: application/zpl
-          description: The format of the label
-        dpi:
-          type: integer
-          description: The resolution of the label in **dots per inch**. ZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.
-          default: 72
-          enum:
-          - 72
-          - 203
-          - 300
-          - 600
-          example: 300
-    address-with-required-fields:
-      title: Address Object
-      type: object
-      description: Sendcloud Address object
-      allOf:
-      - $ref: '#/components/schemas/address'
-      - required:
-        - name
-        - address_line_1
-        - postal_code
-        - city
-        - country_code
-    str-weight:
-      title: Weight
-      type: object
-      description: Weight in the specified unit
-      properties:
-        value:
+          example: ANNOUNCING
+        message:
           type: string
-          description: Weight value
-          example: '14.5'
-        unit:
-          $ref: '#/components/schemas/weight-units'
-      required:
-      - value
-      - unit
-    address-with-sender-address-id:
-      title: Sender Address ID
-      type: object
-      description: A sender address referenced by ID.
-      properties:
-        sender_address_id:
-          description: 'The ID of a pre-configured sender address to ship from.
-
-
-            A sender address can be added through the [Sendcloud platform](https://app.sendcloud.com/v2/settings/addresses/sender) and be retrieved using the [Retrieve a list of sender addresses](/api/v3/sender-addresses/retrieve-a-list-of-sender-addresses) endpoint.
-
-
-            Note: if the sender address has a brand or tax numbers configured, those will be used by default. However, explicitly provided `brand_id` or `tax_numbers` in the request will always take precedence over the values from the sender address.'
-          example: 192
-          type: integer
-      required:
-      - sender_address_id
-    errors:
-      title: Errors
-      description: A standardized format for errors in [JSON:API](https://jsonapi.org/format/#error-objects) responses.
-      type: array
-      items:
-        allOf:
-        - $ref: '#/components/schemas/ErrorObject'
-        - required:
-          - status
-          - code
-          - detail
-    address-washer-request:
-      title: Address Washer Request
-      description: Address Washer Request object model
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/raw-address'
-        carrier_code:
-          description: The code of the carrier to be used for the address validation. Only carriers available to your account can be used.
-          type: string
-          example: trunkrs
-        validation_methods:
-          description: 'An array of optional address validation methods to be applied
-
-            The default Sendcloud validation will always be applied.
-
-            '
-          type: array
-          items:
-            $ref: '#/components/schemas/address-validation-method-enum'
-          example:
-          - here
-      required:
-      - address
-      - carrier_code
-    parcels-array-response:
-      title: Parcels Array Response Object
-      description: Parcel common object model
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/parcel-common'
-      - type: object
-        properties:
-          created_at:
-            type: string
-            format: date-time
-            description: The timestamp of when the parcel was created
-            readOnly: true
-            example: '2024-09-04T12:14:36.506925Z'
-          updated_at:
-            type: string
-            format: date-time
-            description: The timestamp of when the parcel was last updated
-            readOnly: true
-            example: '2024-09-04T12:14:47.203107Z'
-          announced_at:
-            type:
-            - string
-            - 'null'
-            description: The timestamp of when the parcel was announced to the carrier (label was created)
-            format: date-time
-            readOnly: true
-            example: '2024-09-04T12:14:47.153985Z'
-          id:
-            type: integer
-            description: ID of the parcel (required to retrieve a parcel document for async announcement)
-            readOnly: true
-          status:
-            $ref: '#/components/schemas/status'
-            readOnly: true
-          documents:
-            type: array
-            uniqueItems: true
-            description: An array of documents. A parcel can contain multiple documents, for instance labels and a customs form. This field returns an array of all the available documents for this parcel.
-            readOnly: true
-            items:
-              $ref: '#/components/schemas/documents'
-          tracking_number:
-            type: string
-            description: Tracking number of the shipment.
-            readOnly: true
-            example: 3SYZXG8498635
-          tracking_url:
-            type:
-            - string
-            - 'null'
-            description: Tracking url of this shipment.
-            readOnly: true
-          additional_carrier_data:
-            type: object
-            title: Carrier-specific data
-            readOnly: true
-            description: Specific data that only belongs to some carriers.
-            properties:
-              awb_tracking_number:
-                type:
-                - string
-                - 'null'
-                description: Deutsche Post Global Mail only. This indicates the air waybill number of this box of Global Mail parcels. This will be set once the `Finalize box` has been called.
-              box_number:
-                type:
-                - integer
-                - 'null'
-                description: Deutsche Post Global Mail only. This indicates the box to which this parcel belongs. This will be only set for Global Mail parcels.
-          label_notes:
-            type:
-            - array
-            - 'null'
-            description: Custom messages printed on the shipping label. Use this field to include custom text - such as invoice numbers, product IDs, or internal reference codes - on the package’s shipping label.
-            maxItems: 255
-            items:
-              type: string
-              example: The doorbell isn’t working
-              minLength: 1
-              maxLength: 255
-    weight:
-      title: Weight
-      type: object
-      description: Weight in the specified unit
-      properties:
-        value:
-          type: number
-          description: Weight value
-          exclusiveMinimum: 0
-          example: 14.5
-        unit:
-          $ref: '#/components/schemas/weight-units'
-      required:
-      - value
-      - unit
-    ShipmentBlobOrderCreate:
-      title: Shipment Blob Order Create Object
-      type: object
-      properties:
-        address:
-          title: Address
-          type: string
-          minLength: 1
-        address_2:
-          title: Address 2
-          type: string
-          minLength: 0
-        city:
-          title: City
-          type: string
-          minLength: 1
-        company_name:
-          title: Company name
-          type: string
-          minLength: 0
-        country:
-          $ref: '#/components/schemas/country-codes'
-        created_at:
-          type: string
-          title: Created at
-          format: date-time
-          description: Timestamp indicating when the shipment was created in the shop system. This value will be saved and accessible through `shipment_created_at` field in GET response.
-          example: '2022-05-07T15:08:12.152000Z'
-        currency:
-          type:
-          - string
-          - 'null'
-          title: Currency
-          minLength: 1
-          description: ISO 4217 currency code
-          enum:
-          - EUR
-          - USD
-          - GBP
-        customs_invoice_nr:
-          type: string
-          title: Customs invoice nr
-          minLength: 0
-          description: Your own commercial invoice number
-          example: '120'
-        customs_shipment_type:
-          type:
-          - integer
-          - 'null'
-          title: Customs shipment type
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          description: "Type of shipment for customs purposes:\n  - `0` - Gift\n  - `1` - Documents\n  - `2` - Commercial Goods\n  - `3` - Commercial Sample\n  - `4` - Returned Goods\n"
-          minimum: 0
-          maximum: 4
-        email:
-          title: Customer email address
-          type: string
-          format: email
-          minLength: 0
-        external_order_id:
-          title: External order id
-          type: string
-          minLength: 1
-          description: External order ID assigned by the shop system
-        external_shipment_id:
-          title: External shipment id
-          type:
-          - string
-          - 'null'
-          minLength: 1
-          description: External shipment ID assigned by the shop system
-        house_number:
-          title: House number
-          type: string
-          minLength: 0
-        name:
-          title: Name
-          type: string
-          minLength: 1
-        order_number:
-          title: Order number
-          type: string
-          minLength: 1
-          description: Unique order number generated manualy or by the shop system
-        order_status:
-          $ref: '#/components/schemas/ShipmentBlobStatus'
-        parcel_items:
-          type:
-          - array
-          - 'null'
-          description: List of items the parcel contains
-          items:
-            $ref: '#/components/schemas/ParcelItems'
-        payment_status:
-          $ref: '#/components/schemas/ShipmentBlobStatus'
-        postal_code:
-          title: Postal code
-          type: string
-          minLength: 1
-        shipping_method:
-          type:
-          - integer
-          - 'null'
-          title: Shipping method
-          description: Foreign key indicating shipping method used
-          example: 1234
-        shipping_method_checkout_name:
-          title: Shipping method checkout name
-          type: string
-          minLength: 0
-          maxLength: 100
-          description: Human readable shipping method name
-        telephone:
-          title: Telephone
-          type: string
-          minLength: 0
-        to_post_number:
-          title: To post number
-          type: string
-          minLength: 0
-        to_service_point:
-          title: To service point
-          type:
-          - integer
-          - 'null'
-        to_state:
-          title: To state
-          type:
-          - string
-          - 'null'
-          minLength: 1
-        total_order_value:
-          title: Total order value
-          type:
-          - string
-          - 'null'
-          format: decimal
-          description: The total price of an order
-        updated_at:
-          type: string
-          title: Updated at
-          format: date-time
-          description: Timestamp indicating when the shipment was updated in the shop system. This value will be saved and accessible through `shipment_updated_at` field in GET response.
-          example: '2022-05-07T15:08:12.152000Z'
-        weight:
-          type:
-          - string
-          - 'null'
-          title: Weight
-          format: decimal
-          description: Total weight of the order. Cannot be smaler than 0.001
-          example: '10.2'
-          maxLength: 10
-        checkout_payload:
-          $ref: '#/components/schemas/CheckoutPayload'
-        width:
-          type:
-          - string
-          - 'null'
-          title: Width
-          description: Volumetric weight width
-          format: decimal
-          maxLength: 10
-          example: '10.2'
-        height:
-          type:
-          - string
-          - 'null'
-          title: Height
-          description: Volumetric weight height
-          format: decimal
-          maxLength: 10
-          example: '10.2'
-        length:
-          type:
-          - string
-          - 'null'
-          title: Length
-          description: Volumetric weight length
-          format: decimal
-          maxLength: 10
-          example: '10.2'
-        customs_details:
-          $ref: '#/components/schemas/CustomsInformation'
-      required:
-      - address
-      - address_2
-      - city
-      - company_name
-      - country
-      - created_at
-      - currency
-      - customs_invoice_nr
-      - customs_shipment_type
-      - email
-      - external_order_id
-      - external_shipment_id
-      - house_number
-      - name
-      - order_number
-      - order_status
-      - parcel_items
-      - payment_status
-      - postal_code
-      - shipping_method_checkout_name
-      - telephone
-      - to_post_number
-      - to_service_point
-      - to_state
-      - updated_at
-    ShipmentCreateUpdateLog:
-      title: Shipment Creation or Update information log
-      type: object
-      properties:
-        external_order_id:
-          title: External Order ID
-          type: string
-          minLength: 1
-        external_shipment_id:
-          title: External Shipment ID
-          type: string
-          minLength: 1
-        shipment_uuid:
-          title: Shipment UUID
-          type: string
-          format: uuid
-          minLength: 1
-        status:
-          title: Status
-          type: string
-          enum:
-          - created
-          - updated
+          example: Being announced
     shipment-with-rules-response:
       title: Shipment with rules response Object
       description: Shipment response object model including applied shipping rules.
@@ -4733,31 +4334,82 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/applied-shipping-rule'
-    parcel-item:
-      title: Parcel Item Object
-      description: A single item in a shipment. **Note that parcel item object is required for shipments that require customs documents.**
+    documents:
+      title: Documents Object
+      type: object
+      description: Documents object for a parcel
+      properties:
+        type:
+          type: string
+          deprecated: true
+          description: The type of the document. See the list below for available types.
+          enum:
+          - label
+          - cn23
+          - cp71
+          - commercial-invoice
+          - cn23-default
+          - air-waybill
+          - qr
+        document_type:
+          type: string
+          description: The type of the document. See the list below for available types.
+          enum:
+          - label
+          - customs-declaration
+          - air-waybill
+        size:
+          type: string
+          description: The paper size of the document.
+          enum:
+          - a6
+          - a4
+        link:
+          type: string
+          description: A link to the document, which allows downloading of the document in PDF, PNG and ZPL and various DPI.
+    sync-parcels-array-response:
+      title: Sync Parcels Array Response Object
+      description: Sync parcel common object model
       type: object
       allOf:
-      - $ref: '#/components/schemas/parcel-item-with-optional-fields'
-      - required:
-        - hs_code
-        - weight
-        - description
-        - price
-    Price:
-      title: Price Object
+      - $ref: '#/components/schemas/parcels-array-response'
+      - type: object
+        properties:
+          label_file:
+            type:
+            - string
+            - 'null'
+            format: byte
+            description: The base64 representation of the label file. **Note that it will be returned if there is only one parcel in the shipment.**
+    address-validation-method-enum:
+      title: Address validation method enum
+      type: string
+      enum:
+      - here
+    str-dimensions:
+      title: Dimensions
       type: object
+      description: Dimensions in the specified unit
       properties:
-        value:
+        length:
           type: string
-          example: '12.65'
-          pattern: '[\d]+(\.[\d]+)?'
-        currency:
+          description: length in specified unit
+          example: '15'
+        width:
           type: string
-          description: ISO 4217 currency code
-          minLength: 3
-          maxLength: 3
-          example: USD
+          description: width in specified unit
+          example: '20.5'
+        height:
+          type: string
+          description: height in specified unit
+          example: '37'
+        unit:
+          $ref: '#/components/schemas/dimension-units'
+      required:
+      - length
+      - width
+      - height
+      - unit
     customs-information-with-optional-fields:
       title: CustomsInformation with optional fields
       type:
@@ -4964,55 +4616,6 @@ components:
           - importer_of_record
       required:
       - invoice_number
-    status:
-      title: Status Object
-      type: object
-      description: Status object for a parcel
-      properties:
-        code:
-          type: string
-          example: ANNOUNCING
-        message:
-          type: string
-          example: Being announced
-    shipment-request:
-      title: Shipment request Object
-      description: Shipment request object model
-      allOf:
-      - $ref: '#/components/schemas/shipment-common'
-      - type: object
-        required:
-        - from_address
-        properties:
-          from_address:
-            description: The sender address for the shipment. You can either provide a `sender_address_id` to reference a pre-configured sender address (with optional address field overrides), or provide all address fields directly.
-            oneOf:
-            - $ref: '#/components/schemas/address-with-sender-address-id'
-            - $ref: '#/components/schemas/address-with-required-fields'
-          to_service_point:
-            $ref: '#/components/schemas/service-point-request'
-          label_details:
-            $ref: '#/components/schemas/label-details'
-          delivery_dates:
-            oneOf:
-            - $ref: '#/components/schemas/delivery-dates'
-            - type: 'null'
-            description: Defined delivery dates. The `handover_at` date indicates when the item will be handed over to the carrier by the merchant in ISO 8601. If this date is not passed the carrier default will be used. For most carriers this is the following working day.
-      type: object
-    optional-price:
-      title: Optional price
-      anyOf:
-      - type: 'null'
-      - $ref: '#/components/schemas/required-price'
-    required-price:
-      title: Price object
-      description: Price, consisting of a value and currency.
-      allOf:
-      - $ref: '#/components/schemas/Price'
-      - type: object
-        required:
-        - value
-        - currency
     shipment-response:
       title: Shipment response Object
       description: Shipment response object model
@@ -5026,112 +4629,342 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/parcels-array-response'
-    address-validation-method-enum:
-      title: Address validation method enum
-      type: string
-      enum:
-      - here
-    service-point-request:
-      title: Service Point
-      description: 'Node for service point information. Use the [Retrieve a list of service points](/api/v2/service-points/retrieve-a-list-of-service-points) endpoint to find service points, or pass in the carrier''s id for the service point.
-
-
-        If both the `id` and `carrier_service_point_id` are provided, the `carrier_service_point_id` will be prioritised.'
+    cancellation-status:
+      title: Cancel Shipment Status Object
       type: object
-      anyOf:
-      - title: Sendcloud ID
-        type: object
-        properties:
-          id:
-            type: string
-            description: The sendcloud `id` of a service point.
-            example: '123'
-        required:
-        - id
-      - title: Carrier Service Point ID
-        type: object
-        properties:
-          carrier_service_point_id:
-            type: string
-            description: The carrier's id of a service point
-            example: '123'
-        required:
-        - carrier_service_point_id
-    CustomsInformation:
+      properties:
+        status:
+          type: string
+          minLength: 1
+          example: cancelled
+        message:
+          type: string
+          minLength: 1
+          example: Shipment has been cancelled
+      required:
+      - status
+      - message
+    delivery-dates:
+      title: Delivery Dates
+      description: Defined delivery dates
       type:
       - object
-      - 'null'
-      title: Customs Information
-      description: Customs information related to this shipment
       properties:
-        discount_granted:
+        handover_at:
           type:
-          - object
+          - string
           - 'null'
-          title: Discount Granted
-          description: Discount granted on the total order
-          $ref: '#/components/schemas/CostsObject'
-        insurance_costs:
+          format: date-time
+          description: The date when the item will be handed over to the carrier by the merchant in ISO 8601
+          example: '2025-02-27T10:00:00.555309+00:00'
+        deliver_at:
           type:
-          - object
+          - string
           - 'null'
-          title: Insurance Cost
-          description: Amount the order is insured for
-          $ref: '#/components/schemas/CostsObject'
-        freight_costs:
-          type:
-          - object
-          - 'null'
-          title: Freight Cost
-          description: Shipping cost of the order
-          $ref: '#/components/schemas/CostsObject'
-        other_costs:
-          type:
-          - object
-          - 'null'
-          title: Other Costs
-          description: Any other costs (for eg, wrapping costs) associated with the order
-          $ref: '#/components/schemas/CostsObject'
-        tax_numbers:
-          type:
-          - object
-          - 'null'
-          title: Tax information about sender, receiver, and importer of records
-          properties:
-            sender:
-              type: array
-              title: Sender's Tax Information
-              minItems: 0
-              items:
-                $ref: '#/components/schemas/TaxNumber_2'
-            receiver:
-              type: array
-              title: Receiver's Tax Information
-              minItems: 0
-              items:
-                $ref: '#/components/schemas/TaxNumber_2'
-            importer_of_records:
-              type: array
-              title: Receiver's Tax Information
-              minItems: 0
-              items:
-                $ref: '#/components/schemas/TaxNumber_2'
-    service-point-response:
-      title: Service Point
-      description: Service point information returned in responses.
+          format: date-time
+          description: The date when the order should reach the end customer in ISO 8601
+          example: '2025-03-15T10:00:00.555309+00:00'
+    multicollo-parcels-array-request-with-optional-fields:
+      title: Parcels array request with optional fields Object
+      description: Parcels array request with optional fields object model
       type: object
+      properties:
+        parcels:
+          description: Represents each package of the shipment. Each carrier can have its own number of parcels limit per shipment, otherwise there is a restriction to a maximum of 50 parcels (default).
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/parcel-common-with-optional-fields'
+            - type: object
+              properties:
+                parcel_items:
+                  type: array
+                  description: List of items/products that the parcel contains. **Note that parcel items array is required for shipments that require customs documents.**
+                  maxItems: 1000
+                  items:
+                    $ref: '#/components/schemas/parcel-item-with-optional-fields'
+          minItems: 1
+          maxItems: 50
+    base-shipment-response:
+      title: Base shipment response Object
+      description: Base shipment response object model
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/shipment-common'
+      - type: object
+        required:
+        - from_address
+        properties:
+          from_address:
+            description: The sender address for the shipment.
+            $ref: '#/components/schemas/address-with-required-fields'
+          id:
+            description: ID of the shipment (required to retrieve or cancel a specific shipment)
+            type: string
+            readOnly: true
+          to_service_point:
+            $ref: '#/components/schemas/service-point-response'
+          errors:
+            type: array
+            items:
+              $ref: '#/components/schemas/ErrorObject'
+            readOnly: true
+            description: This errors object will contain errors such as carrier announcement errors or validation errors.
+          delivery-dates:
+            $ref: '#/components/schemas/delivery-dates'
+            type: object
+          carrier:
+            type: object
+            description: Carrier used for the shipment.
+            readOnly: true
+            properties:
+              code:
+                type: string
+                title: Carrier Code
+                description: A carrier represented by a Sendcloud unique identifier.
+                example: postnl
+              name:
+                type: string
+                title: Carrier Name
+                description: Carrier friendly name.
+                example: PostNL
+    address-with-sender-address-id:
+      title: Sender Address ID
+      type: object
+      description: A sender address referenced by ID.
+      properties:
+        sender_address_id:
+          description: 'The ID of a pre-configured sender address to ship from.
+
+
+            A sender address can be added through the [Sendcloud platform](https://app.sendcloud.com/v2/settings/addresses/sender) and be retrieved using the [Retrieve a list of sender addresses](/api/v3/sender-addresses/retrieve-a-list-of-sender-addresses) endpoint.
+
+
+            Note: if the sender address has a brand or tax numbers configured, those will be used by default. However, explicitly provided `brand_id` or `tax_numbers` in the request will always take precedence over the values from the sender address.'
+          example: 192
+          type: integer
+      required:
+      - sender_address_id
+    parcel-common-with-optional-fields:
+      title: Parcel common with optional fields Object
+      description: Parcel common with optional fields model
+      type: object
+      properties:
+        dimensions:
+          $ref: '#/components/schemas/str-dimensions'
+          description: While dimensions are optional, some carriers require them present. If this is the case, an error will be thrown.
+        weight:
+          $ref: '#/components/schemas/str-weight'
+        additional_insured_price:
+          $ref: '#/components/schemas/optional-price'
+          description: Amount for which you want to add additional insurance (on top of carrier insurance) to the parcel with our insurance provider XCover. You can inure up from 2 euros to 5000 euros per shipment.
+        label_notes:
+          type:
+          - array
+          - 'null'
+          description: "Custom messages printed on the shipping label. Use this field to include custom text - such as invoice numbers, product IDs, or internal reference codes - on the package's shipping label. \n\n**Note that support for label messages varies by carrier; some carriers may ignore this field or offer alternatives, such as delivery instructions, which are communicated to the carrier but not printed on the label. Some carriers may apply label notes at the shipment level rather than per individual parcel.**"
+          maxItems: 255
+          items:
+            type: string
+            example: The doorbell isn’t working
+            minLength: 1
+            maxLength: 255
+        sscc:
+          type:
+          - string
+          - 'null'
+          minLength: 18
+          maxLength: 18
+          pattern: ^\d{18}$
+          description: The Serial Shipping Container Code (SSCC) serves as a globally unique identifier for a logistic unit, functioning as a digital "license plate" for tracking and managing goods throughout the supply chain.
+          example: 019844628346512933
+        package_type:
+          type:
+          - string
+          - 'null'
+          description: The package type defines how you pack your parcels. This field is mostly only required for carriers with specific needs, such as pallet carriers. For more information, reach out to your Sendcloud contact person.
+          enum:
+          - package
+          - euro_pallet
+          - block_pallet
+          - mini_pallet
+          - one_way_pallet
+          - tube
+          - over_size_pallet
+          - bundle
+          - half_pallet
+          - letterbox
+          - null
+          example: package
+    shipment-request-sync-announce:
+      title: Synchronous Announcement Shipment request Object
+      description: Synchronous Announcement Shipment request object model
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/shipment-request'
+      - type: object
+        properties:
+          parcels:
+            description: 'Represents each package of the shipment. Note that you can send a maximum of 15 parcels per shipment to this endpoint.
+
+
+              To announce more than 15 parcels in the same shipment, you can use the [Create and announce a shipment asynchronously](/api/v3/shipments/create-and-announce-a-shipment-asynchronously) endpoint.
+
+
+              Note: each carrier can have a lower than the default number of parcels limit per shipment.'
+            type: array
+            items:
+              $ref: '#/components/schemas/parcel-common'
+            minItems: 1
+            maxItems: 15
+      - required:
+        - parcels
+    dimension-units:
+      type: string
+      title: Dimensional units
+      enum:
+      - cm
+      - mm
+      - m
+      - yd
+      - ft
+      - in
+      example: mm
+    ErrorObject:
+      title: Error
+      type: object
+      description: Error in a JSON:API error format
       properties:
         id:
           type: string
-          description: The `id` of a service point.
-          example: '123'
-        carrier_service_point_id:
+          description: A unique identifier for the error.
+        links:
+          type: object
+          description: A set of hyperlinks that provide additional information about the error.
+          properties:
+            about:
+              type: string
+              description: A URL that provides additional information about the error.
+        status:
           type: string
-          description: The carrier's native id for the service point
-          example: '91233'
-      required:
-      - id
-      - carrier_service_point_id
+          format: int32
+          description: The HTTP status code of the error.
+          minLength: 1
+        code:
+          type: string
+          description: A unique error code for the error, in snake case format.
+          minLength: 1
+          enum:
+          - unknown_field
+          - invalid
+          - forbidden
+          - invalid_choice
+          - min_value
+          - 'null'
+          - not_found
+          - required
+          - not_a_list
+          - non_field_errors
+          - authentication_failed
+          - validation_error
+          - parcel_announcement_error
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          minLength: 1
+        detail:
+          type: string
+          description: A human-readable explanation of the error.
+          minLength: 1
+        source:
+          type: object
+          description: An object that identifies the source of the error within the request payload.
+          properties:
+            pointer:
+              type: string
+              description: A `JSON` pointer to the location of the error within the request payload.
+            parameter:
+              type: string
+              description: The name of the `query` parameter that caused the error.
+            header:
+              type: string
+              description: The name of the `header` parameter that caused the error.
+        meta:
+          type: object
+          description: Additional metadata about the error.
+    address-washer-response:
+      title: Address Washer Response
+      description: Address Washer Response object model
+      type: object
+      properties:
+        input_address_is_valid:
+          type: boolean
+          description: Indicates if the input address is valid.
+        results:
+          description: The results of the address validation.
+          type: array
+          items:
+            type: object
+            properties:
+              address:
+                $ref: '#/components/schemas/raw-address'
+              recommended:
+                type: boolean
+                description: Indicates if the address is recommended after validation.
+              analysis:
+                type: object
+                description: Analysis details of the address validation.
+                properties:
+                  validation_result:
+                    type: object
+                    description: The result of the validation process.
+                    properties:
+                      is_valid:
+                        type: boolean
+                        description: Indicates if the address is valid.
+                      reasons:
+                        type: array
+                        description: List of reasons for the validation result.
+                        items:
+                          type: string
+                          oneOf:
+                          - const: ADDRESS_TOO_LONG
+                            title: address_lines:too_long
+                            description: The address line exceeds the maximum length.
+                          - const: HOUSE_NUMBER_TOO_LONG
+                            title: house_number:too_long
+                            description: The house number exceeds the maximum length.
+                          - const: HOUSE_NUMBER_TOO_SHORT
+                            title: house_number:too_short
+                            description: The house number is too short.
+                          - const: ADDRESS_NOT_VALID
+                            title: address:does_not_exist
+                            description: The address does not exist.
+                          - const: COUNTRY_CODE_MISSING
+                            title: country_code:missing
+                            description: The country code is missing.
+                          - const: POSTAL_CODE_MISSING
+                            title: postal_code:missing
+                            description: The postal code is missing.
+                          - const: STATE_MISSING
+                            title: state:missing
+                            description: The state is missing.
+                          - const: PROVINCE_MISSING
+                            title: province:missing
+                            description: The province is missing.
+                  changed_attributes:
+                    type: array
+                    description: List of changed attributes.
+                    items:
+                      type: string
+    customs-information:
+      title: CustomsInformation
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/customs-information-with-optional-fields'
+      - required:
+        - invoice_number
+        - export_reason
     applied-shipping-rule:
       title: Applied shipping rule modification
       description: Represents a shipping rule that was applied to the shipment and the result of the changes it made.
@@ -5164,26 +4997,52 @@ components:
       required:
       - rule
       - result
-    shipment-request-with-optional-fields:
-      title: Shipment request with optional fields Object
-      description: Shipment request with optional fields object model
+    Price:
+      title: Price Object
+      type: object
+      properties:
+        value:
+          type: string
+          example: '12.65'
+          pattern: '[\d]+(\.[\d]+)?'
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          minLength: 3
+          maxLength: 3
+          example: USD
+    parcel-common:
+      title: Parcel common Object
+      description: Parcel common object model
+      type: object
       allOf:
-      - $ref: '#/components/schemas/shipment-common-with-optional-fields'
+      - $ref: '#/components/schemas/parcel-common-with-optional-fields'
+      - required:
+        - weight
       - type: object
+        properties:
+          parcel_items:
+            type: array
+            description: List of items/products that the parcel contains. **Note that parcel items array is required for shipments that require customs documents.**
+            maxItems: 1000
+            items:
+              $ref: '#/components/schemas/parcel-item'
+    shipment-request:
+      title: Shipment request Object
+      description: Shipment request object model
+      allOf:
+      - $ref: '#/components/schemas/shipment-common'
+      - type: object
+        required:
+        - from_address
         properties:
           from_address:
             description: The sender address for the shipment. You can either provide a `sender_address_id` to reference a pre-configured sender address (with optional address field overrides), or provide all address fields directly.
             oneOf:
             - $ref: '#/components/schemas/address-with-sender-address-id'
             - $ref: '#/components/schemas/address-with-required-fields'
-          customs_information:
-            $ref: '#/components/schemas/customs-information-with-optional-fields'
-      - type: object
-        properties:
           to_service_point:
             $ref: '#/components/schemas/service-point-request'
-      - type: object
-        properties:
           label_details:
             $ref: '#/components/schemas/label-details'
           delivery_dates:
@@ -5192,150 +5051,278 @@ components:
             - type: 'null'
             description: Defined delivery dates. The `handover_at` date indicates when the item will be handed over to the carrier by the merchant in ISO 8601. If this date is not passed the carrier default will be used. For most carriers this is the following working day.
       type: object
-    ShipmentBlobStatus:
-      title: Shipment Blob Status Object
-      type:
-      - object
-      - 'null'
+    service-point-response:
+      title: Service Point
+      description: Service point information returned in responses.
+      type: object
       properties:
         id:
-          title: Id
           type: string
-          minLength: 1
-          description: Custom internal shop status, can be used for filtering
-        message:
-          title: Message
+          description: The `id` of a service point.
+          example: '123'
+        carrier_service_point_id:
           type: string
-          minLength: 1
-          description: User-defined human readable status
+          description: The carrier's native id for the service point
+          example: '91233'
       required:
       - id
-      - message
-    delivery-dates:
-      title: Delivery Dates
-      description: Defined delivery dates
-      type:
-      - object
-      properties:
-        handover_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date when the item will be handed over to the carrier by the merchant in ISO 8601
-          example: '2025-02-27T10:00:00.555309+00:00'
-        deliver_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: The date when the order should reach the end customer in ISO 8601
-          example: '2025-03-15T10:00:00.555309+00:00'
-    TaxNumber_2:
+      - carrier_service_point_id
+    weight:
+      title: Weight
       type: object
-      title: Tax Number
+      description: Weight in the specified unit
       properties:
-        name:
-          type:
-          - string
-          - 'null'
-          title: Tax ID name
-          example: VAT
-        country_code:
-          type:
-          - string
-          - 'null'
-          title: The country code of the country in the address
-          example: NL
         value:
-          type:
-          - string
-          - 'null'
-          title: The value of the Tax ID
-          example: NL987654321B02
-    str-dimensions:
-      title: Dimensions
-      type: object
-      description: Dimensions in the specified unit
-      properties:
-        length:
-          type: string
-          description: length in specified unit
-          example: '15'
-        width:
-          type: string
-          description: width in specified unit
-          example: '20.5'
-        height:
-          type: string
-          description: height in specified unit
-          example: '37'
+          type: number
+          description: Weight value
+          exclusiveMinimum: 0
+          example: 14.5
         unit:
-          $ref: '#/components/schemas/dimension-units'
+          $ref: '#/components/schemas/weight-units'
       required:
-      - length
-      - width
-      - height
+      - value
       - unit
-    address:
-      title: Address Object
+    service-point-request:
+      title: Service Point
+      description: 'Node for service point information. Use the [Retrieve a list of service points](/api/v2/service-points/retrieve-a-list-of-service-points) endpoint to find service points, or pass in the carrier''s id for the service point.
+
+
+        If both the `id` and `carrier_service_point_id` are provided, the `carrier_service_point_id` will be prioritised.'
       type: object
-      description: Sendcloud Address object
+      anyOf:
+      - title: Sendcloud ID
+        type: object
+        properties:
+          id:
+            type: string
+            description: The sendcloud `id` of a service point.
+            example: '123'
+        required:
+        - id
+      - title: Carrier Service Point ID
+        type: object
+        properties:
+          carrier_service_point_id:
+            type: string
+            description: The carrier's id of a service point
+            example: '123'
+        required:
+        - carrier_service_point_id
+    shipment-common-with-optional-fields:
+      title: Shipment common with optional fields Object
+      description: Shipment common with optional fields object model
+      type: object
       properties:
-        name:
+        brand_id:
+          description: 'The `id` of the brand. Brands can be added through the [Sendcloud platform](https://app.sendcloud.com/v2/settings/brands/list) and be retrieved (alongside their `id`) from the [Retrieve a list of brands](/api/v2/brands/retrieve-a-list-of-brands) endpoint.
+
+            '
+          example: 42
+          type: integer
+        ship_with:
+          $ref: '#/components/schemas/ship-with'
+        to_address:
+          $ref: '#/components/schemas/address-with-required-fields'
+        order_number:
           type: string
-          example: John Doe
-          description: Name of the person associated with the address
-          minLength: 1
-        company_name:
-          type: string
-          example: Sendcloud
-          description: Name of the company associated with the address
-        address_line_1:
-          type: string
-          example: Stadhuisplein
-          description: First line of the address
-        house_number:
-          type: string
-          example: '50'
-          description: House number of the address
-        address_line_2:
-          type: string
-          description: Additional address information, e.g. 2nd level
-          example: Apartment 17B
-        postal_code:
-          type: string
-          example: 1013 AB
-          description: Zip code of the address
-          minLength: 1
-        city:
-          type: string
-          example: Eindhoven
-          description: City of the address
-          minLength: 1
-        po_box:
+          description: Order number generated manually or by shop system
+        total_order_price:
+          description: 'The value paid by the buyer for the order.
+
+            '
+          $ref: '#/components/schemas/optional-price'
+        reference:
+          description: 'A reference that will be stored on the Shipment and returned in your responses. This is not sent to the carrier.
+
+            '
           type:
           - string
           - 'null'
-          description: Code required in case of PO Box or post locker delivery
-        state_province_code:
+          example: shipment-1234
+        external_reference_id:
+          description: 'An optional reference can be provided by the API user; if included, it must be unique across shipments of the user. Using the same reference more than once will result in a 409 HTTP status code and the associated object being returned.
+
+            '
+          type:
+          - string
+          - 'null'
+          example: unique-value-1234
+        validation_methods:
+          type: array
+          description: 'A list of additional address validations to apply. At present, the only supported validation service is Here, and it is used exclusively for transactional contracts. To enable this feature, contract_id must be explicitly set and must reference a transactional contract.
+
+
+            When using the "Here" validation method, Sendcloud will attempt to verify and correct the provided address based on the best available match from the selected provider. For example, if you submit "city": "Amstredan", the system will automatically correct it to "city": "Amsterdam".
+
+
+            If no suitable match is found, the request will return an error.
+
+
+            Please note that only address components recognised by the selected provider will be kept. Any additional details included in address fields (e.g. "address_line_2": "Ring the blue doorbell") will be removed if they do not match the provider records.
+
+
+            For adding delivery notes or extra instructions, use the parcels.label_notes field instead.
+
+            '
+          items:
+            $ref: '#/components/schemas/address-validation-method-enum'
+          example:
+          - here
+      required:
+      - to_address
+    sync-shipment-with-rules-response:
+      title: Sync shipment with rules response Object
+      description: Sync shipment response object model including applied shipping rules.
+      allOf:
+      - $ref: '#/components/schemas/base-shipment-response'
+      - properties:
+          parcels:
+            description: Represents each package of the shipment.
+            type: array
+            items:
+              $ref: '#/components/schemas/sync-parcels-array-response'
+          label_details:
+            $ref: '#/components/schemas/label-details'
+          applied_shipping_rules:
+            description: List of shipping rules that were applied to the shipment and the result of each rule's modifications.
+            type: array
+            items:
+              $ref: '#/components/schemas/applied-shipping-rule'
+      type: object
+    parcel-item-with-optional-fields:
+      title: Parcel Item with optional fields Object
+      description: A single item (with optional fields) in a shipment. **Note that parcel item object is required for shipments that require customs documents.**
+      type: object
+      properties:
+        item_id:
           type: string
-          example: IT-RM
-          description: The character state code of the customer represented as ISO 3166-2 code. This field is required for certain countries. See [international shipping](/docs/shipments/international-shipping#required-fields-for-international-shipments) for details.
-        country_code:
-          type: string
-          example: NL
-          description: The country code of the customer represented as ISO 3166-1 alpha-2
+          description: Order Item external ID in shop system
+          example: '5552'
           minLength: 1
-        email:
+        description:
           type: string
-          format: email
-          example: johndoe@gmail.com
-          description: Email address of the person associated with the address
-        phone_number:
+          description: Description of the item
+          example: T-Shirt XL
+          minLength: 1
+          maxLength: 255
+        quantity:
+          type: integer
+          description: Quantity of items shipped
+          minimum: 1
+          example: 1
+        weight:
+          $ref: '#/components/schemas/weight'
+        price:
+          $ref: '#/components/schemas/required-price'
+        hs_code:
           type: string
-          example: '+319881729999'
-          description: Phone number of the person associated with the address
+          description: Harmonized System Code. **This field is required if it's an international shipment**
+          example: '620520'
+          maxLength: 12
+        origin_country:
+          type: string
+          description: ISO-2 code of the country where the items were originally produced. **This field is required if it's an international shipment**
+          example: NL
+        sku:
+          type: string
+          description: The SKU of the product
+          example: TS1234
+        product_id:
+          type: string
+          description: The internal ID of the product
+          example: '19284'
+        mid_code:
+          title: MID Code
+          type:
+          - string
+          - 'null'
+          description: MID code is short for Manufacturer's Identification code and must be shown on the commercial invoice. It's used as an alternative to the full name and address of a manufacturer, shipper or exporter and is always required for U.S. formal customs entries.
+          example: NLOZR92MEL
+        material_content:
+          title: Material Content
+          type:
+          - string
+          - 'null'
+          description: A description of materials of the order content.
+          example: 100% Cotton
+        intended_use:
+          title: Intended Use
+          type:
+          - string
+          - 'null'
+          description: Intended use of the order contents. The intended use may be personal or commercial.
+          example: Personal use
+        dangerous_goods:
+          $ref: '#/components/schemas/dangerous-goods'
+        dds_reference:
+          title: DDS Reference
+          type:
+          - string
+          - 'null'
+          description: The DDS (Due Diligence Statement) reference number associated with the item, if applicable. See EUDR system for more details.
+          example: 25FIYPEK0A7573
+        taric_doc_code:
+          title: TARIC document code
+          type:
+          - string
+          - 'null'
+          description: TARIC document codes are specific alphanumeric codes used in EU customs declarations (Box 44) to identify required supporting documents, certificates, or conditions for a product, like health certificates (e.g., 3200), origin proofs (e.g., EUR.1), or special authorizations (e.g., C716 for due diligence) for simplified procedures, ensuring compliance with EU trade rules for various goods.
+          example: Y142
+        manufacturer_product_id:
+          title: Manufacturer Product ID
+          type:
+          - string
+          - 'null'
+          description: A manufacturer or product supplier's unique code, assigned to an individual product.
+          maxLength: 70
+          example: ABC-12345
+        manufacturer_product_id_std:
+          title: Manufacturer Product ID (Standardized)
+          type:
+          - string
+          - 'null'
+          description: A standardized manufacturer product identifier assigned by a global industry standard body (e.g. GTIN). Provide only if one exists for the product.
+          maxLength: 70
+          example: 01234567890128
+        properties:
+          type: object
+          additionalProperties: true
+          description: Any custom user-defined properties of order item or product
+          example:
+            size: red
+            color: green
+      required:
+      - quantity
+    cancel-shipment-status:
+      title: Cancel Shipment Status object
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/cancellation-status'
+      required:
+      - data
+    errors:
+      title: Errors
+      description: A standardized format for errors in [JSON:API](https://jsonapi.org/format/#error-objects) responses.
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/ErrorObject'
+        - required:
+          - status
+          - code
+          - detail
+    parcel-item:
+      title: Parcel Item Object
+      description: A single item in a shipment. **Note that parcel item object is required for shipments that require customs documents.**
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/parcel-item-with-optional-fields'
+      - required:
+        - hs_code
+        - weight
+        - description
+        - price
     dangerous-goods:
       title: DangerousGoods
       type: object
@@ -5434,6 +5421,289 @@ components:
           - Net
           - Gross
           description: Type of weight measurement
+    optional-price:
+      title: Optional price
+      anyOf:
+      - type: 'null'
+      - $ref: '#/components/schemas/required-price'
+    address-washer-request:
+      title: Address Washer Request
+      description: Address Washer Request object model
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/raw-address'
+        carrier_code:
+          description: The code of the carrier to be used for the address validation. Only carriers available to your account can be used.
+          type: string
+          example: trunkrs
+        validation_methods:
+          description: 'An array of optional address validation methods to be applied
+
+            The default Sendcloud validation will always be applied.
+
+            '
+          type: array
+          items:
+            $ref: '#/components/schemas/address-validation-method-enum'
+          example:
+          - here
+      required:
+      - address
+      - carrier_code
+    label-details:
+      title: Label details Object
+      description: 'Describes the format and resolution of the label.
+
+
+        **Note**: If you request a label in ZPL format and the carrier supports native ZPL, then it won''t be possible to download the label in any other format later.'
+      type: object
+      properties:
+        mime_type:
+          type: string
+          default: application/pdf
+          enum:
+          - application/pdf
+          - application/zpl
+          - image/png
+          example: application/zpl
+          description: The format of the label
+        dpi:
+          type: integer
+          description: The resolution of the label in **dots per inch**. ZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.
+          default: 72
+          enum:
+          - 72
+          - 203
+          - 300
+          - 600
+          example: 300
+    parcels-array-response:
+      title: Parcels Array Response Object
+      description: Parcel common object model
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/parcel-common'
+      - type: object
+        properties:
+          created_at:
+            type: string
+            format: date-time
+            description: The timestamp of when the parcel was created
+            readOnly: true
+            example: '2024-09-04T12:14:36.506925Z'
+          updated_at:
+            type: string
+            format: date-time
+            description: The timestamp of when the parcel was last updated
+            readOnly: true
+            example: '2024-09-04T12:14:47.203107Z'
+          announced_at:
+            type:
+            - string
+            - 'null'
+            description: The timestamp of when the parcel was announced to the carrier (label was created)
+            format: date-time
+            readOnly: true
+            example: '2024-09-04T12:14:47.153985Z'
+          id:
+            type: integer
+            description: ID of the parcel (required to retrieve a parcel document for async announcement)
+            readOnly: true
+          status:
+            $ref: '#/components/schemas/status'
+            readOnly: true
+          documents:
+            type: array
+            uniqueItems: true
+            description: An array of documents. A parcel can contain multiple documents, for instance labels and a customs form. This field returns an array of all the available documents for this parcel.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/documents'
+          tracking_number:
+            type: string
+            description: Tracking number of the shipment.
+            readOnly: true
+            example: 3SYZXG8498635
+          tracking_url:
+            type:
+            - string
+            - 'null'
+            description: Tracking url of this shipment.
+            readOnly: true
+          additional_carrier_data:
+            type: object
+            title: Carrier-specific data
+            readOnly: true
+            description: Specific data that only belongs to some carriers.
+            properties:
+              awb_tracking_number:
+                type:
+                - string
+                - 'null'
+                description: Deutsche Post Global Mail only. This indicates the air waybill number of this box of Global Mail parcels. This will be set once the `Finalize box` has been called.
+              box_number:
+                type:
+                - integer
+                - 'null'
+                description: Deutsche Post Global Mail only. This indicates the box to which this parcel belongs. This will be only set for Global Mail parcels.
+          label_notes:
+            type:
+            - array
+            - 'null'
+            description: Custom messages printed on the shipping label. Use this field to include custom text - such as invoice numbers, product IDs, or internal reference codes - on the package’s shipping label.
+            maxItems: 255
+            items:
+              type: string
+              example: The doorbell isn’t working
+              minLength: 1
+              maxLength: 255
+    address-with-required-fields:
+      title: Address Object
+      type: object
+      description: Sendcloud Address object
+      allOf:
+      - $ref: '#/components/schemas/address'
+      - required:
+        - name
+        - address_line_1
+        - postal_code
+        - city
+        - country_code
+    TaxNumber:
+      title: Tax Number Object
+      description: Identification numbers and codes used in different contexts. These identifiers are used for taxation, customs, business registration, and other purposes, depending on the country and the specific regulatory requirements. Depending on these requirements you may need to pass one or several numbers related to sender, receiver or importer of record provider. These numbers and codes will be included into final Customs documents.
+      type: object
+      properties:
+        name:
+          type: string
+          example: EORI
+          description: "Tax number abbreviation\n  * VAT - Value-Added Tax → VOEC number for Norway should be shared here as advised by the [Norwegian Tax Authorities](https://www.skatteetaten.no/globalassets/bedrift-og-organisasjon/voec/sending-and-marking-goods-through-postal-services-and-transporters.pdf)\n  * EIN - Employer Identification Number\n  * GST - Goods and Service Tax\n  * SSN - Social Security Number\n  * EORI - Economic Operators Registration and Identification for the European Union\n  * DUN - Data Universal Numbering System\n  * FED - Federal Tax ID\n  * STA - State Tax ID\n  * CNP - Brazil CNPJ/CPF Federal Tax\n  * IE - Brazil type IE/RG Federal Tax\n  * INN - Russia bank details section INN\n  * KPP - Russia bank details section KPP\n  * OGR - Russia bank details section OGRN\n  * OKP - Russia bank details section OKPO\n  * IOSS - SDT or Overseas Registered Supplier or Import One-Stop-Shop or GB VAT (foreign) registration or AUSid GST Registration or VAT on E-Commerce\n  * FTZ - Free Trade Zone ID\n  * DAN - Deferment Account Duties Only\n  * TAN - Deferment Account Tax Only\n  * DTF - Deferment Account Duties, Taxes and Fees Only\n  * RGP - EU Registered Exporters Registration ID\n  * DLI - Driver's License\n  * NID - National Identity Card - A PID (Personal Identification Number) should be provided as NID (National Identity Card).\n  * PAS - Passport\n  * MID - Manufacturer ID\n  * UKIMS - UK Internal Market Scheme -> customs clearance for shipping from Great Britain to Northern Ireland under the Windsor Framework, for more information see [Windsor Framework](https://www.gov.uk/government/publications/the-windsor-framework)\n"
+          enum:
+          - VAT
+          - EIN
+          - GST
+          - SSN
+          - EORI
+          - DUN
+          - FED
+          - STA
+          - CNP
+          - IE
+          - INN
+          - KPP
+          - OGR
+          - OKP
+          - IOSS
+          - FTZ
+          - DAN
+          - TAN
+          - DTF
+          - RGP
+          - DLI
+          - NID
+          - PAS
+          - MID
+          - UKIMS
+        country_code:
+          type: string
+          example: NL
+          description: Issuing country code (ISO 3166-1 alpha-2 code)
+          maxLength: 2
+        value:
+          type: string
+          example: NL123456789B01
+          description: Tax number itself
+          maxLength: 100
+      required:
+      - name
+      - country_code
+      - value
+    str-weight:
+      title: Weight
+      type: object
+      description: Weight in the specified unit
+      properties:
+        value:
+          type: string
+          description: Weight value
+          example: '14.5'
+        unit:
+          $ref: '#/components/schemas/weight-units'
+      required:
+      - value
+      - unit
+    required-price:
+      title: Price object
+      description: Price, consisting of a value and currency.
+      allOf:
+      - $ref: '#/components/schemas/Price'
+      - type: object
+        required:
+        - value
+        - currency
+    shipment-request-async:
+      title: Asynchronous Announcement Shipment request Object
+      description: Asynchronous Shipment request object model
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/shipment-request'
+      - $ref: '#/components/schemas/multicollo-parcels-array-request'
+      - required:
+        - parcels
+    raw-address:
+      title: Raw address
+      type: object
+      description: Raw address object
+      properties:
+        address_line_1:
+          type: string
+          example: Stadhuisplein
+          description: First line of the address
+        house_number:
+          type: string
+          example: '50'
+          description: House number of the address
+        address_line_2:
+          type: string
+          description: Additional address information, e.g. 2nd level
+          example: Apartment 17B
+        postal_code:
+          type: string
+          example: 1013 AB
+          description: Zip code of the address
+          minLength: 1
+        city:
+          type: string
+          example: Eindhoven
+          description: City of the address
+          minLength: 1
+        po_box:
+          type:
+          - string
+          - 'null'
+          description: Code required in case of PO Box or post locker delivery
+        state_province_code:
+          type: string
+          example: IT-RM
+          description: The character state code of the customer represented as ISO 3166-2 code. This field is required for certain countries. See [international shipping](/docs/shipments/international-shipping#required-fields-for-international-shipments) for details.
+        country_code:
+          type: string
+          example: NL
+          description: The country code of the customer represented as ISO 3166-1 alpha-2
+          minLength: 1
+    multicollo-parcels-array-request:
+      title: Multicollo parcels array Object
+      description: Multicollo parcels array model
+      type: object
+      properties:
+        parcels:
+          description: "Represent each package of the shipment.\n\nThere is a restriction to a maximum number of percels per shipment. \n\n* **sync** announcements : max 15 parcels per shipment\n* **async** announcements: max 50 parcels per shipment\n\nNote: each carrier can have a lower than the max number of parcels limit per shipment."
+          type: array
+          items:
+            $ref: '#/components/schemas/parcel-common'
+          minItems: 1
+          maxItems: 50
     shipping-option-code-properties:
       title: Shipping option properties Object
       description: Contains the required properties to be sent when API client informs the shipping method and carrier to be used
@@ -5451,81 +5721,77 @@ components:
           - 'null'
           minimum: 1
           description: The selected shipping contract. If you haven't specified a contract for shipping your parcel, we will automatically select the default contract for the carrier that matches your shipping option. You can retrieve your contract IDs from the [Retrieve a list of contracts](/api/v3/contracts/retrieve-a-list-of-contracts) endpoint. Otherwise, the default direct contract will be automatically selected.
-    parcel-common-with-optional-fields:
-      title: Parcel common with optional fields Object
-      description: Parcel common with optional fields model
+    shipment-request-with-optional-fields:
+      title: Shipment request with optional fields Object
+      description: Shipment request with optional fields object model
+      allOf:
+      - $ref: '#/components/schemas/shipment-common-with-optional-fields'
+      - type: object
+        properties:
+          from_address:
+            description: The sender address for the shipment. You can either provide a `sender_address_id` to reference a pre-configured sender address (with optional address field overrides), or provide all address fields directly.
+            oneOf:
+            - $ref: '#/components/schemas/address-with-sender-address-id'
+            - $ref: '#/components/schemas/address-with-required-fields'
+          customs_information:
+            $ref: '#/components/schemas/customs-information-with-optional-fields'
+      - type: object
+        properties:
+          to_service_point:
+            $ref: '#/components/schemas/service-point-request'
+      - type: object
+        properties:
+          label_details:
+            $ref: '#/components/schemas/label-details'
+          delivery_dates:
+            oneOf:
+            - $ref: '#/components/schemas/delivery-dates'
+            - type: 'null'
+            description: Defined delivery dates. The `handover_at` date indicates when the item will be handed over to the carrier by the merchant in ISO 8601. If this date is not passed the carrier default will be used. For most carriers this is the following working day.
       type: object
+    ship-with:
+      title: Ship with object
+      type: object
+      description: 'The ship with object can be used to define how you would like to send your shipment.
+
+
+        You can use a `shipping_option_code`. This is a unique identifier that displays what carrier and what set of shipping functionalities you want to use.
+
+        '
+      examples:
+      - type: shipping_option_code
+        properties:
+          shipping_option_code: postnl:standard/insured=3000
+          contract_id: 517
       properties:
-        dimensions:
-          $ref: '#/components/schemas/str-dimensions'
-          description: While dimensions are optional, some carriers require them present. If this is the case, an error will be thrown.
-        weight:
-          $ref: '#/components/schemas/str-weight'
-        additional_insured_price:
-          $ref: '#/components/schemas/optional-price'
-          description: Amount for which you want to add additional insurance (on top of carrier insurance) to the parcel with our insurance provider XCover. You can inure up from 2 euros to 5000 euros per shipment.
-        label_notes:
-          type:
-          - array
-          - 'null'
-          description: "Custom messages printed on the shipping label. Use this field to include custom text - such as invoice numbers, product IDs, or internal reference codes - on the package's shipping label. \n\n**Note that support for label messages varies by carrier; some carriers may ignore this field or offer alternatives, such as delivery instructions, which are communicated to the carrier but not printed on the label. Some carriers may apply label notes at the shipment level rather than per individual parcel.**"
-          maxItems: 255
-          items:
-            type: string
-            example: The doorbell isn’t working
-            minLength: 1
-            maxLength: 255
-        sscc:
-          type:
-          - string
-          - 'null'
-          minLength: 18
-          maxLength: 18
-          pattern: ^\d{18}$
-          description: The Serial Shipping Container Code (SSCC) serves as a globally unique identifier for a logistic unit, functioning as a digital "license plate" for tracking and managing goods throughout the supply chain.
-          example: 019844628346512933
-        package_type:
-          type:
-          - string
-          - 'null'
-          description: The package type defines how you pack your parcels. This field is mostly only required for carriers with specific needs, such as pallet carriers. For more information, reach out to your Sendcloud contact person.
+        type:
+          type: string
+          description: 'The way the shipping method and carrier will be selected. Nowadays the only possible value is ''shipping_option_code'', which requires client to also send the `shipping_option_code` inside properties.
+
+            '
           enum:
-          - package
-          - euro_pallet
-          - block_pallet
-          - mini_pallet
-          - one_way_pallet
-          - tube
-          - over_size_pallet
-          - bundle
-          - half_pallet
-          - letterbox
-          - null
-          example: package
-    multicollo-parcels-array-request-with-optional-fields:
-      title: Parcels array request with optional fields Object
-      description: Parcels array request with optional fields object model
+          - shipping_option_code
+          example: shipping_option_code
+        properties:
+          $ref: '#/components/schemas/shipping-option-code-properties'
+      required:
+      - type
+      - properties
+    shipment-common:
+      title: Shipment common Object
+      description: Shipment common object model
       type: object
-      properties:
-        parcels:
-          description: Represents each package of the shipment. Each carrier can have its own number of parcels limit per shipment, otherwise there is a restriction to a maximum of 50 parcels (default).
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/parcel-common-with-optional-fields'
-            - type: object
-              properties:
-                parcel_items:
-                  type: array
-                  description: List of items/products that the parcel contains. **Note that parcel items array is required for shipments that require customs documents.**
-                  maxItems: 1000
-                  items:
-                    $ref: '#/components/schemas/parcel-item-with-optional-fields'
-          minItems: 1
-          maxItems: 50
-    sync-shipment-with-rules-response:
-      title: Sync shipment with rules response Object
-      description: Sync shipment response object model including applied shipping rules.
+      allOf:
+      - $ref: '#/components/schemas/shipment-common-with-optional-fields'
+      - type: object
+        properties:
+          customs_information:
+            $ref: '#/components/schemas/customs-information'
+        required:
+        - ship_with
+    sync-shipment-response:
+      title: Sync shipment response Object
+      description: Sync shipment response object model
       allOf:
       - $ref: '#/components/schemas/base-shipment-response'
       - properties:
@@ -5536,12 +5802,357 @@ components:
               $ref: '#/components/schemas/sync-parcels-array-response'
           label_details:
             $ref: '#/components/schemas/label-details'
-          applied_shipping_rules:
-            description: List of shipping rules that were applied to the shipment and the result of each rule's modifications.
-            type: array
-            items:
-              $ref: '#/components/schemas/applied-shipping-rule'
       type: object
+    address:
+      title: Address Object
+      type: object
+      description: Sendcloud Address object
+      properties:
+        name:
+          type: string
+          example: John Doe
+          description: Name of the person associated with the address
+          minLength: 1
+        company_name:
+          type: string
+          example: Sendcloud
+          description: Name of the company associated with the address
+        address_line_1:
+          type: string
+          example: Stadhuisplein
+          description: First line of the address
+        house_number:
+          type: string
+          example: '50'
+          description: House number of the address
+        address_line_2:
+          type: string
+          description: Additional address information, e.g. 2nd level
+          example: Apartment 17B
+        postal_code:
+          type: string
+          example: 1013 AB
+          description: Zip code of the address
+          minLength: 1
+        city:
+          type: string
+          example: Eindhoven
+          description: City of the address
+          minLength: 1
+        po_box:
+          type:
+          - string
+          - 'null'
+          description: Code required in case of PO Box or post locker delivery
+        state_province_code:
+          type: string
+          example: IT-RM
+          description: The character state code of the customer represented as ISO 3166-2 code. This field is required for certain countries. See [international shipping](/docs/shipments/international-shipping#required-fields-for-international-shipments) for details.
+        country_code:
+          type: string
+          example: NL
+          description: The country code of the customer represented as ISO 3166-1 alpha-2
+          minLength: 1
+        email:
+          type: string
+          format: email
+          example: johndoe@gmail.com
+          description: Email address of the person associated with the address
+        phone_number:
+          type: string
+          example: '+319881729999'
+          description: Phone number of the person associated with the address
+    shipment-request-with-rules:
+      title: Asynchronous Announcement Shipment with Rules request Object
+      description: Asynchronous Shipment with Rules request object model
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/shipment-request-with-optional-fields'
+      - $ref: '#/components/schemas/multicollo-parcels-array-request-with-optional-fields'
+      - type: object
+        properties:
+          apply_shipping_defaults:
+            type: boolean
+            description: 'When set to `true`, the "Default weight", "Preferred shipping method" and "Default export reason" [shipping defaults](https://app.sendcloud.com/v2/shipping/shipping-defaults) will be applied, if they were not provided by the request payload.
+
+
+              **Note that the request payload values and shipping rules take precedence over these defaults.**'
+            default: true
+            example: true
+          apply_shipping_rules:
+            type: boolean
+            description: "When set to `true`, [shipping rules](https://app.sendcloud.com/v2/shipping/rules) will be applied.\n\n<Info>\n  **Note that rules take precedence over the values provided in the request payload and over the [shipping defaults](https://app.sendcloud.com/v2/shipping/shipping-defaults).**\n  \n  For instance, if a contract is specified in one of the applicable rules for the shipment that is being requested, the contract value provided in the request payload will be ignored.\n  \n  Also keep in mind that since orders created by the API do not appear in the Sendcloud platform's Incoming Orders overview, not all shipping rules can be applied.\n</Info>"
+            default: true
+            example: true
+          delivery_indicator:
+            type: string
+            description: 'Free text that is intended for applying the **Checkout Delivery Method** condition in shipping rules.
+
+
+              Learn more about [Shipping rules](/docs/shipping/shipping-rules/).
+
+              '
+            example: DHL home delivery
+    weight-units:
+      type: string
+      title: Mass Units Object
+      enum:
+      - kg
+      - g
+      - lbs
+      - oz
+      example: g
+    ShipmentBlobOrder:
+      title: Shipment Blob Order Object
+      type: object
+      properties:
+        address:
+          title: Address
+          type: string
+          minLength: 1
+        address_2:
+          title: Address 2
+          type: string
+        allowed_shipping_methods:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+        barcode:
+          title: Barcode
+          type: string
+          minLength: 1
+          description: Barcode value of the label
+          readOnly: true
+        city:
+          title: City
+          type: string
+          minLength: 1
+        company_name:
+          title: Company name
+          type: string
+        country:
+          $ref: '#/components/schemas/country-codes'
+        created_at:
+          type: string
+          title: Created at
+          format: date-time
+          description: Timestamp indicating when the shipment was created in the Sendcloud system
+          example: '2022-05-07T15:08:12.152000Z'
+        currency:
+          type:
+          - string
+          - 'null'
+          title: Currency
+          minLength: 1
+          description: ISO 4217 currency code
+          enum:
+          - EUR
+          - USD
+          - GBP
+        customs_invoice_nr:
+          type: string
+          title: Customs invoice nr
+          description: Your own commercial invoice number
+          example: '120'
+        customs_shipment_type:
+          type:
+          - integer
+          - 'null'
+          title: Customs shipment type
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          description: "Type of shipment for customs purposes:\n  - `0` - Gift\n  - `1` - Documents\n  - `2` - Commercial Goods\n  - `3` - Commercial Sample\n  - `4` - Returned Goods\n"
+          minimum: 0
+          maximum: 4
+        email:
+          title: Customer email address
+          type: string
+          format: email
+        external_order_id:
+          title: External order id
+          type: string
+          minLength: 1
+          description: External order ID assigned by the shop system
+        external_shipment_id:
+          title: External shipment id
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          description: External shipment ID assigned by the shop system
+        house_number:
+          title: House number
+          type: string
+        integration:
+          title: Integration
+          type: integer
+          description: Sendcloud Integration ID
+          readOnly: true
+        name:
+          title: Name
+          type: string
+          minLength: 1
+        order_number:
+          title: Order number
+          type: string
+          minLength: 1
+          description: Unique order number generated manualy or by the shop system
+        order_status:
+          $ref: '#/components/schemas/ShipmentBlobStatus'
+        parcel_items:
+          type:
+          - array
+          - 'null'
+          description: List of items the parcel contains
+          items:
+            $ref: '#/components/schemas/ParcelItems'
+        payment_status:
+          $ref: '#/components/schemas/ShipmentBlobStatus'
+        postal_code:
+          title: Postal code
+          type: string
+          minLength: 1
+        sender_address:
+          title: Sender address
+          type:
+          - integer
+          - 'null'
+          description: ID of a sender address in the Sendcloud system
+          readOnly: true
+        shipment_uuid:
+          type: string
+          title: Shipment uuid
+          minLength: 1
+          format: uuid
+          description: Automatically generated Sendcloud's internal ID
+          readOnly: true
+        shipping_method:
+          type:
+          - integer
+          - 'null'
+          title: Shipping method
+          description: Foreign key indicating shipping method used
+          example: 1234
+        shipping_method_checkout_name:
+          title: Shipping method checkout name
+          type: string
+          maxLength: 100
+          description: Human readable shipping method name
+        telephone:
+          title: Telephone
+          type: string
+        to_post_number:
+          title: To post number
+          type: string
+        to_service_point:
+          title: To service point
+          type:
+          - integer
+          - 'null'
+        to_state:
+          title: To state
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        total_order_value:
+          title: Total order value
+          type:
+          - string
+          - 'null'
+          format: decimal
+          description: The total price of an order
+        updated_at:
+          type: string
+          title: Updated at
+          format: date-time
+          description: Timestamp for when the shipment was updated in the Sendcloud system
+          example: '2022-05-07T15:08:12.152000Z'
+        weight:
+          type:
+          - string
+          - 'null'
+          title: Weight
+          format: decimal
+          description: Total weight of the order. Cannot be smaler than 0.001
+          example: '10.2'
+          maxLength: 10
+        checkout_payload:
+          $ref: '#/components/schemas/CheckoutPayload'
+        width:
+          type:
+          - string
+          - 'null'
+          title: Width
+          description: Volumetric weight width
+          format: decimal
+          maxLength: 10
+          example: '10.2'
+        height:
+          type:
+          - string
+          - 'null'
+          title: Height
+          description: Volumetric weight height
+          format: decimal
+          maxLength: 10
+          example: '10.2'
+        length:
+          type:
+          - string
+          - 'null'
+          title: Length
+          description: Volumetric weight length
+          format: decimal
+          maxLength: 10
+          example: '10.2'
+        customs_details:
+          $ref: '#/components/schemas/CustomsInformation'
+        shipment_created_at:
+          type: string
+          format: date-time
+          description: Timestamp indicating when the shipment was created in the shop system
+          example: '2022-07-07T15:08:12.152000Z'
+          readOnly: true
+        shipment_updated_at:
+          type: string
+          format: date-time
+          description: Timestamp for when the shipment was updated in the shop system
+          example: '2022-07-07T15:08:12.152000Z'
+          readOnly: true
+      required:
+      - address
+      - address_2
+      - city
+      - company_name
+      - country
+      - created_at
+      - currency
+      - customs_invoice_nr
+      - customs_shipment_type
+      - email
+      - external_order_id
+      - external_shipment_id
+      - house_number
+      - name
+      - order_number
+      - order_status
+      - parcel_items
+      - payment_status
+      - postal_code
+      - shipping_method_checkout_name
+      - telephone
+      - to_post_number
+      - to_service_point
+      - to_state
+      - updated_at
+      - shipment_created_at
+      - shipment_updated_at
     ParcelItems:
       title: Parcel Items Object
       type: object
@@ -5879,49 +6490,334 @@ components:
       - description
       - quantity
       - value
-    multicollo-parcels-array-request:
-      title: Multicollo parcels array Object
-      description: Multicollo parcels array model
+    ShipmentBlobOrderCreate:
+      title: Shipment Blob Order Create Object
       type: object
       properties:
-        parcels:
-          description: "Represent each package of the shipment.\n\nThere is a restriction to a maximum number of percels per shipment. \n\n* **sync** announcements : max 15 parcels per shipment\n* **async** announcements: max 50 parcels per shipment\n\nNote: each carrier can have a lower than the max number of parcels limit per shipment."
-          type: array
+        address:
+          title: Address
+          type: string
+          minLength: 1
+        address_2:
+          title: Address 2
+          type: string
+          minLength: 0
+        city:
+          title: City
+          type: string
+          minLength: 1
+        company_name:
+          title: Company name
+          type: string
+          minLength: 0
+        country:
+          $ref: '#/components/schemas/country-codes'
+        created_at:
+          type: string
+          title: Created at
+          format: date-time
+          description: Timestamp indicating when the shipment was created in the shop system. This value will be saved and accessible through `shipment_created_at` field in GET response.
+          example: '2022-05-07T15:08:12.152000Z'
+        currency:
+          type:
+          - string
+          - 'null'
+          title: Currency
+          minLength: 1
+          description: ISO 4217 currency code
+          enum:
+          - EUR
+          - USD
+          - GBP
+        customs_invoice_nr:
+          type: string
+          title: Customs invoice nr
+          minLength: 0
+          description: Your own commercial invoice number
+          example: '120'
+        customs_shipment_type:
+          type:
+          - integer
+          - 'null'
+          title: Customs shipment type
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          description: "Type of shipment for customs purposes:\n  - `0` - Gift\n  - `1` - Documents\n  - `2` - Commercial Goods\n  - `3` - Commercial Sample\n  - `4` - Returned Goods\n"
+          minimum: 0
+          maximum: 4
+        email:
+          title: Customer email address
+          type: string
+          format: email
+          minLength: 0
+        external_order_id:
+          title: External order id
+          type: string
+          minLength: 1
+          description: External order ID assigned by the shop system
+        external_shipment_id:
+          title: External shipment id
+          type:
+          - string
+          - 'null'
+          minLength: 1
+          description: External shipment ID assigned by the shop system
+        house_number:
+          title: House number
+          type: string
+          minLength: 0
+        name:
+          title: Name
+          type: string
+          minLength: 1
+        order_number:
+          title: Order number
+          type: string
+          minLength: 1
+          description: Unique order number generated manualy or by the shop system
+        order_status:
+          $ref: '#/components/schemas/ShipmentBlobStatus'
+        parcel_items:
+          type:
+          - array
+          - 'null'
+          description: List of items the parcel contains
           items:
-            $ref: '#/components/schemas/parcel-common'
-          minItems: 1
-          maxItems: 50
-    cancel-shipment-status:
-      title: Cancel Shipment Status object
+            $ref: '#/components/schemas/ParcelItems'
+        payment_status:
+          $ref: '#/components/schemas/ShipmentBlobStatus'
+        postal_code:
+          title: Postal code
+          type: string
+          minLength: 1
+        shipping_method:
+          type:
+          - integer
+          - 'null'
+          title: Shipping method
+          description: Foreign key indicating shipping method used
+          example: 1234
+        shipping_method_checkout_name:
+          title: Shipping method checkout name
+          type: string
+          minLength: 0
+          maxLength: 100
+          description: Human readable shipping method name
+        telephone:
+          title: Telephone
+          type: string
+          minLength: 0
+        to_post_number:
+          title: To post number
+          type: string
+          minLength: 0
+        to_service_point:
+          title: To service point
+          type:
+          - integer
+          - 'null'
+        to_state:
+          title: To state
+          type:
+          - string
+          - 'null'
+          minLength: 1
+        total_order_value:
+          title: Total order value
+          type:
+          - string
+          - 'null'
+          format: decimal
+          description: The total price of an order
+        updated_at:
+          type: string
+          title: Updated at
+          format: date-time
+          description: Timestamp indicating when the shipment was updated in the shop system. This value will be saved and accessible through `shipment_updated_at` field in GET response.
+          example: '2022-05-07T15:08:12.152000Z'
+        weight:
+          type:
+          - string
+          - 'null'
+          title: Weight
+          format: decimal
+          description: Total weight of the order. Cannot be smaler than 0.001
+          example: '10.2'
+          maxLength: 10
+        checkout_payload:
+          $ref: '#/components/schemas/CheckoutPayload'
+        width:
+          type:
+          - string
+          - 'null'
+          title: Width
+          description: Volumetric weight width
+          format: decimal
+          maxLength: 10
+          example: '10.2'
+        height:
+          type:
+          - string
+          - 'null'
+          title: Height
+          description: Volumetric weight height
+          format: decimal
+          maxLength: 10
+          example: '10.2'
+        length:
+          type:
+          - string
+          - 'null'
+          title: Length
+          description: Volumetric weight length
+          format: decimal
+          maxLength: 10
+          example: '10.2'
+        customs_details:
+          $ref: '#/components/schemas/CustomsInformation'
+      required:
+      - address
+      - address_2
+      - city
+      - company_name
+      - country
+      - created_at
+      - currency
+      - customs_invoice_nr
+      - customs_shipment_type
+      - email
+      - external_order_id
+      - external_shipment_id
+      - house_number
+      - name
+      - order_number
+      - order_status
+      - parcel_items
+      - payment_status
+      - postal_code
+      - shipping_method_checkout_name
+      - telephone
+      - to_post_number
+      - to_service_point
+      - to_state
+      - updated_at
+    CustomsInformation:
+      type:
+      - object
+      - 'null'
+      title: Customs Information
+      description: Customs information related to this shipment
+      properties:
+        discount_granted:
+          type:
+          - object
+          - 'null'
+          title: Discount Granted
+          description: Discount granted on the total order
+          $ref: '#/components/schemas/CostsObject'
+        insurance_costs:
+          type:
+          - object
+          - 'null'
+          title: Insurance Cost
+          description: Amount the order is insured for
+          $ref: '#/components/schemas/CostsObject'
+        freight_costs:
+          type:
+          - object
+          - 'null'
+          title: Freight Cost
+          description: Shipping cost of the order
+          $ref: '#/components/schemas/CostsObject'
+        other_costs:
+          type:
+          - object
+          - 'null'
+          title: Other Costs
+          description: Any other costs (for eg, wrapping costs) associated with the order
+          $ref: '#/components/schemas/CostsObject'
+        tax_numbers:
+          type:
+          - object
+          - 'null'
+          title: Tax information about sender, receiver, and importer of records
+          properties:
+            sender:
+              type: array
+              title: Sender's Tax Information
+              minItems: 0
+              items:
+                $ref: '#/components/schemas/TaxNumber_2'
+            receiver:
+              type: array
+              title: Receiver's Tax Information
+              minItems: 0
+              items:
+                $ref: '#/components/schemas/TaxNumber_2'
+            importer_of_records:
+              type: array
+              title: Receiver's Tax Information
+              minItems: 0
+              items:
+                $ref: '#/components/schemas/TaxNumber_2'
+    ShipmentErrorLog:
+      title: Shipment create/update error log
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/cancellation-status'
-      required:
-      - data
-    shipment-request-sync-announce:
-      title: Synchronous Announcement Shipment request Object
-      description: Synchronous Announcement Shipment request object model
+        error:
+          title: Error(s)
+          type: object
+        external_order_id:
+          title: External Order ID
+          type: string
+        external_shipment_id:
+          title: External Shipment ID
+          type: string
+        status:
+          title: Status
+          type: string
+          enum:
+          - error
+    CostsObject:
+      properties:
+        value:
+          type:
+          - string
+          - 'null'
+          pattern: '[\d]+(\.[\d]+)?'
+          example: '3.99'
+        currency:
+          type:
+          - string
+          - 'null'
+          example: EUR
+    ShipmentCreateUpdateLog:
+      title: Shipment Creation or Update information log
       type: object
-      allOf:
-      - $ref: '#/components/schemas/shipment-request'
-      - type: object
-        properties:
-          parcels:
-            description: 'Represents each package of the shipment. Note that you can send a maximum of 15 parcels per shipment to this endpoint.
-
-
-              To announce more than 15 parcels in the same shipment, you can use the [Create and announce a shipment asynchronously](/api/v3/shipments/create-and-announce-a-shipment-asynchronously) endpoint.
-
-
-              Note: each carrier can have a lower than the default number of parcels limit per shipment.'
-            type: array
-            items:
-              $ref: '#/components/schemas/parcel-common'
-            minItems: 1
-            maxItems: 15
-      - required:
-        - parcels
+      properties:
+        external_order_id:
+          title: External Order ID
+          type: string
+          minLength: 1
+        external_shipment_id:
+          title: External Shipment ID
+          type: string
+          minLength: 1
+        shipment_uuid:
+          title: Shipment UUID
+          type: string
+          format: uuid
+          minLength: 1
+        status:
+          title: Status
+          type: string
+          enum:
+          - created
+          - updated
     country-codes:
       type: string
       title: Country Code Object
@@ -6179,388 +7075,25 @@ components:
       - XK
       description: A country represented by its ISO 3166-1 alpha-2 code
       example: NL
-    TaxNumber:
-      title: Tax Number Object
-      description: Identification numbers and codes used in different contexts. These identifiers are used for taxation, customs, business registration, and other purposes, depending on the country and the specific regulatory requirements. Depending on these requirements you may need to pass one or several numbers related to sender, receiver or importer of record provider. These numbers and codes will be included into final Customs documents.
-      type: object
-      properties:
-        name:
-          type: string
-          example: EORI
-          description: "Tax number abbreviation\n  * VAT - Value-Added Tax → VOEC number for Norway should be shared here as advised by the [Norwegian Tax Authorities](https://www.skatteetaten.no/globalassets/bedrift-og-organisasjon/voec/sending-and-marking-goods-through-postal-services-and-transporters.pdf)\n  * EIN - Employer Identification Number\n  * GST - Goods and Service Tax\n  * SSN - Social Security Number\n  * EORI - Economic Operators Registration and Identification for the European Union\n  * DUN - Data Universal Numbering System\n  * FED - Federal Tax ID\n  * STA - State Tax ID\n  * CNP - Brazil CNPJ/CPF Federal Tax\n  * IE - Brazil type IE/RG Federal Tax\n  * INN - Russia bank details section INN\n  * KPP - Russia bank details section KPP\n  * OGR - Russia bank details section OGRN\n  * OKP - Russia bank details section OKPO\n  * IOSS - SDT or Overseas Registered Supplier or Import One-Stop-Shop or GB VAT (foreign) registration or AUSid GST Registration or VAT on E-Commerce\n  * FTZ - Free Trade Zone ID\n  * DAN - Deferment Account Duties Only\n  * TAN - Deferment Account Tax Only\n  * DTF - Deferment Account Duties, Taxes and Fees Only\n  * RGP - EU Registered Exporters Registration ID\n  * DLI - Driver's License\n  * NID - National Identity Card - A PID (Personal Identification Number) should be provided as NID (National Identity Card).\n  * PAS - Passport\n  * MID - Manufacturer ID\n  * UKIMS - UK Internal Market Scheme -> customs clearance for shipping from Great Britain to Northern Ireland under the Windsor Framework, for more information see [Windsor Framework](https://www.gov.uk/government/publications/the-windsor-framework)\n"
-          enum:
-          - VAT
-          - EIN
-          - GST
-          - SSN
-          - EORI
-          - DUN
-          - FED
-          - STA
-          - CNP
-          - IE
-          - INN
-          - KPP
-          - OGR
-          - OKP
-          - IOSS
-          - FTZ
-          - DAN
-          - TAN
-          - DTF
-          - RGP
-          - DLI
-          - NID
-          - PAS
-          - MID
-          - UKIMS
-        country_code:
-          type: string
-          example: NL
-          description: Issuing country code (ISO 3166-1 alpha-2 code)
-          maxLength: 2
-        value:
-          type: string
-          example: NL123456789B01
-          description: Tax number itself
-          maxLength: 100
-      required:
-      - name
-      - country_code
-      - value
-    sync-shipment-response:
-      title: Sync shipment response Object
-      description: Sync shipment response object model
-      allOf:
-      - $ref: '#/components/schemas/base-shipment-response'
-      - properties:
-          parcels:
-            description: Represents each package of the shipment.
-            type: array
-            items:
-              $ref: '#/components/schemas/sync-parcels-array-response'
-          label_details:
-            $ref: '#/components/schemas/label-details'
-      type: object
-    ErrorObject:
-      title: Error
-      type: object
-      description: Error in a JSON:API error format
+    ShipmentBlobStatus:
+      title: Shipment Blob Status Object
+      type:
+      - object
+      - 'null'
       properties:
         id:
+          title: Id
           type: string
-          description: A unique identifier for the error.
-        links:
-          type: object
-          description: A set of hyperlinks that provide additional information about the error.
-          properties:
-            about:
-              type: string
-              description: A URL that provides additional information about the error.
-        status:
-          type: string
-          format: int32
-          description: The HTTP status code of the error.
           minLength: 1
-        code:
+          description: Custom internal shop status, can be used for filtering
+        message:
+          title: Message
           type: string
-          description: A unique error code for the error, in snake case format.
           minLength: 1
-          enum:
-          - unknown_field
-          - invalid
-          - forbidden
-          - invalid_choice
-          - min_value
-          - 'null'
-          - not_found
-          - required
-          - not_a_list
-          - non_field_errors
-          - authentication_failed
-          - validation_error
-          - parcel_announcement_error
-        title:
-          type: string
-          description: A short, human-readable summary of the error.
-          minLength: 1
-        detail:
-          type: string
-          description: A human-readable explanation of the error.
-          minLength: 1
-        source:
-          type: object
-          description: An object that identifies the source of the error within the request payload.
-          properties:
-            pointer:
-              type: string
-              description: A `JSON` pointer to the location of the error within the request payload.
-            parameter:
-              type: string
-              description: The name of the `query` parameter that caused the error.
-            header:
-              type: string
-              description: The name of the `header` parameter that caused the error.
-        meta:
-          type: object
-          description: Additional metadata about the error.
-    shipment-request-async:
-      title: Asynchronous Announcement Shipment request Object
-      description: Asynchronous Shipment request object model
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/shipment-request'
-      - $ref: '#/components/schemas/multicollo-parcels-array-request'
-      - required:
-        - parcels
-    address-washer-response:
-      title: Address Washer Response
-      description: Address Washer Response object model
-      type: object
-      properties:
-        input_address_is_valid:
-          type: boolean
-          description: Indicates if the input address is valid.
-        results:
-          description: The results of the address validation.
-          type: array
-          items:
-            type: object
-            properties:
-              address:
-                $ref: '#/components/schemas/raw-address'
-              recommended:
-                type: boolean
-                description: Indicates if the address is recommended after validation.
-              analysis:
-                type: object
-                description: Analysis details of the address validation.
-                properties:
-                  validation_result:
-                    type: object
-                    description: The result of the validation process.
-                    properties:
-                      is_valid:
-                        type: boolean
-                        description: Indicates if the address is valid.
-                      reasons:
-                        type: array
-                        description: List of reasons for the validation result.
-                        items:
-                          type: string
-                          oneOf:
-                          - const: ADDRESS_TOO_LONG
-                            title: address_lines:too_long
-                            description: The address line exceeds the maximum length.
-                          - const: HOUSE_NUMBER_TOO_LONG
-                            title: house_number:too_long
-                            description: The house number exceeds the maximum length.
-                          - const: HOUSE_NUMBER_TOO_SHORT
-                            title: house_number:too_short
-                            description: The house number is too short.
-                          - const: ADDRESS_NOT_VALID
-                            title: address:does_not_exist
-                            description: The address does not exist.
-                          - const: COUNTRY_CODE_MISSING
-                            title: country_code:missing
-                            description: The country code is missing.
-                          - const: POSTAL_CODE_MISSING
-                            title: postal_code:missing
-                            description: The postal code is missing.
-                          - const: STATE_MISSING
-                            title: state:missing
-                            description: The state is missing.
-                          - const: PROVINCE_MISSING
-                            title: province:missing
-                            description: The province is missing.
-                  changed_attributes:
-                    type: array
-                    description: List of changed attributes.
-                    items:
-                      type: string
-    parcel-common:
-      title: Parcel common Object
-      description: Parcel common object model
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/parcel-common-with-optional-fields'
-      - required:
-        - weight
-      - type: object
-        properties:
-          parcel_items:
-            type: array
-            description: List of items/products that the parcel contains. **Note that parcel items array is required for shipments that require customs documents.**
-            maxItems: 1000
-            items:
-              $ref: '#/components/schemas/parcel-item'
-    CostsObject:
-      properties:
-        value:
-          type:
-          - string
-          - 'null'
-          pattern: '[\d]+(\.[\d]+)?'
-          example: '3.99'
-        currency:
-          type:
-          - string
-          - 'null'
-          example: EUR
-    shipment-common:
-      title: Shipment common Object
-      description: Shipment common object model
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/shipment-common-with-optional-fields'
-      - type: object
-        properties:
-          customs_information:
-            $ref: '#/components/schemas/customs-information'
-        required:
-        - ship_with
-    raw-address:
-      title: Raw address
-      type: object
-      description: Raw address object
-      properties:
-        address_line_1:
-          type: string
-          example: Stadhuisplein
-          description: First line of the address
-        house_number:
-          type: string
-          example: '50'
-          description: House number of the address
-        address_line_2:
-          type: string
-          description: Additional address information, e.g. 2nd level
-          example: Apartment 17B
-        postal_code:
-          type: string
-          example: 1013 AB
-          description: Zip code of the address
-          minLength: 1
-        city:
-          type: string
-          example: Eindhoven
-          description: City of the address
-          minLength: 1
-        po_box:
-          type:
-          - string
-          - 'null'
-          description: Code required in case of PO Box or post locker delivery
-        state_province_code:
-          type: string
-          example: IT-RM
-          description: The character state code of the customer represented as ISO 3166-2 code. This field is required for certain countries. See [international shipping](/docs/shipments/international-shipping#required-fields-for-international-shipments) for details.
-        country_code:
-          type: string
-          example: NL
-          description: The country code of the customer represented as ISO 3166-1 alpha-2
-          minLength: 1
-    shipment-common-with-optional-fields:
-      title: Shipment common with optional fields Object
-      description: Shipment common with optional fields object model
-      type: object
-      properties:
-        brand_id:
-          description: 'The `id` of the brand. Brands can be added through the [Sendcloud platform](https://app.sendcloud.com/v2/settings/brands/list) and be retrieved (alongside their `id`) from the [Retrieve a list of brands](/api/v2/brands/retrieve-a-list-of-brands) endpoint.
-
-            '
-          example: 42
-          type: integer
-        ship_with:
-          $ref: '#/components/schemas/ship-with'
-        to_address:
-          $ref: '#/components/schemas/address-with-required-fields'
-        order_number:
-          type: string
-          description: Order number generated manually or by shop system
-        total_order_price:
-          description: 'The value paid by the buyer for the order.
-
-            '
-          $ref: '#/components/schemas/optional-price'
-        reference:
-          description: 'A reference that will be stored on the Shipment and returned in your responses. This is not sent to the carrier.
-
-            '
-          type:
-          - string
-          - 'null'
-          example: shipment-1234
-        external_reference_id:
-          description: 'An optional reference can be provided by the API user; if included, it must be unique across shipments of the user. Using the same reference more than once will result in a 409 HTTP status code and the associated object being returned.
-
-            '
-          type:
-          - string
-          - 'null'
-          example: unique-value-1234
-        validation_methods:
-          type: array
-          description: 'A list of additional address validations to apply. At present, the only supported validation service is Here, and it is used exclusively for transactional contracts. To enable this feature, contract_id must be explicitly set and must reference a transactional contract.
-
-
-            When using the "Here" validation method, Sendcloud will attempt to verify and correct the provided address based on the best available match from the selected provider. For example, if you submit "city": "Amstredan", the system will automatically correct it to "city": "Amsterdam".
-
-
-            If no suitable match is found, the request will return an error.
-
-
-            Please note that only address components recognised by the selected provider will be kept. Any additional details included in address fields (e.g. "address_line_2": "Ring the blue doorbell") will be removed if they do not match the provider records.
-
-
-            For adding delivery notes or extra instructions, use the parcels.label_notes field instead.
-
-            '
-          items:
-            $ref: '#/components/schemas/address-validation-method-enum'
-          example:
-          - here
+          description: User-defined human readable status
       required:
-      - to_address
-    ship-with:
-      title: Ship with object
-      type: object
-      description: 'The ship with object can be used to define how you would like to send your shipment.
-
-
-        You can use a `shipping_option_code`. This is a unique identifier that displays what carrier and what set of shipping functionalities you want to use.
-
-        '
-      examples:
-      - type: shipping_option_code
-        properties:
-          shipping_option_code: postnl:standard/insured=3000
-          contract_id: 517
-      properties:
-        type:
-          type: string
-          description: 'The way the shipping method and carrier will be selected. Nowadays the only possible value is ''shipping_option_code'', which requires client to also send the `shipping_option_code` inside properties.
-
-            '
-          enum:
-          - shipping_option_code
-          example: shipping_option_code
-        properties:
-          $ref: '#/components/schemas/shipping-option-code-properties'
-      required:
-      - type
-      - properties
-    dimension-units:
-      type: string
-      title: Dimensional units
-      enum:
-      - cm
-      - mm
-      - m
-      - yd
-      - ft
-      - in
-      example: mm
+      - id
+      - message
     CheckoutPayload:
       title: Checkout Payload Object
       type: object
@@ -6604,532 +7137,28 @@ components:
       - sender_address_id
       - shipping_product
       - delivery_method_type
-    ShipmentErrorLog:
-      title: Shipment create/update error log
+    TaxNumber_2:
       type: object
+      title: Tax Number
       properties:
-        error:
-          title: Error(s)
-          type: object
-        external_order_id:
-          title: External Order ID
-          type: string
-        external_shipment_id:
-          title: External Shipment ID
-          type: string
-        status:
-          title: Status
-          type: string
-          enum:
-          - error
-    cancellation-status:
-      title: Cancel Shipment Status Object
-      type: object
-      properties:
-        status:
-          type: string
-          minLength: 1
-          example: cancelled
-        message:
-          type: string
-          minLength: 1
-          example: Shipment has been cancelled
-      required:
-      - status
-      - message
-    customs-information:
-      title: CustomsInformation
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/customs-information-with-optional-fields'
-      - required:
-        - invoice_number
-        - export_reason
-    parcel-item-with-optional-fields:
-      title: Parcel Item with optional fields Object
-      description: A single item (with optional fields) in a shipment. **Note that parcel item object is required for shipments that require customs documents.**
-      type: object
-      properties:
-        item_id:
-          type: string
-          description: Order Item external ID in shop system
-          example: '5552'
-          minLength: 1
-        description:
-          type: string
-          description: Description of the item
-          example: T-Shirt XL
-          minLength: 1
-          maxLength: 255
-        quantity:
-          type: integer
-          description: Quantity of items shipped
-          minimum: 1
-          example: 1
-        weight:
-          $ref: '#/components/schemas/weight'
-        price:
-          $ref: '#/components/schemas/required-price'
-        hs_code:
-          type: string
-          description: Harmonized System Code. **This field is required if it's an international shipment**
-          example: '620520'
-          maxLength: 12
-        origin_country:
-          type: string
-          description: ISO-2 code of the country where the items were originally produced. **This field is required if it's an international shipment**
-          example: NL
-        sku:
-          type: string
-          description: The SKU of the product
-          example: TS1234
-        product_id:
-          type: string
-          description: The internal ID of the product
-          example: '19284'
-        mid_code:
-          title: MID Code
-          type:
-          - string
-          - 'null'
-          description: MID code is short for Manufacturer's Identification code and must be shown on the commercial invoice. It's used as an alternative to the full name and address of a manufacturer, shipper or exporter and is always required for U.S. formal customs entries.
-          example: NLOZR92MEL
-        material_content:
-          title: Material Content
-          type:
-          - string
-          - 'null'
-          description: A description of materials of the order content.
-          example: 100% Cotton
-        intended_use:
-          title: Intended Use
-          type:
-          - string
-          - 'null'
-          description: Intended use of the order contents. The intended use may be personal or commercial.
-          example: Personal use
-        dangerous_goods:
-          $ref: '#/components/schemas/dangerous-goods'
-        dds_reference:
-          title: DDS Reference
-          type:
-          - string
-          - 'null'
-          description: The DDS (Due Diligence Statement) reference number associated with the item, if applicable. See EUDR system for more details.
-          example: 25FIYPEK0A7573
-        taric_doc_code:
-          title: TARIC document code
-          type:
-          - string
-          - 'null'
-          description: TARIC document codes are specific alphanumeric codes used in EU customs declarations (Box 44) to identify required supporting documents, certificates, or conditions for a product, like health certificates (e.g., 3200), origin proofs (e.g., EUR.1), or special authorizations (e.g., C716 for due diligence) for simplified procedures, ensuring compliance with EU trade rules for various goods.
-          example: Y142
-        manufacturer_product_id:
-          title: Manufacturer Product ID
-          type:
-          - string
-          - 'null'
-          description: A manufacturer or product supplier's unique code, assigned to an individual product.
-          maxLength: 70
-          example: ABC-12345
-        manufacturer_product_id_std:
-          title: Manufacturer Product ID (Standardized)
-          type:
-          - string
-          - 'null'
-          description: A standardized manufacturer product identifier assigned by a global industry standard body (e.g. GTIN). Provide only if one exists for the product.
-          maxLength: 70
-          example: 01234567890128
-        properties:
-          type: object
-          additionalProperties: true
-          description: Any custom user-defined properties of order item or product
-          example:
-            size: red
-            color: green
-      required:
-      - quantity
-    documents:
-      title: Documents Object
-      type: object
-      description: Documents object for a parcel
-      properties:
-        type:
-          type: string
-          deprecated: true
-          description: The type of the document. See the list below for available types.
-          enum:
-          - label
-          - cn23
-          - cp71
-          - commercial-invoice
-          - cn23-default
-          - air-waybill
-          - qr
-        document_type:
-          type: string
-          description: The type of the document. See the list below for available types.
-          enum:
-          - label
-          - customs-declaration
-          - air-waybill
-        size:
-          type: string
-          description: The paper size of the document.
-          enum:
-          - a6
-          - a4
-        link:
-          type: string
-          description: A link to the document, which allows downloading of the document in PDF, PNG and ZPL and various DPI.
-    ShipmentBlobOrder:
-      title: Shipment Blob Order Object
-      type: object
-      properties:
-        address:
-          title: Address
-          type: string
-          minLength: 1
-        address_2:
-          title: Address 2
-          type: string
-        allowed_shipping_methods:
-          type: array
-          items:
-            type: integer
-          readOnly: true
-        barcode:
-          title: Barcode
-          type: string
-          minLength: 1
-          description: Barcode value of the label
-          readOnly: true
-        city:
-          title: City
-          type: string
-          minLength: 1
-        company_name:
-          title: Company name
-          type: string
-        country:
-          $ref: '#/components/schemas/country-codes'
-        created_at:
-          type: string
-          title: Created at
-          format: date-time
-          description: Timestamp indicating when the shipment was created in the Sendcloud system
-          example: '2022-05-07T15:08:12.152000Z'
-        currency:
-          type:
-          - string
-          - 'null'
-          title: Currency
-          minLength: 1
-          description: ISO 4217 currency code
-          enum:
-          - EUR
-          - USD
-          - GBP
-        customs_invoice_nr:
-          type: string
-          title: Customs invoice nr
-          description: Your own commercial invoice number
-          example: '120'
-        customs_shipment_type:
-          type:
-          - integer
-          - 'null'
-          title: Customs shipment type
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          description: "Type of shipment for customs purposes:\n  - `0` - Gift\n  - `1` - Documents\n  - `2` - Commercial Goods\n  - `3` - Commercial Sample\n  - `4` - Returned Goods\n"
-          minimum: 0
-          maximum: 4
-        email:
-          title: Customer email address
-          type: string
-          format: email
-        external_order_id:
-          title: External order id
-          type: string
-          minLength: 1
-          description: External order ID assigned by the shop system
-        external_shipment_id:
-          title: External shipment id
-          type:
-          - string
-          - 'null'
-          minLength: 1
-          description: External shipment ID assigned by the shop system
-        house_number:
-          title: House number
-          type: string
-        integration:
-          title: Integration
-          type: integer
-          description: Sendcloud Integration ID
-          readOnly: true
         name:
-          title: Name
-          type: string
-          minLength: 1
-        order_number:
-          title: Order number
-          type: string
-          minLength: 1
-          description: Unique order number generated manualy or by the shop system
-        order_status:
-          $ref: '#/components/schemas/ShipmentBlobStatus'
-        parcel_items:
-          type:
-          - array
-          - 'null'
-          description: List of items the parcel contains
-          items:
-            $ref: '#/components/schemas/ParcelItems'
-        payment_status:
-          $ref: '#/components/schemas/ShipmentBlobStatus'
-        postal_code:
-          title: Postal code
-          type: string
-          minLength: 1
-        sender_address:
-          title: Sender address
-          type:
-          - integer
-          - 'null'
-          description: ID of a sender address in the Sendcloud system
-          readOnly: true
-        shipment_uuid:
-          type: string
-          title: Shipment uuid
-          minLength: 1
-          format: uuid
-          description: Automatically generated Sendcloud's internal ID
-          readOnly: true
-        shipping_method:
-          type:
-          - integer
-          - 'null'
-          title: Shipping method
-          description: Foreign key indicating shipping method used
-          example: 1234
-        shipping_method_checkout_name:
-          title: Shipping method checkout name
-          type: string
-          maxLength: 100
-          description: Human readable shipping method name
-        telephone:
-          title: Telephone
-          type: string
-        to_post_number:
-          title: To post number
-          type: string
-        to_service_point:
-          title: To service point
-          type:
-          - integer
-          - 'null'
-        to_state:
-          title: To state
           type:
           - string
           - 'null'
-          minLength: 1
-        total_order_value:
-          title: Total order value
+          title: Tax ID name
+          example: VAT
+        country_code:
           type:
           - string
           - 'null'
-          format: decimal
-          description: The total price of an order
-        updated_at:
-          type: string
-          title: Updated at
-          format: date-time
-          description: Timestamp for when the shipment was updated in the Sendcloud system
-          example: '2022-05-07T15:08:12.152000Z'
-        weight:
+          title: The country code of the country in the address
+          example: NL
+        value:
           type:
           - string
           - 'null'
-          title: Weight
-          format: decimal
-          description: Total weight of the order. Cannot be smaler than 0.001
-          example: '10.2'
-          maxLength: 10
-        checkout_payload:
-          $ref: '#/components/schemas/CheckoutPayload'
-        width:
-          type:
-          - string
-          - 'null'
-          title: Width
-          description: Volumetric weight width
-          format: decimal
-          maxLength: 10
-          example: '10.2'
-        height:
-          type:
-          - string
-          - 'null'
-          title: Height
-          description: Volumetric weight height
-          format: decimal
-          maxLength: 10
-          example: '10.2'
-        length:
-          type:
-          - string
-          - 'null'
-          title: Length
-          description: Volumetric weight length
-          format: decimal
-          maxLength: 10
-          example: '10.2'
-        customs_details:
-          $ref: '#/components/schemas/CustomsInformation'
-        shipment_created_at:
-          type: string
-          format: date-time
-          description: Timestamp indicating when the shipment was created in the shop system
-          example: '2022-07-07T15:08:12.152000Z'
-          readOnly: true
-        shipment_updated_at:
-          type: string
-          format: date-time
-          description: Timestamp for when the shipment was updated in the shop system
-          example: '2022-07-07T15:08:12.152000Z'
-          readOnly: true
-      required:
-      - address
-      - address_2
-      - city
-      - company_name
-      - country
-      - created_at
-      - currency
-      - customs_invoice_nr
-      - customs_shipment_type
-      - email
-      - external_order_id
-      - external_shipment_id
-      - house_number
-      - name
-      - order_number
-      - order_status
-      - parcel_items
-      - payment_status
-      - postal_code
-      - shipping_method_checkout_name
-      - telephone
-      - to_post_number
-      - to_service_point
-      - to_state
-      - updated_at
-      - shipment_created_at
-      - shipment_updated_at
-    base-shipment-response:
-      title: Base shipment response Object
-      description: Base shipment response object model
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/shipment-common'
-      - type: object
-        required:
-        - from_address
-        properties:
-          from_address:
-            description: The sender address for the shipment.
-            $ref: '#/components/schemas/address-with-required-fields'
-          id:
-            description: ID of the shipment (required to retrieve or cancel a specific shipment)
-            type: string
-            readOnly: true
-          to_service_point:
-            $ref: '#/components/schemas/service-point-response'
-          errors:
-            type: array
-            items:
-              $ref: '#/components/schemas/ErrorObject'
-            readOnly: true
-            description: This errors object will contain errors such as carrier announcement errors or validation errors.
-          delivery-dates:
-            $ref: '#/components/schemas/delivery-dates'
-            type: object
-          carrier:
-            type: object
-            description: Carrier used for the shipment.
-            readOnly: true
-            properties:
-              code:
-                type: string
-                title: Carrier Code
-                description: A carrier represented by a Sendcloud unique identifier.
-                example: postnl
-              name:
-                type: string
-                title: Carrier Name
-                description: Carrier friendly name.
-                example: PostNL
-    shipment-request-with-rules:
-      title: Asynchronous Announcement Shipment with Rules request Object
-      description: Asynchronous Shipment with Rules request object model
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/shipment-request-with-optional-fields'
-      - $ref: '#/components/schemas/multicollo-parcels-array-request-with-optional-fields'
-      - type: object
-        properties:
-          apply_shipping_defaults:
-            type: boolean
-            description: 'When set to `true`, the "Default weight", "Preferred shipping method" and "Default export reason" [shipping defaults](https://app.sendcloud.com/v2/shipping/shipping-defaults) will be applied, if they were not provided by the request payload.
-
-
-              **Note that the request payload values and shipping rules take precedence over these defaults.**'
-            default: true
-            example: true
-          apply_shipping_rules:
-            type: boolean
-            description: "When set to `true`, [shipping rules](https://app.sendcloud.com/v2/shipping/rules) will be applied.\n\n<Info>\n  **Note that rules take precedence over the values provided in the request payload and over the [shipping defaults](https://app.sendcloud.com/v2/shipping/shipping-defaults).**\n  \n  For instance, if a contract is specified in one of the applicable rules for the shipment that is being requested, the contract value provided in the request payload will be ignored.\n  \n  Also keep in mind that since orders created by the API do not appear in the Sendcloud platform's Incoming Orders overview, not all shipping rules can be applied.\n</Info>"
-            default: true
-            example: true
-          delivery_indicator:
-            type: string
-            description: 'Free text that is intended for applying the **Checkout Delivery Method** condition in shipping rules.
-
-
-              Learn more about [Shipping rules](/docs/shipping/shipping-rules/).
-
-              '
-            example: DHL home delivery
-    weight-units:
-      type: string
-      title: Mass Units Object
-      enum:
-      - kg
-      - g
-      - lbs
-      - oz
-      example: g
-    sync-parcels-array-response:
-      title: Sync Parcels Array Response Object
-      description: Sync parcel common object model
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/parcels-array-response'
-      - type: object
-        properties:
-          label_file:
-            type:
-            - string
-            - 'null'
-            format: byte
-            description: The base64 representation of the label file. **Note that it will be returned if there is only one parcel in the shipment.**
+          title: The value of the Tax ID
+          example: NL987654321B02
   parameters:
     SendcloudPartnerId:
       in: header
@@ -7207,3 +7236,6 @@ components:
           tokenUrl: https://account.sendcloud.com/oauth2/token/
           scopes:
             api: Default OAuth scope required to access Sendcloud API.
+x-refined-from:
+- sendcloud-shipments-openapi.yml
+- sendcloud-v2-integrations-openapi.yml

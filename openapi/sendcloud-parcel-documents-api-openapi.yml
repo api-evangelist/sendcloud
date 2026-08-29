@@ -1,15 +1,18 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Shipments Address Parcel Documents API
-  version: 3.0.0
-  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  title: Sendcloud Parcel Documents API
   contact:
     name: Sendcloud API Support
+    url: https://www.sendcloud.dev
     email: contact@sendcloud.com
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: '1.0'
+  description: 'Operations tagged Parcel Documents across 2 of this provider''s published API definitions: sendcloud-v2-parcel-documents-openapi.yml, sendcloud-v3-parcel-documents-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://panel.sendcloud.sc/api/v2
+  description: Sendcloud Production
 - url: https://panel.sendcloud.sc/api/v3
   description: Sendcloud Production
 tags:
@@ -88,6 +91,9 @@ paths:
       - $ref: '#/components/parameters/dpi'
       - $ref: '#/components/parameters/rendering_format'
       - $ref: '#/components/parameters/raw'
+    servers:
+    - url: https://panel.sendcloud.sc/api/v2
+      description: Sendcloud Production
   /parcel-documents/{type}:
     get:
       summary: Retrieve multiple parcel documents
@@ -147,8 +153,120 @@ paths:
       - $ref: '#/components/parameters/type_2'
       - $ref: '#/components/parameters/paper-size'
       description: Download multiple parcel documents of the same type in bulk.
+    servers:
+    - url: https://panel.sendcloud.sc/api/v3
+      description: Sendcloud Production
 components:
   parameters:
+    dpi:
+      name: dpi
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 72
+        enum:
+        - 72
+        - 150
+        - 203
+        - 300
+        - 600
+        example: 300
+        minimum: 1
+      description: "DPI refers to the printing resolution of your shipping labels. It's important that labels are printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\nUse following amounts for appropriate result:\n<table>\n  <thead>\n    <tr>\n      <th>File format</th>\n      <th>Default DPI</th>\n      <th>Valid DPI</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>pdf</td>\n      <td>72</td>\n      <td>72</td>\n    </tr>\n    <tr>\n      <td>png</td>\n      <td>300</td>\n      <td>150, 300</td>\n    </tr>\n  </tbody>\n</table>\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n"
+    raw:
+      name: raw
+      in: query
+      required: false
+      schema:
+        type: boolean
+      description: There have been identified cases where custom documents, internally rendered, will only include some of the necessary information, mainly due to some restrictions. Using the raw query param, one can request to receive the document in the originally received format by the carrier. This temporary solution to the problem allows the normal operations of the affected customers. As such, you can expect this property to be sunsetted shortly once the necessary changes have been implemented.
+    type:
+      name: type
+      in: path
+      schema:
+        type: string
+        example: commercial-invoice
+        enum:
+        - air-waybill
+        - cn23
+        - cn23-default
+        - commercial-invoice
+        - cp71
+        - label
+        - qr
+      description: Document type you want to retrieve for this parcel
+      required: true
+    id:
+      name: id
+      in: path
+      schema:
+        type: integer
+        example: 1
+        minimum: 1
+      description: Identifier of the parcel which you want to retrieve a document from
+      required: true
+    rendering_format:
+      name: Accept
+      in: header
+      required: false
+      schema:
+        type: string
+        default: application/pdf
+        enum:
+        - application/pdf
+        - application/zpl
+        - image/png
+        example: image/png
+      description: The returned format of the document
+    parcels:
+      name: parcels
+      in: query
+      required: true
+      schema:
+        type: array
+        items:
+          type: integer
+        example:
+        - 1
+        - 2
+        - 3
+        maxItems: 20
+        minItems: 1
+      description: Parcels for which you want to retrieve the documents
+    dpi_2:
+      name: dpi
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 72
+        enum:
+        - 72
+        - 150
+        - 203
+        - 300
+        - 600
+        example: 300
+        minimum: 1
+      description: 'DPI, or dots per inch, refers to the printing resolution of your shipping labels. Labels must be printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.
+
+
+        Use the following table to find the appropriate DPI for each file format:
+
+
+        | File format | Default DPI | Valid DPI |
+
+        |-------------|-------------|-----------|
+
+        | pdf         | 72          | 72        |
+
+        | png         | 300         | 150, 300  |
+
+
+        ZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.
+
+        '
     paper-size:
       in: query
       name: paper_size
@@ -172,44 +290,6 @@ components:
         - A5
         - A6
         example: A4
-    raw:
-      name: raw
-      in: query
-      required: false
-      schema:
-        type: boolean
-      description: There have been identified cases where custom documents, internally rendered, will only include some of the necessary information, mainly due to some restrictions. Using the raw query param, one can request to receive the document in the originally received format by the carrier. This temporary solution to the problem allows the normal operations of the affected customers. As such, you can expect this property to be sunsetted shortly once the necessary changes have been implemented.
-    parcels:
-      name: parcels
-      in: query
-      required: true
-      schema:
-        type: array
-        items:
-          type: integer
-        example:
-        - 1
-        - 2
-        - 3
-        maxItems: 20
-        minItems: 1
-      description: Parcels for which you want to retrieve the documents
-    type:
-      name: type
-      in: path
-      schema:
-        type: string
-        example: commercial-invoice
-        enum:
-        - air-waybill
-        - cn23
-        - cn23-default
-        - commercial-invoice
-        - cp71
-        - label
-        - qr
-      description: Document type you want to retrieve for this parcel
-      required: true
     type_2:
       name: type
       in: path
@@ -222,7 +302,7 @@ components:
         - air-waybill
       description: Document type you want to retrieve.
       required: true
-    rendering_format:
+    rendering_format_2:
       name: Accept
       in: header
       required: false
@@ -234,50 +314,11 @@ components:
         - application/zpl
         - image/png
         example: image/png
-      description: The returned format of the document
-    id:
-      name: id
-      in: path
-      schema:
-        type: integer
-        example: 1
-        minimum: 1
-      description: Identifier of the parcel which you want to retrieve a document from
-      required: true
-    dpi:
-      name: dpi
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 72
-        enum:
-        - 72
-        - 150
-        - 203
-        - 300
-        - 600
-        example: 300
-        minimum: 1
-      description: "DPI refers to the printing resolution of your shipping labels. It's important that labels are printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\nUse following amounts for appropriate result:\n<table>\n  <thead>\n    <tr>\n      <th>File format</th>\n      <th>Default DPI</th>\n      <th>Valid DPI</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>pdf</td>\n      <td>72</td>\n      <td>72</td>\n    </tr>\n    <tr>\n      <td>png</td>\n      <td>300</td>\n      <td>150, 300</td>\n    </tr>\n  </tbody>\n</table>\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n"
+      description: 'The returned format of the document.
+
+
+        **Note:** If a label is requested as native ZPL from the carrier it can''t be converted to another format and will always be returned in ZPL.'
   schemas:
-    errors:
-      title: Errors
-      type: object
-      description: A standardized format for errors in JSON:API responses.
-      properties:
-        errors:
-          type:
-          - array
-          - object
-          items:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/ErrorObject'
-            required:
-            - status
-            - code
-            - detail
     ErrorObject:
       title: Error
       type: object
@@ -340,6 +381,23 @@ components:
         meta:
           type: object
           description: Additional metadata about the error.
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
   securitySchemes:
     HTTPBasicAuth:
       type: http
@@ -353,3 +411,6 @@ components:
           tokenUrl: https://account.sendcloud.com/oauth2/token/
           scopes:
             api: Default OAuth scope required to access Sendcloud API.
+x-refined-from:
+- sendcloud-v2-parcel-documents-openapi.yml
+- sendcloud-v3-parcel-documents-openapi.yml

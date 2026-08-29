@@ -1,0 +1,426 @@
+openapi: 3.2.0
+info:
+  title: Event Subscriptions Events API
+  version: 3.0.0
+  description: '**BETA** - The Event Subscriptions API allows you to subscribe to parcel events and have them delivered to external endpoints such as webhooks or Klaviyo.
+
+
+    This API uses a two-part model:
+
+    - **Connections** define _where_ events are delivered (e.g., a webhook URL or a Klaviyo account).
+
+    - **Subscriptions** define _which_ events are routed to a connection.
+
+
+    All resources are scoped to the authenticated user''s organization.'
+  contact:
+    name: Sendcloud API Support
+    email: contact@sendcloud.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://panel.sendcloud.sc/api/v3
+  description: Sendcloud Production
+tags:
+- name: Events
+paths: {}
+webhooks:
+  ParcelEventCreated:
+    post:
+      operationId: sc-public-v3-event-subscriptions-parcel_event_created
+      summary: Parcel event created
+      description: 'Delivered to your connection endpoint when a parcel tracking event occurs (e.g., a status change such as shipped, delivered, or returned).
+
+
+        Subscribe to this event type using `parcels.event.created` when creating a subscription.'
+      x-mint:
+        href: /api/v3/event-subscriptions/parcel-event-created
+      tags:
+      - Events
+      security: []
+      requestBody:
+        description: Event data delivered to your endpoint
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParcelEventCreatedPayload'
+            examples:
+              InTransit:
+                summary: Parcel in transit
+                value:
+                  event_type: parcels.event.created
+                  data:
+                    parcel:
+                      parcel_id: 12345678
+                      tracking_number: 3SYZXG132912330
+                      carrier_code: dpd
+                      announced_at: '2026-01-15T10:00:00Z'
+                    event:
+                      event_type: carrier
+                      timestamp: '2026-01-15T10:30:00Z'
+                      phase: in_transit
+                      exception: none
+                      status_type: success
+                      sub_status: none
+                      description: Parcel is on its way
+                      end_of_tracking: false
+                      is_offered: false
+                      is_carrier_responsible: null
+                      is_returned: false
+                      location_details:
+                        city: Eindhoven
+                        country: NL
+                        house_number: null
+                        postal_code: null
+                        street: null
+                        service_point_id: null
+                        depot: null
+                      extra_data: null
+              Delivered:
+                summary: Parcel delivered
+                value:
+                  event_type: parcels.event.created
+                  data:
+                    parcel:
+                      parcel_id: 12345678
+                      tracking_number: 3SYZXG132912330
+                      carrier_code: dpd
+                      announced_at: '2026-01-15T10:00:00Z'
+                    event:
+                      event_type: carrier
+                      timestamp: '2026-01-16T14:22:00Z'
+                      phase: delivered
+                      exception: none
+                      status_type: success
+                      sub_status: none
+                      description: Parcel has been delivered
+                      end_of_tracking: true
+                      is_offered: true
+                      is_carrier_responsible: null
+                      is_returned: false
+                      location_details: null
+                      extra_data: null
+      responses:
+        '200':
+          description: Return a 2xx status to acknowledge receipt of the event.
+components:
+  schemas:
+    WebhookEventData:
+      type: object
+      description: Parcel tracking event data.
+      required:
+      - event_type
+      - timestamp
+      - phase
+      - exception
+      - status_type
+      - sub_status
+      properties:
+        event_type:
+          $ref: '#/components/schemas/parcel-event-type'
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the event occurred.
+          example: '2026-01-15T10:30:00Z'
+        phase:
+          $ref: '#/components/schemas/parcel-event-phase'
+        exception:
+          $ref: '#/components/schemas/parcel-event-exception'
+        status_type:
+          $ref: '#/components/schemas/parcel-event-status-type'
+        sub_status:
+          $ref: '#/components/schemas/parcel-event-sub-status'
+        description:
+          type:
+          - string
+          - 'null'
+          description: Human-readable carrier description of the event.
+          example: Parcel is on its way
+        end_of_tracking:
+          type:
+          - boolean
+          - 'null'
+          description: True when there will be no further tracking updates.
+          example: false
+        is_offered:
+          type:
+          - boolean
+          - 'null'
+          description: True when the parcel was offered for delivery.
+          example: false
+        is_carrier_responsible:
+          type:
+          - boolean
+          - 'null'
+          description: True when the carrier is responsible for the event.
+          example: null
+        is_returned:
+          type:
+          - boolean
+          - 'null'
+          description: True when this event belongs to a return shipment.
+          example: false
+        location_details:
+          oneOf:
+          - $ref: '#/components/schemas/WebhookLocationData'
+          - type: 'null'
+          description: Location where the event occurred, if available.
+        extra_data:
+          type:
+          - object
+          - 'null'
+          description: Additional carrier-specific data. Structure varies per carrier.
+          example: null
+    parcel-event-exception:
+      type: string
+      title: Parcel Event Exception
+      description: Exception on the current phase, or `none` when on the expected path.
+      enum:
+      - address_error
+      - announcement_failed
+      - cancellation_failed
+      - cancelled
+      - cancelled_upstream
+      - cancelling
+      - cancelling_upstream
+      - changed
+      - claim
+      - claimable
+      - customer_rejected
+      - customer_support
+      - customs_issue
+      - damaged
+      - delay_unknown
+      - delivery_delay
+      - dropoff_expiration
+      - handover_delay
+      - hold
+      - missing
+      - none
+      - non_conformity
+      - off_radar
+      - pup_expiration
+      - refused
+      - relabelled
+      - returned_sender
+      - sorting_delay
+      - unknown
+      example: none
+    parcel-event-type:
+      type: string
+      title: Parcel Event Type
+      description: Classification of the event source.
+      enum:
+      - carrier
+      - internal
+      - calculated
+      - claim
+      example: carrier
+    ParcelEventCreatedPayload:
+      type: object
+      description: Event payload delivered to your endpoint when a parcel tracking event occurs.
+      required:
+      - event_type
+      - data
+      properties:
+        event_type:
+          type: string
+          description: The event type identifier.
+          example: parcels.event.created
+          enum:
+          - parcels.event.created
+        data:
+          type: object
+          description: The event payload.
+          required:
+          - parcel
+          - event
+          properties:
+            parcel:
+              $ref: '#/components/schemas/WebhookParcelData'
+            event:
+              $ref: '#/components/schemas/WebhookEventData'
+    parcel-event-phase:
+      type: string
+      title: Parcel Event Phase
+      description: Current delivery phase.
+      enum:
+      - accepted
+      - announced
+      - announcing
+      - attempted
+      - cancelled
+      - customs
+      - delivered
+      - delivery_forced
+      - dropped
+      - in_delivery
+      - in_transit
+      - labelled
+      - none
+      - no_label
+      - pup
+      - ready_to_send
+      - sorted
+      - unknown
+      example: in_transit
+    WebhookLocationData:
+      type: object
+      description: Location details associated with a carrier event.
+      properties:
+        city:
+          type:
+          - string
+          - 'null'
+          description: City where the event occurred.
+          example: Eindhoven
+        country:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-1 alpha-2 country code.
+          example: NL
+        house_number:
+          type:
+          - string
+          - 'null'
+          description: Street house number.
+          example: '10'
+        postal_code:
+          type:
+          - string
+          - 'null'
+          description: Postal / zip code.
+          example: 5611 EM
+        street:
+          type:
+          - string
+          - 'null'
+          description: Street name.
+          example: Stadhuisplein
+        service_point_id:
+          type:
+          - integer
+          - 'null'
+          description: Service point identifier, if applicable.
+          example: null
+        depot:
+          type:
+          - string
+          - 'null'
+          description: Carrier depot name, if applicable.
+          example: null
+    WebhookParcelData:
+      type: object
+      description: Parcel identifiers included in event deliveries.
+      required:
+      - parcel_id
+      - carrier_code
+      properties:
+        parcel_id:
+          type: integer
+          description: Sendcloud parcel identifier.
+          example: 12345678
+        tracking_number:
+          type:
+          - string
+          - 'null'
+          description: Carrier-issued tracking number.
+          example: 3SYZXG132912330
+        carrier_code:
+          type: string
+          description: Short carrier code (e.g. `dpd`, `dhl`, `postnl`).
+          example: dpd
+        announced_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 timestamp of when the carrier was announced for this parcel.
+          example: '2026-01-15T10:00:00Z'
+    parcel-event-status-type:
+      type: string
+      title: Parcel Event Status Type
+      description: Severity of the event.
+      enum:
+      - error
+      - success
+      - warning
+      example: success
+    parcel-event-sub-status:
+      type: string
+      title: Parcel Event Sub Status
+      description: Additional granularity within the phase/exception combination.
+      enum:
+      - accepted
+      - additional_information
+      - carrier
+      - company_closed
+      - connection_missed
+      - content
+      - cut_off
+      - damaged
+      - delay
+      - delivery_change
+      - disposed
+      - documents
+      - duplicate
+      - expired
+      - high_volume
+      - inaccessible
+      - incorrect_information
+      - in_progress
+      - late
+      - locker
+      - mailbox
+      - max_measure
+      - max_weight
+      - mechanical
+      - misrouted
+      - missort
+      - neighbour
+      - none
+      - not_home
+      - not_ordered
+      - one
+      - packaging
+      - parcel_found
+      - partly
+      - passed
+      - payment
+      - postal_box
+      - prohibited_item
+      - pup
+      - pup_closed
+      - receiver
+      - rejected
+      - requested
+      - resolved
+      - safeplace
+      - sender
+      - shop
+      - signature
+      - three
+      - traffic
+      - two
+      - undeliverable
+      - unknown
+      - unknown_receiver
+      - updated
+      - weather_conditions
+      example: none
+  securitySchemes:
+    HTTPBasicAuth:
+      type: http
+      description: Basic Authentication using API key and secrets is currently the main authentication mechanism.
+      scheme: basic
+    OAuth2ClientCreds:
+      type: oauth2
+      description: OAuth2 is a standardized protocol for authorization that allows users to share their private resources stored on one site with another site without having to provide their credentials. OAuth2 Client Credentials Grant workflow. This workflow is typically used for server-to-server interactions that require authorization to access specific resources.
+      flows:
+        clientCredentials:
+          tokenUrl: https://account.sendcloud.com/oauth2/token/
+          scopes:
+            api: Default OAuth scope required to access Sendcloud API.

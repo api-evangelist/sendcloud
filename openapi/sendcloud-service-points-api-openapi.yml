@@ -1,10 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Shipments Address Service Points API
+  title: '[BETA] Service Points API'
   version: 3.0.0
-  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  description: Search service points to display and select in checkout and delivery flows.
   contact:
     name: Sendcloud API Support
+    url: https://www.sendcloud.dev
     email: contact@sendcloud.com
   license:
     name: Apache 2.0
@@ -666,6 +667,37 @@ paths:
                       detail: The service point could not be found
 components:
   schemas:
+    ServicePointAddress:
+      title: Service Point Address
+      type: object
+      description: Address of the service point.
+      properties:
+        street:
+          type: string
+          example: Stationsplein
+          description: Street of the service point address.
+        house_number:
+          type: string
+          example: '1'
+          description: House number of the service point address.
+        postal_code:
+          type: string
+          example: 5611 AC
+          description: Postal code of the service point address.
+        city:
+          type: string
+          example: Eindhoven
+          description: City of the service point address.
+        country_code:
+          type: string
+          example: NL
+          description: Country code of the service point address as an ISO 3166-1 alpha-2 code.
+      required:
+      - street
+      - house_number
+      - postal_code
+      - city
+      - country_code
     OpeningTime:
       title: Opening Time
       type: object
@@ -682,23 +714,38 @@ components:
       required:
       - start_time
       - end_time
-    errors:
-      title: Errors
+    ServicePointCarrier:
+      title: Service Point Carrier
       type: object
-      description: A standardized format for errors in JSON:API responses.
+      description: Information about the carrier that operates the service point.
       properties:
-        errors:
+        code:
+          type: string
+          example: postnl
+          description: Unique identifier of the carrier.
+        name:
+          type: string
+          example: PostNL
+          description: Name of the carrier.
+        logo_url:
           type:
-          - array
-          - object
-          items:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/ErrorObject'
-            required:
-            - status
-            - code
-            - detail
+          - string
+          - 'null'
+          format: uri
+          example: https://cdn.sendcloud.com/global-media/postnl/img/logo.svg
+          description: URL of the carrier logo. Can be `null` when no logo is available.
+        icon_url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: https://cdn.sendcloud.com/global-media/postnl/img/icon.svg
+          description: URL of the carrier icon. This is usually more suitable than `logo_url` for compact UI elements such as map markers or list items. Can be `null` when no icon is available.
+      required:
+      - code
+      - name
+      - logo_url
+      - icon_url
     OpeningTimes:
       title: Opening Times
       type: object
@@ -771,126 +818,6 @@ components:
       - friday
       - saturday
       - sunday
-    ServicePointCarrier:
-      title: Service Point Carrier
-      type: object
-      description: Information about the carrier that operates the service point.
-      properties:
-        code:
-          type: string
-          example: postnl
-          description: Unique identifier of the carrier.
-        name:
-          type: string
-          example: PostNL
-          description: Name of the carrier.
-        logo_url:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: https://cdn.sendcloud.com/global-media/postnl/img/logo.svg
-          description: URL of the carrier logo. Can be `null` when no logo is available.
-        icon_url:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: https://cdn.sendcloud.com/global-media/postnl/img/icon.svg
-          description: URL of the carrier icon. This is usually more suitable than `logo_url` for compact UI elements such as map markers or list items. Can be `null` when no icon is available.
-      required:
-      - code
-      - name
-      - logo_url
-      - icon_url
-    ServicePoint:
-      title: Service Point Search Result
-      allOf:
-      - $ref: '#/components/schemas/ServicePointDetail'
-      - type: object
-        description: Service point returned in a list response.
-        properties:
-          distance:
-            type:
-            - integer
-            - 'null'
-            example: 85
-            description: Distance in meters from the reference point to the service point. `null` when no reference point was provided.
-        required:
-        - distance
-    ServicePointContact:
-      title: Service Point Contact
-      type: object
-      description: Contact information for the service point.
-      properties:
-        email:
-          type: string
-          example: ''
-          description: Contact email address of the service point. Empty when not available.
-        phone:
-          type: string
-          example: ''
-          description: Contact phone number of the service point. Empty when not available.
-      required:
-      - email
-      - phone
-    GeocodingResult:
-      title: Geocoding Result
-      type: object
-      description: "Explains how the address provided in the request was geocoded.\n\nThis helps you understand how reliable the geocoded location is for the returned results. The `status` field tells you the outcome:\n\n  - `matched` - The address was successfully geocoded. See `precision` for the match level.\n  - `partially_matched` - The address was resolved, but not all parts of the input contributed to the match.\n  - `not_found` - The address could not be geocoded. In this case, no service points are returned.\n\nWhen the status is `matched` or `partially_matched`, `precision` indicates how specifically the address was matched.\nYou can use it to decide whether the result is accurate enough for your use case.\nFor example, if the address was matched only at `city` level, you may want to ask the customer to refine the address before showing service points."
-      properties:
-        status:
-          type: string
-          enum:
-          - matched
-          - partially_matched
-          - not_found
-          description: Indicates whether and how the provided address was geocoded.
-        precision:
-          type:
-          - string
-          - 'null'
-          enum:
-          - house_number
-          - street
-          - postal_code
-          - city
-          - region
-          description: 'Indicates how precisely the address was geocoded when a match was found:
-
-
-            - `house_number` - Matched to a specific house number.
-
-            - `street` - Matched to a street, but not to a specific house number.
-
-            - `postal_code` - Matched to a postal code area.
-
-            - `city` - Matched only to a city.
-
-            - `region` - Matched only to a broader region, such as a state or province.
-
-
-            This list is not exhaustive and may be extended with new values in the future. Integrations should be able to handle values they do not recognize.'
-        formatted_address:
-          type:
-          - string
-          - 'null'
-          example: Stadhuisplein 10, 5611 EM Eindhoven, Nederland
-          description: 'Formatted address of the geocoded location.
-
-
-            This is the canonical version of the address matched from the input.
-
-            It can be used to confirm that a free-form or structured address was interpreted as expected.
-
-
-            The matched location may differ from the location intended in the request,
-
-            for example when the address was only partially matched because of a spelling issue or unrecognized address parts.'
-      required:
-      - status
-      - precision
-      - formatted_address
     ErrorObject:
       title: Error
       type: object
@@ -971,37 +898,6 @@ components:
       required:
       - latitude
       - longitude
-    ServicePointAddress:
-      title: Service Point Address
-      type: object
-      description: Address of the service point.
-      properties:
-        street:
-          type: string
-          example: Stationsplein
-          description: Street of the service point address.
-        house_number:
-          type: string
-          example: '1'
-          description: House number of the service point address.
-        postal_code:
-          type: string
-          example: 5611 AC
-          description: Postal code of the service point address.
-        city:
-          type: string
-          example: Eindhoven
-          description: City of the service point address.
-        country_code:
-          type: string
-          example: NL
-          description: Country code of the service point address as an ISO 3166-1 alpha-2 code.
-      required:
-      - street
-      - house_number
-      - postal_code
-      - city
-      - country_code
     ServicePointDetail:
       title: Service Point
       type: object
@@ -1111,6 +1007,111 @@ components:
       - is_open_tomorrow
       - next_open_at
       - is_expired
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
+    ServicePointContact:
+      title: Service Point Contact
+      type: object
+      description: Contact information for the service point.
+      properties:
+        email:
+          type: string
+          example: ''
+          description: Contact email address of the service point. Empty when not available.
+        phone:
+          type: string
+          example: ''
+          description: Contact phone number of the service point. Empty when not available.
+      required:
+      - email
+      - phone
+    GeocodingResult:
+      title: Geocoding Result
+      type: object
+      description: "Explains how the address provided in the request was geocoded.\n\nThis helps you understand how reliable the geocoded location is for the returned results. The `status` field tells you the outcome:\n\n  - `matched` - The address was successfully geocoded. See `precision` for the match level.\n  - `partially_matched` - The address was resolved, but not all parts of the input contributed to the match.\n  - `not_found` - The address could not be geocoded. In this case, no service points are returned.\n\nWhen the status is `matched` or `partially_matched`, `precision` indicates how specifically the address was matched.\nYou can use it to decide whether the result is accurate enough for your use case.\nFor example, if the address was matched only at `city` level, you may want to ask the customer to refine the address before showing service points."
+      properties:
+        status:
+          type: string
+          enum:
+          - matched
+          - partially_matched
+          - not_found
+          description: Indicates whether and how the provided address was geocoded.
+        precision:
+          type:
+          - string
+          - 'null'
+          enum:
+          - house_number
+          - street
+          - postal_code
+          - city
+          - region
+          description: 'Indicates how precisely the address was geocoded when a match was found:
+
+
+            - `house_number` - Matched to a specific house number.
+
+            - `street` - Matched to a street, but not to a specific house number.
+
+            - `postal_code` - Matched to a postal code area.
+
+            - `city` - Matched only to a city.
+
+            - `region` - Matched only to a broader region, such as a state or province.
+
+
+            This list is not exhaustive and may be extended with new values in the future. Integrations should be able to handle values they do not recognize.'
+        formatted_address:
+          type:
+          - string
+          - 'null'
+          example: Stadhuisplein 10, 5611 EM Eindhoven, Nederland
+          description: 'Formatted address of the geocoded location.
+
+
+            This is the canonical version of the address matched from the input.
+
+            It can be used to confirm that a free-form or structured address was interpreted as expected.
+
+
+            The matched location may differ from the location intended in the request,
+
+            for example when the address was only partially matched because of a spelling issue or unrecognized address parts.'
+      required:
+      - status
+      - precision
+      - formatted_address
+    ServicePoint:
+      title: Service Point Search Result
+      allOf:
+      - $ref: '#/components/schemas/ServicePointDetail'
+      - type: object
+        description: Service point returned in a list response.
+        properties:
+          distance:
+            type:
+            - integer
+            - 'null'
+            example: 85
+            description: Distance in meters from the reference point to the service point. `null` when no reference point was provided.
+        required:
+        - distance
   securitySchemes:
     HTTPBasicAuth:
       type: http

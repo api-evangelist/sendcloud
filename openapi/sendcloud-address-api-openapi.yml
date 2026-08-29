@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Shipments Address API
   version: 3.0.0
@@ -86,42 +86,6 @@ paths:
               $ref: '#/components/schemas/address-washer-request'
 components:
   schemas:
-    address-washer-request:
-      title: Address Washer Request
-      description: Address Washer Request object model
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/raw-address'
-        carrier_code:
-          description: The code of the carrier to be used for the address validation. Only carriers available to your account can be used.
-          type: string
-          example: trunkrs
-        validation_methods:
-          description: 'An array of optional address validation methods to be applied
-
-            The default Sendcloud validation will always be applied.
-
-            '
-          type: array
-          items:
-            $ref: '#/components/schemas/address-validation-method-enum'
-          example:
-          - here
-      required:
-      - address
-      - carrier_code
-    errors:
-      title: Errors
-      description: A standardized format for errors in [JSON:API](https://jsonapi.org/format/#error-objects) responses.
-      type: array
-      items:
-        allOf:
-        - $ref: '#/components/schemas/ErrorObject'
-        - required:
-          - status
-          - code
-          - detail
     raw-address:
       title: Raw address
       type: object
@@ -163,11 +127,6 @@ components:
           example: NL
           description: The country code of the customer represented as ISO 3166-1 alpha-2
           minLength: 1
-    address-validation-method-enum:
-      title: Address validation method enum
-      type: string
-      enum:
-      - here
     ErrorObject:
       title: Error
       type: object
@@ -295,6 +254,47 @@ components:
                     description: List of changed attributes.
                     items:
                       type: string
+    errors:
+      title: Errors
+      description: A standardized format for errors in [JSON:API](https://jsonapi.org/format/#error-objects) responses.
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/ErrorObject'
+        - required:
+          - status
+          - code
+          - detail
+    address-validation-method-enum:
+      title: Address validation method enum
+      type: string
+      enum:
+      - here
+    address-washer-request:
+      title: Address Washer Request
+      description: Address Washer Request object model
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/raw-address'
+        carrier_code:
+          description: The code of the carrier to be used for the address validation. Only carriers available to your account can be used.
+          type: string
+          example: trunkrs
+        validation_methods:
+          description: 'An array of optional address validation methods to be applied
+
+            The default Sendcloud validation will always be applied.
+
+            '
+          type: array
+          items:
+            $ref: '#/components/schemas/address-validation-method-enum'
+          example:
+          - here
+      required:
+      - address
+      - carrier_code
   securitySchemes:
     HTTPBasicAuth:
       type: http

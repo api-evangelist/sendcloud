@@ -1,8 +1,18 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Shipments Address Broadcast API
+  title: Event Subscriptions Broadcast API
   version: 3.0.0
-  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  description: '**BETA** - The Event Subscriptions API allows you to subscribe to parcel events and have them delivered to external endpoints such as webhooks or Klaviyo.
+
+
+    This API uses a two-part model:
+
+    - **Connections** define _where_ events are delivered (e.g., a webhook URL or a Klaviyo account).
+
+    - **Subscriptions** define _which_ events are routed to a connection.
+
+
+    All resources are scoped to the authenticated user''s organization.'
   contact:
     name: Sendcloud API Support
     email: contact@sendcloud.com
@@ -69,6 +79,37 @@ paths:
                 $ref: '#/components/schemas/errors'
 components:
   schemas:
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
+    broadcast-result:
+      title: Broadcast Result
+      description: The result of a test event broadcast to a subscription's connection endpoint.
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the test event was successfully delivered.
+        status_code:
+          type: integer
+          description: The HTTP status code returned by the connection endpoint.
+        response_body:
+          type: string
+          description: The response body returned by the connection endpoint.
     ErrorObject:
       title: Error
       type: object
@@ -131,37 +172,6 @@ components:
         meta:
           type: object
           description: Additional metadata about the error.
-    errors:
-      title: Errors
-      type: object
-      description: A standardized format for errors in JSON:API responses.
-      properties:
-        errors:
-          type:
-          - array
-          - object
-          items:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/ErrorObject'
-            required:
-            - status
-            - code
-            - detail
-    broadcast-result:
-      title: Broadcast Result
-      description: The result of a test event broadcast to a subscription's connection endpoint.
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the test event was successfully delivered.
-        status_code:
-          type: integer
-          description: The HTTP status code returned by the connection endpoint.
-        response_body:
-          type: string
-          description: The response body returned by the connection endpoint.
   securitySchemes:
     HTTPBasicAuth:
       type: http

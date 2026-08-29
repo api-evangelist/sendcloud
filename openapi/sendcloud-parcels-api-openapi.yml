@@ -1,16 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Shipments Address Parcels API
-  version: 3.0.0
-  description: The Shipments API allows you to create and announce, retrieve, and cancel outgoing shipments and their associated parcels within the Sendcloud platform.
+  title: Sendcloud Parcels API
+  version: 2.0.0
   contact:
     name: Sendcloud API Support
+    url: https://www.sendcloud.dev
     email: contact@sendcloud.com
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'Operations tagged Parcels across 2 of this provider''s published API definitions: sendcloud-v2-analytics-openapi.yml, sendcloud-v2-parcels-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://panel.sendcloud.sc/api/v3
+- url: https://panel.sendcloud.sc/api/v2
   description: Sendcloud Production
 tags:
 - name: Parcels
@@ -155,6 +156,9 @@ paths:
         in: query
         name: product_sku
         description: filtering by product sku
+    servers:
+    - url: https://panel.sendcloud.sc/api/v2
+      description: Sendcloud Production
   /insights/parcels/buckets:
     get:
       summary: Retrieve parcel-insights buckets
@@ -315,6 +319,9 @@ paths:
         name: product_sku
         description: filtering by product sku
       security: []
+    servers:
+    - url: https://panel.sendcloud.sc/api/v2
+      description: Sendcloud Production
   /insights/parcels/counts-summary:
     get:
       summary: Retrieve parcels counts summary
@@ -423,6 +430,9 @@ paths:
         in: query
         name: product_sku
         description: filtering by product sku
+    servers:
+    - url: https://panel.sendcloud.sc/api/v2
+      description: Sendcloud Production
   /parcels:
     get:
       summary: Retrieve parcels
@@ -1045,6 +1055,9 @@ paths:
                     city: Eindhoven
                     country: NL
                     company_name: Summer Co
+    servers:
+    - url: https://panel.sendcloud.sc/api/v2
+      description: Sendcloud Production
   /parcels/{id}:
     parameters:
     - schema:
@@ -1079,6 +1092,9 @@ paths:
         content: "<Warning>\n  **API v2 is entering maintenance mode.** New users should start with API v3 to access our latest features and improved performance. Already using v2? Don't worry, your current integration remains fully functional. Read more about [maintenance mode](/docs/getting-started/api-version-guide), or check out the [migration guide for API v3](/docs/getting-started/migration-guidelines-for-api-v3).\n</Warning>"
       description: Retrieve a specific parcel by its `id`.
       parameters: []
+    servers:
+    - url: https://panel.sendcloud.sc/api/v2
+      description: Sendcloud Production
   /parcels/{id}/cancel:
     parameters:
     - schema:
@@ -1132,6 +1148,9 @@ paths:
 
             - Happens when the parcel announcement has failed, the parcel status contains id of 1002 and you try to cancel it.'
       description: Cancel an announced parcel (if supported by the carrier) or delete an unannounced parcel.
+    servers:
+    - url: https://panel.sendcloud.sc/api/v2
+      description: Sendcloud Production
   /parcels/{id}/return_portal_url:
     parameters:
     - schema:
@@ -1173,8 +1192,33 @@ paths:
         href: /api/v2/parcels/retrieve-a-return-portal-url
         content: "<Warning>\n  **API v2 is entering maintenance mode.** New users should start with API v3 to access our latest features and improved performance. Already using v2? Don't worry, your current integration remains fully functional. Read more about [maintenance mode](/docs/getting-started/api-version-guide), or check out the [migration guide for API v3](/docs/getting-started/migration-guidelines-for-api-v3).\n</Warning>\n\nThe URL which is retrieved will link directly to the parcel in the Sendcloud Return portal, so a **return parcel** can be created immediately based on the outgoing shipment.\n\nIf no Return portal is configured, or if no brand is connected to the parcel, this endpoint will return an error response with a 404 status code."
       description: Check which of your branded return portals is associated with a specific parcel using the parcel's `id`.
+    servers:
+    - url: https://panel.sendcloud.sc/api/v2
+      description: Sendcloud Production
 components:
   schemas:
+    Summary:
+      type: object
+      title: Analytics Summary Object
+      description: Summary value for the selected last number of days
+      properties:
+        summary:
+          type: array
+          items:
+            type: object
+            description: Shows number of parcels for selected number of last days
+            properties:
+              last_days:
+                type: integer
+                minimum: 0
+              value:
+                type: integer
+                minimum: 0
+            required:
+            - last_days
+            - value
+      required:
+      - summary
     Errors:
       title: Errors Object
       type: object
@@ -1184,19 +1228,309 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ErrorItem'
-    Shipment:
-      title: Shipment Object
+    Buckets:
+      type: object
+      title: Analytics Buckets Object
+      description: Parcel/Products data grouped into buckets.
+      properties:
+        buckets:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: bucket key
+              value:
+                type: integer
+                minimum: 0
+                description: Number of parcels/products in bucket
+              percentage:
+                type: number
+                minimum: 0
+                description: Percent of all parcels/products this bucket has
+              missing_data:
+                type: array
+                description: Periods when data is missing
+                items:
+                  type: object
+                  properties:
+                    start_date:
+                      type: string
+                      format: date
+                    end_date:
+                      type: string
+                      format: date
+                    reason_code:
+                      type: string
+                      enum:
+                      - missing-grouping-property
+                      - missing-filter-property
+                      - not-available
+                      - partly-available
+            required:
+            - key
+            - value
+            - percentage
+            - missing_data
+      required:
+      - buckets
+    Series:
+      type: object
+      title: Analytics Series Object
+      description: Parcels/Products data represented in series
+      properties:
+        series:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: integer
+                example: 0
+                minimum: 0
+                description: Number of parcels/products for the period
+              start_date:
+                type: string
+                format: date
+              end_date:
+                type: string
+                format: date
+              missing_data:
+                type: array
+                items:
+                  type: object
+                  description: Periods when data is missing
+                  properties:
+                    start_date:
+                      type: string
+                      format: date
+                    end_date:
+                      type: string
+                      format: date
+                    reason_code:
+                      type: string
+                      enum:
+                      - missing-grouping-property
+                      - missing-filter-property
+                      - not-available
+                      - partly-available
+            required:
+            - value
+            - start_date
+            - end_date
+            - missing_data
+      required:
+      - series
+    ErrorItem:
+      title: Error Item Object
       type: object
       properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            type: string
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
+    ParcelResponseShort:
+      description: Parcel object model
+      type: object
+      title: Parcel Object
+      properties:
+        address:
+          type: string
+        address_2:
+          type: string
+          description: 'An apartment or floor number that has been extracted from general address input.
+
+            '
+        address_divided:
+          $ref: '#/components/schemas/AddressDivided'
+        carrier:
+          type: object
+          properties:
+            code:
+              $ref: '#/components/schemas/carrier'
+        city:
+          type: string
+        company_name:
+          type: string
+        contract:
+          type: integer
+          minimum: 1
+          description: Id of the contract that was used to create the parcel.
+          nullable: true
+        country:
+          $ref: '#/components/schemas/Country'
+        customs_invoice_nr:
+          type: string
+          description: Customs invoice number
+        customs_shipment_type:
+          type: integer
+          description: "Customs shipment type. Deprecated in favor of the `customs_information` object. \n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          nullable: true
+          deprecated: true
+        data:
+          type: object
+        date_created:
+          type: string
+        date_updated:
+          type: string
+        date_announced:
+          type: string
+        email:
+          type: string
+          description: An email address of the person this parcel is supposed to be delivered to.
         id:
           type: integer
-          description: ID of shipping method
+        insured_value:
+          type: integer
+        label:
+          $ref: '#/components/schemas/Label'
         name:
           type: string
-          description: Name of shipping method
+        order_number:
+          type: string
+        shipment_uuid:
+          type: string
+        parcel_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/parcel-item'
+        postal_code:
+          type: string
+        external_reference:
+          type: string
+          nullable: true
+          description: A reference to be assigned to this parcel. Must be unique across parcels. This field is used to create idempotence.
+        reference:
+          type: string
+          nullable: true
+          description: A reference to be assigned to this parcel. Multiple parcels can have the same reference.
+          default: '0'
+        shipment:
+          $ref: '#/components/schemas/Shipment'
+        status:
+          $ref: '#/components/schemas/Status'
+        documents:
+          type: array
+          uniqueItems: true
+          description: An array of documents. A parcel can contain multiple documents, for instance labels and a customs form. This field returns an array of all the available documents for this parcel.
+          items:
+            $ref: '#/components/schemas/Documents'
+        telephone:
+          type: string
+        to_service_point:
+          type: string
+          description: An id of service point to which the shipment is going to be shipped.
+        to_state:
+          type: string
+          description: 'Represents the state or province of a country. Countries that need a state are USA, Canada, Italy and Australia. e.g. America’s city of Los Angeles belongs to the California state: CA. Shipments to Italy need a province. e.g. Italy’s city of Rome belongs to Roma province: RM.'
+        total_insured_value:
+          type: integer
+        total_order_value_currency:
+          type: string
+        total_order_value:
+          type: string
+        tracking_number:
+          type: string
+          description: Tracking number of the shipment.
+        tracking_url:
+          type: string
+          description: tracking url of this shipment.
+        weight:
+          type: string
+        type:
+          type: string
+          description: Returns either ‘parcel’ or ‘letter’ by which you can determine the type of your shipment.
+          enum:
+          - parcel
+          - letter
+          deprecated: true
+          nullable: true
+        colli_uuid:
+          type: string
+        collo_nr:
+          type: integer
+          description: A number indicating the collo number within a shipment. For a non-multi-collo shipment, this value will always be 0. In a multi-collo shipment with 3 collos, this number will range from 0 to 2.
+        collo_count:
+          type: integer
+          description: A number indicating the number of collos within a shipment. For non-multi-collo shipments, this value will always be 1.
+        is_return:
+          type: boolean
+          description: Indicates if the parcel correspond to a return.
+        awb_tracking_number:
+          type: string
+          description: Deutsche Post Global Mail only. This indicates the air waybill number of this box of Global Mail parcels. This will be only set once Finalize box has been called.
+          nullable: true
+        box_number:
+          type: integer
+          description: Deutsche Post Global Mail only. This indicates the box to which this parcel belongs. This will be only set for Global Mail parcels.
+          nullable: true
+        length:
+          type: string
+          description: 'Parcel length in centimeters (will be used for volumetric weight calculation). Examples: “48” or “52.3”'
+          nullable: true
+        width:
+          type: string
+          description: 'Parcel width in centimeters (will be used for volumetric weight calculation). Examples: “48” or “52.3”'
+          nullable: true
+        height:
+          type: string
+          description: 'Parcel height in centimeters (will be used for volumetric weight calculation). Examples: “48” or “52.3”'
+          nullable: true
+        shipping_method_checkout_name:
+          type: string
+          description: Shipping method name selected by buyer during the checkout
+        customs_declaration:
+          type: object
+          deprecated: true
+          description: An object with available printers that lists available links to the created customs declaration form. (deprecated in favour of documents).
+        note:
+          type: string
+          description: This field can be used to add additional notes regarding an order. The notes will not be displayed on a label, but will be displayed on both the Packing slips & Picking lists which you can use for Pack & Go feature. The value will not be shared with carriers. It may be used for packing instructions, such as "gift" or "do not send before monday".
+          nullable: true
+        errors:
+          $ref: '#/components/schemas/CarrierErrors'
       required:
       - id
-      description: Shipping method object for a parcel
+    CancelParcelStatus:
+      title: Cancel Parcel Status Object
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 1
+        message:
+          type: string
+          minLength: 1
+      required:
+      - status
+      - message
+    AddressDivided:
+      title: Address Divided Object
+      type: object
+      properties:
+        house_number:
+          type: string
+        street:
+          type: string
+      description: Address_divided object for a parcel
     Country:
       title: Country Object
       description: Country object for a parcel
@@ -1208,95 +1542,222 @@ components:
           type: string
         name:
           type: string
-    carrier:
-      type: string
-      title: Carrier Code
-      enum:
-      - amazon
-      - bol
-      - bpost
-      - brt
-      - budbee
-      - chronopost
-      - cirro
-      - colisprive
-      - colissimo
-      - correos
-      - correos_express
-      - ctt_express
-      - dbschenker
-      - delivengo
-      - dhl
-      - dhl_2_man_handling
-      - dhl_de
-      - dhl_ecommerce
-      - dhl_express
-      - dhl_parcel_gb
-      - dhl_parcel_iberia
-      - dp
-      - dpd
-      - dpd_at
-      - dpd_fr
-      - dpd_gb
-      - dpd_local
-      - evri_international
-      - fadello
-      - fairsenden
-      - fedex
-      - fedexcrossborder
-      - fietskoeriers
-      - geodis
-      - glovo
-      - gls_de
-      - gls_es
-      - gls_eu
-      - gls_it
-      - gls_nl
-      - hermes_at
-      - hermes_c2c_gb
-      - hermes_de
-      - hermes_gb
-      - hived
-      - homerr
-      - hurby
-      - inpost_es
-      - inpost_gb
-      - inpost_it
-      - inpost_pl
-      - lettresuivie
-      - mhi
-      - mondial_relay
-      - mrw
-      - nacex
-      - paack
-      - parcelforce
-      - plx
-      - postat
-      - poste_italiane
-      - poste_it_delivery
-      - postnl
-      - postnl_fulfilment
-      - postnl_large
-      - postnord
-      - rjp
-      - rjpv2
-      - royal_mail
-      - sandd
-      - sendcloud
-      - seur
-      - skymail
-      - spring
-      - storeshippers
-      - tipsa
-      - tnt_it
-      - transforce
-      - trunkrs
-      - ups
-      - van_straaten
-      - viatim
-      - yodel
-      description: A carrier represented by a Sendcloud code
-      example: postnl
+    CarrierErrors:
+      description: Errors object for a parcel
+      type: object
+      title: Carrier Errors Object
+      properties:
+        non_field_errors:
+          type: array
+          items:
+            type: string
+    ParcelCreation:
+      description: Parcel object for a parcel creation
+      type: object
+      title: Parcel Creation Object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+          description: Identifier of the parcel (ignored when creating)
+        name:
+          type: string
+          description: Name of the recipient
+        company_name:
+          type: string
+          description: Company name of the recipient the parcel will be shipped to
+        contract:
+          type: integer
+          description: Id of the contract that you would like to use to create the parcel with.
+          minimum: 1
+        address:
+          type: string
+          description: Address of the recipient
+        address_2:
+          type: string
+          description: Additional address information, e.g. 2nd level
+        house_number:
+          type: string
+          description: House number of the recipient
+        city:
+          type: string
+          description: City of the recipient
+        postal_code:
+          type: string
+          description: Zip code of the recipient
+        telephone:
+          type: string
+          description: Phone number of the recipient
+        request_label:
+          type: boolean
+          description: 'Should the parcel request a label. This property used to be called requestLabel. We kept it backwards compatible by still accepting the previous name.
+
+            '
+        email:
+          type: string
+          minLength: 1
+          description: E-mail address of the recipient
+        data:
+          type: object
+          description: This field previously served to store a `pakjegemak` key; however, the data provided in this field is no longer stored or used anymore. Please use `to_service_point` property to use service points.
+          deprecated: true
+          nullable: true
+        country:
+          type: string
+          minLength: 1
+          description: Country of the recipient
+        shipment:
+          $ref: '#/components/schemas/Shipment'
+        weight:
+          type: string
+          minLength: 1
+          description: Weight of the parcel in kilograms, if none given the default weight from settings is used. If you provide no weight in your request we’ll use the default weight set in your settings.
+        order_number:
+          type: string
+          description: Order number of your order
+        insured_value:
+          type: integer
+          description: "This field is mutually exclusive with the `total_insured_value`. Amount of Sendcloud Insurance to add.  \nThis must be a positive value, larger than 2. If a value between 0 and 2 is sent, it is rounded up to 2.\nThe maximum insurance is 5000. \nThis field does not take the carrier provided shipping method insurance into consideration. \n<br><br>\nNote: this value is an integer. If decimal numbers are sent, these are rounded up to the nearest whole number.\nExample: sending 72.35 results in a `insured_value` of 73.<br><br>\nNote: For multicollo shipments, where the `quantity` is greater than 1, the specified insurance amount applies per parcel, not to the shipment as a whole.\nFor example, if you ship 5 parcels and set the `insured_value` to 500 EUR/GBP, each parcel will be insured for 500 EUR/GBP. This results in a total shipment coverage of 5 x 500 = 2500 EUR/GBP.\n"
+        total_order_value_currency:
+          type: string
+          description: The currency of the total order value. Validated against a format of “XYZ” (ISO 4217).
+        total_order_value:
+          type: string
+          description: The value paid by the buyer (via various payment methods supported by the shop(cash on delivery, pre-paid or post-paid), it will also be used for the cash on delivery amount for example “99.99”.
+        quantity:
+          type: integer
+          description: 'Create a multi-collo shipment. Default value: 1. Minimal value: 1. Maximal value: 20. When request_label is true, it is required to use the Create multiple parcels method, since multiple parcels will be returned. When request_label is false, the number of parcels will be set according to this value in the incoming order overview.'
+        shipping_method_checkout_name:
+          type: string
+          description: Shipping method name selected by buyer during the checkout
+        to_post_number:
+          type: string
+          description: Code required in case of PO Box or post locker delivery
+        country_state:
+          type: string
+          description: Code of the state (e.g. NY for New York) or province (e.g. RM for Rome). Destinations that require this field are USA, Canada, Italy and Australia. Errors related to this field will mention the to_state field.
+        sender_address:
+          type: integer
+          description: 'ID of the SenderAddress
+
+
+            **Keep in mind that this id will not be saved / reflected in the created order (Incoming Orders View / Pack&Go) in case `request_label` is `false`.**
+
+            '
+        customs_invoice_nr:
+          type: string
+          description: Customs invoice number. Deprecated in favor of the `customs_information` object.
+          deprecated: true
+        customs_shipment_type:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          description: "Customs shipment type. Deprecated in favor of the `customs_information` object. \n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
+          deprecated: true
+        external_reference:
+          type: string
+          nullable: true
+          description: A reference to be assigned to this parcel. Must be unique across parcels. This field is used to create idempotence.
+        reference:
+          type: string
+          nullable: true
+          description: A reference to be assigned to this parcel. Multiple parcels can have the same reference.
+          default: '0'
+        to_service_point:
+          type: integer
+          description: ID of the selected service point
+        total_insured_value:
+          type: integer
+          description: "This field is mutually exclusive with the `insured_value`. Amount of total insurance to add. \nThis must be a positive value, larger than 2. If a value between 0 and 2 is sent, it is rounded up to 2.\nThe maximum insurance is 5000 plus your shipping method’s insurance depending on the carrier. \nThis field works by automatically calculating how much Sendcloud Insurance you’d need to add plus your shipping method’s insurance so it matches the exact value you’ve given. \nAs an example, DPD insures all their shipments by 520€ by default. \nIf you pass the `total_insured_value`: 5000 your shipment will have a total insurance coverage of 5000€, but you’re only paying for 4480€. <br><br>\nNote: this value is an integer. If decimal numbers are sent, these are rounded up to the nearest whole number.\nExample: sending 72.35 results in a `total_insured_value` of 73. <br><br>\nNote: For multicollo shipments, where the `quantity` is greater than 1, the specified insurance amount applies per parcel, not to the shipment as a whole.\nFor example, if you ship 5 parcels and set the `insured_value` to 500 EUR/GBP, each parcel will be insured for 500 EUR/GBP. This results in a total shipment coverage of 5 x 500 = 2500 EUR/GBP.\n"
+        shipment_uuid:
+          type: string
+          description: Unique identifier that we assign to your shipment within the Sendcloud system.
+        parcel_items:
+          type: array
+          description: List of items the order contains. Check the structure of a parcel_item in the “Parcel_items” section (remember, it’s a list of them!).
+          items:
+            $ref: '#/components/schemas/parcel-item'
+        is_return:
+          type: boolean
+          description: Set to true if this parcel is a return
+        length:
+          type: string
+          description: Parcel length in centimeters (will be used for volumetric weight calculation)
+        width:
+          type: string
+          description: Parcel width in centimeters (will be used for volumetric weight calculation)
+        height:
+          type: string
+          description: 'Parcel height in centimeters (will be used for volumetric weight calculation). Note: You must provide length, width and height all at once for calculating volumetric weight or passing them as-is to carriers that require these properties
+
+            Parcel height in centimeters (will be used for volumetric weight calculation). Note: You must provide length, width and height all at once for calculating volumetric weight or passing them as-is to carriers that require these properties'
+        request_label_async:
+          type: boolean
+          description: Makes sure that the label is requested asynchronously. The parcel is returned, but without label. You will need to poll for status changes on the parcel.
+        apply_shipping_rules:
+          type: boolean
+          description: When set to True configured shipping rules will be applied before creating the label and announcing the Parcel
+        from_name:
+          type: string
+          description: Name of the sender (when creating a return parcel)
+        from_company_name:
+          type: string
+          description: Company name of the sender the parcel will be shipped from (when creating a return parcel)
+        from_address_1:
+          type: string
+          description: Address of the sender (when creating a return parcel)
+        from_address_2:
+          type: string
+          description: Additional address information of the sender (when creating a return parcel)
+        from_house_number:
+          type: string
+          description: House number of the sender (when creating a return parcel)
+        from_city:
+          type: string
+          description: City of the sender (when creating a return parcel)
+        from_postal_code:
+          type: string
+          description: Zip code of the sender
+        from_country:
+          type: string
+          description: Country of the sender (when creating a return parcel)
+        from_telephone:
+          type: string
+          description: Phone number of the sender (when creating a return parcel)
+        from_email:
+          type: string
+          description: E-mail address of the sender (when creating a return parcel)
+        from_vat_number:
+          type: string
+          description: VAT number of the sender (when creating a return parcel). Deprecated in favor of the `customs_information` object.
+        from_eori_number:
+          type: string
+          description: EORI number of the sender (when creating a return parcel). Deprecated in favor of the `customs_information` object.
+          deprecated: true
+        from_inbound_vat_number:
+          type: string
+          description: GB VAT number - needed for shipments from Europe to GB (when creating a return parcel). Deprecated in favor of the `customs_information` object.
+          deprecated: true
+        from_inbound_eori_number:
+          type: string
+          description: GB EORI number - needed for shipments from Europe to GB (when creating a return parcel). Deprecated in favor of the `customs_information` object.
+          deprecated: true
+        from_ioss_number:
+          type: string
+          description: IOSS(Import One-Stop Shop) number of the sender (when creating a return parcel). Deprecated in favor of the `customs_information` object.
+          deprecated: true
+        customs_information:
+          $ref: '#/components/schemas/ParcelCustomsInformation'
+      required:
+      - name
+      - address
+      - city
+      - postal_code
+      - country
     parcel-item:
       title: Parcel Item Object
       type: object
@@ -1406,6 +1867,319 @@ components:
       - weight
       - quantity
       - description
+      - value
+    Shipment:
+      title: Shipment Object
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of shipping method
+        name:
+          type: string
+          description: Name of shipping method
+      required:
+      - id
+      description: Shipping method object for a parcel
+    Label:
+      title: Label Object
+      type: object
+      description: Label object for a parcel
+      properties:
+        label_printer:
+          type: string
+        normal_printer:
+          type: array
+          items:
+            type: string
+    Documents:
+      title: Documents Object
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of the document. See the list below for available types.
+          enum:
+          - label
+          - cp71
+          - cn23
+          - commercial-invoice
+          - cn23-default
+        size:
+          type: string
+          description: 'The paper size of the document, you can expect: a4 and a6.'
+        link:
+          type: string
+          description: "A link to the document, which allows downloading of the document in PDF, PNG, and ZPL. Learn more about the [endpoint](/api/v2/integrations/retrieve-a-list-of-shipments).\n \nSend a GET request to https://panel.sendcloud.sc/api/v2/parcels/{parcelID}/documents/label using your parcel ID.\n\nYou can pick the resolution in the parameters of the request. The default value is 203 dpi."
+      description: Documents object for a parcel
+    Status:
+      title: Status Object
+      type: object
+      properties:
+        id:
+          type: integer
+        message:
+          type: string
+      description: Status object for a parcel
+    dangerous-goods:
+      title: DangerousGoods
+      type: object
+      description: Hazardous materials information for items.
+      properties:
+        chemical_record_identifier:
+          type: string
+          nullable: true
+          description: Chemical record identifier for the dangerous goods
+        regulation_set:
+          type: string
+          enum:
+          - IATA
+          - ADR
+          description: Regulation set governing the dangerous goods
+        packaging_type_quantity:
+          type: string
+          nullable: true
+          description: Quantity of packaging type
+        packaging_type:
+          type: string
+          nullable: true
+          description: Type of packaging used
+        packaging_instruction_code:
+          type: string
+          nullable: true
+          description: Packaging instruction code
+        id_number:
+          type: string
+          nullable: true
+          description: UN identification number
+        class_division_number:
+          type: string
+          nullable: true
+          description: Hazard class and division number
+        quantity:
+          type: string
+          nullable: true
+          description: Quantity of dangerous goods
+        unit_of_measurement:
+          type: string
+          enum:
+          - KG
+          - G
+          - L
+          - ML
+          description: Unit of measurement for dangerous goods quantity
+        proper_shipping_name:
+          type: string
+          nullable: true
+          description: Proper shipping name as defined by regulations
+        commodity_regulated_level_code:
+          type: string
+          enum:
+          - LQ
+          - EQ
+          description: Commodity regulated level code
+        transportation_mode:
+          type: string
+          enum:
+          - Highway
+          - Ground
+          - PAX
+          - CAO
+          description: Mode of transportation
+        emergency_contact_name:
+          type: string
+          nullable: true
+          description: Name of emergency contact person
+        emergency_contact_phone:
+          type: string
+          nullable: true
+          description: Phone number of emergency contact
+        adr_packing_group_letter:
+          type: string
+          enum:
+          - I
+          - II
+          - III
+          description: ADR packing group classification
+        local_proper_shipping_name:
+          type: string
+          nullable: true
+          description: Local proper shipping name
+        transport_category:
+          type: string
+          nullable: true
+          description: Transport category for ADR regulations
+        tunnel_restriction_code:
+          type: string
+          nullable: true
+          description: Tunnel restriction code
+        weight_type:
+          type: string
+          enum:
+          - Net
+          - Gross
+          description: Type of weight measurement
+    carrier:
+      type: string
+      title: Carrier Code
+      enum:
+      - amazon
+      - bol
+      - bpost
+      - brt
+      - budbee
+      - chronopost
+      - cirro
+      - colisprive
+      - colissimo
+      - correos
+      - correos_express
+      - ctt_express
+      - dbschenker
+      - delivengo
+      - dhl
+      - dhl_2_man_handling
+      - dhl_de
+      - dhl_ecommerce
+      - dhl_express
+      - dhl_parcel_gb
+      - dhl_parcel_iberia
+      - dp
+      - dpd
+      - dpd_at
+      - dpd_fr
+      - dpd_gb
+      - dpd_local
+      - evri_international
+      - fadello
+      - fairsenden
+      - fedex
+      - fedexcrossborder
+      - fietskoeriers
+      - geodis
+      - glovo
+      - gls_de
+      - gls_es
+      - gls_eu
+      - gls_it
+      - gls_nl
+      - hermes_at
+      - hermes_c2c_gb
+      - hermes_de
+      - hermes_gb
+      - hived
+      - homerr
+      - hurby
+      - inpost_es
+      - inpost_gb
+      - inpost_it
+      - inpost_pl
+      - lettresuivie
+      - mhi
+      - mondial_relay
+      - mrw
+      - nacex
+      - paack
+      - parcelforce
+      - plx
+      - postat
+      - poste_italiane
+      - poste_it_delivery
+      - postnl
+      - postnl_fulfilment
+      - postnl_large
+      - postnord
+      - rjp
+      - rjpv2
+      - royal_mail
+      - sandd
+      - sendcloud
+      - seur
+      - skymail
+      - spring
+      - storeshippers
+      - tipsa
+      - tnt_it
+      - transforce
+      - trunkrs
+      - ups
+      - van_straaten
+      - viatim
+      - yodel
+      description: A carrier represented by a Sendcloud code
+      example: postnl
+    ParcelResponseFull:
+      allOf:
+      - $ref: '#/components/schemas/ParcelResponseShort'
+      - properties:
+          customs_information:
+            $ref: '#/components/schemas/ParcelCustomsInformation'
+      type: object
+    CreateParcelError:
+      description: Error returned during parcel creation
+      type: object
+      title: Parcel Creation Error Object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: Error code
+            message:
+              type: string
+              description: Concatenated to one string array of errors
+            request:
+              type: string
+              description: URL of the Sendcloud'd endpoint which returned an error
+    TaxNumber:
+      title: Tax Number Object
+      description: Identification numbers and codes used in different contexts. These identifiers are used for taxation, customs, business registration, and other purposes, depending on the country and the specific regulatory requirements. Depending on these requirements you may need to pass one or several numbers related to sender, receiver or importer of record provider. These numbers and codes will be included into final Customs documents.
+      type: object
+      properties:
+        name:
+          type: string
+          example: EORI
+          description: "Tax number abbreviation\n  * VAT - Value-Added Tax → VOEC number for Norway should be shared here as advised by the [Norwegian Tax Authorities](https://www.skatteetaten.no/globalassets/bedrift-og-organisasjon/voec/sending-and-marking-goods-through-postal-services-and-transporters.pdf)\n  * EIN - Employer Identification Number\n  * GST - Goods and Service Tax\n  * SSN - Social Security Number\n  * EORI - Economic Operators Registration and Identification for the European Union\n  * DUN - Data Universal Numbering System\n  * FED - Federal Tax ID\n  * STA - State Tax ID\n  * CNP - Brazil CNPJ/CPF Federal Tax\n  * IE - Brazil type IE/RG Federal Tax\n  * INN - Russia bank details section INN\n  * KPP - Russia bank details section KPP\n  * OGR - Russia bank details section OGRN\n  * OKP - Russia bank details section OKPO\n  * IOSS - SDT or Overseas Registered Supplier or Import One-Stop-Shop or GB VAT (foreign) registration or AUSid GST Registration or VAT on E-Commerce\n  * FTZ - Free Trade Zone ID\n  * DAN - Deferment Account Duties Only\n  * TAN - Deferment Account Tax Only\n  * DTF - Deferment Account Duties, Taxes and Fees Only\n  * RGP - EU Registered Exporters Registration ID\n  * DLI - Driver's License\n  * NID - National Identity Card - A PID (Personal Identification Number) should be provided as NID (National Identity Card).\n  * PAS - Passport\n  * MID - Manufacturer ID\n  * UKIMS - UK Internal Market Scheme -> customs clearance for shipping from Great Britain to Northern Ireland under the Windsor Framework, for more information see [Windsor Framework](https://www.gov.uk/government/publications/the-windsor-framework)\n"
+          enum:
+          - VAT
+          - EIN
+          - GST
+          - SSN
+          - EORI
+          - DUN
+          - FED
+          - STA
+          - CNP
+          - IE
+          - INN
+          - KPP
+          - OGR
+          - OKP
+          - IOSS
+          - FTZ
+          - DAN
+          - TAN
+          - DTF
+          - RGP
+          - DLI
+          - NID
+          - PAS
+          - MID
+          - UKIMS
+        country_code:
+          type: string
+          example: NL
+          description: Issuing country code (ISO 3166-1 alpha-2 code)
+          maxLength: 2
+        value:
+          type: string
+          example: NL123456789B01
+          description: Tax number itself
+          maxLength: 100
+      required:
+      - name
+      - country_code
       - value
     ParcelCustomsInformation:
       title: ParcelCustomsInformation
@@ -1623,758 +2397,6 @@ components:
       required:
       - customs_invoice_nr
       - customs_shipment_type
-    ParcelResponseFull:
-      allOf:
-      - $ref: '#/components/schemas/ParcelResponseShort'
-      - properties:
-          customs_information:
-            $ref: '#/components/schemas/ParcelCustomsInformation'
-      type: object
-    dangerous-goods:
-      title: DangerousGoods
-      type: object
-      description: Hazardous materials information for items.
-      properties:
-        chemical_record_identifier:
-          type: string
-          nullable: true
-          description: Chemical record identifier for the dangerous goods
-        regulation_set:
-          type: string
-          enum:
-          - IATA
-          - ADR
-          description: Regulation set governing the dangerous goods
-        packaging_type_quantity:
-          type: string
-          nullable: true
-          description: Quantity of packaging type
-        packaging_type:
-          type: string
-          nullable: true
-          description: Type of packaging used
-        packaging_instruction_code:
-          type: string
-          nullable: true
-          description: Packaging instruction code
-        id_number:
-          type: string
-          nullable: true
-          description: UN identification number
-        class_division_number:
-          type: string
-          nullable: true
-          description: Hazard class and division number
-        quantity:
-          type: string
-          nullable: true
-          description: Quantity of dangerous goods
-        unit_of_measurement:
-          type: string
-          enum:
-          - KG
-          - G
-          - L
-          - ML
-          description: Unit of measurement for dangerous goods quantity
-        proper_shipping_name:
-          type: string
-          nullable: true
-          description: Proper shipping name as defined by regulations
-        commodity_regulated_level_code:
-          type: string
-          enum:
-          - LQ
-          - EQ
-          description: Commodity regulated level code
-        transportation_mode:
-          type: string
-          enum:
-          - Highway
-          - Ground
-          - PAX
-          - CAO
-          description: Mode of transportation
-        emergency_contact_name:
-          type: string
-          nullable: true
-          description: Name of emergency contact person
-        emergency_contact_phone:
-          type: string
-          nullable: true
-          description: Phone number of emergency contact
-        adr_packing_group_letter:
-          type: string
-          enum:
-          - I
-          - II
-          - III
-          description: ADR packing group classification
-        local_proper_shipping_name:
-          type: string
-          nullable: true
-          description: Local proper shipping name
-        transport_category:
-          type: string
-          nullable: true
-          description: Transport category for ADR regulations
-        tunnel_restriction_code:
-          type: string
-          nullable: true
-          description: Tunnel restriction code
-        weight_type:
-          type: string
-          enum:
-          - Net
-          - Gross
-          description: Type of weight measurement
-    CreateParcelError:
-      description: Error returned during parcel creation
-      type: object
-      title: Parcel Creation Error Object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: Error code
-            message:
-              type: string
-              description: Concatenated to one string array of errors
-            request:
-              type: string
-              description: URL of the Sendcloud'd endpoint which returned an error
-    CancelParcelStatus:
-      title: Cancel Parcel Status Object
-      type: object
-      properties:
-        status:
-          type: string
-          minLength: 1
-        message:
-          type: string
-          minLength: 1
-      required:
-      - status
-      - message
-    AddressDivided:
-      title: Address Divided Object
-      type: object
-      properties:
-        house_number:
-          type: string
-        street:
-          type: string
-      description: Address_divided object for a parcel
-    Summary:
-      type: object
-      title: Analytics Summary Object
-      description: Summary value for the selected last number of days
-      properties:
-        summary:
-          type: array
-          items:
-            type: object
-            description: Shows number of parcels for selected number of last days
-            properties:
-              last_days:
-                type: integer
-                minimum: 0
-              value:
-                type: integer
-                minimum: 0
-            required:
-            - last_days
-            - value
-      required:
-      - summary
-    CarrierErrors:
-      description: Errors object for a parcel
-      type: object
-      title: Carrier Errors Object
-      properties:
-        non_field_errors:
-          type: array
-          items:
-            type: string
-    TaxNumber:
-      title: Tax Number Object
-      description: Identification numbers and codes used in different contexts. These identifiers are used for taxation, customs, business registration, and other purposes, depending on the country and the specific regulatory requirements. Depending on these requirements you may need to pass one or several numbers related to sender, receiver or importer of record provider. These numbers and codes will be included into final Customs documents.
-      type: object
-      properties:
-        name:
-          type: string
-          example: EORI
-          description: "Tax number abbreviation\n  * VAT - Value-Added Tax → VOEC number for Norway should be shared here as advised by the [Norwegian Tax Authorities](https://www.skatteetaten.no/globalassets/bedrift-og-organisasjon/voec/sending-and-marking-goods-through-postal-services-and-transporters.pdf)\n  * EIN - Employer Identification Number\n  * GST - Goods and Service Tax\n  * SSN - Social Security Number\n  * EORI - Economic Operators Registration and Identification for the European Union\n  * DUN - Data Universal Numbering System\n  * FED - Federal Tax ID\n  * STA - State Tax ID\n  * CNP - Brazil CNPJ/CPF Federal Tax\n  * IE - Brazil type IE/RG Federal Tax\n  * INN - Russia bank details section INN\n  * KPP - Russia bank details section KPP\n  * OGR - Russia bank details section OGRN\n  * OKP - Russia bank details section OKPO\n  * IOSS - SDT or Overseas Registered Supplier or Import One-Stop-Shop or GB VAT (foreign) registration or AUSid GST Registration or VAT on E-Commerce\n  * FTZ - Free Trade Zone ID\n  * DAN - Deferment Account Duties Only\n  * TAN - Deferment Account Tax Only\n  * DTF - Deferment Account Duties, Taxes and Fees Only\n  * RGP - EU Registered Exporters Registration ID\n  * DLI - Driver's License\n  * NID - National Identity Card - A PID (Personal Identification Number) should be provided as NID (National Identity Card).\n  * PAS - Passport\n  * MID - Manufacturer ID\n  * UKIMS - UK Internal Market Scheme -> customs clearance for shipping from Great Britain to Northern Ireland under the Windsor Framework, for more information see [Windsor Framework](https://www.gov.uk/government/publications/the-windsor-framework)\n"
-          enum:
-          - VAT
-          - EIN
-          - GST
-          - SSN
-          - EORI
-          - DUN
-          - FED
-          - STA
-          - CNP
-          - IE
-          - INN
-          - KPP
-          - OGR
-          - OKP
-          - IOSS
-          - FTZ
-          - DAN
-          - TAN
-          - DTF
-          - RGP
-          - DLI
-          - NID
-          - PAS
-          - MID
-          - UKIMS
-        country_code:
-          type: string
-          example: NL
-          description: Issuing country code (ISO 3166-1 alpha-2 code)
-          maxLength: 2
-        value:
-          type: string
-          example: NL123456789B01
-          description: Tax number itself
-          maxLength: 100
-      required:
-      - name
-      - country_code
-      - value
-    Buckets:
-      type: object
-      title: Analytics Buckets Object
-      description: Parcel/Products data grouped into buckets.
-      properties:
-        buckets:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-                description: bucket key
-              value:
-                type: integer
-                minimum: 0
-                description: Number of parcels/products in bucket
-              percentage:
-                type: number
-                minimum: 0
-                description: Percent of all parcels/products this bucket has
-              missing_data:
-                type: array
-                description: Periods when data is missing
-                items:
-                  type: object
-                  properties:
-                    start_date:
-                      type: string
-                      format: date
-                    end_date:
-                      type: string
-                      format: date
-                    reason_code:
-                      type: string
-                      enum:
-                      - missing-grouping-property
-                      - missing-filter-property
-                      - not-available
-                      - partly-available
-            required:
-            - key
-            - value
-            - percentage
-            - missing_data
-      required:
-      - buckets
-    Documents:
-      title: Documents Object
-      type: object
-      properties:
-        type:
-          type: string
-          description: The type of the document. See the list below for available types.
-          enum:
-          - label
-          - cp71
-          - cn23
-          - commercial-invoice
-          - cn23-default
-        size:
-          type: string
-          description: 'The paper size of the document, you can expect: a4 and a6.'
-        link:
-          type: string
-          description: "A link to the document, which allows downloading of the document in PDF, PNG, and ZPL. Learn more about the [endpoint](/api/v2/integrations/retrieve-a-list-of-shipments).\n \nSend a GET request to https://panel.sendcloud.sc/api/v2/parcels/{parcelID}/documents/label using your parcel ID.\n\nYou can pick the resolution in the parameters of the request. The default value is 203 dpi."
-      description: Documents object for a parcel
-    ErrorItem:
-      title: Error Item Object
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            type: string
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
-      required:
-      - loc
-      - msg
-      - type
-    ParcelResponseShort:
-      description: Parcel object model
-      type: object
-      title: Parcel Object
-      properties:
-        address:
-          type: string
-        address_2:
-          type: string
-          description: 'An apartment or floor number that has been extracted from general address input.
-
-            '
-        address_divided:
-          $ref: '#/components/schemas/AddressDivided'
-        carrier:
-          type: object
-          properties:
-            code:
-              $ref: '#/components/schemas/carrier'
-        city:
-          type: string
-        company_name:
-          type: string
-        contract:
-          type: integer
-          minimum: 1
-          description: Id of the contract that was used to create the parcel.
-          nullable: true
-        country:
-          $ref: '#/components/schemas/Country'
-        customs_invoice_nr:
-          type: string
-          description: Customs invoice number
-        customs_shipment_type:
-          type: integer
-          description: "Customs shipment type. Deprecated in favor of the `customs_information` object. \n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          nullable: true
-          deprecated: true
-        data:
-          type: object
-        date_created:
-          type: string
-        date_updated:
-          type: string
-        date_announced:
-          type: string
-        email:
-          type: string
-          description: An email address of the person this parcel is supposed to be delivered to.
-        id:
-          type: integer
-        insured_value:
-          type: integer
-        label:
-          $ref: '#/components/schemas/Label'
-        name:
-          type: string
-        order_number:
-          type: string
-        shipment_uuid:
-          type: string
-        parcel_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/parcel-item'
-        postal_code:
-          type: string
-        external_reference:
-          type: string
-          nullable: true
-          description: A reference to be assigned to this parcel. Must be unique across parcels. This field is used to create idempotence.
-        reference:
-          type: string
-          nullable: true
-          description: A reference to be assigned to this parcel. Multiple parcels can have the same reference.
-          default: '0'
-        shipment:
-          $ref: '#/components/schemas/Shipment'
-        status:
-          $ref: '#/components/schemas/Status'
-        documents:
-          type: array
-          uniqueItems: true
-          description: An array of documents. A parcel can contain multiple documents, for instance labels and a customs form. This field returns an array of all the available documents for this parcel.
-          items:
-            $ref: '#/components/schemas/Documents'
-        telephone:
-          type: string
-        to_service_point:
-          type: string
-          description: An id of service point to which the shipment is going to be shipped.
-        to_state:
-          type: string
-          description: 'Represents the state or province of a country. Countries that need a state are USA, Canada, Italy and Australia. e.g. America’s city of Los Angeles belongs to the California state: CA. Shipments to Italy need a province. e.g. Italy’s city of Rome belongs to Roma province: RM.'
-        total_insured_value:
-          type: integer
-        total_order_value_currency:
-          type: string
-        total_order_value:
-          type: string
-        tracking_number:
-          type: string
-          description: Tracking number of the shipment.
-        tracking_url:
-          type: string
-          description: tracking url of this shipment.
-        weight:
-          type: string
-        type:
-          type: string
-          description: Returns either ‘parcel’ or ‘letter’ by which you can determine the type of your shipment.
-          enum:
-          - parcel
-          - letter
-          deprecated: true
-          nullable: true
-        colli_uuid:
-          type: string
-        collo_nr:
-          type: integer
-          description: A number indicating the collo number within a shipment. For a non-multi-collo shipment, this value will always be 0. In a multi-collo shipment with 3 collos, this number will range from 0 to 2.
-        collo_count:
-          type: integer
-          description: A number indicating the number of collos within a shipment. For non-multi-collo shipments, this value will always be 1.
-        is_return:
-          type: boolean
-          description: Indicates if the parcel correspond to a return.
-        awb_tracking_number:
-          type: string
-          description: Deutsche Post Global Mail only. This indicates the air waybill number of this box of Global Mail parcels. This will be only set once Finalize box has been called.
-          nullable: true
-        box_number:
-          type: integer
-          description: Deutsche Post Global Mail only. This indicates the box to which this parcel belongs. This will be only set for Global Mail parcels.
-          nullable: true
-        length:
-          type: string
-          description: 'Parcel length in centimeters (will be used for volumetric weight calculation). Examples: “48” or “52.3”'
-          nullable: true
-        width:
-          type: string
-          description: 'Parcel width in centimeters (will be used for volumetric weight calculation). Examples: “48” or “52.3”'
-          nullable: true
-        height:
-          type: string
-          description: 'Parcel height in centimeters (will be used for volumetric weight calculation). Examples: “48” or “52.3”'
-          nullable: true
-        shipping_method_checkout_name:
-          type: string
-          description: Shipping method name selected by buyer during the checkout
-        customs_declaration:
-          type: object
-          deprecated: true
-          description: An object with available printers that lists available links to the created customs declaration form. (deprecated in favour of documents).
-        note:
-          type: string
-          description: This field can be used to add additional notes regarding an order. The notes will not be displayed on a label, but will be displayed on both the Packing slips & Picking lists which you can use for Pack & Go feature. The value will not be shared with carriers. It may be used for packing instructions, such as "gift" or "do not send before monday".
-          nullable: true
-        errors:
-          $ref: '#/components/schemas/CarrierErrors'
-      required:
-      - id
-    Label:
-      title: Label Object
-      type: object
-      description: Label object for a parcel
-      properties:
-        label_printer:
-          type: string
-        normal_printer:
-          type: array
-          items:
-            type: string
-    Series:
-      type: object
-      title: Analytics Series Object
-      description: Parcels/Products data represented in series
-      properties:
-        series:
-          type: array
-          items:
-            type: object
-            properties:
-              value:
-                type: integer
-                example: 0
-                minimum: 0
-                description: Number of parcels/products for the period
-              start_date:
-                type: string
-                format: date
-              end_date:
-                type: string
-                format: date
-              missing_data:
-                type: array
-                items:
-                  type: object
-                  description: Periods when data is missing
-                  properties:
-                    start_date:
-                      type: string
-                      format: date
-                    end_date:
-                      type: string
-                      format: date
-                    reason_code:
-                      type: string
-                      enum:
-                      - missing-grouping-property
-                      - missing-filter-property
-                      - not-available
-                      - partly-available
-            required:
-            - value
-            - start_date
-            - end_date
-            - missing_data
-      required:
-      - series
-    ParcelCreation:
-      description: Parcel object for a parcel creation
-      type: object
-      title: Parcel Creation Object
-      properties:
-        id:
-          type: integer
-          minimum: 1
-          description: Identifier of the parcel (ignored when creating)
-        name:
-          type: string
-          description: Name of the recipient
-        company_name:
-          type: string
-          description: Company name of the recipient the parcel will be shipped to
-        contract:
-          type: integer
-          description: Id of the contract that you would like to use to create the parcel with.
-          minimum: 1
-        address:
-          type: string
-          description: Address of the recipient
-        address_2:
-          type: string
-          description: Additional address information, e.g. 2nd level
-        house_number:
-          type: string
-          description: House number of the recipient
-        city:
-          type: string
-          description: City of the recipient
-        postal_code:
-          type: string
-          description: Zip code of the recipient
-        telephone:
-          type: string
-          description: Phone number of the recipient
-        request_label:
-          type: boolean
-          description: 'Should the parcel request a label. This property used to be called requestLabel. We kept it backwards compatible by still accepting the previous name.
-
-            '
-        email:
-          type: string
-          minLength: 1
-          description: E-mail address of the recipient
-        data:
-          type: object
-          description: This field previously served to store a `pakjegemak` key; however, the data provided in this field is no longer stored or used anymore. Please use `to_service_point` property to use service points.
-          deprecated: true
-          nullable: true
-        country:
-          type: string
-          minLength: 1
-          description: Country of the recipient
-        shipment:
-          $ref: '#/components/schemas/Shipment'
-        weight:
-          type: string
-          minLength: 1
-          description: Weight of the parcel in kilograms, if none given the default weight from settings is used. If you provide no weight in your request we’ll use the default weight set in your settings.
-        order_number:
-          type: string
-          description: Order number of your order
-        insured_value:
-          type: integer
-          description: "This field is mutually exclusive with the `total_insured_value`. Amount of Sendcloud Insurance to add.  \nThis must be a positive value, larger than 2. If a value between 0 and 2 is sent, it is rounded up to 2.\nThe maximum insurance is 5000. \nThis field does not take the carrier provided shipping method insurance into consideration. \n<br><br>\nNote: this value is an integer. If decimal numbers are sent, these are rounded up to the nearest whole number.\nExample: sending 72.35 results in a `insured_value` of 73.<br><br>\nNote: For multicollo shipments, where the `quantity` is greater than 1, the specified insurance amount applies per parcel, not to the shipment as a whole.\nFor example, if you ship 5 parcels and set the `insured_value` to 500 EUR/GBP, each parcel will be insured for 500 EUR/GBP. This results in a total shipment coverage of 5 x 500 = 2500 EUR/GBP.\n"
-        total_order_value_currency:
-          type: string
-          description: The currency of the total order value. Validated against a format of “XYZ” (ISO 4217).
-        total_order_value:
-          type: string
-          description: The value paid by the buyer (via various payment methods supported by the shop(cash on delivery, pre-paid or post-paid), it will also be used for the cash on delivery amount for example “99.99”.
-        quantity:
-          type: integer
-          description: 'Create a multi-collo shipment. Default value: 1. Minimal value: 1. Maximal value: 20. When request_label is true, it is required to use the Create multiple parcels method, since multiple parcels will be returned. When request_label is false, the number of parcels will be set according to this value in the incoming order overview.'
-        shipping_method_checkout_name:
-          type: string
-          description: Shipping method name selected by buyer during the checkout
-        to_post_number:
-          type: string
-          description: Code required in case of PO Box or post locker delivery
-        country_state:
-          type: string
-          description: Code of the state (e.g. NY for New York) or province (e.g. RM for Rome). Destinations that require this field are USA, Canada, Italy and Australia. Errors related to this field will mention the to_state field.
-        sender_address:
-          type: integer
-          description: 'ID of the SenderAddress
-
-
-            **Keep in mind that this id will not be saved / reflected in the created order (Incoming Orders View / Pack&Go) in case `request_label` is `false`.**
-
-            '
-        customs_invoice_nr:
-          type: string
-          description: Customs invoice number. Deprecated in favor of the `customs_information` object.
-          deprecated: true
-        customs_shipment_type:
-          type: integer
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          description: "Customs shipment type. Deprecated in favor of the `customs_information` object. \n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
-          deprecated: true
-        external_reference:
-          type: string
-          nullable: true
-          description: A reference to be assigned to this parcel. Must be unique across parcels. This field is used to create idempotence.
-        reference:
-          type: string
-          nullable: true
-          description: A reference to be assigned to this parcel. Multiple parcels can have the same reference.
-          default: '0'
-        to_service_point:
-          type: integer
-          description: ID of the selected service point
-        total_insured_value:
-          type: integer
-          description: "This field is mutually exclusive with the `insured_value`. Amount of total insurance to add. \nThis must be a positive value, larger than 2. If a value between 0 and 2 is sent, it is rounded up to 2.\nThe maximum insurance is 5000 plus your shipping method’s insurance depending on the carrier. \nThis field works by automatically calculating how much Sendcloud Insurance you’d need to add plus your shipping method’s insurance so it matches the exact value you’ve given. \nAs an example, DPD insures all their shipments by 520€ by default. \nIf you pass the `total_insured_value`: 5000 your shipment will have a total insurance coverage of 5000€, but you’re only paying for 4480€. <br><br>\nNote: this value is an integer. If decimal numbers are sent, these are rounded up to the nearest whole number.\nExample: sending 72.35 results in a `total_insured_value` of 73. <br><br>\nNote: For multicollo shipments, where the `quantity` is greater than 1, the specified insurance amount applies per parcel, not to the shipment as a whole.\nFor example, if you ship 5 parcels and set the `insured_value` to 500 EUR/GBP, each parcel will be insured for 500 EUR/GBP. This results in a total shipment coverage of 5 x 500 = 2500 EUR/GBP.\n"
-        shipment_uuid:
-          type: string
-          description: Unique identifier that we assign to your shipment within the Sendcloud system.
-        parcel_items:
-          type: array
-          description: List of items the order contains. Check the structure of a parcel_item in the “Parcel_items” section (remember, it’s a list of them!).
-          items:
-            $ref: '#/components/schemas/parcel-item'
-        is_return:
-          type: boolean
-          description: Set to true if this parcel is a return
-        length:
-          type: string
-          description: Parcel length in centimeters (will be used for volumetric weight calculation)
-        width:
-          type: string
-          description: Parcel width in centimeters (will be used for volumetric weight calculation)
-        height:
-          type: string
-          description: 'Parcel height in centimeters (will be used for volumetric weight calculation). Note: You must provide length, width and height all at once for calculating volumetric weight or passing them as-is to carriers that require these properties
-
-            Parcel height in centimeters (will be used for volumetric weight calculation). Note: You must provide length, width and height all at once for calculating volumetric weight or passing them as-is to carriers that require these properties'
-        request_label_async:
-          type: boolean
-          description: Makes sure that the label is requested asynchronously. The parcel is returned, but without label. You will need to poll for status changes on the parcel.
-        apply_shipping_rules:
-          type: boolean
-          description: When set to True configured shipping rules will be applied before creating the label and announcing the Parcel
-        from_name:
-          type: string
-          description: Name of the sender (when creating a return parcel)
-        from_company_name:
-          type: string
-          description: Company name of the sender the parcel will be shipped from (when creating a return parcel)
-        from_address_1:
-          type: string
-          description: Address of the sender (when creating a return parcel)
-        from_address_2:
-          type: string
-          description: Additional address information of the sender (when creating a return parcel)
-        from_house_number:
-          type: string
-          description: House number of the sender (when creating a return parcel)
-        from_city:
-          type: string
-          description: City of the sender (when creating a return parcel)
-        from_postal_code:
-          type: string
-          description: Zip code of the sender
-        from_country:
-          type: string
-          description: Country of the sender (when creating a return parcel)
-        from_telephone:
-          type: string
-          description: Phone number of the sender (when creating a return parcel)
-        from_email:
-          type: string
-          description: E-mail address of the sender (when creating a return parcel)
-        from_vat_number:
-          type: string
-          description: VAT number of the sender (when creating a return parcel). Deprecated in favor of the `customs_information` object.
-        from_eori_number:
-          type: string
-          description: EORI number of the sender (when creating a return parcel). Deprecated in favor of the `customs_information` object.
-          deprecated: true
-        from_inbound_vat_number:
-          type: string
-          description: GB VAT number - needed for shipments from Europe to GB (when creating a return parcel). Deprecated in favor of the `customs_information` object.
-          deprecated: true
-        from_inbound_eori_number:
-          type: string
-          description: GB EORI number - needed for shipments from Europe to GB (when creating a return parcel). Deprecated in favor of the `customs_information` object.
-          deprecated: true
-        from_ioss_number:
-          type: string
-          description: IOSS(Import One-Stop Shop) number of the sender (when creating a return parcel). Deprecated in favor of the `customs_information` object.
-          deprecated: true
-        customs_information:
-          $ref: '#/components/schemas/ParcelCustomsInformation'
-      required:
-      - name
-      - address
-      - city
-      - postal_code
-      - country
-    Status:
-      title: Status Object
-      type: object
-      properties:
-        id:
-          type: integer
-        message:
-          type: string
-      description: Status object for a parcel
   parameters:
     SendcloudPartnerId:
       in: header
@@ -2398,3 +2420,6 @@ components:
           tokenUrl: https://account.sendcloud.com/oauth2/token/
           scopes:
             api: Default OAuth scope required to access Sendcloud API.
+x-refined-from:
+- sendcloud-v2-analytics-openapi.yml
+- sendcloud-v2-parcels-openapi.yml
