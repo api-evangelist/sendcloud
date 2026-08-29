@@ -1884,6 +1884,26 @@ apis:
     url: https://sendcloud.dev/api/v2/reporting/
   - type: Documentation
     url: https://sendcloud.dev/api/v2/parcel-documents/
+- aid: sendcloud:sendcloud-events-api
+  name: Sendcloud Events API
+  description: The Events API from Sendcloud — 0 operation(s) for events.
+  humanURL: https://sendcloud.dev/api/v3/shipments/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/sendcloud-events-api-openapi.yml
+- aid: sendcloud:sendcloud-webhooks-api
+  name: Sendcloud Webhooks API
+  description: The Webhooks API from Sendcloud — 0 operation(s) for webhooks.
+  humanURL: https://sendcloud.dev/api/v3/shipments/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/sendcloud-webhooks-api-openapi.yml
 name: Sendcloud
 tags:
   - Shipping
@@ -1904,6 +1924,18 @@ tags_raw:
   - Tracking
   - Europe
 kind: contract
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2026-05-25'
