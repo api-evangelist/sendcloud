@@ -1890,6 +1890,8 @@ apis:
   humanURL: https://sendcloud.dev/api/v3/shipments/
   baseURL: https://panel.sendcloud.sc/api/v3
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -1900,6 +1902,8 @@ apis:
   humanURL: https://sendcloud.dev/api/v3/shipments/
   baseURL: https://panel.sendcloud.sc/api/v3
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
