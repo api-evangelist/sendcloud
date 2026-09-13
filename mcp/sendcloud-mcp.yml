@@ -1,0 +1,29 @@
+generated: '2026-09-11'
+method: probed
+source: https://sendcloud.dev/mcp
+status: published
+server:
+  name: sendcloud
+  transport: http
+  url: https://sendcloud.dev/mcp
+deployment:
+  mode: remote
+  endpoint: https://sendcloud.dev/mcp
+  verified: probed
+  probe: live
+  checked: '2026-09-11'
+  source: docs-check 2026-09-11 (endpoint found in the provider's own documentation, then probed)
+  probe_why: docs-check
+tools_count: 3
+tools:
+- name: search_sendcloud_api_developer_portal
+  description: ''
+- name: query_docs_filesystem_sendcloud_api_developer_portal
+  description: ''
+- name: submit_feedback
+  description: ''
+tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
+authorship: platform
+authorship_note: 'PLATFORM-AUTHORED: this tool shape is shared with at least one other provider in the
+  catalog, so it is a platform default appearing under this provider''s domain rather than an interface
+  this provider designed. Shared shape: (''query_docs_filesystem_*'', ''search_*'', ''submit_feedback'')'
