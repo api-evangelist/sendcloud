@@ -706,86 +706,6 @@ apis:
     url: https://sendcloud.dev/api/v2/reporting/
   - type: Documentation
     url: https://sendcloud.dev/api/v2/parcel-documents/
-- aid: sendcloud:sendcloud-oauth2-api
-  name: Sendcloud OAuth2 API
-  description: The OAuth2 API from Sendcloud — 1 operation(s) for oauth2.
-  humanURL: https://sendcloud.dev/api/v3/shipments/
-  baseURL: https://panel.sendcloud.sc/api/v3
-  tags:
-  - Authentication
-  tags_raw:
-  - OAuth2
-  properties:
-  - type: OpenAPI
-    url: openapi/sendcloud-oauth2-api-openapi.yml
-  - type: Documentation
-    url: https://sendcloud.dev/api/v3/shipments/
-  - type: APIReference
-    url: https://sendcloud.dev/api/v3/shipments/create-and-announce-a-shipment-synchronously
-  - type: JSONStructure
-    url: json-structure/sendcloud-shipment-structure.json
-  - type: Examples
-    url: examples/sendcloud-announce-shipment-example.json
-  - type: Documentation
-    url: https://sendcloud.dev/api/v3/orders/
-  - type: JSONSchema
-    url: json-schema/sendcloud-order-schema.json
-  - type: Documentation
-    url: https://sendcloud.dev/api/v3/ship-an-order/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v3/returns/
-  - type: JSONSchema
-    url: json-schema/sendcloud-return-schema.json
-  - type: JSONSchema
-    url: json-schema/sendcloud-deliveryoption-schema.json
-  - type: JSONStructure
-    url: json-structure/sendcloud-return-structure.json
-  - type: Examples
-    url: examples/sendcloud-create-return-example.json
-  - type: Documentation
-    url: https://sendcloud.dev/api/v3/service-points/
-  - type: JSONSchema
-    url: json-schema/sendcloud-servicepoint-schema.json
-  - type: JSONSchema
-    url: json-schema/sendcloud-servicepointdetail-schema.json
-  - type: JSONSchema
-    url: json-schema/sendcloud-servicepointaddress-schema.json
-  - type: Examples
-    url: examples/sendcloud-list-service-points-example.json
-  - type: Documentation
-    url: https://sendcloud.dev/api/v3/parcel-tracking/
-  - type: JSONSchema
-    url: json-schema/sendcloud-parceltrackingresponse-schema.json
-  - type: JSONSchema
-    url: json-schema/sendcloud-parceltrackingcreaterequest-schema.json
-  - type: Documentation
-    url: https://sendcloud.dev/api/v3/parcel-documents/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v3/webhooks/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v3/event-subscriptions/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v3/integrations/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v3/analytics/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v3/reporting/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v2/parcels/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v2/labels/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v2/tracking/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v2/webhooks/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v2/integrations/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v2/analytics/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v2/reporting/
-  - type: Documentation
-    url: https://sendcloud.dev/api/v2/parcel-documents/
 - aid: sendcloud:sendcloud-orders-api
   name: Sendcloud Orders API
   description: OrderAPI
@@ -1908,6 +1828,84 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/sendcloud-webhooks-api-openapi.yml
+- aid: sendcloud:sendcloud-oauth2-api
+  name: Sendcloud O Auth2 API
+  description: The OAuth2 API from Sendcloud — 1 operation(s) for oauth2.
+  humanURL: https://sendcloud.dev/api/v3/shipments/
+  baseURL: https://panel.sendcloud.sc/api/v3
+  tags:
+  - OAuth2
+  properties:
+  - type: OpenAPI
+    url: openapi/sendcloud-oauth2-api-openapi.yml
+  - type: Documentation
+    url: https://sendcloud.dev/api/v3/shipments/
+  - type: APIReference
+    url: https://sendcloud.dev/api/v3/shipments/create-and-announce-a-shipment-synchronously
+  - type: JSONStructure
+    url: json-structure/sendcloud-shipment-structure.json
+  - type: Examples
+    url: examples/sendcloud-announce-shipment-example.json
+  - type: Documentation
+    url: https://sendcloud.dev/api/v3/orders/
+  - type: JSONSchema
+    url: json-schema/sendcloud-order-schema.json
+  - type: Documentation
+    url: https://sendcloud.dev/api/v3/ship-an-order/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v3/returns/
+  - type: JSONSchema
+    url: json-schema/sendcloud-return-schema.json
+  - type: JSONSchema
+    url: json-schema/sendcloud-deliveryoption-schema.json
+  - type: JSONStructure
+    url: json-structure/sendcloud-return-structure.json
+  - type: Examples
+    url: examples/sendcloud-create-return-example.json
+  - type: Documentation
+    url: https://sendcloud.dev/api/v3/service-points/
+  - type: JSONSchema
+    url: json-schema/sendcloud-servicepoint-schema.json
+  - type: JSONSchema
+    url: json-schema/sendcloud-servicepointdetail-schema.json
+  - type: JSONSchema
+    url: json-schema/sendcloud-servicepointaddress-schema.json
+  - type: Examples
+    url: examples/sendcloud-list-service-points-example.json
+  - type: Documentation
+    url: https://sendcloud.dev/api/v3/parcel-tracking/
+  - type: JSONSchema
+    url: json-schema/sendcloud-parceltrackingresponse-schema.json
+  - type: JSONSchema
+    url: json-schema/sendcloud-parceltrackingcreaterequest-schema.json
+  - type: Documentation
+    url: https://sendcloud.dev/api/v3/parcel-documents/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v3/webhooks/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v3/event-subscriptions/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v3/integrations/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v3/analytics/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v3/reporting/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v2/parcels/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v2/labels/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v2/tracking/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v2/webhooks/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v2/integrations/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v2/analytics/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v2/reporting/
+  - type: Documentation
+    url: https://sendcloud.dev/api/v2/parcel-documents/
 name: Sendcloud
 tags:
   - Shipping
