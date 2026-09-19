@@ -948,6 +948,8 @@ apis:
   humanURL: https://sendcloud.dev/api/v3/shipments/
   baseURL: https://panel.sendcloud.sc/api/v3
   tags:
+  - Parcel
+  tags_raw:
   - Parcels
   properties:
   - type: OpenAPI
@@ -1834,6 +1836,8 @@ apis:
   humanURL: https://sendcloud.dev/api/v3/shipments/
   baseURL: https://panel.sendcloud.sc/api/v3
   tags:
+  - Authentication
+  tags_raw:
   - OAuth2
   properties:
   - type: OpenAPI
@@ -1911,7 +1915,7 @@ tags:
   - Shipping
   - Logistics
   - E-Commerce
-  - Carriers
+  - Carrier
   - Labels
   - Returns
   - Tracking
