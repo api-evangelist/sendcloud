@@ -1,234 +1,64 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Sendcloud
-providerId: sendcloud
-created: '2026-05-25'
-modified: '2026-05-25'
-reconciled: true
-tags:
-  - Shipping
-  - Logistics
-  - Ecommerce
-description: 'Sendcloud subscription plans (Free, Lite, Growth, Premium, Pro, Enterprise) plus shipping rates passed through 160+ European carriers.'
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.sendcloud.com/pricing/
 sources:
-  - https://www.sendcloud.com/pricing/
+- https://www.sendcloud.com/pricing/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: tiered-subscription
+published: true
+note: Monthly plan prices plus per-label processing fee; yearly billing (-20%) toggle mentioned. Sample
+  carrier shipping rates also listed per plan.
+plan_count: 6
+currency: EUR
 plans:
-  - id: sendcloud-free
-    name: Free
-    type: free
-    description: Up to 50 unstamped letter labels/month. 1 user, 2 integrations.
-    entries:
-      - label: Free labels
-        name: free_labels
-        type: quota
-        metric: label
-        limit: 50
-        timeFrame: month
-        geo: europe
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: 50 labels/month (unstamped letter only)
-      - name: 1 user
-      - name: 2 integrations
-      - name: Email notifications
-      - name: Manual returns
-  - id: sendcloud-lite
-    name: Lite
-    type: subscription
-    description: 'EUR 33/month (EUR 26/mo yearly). 400 labels/month included.'
-    entries:
-      - label: Monthly subscription
-        name: monthly
-        type: subscription
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: europe
-        unit: 1
-        price: '33.00'
-        priceCurrency: EUR
-        userMultiplied: false
-      - label: Included labels
-        name: included_labels
-        type: quota
-        metric: label
-        limit: 400
-        timeFrame: month
-        geo: europe
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Extra label
-        name: label_extra
-        type: metered
-        metric: label
-        limit: -1
-        timeFrame: usage
-        geo: europe
-        unit: 1
-        price: '0.11'
-        priceCurrency: EUR
-        userMultiplied: false
-    elements:
-      - name: 400 labels/month
-      - name: 3 users
-      - name: 3 integrations
-      - name: 5 shipping rules
-      - name: Branded tracking page
-      - name: Packing slips
-      - name: Multi-channel notifications
-  - id: sendcloud-growth
-    name: Growth
-    type: subscription
-    description: 'EUR 99/month (EUR 79/mo yearly). 1,000 labels/month included.'
-    entries:
-      - label: Monthly subscription
-        name: monthly
-        type: subscription
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: europe
-        unit: 1
-        price: '99.00'
-        priceCurrency: EUR
-        userMultiplied: false
-      - label: Included labels
-        name: included_labels
-        type: quota
-        metric: label
-        limit: 1000
-        timeFrame: month
-        geo: europe
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Extra label
-        name: label_extra
-        type: metered
-        metric: label
-        limit: -1
-        timeFrame: usage
-        geo: europe
-        unit: 1
-        price: '0.10'
-        priceCurrency: EUR
-        userMultiplied: false
-    elements:
-      - name: 1,000 labels/month
-      - name: 5 users
-      - name: 5 integrations
-      - name: 10 shipping rules
-      - name: Pack & Go
-      - name: WhatsApp tracking notifications
-      - name: Review automation
-  - id: sendcloud-premium
-    name: Premium
-    type: subscription
-    description: 'EUR 195/month (EUR 155/mo yearly). 10,000 labels/month included.'
-    entries:
-      - label: Monthly subscription
-        name: monthly
-        type: subscription
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: europe
-        unit: 1
-        price: '195.00'
-        priceCurrency: EUR
-        userMultiplied: false
-      - label: Included labels
-        name: included_labels
-        type: quota
-        metric: label
-        limit: 10000
-        timeFrame: month
-        geo: europe
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Extra label
-        name: label_extra
-        type: metered
-        metric: label
-        limit: -1
-        timeFrame: usage
-        geo: europe
-        unit: 1
-        price: '0.09'
-        priceCurrency: EUR
-        userMultiplied: false
-    elements:
-      - name: 10,000 labels/month
-      - name: 10 users
-      - name: Unlimited integrations and shipping rules
-      - name: Return management module
-      - name: Branded return portal
-      - name: Shipping analytics
-  - id: sendcloud-pro
-    name: Pro
-    type: subscription
-    description: 'EUR 799/month (EUR 639/mo yearly). 30,000 labels/month included.'
-    entries:
-      - label: Monthly subscription
-        name: monthly
-        type: subscription
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: europe
-        unit: 1
-        price: '799.00'
-        priceCurrency: EUR
-        userMultiplied: false
-      - label: Included labels
-        name: included_labels
-        type: quota
-        metric: label
-        limit: 30000
-        timeFrame: month
-        geo: europe
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Extra label
-        name: label_extra
-        type: metered
-        metric: label
-        limit: -1
-        timeFrame: usage
-        geo: europe
-        unit: 1
-        price: '0.07'
-        priceCurrency: EUR
-        userMultiplied: false
-    elements:
-      - name: 30,000 labels/month
-      - name: Unlimited users and integrations
-      - name: Dedicated customer success manager
-      - name: Marketplace solutions
-      - name: Guided onboarding
-  - id: sendcloud-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom pricing, SLAs, custom development.
-    entries:
-      - label: Custom contract
-        name: custom
-        type: subscription
-        metric: year
-        limit: -1
-        timeFrame: year
-        geo: europe
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: Custom label volumes and pricing
-      - name: Full enterprise support
-      - name: Custom development
-      - name: Dedicated integration engineers
+- name: Free
+  price_text: €0/mo
+  price: 0
+  currency: EUR
+  period: month
+  unit: subscription
+  included_quota: up to 20 parcels per month; 1 user; Max. 2 shop integrations
+  overage: Price/label after exceeding the monthly limit €0.50
+- name: Lite
+  price_text: €28/mo + €0.10 per label
+  currency: EUR
+  period: month
+  unit: subscription + per label
+  included_quota: 3 users, 3 integrations, 5 shipping rules, Max. 4 800 labels/year
+  overage: €0.10 + €0.15 (after 400 labels/month)
+- name: Growth
+  price_text: €87/mo + €0.09 per label
+  currency: EUR
+  period: month
+  unit: subscription + per label
+  included_quota: 5 users, 5 integrations, 10 shipping rules, Max. 12 000 labels/year
+  overage: €0.09 + €0.15 (after 1000 labels/month)
+- name: Premium
+  price_text: €175/mo + €0.08 per label
+  currency: EUR
+  period: month
+  unit: subscription + per label
+  included_quota: 10 users, Unlimited integrations, Max. 120 000 labels/year
+  overage: €0.08 + €0.15 (after 10 000 labels/month)
+- name: Pro
+  price_text: €639/mo + €0.07 per label
+  currency: EUR
+  period: month
+  unit: subscription + per label
+  included_quota: Unlimited users, Max. 360 000 labels/year
+  overage: €0.07 + €0.15 (after 30 000 labels/month)
+- name: Enterprise
+  price_text: Enterprise | Custom
+  period: none
+  included_quota: Tailored solutions
+rate_limit_statements:
+- Max. 4 800 labels/year
+- Max. 12 000 labels/year
+- Max. 120 000 labels/year
+- Max. 360 000 labels/year
+- there is a limit of 50 labels, after which you will be charged
