@@ -1,34 +1,35 @@
-specification: API Commons Rate Limits
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
-provider: Sendcloud
-providerId: sendcloud
-created: '2026-05-25'
-modified: '2026-05-25'
-reconciled: true
-tags:
-  - Rate Limiting
-  - Shipping
-description: Sendcloud REST API rate limits split by HTTP method safety class.
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://sendcloud.dev/docs/getting-started/rate-limits
 sources:
-  - https://sendcloud.dev/docs/getting-started/rate-limits/
-headers:
-  retryAfter: Retry-After
-responseCodes:
-  throttled: 429
+- https://sendcloud.dev/docs/getting-started/rate-limits
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: true
+note: Default rate limits table distinguishes safe vs unsafe methods, with a burst allowance for unsafe
+  methods.
+limit_count: 3
 limits:
-  - name: Safe requests (GET)
-    scope: integration
-    metric: requests_per_minute
-    limit: 1000
-    timeFrame: minute
-  - name: Unsafe requests (POST/PATCH/PUT/DELETE)
-    scope: integration
-    metric: requests_per_minute
-    limit: 100
-    timeFrame: minute
-  - name: Unsafe burst allowance
-    scope: integration
-    metric: concurrent_requests
-    limit: 15
-    timeFrame: second
+- name: Safe methods (GET)
+  limit_text: 1000 requests per minute
+  limit: 1000
+  window: minute
+  scope: unclear
+  endpoint: GET
+- name: Unsafe methods (POST, PATCH, PUT, DELETE)
+  limit_text: 100 requests per minute
+  limit: 100
+  window: minute
+  scope: unclear
+  endpoint: POST, PATCH, PUT, DELETE
+- name: Unsafe methods burst allowance
+  limit_text: 15 requests per second
+  limit: 15
+  window: second
+  scope: unclear
+  endpoint: POST, PATCH, PUT, DELETE
+  kind: burst
+exceeded_status: 429
