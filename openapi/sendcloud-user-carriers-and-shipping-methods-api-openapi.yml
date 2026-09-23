@@ -69,6 +69,23 @@ paths:
       security: []
 components:
   schemas:
+    UserCarriers:
+      type: object
+      description: All carriers used by user
+      properties:
+        carriers:
+          type: array
+          description: array of carrier objects
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: postnl
+            required:
+            - code
+      required:
+      - carriers
     UserShippingMethods:
       type: object
       description: All shipping methods used by user
@@ -91,23 +108,6 @@ components:
             - carrier_code
       required:
       - shipping_methods
-    UserCarriers:
-      type: object
-      description: All carriers used by user
-      properties:
-        carriers:
-          type: array
-          description: array of carrier objects
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                example: postnl
-            required:
-            - code
-      required:
-      - carriers
   securitySchemes:
     HTTPBasicAuth:
       type: http

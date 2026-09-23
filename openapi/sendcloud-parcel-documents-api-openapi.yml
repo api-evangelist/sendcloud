@@ -1,6 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Sendcloud Parcel Documents API
+  title: Parcel Documents API
+  description: For international shipments, customs documentation is generated alongside the shipping label. These documents can be downloaded separately from the shipping label in various formats and resolutions via this API.
+  version: 3.0.0
   contact:
     name: Sendcloud API Support
     url: https://www.sendcloud.dev
@@ -8,26 +10,18 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: '1.0'
-  description: 'Operations tagged Parcel Documents across 2 of this provider''s published API definitions: sendcloud-v2-parcel-documents-openapi.yml, sendcloud-v3-parcel-documents-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://panel.sendcloud.sc/api/v2
-  description: Sendcloud Production
 - url: https://panel.sendcloud.sc/api/v3
   description: Sendcloud Production
 tags:
 - name: Parcel Documents
 paths:
   /parcels/{id}/documents/{type}:
-    parameters:
-    - $ref: '#/components/parameters/id'
-    - $ref: '#/components/parameters/type'
     get:
-      summary: Retrieve parcel documents
+      summary: Retrieve a parcel document
       x-mint:
-        href: /api/v2/parcel-documents/retrieve-parcel-documents
-        content: "<Warning>\n  **API v2 is entering maintenance mode.** New users should start with API v3 to access our latest features and improved performance. Already using v2? Don't worry, your current integration remains fully functional. Read more about [maintenance mode](/docs/getting-started/api-version-guide), or check out the [migration guide for API v3](/docs/getting-started/migration-guidelines-for-api-v3).\n</Warning>\n\nFor international shipments, a commercial invoice, CN23 or CN22 (+CP71) form must be attached (either physically or [digitally](https://support.sendcloud.com/hc/en-us/articles/4417349714452-Send-your-customs-documents-digitally-via-Paperless-Trade-) for some carriers) to the shipment for customs officials to access. The type of document required depends on the shipping method and value of the shipment.\n\nWhen you use the [Create a parcel or parcels](/api/v2/parcels/create-a-parcel-or-parcels) endpoint, Sendcloud generates the correct type of document for your shipment if you have filled in all the information related to the parcel contents, value, and invoice. Use this endpoint to retrieve these documents in your preferred format.\n\nThe supported document types are as follows:\n\n- `air-waybill`\n- `cn23`\n- `cn23-default`\n- `commercial-invoice`\n- `cp71`\n- `label`\n- `qr`"
-      description: Retrieve a document for a given parcel by providing the parcel `id` and document `type`.
+        href: /api/v3/parcel-documents/retrieve-a-parcel-document
+        content: "Sendcloud generates the correct type of document for your shipment when you [Create a parcel](/api/v2/parcels/create-a-parcel-or-parcels), provided that you have filled in all the information related to the parcel contents, value and invoice. Use this endpoint to retrieve these documents in your preferred format. \n\nThis endpoint supports the following document types:\n\n- `label`\n- `customs-declaration`\n- `air-waybill`\n\n<Note>\n  For international shipments, customs declaration must be attached (either physically or [digitally](https://support.sendcloud.com/hc/en-us/articles/4417349714452-Send-your-customs-documents-digitally-via-Paperless-Trade-) for some carriers) to the shipment for customs officials to access.\n</Note>"
       tags:
       - Parcel Documents
       responses:
@@ -46,54 +40,44 @@ paths:
               schema:
                 type: string
                 format: binary
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+              examples:
+                InvalidType:
+                  value:
+                    errors:
+                    - code: invalid
+                      status: '400'
+                      detail: Invalid document type.
         '404':
           description: Document type requested is not available for the parcel
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    properties:
-                      code:
-                        type: integer
-                        description: HTTP error code
-                        example: 404
-                      request:
-                        type: string
-                        description: Endpoint URL that was requested
-                        example: api/v2/parcels/1/documents/commercial-invoice
-                      message:
-                        type: string
-                        description: A human readable error message
-                        example: No Parcel matches the given query.
+                $ref: '#/components/schemas/errors'
               examples:
                 NotFound:
                   summary: Parcel Document Not Found
                   value:
-                    error:
-                      code: 404
-                      request: api/v2/parcels/1/documents/commercial-invoice
-                      message: No Parcel matches the given query.
-                document_type_not_found:
-                  summary: Document Type Not Found
-                  value:
-                    error:
-                      code: 404
-                      request: api/v2/parcels/1/documents/not-existing-document-type
-                      message: Not found.
-      operationId: sc-public-v2-scp-get-retrieve_parcel_documents
+                    errors:
+                    - code: not_found
+                      status: '404'
+                      detail: No Parcel matches the given query.
+      operationId: sc-public-v3-scp-get-retrieve_parcel_documents
       security:
       - HTTPBasicAuth: []
       - OAuth2ClientCreds: []
       parameters:
+      - $ref: '#/components/parameters/id'
+      - $ref: '#/components/parameters/type'
       - $ref: '#/components/parameters/dpi'
       - $ref: '#/components/parameters/rendering_format'
-      - $ref: '#/components/parameters/raw'
-    servers:
-    - url: https://panel.sendcloud.sc/api/v2
-      description: Sendcloud Production
+      - $ref: '#/components/parameters/paper-size'
+      description: Retrieve a specific document for a given parcel, and download it in your preferred format and resolution.
   /parcel-documents/{type}:
     get:
       summary: Retrieve multiple parcel documents
@@ -150,62 +134,11 @@ paths:
       - OAuth2ClientCreds: []
       parameters:
       - $ref: '#/components/parameters/parcels'
-      - $ref: '#/components/parameters/type_2'
+      - $ref: '#/components/parameters/type'
       - $ref: '#/components/parameters/paper-size'
       description: Download multiple parcel documents of the same type in bulk.
-    servers:
-    - url: https://panel.sendcloud.sc/api/v3
-      description: Sendcloud Production
 components:
   parameters:
-    dpi:
-      name: dpi
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 72
-        enum:
-        - 72
-        - 150
-        - 203
-        - 300
-        - 600
-        example: 300
-        minimum: 1
-      description: "DPI refers to the printing resolution of your shipping labels. It's important that labels are printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.\nUse following amounts for appropriate result:\n<table>\n  <thead>\n    <tr>\n      <th>File format</th>\n      <th>Default DPI</th>\n      <th>Valid DPI</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>pdf</td>\n      <td>72</td>\n      <td>72</td>\n    </tr>\n    <tr>\n      <td>png</td>\n      <td>300</td>\n      <td>150, 300</td>\n    </tr>\n  </tbody>\n</table>\nZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.\n"
-    raw:
-      name: raw
-      in: query
-      required: false
-      schema:
-        type: boolean
-      description: There have been identified cases where custom documents, internally rendered, will only include some of the necessary information, mainly due to some restrictions. Using the raw query param, one can request to receive the document in the originally received format by the carrier. This temporary solution to the problem allows the normal operations of the affected customers. As such, you can expect this property to be sunsetted shortly once the necessary changes have been implemented.
-    type:
-      name: type
-      in: path
-      schema:
-        type: string
-        example: commercial-invoice
-        enum:
-        - air-waybill
-        - cn23
-        - cn23-default
-        - commercial-invoice
-        - cp71
-        - label
-        - qr
-      description: Document type you want to retrieve for this parcel
-      required: true
-    id:
-      name: id
-      in: path
-      schema:
-        type: integer
-        example: 1
-        minimum: 1
-      description: Identifier of the parcel which you want to retrieve a document from
-      required: true
     rendering_format:
       name: Accept
       in: header
@@ -218,7 +151,10 @@ components:
         - application/zpl
         - image/png
         example: image/png
-      description: The returned format of the document
+      description: 'The returned format of the document.
+
+
+        **Note:** If a label is requested as native ZPL from the carrier it can''t be converted to another format and will always be returned in ZPL.'
     parcels:
       name: parcels
       in: query
@@ -234,7 +170,51 @@ components:
         maxItems: 20
         minItems: 1
       description: Parcels for which you want to retrieve the documents
-    dpi_2:
+    type:
+      name: type
+      in: path
+      schema:
+        type: string
+        example: customs-declaration
+        enum:
+        - label
+        - customs-declaration
+        - air-waybill
+      description: Document type you want to retrieve.
+      required: true
+    id:
+      name: id
+      in: path
+      schema:
+        type: integer
+        example: 1
+        minimum: 1
+      description: Identifier of the parcel which you want to retrieve a document from
+      required: true
+    paper-size:
+      in: query
+      name: paper_size
+      description: 'The paper size of the document you would like to retrieve. Paper size can be one of:
+
+
+        - A4
+
+        - A5
+
+        - A6
+
+
+        Omitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.
+
+        '
+      schema:
+        type: string
+        enum:
+        - A4
+        - A5
+        - A6
+        example: A4
+    dpi:
       name: dpi
       in: query
       required: false
@@ -267,58 +247,24 @@ components:
         ZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.
 
         '
-    paper-size:
-      in: query
-      name: paper_size
-      description: 'The paper size of the document you would like to retrieve. Paper size can be one of:
-
-
-        - A4
-
-        - A5
-
-        - A6
-
-
-        Omitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.
-
-        '
-      schema:
-        type: string
-        enum:
-        - A4
-        - A5
-        - A6
-        example: A4
-    type_2:
-      name: type
-      in: path
-      schema:
-        type: string
-        example: customs-declaration
-        enum:
-        - label
-        - customs-declaration
-        - air-waybill
-      description: Document type you want to retrieve.
-      required: true
-    rendering_format_2:
-      name: Accept
-      in: header
-      required: false
-      schema:
-        type: string
-        default: application/pdf
-        enum:
-        - application/pdf
-        - application/zpl
-        - image/png
-        example: image/png
-      description: 'The returned format of the document.
-
-
-        **Note:** If a label is requested as native ZPL from the carrier it can''t be converted to another format and will always be returned in ZPL.'
   schemas:
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
     ErrorObject:
       title: Error
       type: object
@@ -381,23 +327,6 @@ components:
         meta:
           type: object
           description: Additional metadata about the error.
-    errors:
-      title: Errors
-      type: object
-      description: A standardized format for errors in JSON:API responses.
-      properties:
-        errors:
-          type:
-          - array
-          - object
-          items:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/ErrorObject'
-            required:
-            - status
-            - code
-            - detail
   securitySchemes:
     HTTPBasicAuth:
       type: http
@@ -411,6 +340,3 @@ components:
           tokenUrl: https://account.sendcloud.com/oauth2/token/
           scopes:
             api: Default OAuth scope required to access Sendcloud API.
-x-refined-from:
-- sendcloud-v2-parcel-documents-openapi.yml
-- sendcloud-v3-parcel-documents-openapi.yml

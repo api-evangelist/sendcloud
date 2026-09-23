@@ -277,6 +277,23 @@ paths:
                 $ref: '#/components/schemas/errors'
 components:
   schemas:
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
     subscription:
       title: Subscription
       description: A subscription routes a specific event type to a connection for delivery.
@@ -392,23 +409,6 @@ components:
         meta:
           type: object
           description: Additional metadata about the error.
-    errors:
-      title: Errors
-      type: object
-      description: A standardized format for errors in JSON:API responses.
-      properties:
-        errors:
-          type:
-          - array
-          - object
-          items:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/ErrorObject'
-            required:
-            - status
-            - code
-            - detail
     subscription-update-request:
       title: Update Subscription request
       description: Request body for updating an existing subscription. All fields are optional.

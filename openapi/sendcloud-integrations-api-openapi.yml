@@ -630,9 +630,7 @@ paths:
   /shop-order-statuses/mapping:
     get:
       summary: Retrieve custom status mapping for an integration
-      description: 'Fetch a map of available shop order statuses and Sendcloud''s internal status category for the integration.
-
-        '
+      description: Fetch a map of available shop order statuses and Sendcloud's internal status category for the integration.
       x-mint:
         href: /api/v3/integrations/retrieve-custom-status-mapping-for-an-integration
         content: "<Warning>\n  Only the Prestashop V2 integration is supported.\n</Warning>"
@@ -743,52 +741,104 @@ paths:
     - url: https://panel.sendcloud.sc/api/v3
       description: Sendcloud Production
 components:
+  responses:
+    400-Integration:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 400
+                    description: HTTP response status code
+                  request:
+                    type: string
+                    description: Endpoint which returned the response
+                  message:
+                    type: string
+                    description: Human readable error message
+                required:
+                - code
+                - request
+                - message
+          examples:
+            WrongFieldValue:
+              summary: Wrong field value
+              value:
+                error:
+                  code: 400
+                  request: api/v2/integrations/
+                  message: '{''settings'': [''webhook_active: This field may not be null.'', ''webhook_url: This field may not be null.'']}'
+    400-IntegrationLog:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 400
+                    description: HTTP response status code
+                  request:
+                    type: string
+                    description: Endpoint which returned the response
+                  message:
+                    type: string
+                    description: Human readable error message
+                required:
+                - code
+                - request
+                - message
+          examples:
+            WrongFieldValue:
+              summary: Wrong field value
+              value:
+                error:
+                  code: 400
+                  request: api/v2/integrations/12/logs
+                  message: '{''exception'': [''This field may not be null.'', ]}'
+    404-Integrations:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: HTTP response status code
+                    default: 404
+                  request:
+                    type: string
+                    description: Endpoint which returned the response
+                  message:
+                    type: string
+                    description: Human readable error message
+                required:
+                - code
+                - request
+                - message
+          examples:
+            NotFound:
+              summary: Integration not found
+              value:
+                error:
+                  code: 404
+                  request: api/v2/integrations/
+                  message: No Integration matches the given query.
   schemas:
-    IntegrationUpdate:
-      title: Integration Update Object
-      description: An updated integration response object
-      properties:
-        shop_name:
-          type: string
-          title: Name
-          maxLength: 250
-          minLength: 1
-          description: Name of the shop
-          example: 'Integration #1'
-          readOnly: true
-        shop_url:
-          type: string
-          title: Shop url
-          description: URL of the shop the integration connects to
-          format: uri
-          minLength: 1
-        last_updated_at:
-          type: string
-          title: Last updated at
-          format: date-time
-          description: Timestamp when the integration was last updated
-          readOnly: true
-        service_point_enabled:
-          type: boolean
-          title: Service point enabled
-          description: Flag for denoting if delivery to service points is enabled
-        service_point_carriers:
-          type: array
-          title: Service point carriers
-          description: A list of carriers available for the service point picker. At least one carrier must be provided if the service point delivery is enabled.
-          items:
-            type: string
-            example: ups
-        webhook_active:
-          type: boolean
-          title: Webhook active
-          description: Flag indicating if updates for parcels should be send via the webhook
-        webhook_url:
-          type: string
-          title: Webhook url
-          format: uri
-          description: A URL to which Sendcloud communicates updates in a parcel
-          minLength: 1
     Integration:
       type: object
       title: Integration Object
@@ -1009,6 +1059,243 @@ components:
       required:
       - base_url
       description: ''
+    IntegrationUpdate:
+      title: Integration Update Object
+      description: An updated integration response object
+      properties:
+        shop_name:
+          type: string
+          title: Name
+          maxLength: 250
+          minLength: 1
+          description: Name of the shop
+          example: 'Integration #1'
+          readOnly: true
+        shop_url:
+          type: string
+          title: Shop url
+          description: URL of the shop the integration connects to
+          format: uri
+          minLength: 1
+        last_updated_at:
+          type: string
+          title: Last updated at
+          format: date-time
+          description: Timestamp when the integration was last updated
+          readOnly: true
+        service_point_enabled:
+          type: boolean
+          title: Service point enabled
+          description: Flag for denoting if delivery to service points is enabled
+        service_point_carriers:
+          type: array
+          title: Service point carriers
+          description: A list of carriers available for the service point picker. At least one carrier must be provided if the service point delivery is enabled.
+          items:
+            type: string
+            example: ups
+        webhook_active:
+          type: boolean
+          title: Webhook active
+          description: Flag indicating if updates for parcels should be send via the webhook
+        webhook_url:
+          type: string
+          title: Webhook url
+          format: uri
+          description: A URL to which Sendcloud communicates updates in a parcel
+          minLength: 1
+    create-custom-status-mapping:
+      title: Create Custom Status Mapping
+      type: object
+      required:
+      - integration_id
+      - mapping
+      description: Create or update the mapping of available shop order statuses onto Sendcloud's internal status category.
+      properties:
+        integration_id:
+          type: integer
+          description: Sendcloud Integration ID.
+          example: 23452345
+        mapping:
+          type: array
+          minItems: 4
+          maxItems: 4
+          uniqueItems: true
+          description: "Array containing available shop order statuses mapped onto Sendcloud's internal status category.\n  - Create or update an existing map of available shop order statuses onto Sendcloud's internal status category for the given integration.\n  - Make sure the mapping array contains objects of each Sendcloud's internal status categories.\n  - Map each of Sendcloud's internal status categories onto either `AvailableStatus.external_id` or `None`.\n  - Note that two `external_ids` may map to the same internal status category."
+          items:
+            type: object
+            required:
+            - status_category
+            - external_id
+            description: status category to external_id association map
+            properties:
+              status_category:
+                type: string
+                enum:
+                - READY_TO_SEND
+                - IN_TRANSIT
+                - DELIVERED
+                - CANCEL
+                description: sendcloud internal status category.
+                example: READY_TO_SEND
+              external_id:
+                type:
+                - string
+                - 'null'
+                description: Field containing the ID linked to the order status inside the integrated webshop. It may be `None`.
+                example: '11'
+    integration-model:
+      title: Integration Object
+      type: object
+      description: Integration object.
+      properties:
+        shop_name:
+          type: string
+          title: Shop Name
+          maxLength: 250
+          minLength: 1
+          description: Name of the shop.
+          example: My Shop Integration
+        shop_url:
+          type: string
+          title: Shop url
+          description: URL of the shop the integration connects to.
+          format: uri
+          minLength: 1
+          example: https://www.my-shop-integration.com/
+        service_point_enabled:
+          type: boolean
+          title: Service point enabled
+          description: Flag indicating if delivery to service points is enabled.
+          example: false
+        service_point_carriers:
+          type: array
+          title: Service point carriers
+          description: List of carriers available for the service point picker. If service point delivery is enabled, make sure to provide at least one carrier.
+          items:
+            type: string
+            example: ups
+          example:
+          - ups
+          - dhl
+        webhook_active:
+          type: boolean
+          title: Webhook active
+          description: Flag indicating if parcel updates should be sent via the webhook.
+          example: false
+        webhook_url:
+          type:
+          - string
+          - 'null'
+          title: Webhook url
+          format: uri
+          description: URL for sending updates on a parcel. A value for `webhook_url` is required if `webhook_active` is set to `true`.
+          minLength: 1
+          example: https://my-shop-integration.integrator/api/webhooks/sendcloud
+        feedback_type:
+          type: string
+          title: Feedback Type
+          enum:
+          - eager
+          - delayed
+          - none
+          description: "Define how your shop status feedback should be sent into your system. \nNote that this will not apply to Prestashop V2 as the custom status mapping will define this.  \nUse the following states:\n   - eager: Change the parcels’ status to “sent” once the label is created.\n   - delayed: Change the parcels’ status to “sent” once the carrier scans the label.\n   - none: Don’t send any feedback."
+          minLength: 1
+    integration-response-model:
+      title: Integration Response Object
+      type: object
+      description: Integration object.
+      allOf:
+      - $ref: '#/components/schemas/integration-model'
+      - type: object
+        properties:
+          id:
+            type: integer
+            description: ID of an integration.
+            example: 23452345
+          type:
+            type: string
+            description: Type of shop/system the integration connects to. In Integrations API V2, this attribute was referred to as `system`.
+            example: api
+          started_failing_at:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            description: Timestamp from when the integration is failing to fetch orders or to send feedback. This value will be in the [ISO8601 format](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6). In the Integrations API V2, this attribute was referred to as `failing_since`.
+            example: '2023-11-10T16:16:42Z'
+          last_fetched_at:
+            type:
+            - string
+            - 'null'
+            format: date-time
+            description: The last time we managed to fetch data from this integration, used for rate limiting purposes. This value will be in the [ISO8601 format](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6). In the Integrations API V2, this attribute was referred to as `last_fetch`.
+            example: '2023-11-10T16:15:09Z'
+          created_at:
+            type: string
+            format: date-time
+            description: Timestamp when the integration was created. This value will be in the [ISO8601 format](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            example: '2023-11-04T14:15:22Z'
+          updated_at:
+            type: string
+            format: date-time
+            description: Timestamp when the integration was last updated. This value will be in the [ISO8601 format](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
+            example: '2023-11-08T12:23:56Z'
+    get-custom-status-mapping:
+      title: Get Custom Status Mapping
+      type: object
+      description: Retrieve available shop order statuses mapped onto Sendcloud's internal status category for the given integration.
+      properties:
+        data:
+          type: object
+          properties:
+            integration_id:
+              type: integer
+              description: Sendcloud Integration ID.
+              example: 23452345
+            mapping:
+              type: array
+              description: "Array containing available shop order statuses mapped onto Sendcloud's internal status category.\n  - The array contains an object of each of Sendcloud's internal status categories.\n  - Each of sendcloud's internal status categories will be mapped onto either `AvailableStatus.external_id` or `null`\n  - Not all `external_ids` in AvailableStatus may be mapped onto Sendcloud's internal status category.\n  - Two `external_ids` may map onto the same internal status category.\n  - An invalid mapping is a mapping that points to `external_id` that has been deleted."
+              items:
+                type: object
+                description: Status category to `external_id` association map.
+                properties:
+                  status_category:
+                    type: string
+                    enum:
+                    - READY_TO_SEND
+                    - IN_TRANSIT
+                    - DELIVERED
+                    - CANCEL
+                    description: Sendcloud internal status category.
+                    example: READY_TO_SEND
+                  external_id:
+                    type:
+                    - string
+                    - 'null'
+                    description: Field containing the ID linked to the order status inside the integrated webshop. It may be `None` or `null`.
+                    example: '11'
+                  is_valid:
+                    type: boolean
+                    description: A flag showing if the mapping points to an existing `external_id`.
+                    example: true
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
     get-shop-order-statuses:
       title: Shop Order Statuses
       type: object
@@ -1057,100 +1344,6 @@ components:
                       - nl-nl
                       - es-es
                       - it-it
-    post-shop-order-statuses:
-      title: POST Shop Order Statuses
-      description: POST request with shop order statuses with translations.
-      type: object
-      required:
-      - integration_id
-      - statuses
-      properties:
-        integration_id:
-          type: integer
-          description: ID of the integration to which these statuses belong.
-          example: 252345
-        statuses:
-          type: array
-          description: Available shop statuses.
-          uniqueItems: true
-          minItems: 0
-          items:
-            type: object
-            required:
-            - external_id
-            - translations
-            properties:
-              external_id:
-                type: string
-                description: ID linked to the order status inside the integrated webshop.
-                example: 17-B
-              translations:
-                type: array
-                minItems: 1
-                maxItems: 7
-                uniqueItems: true
-                items:
-                  type: object
-                  required:
-                  - status
-                  - language
-                  properties:
-                    status:
-                      type: string
-                      description: Order status
-                      example: Delivered
-                    language:
-                      type: string
-                      description: Language of the status.
-                      example: en-gb
-                      enum:
-                      - en-us
-                      - en-gb
-                      - fr-fr
-                      - de-de
-                      - nl-nl
-                      - es-es
-                      - it-it
-    create-custom-status-mapping:
-      title: Create Custom Status Mapping
-      type: object
-      required:
-      - integration_id
-      - mapping
-      description: Create or update the mapping of available shop order statuses onto Sendcloud's internal status category.
-      properties:
-        integration_id:
-          type: integer
-          description: Sendcloud Integration ID.
-          example: 23452345
-        mapping:
-          type: array
-          minItems: 4
-          maxItems: 4
-          uniqueItems: true
-          description: "Array containing available shop order statuses mapped onto Sendcloud's internal status category.\n  - Create or update an existing map of available shop order statuses onto Sendcloud's internal status category for the given integration.\n  - Make sure the mapping array contains objects of each Sendcloud's internal status categories.\n  - Map each of Sendcloud's internal status categories onto either `AvailableStatus.external_id` or `None`.\n  - Note that two `external_ids` may map to the same internal status category."
-          items:
-            type: object
-            required:
-            - status_category
-            - external_id
-            description: status category to external_id association map
-            properties:
-              status_category:
-                type: string
-                enum:
-                - READY_TO_SEND
-                - IN_TRANSIT
-                - DELIVERED
-                - CANCEL
-                description: sendcloud internal status category.
-                example: READY_TO_SEND
-              external_id:
-                type:
-                - string
-                - 'null'
-                description: Field containing the ID linked to the order status inside the integrated webshop. It may be `None`.
-                example: '11'
     ErrorObject:
       title: Error
       type: object
@@ -1213,256 +1406,69 @@ components:
         meta:
           type: object
           description: Additional metadata about the error.
-    errors:
-      title: Errors
+    post-shop-order-statuses:
+      title: POST Shop Order Statuses
+      description: POST request with shop order statuses with translations.
       type: object
-      description: A standardized format for errors in JSON:API responses.
+      required:
+      - integration_id
+      - statuses
       properties:
-        errors:
-          type:
-          - array
-          - object
-          items:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/ErrorObject'
-            required:
-            - status
-            - code
-            - detail
-    integration-response-model:
-      title: Integration Response Object
-      type: object
-      description: Integration object.
-      allOf:
-      - $ref: '#/components/schemas/integration-model'
-      - type: object
-        properties:
-          id:
-            type: integer
-            description: ID of an integration.
-            example: 23452345
-          type:
-            type: string
-            description: Type of shop/system the integration connects to. In Integrations API V2, this attribute was referred to as `system`.
-            example: api
-          started_failing_at:
-            type:
-            - string
-            - 'null'
-            format: date-time
-            description: Timestamp from when the integration is failing to fetch orders or to send feedback. This value will be in the [ISO8601 format](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6). In the Integrations API V2, this attribute was referred to as `failing_since`.
-            example: '2023-11-10T16:16:42Z'
-          last_fetched_at:
-            type:
-            - string
-            - 'null'
-            format: date-time
-            description: The last time we managed to fetch data from this integration, used for rate limiting purposes. This value will be in the [ISO8601 format](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6). In the Integrations API V2, this attribute was referred to as `last_fetch`.
-            example: '2023-11-10T16:15:09Z'
-          created_at:
-            type: string
-            format: date-time
-            description: Timestamp when the integration was created. This value will be in the [ISO8601 format](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
-            example: '2023-11-04T14:15:22Z'
-          updated_at:
-            type: string
-            format: date-time
-            description: Timestamp when the integration was last updated. This value will be in the [ISO8601 format](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6).
-            example: '2023-11-08T12:23:56Z'
-    integration-model:
-      title: Integration Object
-      type: object
-      description: Integration object.
-      properties:
-        shop_name:
-          type: string
-          title: Shop Name
-          maxLength: 250
-          minLength: 1
-          description: Name of the shop.
-          example: My Shop Integration
-        shop_url:
-          type: string
-          title: Shop url
-          description: URL of the shop the integration connects to.
-          format: uri
-          minLength: 1
-          example: https://www.my-shop-integration.com/
-        service_point_enabled:
-          type: boolean
-          title: Service point enabled
-          description: Flag indicating if delivery to service points is enabled.
-          example: false
-        service_point_carriers:
+        integration_id:
+          type: integer
+          description: ID of the integration to which these statuses belong.
+          example: 252345
+        statuses:
           type: array
-          title: Service point carriers
-          description: List of carriers available for the service point picker. If service point delivery is enabled, make sure to provide at least one carrier.
+          description: Available shop statuses.
+          uniqueItems: true
+          minItems: 0
           items:
-            type: string
-            example: ups
-          example:
-          - ups
-          - dhl
-        webhook_active:
-          type: boolean
-          title: Webhook active
-          description: Flag indicating if parcel updates should be sent via the webhook.
-          example: false
-        webhook_url:
-          type:
-          - string
-          - 'null'
-          title: Webhook url
-          format: uri
-          description: URL for sending updates on a parcel. A value for `webhook_url` is required if `webhook_active` is set to `true`.
-          minLength: 1
-          example: https://my-shop-integration.integrator/api/webhooks/sendcloud
-        feedback_type:
-          type: string
-          title: Feedback Type
-          enum:
-          - eager
-          - delayed
-          - none
-          description: "Define how your shop status feedback should be sent into your system. \nNote that this will not apply to Prestashop V2 as the custom status mapping will define this.  \nUse the following states:\n   - eager: Change the parcels’ status to “sent” once the label is created.\n   - delayed: Change the parcels’ status to “sent” once the carrier scans the label.\n   - none: Don’t send any feedback."
-          minLength: 1
-    get-custom-status-mapping:
-      title: Get Custom Status Mapping
-      type: object
-      description: Retrieve available shop order statuses mapped onto Sendcloud's internal status category for the given integration.
-      properties:
-        data:
-          type: object
-          properties:
-            integration_id:
-              type: integer
-              description: Sendcloud Integration ID.
-              example: 23452345
-            mapping:
-              type: array
-              description: "Array containing available shop order statuses mapped onto Sendcloud's internal status category.\n  - The array contains an object of each of Sendcloud's internal status categories.\n  - Each of sendcloud's internal status categories will be mapped onto either `AvailableStatus.external_id` or `null`\n  - Not all `external_ids` in AvailableStatus may be mapped onto Sendcloud's internal status category.\n  - Two `external_ids` may map onto the same internal status category.\n  - An invalid mapping is a mapping that points to `external_id` that has been deleted."
-              items:
-                type: object
-                description: Status category to `external_id` association map.
-                properties:
-                  status_category:
-                    type: string
-                    enum:
-                    - READY_TO_SEND
-                    - IN_TRANSIT
-                    - DELIVERED
-                    - CANCEL
-                    description: Sendcloud internal status category.
-                    example: READY_TO_SEND
-                  external_id:
-                    type:
-                    - string
-                    - 'null'
-                    description: Field containing the ID linked to the order status inside the integrated webshop. It may be `None` or `null`.
-                    example: '11'
-                  is_valid:
-                    type: boolean
-                    description: A flag showing if the mapping points to an existing `external_id`.
-                    example: true
-  responses:
-    404-Integrations:
-      description: Example response
-      content:
-        application/json:
-          schema:
             type: object
+            required:
+            - external_id
+            - translations
             properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    description: HTTP response status code
-                    default: 404
-                  request:
-                    type: string
-                    description: Endpoint which returned the response
-                  message:
-                    type: string
-                    description: Human readable error message
-                required:
-                - code
-                - request
-                - message
-          examples:
-            NotFound:
-              summary: Integration not found
-              value:
-                error:
-                  code: 404
-                  request: api/v2/integrations/
-                  message: No Integration matches the given query.
-    400-IntegrationLog:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    default: 400
-                    description: HTTP response status code
-                  request:
-                    type: string
-                    description: Endpoint which returned the response
-                  message:
-                    type: string
-                    description: Human readable error message
-                required:
-                - code
-                - request
-                - message
-          examples:
-            WrongFieldValue:
-              summary: Wrong field value
-              value:
-                error:
-                  code: 400
-                  request: api/v2/integrations/12/logs
-                  message: '{''exception'': [''This field may not be null.'', ]}'
-    400-Integration:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    default: 400
-                    description: HTTP response status code
-                  request:
-                    type: string
-                    description: Endpoint which returned the response
-                  message:
-                    type: string
-                    description: Human readable error message
-                required:
-                - code
-                - request
-                - message
-          examples:
-            WrongFieldValue:
-              summary: Wrong field value
-              value:
-                error:
-                  code: 400
-                  request: api/v2/integrations/
-                  message: '{''settings'': [''webhook_active: This field may not be null.'', ''webhook_url: This field may not be null.'']}'
+              external_id:
+                type: string
+                description: ID linked to the order status inside the integrated webshop.
+                example: 17-B
+              translations:
+                type: array
+                minItems: 1
+                maxItems: 7
+                uniqueItems: true
+                items:
+                  type: object
+                  required:
+                  - status
+                  - language
+                  properties:
+                    status:
+                      type: string
+                      description: Order status
+                      example: Delivered
+                    language:
+                      type: string
+                      description: Language of the status.
+                      example: en-gb
+                      enum:
+                      - en-us
+                      - en-gb
+                      - fr-fr
+                      - de-de
+                      - nl-nl
+                      - es-es
+                      - it-it
   parameters:
+    required_integration_id:
+      in: query
+      required: true
+      name: integration_id
+      schema:
+        type: integer
+        example: 251
+      description: Filter response on `integration_id`.
     show_deleted:
       in: query
       name: show_deleted
@@ -1485,14 +1491,6 @@ components:
         - it-it
       description: Get a response for the specified language.
       example: en-gb
-    required_integration_id:
-      in: query
-      required: true
-      name: integration_id
-      schema:
-        type: integer
-        example: 251
-      description: Filter response on `integration_id`.
   securitySchemes:
     HTTPBasicAuth:
       type: http

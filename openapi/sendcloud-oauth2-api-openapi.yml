@@ -87,15 +87,6 @@ components:
             - status
             - code
             - detail
-    connection-authorization-response:
-      title: Authorization Response
-      description: Response containing the OAuth2 authorization URL for connecting external services like Klaviyo.
-      type: object
-      properties:
-        authorization_url:
-          type: string
-          format: uri
-          description: The URL to redirect the user to for OAuth2 authorization with the external service.
     ErrorObject:
       title: Error
       type: object
@@ -158,6 +149,15 @@ components:
         meta:
           type: object
           description: Additional metadata about the error.
+    connection-authorization-response:
+      title: Authorization Response
+      description: Response containing the OAuth2 authorization URL for connecting external services like Klaviyo.
+      type: object
+      properties:
+        authorization_url:
+          type: string
+          format: uri
+          description: The URL to redirect the user to for OAuth2 authorization with the external service.
   securitySchemes:
     HTTPBasicAuth:
       type: http

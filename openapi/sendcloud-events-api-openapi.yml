@@ -106,6 +106,140 @@ webhooks:
           description: Return a 2xx status to acknowledge receipt of the event.
 components:
   schemas:
+    parcel-event-exception:
+      type: string
+      title: Parcel Event Exception
+      description: Exception on the current phase, or `none` when on the expected path.
+      enum:
+      - address_error
+      - announcement_failed
+      - cancellation_failed
+      - cancelled
+      - cancelled_upstream
+      - cancelling
+      - cancelling_upstream
+      - changed
+      - claim
+      - claimable
+      - customer_rejected
+      - customer_support
+      - customs_issue
+      - damaged
+      - delay_unknown
+      - delivery_delay
+      - dropoff_expiration
+      - handover_delay
+      - hold
+      - missing
+      - none
+      - non_conformity
+      - off_radar
+      - pup_expiration
+      - refused
+      - relabelled
+      - returned_sender
+      - sorting_delay
+      - unknown
+      example: none
+    parcel-event-sub-status:
+      type: string
+      title: Parcel Event Sub Status
+      description: Additional granularity within the phase/exception combination.
+      enum:
+      - accepted
+      - additional_information
+      - carrier
+      - company_closed
+      - connection_missed
+      - content
+      - cut_off
+      - damaged
+      - delay
+      - delivery_change
+      - disposed
+      - documents
+      - duplicate
+      - expired
+      - high_volume
+      - inaccessible
+      - incorrect_information
+      - in_progress
+      - late
+      - locker
+      - mailbox
+      - max_measure
+      - max_weight
+      - mechanical
+      - misrouted
+      - missort
+      - neighbour
+      - none
+      - not_home
+      - not_ordered
+      - one
+      - packaging
+      - parcel_found
+      - partly
+      - passed
+      - payment
+      - postal_box
+      - prohibited_item
+      - pup
+      - pup_closed
+      - receiver
+      - rejected
+      - requested
+      - resolved
+      - safeplace
+      - sender
+      - shop
+      - signature
+      - three
+      - traffic
+      - two
+      - undeliverable
+      - unknown
+      - unknown_receiver
+      - updated
+      - weather_conditions
+      example: none
+    WebhookParcelData:
+      type: object
+      description: Parcel identifiers included in event deliveries.
+      required:
+      - parcel_id
+      - carrier_code
+      properties:
+        parcel_id:
+          type: integer
+          description: Sendcloud parcel identifier.
+          example: 12345678
+        tracking_number:
+          type:
+          - string
+          - 'null'
+          description: Carrier-issued tracking number.
+          example: 3SYZXG132912330
+        carrier_code:
+          type: string
+          description: Short carrier code (e.g. `dpd`, `dhl`, `postnl`).
+          example: dpd
+        announced_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 timestamp of when the carrier was announced for this parcel.
+          example: '2026-01-15T10:00:00Z'
+    parcel-event-status-type:
+      type: string
+      title: Parcel Event Status Type
+      description: Severity of the event.
+      enum:
+      - error
+      - success
+      - warning
+      example: success
     WebhookEventData:
       type: object
       description: Parcel tracking event data.
@@ -173,99 +307,6 @@ components:
           - 'null'
           description: Additional carrier-specific data. Structure varies per carrier.
           example: null
-    parcel-event-exception:
-      type: string
-      title: Parcel Event Exception
-      description: Exception on the current phase, or `none` when on the expected path.
-      enum:
-      - address_error
-      - announcement_failed
-      - cancellation_failed
-      - cancelled
-      - cancelled_upstream
-      - cancelling
-      - cancelling_upstream
-      - changed
-      - claim
-      - claimable
-      - customer_rejected
-      - customer_support
-      - customs_issue
-      - damaged
-      - delay_unknown
-      - delivery_delay
-      - dropoff_expiration
-      - handover_delay
-      - hold
-      - missing
-      - none
-      - non_conformity
-      - off_radar
-      - pup_expiration
-      - refused
-      - relabelled
-      - returned_sender
-      - sorting_delay
-      - unknown
-      example: none
-    parcel-event-type:
-      type: string
-      title: Parcel Event Type
-      description: Classification of the event source.
-      enum:
-      - carrier
-      - internal
-      - calculated
-      - claim
-      example: carrier
-    ParcelEventCreatedPayload:
-      type: object
-      description: Event payload delivered to your endpoint when a parcel tracking event occurs.
-      required:
-      - event_type
-      - data
-      properties:
-        event_type:
-          type: string
-          description: The event type identifier.
-          example: parcels.event.created
-          enum:
-          - parcels.event.created
-        data:
-          type: object
-          description: The event payload.
-          required:
-          - parcel
-          - event
-          properties:
-            parcel:
-              $ref: '#/components/schemas/WebhookParcelData'
-            event:
-              $ref: '#/components/schemas/WebhookEventData'
-    parcel-event-phase:
-      type: string
-      title: Parcel Event Phase
-      description: Current delivery phase.
-      enum:
-      - accepted
-      - announced
-      - announcing
-      - attempted
-      - cancelled
-      - customs
-      - delivered
-      - delivery_forced
-      - dropped
-      - in_delivery
-      - in_transit
-      - labelled
-      - none
-      - no_label
-      - pup
-      - ready_to_send
-      - sorted
-      - unknown
-      example: in_transit
     WebhookLocationData:
       type: object
       description: Location details associated with a carrier event.
@@ -312,105 +353,64 @@ components:
           - 'null'
           description: Carrier depot name, if applicable.
           example: null
-    WebhookParcelData:
+    ParcelEventCreatedPayload:
       type: object
-      description: Parcel identifiers included in event deliveries.
+      description: Event payload delivered to your endpoint when a parcel tracking event occurs.
       required:
-      - parcel_id
-      - carrier_code
+      - event_type
+      - data
       properties:
-        parcel_id:
-          type: integer
-          description: Sendcloud parcel identifier.
-          example: 12345678
-        tracking_number:
-          type:
-          - string
-          - 'null'
-          description: Carrier-issued tracking number.
-          example: 3SYZXG132912330
-        carrier_code:
+        event_type:
           type: string
-          description: Short carrier code (e.g. `dpd`, `dhl`, `postnl`).
-          example: dpd
-        announced_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: ISO 8601 timestamp of when the carrier was announced for this parcel.
-          example: '2026-01-15T10:00:00Z'
-    parcel-event-status-type:
+          description: The event type identifier.
+          example: parcels.event.created
+          enum:
+          - parcels.event.created
+        data:
+          type: object
+          description: The event payload.
+          required:
+          - parcel
+          - event
+          properties:
+            parcel:
+              $ref: '#/components/schemas/WebhookParcelData'
+            event:
+              $ref: '#/components/schemas/WebhookEventData'
+    parcel-event-type:
       type: string
-      title: Parcel Event Status Type
-      description: Severity of the event.
+      title: Parcel Event Type
+      description: Classification of the event source.
       enum:
-      - error
-      - success
-      - warning
-      example: success
-    parcel-event-sub-status:
+      - carrier
+      - internal
+      - calculated
+      - claim
+      example: carrier
+    parcel-event-phase:
       type: string
-      title: Parcel Event Sub Status
-      description: Additional granularity within the phase/exception combination.
+      title: Parcel Event Phase
+      description: Current delivery phase.
       enum:
       - accepted
-      - additional_information
-      - carrier
-      - company_closed
-      - connection_missed
-      - content
-      - cut_off
-      - damaged
-      - delay
-      - delivery_change
-      - disposed
-      - documents
-      - duplicate
-      - expired
-      - high_volume
-      - inaccessible
-      - incorrect_information
-      - in_progress
-      - late
-      - locker
-      - mailbox
-      - max_measure
-      - max_weight
-      - mechanical
-      - misrouted
-      - missort
-      - neighbour
+      - announced
+      - announcing
+      - attempted
+      - cancelled
+      - customs
+      - delivered
+      - delivery_forced
+      - dropped
+      - in_delivery
+      - in_transit
+      - labelled
       - none
-      - not_home
-      - not_ordered
-      - one
-      - packaging
-      - parcel_found
-      - partly
-      - passed
-      - payment
-      - postal_box
-      - prohibited_item
+      - no_label
       - pup
-      - pup_closed
-      - receiver
-      - rejected
-      - requested
-      - resolved
-      - safeplace
-      - sender
-      - shop
-      - signature
-      - three
-      - traffic
-      - two
-      - undeliverable
+      - ready_to_send
+      - sorted
       - unknown
-      - unknown_receiver
-      - updated
-      - weather_conditions
-      example: none
+      example: in_transit
   securitySchemes:
     HTTPBasicAuth:
       type: http

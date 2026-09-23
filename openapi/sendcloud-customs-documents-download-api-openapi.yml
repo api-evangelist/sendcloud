@@ -63,50 +63,27 @@ paths:
           $ref: '#/components/responses/error_404_not_found'
       deprecated: true
 components:
-  parameters:
-    path-parcel-id:
-      schema:
-        type: integer
-        minimum: 1
-      name: parcel_id
-      in: path
-      description: Unique parcel identifier
-      required: true
-      example: 1
-    query-start-from:
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 3
-      name: start_from
-      in: query
-      required: true
-      description: 'The position of the label on an A4 page.
-
-
-        0 - Top left
-
-        1 - Top right
-
-        2 - Bottom left
-
-        3 - Bottom right'
-    path-parcel-ids:
-      schema:
-        type: array
-        minLength: 1
-        items:
-          type: integer
-      name: ids
-      in: query
-      description: Comma separated parcel ids
-      required: true
-      explode: false
-      example:
-      - 1
-      - 2
-      - 3
   responses:
+    error_400_bad_request:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+                title: Error response message
+    error_404_not_found:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            example: {}
+          example: {}
     customs_pdf_document_response:
       description: OK
       content:
@@ -125,26 +102,49 @@ components:
           schema:
             type: string
             example: Monday, 8 Jul 2024 00:00:00 GMT
-    error_404_not_found:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            description: ''
-            type: object
-            example: {}
-          example: {}
-    error_400_bad_request:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            description: ''
-            type: object
-            properties:
-              message:
-                type: string
-                title: Error response message
+  parameters:
+    path-parcel-id:
+      schema:
+        type: integer
+        minimum: 1
+      name: parcel_id
+      in: path
+      description: Unique parcel identifier
+      required: true
+      example: 1
+    path-parcel-ids:
+      schema:
+        type: array
+        minLength: 1
+        items:
+          type: integer
+      name: ids
+      in: query
+      description: Comma separated parcel ids
+      required: true
+      explode: false
+      example:
+      - 1
+      - 2
+      - 3
+    query-start-from:
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 3
+      name: start_from
+      in: query
+      required: true
+      description: 'The position of the label on an A4 page.
+
+
+        0 - Top left
+
+        1 - Top right
+
+        2 - Bottom left
+
+        3 - Bottom right'
   securitySchemes:
     HTTPBasicAuth:
       type: http

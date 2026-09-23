@@ -107,16 +107,37 @@ paths:
         '404':
           $ref: '#/components/responses/error_404_not_found'
 components:
+  responses:
+    error_400_bad_request:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+                title: Error response message
+    error_404_not_found:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            example: {}
+          example: {}
+    label_pdf_document_response:
+      description: OK
+      content:
+        application/pdf:
+          schema:
+            type: string
+            format: binary
+            title: Label PDF document
+            description: Label PDF document ready to print
   parameters:
-    path-parcel-id:
-      schema:
-        type: integer
-        minimum: 1
-      name: parcel_id
-      in: path
-      description: Unique parcel identifier
-      required: true
-      example: 1
     query-start-from:
       schema:
         type: integer
@@ -150,36 +171,15 @@ components:
       - 1
       - 2
       - 3
-  responses:
-    error_404_not_found:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            description: ''
-            type: object
-            example: {}
-          example: {}
-    error_400_bad_request:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            description: ''
-            type: object
-            properties:
-              message:
-                type: string
-                title: Error response message
-    label_pdf_document_response:
-      description: OK
-      content:
-        application/pdf:
-          schema:
-            type: string
-            format: binary
-            title: Label PDF document
-            description: Label PDF document ready to print
+    path-parcel-id:
+      schema:
+        type: integer
+        minimum: 1
+      name: parcel_id
+      in: path
+      description: Unique parcel identifier
+      required: true
+      example: 1
   securitySchemes:
     HTTPBasicAuth:
       type: http

@@ -327,179 +327,6 @@ paths:
                       detail: The Integration could not be found with the search criteria given
 components:
   schemas:
-    errors:
-      title: Errors
-      type: object
-      description: A standardized format for errors in JSON:API responses.
-      properties:
-        errors:
-          type:
-          - array
-          - object
-          items:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/ErrorObject'
-            required:
-            - status
-            - code
-            - detail
-    integration-log-create:
-      type: object
-      title: Integration Log Create Object
-      description: Request body for creating an integration exception log.
-      properties:
-        base_url:
-          description: Base shop URL
-          type: string
-          example: https://example.com
-          minLength: 1
-        full_url:
-          description: Full path to resource where error happened
-          type:
-          - string
-          - 'null'
-          example: https://example.com/order-note.json
-        method:
-          type:
-          - string
-          - 'null'
-          description: HTTP method that caused an error
-          example: POST
-          default: ''
-        response_code:
-          type:
-          - integer
-          - 'null'
-          description: Standard HTTP error code
-          example: 495
-          minimum: 0
-        response:
-          type:
-          - object
-          - 'null'
-          title: Response object
-          description: Response JSON containing response body and headers
-          properties:
-            headers:
-              title: HTTP headers
-              description: HTTP headers which were sent within a response
-              type:
-              - object
-              - 'null'
-            body:
-              title: HTTP response body
-              description: HTTP response body
-              type:
-              - string
-              - object
-              - 'null'
-        request:
-          type:
-          - object
-          - 'null'
-          title: Request object
-          description: Request JSON containing request body and headers
-          properties:
-            headers:
-              title: HTTP headers
-              description: HTTP headers which were sent within a request
-              type:
-              - object
-              - string
-              - 'null'
-            payload:
-              title: HTTP request body
-              description: HTTP request body
-              type:
-              - object
-              - string
-              - 'null'
-        created_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Timestamp indicating when an exception occurred. If not provided, the current date will be used.
-          example: '2023-03-01T02:02:00+01:00'
-        exception_type:
-          type:
-          - string
-          - 'null'
-          description: Internal field to store Python exception type. We use this field to suggest our users the ways how they can fix issues.
-          example: requests.exceptions.SSLError
-        exception:
-          type:
-          - string
-          - 'null'
-          title: Exception text
-          description: Human readable description of exception
-          example: An SSL error occurred
-      required:
-      - base_url
-      additionalProperties: false
-    ErrorObject:
-      title: Error
-      type: object
-      description: Error in a JSON:API error format
-      properties:
-        id:
-          type: string
-          description: A unique identifier for the error.
-        links:
-          type: object
-          description: A set of hyperlinks that provide additional information about the error.
-          properties:
-            about:
-              type: string
-              description: A URL that provides additional information about the error.
-        status:
-          type: string
-          format: int32
-          description: The HTTP status code of the error.
-          minLength: 1
-        code:
-          type: string
-          description: A unique error code for the error, in snake case format.
-          minLength: 1
-          enum:
-          - unknown_field
-          - invalid
-          - forbidden
-          - invalid_choice
-          - min_value
-          - 'null'
-          - not_found
-          - required
-          - not_a_list
-          - non_field_errors
-          - authentication_failed
-          - validation_error
-          - parcel_announcement_error
-        title:
-          type: string
-          description: A short, human-readable summary of the error.
-          minLength: 1
-        detail:
-          type: string
-          description: A human-readable explanation of the error.
-          minLength: 1
-        source:
-          type: object
-          description: An object that identifies the source of the error within the request payload.
-          properties:
-            pointer:
-              type: string
-              description: A `JSON` pointer to the location of the error within the request payload.
-            parameter:
-              type: string
-              description: The name of the `query` parameter that caused the error.
-            header:
-              type: string
-              description: The name of the `header` parameter that caused the error.
-        meta:
-          type: object
-          description: Additional metadata about the error.
     integration-log:
       type: object
       title: Integration Log Object
@@ -613,6 +440,179 @@ components:
           default: ''
       required:
       - base_url
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
+    ErrorObject:
+      title: Error
+      type: object
+      description: Error in a JSON:API error format
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the error.
+        links:
+          type: object
+          description: A set of hyperlinks that provide additional information about the error.
+          properties:
+            about:
+              type: string
+              description: A URL that provides additional information about the error.
+        status:
+          type: string
+          format: int32
+          description: The HTTP status code of the error.
+          minLength: 1
+        code:
+          type: string
+          description: A unique error code for the error, in snake case format.
+          minLength: 1
+          enum:
+          - unknown_field
+          - invalid
+          - forbidden
+          - invalid_choice
+          - min_value
+          - 'null'
+          - not_found
+          - required
+          - not_a_list
+          - non_field_errors
+          - authentication_failed
+          - validation_error
+          - parcel_announcement_error
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          minLength: 1
+        detail:
+          type: string
+          description: A human-readable explanation of the error.
+          minLength: 1
+        source:
+          type: object
+          description: An object that identifies the source of the error within the request payload.
+          properties:
+            pointer:
+              type: string
+              description: A `JSON` pointer to the location of the error within the request payload.
+            parameter:
+              type: string
+              description: The name of the `query` parameter that caused the error.
+            header:
+              type: string
+              description: The name of the `header` parameter that caused the error.
+        meta:
+          type: object
+          description: Additional metadata about the error.
+    integration-log-create:
+      type: object
+      title: Integration Log Create Object
+      description: Request body for creating an integration exception log.
+      properties:
+        base_url:
+          description: Base shop URL
+          type: string
+          example: https://example.com
+          minLength: 1
+        full_url:
+          description: Full path to resource where error happened
+          type:
+          - string
+          - 'null'
+          example: https://example.com/order-note.json
+        method:
+          type:
+          - string
+          - 'null'
+          description: HTTP method that caused an error
+          example: POST
+          default: ''
+        response_code:
+          type:
+          - integer
+          - 'null'
+          description: Standard HTTP error code
+          example: 495
+          minimum: 0
+        response:
+          type:
+          - object
+          - 'null'
+          title: Response object
+          description: Response JSON containing response body and headers
+          properties:
+            headers:
+              title: HTTP headers
+              description: HTTP headers which were sent within a response
+              type:
+              - object
+              - 'null'
+            body:
+              title: HTTP response body
+              description: HTTP response body
+              type:
+              - string
+              - object
+              - 'null'
+        request:
+          type:
+          - object
+          - 'null'
+          title: Request object
+          description: Request JSON containing request body and headers
+          properties:
+            headers:
+              title: HTTP headers
+              description: HTTP headers which were sent within a request
+              type:
+              - object
+              - string
+              - 'null'
+            payload:
+              title: HTTP request body
+              description: HTTP request body
+              type:
+              - object
+              - string
+              - 'null'
+        created_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Timestamp indicating when an exception occurred. If not provided, the current date will be used.
+          example: '2023-03-01T02:02:00+01:00'
+        exception_type:
+          type:
+          - string
+          - 'null'
+          description: Internal field to store Python exception type. We use this field to suggest our users the ways how they can fix issues.
+          example: requests.exceptions.SSLError
+        exception:
+          type:
+          - string
+          - 'null'
+          title: Exception text
+          description: Human readable description of exception
+          example: An SSL error occurred
+      required:
+      - base_url
+      additionalProperties: false
   securitySchemes:
     HTTPBasicAuth:
       type: http

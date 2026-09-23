@@ -231,6 +231,52 @@ components:
       - loc
       - msg
       - type
+    ShippingMethodTransitTime:
+      type: object
+      title: User Shipping Method Transit Times Object
+      properties:
+        transit_times:
+          type: array
+          description: array of transit time objects
+          items:
+            type: object
+            properties:
+              user_id:
+                type: string
+                example: '12345'
+              carrier_code:
+                type: string
+                example: postnl
+              shipping_method_code:
+                type: string
+                example: express-postnl-1-3kg
+              from_country:
+                type: string
+                example: ES
+              to_country:
+                type: string
+                example: AT
+              start_date:
+                type: string
+                format: date
+              end_date:
+                type: string
+                format: date
+              total_parcels:
+                type: integer
+                description: total number of parcels matching the filters
+                minimum: 0
+              transit_time:
+                type: number
+                description: average transit times for the matching parcels
+                minimum: 0
+            required:
+            - user_id
+            - shipping_method_code
+            - total_parcels
+            - transit_time
+      required:
+      - transit_times
     Errors:
       title: Errors Object
       type: object
@@ -279,52 +325,6 @@ components:
             required:
             - user_id
             - carrier_code
-            - total_parcels
-            - transit_time
-      required:
-      - transit_times
-    ShippingMethodTransitTime:
-      type: object
-      title: User Shipping Method Transit Times Object
-      properties:
-        transit_times:
-          type: array
-          description: array of transit time objects
-          items:
-            type: object
-            properties:
-              user_id:
-                type: string
-                example: '12345'
-              carrier_code:
-                type: string
-                example: postnl
-              shipping_method_code:
-                type: string
-                example: express-postnl-1-3kg
-              from_country:
-                type: string
-                example: ES
-              to_country:
-                type: string
-                example: AT
-              start_date:
-                type: string
-                format: date
-              end_date:
-                type: string
-                format: date
-              total_parcels:
-                type: integer
-                description: total number of parcels matching the filters
-                minimum: 0
-              transit_time:
-                type: number
-                description: average transit times for the matching parcels
-                minimum: 0
-            required:
-            - user_id
-            - shipping_method_code
             - total_parcels
             - transit_time
       required:

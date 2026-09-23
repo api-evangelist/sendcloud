@@ -23,7 +23,29 @@ paths:
       operationId: sc-public-v3-scp-post-validate_address
       security:
       - HTTPBasicAuth: []
-      description: "This address validation endpoint allows you to validate shipping addresses before using them.\nBy validating addresses in advance, you can ensure that the shipping information is accurate and complete,\nreducing the risk of delivery issues and improving overall shipping efficiency.\nProviding the carrier helps to tailor the address validation process according to specific carrier requirements.\nUsing additional validation methods can further enhance the accuracy of the address verification.\n\nThe default Sendcloud validation, will always be applied, has in 2 steps:\n1. checks the address against the carrier limits\n(e.g. maximum length of the address line, existence of the postal code for the country, etc.). \nsee also [Carrier address limits](/docs/shipments/address-field-limits#address-field-limits).\n\n2. optimizes (washes) the address to fit within the carrier limits.\n(e.g. deduplication of address lines, abbreviations, etc.)"
+      description: 'This address validation endpoint allows you to validate shipping addresses before using them.
+
+        By validating addresses in advance, you can ensure that the shipping information is accurate and complete,
+
+        reducing the risk of delivery issues and improving overall shipping efficiency.
+
+        Providing the carrier helps to tailor the address validation process according to specific carrier requirements.
+
+        Using additional validation methods can further enhance the accuracy of the address verification.
+
+
+        The default Sendcloud validation, will always be applied, has in 2 steps:
+
+        1. checks the address against the carrier limits
+
+        (e.g. maximum length of the address line, existence of the postal code for the country, etc.).
+
+        see also Carrier address limits.
+
+
+        2. optimizes (washes) the address to fit within the carrier limits.
+
+        (e.g. deduplication of address lines, abbreviations, etc.)'
       x-mint:
         href: /api/v3/address/validate
         content: 'This address validation endpoint allows you to validate shipping addresses before using them.
@@ -86,6 +108,11 @@ paths:
               $ref: '#/components/schemas/address-washer-request'
 components:
   schemas:
+    address-validation-method-enum:
+      title: Address validation method enum
+      type: string
+      enum:
+      - here
     raw-address:
       title: Raw address
       type: object
@@ -127,68 +154,17 @@ components:
           example: NL
           description: The country code of the customer represented as ISO 3166-1 alpha-2
           minLength: 1
-    ErrorObject:
-      title: Error
-      type: object
-      description: Error in a JSON:API error format
-      properties:
-        id:
-          type: string
-          description: A unique identifier for the error.
-        links:
-          type: object
-          description: A set of hyperlinks that provide additional information about the error.
-          properties:
-            about:
-              type: string
-              description: A URL that provides additional information about the error.
-        status:
-          type: string
-          format: int32
-          description: The HTTP status code of the error.
-          minLength: 1
-        code:
-          type: string
-          description: A unique error code for the error, in snake case format.
-          minLength: 1
-          enum:
-          - unknown_field
-          - invalid
-          - forbidden
-          - invalid_choice
-          - min_value
-          - 'null'
-          - not_found
-          - required
-          - not_a_list
-          - non_field_errors
-          - authentication_failed
-          - validation_error
-          - parcel_announcement_error
-        title:
-          type: string
-          description: A short, human-readable summary of the error.
-          minLength: 1
-        detail:
-          type: string
-          description: A human-readable explanation of the error.
-          minLength: 1
-        source:
-          type: object
-          description: An object that identifies the source of the error within the request payload.
-          properties:
-            pointer:
-              type: string
-              description: A `JSON` pointer to the location of the error within the request payload.
-            parameter:
-              type: string
-              description: The name of the `query` parameter that caused the error.
-            header:
-              type: string
-              description: The name of the `header` parameter that caused the error.
-        meta:
-          type: object
-          description: Additional metadata about the error.
+    errors:
+      title: Errors
+      description: A standardized format for errors in [JSON:API](https://jsonapi.org/format/#error-objects) responses.
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/ErrorObject'
+        - required:
+          - status
+          - code
+          - detail
     address-washer-response:
       title: Address Washer Response
       description: Address Washer Response object model
@@ -254,22 +230,6 @@ components:
                     description: List of changed attributes.
                     items:
                       type: string
-    errors:
-      title: Errors
-      description: A standardized format for errors in [JSON:API](https://jsonapi.org/format/#error-objects) responses.
-      type: array
-      items:
-        allOf:
-        - $ref: '#/components/schemas/ErrorObject'
-        - required:
-          - status
-          - code
-          - detail
-    address-validation-method-enum:
-      title: Address validation method enum
-      type: string
-      enum:
-      - here
     address-washer-request:
       title: Address Washer Request
       description: Address Washer Request object model
@@ -295,6 +255,68 @@ components:
       required:
       - address
       - carrier_code
+    ErrorObject:
+      title: Error
+      type: object
+      description: Error in a JSON:API error format
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the error.
+        links:
+          type: object
+          description: A set of hyperlinks that provide additional information about the error.
+          properties:
+            about:
+              type: string
+              description: A URL that provides additional information about the error.
+        status:
+          type: string
+          format: int32
+          description: The HTTP status code of the error.
+          minLength: 1
+        code:
+          type: string
+          description: A unique error code for the error, in snake case format.
+          minLength: 1
+          enum:
+          - unknown_field
+          - invalid
+          - forbidden
+          - invalid_choice
+          - min_value
+          - 'null'
+          - not_found
+          - required
+          - not_a_list
+          - non_field_errors
+          - authentication_failed
+          - validation_error
+          - parcel_announcement_error
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          minLength: 1
+        detail:
+          type: string
+          description: A human-readable explanation of the error.
+          minLength: 1
+        source:
+          type: object
+          description: An object that identifies the source of the error within the request payload.
+          properties:
+            pointer:
+              type: string
+              description: A `JSON` pointer to the location of the error within the request payload.
+            parameter:
+              type: string
+              description: The name of the `query` parameter that caused the error.
+            header:
+              type: string
+              description: The name of the `header` parameter that caused the error.
+        meta:
+          type: object
+          description: Additional metadata about the error.
   securitySchemes:
     HTTPBasicAuth:
       type: http

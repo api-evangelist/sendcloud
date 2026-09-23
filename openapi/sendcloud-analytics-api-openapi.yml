@@ -228,99 +228,7 @@ paths:
         '502':
           $ref: '#/components/responses/BadGateway'
 components:
-  parameters:
-    EndDate:
-      name: end_date
-      in: query
-      required: false
-      description: Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.
-      schema:
-        type: string
-        format: date
-        example: '2025-03-31'
-    ToCountryCode:
-      name: to_country_code
-      in: query
-      required: false
-      style: form
-      explode: true
-      description: ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.
-      schema:
-        type: array
-        items:
-          type: string
-          minLength: 2
-          maxLength: 2
-        example:
-        - AT
-        - DE
-    FromCountryCode:
-      name: from_country_code
-      in: query
-      required: false
-      style: form
-      explode: true
-      description: ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.
-      schema:
-        type: array
-        items:
-          type: string
-          minLength: 2
-          maxLength: 2
-        example:
-        - NL
-    StartDate:
-      name: start_date
-      in: query
-      required: false
-      description: Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.
-      schema:
-        type: string
-        format: date
-        example: '2025-03-01'
   responses:
-    NotFound:
-      description: Not Found. Returned when the analytics data source has not been provisioned for your organization. A successful query with no matching rows returns `200` with an empty `transit_times` array instead.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            NotProvisioned:
-              summary: Analytics data source not provisioned
-              value:
-                errors:
-                - status: '404'
-                  code: not_found
-                  detail: Analytics data is not available for this organization.
-    Forbidden:
-      description: Forbidden. Returned when your account doesn't have access to this endpoint.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            NotEnabled:
-              summary: Account does not have access to the Analytics API
-              value:
-                errors:
-                - status: '403'
-                  code: forbidden
-                  detail: Analytics is not enabled for this organization.
-    InternalServerError:
-      description: Internal Server Error. Returned when the analytics data source is unreachable, times out, or returns an unexpected error. Safe to retry, but if it persists, contact support and include the request ID from the `X-Request-Id` response header.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            UpstreamUnavailable:
-              summary: Analytics data source unavailable
-              value:
-                errors:
-                - status: '500'
-                  code: unknown_error
-                  detail: Failed to fetch analytics data. Please try again later.
     Unauthorized:
       description: Unauthorized. Returned when authentication credentials are missing or invalid. Make sure you're using your **Public Key** as the username and **Secret Key** as the password (HTTP Basic Auth), or a valid OAuth 2.0 access token.
       content:
@@ -342,6 +250,20 @@ components:
                 - status: '401'
                   code: authentication_failed
                   detail: Invalid username/password.
+    Forbidden:
+      description: Forbidden. Returned when your account doesn't have access to this endpoint.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            NotEnabled:
+              summary: Account does not have access to the Analytics API
+              value:
+                errors:
+                - status: '403'
+                  code: forbidden
+                  detail: Analytics is not enabled for this organization.
     BadGateway:
       description: Bad Gateway. Returned when a request to an external service fails with an unexpected status. Safe to retry, but if it persists, contact support and include the request ID from the `X-Request-Id` response header.
       content:
@@ -356,6 +278,84 @@ components:
                 - status: '502'
                   code: external_service_error
                   detail: An error occurred with an external service.
+    InternalServerError:
+      description: Internal Server Error. Returned when the analytics data source is unreachable, times out, or returns an unexpected error. Safe to retry, but if it persists, contact support and include the request ID from the `X-Request-Id` response header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            UpstreamUnavailable:
+              summary: Analytics data source unavailable
+              value:
+                errors:
+                - status: '500'
+                  code: unknown_error
+                  detail: Failed to fetch analytics data. Please try again later.
+    NotFound:
+      description: Not Found. Returned when the analytics data source has not been provisioned for your organization. A successful query with no matching rows returns `200` with an empty `transit_times` array instead.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            NotProvisioned:
+              summary: Analytics data source not provisioned
+              value:
+                errors:
+                - status: '404'
+                  code: not_found
+                  detail: Analytics data is not available for this organization.
+  parameters:
+    ToCountryCode:
+      name: to_country_code
+      in: query
+      required: false
+      style: form
+      explode: true
+      description: ISO 3166-1 alpha-2 country codes of the destination to filter by. Repeat the parameter to pass multiple values.
+      schema:
+        type: array
+        items:
+          type: string
+          minLength: 2
+          maxLength: 2
+        example:
+        - AT
+        - DE
+    StartDate:
+      name: start_date
+      in: query
+      required: false
+      description: Inclusive start of the window in `YYYY-MM-DD` format. Defaults to 90 days before today (UTC) when omitted.
+      schema:
+        type: string
+        format: date
+        example: '2025-03-01'
+    FromCountryCode:
+      name: from_country_code
+      in: query
+      required: false
+      style: form
+      explode: true
+      description: ISO 3166-1 alpha-2 country codes of the origin to filter by. Repeat the parameter to pass multiple values.
+      schema:
+        type: array
+        items:
+          type: string
+          minLength: 2
+          maxLength: 2
+        example:
+        - NL
+    EndDate:
+      name: end_date
+      in: query
+      required: false
+      description: Inclusive end of the window in `YYYY-MM-DD` format. Defaults to today (UTC) when omitted.
+      schema:
+        type: string
+        format: date
+        example: '2025-03-31'
   schemas:
     ErrorResponse:
       type: object
@@ -429,68 +429,6 @@ components:
       - total_parcels
       - transit_time_hours
       - transit_time_days
-    ErrorObject:
-      title: Error
-      type: object
-      description: Error in a JSON:API error format
-      properties:
-        id:
-          type: string
-          description: A unique identifier for the error.
-        links:
-          type: object
-          description: A set of hyperlinks that provide additional information about the error.
-          properties:
-            about:
-              type: string
-              description: A URL that provides additional information about the error.
-        status:
-          type: string
-          format: int32
-          description: The HTTP status code of the error.
-          minLength: 1
-        code:
-          type: string
-          description: A unique error code for the error, in snake case format.
-          minLength: 1
-          enum:
-          - unknown_field
-          - invalid
-          - forbidden
-          - invalid_choice
-          - min_value
-          - 'null'
-          - not_found
-          - required
-          - not_a_list
-          - non_field_errors
-          - authentication_failed
-          - validation_error
-          - parcel_announcement_error
-        title:
-          type: string
-          description: A short, human-readable summary of the error.
-          minLength: 1
-        detail:
-          type: string
-          description: A human-readable explanation of the error.
-          minLength: 1
-        source:
-          type: object
-          description: An object that identifies the source of the error within the request payload.
-          properties:
-            pointer:
-              type: string
-              description: A `JSON` pointer to the location of the error within the request payload.
-            parameter:
-              type: string
-              description: The name of the `query` parameter that caused the error.
-            header:
-              type: string
-              description: The name of the `header` parameter that caused the error.
-        meta:
-          type: object
-          description: Additional metadata about the error.
     CarrierTransitTimeResponse:
       description: Response schema for the carrier transit times endpoint.
       type: object
@@ -576,6 +514,68 @@ components:
             $ref: '#/components/schemas/ShippingOptionTransitTimeRecord'
       required:
       - transit_times
+    ErrorObject:
+      title: Error
+      type: object
+      description: Error in a JSON:API error format
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the error.
+        links:
+          type: object
+          description: A set of hyperlinks that provide additional information about the error.
+          properties:
+            about:
+              type: string
+              description: A URL that provides additional information about the error.
+        status:
+          type: string
+          format: int32
+          description: The HTTP status code of the error.
+          minLength: 1
+        code:
+          type: string
+          description: A unique error code for the error, in snake case format.
+          minLength: 1
+          enum:
+          - unknown_field
+          - invalid
+          - forbidden
+          - invalid_choice
+          - min_value
+          - 'null'
+          - not_found
+          - required
+          - not_a_list
+          - non_field_errors
+          - authentication_failed
+          - validation_error
+          - parcel_announcement_error
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          minLength: 1
+        detail:
+          type: string
+          description: A human-readable explanation of the error.
+          minLength: 1
+        source:
+          type: object
+          description: An object that identifies the source of the error within the request payload.
+          properties:
+            pointer:
+              type: string
+              description: A `JSON` pointer to the location of the error within the request payload.
+            parameter:
+              type: string
+              description: The name of the `query` parameter that caused the error.
+            header:
+              type: string
+              description: The name of the `header` parameter that caused the error.
+        meta:
+          type: object
+          description: Additional metadata about the error.
   securitySchemes:
     HTTPBasicAuth:
       type: http

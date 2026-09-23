@@ -1,0 +1,26 @@
+# Front Door AI Index — sendcloud — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: sendcloud
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.sendcloud.com
+  final_host: www.sendcloud.com
+  ownership: own
+  owner: sendcloud
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 6
+  host_score: 6
+  density: 1.86
+  words: 3229
+  tiers:
+    agentic: 0
+    core: 6
+    model: 0
+  ambiguous: 6
+  top_terms:
+    AI: 6
+    smart: 6

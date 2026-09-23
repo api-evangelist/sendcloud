@@ -328,16 +328,28 @@ paths:
                 $ref: '#/components/schemas/errors'
 components:
   schemas:
-    connection:
-      title: Connection
-      description: A connection defines an external endpoint where event notifications are delivered.
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
+    connection-update-request:
+      title: Update Connection request
+      description: Request body for updating an existing connection. All fields are optional.
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          minimum: 1
-          description: Unique identifier of the connection.
         type:
           type: string
           description: The type of connection.
@@ -346,15 +358,34 @@ components:
           - klaviyo
         configuration:
           type: object
-          description: The configuration for the connection. The shape depends on the connection type.
-        created_at:
+          description: 'The configuration for the connection. The shape depends on the connection type.
+
+
+            For `webhook` connections, see the webhook configuration fields.
+
+            For `klaviyo` connections, configuration can be an empty object as credentials are managed via OAuth2.'
+    connection-create-request:
+      title: Create Connection request
+      description: Request body for creating a new connection.
+      type: object
+      required:
+      - type
+      - configuration
+      properties:
+        type:
           type: string
-          format: date-time
-          description: The date and time when the connection was created, in ISO 8601 format.
-        updated_at:
-          type: string
-          format: date-time
-          description: The date and time when the connection was last updated, in ISO 8601 format.
+          description: The type of connection.
+          enum:
+          - webhook
+          - klaviyo
+        configuration:
+          type: object
+          description: 'The configuration for the connection. The shape depends on the connection type.
+
+
+            For `webhook` connections, see the webhook configuration fields.
+
+            For `klaviyo` connections, configuration can be an empty object as credentials are managed via OAuth2.'
     ErrorObject:
       title: Error
       type: object
@@ -417,31 +448,16 @@ components:
         meta:
           type: object
           description: Additional metadata about the error.
-    errors:
-      title: Errors
+    connection:
+      title: Connection
+      description: A connection defines an external endpoint where event notifications are delivered.
       type: object
-      description: A standardized format for errors in JSON:API responses.
       properties:
-        errors:
-          type:
-          - array
-          - object
-          items:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/ErrorObject'
-            required:
-            - status
-            - code
-            - detail
-    connection-create-request:
-      title: Create Connection request
-      description: Request body for creating a new connection.
-      type: object
-      required:
-      - type
-      - configuration
-      properties:
+        id:
+          type: integer
+          format: int64
+          minimum: 1
+          description: Unique identifier of the connection.
         type:
           type: string
           description: The type of connection.
@@ -450,31 +466,15 @@ components:
           - klaviyo
         configuration:
           type: object
-          description: 'The configuration for the connection. The shape depends on the connection type.
-
-
-            For `webhook` connections, see the webhook configuration fields.
-
-            For `klaviyo` connections, configuration can be an empty object as credentials are managed via OAuth2.'
-    connection-update-request:
-      title: Update Connection request
-      description: Request body for updating an existing connection. All fields are optional.
-      type: object
-      properties:
-        type:
+          description: The configuration for the connection. The shape depends on the connection type.
+        created_at:
           type: string
-          description: The type of connection.
-          enum:
-          - webhook
-          - klaviyo
-        configuration:
-          type: object
-          description: 'The configuration for the connection. The shape depends on the connection type.
-
-
-            For `webhook` connections, see the webhook configuration fields.
-
-            For `klaviyo` connections, configuration can be an empty object as credentials are managed via OAuth2.'
+          format: date-time
+          description: The date and time when the connection was created, in ISO 8601 format.
+        updated_at:
+          type: string
+          format: date-time
+          description: The date and time when the connection was last updated, in ISO 8601 format.
   securitySchemes:
     HTTPBasicAuth:
       type: http
