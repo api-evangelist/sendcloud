@@ -110,29 +110,6 @@ paths:
       - Tracking
 components:
   schemas:
-    DetailedTrackingBlobStatus:
-      title: Detailed Tracking Blob Status Object
-      description: List of shipping statuses for the parcel
-      type: object
-      properties:
-        carrier_update_timestamp:
-          type: string
-          description: 'Timestamp (ISO format): when did the carrier move the parcel to this status'
-          example: '2022-01-25 16:42:03.277703+00:00'
-        parcel_status_history_id:
-          type: string
-          description: ID of the historical status
-          example: '1270787363'
-        parent_status:
-          type: string
-          description: Current delivery status of the parcel. Aggregates variations of status messages sent by multiple carriers with similar meanings, into one user-friendly status message issued by Sendcloud.
-          example: delivered
-        carrier_code:
-          $ref: '#/components/schemas/carrier'
-        carrier_message:
-          type: string
-          description: Status description specified by the carrier, more detailed than parent_status
-          example: Shipment delivered, no signature
     DetailedTrackingBlob:
       title: Detailed Tracking Blob Object
       description: A definition of a detailed tracking blob.
@@ -177,6 +154,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DetailedTrackingBlobStatus'
+    DetailedTrackingBlobStatus:
+      title: Detailed Tracking Blob Status Object
+      description: List of shipping statuses for the parcel
+      type: object
+      properties:
+        carrier_update_timestamp:
+          type: string
+          description: 'Timestamp (ISO format): when did the carrier move the parcel to this status'
+          example: '2022-01-25 16:42:03.277703+00:00'
+        parcel_status_history_id:
+          type: string
+          description: ID of the historical status
+          example: '1270787363'
+        parent_status:
+          type: string
+          description: Current delivery status of the parcel. Aggregates variations of status messages sent by multiple carriers with similar meanings, into one user-friendly status message issued by Sendcloud.
+          example: delivered
+        carrier_code:
+          $ref: '#/components/schemas/carrier'
+        carrier_message:
+          type: string
+          description: Status description specified by the carrier, more detailed than parent_status
+          example: Shipment delivered, no signature
     carrier:
       type: string
       title: Carrier Code

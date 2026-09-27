@@ -1920,6 +1920,7 @@ tags:
   - Returns
   - Tracking
   - Europe
+  - A2A
 tags_raw:
   - Shipping
   - Logistics
@@ -1929,6 +1930,7 @@ tags_raw:
   - Returns
   - Tracking
   - Europe
+  - A2A
 kind: contract
 deliveryModel:
   model: saas
@@ -2180,3 +2182,10 @@ common:
         description: Custom volumes, SLAs, custom development.
   - type: Integrations
     url: https://www.sendcloud.com/integrations/
+x-a2a:
+  verified: true
+  probed: '2026-09-26'
+  url: "https://sendcloud.dev/.well-known/agent-card.json"
+  grade: "conformant"
+  protocol_version: "0.3"
+  control: 404

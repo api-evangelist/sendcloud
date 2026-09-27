@@ -63,45 +63,6 @@ paths:
           $ref: '#/components/responses/error_404_not_found'
       deprecated: true
 components:
-  responses:
-    error_400_bad_request:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            description: ''
-            type: object
-            properties:
-              message:
-                type: string
-                title: Error response message
-    error_404_not_found:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            description: ''
-            type: object
-            example: {}
-          example: {}
-    customs_pdf_document_response:
-      description: OK
-      content:
-        application/pdf:
-          schema:
-            type: string
-            format: binary
-            title: Customs document in PDF format
-            description: Customs PDF document ready to print
-      headers:
-        Deprecation:
-          schema:
-            type: string
-            example: Mon, 8 Jan 2024 00:00:00 GMT
-        Sunset:
-          schema:
-            type: string
-            example: Monday, 8 Jul 2024 00:00:00 GMT
   parameters:
     path-parcel-id:
       schema:
@@ -112,21 +73,6 @@ components:
       description: Unique parcel identifier
       required: true
       example: 1
-    path-parcel-ids:
-      schema:
-        type: array
-        minLength: 1
-        items:
-          type: integer
-      name: ids
-      in: query
-      description: Comma separated parcel ids
-      required: true
-      explode: false
-      example:
-      - 1
-      - 2
-      - 3
     query-start-from:
       schema:
         type: integer
@@ -145,6 +91,60 @@ components:
         2 - Bottom left
 
         3 - Bottom right'
+    path-parcel-ids:
+      schema:
+        type: array
+        minLength: 1
+        items:
+          type: integer
+      name: ids
+      in: query
+      description: Comma separated parcel ids
+      required: true
+      explode: false
+      example:
+      - 1
+      - 2
+      - 3
+  responses:
+    error_400_bad_request:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              message:
+                type: string
+                title: Error response message
+    customs_pdf_document_response:
+      description: OK
+      content:
+        application/pdf:
+          schema:
+            type: string
+            format: binary
+            title: Customs document in PDF format
+            description: Customs PDF document ready to print
+      headers:
+        Deprecation:
+          schema:
+            type: string
+            example: Mon, 8 Jan 2024 00:00:00 GMT
+        Sunset:
+          schema:
+            type: string
+            example: Monday, 8 Jul 2024 00:00:00 GMT
+    error_404_not_found:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            example: {}
+          example: {}
   securitySchemes:
     HTTPBasicAuth:
       type: http

@@ -116,19 +116,97 @@ webhooks:
           $ref: '#/components/responses/200'
 components:
   schemas:
-    IntegrationDeletedWebhook:
-      description: The webhook payload when an integration is deleted from Sendcloud
+    ReturnCreatedWebhook:
+      title: Webhook Return Created Object
       type: object
-      title: Webhook Integration Deleted Object
+      description: 'The webhook payload when a return is created. This is emitted when a return is created either via the API or the Return Portal.
+
+
+        Creating a return manually via Return Form does NOT trigger the webhook.'
+      properties:
+        action:
+          type: string
+          description: Describes webhook action
+          example: return_created
+          enum:
+          - return_created
+        timestamp:
+          type: number
+          description: Unix timestamp
+        data:
+          type: object
+          description: Information about the return
+          required:
+          - id
+          properties:
+            id:
+              type: number
+              description: The id of the return
+              example: 42
+            brand_id:
+              type: integer
+            order_number:
+              type: string
+            return_reason_id:
+              type: integer
+            return_address_id:
+              type: integer
+            paid_return:
+              type: boolean
+            delivery_choice:
+              type: string
+            refund_type:
+              type: string
+            items:
+              type: array
+              description: List of items for this return
+              items:
+                type: object
+                properties:
+                  item_id:
+                    type: string
+                  description:
+                    type: string
+                  quantity:
+                    type: integer
+                  sku:
+                    type: string
+                  hs_code:
+                    type: string
+                  return_reason_id:
+                    type: integer
+                required:
+                - quantity
+      required:
+      - action
+      - timestamp
+      - data
+    IntegrationConnectedWebhook:
+      description: The webhook payload when an integration is added to Sendcloud
+      type: object
+      title: Webhook Integration Connected Object
       allOf:
       - $ref: '#/components/schemas/IntegrationWebhookBase'
       - type: object
         properties:
           action:
             type: string
-            example: integration_deleted
+            example: integration_connected
             enum:
-            - integration_deleted
+            - integration_connected
+    IntegrationUpdatedWebhook:
+      description: The webhook payload when an integration is updated in Sendcloud
+      type: object
+      title: Webhook Integration Updated Object
+      allOf:
+      - $ref: '#/components/schemas/IntegrationWebhookBase'
+      - type: object
+        properties:
+          action:
+            type: string
+            example: integration_updated
+            enum:
+            - integration_updated
     IntegrationWebhookBase:
       description: Base schema for integration webhook payloads
       type: object
@@ -202,6 +280,19 @@ components:
       required:
       - action
       - timestamp
+    IntegrationDeletedWebhook:
+      description: The webhook payload when an integration is deleted from Sendcloud
+      type: object
+      title: Webhook Integration Deleted Object
+      allOf:
+      - $ref: '#/components/schemas/IntegrationWebhookBase'
+      - type: object
+        properties:
+          action:
+            type: string
+            example: integration_deleted
+            enum:
+            - integration_deleted
     ParcelStatusChangedWebhook:
       type: object
       description: The webhook payload when a parcel (either an outgoing or an incoming one) changes status.
@@ -354,97 +445,6 @@ components:
               type: string
               description: Our system will ensure uniqueness of shipments with the combination of `external_order_id` and `external_shipment_id`
               example: AMZ231231
-    IntegrationConnectedWebhook:
-      description: The webhook payload when an integration is added to Sendcloud
-      type: object
-      title: Webhook Integration Connected Object
-      allOf:
-      - $ref: '#/components/schemas/IntegrationWebhookBase'
-      - type: object
-        properties:
-          action:
-            type: string
-            example: integration_connected
-            enum:
-            - integration_connected
-    IntegrationUpdatedWebhook:
-      description: The webhook payload when an integration is updated in Sendcloud
-      type: object
-      title: Webhook Integration Updated Object
-      allOf:
-      - $ref: '#/components/schemas/IntegrationWebhookBase'
-      - type: object
-        properties:
-          action:
-            type: string
-            example: integration_updated
-            enum:
-            - integration_updated
-    ReturnCreatedWebhook:
-      title: Webhook Return Created Object
-      type: object
-      description: 'The webhook payload when a return is created. This is emitted when a return is created either via the API or the Return Portal.
-
-
-        Creating a return manually via Return Form does NOT trigger the webhook.'
-      properties:
-        action:
-          type: string
-          description: Describes webhook action
-          example: return_created
-          enum:
-          - return_created
-        timestamp:
-          type: number
-          description: Unix timestamp
-        data:
-          type: object
-          description: Information about the return
-          required:
-          - id
-          properties:
-            id:
-              type: number
-              description: The id of the return
-              example: 42
-            brand_id:
-              type: integer
-            order_number:
-              type: string
-            return_reason_id:
-              type: integer
-            return_address_id:
-              type: integer
-            paid_return:
-              type: boolean
-            delivery_choice:
-              type: string
-            refund_type:
-              type: string
-            items:
-              type: array
-              description: List of items for this return
-              items:
-                type: object
-                properties:
-                  item_id:
-                    type: string
-                  description:
-                    type: string
-                  quantity:
-                    type: integer
-                  sku:
-                    type: string
-                  hs_code:
-                    type: string
-                  return_reason_id:
-                    type: integer
-                required:
-                - quantity
-      required:
-      - action
-      - timestamp
-      - data
   responses:
     '200':
       description: Return a 200 status to indicate that the data was processed successfully. The response body may contain the extended line item.

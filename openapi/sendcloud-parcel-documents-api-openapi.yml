@@ -138,133 +138,7 @@ paths:
       - $ref: '#/components/parameters/paper-size'
       description: Download multiple parcel documents of the same type in bulk.
 components:
-  parameters:
-    rendering_format:
-      name: Accept
-      in: header
-      required: false
-      schema:
-        type: string
-        default: application/pdf
-        enum:
-        - application/pdf
-        - application/zpl
-        - image/png
-        example: image/png
-      description: 'The returned format of the document.
-
-
-        **Note:** If a label is requested as native ZPL from the carrier it can''t be converted to another format and will always be returned in ZPL.'
-    parcels:
-      name: parcels
-      in: query
-      required: true
-      schema:
-        type: array
-        items:
-          type: integer
-        example:
-        - 1
-        - 2
-        - 3
-        maxItems: 20
-        minItems: 1
-      description: Parcels for which you want to retrieve the documents
-    type:
-      name: type
-      in: path
-      schema:
-        type: string
-        example: customs-declaration
-        enum:
-        - label
-        - customs-declaration
-        - air-waybill
-      description: Document type you want to retrieve.
-      required: true
-    id:
-      name: id
-      in: path
-      schema:
-        type: integer
-        example: 1
-        minimum: 1
-      description: Identifier of the parcel which you want to retrieve a document from
-      required: true
-    paper-size:
-      in: query
-      name: paper_size
-      description: 'The paper size of the document you would like to retrieve. Paper size can be one of:
-
-
-        - A4
-
-        - A5
-
-        - A6
-
-
-        Omitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.
-
-        '
-      schema:
-        type: string
-        enum:
-        - A4
-        - A5
-        - A6
-        example: A4
-    dpi:
-      name: dpi
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 72
-        enum:
-        - 72
-        - 150
-        - 203
-        - 300
-        - 600
-        example: 300
-        minimum: 1
-      description: 'DPI, or dots per inch, refers to the printing resolution of your shipping labels. Labels must be printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.
-
-
-        Use the following table to find the appropriate DPI for each file format:
-
-
-        | File format | Default DPI | Valid DPI |
-
-        |-------------|-------------|-----------|
-
-        | pdf         | 72          | 72        |
-
-        | png         | 300         | 150, 300  |
-
-
-        ZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.
-
-        '
   schemas:
-    errors:
-      title: Errors
-      type: object
-      description: A standardized format for errors in JSON:API responses.
-      properties:
-        errors:
-          type:
-          - array
-          - object
-          items:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/ErrorObject'
-            required:
-            - status
-            - code
-            - detail
     ErrorObject:
       title: Error
       type: object
@@ -327,6 +201,132 @@ components:
         meta:
           type: object
           description: Additional metadata about the error.
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
+  parameters:
+    rendering_format:
+      name: Accept
+      in: header
+      required: false
+      schema:
+        type: string
+        default: application/pdf
+        enum:
+        - application/pdf
+        - application/zpl
+        - image/png
+        example: image/png
+      description: 'The returned format of the document.
+
+
+        **Note:** If a label is requested as native ZPL from the carrier it can''t be converted to another format and will always be returned in ZPL.'
+    paper-size:
+      in: query
+      name: paper_size
+      description: 'The paper size of the document you would like to retrieve. Paper size can be one of:
+
+
+        - A4
+
+        - A5
+
+        - A6
+
+
+        Omitting this query parameter leads to the internal paper size of the document being used. Generally this is A6 for labels and A4 for larger documents, like customs documents.
+
+        '
+      schema:
+        type: string
+        enum:
+        - A4
+        - A5
+        - A6
+        example: A4
+    type:
+      name: type
+      in: path
+      schema:
+        type: string
+        example: customs-declaration
+        enum:
+        - label
+        - customs-declaration
+        - air-waybill
+      description: Document type you want to retrieve.
+      required: true
+    dpi:
+      name: dpi
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 72
+        enum:
+        - 72
+        - 150
+        - 203
+        - 300
+        - 600
+        example: 300
+        minimum: 1
+      description: 'DPI, or dots per inch, refers to the printing resolution of your shipping labels. Labels must be printed at a high enough resolution to ensure the clarity of address details and the barcode for scanning purposes.
+
+
+        Use the following table to find the appropriate DPI for each file format:
+
+
+        | File format | Default DPI | Valid DPI |
+
+        |-------------|-------------|-----------|
+
+        | pdf         | 72          | 72        |
+
+        | png         | 300         | 150, 300  |
+
+
+        ZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.
+
+        '
+    parcels:
+      name: parcels
+      in: query
+      required: true
+      schema:
+        type: array
+        items:
+          type: integer
+        example:
+        - 1
+        - 2
+        - 3
+        maxItems: 20
+        minItems: 1
+      description: Parcels for which you want to retrieve the documents
+    id:
+      name: id
+      in: path
+      schema:
+        type: integer
+        example: 1
+        minimum: 1
+      description: Identifier of the parcel which you want to retrieve a document from
+      required: true
   securitySchemes:
     HTTPBasicAuth:
       type: http

@@ -136,84 +136,6 @@ paths:
           $ref: '#/components/responses/422'
 components:
   schemas:
-    ParcelsReportFields:
-      title: Parcel Report Fields
-      enum:
-      - parcel_id
-      - direction
-      - carrier_code
-      - carrier_name
-      - from_company_name
-      - contract_id
-      - contract_type
-      - origin_city
-      - origin_postal_code
-      - origin_country_code
-      - origin_country_name
-      - destination_city
-      - destination_postal_code
-      - destination_country_code
-      - destination_country_name
-      - order_number
-      - tracking_number
-      - created_at
-      - updated_at
-      - announced_at
-      - shipped_at
-      - first_delivery_at
-      - arrived_at
-      - shipping_method
-      - shipping_method_name
-      - price
-      - global_status_slug
-      - carrier_status
-      - integration_id
-      - integration_type
-      - weight
-      type: string
-      description: The parcel fields to include for the report
-    ParcelsReportFilter:
-      title: Parcels Report Filters Object
-      type: object
-      properties:
-        direction:
-          allOf:
-          - $ref: '#/components/schemas/ParcelDirections'
-          description: Includes only the parcels that are sent (`outgoing`) or returned (`incoming`).
-        integration_id:
-          type: integer
-          title: Integration Id
-          description: Includes only the parcels created by the shop integration with the provided id.
-          minimum: 1
-        updated_after:
-          title: Updated After
-          type: string
-          description: "Includes only the parcels which have been updated in our system after your given time.\n\nYou can use the value of ISO 8601 DateTime string like this:\n - 2018-02-26T11:01:47.505309+00:00\n - 2018-02-26T11:01:47\n - 2018-02-26\n\nNote: the default timezone is UTC\n"
-          format: date-time
-        updated_before:
-          title: Updated Before
-          type: string
-          description: "Includes only the parcels which have been updated in our system before your given time.\n\nYou can use the value of ISO 8601 DateTime string like this:\n - 2018-02-26T11:01:47.505309+00:00\n - 2018-02-26T11:01:47\n - 2018-02-26\n\nNote: the default timezone is UTC\n"
-          format: date-time
-        announced_after:
-          title: Announced After
-          type: string
-          description: "Includes only the parcels which have been announced in our system after your given time.\n\nYou can use the value of ISO 8601 DateTime string like this:\n - 2018-02-26T11:01:47.505309+00:00\n - 2018-02-26T11:01:47\n - 2018-02-26\n\nNote: the default timezone is UTC\n"
-          format: date-time
-        announced_before:
-          title: Announced Before
-          type: string
-          description: "Includes only the parcels which have been announced in our system before your given time.\n\nYou can use the value of ISO 8601 DateTime string like this:\n - 2018-02-26T11:01:47.505309+00:00\n - 2018-02-26T11:01:47\n - 2018-02-26\n\nNote: the default timezone is UTC\n"
-          format: date-time
-      description: A parcels report filter
-    ParcelDirections:
-      type: string
-      title: Parcel Directions
-      enum:
-      - incoming
-      - outgoing
-      description: The direction of the parcel
-      example: outgoing
     Error:
       title: Error
       type: object
@@ -243,25 +165,6 @@ components:
       - loc
       - msg
       - type
-    ReportStatus:
-      title: Report Status
-      enum:
-      - queued
-      - generating
-      - ready
-      - failed
-      - expired
-      type: string
-      description: The report status
-    HTTPError:
-      title: HTTP Error Object
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     ParcelsReport:
       title: Parcels Report Object
       type: object
@@ -329,6 +232,103 @@ components:
       required:
       - filters
       - fields
+    ParcelsReportFields:
+      title: Parcel Report Fields
+      enum:
+      - parcel_id
+      - direction
+      - carrier_code
+      - carrier_name
+      - from_company_name
+      - contract_id
+      - contract_type
+      - origin_city
+      - origin_postal_code
+      - origin_country_code
+      - origin_country_name
+      - destination_city
+      - destination_postal_code
+      - destination_country_code
+      - destination_country_name
+      - order_number
+      - tracking_number
+      - created_at
+      - updated_at
+      - announced_at
+      - shipped_at
+      - first_delivery_at
+      - arrived_at
+      - shipping_method
+      - shipping_method_name
+      - price
+      - global_status_slug
+      - carrier_status
+      - integration_id
+      - integration_type
+      - weight
+      type: string
+      description: The parcel fields to include for the report
+    ParcelDirections:
+      type: string
+      title: Parcel Directions
+      enum:
+      - incoming
+      - outgoing
+      description: The direction of the parcel
+      example: outgoing
+    ReportStatus:
+      title: Report Status
+      enum:
+      - queued
+      - generating
+      - ready
+      - failed
+      - expired
+      type: string
+      description: The report status
+    HTTPError:
+      title: HTTP Error Object
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    ParcelsReportFilter:
+      title: Parcels Report Filters Object
+      type: object
+      properties:
+        direction:
+          allOf:
+          - $ref: '#/components/schemas/ParcelDirections'
+          description: Includes only the parcels that are sent (`outgoing`) or returned (`incoming`).
+        integration_id:
+          type: integer
+          title: Integration Id
+          description: Includes only the parcels created by the shop integration with the provided id.
+          minimum: 1
+        updated_after:
+          title: Updated After
+          type: string
+          description: "Includes only the parcels which have been updated in our system after your given time.\n\nYou can use the value of ISO 8601 DateTime string like this:\n - 2018-02-26T11:01:47.505309+00:00\n - 2018-02-26T11:01:47\n - 2018-02-26\n\nNote: the default timezone is UTC\n"
+          format: date-time
+        updated_before:
+          title: Updated Before
+          type: string
+          description: "Includes only the parcels which have been updated in our system before your given time.\n\nYou can use the value of ISO 8601 DateTime string like this:\n - 2018-02-26T11:01:47.505309+00:00\n - 2018-02-26T11:01:47\n - 2018-02-26\n\nNote: the default timezone is UTC\n"
+          format: date-time
+        announced_after:
+          title: Announced After
+          type: string
+          description: "Includes only the parcels which have been announced in our system after your given time.\n\nYou can use the value of ISO 8601 DateTime string like this:\n - 2018-02-26T11:01:47.505309+00:00\n - 2018-02-26T11:01:47\n - 2018-02-26\n\nNote: the default timezone is UTC\n"
+          format: date-time
+        announced_before:
+          title: Announced Before
+          type: string
+          description: "Includes only the parcels which have been announced in our system before your given time.\n\nYou can use the value of ISO 8601 DateTime string like this:\n - 2018-02-26T11:01:47.505309+00:00\n - 2018-02-26T11:01:47\n - 2018-02-26\n\nNote: the default timezone is UTC\n"
+          format: date-time
+      description: A parcels report filter
     ParcelsReportRequest:
       title: Parcels Report Request Object
       required:

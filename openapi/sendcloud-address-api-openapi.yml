@@ -108,128 +108,6 @@ paths:
               $ref: '#/components/schemas/address-washer-request'
 components:
   schemas:
-    address-validation-method-enum:
-      title: Address validation method enum
-      type: string
-      enum:
-      - here
-    raw-address:
-      title: Raw address
-      type: object
-      description: Raw address object
-      properties:
-        address_line_1:
-          type: string
-          example: Stadhuisplein
-          description: First line of the address
-        house_number:
-          type: string
-          example: '50'
-          description: House number of the address
-        address_line_2:
-          type: string
-          description: Additional address information, e.g. 2nd level
-          example: Apartment 17B
-        postal_code:
-          type: string
-          example: 1013 AB
-          description: Zip code of the address
-          minLength: 1
-        city:
-          type: string
-          example: Eindhoven
-          description: City of the address
-          minLength: 1
-        po_box:
-          type:
-          - string
-          - 'null'
-          description: Code required in case of PO Box or post locker delivery
-        state_province_code:
-          type: string
-          example: IT-RM
-          description: The character state code of the customer represented as ISO 3166-2 code. This field is required for certain countries. See [international shipping](/docs/shipments/international-shipping#required-fields-for-international-shipments) for details.
-        country_code:
-          type: string
-          example: NL
-          description: The country code of the customer represented as ISO 3166-1 alpha-2
-          minLength: 1
-    errors:
-      title: Errors
-      description: A standardized format for errors in [JSON:API](https://jsonapi.org/format/#error-objects) responses.
-      type: array
-      items:
-        allOf:
-        - $ref: '#/components/schemas/ErrorObject'
-        - required:
-          - status
-          - code
-          - detail
-    address-washer-response:
-      title: Address Washer Response
-      description: Address Washer Response object model
-      type: object
-      properties:
-        input_address_is_valid:
-          type: boolean
-          description: Indicates if the input address is valid.
-        results:
-          description: The results of the address validation.
-          type: array
-          items:
-            type: object
-            properties:
-              address:
-                $ref: '#/components/schemas/raw-address'
-              recommended:
-                type: boolean
-                description: Indicates if the address is recommended after validation.
-              analysis:
-                type: object
-                description: Analysis details of the address validation.
-                properties:
-                  validation_result:
-                    type: object
-                    description: The result of the validation process.
-                    properties:
-                      is_valid:
-                        type: boolean
-                        description: Indicates if the address is valid.
-                      reasons:
-                        type: array
-                        description: List of reasons for the validation result.
-                        items:
-                          type: string
-                          oneOf:
-                          - const: ADDRESS_TOO_LONG
-                            title: address_lines:too_long
-                            description: The address line exceeds the maximum length.
-                          - const: HOUSE_NUMBER_TOO_LONG
-                            title: house_number:too_long
-                            description: The house number exceeds the maximum length.
-                          - const: HOUSE_NUMBER_TOO_SHORT
-                            title: house_number:too_short
-                            description: The house number is too short.
-                          - const: ADDRESS_NOT_VALID
-                            title: address:does_not_exist
-                            description: The address does not exist.
-                          - const: COUNTRY_CODE_MISSING
-                            title: country_code:missing
-                            description: The country code is missing.
-                          - const: POSTAL_CODE_MISSING
-                            title: postal_code:missing
-                            description: The postal code is missing.
-                          - const: STATE_MISSING
-                            title: state:missing
-                            description: The state is missing.
-                          - const: PROVINCE_MISSING
-                            title: province:missing
-                            description: The province is missing.
-                  changed_attributes:
-                    type: array
-                    description: List of changed attributes.
-                    items:
-                      type: string
     address-washer-request:
       title: Address Washer Request
       description: Address Washer Request object model
@@ -317,6 +195,128 @@ components:
         meta:
           type: object
           description: Additional metadata about the error.
+    address-validation-method-enum:
+      title: Address validation method enum
+      type: string
+      enum:
+      - here
+    address-washer-response:
+      title: Address Washer Response
+      description: Address Washer Response object model
+      type: object
+      properties:
+        input_address_is_valid:
+          type: boolean
+          description: Indicates if the input address is valid.
+        results:
+          description: The results of the address validation.
+          type: array
+          items:
+            type: object
+            properties:
+              address:
+                $ref: '#/components/schemas/raw-address'
+              recommended:
+                type: boolean
+                description: Indicates if the address is recommended after validation.
+              analysis:
+                type: object
+                description: Analysis details of the address validation.
+                properties:
+                  validation_result:
+                    type: object
+                    description: The result of the validation process.
+                    properties:
+                      is_valid:
+                        type: boolean
+                        description: Indicates if the address is valid.
+                      reasons:
+                        type: array
+                        description: List of reasons for the validation result.
+                        items:
+                          type: string
+                          oneOf:
+                          - const: ADDRESS_TOO_LONG
+                            title: address_lines:too_long
+                            description: The address line exceeds the maximum length.
+                          - const: HOUSE_NUMBER_TOO_LONG
+                            title: house_number:too_long
+                            description: The house number exceeds the maximum length.
+                          - const: HOUSE_NUMBER_TOO_SHORT
+                            title: house_number:too_short
+                            description: The house number is too short.
+                          - const: ADDRESS_NOT_VALID
+                            title: address:does_not_exist
+                            description: The address does not exist.
+                          - const: COUNTRY_CODE_MISSING
+                            title: country_code:missing
+                            description: The country code is missing.
+                          - const: POSTAL_CODE_MISSING
+                            title: postal_code:missing
+                            description: The postal code is missing.
+                          - const: STATE_MISSING
+                            title: state:missing
+                            description: The state is missing.
+                          - const: PROVINCE_MISSING
+                            title: province:missing
+                            description: The province is missing.
+                  changed_attributes:
+                    type: array
+                    description: List of changed attributes.
+                    items:
+                      type: string
+    errors:
+      title: Errors
+      description: A standardized format for errors in [JSON:API](https://jsonapi.org/format/#error-objects) responses.
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/ErrorObject'
+        - required:
+          - status
+          - code
+          - detail
+    raw-address:
+      title: Raw address
+      type: object
+      description: Raw address object
+      properties:
+        address_line_1:
+          type: string
+          example: Stadhuisplein
+          description: First line of the address
+        house_number:
+          type: string
+          example: '50'
+          description: House number of the address
+        address_line_2:
+          type: string
+          description: Additional address information, e.g. 2nd level
+          example: Apartment 17B
+        postal_code:
+          type: string
+          example: 1013 AB
+          description: Zip code of the address
+          minLength: 1
+        city:
+          type: string
+          example: Eindhoven
+          description: City of the address
+          minLength: 1
+        po_box:
+          type:
+          - string
+          - 'null'
+          description: Code required in case of PO Box or post locker delivery
+        state_province_code:
+          type: string
+          example: IT-RM
+          description: The character state code of the customer represented as ISO 3166-2 code. This field is required for certain countries. See [international shipping](/docs/shipments/international-shipping#required-fields-for-international-shipments) for details.
+        country_code:
+          type: string
+          example: NL
+          description: The country code of the customer represented as ISO 3166-1 alpha-2
+          minLength: 1
   securitySchemes:
     HTTPBasicAuth:
       type: http

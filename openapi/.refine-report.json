@@ -47,9 +47,7 @@
     "sendcloud-service-points-api-openapi.yml",
     "sendcloud-ship-an-order-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -78,8 +76,7 @@
     "tag 'Shipments' spans 2 source specs (sendcloud-shipments-openapi.yml, sendcloud-v2-integrations-openapi.yml): per-path servers applied",
     "tag 'Parcels' spans 2 source specs (sendcloud-v2-analytics-openapi.yml, sendcloud-v2-parcels-openapi.yml): per-path servers applied",
     "tag 'Integrations' spans 2 source specs (sendcloud-v2-integrations-openapi.yml, sendcloud-v3-integrations-openapi.yml): per-path servers applied",
-    "superseded outputs removed: sendcloud-o-auth2-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 26 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "_original/sendcloud-v3-webhooks-openapi.yml: archived document superseded by a larger archived document",
@@ -95,7 +92,7 @@
     "sendcloud-integrations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "sendcloud-label-download-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "sendcloud-labels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "sendcloud-o-auth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sendcloud-oauth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "sendcloud-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "sendcloud-parcel-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "sendcloud-parcel-tracking-api-openapi.yml: previously refined output, superseded by openapi/_original/",
