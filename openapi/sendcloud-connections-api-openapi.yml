@@ -390,23 +390,25 @@ components:
         meta:
           type: object
           description: Additional metadata about the error.
-    errors:
-      title: Errors
+    connection-update-request:
+      title: Update Connection request
+      description: Request body for updating an existing connection. All fields are optional.
       type: object
-      description: A standardized format for errors in JSON:API responses.
       properties:
-        errors:
-          type:
-          - array
-          - object
-          items:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/ErrorObject'
-            required:
-            - status
-            - code
-            - detail
+        type:
+          type: string
+          description: The type of connection.
+          enum:
+          - webhook
+          - klaviyo
+        configuration:
+          type: object
+          description: 'The configuration for the connection. The shape depends on the connection type.
+
+
+            For `webhook` connections, see the webhook configuration fields.
+
+            For `klaviyo` connections, configuration can be an empty object as credentials are managed via OAuth2.'
     connection:
       title: Connection
       description: A connection defines an external endpoint where event notifications are delivered.
@@ -456,25 +458,23 @@ components:
             For `webhook` connections, see the webhook configuration fields.
 
             For `klaviyo` connections, configuration can be an empty object as credentials are managed via OAuth2.'
-    connection-update-request:
-      title: Update Connection request
-      description: Request body for updating an existing connection. All fields are optional.
+    errors:
+      title: Errors
       type: object
+      description: A standardized format for errors in JSON:API responses.
       properties:
-        type:
-          type: string
-          description: The type of connection.
-          enum:
-          - webhook
-          - klaviyo
-        configuration:
-          type: object
-          description: 'The configuration for the connection. The shape depends on the connection type.
-
-
-            For `webhook` connections, see the webhook configuration fields.
-
-            For `klaviyo` connections, configuration can be an empty object as credentials are managed via OAuth2.'
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
   securitySchemes:
     HTTPBasicAuth:
       type: http

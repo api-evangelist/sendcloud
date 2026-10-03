@@ -212,6 +212,15 @@ paths:
         description: first delivery end date
 components:
   schemas:
+    Errors:
+      title: Errors Object
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
     ShippingMethodTransitTime:
       type: object
       title: User Shipping Method Transit Times Object
@@ -301,15 +310,6 @@ components:
             - transit_time
       required:
       - transit_times
-    Errors:
-      title: Errors Object
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
     ErrorItem:
       title: Error Item Object
       type: object

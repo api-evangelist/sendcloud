@@ -361,6 +361,37 @@ components:
           type: boolean
           description: Whether the subscription should be active immediately. Defaults to `true`.
           default: true
+    subscription:
+      title: Subscription
+      description: A subscription routes a specific event type to a connection for delivery.
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          minimum: 1
+          description: Unique identifier of the subscription.
+        connection_id:
+          type: integer
+          format: int64
+          minimum: 1
+          description: The identifier of the connection this subscription delivers events to.
+        event_type:
+          type: string
+          description: The type of event this subscription listens for.
+          enum:
+          - parcels.event.created
+        is_active:
+          type: boolean
+          description: Whether the subscription is currently active and delivering events.
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time when the subscription was created, in ISO 8601 format.
+        updated_at:
+          type: string
+          format: date-time
+          description: The date and time when the subscription was last updated, in ISO 8601 format.
     subscription-update-request:
       title: Update Subscription request
       description: Request body for updating an existing subscription. All fields are optional.
@@ -396,37 +427,6 @@ components:
             - status
             - code
             - detail
-    subscription:
-      title: Subscription
-      description: A subscription routes a specific event type to a connection for delivery.
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          minimum: 1
-          description: Unique identifier of the subscription.
-        connection_id:
-          type: integer
-          format: int64
-          minimum: 1
-          description: The identifier of the connection this subscription delivers events to.
-        event_type:
-          type: string
-          description: The type of event this subscription listens for.
-          enum:
-          - parcels.event.created
-        is_active:
-          type: boolean
-          description: Whether the subscription is currently active and delivering events.
-        created_at:
-          type: string
-          format: date-time
-          description: The date and time when the subscription was created, in ISO 8601 format.
-        updated_at:
-          type: string
-          format: date-time
-          description: The date and time when the subscription was last updated, in ISO 8601 format.
   securitySchemes:
     HTTPBasicAuth:
       type: http

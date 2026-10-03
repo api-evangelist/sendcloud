@@ -114,28 +114,17 @@ components:
       description: Unique parcel identifier
       required: true
       example: 1
+  responses:
+    error_404_not_found:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            example: {}
+          example: {}
   schemas:
-    LabelMultipleResponse:
-      title: Multi-Label response
-      description: Response for multiple labels in bulk
-      properties:
-        label:
-          type: object
-          title: Label object
-          description: Label
-          properties:
-            normal_printer:
-              title: URLs of labels documents in PDF format for normal printers for each position of an A4 size page
-              type: array
-              minLength: 4
-              maxLength: 4
-              items:
-                type: string
-                example: https://panel.sendcloud.sc/api/v2/label/normal_printer/1234?start_from=0
-            label_printer:
-              title: URL of label document in PDF format for label printers
-              type: string
-              example: https://panel.sendcloud.sc/api/v2/label/label_printer/1234?hash=bbfd669ee9ebb19408b85b33d
     LabelSingleResponse:
       title: Single Label response
       properties:
@@ -166,16 +155,27 @@ components:
               title: Normal printer PDF url
               description: URL that links to the customs documentation associated with the label in PDF format
           example: {}
-  responses:
-    error_404_not_found:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            description: ''
-            type: object
-            example: {}
-          example: {}
+    LabelMultipleResponse:
+      title: Multi-Label response
+      description: Response for multiple labels in bulk
+      properties:
+        label:
+          type: object
+          title: Label object
+          description: Label
+          properties:
+            normal_printer:
+              title: URLs of labels documents in PDF format for normal printers for each position of an A4 size page
+              type: array
+              minLength: 4
+              maxLength: 4
+              items:
+                type: string
+                example: https://panel.sendcloud.sc/api/v2/label/normal_printer/1234?start_from=0
+            label_printer:
+              title: URL of label document in PDF format for label printers
+              type: string
+              example: https://panel.sendcloud.sc/api/v2/label/label_printer/1234?hash=bbfd669ee9ebb19408b85b33d
   securitySchemes:
     HTTPBasicAuth:
       type: http

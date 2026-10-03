@@ -235,6 +235,30 @@ components:
 
 
         **Note:** If a label is requested as native ZPL from the carrier it can''t be converted to another format and will always be returned in ZPL.'
+    id:
+      name: id
+      in: path
+      schema:
+        type: integer
+        example: 1
+        minimum: 1
+      description: Identifier of the parcel which you want to retrieve a document from
+      required: true
+    parcels:
+      name: parcels
+      in: query
+      required: true
+      schema:
+        type: array
+        items:
+          type: integer
+        example:
+        - 1
+        - 2
+        - 3
+        maxItems: 20
+        minItems: 1
+      description: Parcels for which you want to retrieve the documents
     paper-size:
       in: query
       name: paper_size
@@ -258,18 +282,6 @@ components:
         - A5
         - A6
         example: A4
-    type:
-      name: type
-      in: path
-      schema:
-        type: string
-        example: customs-declaration
-        enum:
-        - label
-        - customs-declaration
-        - air-waybill
-      description: Document type you want to retrieve.
-      required: true
     dpi:
       name: dpi
       in: query
@@ -303,29 +315,17 @@ components:
         ZPL labels are not affected by the DPI setting, as the resolution is determined by the carrier itself. Most carriers use a resolution of 203 DPI. Zebra printers need to be configured to print at the specific DPI of the label if they have higher resolution capabilities.
 
         '
-    parcels:
-      name: parcels
-      in: query
-      required: true
-      schema:
-        type: array
-        items:
-          type: integer
-        example:
-        - 1
-        - 2
-        - 3
-        maxItems: 20
-        minItems: 1
-      description: Parcels for which you want to retrieve the documents
-    id:
-      name: id
+    type:
+      name: type
       in: path
       schema:
-        type: integer
-        example: 1
-        minimum: 1
-      description: Identifier of the parcel which you want to retrieve a document from
+        type: string
+        example: customs-declaration
+        enum:
+        - label
+        - customs-declaration
+        - air-waybill
+      description: Document type you want to retrieve.
       required: true
   securitySchemes:
     HTTPBasicAuth:

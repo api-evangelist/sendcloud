@@ -79,37 +79,6 @@ paths:
                 $ref: '#/components/schemas/errors'
 components:
   schemas:
-    errors:
-      title: Errors
-      type: object
-      description: A standardized format for errors in JSON:API responses.
-      properties:
-        errors:
-          type:
-          - array
-          - object
-          items:
-            type: object
-            allOf:
-            - $ref: '#/components/schemas/ErrorObject'
-            required:
-            - status
-            - code
-            - detail
-    broadcast-result:
-      title: Broadcast Result
-      description: The result of a test event broadcast to a subscription's connection endpoint.
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the test event was successfully delivered.
-        status_code:
-          type: integer
-          description: The HTTP status code returned by the connection endpoint.
-        response_body:
-          type: string
-          description: The response body returned by the connection endpoint.
     ErrorObject:
       title: Error
       type: object
@@ -172,6 +141,37 @@ components:
         meta:
           type: object
           description: Additional metadata about the error.
+    broadcast-result:
+      title: Broadcast Result
+      description: The result of a test event broadcast to a subscription's connection endpoint.
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the test event was successfully delivered.
+        status_code:
+          type: integer
+          description: The HTTP status code returned by the connection endpoint.
+        response_body:
+          type: string
+          description: The response body returned by the connection endpoint.
+    errors:
+      title: Errors
+      type: object
+      description: A standardized format for errors in JSON:API responses.
+      properties:
+        errors:
+          type:
+          - array
+          - object
+          items:
+            type: object
+            allOf:
+            - $ref: '#/components/schemas/ErrorObject'
+            required:
+            - status
+            - code
+            - detail
   securitySchemes:
     HTTPBasicAuth:
       type: http
