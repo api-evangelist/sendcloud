@@ -104,26 +104,6 @@ paths:
         '404':
           $ref: '#/components/responses/error_404_not_found'
 components:
-  parameters:
-    path-parcel-id:
-      schema:
-        type: integer
-        minimum: 1
-      name: parcel_id
-      in: path
-      description: Unique parcel identifier
-      required: true
-      example: 1
-  responses:
-    error_404_not_found:
-      description: Not found
-      content:
-        application/json:
-          schema:
-            description: ''
-            type: object
-            example: {}
-          example: {}
   schemas:
     LabelSingleResponse:
       title: Single Label response
@@ -176,6 +156,26 @@ components:
               title: URL of label document in PDF format for label printers
               type: string
               example: https://panel.sendcloud.sc/api/v2/label/label_printer/1234?hash=bbfd669ee9ebb19408b85b33d
+  parameters:
+    path-parcel-id:
+      schema:
+        type: integer
+        minimum: 1
+      name: parcel_id
+      in: path
+      description: Unique parcel identifier
+      required: true
+      example: 1
+  responses:
+    error_404_not_found:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            example: {}
+          example: {}
   securitySchemes:
     HTTPBasicAuth:
       type: http

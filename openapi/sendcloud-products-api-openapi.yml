@@ -298,81 +298,6 @@ paths:
       security: []
 components:
   schemas:
-    Errors:
-      title: Errors Object
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-    Buckets:
-      type: object
-      title: Analytics Buckets Object
-      description: Parcel/Products data grouped into buckets.
-      properties:
-        buckets:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-                description: bucket key
-              value:
-                type: integer
-                minimum: 0
-                description: Number of parcels/products in bucket
-              percentage:
-                type: number
-                minimum: 0
-                description: Percent of all parcels/products this bucket has
-              missing_data:
-                type: array
-                description: Periods when data is missing
-                items:
-                  type: object
-                  properties:
-                    start_date:
-                      type: string
-                      format: date
-                    end_date:
-                      type: string
-                      format: date
-                    reason_code:
-                      type: string
-                      enum:
-                      - missing-grouping-property
-                      - missing-filter-property
-                      - not-available
-                      - partly-available
-            required:
-            - key
-            - value
-            - percentage
-            - missing_data
-      required:
-      - buckets
-    ErrorItem:
-      title: Error Item Object
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            type: string
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
-      required:
-      - loc
-      - msg
-      - type
     Series:
       type: object
       title: Analytics Series Object
@@ -420,6 +345,81 @@ components:
             - missing_data
       required:
       - series
+    Buckets:
+      type: object
+      title: Analytics Buckets Object
+      description: Parcel/Products data grouped into buckets.
+      properties:
+        buckets:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: bucket key
+              value:
+                type: integer
+                minimum: 0
+                description: Number of parcels/products in bucket
+              percentage:
+                type: number
+                minimum: 0
+                description: Percent of all parcels/products this bucket has
+              missing_data:
+                type: array
+                description: Periods when data is missing
+                items:
+                  type: object
+                  properties:
+                    start_date:
+                      type: string
+                      format: date
+                    end_date:
+                      type: string
+                      format: date
+                    reason_code:
+                      type: string
+                      enum:
+                      - missing-grouping-property
+                      - missing-filter-property
+                      - not-available
+                      - partly-available
+            required:
+            - key
+            - value
+            - percentage
+            - missing_data
+      required:
+      - buckets
+    Errors:
+      title: Errors Object
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    ErrorItem:
+      title: Error Item Object
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            type: string
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+      required:
+      - loc
+      - msg
+      - type
   securitySchemes:
     HTTPBasicAuth:
       type: http

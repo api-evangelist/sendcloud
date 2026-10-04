@@ -1197,15 +1197,6 @@ paths:
       description: Sendcloud Production
 components:
   schemas:
-    Errors:
-      title: Errors Object
-      type: object
-      properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
     Series:
       type: object
       title: Analytics Series Object
@@ -1253,6 +1244,37 @@ components:
             - missing_data
       required:
       - series
+    Summary:
+      type: object
+      title: Analytics Summary Object
+      description: Summary value for the selected last number of days
+      properties:
+        summary:
+          type: array
+          items:
+            type: object
+            description: Shows number of parcels for selected number of last days
+            properties:
+              last_days:
+                type: integer
+                minimum: 0
+              value:
+                type: integer
+                minimum: 0
+            required:
+            - last_days
+            - value
+      required:
+      - summary
+    Errors:
+      title: Errors Object
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
     Buckets:
       type: object
       title: Analytics Buckets Object
@@ -1300,28 +1322,6 @@ components:
             - missing_data
       required:
       - buckets
-    Summary:
-      type: object
-      title: Analytics Summary Object
-      description: Summary value for the selected last number of days
-      properties:
-        summary:
-          type: array
-          items:
-            type: object
-            description: Shows number of parcels for selected number of last days
-            properties:
-              last_days:
-                type: integer
-                minimum: 0
-              value:
-                type: integer
-                minimum: 0
-            required:
-            - last_days
-            - value
-      required:
-      - summary
     ErrorItem:
       title: Error Item Object
       type: object
@@ -1341,30 +1341,174 @@ components:
       - loc
       - msg
       - type
-    Country:
-      title: Country Object
-      description: Country object for a parcel
+    ParcelResponseShort:
+      description: Parcel object model
       type: object
+      title: Parcel Object
       properties:
-        iso_2:
+        address:
           type: string
-        iso_3:
+        address_2:
           type: string
+          description: 'An apartment or floor number that has been extracted from general address input.
+
+            '
+        address_divided:
+          $ref: '#/components/schemas/AddressDivided'
+        carrier:
+          type: object
+          properties:
+            code:
+              $ref: '#/components/schemas/carrier'
+        city:
+          type: string
+        company_name:
+          type: string
+        contract:
+          type: integer
+          minimum: 1
+          description: Id of the contract that was used to create the parcel.
+          nullable: true
+        country:
+          $ref: '#/components/schemas/Country'
+        customs_invoice_nr:
+          type: string
+          description: Customs invoice number
+        customs_shipment_type:
+          type: integer
+          description: "Customs shipment type. Deprecated in favor of the `customs_information` object. \n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          nullable: true
+          deprecated: true
+        data:
+          type: object
+        date_created:
+          type: string
+        date_updated:
+          type: string
+        date_announced:
+          type: string
+        email:
+          type: string
+          description: An email address of the person this parcel is supposed to be delivered to.
+        id:
+          type: integer
+        insured_value:
+          type: integer
+        label:
+          $ref: '#/components/schemas/Label'
         name:
           type: string
-    CancelParcelStatus:
-      title: Cancel Parcel Status Object
-      type: object
-      properties:
+        order_number:
+          type: string
+        shipment_uuid:
+          type: string
+        parcel_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/parcel-item'
+        postal_code:
+          type: string
+        external_reference:
+          type: string
+          nullable: true
+          description: A reference to be assigned to this parcel. Must be unique across parcels. This field is used to create idempotence.
+        reference:
+          type: string
+          nullable: true
+          description: A reference to be assigned to this parcel. Multiple parcels can have the same reference.
+          default: '0'
+        shipment:
+          $ref: '#/components/schemas/Shipment'
         status:
+          $ref: '#/components/schemas/Status'
+        documents:
+          type: array
+          uniqueItems: true
+          description: An array of documents. A parcel can contain multiple documents, for instance labels and a customs form. This field returns an array of all the available documents for this parcel.
+          items:
+            $ref: '#/components/schemas/Documents'
+        telephone:
           type: string
-          minLength: 1
-        message:
+        to_service_point:
           type: string
-          minLength: 1
+          description: An id of service point to which the shipment is going to be shipped.
+        to_state:
+          type: string
+          description: 'Represents the state or province of a country. Countries that need a state are USA, Canada, Italy and Australia. e.g. America’s city of Los Angeles belongs to the California state: CA. Shipments to Italy need a province. e.g. Italy’s city of Rome belongs to Roma province: RM.'
+        total_insured_value:
+          type: integer
+        total_order_value_currency:
+          type: string
+        total_order_value:
+          type: string
+        tracking_number:
+          type: string
+          description: Tracking number of the shipment.
+        tracking_url:
+          type: string
+          description: tracking url of this shipment.
+        weight:
+          type: string
+        type:
+          type: string
+          description: Returns either ‘parcel’ or ‘letter’ by which you can determine the type of your shipment.
+          enum:
+          - parcel
+          - letter
+          deprecated: true
+          nullable: true
+        colli_uuid:
+          type: string
+        collo_nr:
+          type: integer
+          description: A number indicating the collo number within a shipment. For a non-multi-collo shipment, this value will always be 0. In a multi-collo shipment with 3 collos, this number will range from 0 to 2.
+        collo_count:
+          type: integer
+          description: A number indicating the number of collos within a shipment. For non-multi-collo shipments, this value will always be 1.
+        is_return:
+          type: boolean
+          description: Indicates if the parcel correspond to a return.
+        awb_tracking_number:
+          type: string
+          description: Deutsche Post Global Mail only. This indicates the air waybill number of this box of Global Mail parcels. This will be only set once Finalize box has been called.
+          nullable: true
+        box_number:
+          type: integer
+          description: Deutsche Post Global Mail only. This indicates the box to which this parcel belongs. This will be only set for Global Mail parcels.
+          nullable: true
+        length:
+          type: string
+          description: 'Parcel length in centimeters (will be used for volumetric weight calculation). Examples: “48” or “52.3”'
+          nullable: true
+        width:
+          type: string
+          description: 'Parcel width in centimeters (will be used for volumetric weight calculation). Examples: “48” or “52.3”'
+          nullable: true
+        height:
+          type: string
+          description: 'Parcel height in centimeters (will be used for volumetric weight calculation). Examples: “48” or “52.3”'
+          nullable: true
+        shipping_method_checkout_name:
+          type: string
+          description: Shipping method name selected by buyer during the checkout
+        customs_declaration:
+          type: object
+          deprecated: true
+          description: An object with available printers that lists available links to the created customs declaration form. (deprecated in favour of documents).
+        note:
+          type: string
+          description: This field can be used to add additional notes regarding an order. The notes will not be displayed on a label, but will be displayed on both the Packing slips & Picking lists which you can use for Pack & Go feature. The value will not be shared with carriers. It may be used for packing instructions, such as "gift" or "do not send before monday".
+          nullable: true
+        errors:
+          $ref: '#/components/schemas/CarrierErrors'
       required:
-      - status
-      - message
+      - id
     Documents:
       title: Documents Object
       type: object
@@ -1385,6 +1529,531 @@ components:
           type: string
           description: "A link to the document, which allows downloading of the document in PDF, PNG, and ZPL. Learn more about the [endpoint](/api/v2/integrations/retrieve-a-list-of-shipments).\n \nSend a GET request to https://panel.sendcloud.sc/api/v2/parcels/{parcelID}/documents/label using your parcel ID.\n\nYou can pick the resolution in the parameters of the request. The default value is 203 dpi."
       description: Documents object for a parcel
+    Shipment:
+      title: Shipment Object
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of shipping method
+        name:
+          type: string
+          description: Name of shipping method
+      required:
+      - id
+      description: Shipping method object for a parcel
+    AddressDivided:
+      title: Address Divided Object
+      type: object
+      properties:
+        house_number:
+          type: string
+        street:
+          type: string
+      description: Address_divided object for a parcel
+    carrier:
+      type: string
+      title: Carrier Code
+      enum:
+      - amazon
+      - bol
+      - bpost
+      - brt
+      - budbee
+      - chronopost
+      - cirro
+      - colisprive
+      - colissimo
+      - correos
+      - correos_express
+      - ctt_express
+      - dbschenker
+      - delivengo
+      - dhl
+      - dhl_2_man_handling
+      - dhl_de
+      - dhl_ecommerce
+      - dhl_express
+      - dhl_parcel_gb
+      - dhl_parcel_iberia
+      - dp
+      - dpd
+      - dpd_at
+      - dpd_fr
+      - dpd_gb
+      - dpd_local
+      - evri_international
+      - fadello
+      - fairsenden
+      - fedex
+      - fedexcrossborder
+      - fietskoeriers
+      - geodis
+      - glovo
+      - gls_de
+      - gls_es
+      - gls_eu
+      - gls_it
+      - gls_nl
+      - hermes_at
+      - hermes_c2c_gb
+      - hermes_de
+      - hermes_gb
+      - hived
+      - homerr
+      - hurby
+      - inpost_es
+      - inpost_gb
+      - inpost_it
+      - inpost_pl
+      - lettresuivie
+      - mhi
+      - mondial_relay
+      - mrw
+      - nacex
+      - paack
+      - parcelforce
+      - plx
+      - postat
+      - poste_italiane
+      - poste_it_delivery
+      - postnl
+      - postnl_fulfilment
+      - postnl_large
+      - postnord
+      - rjp
+      - rjpv2
+      - royal_mail
+      - sandd
+      - sendcloud
+      - seur
+      - skymail
+      - spring
+      - storeshippers
+      - tipsa
+      - tnt_it
+      - transforce
+      - trunkrs
+      - ups
+      - van_straaten
+      - viatim
+      - yodel
+      description: A carrier represented by a Sendcloud code
+      example: postnl
+    Status:
+      title: Status Object
+      type: object
+      properties:
+        id:
+          type: integer
+        message:
+          type: string
+      description: Status object for a parcel
+    TaxNumber:
+      title: Tax Number Object
+      description: Identification numbers and codes used in different contexts. These identifiers are used for taxation, customs, business registration, and other purposes, depending on the country and the specific regulatory requirements. Depending on these requirements you may need to pass one or several numbers related to sender, receiver or importer of record provider. These numbers and codes will be included into final Customs documents.
+      type: object
+      properties:
+        name:
+          type: string
+          example: EORI
+          description: "Tax number abbreviation\n  * VAT - Value-Added Tax → VOEC number for Norway should be shared here as advised by the [Norwegian Tax Authorities](https://www.skatteetaten.no/globalassets/bedrift-og-organisasjon/voec/sending-and-marking-goods-through-postal-services-and-transporters.pdf)\n  * EIN - Employer Identification Number\n  * GST - Goods and Service Tax\n  * SSN - Social Security Number\n  * EORI - Economic Operators Registration and Identification for the European Union\n  * DUN - Data Universal Numbering System\n  * FED - Federal Tax ID\n  * STA - State Tax ID\n  * CNP - Brazil CNPJ/CPF Federal Tax\n  * IE - Brazil type IE/RG Federal Tax\n  * INN - Russia bank details section INN\n  * KPP - Russia bank details section KPP\n  * OGR - Russia bank details section OGRN\n  * OKP - Russia bank details section OKPO\n  * IOSS - SDT or Overseas Registered Supplier or Import One-Stop-Shop or GB VAT (foreign) registration or AUSid GST Registration or VAT on E-Commerce\n  * FTZ - Free Trade Zone ID\n  * DAN - Deferment Account Duties Only\n  * TAN - Deferment Account Tax Only\n  * DTF - Deferment Account Duties, Taxes and Fees Only\n  * RGP - EU Registered Exporters Registration ID\n  * DLI - Driver's License\n  * NID - National Identity Card - A PID (Personal Identification Number) should be provided as NID (National Identity Card).\n  * PAS - Passport\n  * MID - Manufacturer ID\n  * UKIMS - UK Internal Market Scheme -> customs clearance for shipping from Great Britain to Northern Ireland under the Windsor Framework, for more information see [Windsor Framework](https://www.gov.uk/government/publications/the-windsor-framework)\n"
+          enum:
+          - VAT
+          - EIN
+          - GST
+          - SSN
+          - EORI
+          - DUN
+          - FED
+          - STA
+          - CNP
+          - IE
+          - INN
+          - KPP
+          - OGR
+          - OKP
+          - IOSS
+          - FTZ
+          - DAN
+          - TAN
+          - DTF
+          - RGP
+          - DLI
+          - NID
+          - PAS
+          - MID
+          - UKIMS
+        country_code:
+          type: string
+          example: NL
+          description: Issuing country code (ISO 3166-1 alpha-2 code)
+          maxLength: 2
+        value:
+          type: string
+          example: NL123456789B01
+          description: Tax number itself
+          maxLength: 100
+      required:
+      - name
+      - country_code
+      - value
+    CreateParcelError:
+      description: Error returned during parcel creation
+      type: object
+      title: Parcel Creation Error Object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: Error code
+            message:
+              type: string
+              description: Concatenated to one string array of errors
+            request:
+              type: string
+              description: URL of the Sendcloud'd endpoint which returned an error
+    ParcelCustomsInformation:
+      title: ParcelCustomsInformation
+      type: object
+      description: Optional customs information that should be provided for international parcels. This information is used for generating customs documents.
+      example:
+        customs_invoice_nr: INV-123
+        customs_shipment_type: 2
+        export_type: private
+        invoice_date: '2023-08-24'
+        discount_granted: '14.99'
+        freight_costs: '4.65'
+        insurance_costs: '3.60'
+        other_costs: '1.20'
+        general_notes: 'Compliance: Goods comply with international safety standards (CE certified).'
+        additional_declaration_statements:
+        - With reference to the above shipment, I understate that the content is not made of leather parts of animal species protected by the Washington Convention.
+        - I solemnly declare that the contents of this document represent a true and accurate account of the events as they occurred. I acknowledge my responsibility for the information presented herein and understand that any misrepresentation or falsification may result in legal consequences or other penalties as applicable.
+        importer_of_record:
+          name: John Doe
+          company_name: ImporterCo
+          address_1: Maple Avenue
+          house_number: '123'
+          postal_code: '90210'
+          city: Springfield
+          country_code: US
+          country_state: US-MA
+          telephone: '+15551234567'
+          email: info@importer-of-record-example.com
+        tax_numbers:
+          sender:
+          - name: VAT
+            country_code: NL
+            value: NL123456789B01
+          - name: EORI
+            country_code: NL
+            value: NL123456789
+          receiver:
+          - name: EIN
+            country_code: US
+            value: '123456789'
+          importer_of_record:
+          - name: EIN
+            country_code: US
+            value: '987654321'
+        return_data:
+          return_postal_code: 1111 AA
+          outbound_tracking_number: JT1234567890
+          outbound_shipment_date: '2023-08-14'
+          outbound_carrier_name: UPS
+      properties:
+        customs_invoice_nr:
+          type: string
+          description: Customs invoice number
+          example: INV-123
+        customs_shipment_type:
+          type: integer
+          description: "Customs shipment type\n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          example: 2
+        export_type:
+          type: string
+          description: 'Export type documentation serves to categorize international shipments into three primary classifications: Private exports, intended for personal use; Commercial B2C exports, directed towards individual consumers; and Commercial B2B exports, involving business-to-business transactions. These distinctions facilitate adherence to regulatory requirements and ensure the orderly movement of goods across international boundaries.'
+          enum:
+          - private
+          - commercial_b2c
+          - commercial_b2b
+          default: commercial_b2c
+          example: private
+        invoice_date:
+          type: string
+          format: date
+          description: The date when the commercial invoice for the goods was issued (ISO 8601). If not provided, the announcement date will be used by default.
+        discount_granted:
+          type: string
+          description: Shipper's granted discount amount to user.
+          example: '14.99'
+        freight_costs:
+          type: string
+          description: Charges associated with the transportation of the goods to their destination paid by the receiver.
+          example: '4.65'
+        insurance_costs:
+          type: string
+          description: The costs of insurance coverage for the goods during transit paid by the receiver.
+          example: '3.60'
+        other_costs:
+          type: string
+          description: Additional costs or charges associated with the shipment that are not covered by freight and insurance paid by the receiver.
+          example: '1.20'
+        general_notes:
+          type: string
+          description: Exporter or shipper can include any additional information or special instructions related to the goods being shipped. This section is used to provide details that may not be covered in other parts of the invoice but are relevant for customs clearance.
+          maxLength: 500
+          example: 'Compliance: Goods comply with international safety standards (CE certified).'
+        additional_declaration_statements:
+          type: array
+          description: List of additional declaration statements. Each statement may contain specific details about the nature of the goods being shipped, their origin, or any additional information required by customs authorities. The content of an additional declaration statement can vary based on the requirements of the importing and exporting countries, as well as the nature of the goods being transported.
+          maxItems: 100
+          items:
+            type: string
+            example: With reference to the above shipment, I understate that the content is not made of leather parts of animal species protected by the Washington Convention.
+            maxLength: 1024
+        importer_of_record:
+          type: object
+          description: 'Importer of Record (IOR) information.
+
+
+            A customs-connected record importer specializes in importing goods and managing the associated customs documentation. If not provided, the receiver''s address will be used instead.'
+          properties:
+            name:
+              type: string
+              description: Name of IOR
+              maxLength: 75
+            company_name:
+              type: string
+              description: IOR company name
+              maxLength: 50
+            address_1:
+              type: string
+              description: Address of IOR
+              maxLength: 150
+            address_2:
+              type: string
+              description: Additional address information, e.g. 2nd level
+              maxLength: 150
+            house_number:
+              type: string
+              description: IOR house number
+              maxLength: 20
+            city:
+              type: string
+              description: IOR city
+              maxLength: 30
+            postal_code:
+              type: string
+              description: IOR postal code
+              maxLength: 12
+            country_code:
+              type: string
+              description: IOR country. ISO 3166-1 alpha-2 code
+              maxLength: 2
+            country_state:
+              type: string
+              description: Code of the state (e.g. NY for New York) or province (e.g. RM for Rome). Destinations that require this field are USA, Canada, Italy and Australia. Format ISO-3166-2.
+              example: IT-RM
+              maxLength: 14
+            telephone:
+              type: string
+              description: IOR phone number in E.164 format
+              maxLength: 20
+            email:
+              type: string
+              description: IOR email
+              maxLength: 320
+          required:
+          - name
+          - address_1
+          - city
+          - postal_code
+          - country_code
+        tax_numbers:
+          type: object
+          description: Identification numbers and codes related to sender, receiver and importer of record provider.
+          properties:
+            sender:
+              type: array
+              description: Sender's list of identification number objects
+              maxItems: 100
+              items:
+                $ref: '#/components/schemas/TaxNumber'
+            receiver:
+              type: array
+              description: Receiver's list of identification number objects
+              maxItems: 100
+              items:
+                $ref: '#/components/schemas/TaxNumber'
+            importer_of_record:
+              type: array
+              description: Importer of record's list of identification number objects
+              maxItems: 100
+              items:
+                $ref: '#/components/schemas/TaxNumber'
+          required:
+          - sender
+          - receiver
+          - importer_of_record
+        return_data:
+          type: object
+          description: Additional information that should be provided for return parcels.
+          properties:
+            return_postal_code:
+              type: string
+              maxLength: 12
+              description: The Postcode of the customer to whom the parcel was originally shipped.
+            outbound_tracking_number:
+              type: string
+              description: Tracking number of outbound shipment
+              example: BE123456789
+              maxLength: 40
+            outbound_shipment_date:
+              type: string
+              format: date
+              description: Data of outbound shipment
+              example: '2020-11-27'
+            outbound_carrier_name:
+              type: string
+              description: The name of the carrier used for outbound shipment
+              example: DHL
+              maxLength: 50
+      required:
+      - customs_invoice_nr
+      - customs_shipment_type
+    parcel-item:
+      title: Parcel Item Object
+      type: object
+      description: The items of a Parcel
+      properties:
+        hs_code:
+          type: string
+          description: 'Harmonized System Code [Wikipedia Link](https://en.wikipedia.org/wiki/Harmonized_System).
+
+            Providing a complete HS code with more characters increases the delivery rate.'
+          maxLength: 12
+        weight:
+          type: string
+          description: Weight of a single item in kilograms.
+        quantity:
+          type: integer
+          minimum: 1
+          description: Quantity of items shipped.
+        description:
+          type: string
+          description: Description of the item.
+          maxLength: 255
+        origin_country:
+          type:
+          - string
+          - 'null'
+          description: ISO-2 code of the country where the items were originally produced. [External Link](http://www.nationsonline.org/oneworld/country_code_list.htm).
+        value:
+          type: number
+          description: Value of a single item.
+          example: 10.5
+        sku:
+          type: string
+          description: The SKU of the product.
+          maxLength: 255
+        product_id:
+          type: string
+          description: The internal ID of the product.
+          maxLength: 255
+        properties:
+          type: object
+          description: 'The list of properties of the product. Used as a JSON object with {‘key’: ‘value’}.'
+        item_id:
+          type:
+          - string
+          - 'null'
+          maxLength: 255
+          description: External ID of the item generated by a shop system or similar.
+        return_reason:
+          type:
+          - integer
+          - 'null'
+          description: The return reason identifier matching the ones provided from Sendcloud. Only applicable for returns.
+          minimum: 1
+        return_message:
+          type:
+          - string
+          - 'null'
+          description: Optional a message relating to the return. Only applicable for returns.
+        mid_code:
+          type: string
+          description: Code to identify the manufacturer of the product. It is required when shipping to the US and is used for generating commercial invoice.
+          maxLength: 15
+          example: US1234567
+        material_content:
+          type: string
+          description: Composition of the items. Used for commercial invoice generation.
+          maxLength: 255
+          example: 100% Cotton
+        intended_use:
+          type: string
+          description: Text that identifies the Intended Use of the item. This will be used to classify the item based on the new ICS2 system. Used for commercial invoice generation.
+          maxLength: 255
+          example: Personal use
+        manufacturer_product_id:
+          type:
+          - string
+          - 'null'
+          description: A manufacturer or product supplier's unique code, assigned to an individual product.
+          maxLength: 70
+          example: ABC-12345
+        manufacturer_product_id_std:
+          type:
+          - string
+          - 'null'
+          description: A standardized manufacturer product identifier assigned by a global industry standard body (e.g. GTIN). Provide only if one exists for the product.
+          maxLength: 70
+          example: 01234567890128
+        dangerous_goods:
+          $ref: '#/components/schemas/dangerous-goods'
+        dds_reference:
+          title: DDS Reference
+          type:
+          - string
+          - 'null'
+          description: The DDS (Due Diligence Statement) reference number associated with the item, if applicable. See EUDR system for more details.
+          example: 25FIYPEK0A7573
+        taric_doc_code:
+          title: TARIC document code
+          type:
+          - string
+          - 'null'
+          description: TARIC document codes are specific alphanumeric codes used in EU customs declarations (Box 44) to identify required supporting documents, certificates, or conditions for a product, like health certificates (e.g., 3200), origin proofs (e.g., EUR.1), or special authorizations (e.g., C716 for due diligence) for simplified procedures, ensuring compliance with EU trade rules for various goods.
+          example: Y142
+      required:
+      - hs_code
+      - weight
+      - quantity
+      - description
+      - value
+    CancelParcelStatus:
+      title: Cancel Parcel Status Object
+      type: object
+      properties:
+        status:
+          type: string
+          minLength: 1
+        message:
+          type: string
+          minLength: 1
+      required:
+      - status
+      - message
     ParcelCreation:
       description: Parcel object for a parcel creation
       type: object
@@ -1603,200 +2272,6 @@ components:
           type: array
           items:
             type: string
-    CarrierErrors:
-      description: Errors object for a parcel
-      type: object
-      title: Carrier Errors Object
-      properties:
-        non_field_errors:
-          type: array
-          items:
-            type: string
-    CreateParcelError:
-      description: Error returned during parcel creation
-      type: object
-      title: Parcel Creation Error Object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: Error code
-            message:
-              type: string
-              description: Concatenated to one string array of errors
-            request:
-              type: string
-              description: URL of the Sendcloud'd endpoint which returned an error
-    ParcelResponseShort:
-      description: Parcel object model
-      type: object
-      title: Parcel Object
-      properties:
-        address:
-          type: string
-        address_2:
-          type: string
-          description: 'An apartment or floor number that has been extracted from general address input.
-
-            '
-        address_divided:
-          $ref: '#/components/schemas/AddressDivided'
-        carrier:
-          type: object
-          properties:
-            code:
-              $ref: '#/components/schemas/carrier'
-        city:
-          type: string
-        company_name:
-          type: string
-        contract:
-          type: integer
-          minimum: 1
-          description: Id of the contract that was used to create the parcel.
-          nullable: true
-        country:
-          $ref: '#/components/schemas/Country'
-        customs_invoice_nr:
-          type: string
-          description: Customs invoice number
-        customs_shipment_type:
-          type: integer
-          description: "Customs shipment type. Deprecated in favor of the `customs_information` object. \n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          nullable: true
-          deprecated: true
-        data:
-          type: object
-        date_created:
-          type: string
-        date_updated:
-          type: string
-        date_announced:
-          type: string
-        email:
-          type: string
-          description: An email address of the person this parcel is supposed to be delivered to.
-        id:
-          type: integer
-        insured_value:
-          type: integer
-        label:
-          $ref: '#/components/schemas/Label'
-        name:
-          type: string
-        order_number:
-          type: string
-        shipment_uuid:
-          type: string
-        parcel_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/parcel-item'
-        postal_code:
-          type: string
-        external_reference:
-          type: string
-          nullable: true
-          description: A reference to be assigned to this parcel. Must be unique across parcels. This field is used to create idempotence.
-        reference:
-          type: string
-          nullable: true
-          description: A reference to be assigned to this parcel. Multiple parcels can have the same reference.
-          default: '0'
-        shipment:
-          $ref: '#/components/schemas/Shipment'
-        status:
-          $ref: '#/components/schemas/Status'
-        documents:
-          type: array
-          uniqueItems: true
-          description: An array of documents. A parcel can contain multiple documents, for instance labels and a customs form. This field returns an array of all the available documents for this parcel.
-          items:
-            $ref: '#/components/schemas/Documents'
-        telephone:
-          type: string
-        to_service_point:
-          type: string
-          description: An id of service point to which the shipment is going to be shipped.
-        to_state:
-          type: string
-          description: 'Represents the state or province of a country. Countries that need a state are USA, Canada, Italy and Australia. e.g. America’s city of Los Angeles belongs to the California state: CA. Shipments to Italy need a province. e.g. Italy’s city of Rome belongs to Roma province: RM.'
-        total_insured_value:
-          type: integer
-        total_order_value_currency:
-          type: string
-        total_order_value:
-          type: string
-        tracking_number:
-          type: string
-          description: Tracking number of the shipment.
-        tracking_url:
-          type: string
-          description: tracking url of this shipment.
-        weight:
-          type: string
-        type:
-          type: string
-          description: Returns either ‘parcel’ or ‘letter’ by which you can determine the type of your shipment.
-          enum:
-          - parcel
-          - letter
-          deprecated: true
-          nullable: true
-        colli_uuid:
-          type: string
-        collo_nr:
-          type: integer
-          description: A number indicating the collo number within a shipment. For a non-multi-collo shipment, this value will always be 0. In a multi-collo shipment with 3 collos, this number will range from 0 to 2.
-        collo_count:
-          type: integer
-          description: A number indicating the number of collos within a shipment. For non-multi-collo shipments, this value will always be 1.
-        is_return:
-          type: boolean
-          description: Indicates if the parcel correspond to a return.
-        awb_tracking_number:
-          type: string
-          description: Deutsche Post Global Mail only. This indicates the air waybill number of this box of Global Mail parcels. This will be only set once Finalize box has been called.
-          nullable: true
-        box_number:
-          type: integer
-          description: Deutsche Post Global Mail only. This indicates the box to which this parcel belongs. This will be only set for Global Mail parcels.
-          nullable: true
-        length:
-          type: string
-          description: 'Parcel length in centimeters (will be used for volumetric weight calculation). Examples: “48” or “52.3”'
-          nullable: true
-        width:
-          type: string
-          description: 'Parcel width in centimeters (will be used for volumetric weight calculation). Examples: “48” or “52.3”'
-          nullable: true
-        height:
-          type: string
-          description: 'Parcel height in centimeters (will be used for volumetric weight calculation). Examples: “48” or “52.3”'
-          nullable: true
-        shipping_method_checkout_name:
-          type: string
-          description: Shipping method name selected by buyer during the checkout
-        customs_declaration:
-          type: object
-          deprecated: true
-          description: An object with available printers that lists available links to the created customs declaration form. (deprecated in favour of documents).
-        note:
-          type: string
-          description: This field can be used to add additional notes regarding an order. The notes will not be displayed on a label, but will be displayed on both the Packing slips & Picking lists which you can use for Pack & Go feature. The value will not be shared with carriers. It may be used for packing instructions, such as "gift" or "do not send before monday".
-          nullable: true
-        errors:
-          $ref: '#/components/schemas/CarrierErrors'
-      required:
-      - id
     dangerous-goods:
       title: DangerousGoods
       type: object
@@ -1895,116 +2370,26 @@ components:
           - Net
           - Gross
           description: Type of weight measurement
-    parcel-item:
-      title: Parcel Item Object
+    Country:
+      title: Country Object
+      description: Country object for a parcel
       type: object
-      description: The items of a Parcel
       properties:
-        hs_code:
+        iso_2:
           type: string
-          description: 'Harmonized System Code [Wikipedia Link](https://en.wikipedia.org/wiki/Harmonized_System).
-
-            Providing a complete HS code with more characters increases the delivery rate.'
-          maxLength: 12
-        weight:
+        iso_3:
           type: string
-          description: Weight of a single item in kilograms.
-        quantity:
-          type: integer
-          minimum: 1
-          description: Quantity of items shipped.
-        description:
+        name:
           type: string
-          description: Description of the item.
-          maxLength: 255
-        origin_country:
-          type:
-          - string
-          - 'null'
-          description: ISO-2 code of the country where the items were originally produced. [External Link](http://www.nationsonline.org/oneworld/country_code_list.htm).
-        value:
-          type: number
-          description: Value of a single item.
-          example: 10.5
-        sku:
-          type: string
-          description: The SKU of the product.
-          maxLength: 255
-        product_id:
-          type: string
-          description: The internal ID of the product.
-          maxLength: 255
-        properties:
-          type: object
-          description: 'The list of properties of the product. Used as a JSON object with {‘key’: ‘value’}.'
-        item_id:
-          type:
-          - string
-          - 'null'
-          maxLength: 255
-          description: External ID of the item generated by a shop system or similar.
-        return_reason:
-          type:
-          - integer
-          - 'null'
-          description: The return reason identifier matching the ones provided from Sendcloud. Only applicable for returns.
-          minimum: 1
-        return_message:
-          type:
-          - string
-          - 'null'
-          description: Optional a message relating to the return. Only applicable for returns.
-        mid_code:
-          type: string
-          description: Code to identify the manufacturer of the product. It is required when shipping to the US and is used for generating commercial invoice.
-          maxLength: 15
-          example: US1234567
-        material_content:
-          type: string
-          description: Composition of the items. Used for commercial invoice generation.
-          maxLength: 255
-          example: 100% Cotton
-        intended_use:
-          type: string
-          description: Text that identifies the Intended Use of the item. This will be used to classify the item based on the new ICS2 system. Used for commercial invoice generation.
-          maxLength: 255
-          example: Personal use
-        manufacturer_product_id:
-          type:
-          - string
-          - 'null'
-          description: A manufacturer or product supplier's unique code, assigned to an individual product.
-          maxLength: 70
-          example: ABC-12345
-        manufacturer_product_id_std:
-          type:
-          - string
-          - 'null'
-          description: A standardized manufacturer product identifier assigned by a global industry standard body (e.g. GTIN). Provide only if one exists for the product.
-          maxLength: 70
-          example: 01234567890128
-        dangerous_goods:
-          $ref: '#/components/schemas/dangerous-goods'
-        dds_reference:
-          title: DDS Reference
-          type:
-          - string
-          - 'null'
-          description: The DDS (Due Diligence Statement) reference number associated with the item, if applicable. See EUDR system for more details.
-          example: 25FIYPEK0A7573
-        taric_doc_code:
-          title: TARIC document code
-          type:
-          - string
-          - 'null'
-          description: TARIC document codes are specific alphanumeric codes used in EU customs declarations (Box 44) to identify required supporting documents, certificates, or conditions for a product, like health certificates (e.g., 3200), origin proofs (e.g., EUR.1), or special authorizations (e.g., C716 for due diligence) for simplified procedures, ensuring compliance with EU trade rules for various goods.
-          example: Y142
-      required:
-      - hs_code
-      - weight
-      - quantity
-      - description
-      - value
+    CarrierErrors:
+      description: Errors object for a parcel
+      type: object
+      title: Carrier Errors Object
+      properties:
+        non_field_errors:
+          type: array
+          items:
+            type: string
     ParcelResponseFull:
       allOf:
       - $ref: '#/components/schemas/ParcelResponseShort'
@@ -2012,391 +2397,6 @@ components:
           customs_information:
             $ref: '#/components/schemas/ParcelCustomsInformation'
       type: object
-    Status:
-      title: Status Object
-      type: object
-      properties:
-        id:
-          type: integer
-        message:
-          type: string
-      description: Status object for a parcel
-    AddressDivided:
-      title: Address Divided Object
-      type: object
-      properties:
-        house_number:
-          type: string
-        street:
-          type: string
-      description: Address_divided object for a parcel
-    Shipment:
-      title: Shipment Object
-      type: object
-      properties:
-        id:
-          type: integer
-          description: ID of shipping method
-        name:
-          type: string
-          description: Name of shipping method
-      required:
-      - id
-      description: Shipping method object for a parcel
-    ParcelCustomsInformation:
-      title: ParcelCustomsInformation
-      type: object
-      description: Optional customs information that should be provided for international parcels. This information is used for generating customs documents.
-      example:
-        customs_invoice_nr: INV-123
-        customs_shipment_type: 2
-        export_type: private
-        invoice_date: '2023-08-24'
-        discount_granted: '14.99'
-        freight_costs: '4.65'
-        insurance_costs: '3.60'
-        other_costs: '1.20'
-        general_notes: 'Compliance: Goods comply with international safety standards (CE certified).'
-        additional_declaration_statements:
-        - With reference to the above shipment, I understate that the content is not made of leather parts of animal species protected by the Washington Convention.
-        - I solemnly declare that the contents of this document represent a true and accurate account of the events as they occurred. I acknowledge my responsibility for the information presented herein and understand that any misrepresentation or falsification may result in legal consequences or other penalties as applicable.
-        importer_of_record:
-          name: John Doe
-          company_name: ImporterCo
-          address_1: Maple Avenue
-          house_number: '123'
-          postal_code: '90210'
-          city: Springfield
-          country_code: US
-          country_state: US-MA
-          telephone: '+15551234567'
-          email: info@importer-of-record-example.com
-        tax_numbers:
-          sender:
-          - name: VAT
-            country_code: NL
-            value: NL123456789B01
-          - name: EORI
-            country_code: NL
-            value: NL123456789
-          receiver:
-          - name: EIN
-            country_code: US
-            value: '123456789'
-          importer_of_record:
-          - name: EIN
-            country_code: US
-            value: '987654321'
-        return_data:
-          return_postal_code: 1111 AA
-          outbound_tracking_number: JT1234567890
-          outbound_shipment_date: '2023-08-14'
-          outbound_carrier_name: UPS
-      properties:
-        customs_invoice_nr:
-          type: string
-          description: Customs invoice number
-          example: INV-123
-        customs_shipment_type:
-          type: integer
-          description: "Customs shipment type\n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          example: 2
-        export_type:
-          type: string
-          description: 'Export type documentation serves to categorize international shipments into three primary classifications: Private exports, intended for personal use; Commercial B2C exports, directed towards individual consumers; and Commercial B2B exports, involving business-to-business transactions. These distinctions facilitate adherence to regulatory requirements and ensure the orderly movement of goods across international boundaries.'
-          enum:
-          - private
-          - commercial_b2c
-          - commercial_b2b
-          default: commercial_b2c
-          example: private
-        invoice_date:
-          type: string
-          format: date
-          description: The date when the commercial invoice for the goods was issued (ISO 8601). If not provided, the announcement date will be used by default.
-        discount_granted:
-          type: string
-          description: Shipper's granted discount amount to user.
-          example: '14.99'
-        freight_costs:
-          type: string
-          description: Charges associated with the transportation of the goods to their destination paid by the receiver.
-          example: '4.65'
-        insurance_costs:
-          type: string
-          description: The costs of insurance coverage for the goods during transit paid by the receiver.
-          example: '3.60'
-        other_costs:
-          type: string
-          description: Additional costs or charges associated with the shipment that are not covered by freight and insurance paid by the receiver.
-          example: '1.20'
-        general_notes:
-          type: string
-          description: Exporter or shipper can include any additional information or special instructions related to the goods being shipped. This section is used to provide details that may not be covered in other parts of the invoice but are relevant for customs clearance.
-          maxLength: 500
-          example: 'Compliance: Goods comply with international safety standards (CE certified).'
-        additional_declaration_statements:
-          type: array
-          description: List of additional declaration statements. Each statement may contain specific details about the nature of the goods being shipped, their origin, or any additional information required by customs authorities. The content of an additional declaration statement can vary based on the requirements of the importing and exporting countries, as well as the nature of the goods being transported.
-          maxItems: 100
-          items:
-            type: string
-            example: With reference to the above shipment, I understate that the content is not made of leather parts of animal species protected by the Washington Convention.
-            maxLength: 1024
-        importer_of_record:
-          type: object
-          description: 'Importer of Record (IOR) information.
-
-
-            A customs-connected record importer specializes in importing goods and managing the associated customs documentation. If not provided, the receiver''s address will be used instead.'
-          properties:
-            name:
-              type: string
-              description: Name of IOR
-              maxLength: 75
-            company_name:
-              type: string
-              description: IOR company name
-              maxLength: 50
-            address_1:
-              type: string
-              description: Address of IOR
-              maxLength: 150
-            address_2:
-              type: string
-              description: Additional address information, e.g. 2nd level
-              maxLength: 150
-            house_number:
-              type: string
-              description: IOR house number
-              maxLength: 20
-            city:
-              type: string
-              description: IOR city
-              maxLength: 30
-            postal_code:
-              type: string
-              description: IOR postal code
-              maxLength: 12
-            country_code:
-              type: string
-              description: IOR country. ISO 3166-1 alpha-2 code
-              maxLength: 2
-            country_state:
-              type: string
-              description: Code of the state (e.g. NY for New York) or province (e.g. RM for Rome). Destinations that require this field are USA, Canada, Italy and Australia. Format ISO-3166-2.
-              example: IT-RM
-              maxLength: 14
-            telephone:
-              type: string
-              description: IOR phone number in E.164 format
-              maxLength: 20
-            email:
-              type: string
-              description: IOR email
-              maxLength: 320
-          required:
-          - name
-          - address_1
-          - city
-          - postal_code
-          - country_code
-        tax_numbers:
-          type: object
-          description: Identification numbers and codes related to sender, receiver and importer of record provider.
-          properties:
-            sender:
-              type: array
-              description: Sender's list of identification number objects
-              maxItems: 100
-              items:
-                $ref: '#/components/schemas/TaxNumber'
-            receiver:
-              type: array
-              description: Receiver's list of identification number objects
-              maxItems: 100
-              items:
-                $ref: '#/components/schemas/TaxNumber'
-            importer_of_record:
-              type: array
-              description: Importer of record's list of identification number objects
-              maxItems: 100
-              items:
-                $ref: '#/components/schemas/TaxNumber'
-          required:
-          - sender
-          - receiver
-          - importer_of_record
-        return_data:
-          type: object
-          description: Additional information that should be provided for return parcels.
-          properties:
-            return_postal_code:
-              type: string
-              maxLength: 12
-              description: The Postcode of the customer to whom the parcel was originally shipped.
-            outbound_tracking_number:
-              type: string
-              description: Tracking number of outbound shipment
-              example: BE123456789
-              maxLength: 40
-            outbound_shipment_date:
-              type: string
-              format: date
-              description: Data of outbound shipment
-              example: '2020-11-27'
-            outbound_carrier_name:
-              type: string
-              description: The name of the carrier used for outbound shipment
-              example: DHL
-              maxLength: 50
-      required:
-      - customs_invoice_nr
-      - customs_shipment_type
-    TaxNumber:
-      title: Tax Number Object
-      description: Identification numbers and codes used in different contexts. These identifiers are used for taxation, customs, business registration, and other purposes, depending on the country and the specific regulatory requirements. Depending on these requirements you may need to pass one or several numbers related to sender, receiver or importer of record provider. These numbers and codes will be included into final Customs documents.
-      type: object
-      properties:
-        name:
-          type: string
-          example: EORI
-          description: "Tax number abbreviation\n  * VAT - Value-Added Tax → VOEC number for Norway should be shared here as advised by the [Norwegian Tax Authorities](https://www.skatteetaten.no/globalassets/bedrift-og-organisasjon/voec/sending-and-marking-goods-through-postal-services-and-transporters.pdf)\n  * EIN - Employer Identification Number\n  * GST - Goods and Service Tax\n  * SSN - Social Security Number\n  * EORI - Economic Operators Registration and Identification for the European Union\n  * DUN - Data Universal Numbering System\n  * FED - Federal Tax ID\n  * STA - State Tax ID\n  * CNP - Brazil CNPJ/CPF Federal Tax\n  * IE - Brazil type IE/RG Federal Tax\n  * INN - Russia bank details section INN\n  * KPP - Russia bank details section KPP\n  * OGR - Russia bank details section OGRN\n  * OKP - Russia bank details section OKPO\n  * IOSS - SDT or Overseas Registered Supplier or Import One-Stop-Shop or GB VAT (foreign) registration or AUSid GST Registration or VAT on E-Commerce\n  * FTZ - Free Trade Zone ID\n  * DAN - Deferment Account Duties Only\n  * TAN - Deferment Account Tax Only\n  * DTF - Deferment Account Duties, Taxes and Fees Only\n  * RGP - EU Registered Exporters Registration ID\n  * DLI - Driver's License\n  * NID - National Identity Card - A PID (Personal Identification Number) should be provided as NID (National Identity Card).\n  * PAS - Passport\n  * MID - Manufacturer ID\n  * UKIMS - UK Internal Market Scheme -> customs clearance for shipping from Great Britain to Northern Ireland under the Windsor Framework, for more information see [Windsor Framework](https://www.gov.uk/government/publications/the-windsor-framework)\n"
-          enum:
-          - VAT
-          - EIN
-          - GST
-          - SSN
-          - EORI
-          - DUN
-          - FED
-          - STA
-          - CNP
-          - IE
-          - INN
-          - KPP
-          - OGR
-          - OKP
-          - IOSS
-          - FTZ
-          - DAN
-          - TAN
-          - DTF
-          - RGP
-          - DLI
-          - NID
-          - PAS
-          - MID
-          - UKIMS
-        country_code:
-          type: string
-          example: NL
-          description: Issuing country code (ISO 3166-1 alpha-2 code)
-          maxLength: 2
-        value:
-          type: string
-          example: NL123456789B01
-          description: Tax number itself
-          maxLength: 100
-      required:
-      - name
-      - country_code
-      - value
-    carrier:
-      type: string
-      title: Carrier Code
-      enum:
-      - amazon
-      - bol
-      - bpost
-      - brt
-      - budbee
-      - chronopost
-      - cirro
-      - colisprive
-      - colissimo
-      - correos
-      - correos_express
-      - ctt_express
-      - dbschenker
-      - delivengo
-      - dhl
-      - dhl_2_man_handling
-      - dhl_de
-      - dhl_ecommerce
-      - dhl_express
-      - dhl_parcel_gb
-      - dhl_parcel_iberia
-      - dp
-      - dpd
-      - dpd_at
-      - dpd_fr
-      - dpd_gb
-      - dpd_local
-      - evri_international
-      - fadello
-      - fairsenden
-      - fedex
-      - fedexcrossborder
-      - fietskoeriers
-      - geodis
-      - glovo
-      - gls_de
-      - gls_es
-      - gls_eu
-      - gls_it
-      - gls_nl
-      - hermes_at
-      - hermes_c2c_gb
-      - hermes_de
-      - hermes_gb
-      - hived
-      - homerr
-      - hurby
-      - inpost_es
-      - inpost_gb
-      - inpost_it
-      - inpost_pl
-      - lettresuivie
-      - mhi
-      - mondial_relay
-      - mrw
-      - nacex
-      - paack
-      - parcelforce
-      - plx
-      - postat
-      - poste_italiane
-      - poste_it_delivery
-      - postnl
-      - postnl_fulfilment
-      - postnl_large
-      - postnord
-      - rjp
-      - rjpv2
-      - royal_mail
-      - sandd
-      - sendcloud
-      - seur
-      - skymail
-      - spring
-      - storeshippers
-      - tipsa
-      - tnt_it
-      - transforce
-      - trunkrs
-      - ups
-      - van_straaten
-      - viatim
-      - yodel
-      description: A carrier represented by a Sendcloud code
-      example: postnl
   parameters:
     SendcloudPartnerId:
       in: header

@@ -135,14 +135,65 @@ paths:
         '422':
           $ref: '#/components/responses/422'
 components:
-  responses:
-    '422':
-      description: Example response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    ParcelDirections:
+      type: string
+      title: Parcel Directions
+      enum:
+      - incoming
+      - outgoing
+      description: The direction of the parcel
+      example: outgoing
+    ParcelsReportRequest:
+      title: Parcels Report Request Object
+      required:
+      - fields
+      - filters
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParcelsReportFields'
+        filters:
+          $ref: '#/components/schemas/ParcelsReportFilter'
+      description: A parcel report request
+    ParcelsReportFields:
+      title: Parcel Report Fields
+      enum:
+      - parcel_id
+      - direction
+      - carrier_code
+      - carrier_name
+      - from_company_name
+      - contract_id
+      - contract_type
+      - origin_city
+      - origin_postal_code
+      - origin_country_code
+      - origin_country_name
+      - destination_city
+      - destination_postal_code
+      - destination_country_code
+      - destination_country_name
+      - order_number
+      - tracking_number
+      - created_at
+      - updated_at
+      - announced_at
+      - shipped_at
+      - first_delivery_at
+      - arrived_at
+      - shipping_method
+      - shipping_method_name
+      - price
+      - global_status_slug
+      - carrier_status
+      - integration_id
+      - integration_type
+      - weight
+      type: string
+      description: The parcel fields to include for the report
     ReportStatus:
       title: Report Status
       enum:
@@ -292,64 +343,13 @@ components:
       required:
       - filters
       - fields
-    ParcelDirections:
-      type: string
-      title: Parcel Directions
-      enum:
-      - incoming
-      - outgoing
-      description: The direction of the parcel
-      example: outgoing
-    ParcelsReportRequest:
-      title: Parcels Report Request Object
-      required:
-      - fields
-      - filters
-      type: object
-      properties:
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/ParcelsReportFields'
-        filters:
-          $ref: '#/components/schemas/ParcelsReportFilter'
-      description: A parcel report request
-    ParcelsReportFields:
-      title: Parcel Report Fields
-      enum:
-      - parcel_id
-      - direction
-      - carrier_code
-      - carrier_name
-      - from_company_name
-      - contract_id
-      - contract_type
-      - origin_city
-      - origin_postal_code
-      - origin_country_code
-      - origin_country_name
-      - destination_city
-      - destination_postal_code
-      - destination_country_code
-      - destination_country_name
-      - order_number
-      - tracking_number
-      - created_at
-      - updated_at
-      - announced_at
-      - shipped_at
-      - first_delivery_at
-      - arrived_at
-      - shipping_method
-      - shipping_method_name
-      - price
-      - global_status_slug
-      - carrier_status
-      - integration_id
-      - integration_type
-      - weight
-      type: string
-      description: The parcel fields to include for the report
+  responses:
+    '422':
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     HTTPBasicAuth:
       type: http

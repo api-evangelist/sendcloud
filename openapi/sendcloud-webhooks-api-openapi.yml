@@ -115,6 +115,9 @@ webhooks:
         '200':
           $ref: '#/components/responses/200'
 components:
+  responses:
+    '200':
+      description: Return a 200 status to indicate that the data was processed successfully. The response body may contain the extended line item.
   schemas:
     IntegrationDeletedWebhook:
       description: The webhook payload when an integration is deleted from Sendcloud
@@ -129,92 +132,6 @@ components:
             example: integration_deleted
             enum:
             - integration_deleted
-    IntegrationWebhookBase:
-      description: Base schema for integration webhook payloads
-      type: object
-      properties:
-        action:
-          type: string
-          description: Describes the webhook action
-        timestamp:
-          type: integer
-          example: 1525271885993
-        integration:
-          type: object
-          properties:
-            id:
-              type: integer
-              format: int64
-              example: 1
-              minimum: 1
-              description: A unique identifier for an integration within Sendcloud
-            shop_name:
-              type: string
-              example: API Integration
-              description: The integration name as configured under the [integration settings in Sendcloud](https://app.sendcloud.com/v2/settings/integrations/manage)
-            shop_url:
-              type: string
-              format: uri
-              example: https://www.sendcloud.com
-              description: The integration url
-            system:
-              type: string
-              example: api
-              description: The integration type
-            failing_since:
-              type:
-              - 'null'
-              - string
-              format: date-time
-              example: '2019-02-03T06:48:07Z'
-              description: A date time indicating when in time Sendcloud lost connection to the integration.
-            last_fetch:
-              type:
-              - 'null'
-              - string
-              example: '2019-02-03T06:48:07Z'
-              format: date-time
-              description: A date time indicating when was the last successful order fetching.
-            last_updated_at:
-              type:
-              - 'null'
-              - string
-              format: date-time
-              example: '2019-02-03T06:48:07Z'
-              description: A date time indicating when the integration settings were updated.
-            service_point_enabled:
-              type: boolean
-              description: True if you have configured [service point](https://support.sendcloud.com/hc/en-us/articles/360026097951-FAQ-Service-Points) support for your integration.
-            service_point_carriers:
-              type: array
-              uniqueItems: true
-              description: The service point carriers configured for your integration
-              items:
-                type: string
-            webhook_active:
-              type: boolean
-              description: True if you have enabled webhooks, False otherwise
-            webhook_url:
-              type: string
-              description: Your integration URL to be used by Sendcloud to communicate with.
-              format: uri
-              example: https://www.sendcloud.com/sendcloud-webhooks
-      required:
-      - action
-      - timestamp
-    IntegrationConnectedWebhook:
-      description: The webhook payload when an integration is added to Sendcloud
-      type: object
-      title: Webhook Integration Connected Object
-      allOf:
-      - $ref: '#/components/schemas/IntegrationWebhookBase'
-      - type: object
-        properties:
-          action:
-            type: string
-            example: integration_connected
-            enum:
-            - integration_connected
     IntegrationUpdatedWebhook:
       description: The webhook payload when an integration is updated in Sendcloud
       type: object
@@ -228,6 +145,71 @@ components:
             example: integration_updated
             enum:
             - integration_updated
+    ReturnCreatedWebhook:
+      title: Webhook Return Created Object
+      type: object
+      description: 'The webhook payload when a return is created. This is emitted when a return is created either via the API or the Return Portal.
+
+
+        Creating a return manually via Return Form does NOT trigger the webhook.'
+      properties:
+        action:
+          type: string
+          description: Describes webhook action
+          example: return_created
+          enum:
+          - return_created
+        timestamp:
+          type: number
+          description: Unix timestamp
+        data:
+          type: object
+          description: Information about the return
+          required:
+          - id
+          properties:
+            id:
+              type: number
+              description: The id of the return
+              example: 42
+            brand_id:
+              type: integer
+            order_number:
+              type: string
+            return_reason_id:
+              type: integer
+            return_address_id:
+              type: integer
+            paid_return:
+              type: boolean
+            delivery_choice:
+              type: string
+            refund_type:
+              type: string
+            items:
+              type: array
+              description: List of items for this return
+              items:
+                type: object
+                properties:
+                  item_id:
+                    type: string
+                  description:
+                    type: string
+                  quantity:
+                    type: integer
+                  sku:
+                    type: string
+                  hs_code:
+                    type: string
+                  return_reason_id:
+                    type: integer
+                required:
+                - quantity
+      required:
+      - action
+      - timestamp
+      - data
     ParcelStatusChangedWebhook:
       type: object
       description: The webhook payload when a parcel (either an outgoing or an incoming one) changes status.
@@ -380,74 +362,92 @@ components:
               type: string
               description: Our system will ensure uniqueness of shipments with the combination of `external_order_id` and `external_shipment_id`
               example: AMZ231231
-    ReturnCreatedWebhook:
-      title: Webhook Return Created Object
+    IntegrationWebhookBase:
+      description: Base schema for integration webhook payloads
       type: object
-      description: 'The webhook payload when a return is created. This is emitted when a return is created either via the API or the Return Portal.
-
-
-        Creating a return manually via Return Form does NOT trigger the webhook.'
       properties:
         action:
           type: string
-          description: Describes webhook action
-          example: return_created
-          enum:
-          - return_created
+          description: Describes the webhook action
         timestamp:
-          type: number
-          description: Unix timestamp
-        data:
+          type: integer
+          example: 1525271885993
+        integration:
           type: object
-          description: Information about the return
-          required:
-          - id
           properties:
             id:
-              type: number
-              description: The id of the return
-              example: 42
-            brand_id:
               type: integer
-            order_number:
+              format: int64
+              example: 1
+              minimum: 1
+              description: A unique identifier for an integration within Sendcloud
+            shop_name:
               type: string
-            return_reason_id:
-              type: integer
-            return_address_id:
-              type: integer
-            paid_return:
+              example: API Integration
+              description: The integration name as configured under the [integration settings in Sendcloud](https://app.sendcloud.com/v2/settings/integrations/manage)
+            shop_url:
+              type: string
+              format: uri
+              example: https://www.sendcloud.com
+              description: The integration url
+            system:
+              type: string
+              example: api
+              description: The integration type
+            failing_since:
+              type:
+              - 'null'
+              - string
+              format: date-time
+              example: '2019-02-03T06:48:07Z'
+              description: A date time indicating when in time Sendcloud lost connection to the integration.
+            last_fetch:
+              type:
+              - 'null'
+              - string
+              example: '2019-02-03T06:48:07Z'
+              format: date-time
+              description: A date time indicating when was the last successful order fetching.
+            last_updated_at:
+              type:
+              - 'null'
+              - string
+              format: date-time
+              example: '2019-02-03T06:48:07Z'
+              description: A date time indicating when the integration settings were updated.
+            service_point_enabled:
               type: boolean
-            delivery_choice:
-              type: string
-            refund_type:
-              type: string
-            items:
+              description: True if you have configured [service point](https://support.sendcloud.com/hc/en-us/articles/360026097951-FAQ-Service-Points) support for your integration.
+            service_point_carriers:
               type: array
-              description: List of items for this return
+              uniqueItems: true
+              description: The service point carriers configured for your integration
               items:
-                type: object
-                properties:
-                  item_id:
-                    type: string
-                  description:
-                    type: string
-                  quantity:
-                    type: integer
-                  sku:
-                    type: string
-                  hs_code:
-                    type: string
-                  return_reason_id:
-                    type: integer
-                required:
-                - quantity
+                type: string
+            webhook_active:
+              type: boolean
+              description: True if you have enabled webhooks, False otherwise
+            webhook_url:
+              type: string
+              description: Your integration URL to be used by Sendcloud to communicate with.
+              format: uri
+              example: https://www.sendcloud.com/sendcloud-webhooks
       required:
       - action
       - timestamp
-      - data
-  responses:
-    '200':
-      description: Return a 200 status to indicate that the data was processed successfully. The response body may contain the extended line item.
+    IntegrationConnectedWebhook:
+      description: The webhook payload when an integration is added to Sendcloud
+      type: object
+      title: Webhook Integration Connected Object
+      allOf:
+      - $ref: '#/components/schemas/IntegrationWebhookBase'
+      - type: object
+        properties:
+          action:
+            type: string
+            example: integration_connected
+            enum:
+            - integration_connected
   securitySchemes:
     Sendcloud-Signature:
       name: Sendcloud-Signature

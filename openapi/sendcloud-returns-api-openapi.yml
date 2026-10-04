@@ -549,6 +549,36 @@ paths:
       description: Sendcloud Production
 components:
   schemas:
+    address-washer-request:
+      title: Address Washer Request
+      description: Address Washer Request object model
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/raw-address'
+        carrier_code:
+          description: The code of the carrier to be used for the address validation. Only carriers available to your account can be used.
+          type: string
+          example: trunkrs
+        validation_methods:
+          description: 'An array of optional address validation methods to be applied
+
+            The default Sendcloud validation will always be applied.
+
+            '
+          type: array
+          items:
+            $ref: '#/components/schemas/address-validation-method-enum'
+          example:
+          - here
+      required:
+      - address
+      - carrier_code
+    address-validation-method-enum:
+      title: Address validation method enum
+      type: string
+      enum:
+      - here
     address-washer-response:
       title: Address Washer Response
       description: Address Washer Response object model
@@ -717,36 +747,6 @@ components:
           example: NL
           description: The country code of the customer represented as ISO 3166-1 alpha-2
           minLength: 1
-    address-washer-request:
-      title: Address Washer Request
-      description: Address Washer Request object model
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/raw-address'
-        carrier_code:
-          description: The code of the carrier to be used for the address validation. Only carriers available to your account can be used.
-          type: string
-          example: trunkrs
-        validation_methods:
-          description: 'An array of optional address validation methods to be applied
-
-            The default Sendcloud validation will always be applied.
-
-            '
-          type: array
-          items:
-            $ref: '#/components/schemas/address-validation-method-enum'
-          example:
-          - here
-      required:
-      - address
-      - carrier_code
-    address-validation-method-enum:
-      title: Address validation method enum
-      type: string
-      enum:
-      - here
     errors:
       title: Errors
       description: A standardized format for errors in [JSON:API](https://jsonapi.org/format/#error-objects) responses.
@@ -758,6 +758,13 @@ components:
           - status
           - code
           - detail
+    shipping-products-ref:
+      title: Shipping Product Code
+      type: object
+      properties:
+        code:
+          type: string
+      description: Sendcloud shipping product code
     price-with-any-currency:
       title: Price With Any Currency
       type: object
@@ -773,72 +780,6 @@ components:
       required:
       - value
       - currency
-    shipping-products-ref:
-      title: Shipping Product Code
-      type: object
-      properties:
-        code:
-          type: string
-      description: Sendcloud shipping product code
-    address:
-      title: Address Object
-      type: object
-      description: Sendcloud Address object
-      properties:
-        name:
-          type: string
-          example: John Doe
-          description: Name of the person associated with the address
-          minLength: 1
-        company_name:
-          type: string
-          example: Sendcloud
-          description: Name of the company associated with the address
-        address_line_1:
-          type: string
-          example: Stadhuisplein
-          description: First line of the address
-        house_number:
-          type: string
-          example: '50'
-          description: House number of the address
-        address_line_2:
-          type: string
-          description: Additional address information, e.g. 2nd level
-          example: Apartment 17B
-        postal_code:
-          type: string
-          example: 1013 AB
-          description: Zip code of the address
-          minLength: 1
-        city:
-          type: string
-          example: Eindhoven
-          description: City of the address
-          minLength: 1
-        po_box:
-          type:
-          - string
-          - 'null'
-          description: Code required in case of PO Box or post locker delivery
-        state_province_code:
-          type: string
-          example: IT-RM
-          description: The character state code of the customer represented as ISO 3166-2 code. This field is required for certain countries. See [international shipping](/docs/shipments/international-shipping#required-fields-for-international-shipments) for details.
-        country_code:
-          type: string
-          example: NL
-          description: The country code of the customer represented as ISO 3166-1 alpha-2
-          minLength: 1
-        email:
-          type: string
-          format: email
-          example: johndoe@gmail.com
-          description: Email address of the person associated with the address
-        phone_number:
-          type: string
-          example: '+319881729999'
-          description: Phone number of the person associated with the address
     parcel-item-returns-create:
       title: Parcel Item Object
       description: A single item in a shipment
@@ -963,137 +904,184 @@ components:
           description: Variant ID of the product. Imported from a shop system
           readOnly: true
           example: size-l
-    return-refund:
-      title: Return refund Object
+    TaxNumber:
+      title: Tax Number Object
+      description: Identification numbers and codes used in different contexts. These identifiers are used for taxation, customs, business registration, and other purposes, depending on the country and the specific regulatory requirements. Depending on these requirements you may need to pass one or several numbers related to sender, receiver or importer of record provider. These numbers and codes will be included into final Customs documents.
       type: object
-      description: Information about the compensation chosen by the customer for the returned items
       properties:
-        refund_type:
+        name:
           type: string
-          description: Identifier of the refund type
+          example: EORI
+          description: "Tax number abbreviation\n  * VAT - Value-Added Tax → VOEC number for Norway should be shared here as advised by the [Norwegian Tax Authorities](https://www.skatteetaten.no/globalassets/bedrift-og-organisasjon/voec/sending-and-marking-goods-through-postal-services-and-transporters.pdf)\n  * EIN - Employer Identification Number\n  * GST - Goods and Service Tax\n  * SSN - Social Security Number\n  * EORI - Economic Operators Registration and Identification for the European Union\n  * DUN - Data Universal Numbering System\n  * FED - Federal Tax ID\n  * STA - State Tax ID\n  * CNP - Brazil CNPJ/CPF Federal Tax\n  * IE - Brazil type IE/RG Federal Tax\n  * INN - Russia bank details section INN\n  * KPP - Russia bank details section KPP\n  * OGR - Russia bank details section OGRN\n  * OKP - Russia bank details section OKPO\n  * IOSS - SDT or Overseas Registered Supplier or Import One-Stop-Shop or GB VAT (foreign) registration or AUSid GST Registration or VAT on E-Commerce\n  * FTZ - Free Trade Zone ID\n  * DAN - Deferment Account Duties Only\n  * TAN - Deferment Account Tax Only\n  * DTF - Deferment Account Duties, Taxes and Fees Only\n  * RGP - EU Registered Exporters Registration ID\n  * DLI - Driver's License\n  * NID - National Identity Card - A PID (Personal Identification Number) should be provided as NID (National Identity Card).\n  * PAS - Passport\n  * MID - Manufacturer ID\n  * UKIMS - UK Internal Market Scheme -> customs clearance for shipping from Great Britain to Northern Ireland under the Windsor Framework, for more information see [Windsor Framework](https://www.gov.uk/government/publications/the-windsor-framework)\n"
           enum:
-          - money
-          - credit
-          - exchange
-          example: exchange
-        message:
-          type:
-          - string
-          - 'null'
-          description: Additional information about the refund provided by the end consumer
-          example: Exchange for size M
-    Price:
-      title: Price Object
-      type: object
-      properties:
+          - VAT
+          - EIN
+          - GST
+          - SSN
+          - EORI
+          - DUN
+          - FED
+          - STA
+          - CNP
+          - IE
+          - INN
+          - KPP
+          - OGR
+          - OKP
+          - IOSS
+          - FTZ
+          - DAN
+          - TAN
+          - DTF
+          - RGP
+          - DLI
+          - NID
+          - PAS
+          - MID
+          - UKIMS
+        country_code:
+          type: string
+          example: NL
+          description: Issuing country code (ISO 3166-1 alpha-2 code)
+          maxLength: 2
         value:
           type: string
-          example: '12.65'
-          pattern: '[\d]+(\.[\d]+)?'
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          minLength: 3
-          maxLength: 3
-          example: USD
-    dangerous-goods:
-      title: DangerousGoods
+          example: NL123456789B01
+          description: Tax number itself
+          maxLength: 100
+      required:
+      - name
+      - country_code
+      - value
+    ShipWith:
+      title: Ship With Object
       type: object
-      description: Hazardous materials information for items.
+      description: Shipping specifications chosen for return
       properties:
-        chemical_record_identifier:
+        type:
           type: string
-          nullable: true
-          description: Chemical record identifier for the dangerous goods
-        regulation_set:
-          type: string
+          description: "The way the shipping method and carrier will be selected. The default is `shipping_product_code`, \nbut the `shipping_option_code` is the new and preferred way.\n"
           enum:
-          - IATA
-          - ADR
-          description: Regulation set governing the dangerous goods
-        packaging_type_quantity:
+          - shipping_option_code
+          - shipping_product_code
+          example: shipping_option_code
+          default: shipping_product_code
+        shipping_option_code:
           type: string
-          nullable: true
-          description: Quantity of packaging type
-        packaging_type:
+          example: dpd:return/return
+          description: "Shipping option code as provided by the [Shipping options API](/api/v3/shipping-options) \nand the `code` property of the corresponding response.\n\nRequired if `type` is `shipping_option_code`."
+        shipping_product_code:
           type: string
-          nullable: true
-          description: Type of packaging used
-        packaging_instruction_code:
+          example: dpd:return/return
+          description: 'Shipping product code as provided by the [Shipping products API](/api/v2/shipping-products/retrieve-a-list-of-shipping-products)
+
+            and the `code` property of the corresponding response.
+
+
+            Required if `type` is `shipping_product_code`.'
+        functionalities:
+          $ref: '#/components/schemas/carrier-shipping-functionalities'
+          description: Shipping functionalities. Should only be provided if `type` is `shipping_product_code`.
+        contract:
+          type: integer
+          description: ID of the contract to ship the return with
+    ReturnValidation:
+      title: Return Validation Object
+      type: object
+      description: A Sendcloud return validation object
+      properties:
+        from_address:
+          $ref: '#/components/schemas/address-with-required-fields'
+        to_address:
+          $ref: '#/components/schemas/address-with-required-fields'
+        ship_with:
+          $ref: '#/components/schemas/ShipWith'
+        dimensions:
+          type: object
+          description: Dimensions of a single collo. Required for some carriers.
+          properties:
+            height:
+              type: number
+              description: Height in centimeters
+              minimum: 0
+              example: 10
+            width:
+              type: number
+              description: Width in centimeters
+              minimum: 0
+              example: 10
+            length:
+              type: number
+              description: Length in centimeters
+              minimum: 0
+              example: 10
+          required:
+          - height
+          - width
+          - length
+        weight:
+          type: number
+          description: Total weight in kilograms
+          minimum: 0.001
+          example: 2.8
+        collo_count:
+          type: integer
+          default: 1
+          minimum: 1
+          description: The number of collos this return consists of
+        parcel_items:
+          type: array
+          description: List of items contained in this return. Required outside EU.
+          items:
+            $ref: '#/components/schemas/parcel-item-returns-create'
+        send_tracking_emails:
+          type: boolean
+          default: false
+          description: When `true`, Sendcloud will send out the default track and trace emails
+        brand_id:
+          type: integer
+          description: The ID of the brand this return belongs to.
+          example: 1
+          minimum: 1
+        total_insured_value:
+          $ref: '#/components/schemas/price'
+        order_number:
           type: string
-          nullable: true
-          description: Packaging instruction code
-        id_number:
+          description: Identifier of the order associated with this return
+          example: ORD12355
+        total_order_value:
+          $ref: '#/components/schemas/price-with-any-currency'
+        external_reference:
           type: string
-          nullable: true
-          description: UN identification number
-        class_division_number:
-          type: string
-          nullable: true
-          description: Hazard class and division number
-        quantity:
-          type: string
-          nullable: true
-          description: Quantity of dangerous goods
-        unit_of_measurement:
-          type: string
+          description: Unique reference for this return, generated by the user
+          example: RET9876
+        customs_shipment_type:
+          type: integer
           enum:
-          - KG
-          - G
-          - L
-          - ML
-          description: Unit of measurement for dangerous goods quantity
-        proper_shipping_name:
-          type: string
-          nullable: true
-          description: Proper shipping name as defined by regulations
-        commodity_regulated_level_code:
-          type: string
-          enum:
-          - LQ
-          - EQ
-          description: Commodity regulated level code
-        transportation_mode:
-          type: string
-          enum:
-          - Highway
-          - Ground
-          - PAX
-          - CAO
-          description: Mode of transportation
-        emergency_contact_name:
-          type: string
-          nullable: true
-          description: Name of emergency contact person
-        emergency_contact_phone:
-          type: string
-          nullable: true
-          description: Phone number of emergency contact
-        adr_packing_group_letter:
-          type: string
-          enum:
-          - I
-          - II
-          - III
-          description: ADR packing group classification
-        local_proper_shipping_name:
-          type: string
-          nullable: true
-          description: Local proper shipping name
-        transport_category:
-          type: string
-          nullable: true
-          description: Transport category for ADR regulations
-        tunnel_restriction_code:
-          type: string
-          nullable: true
-          description: Tunnel restriction code
-        weight_type:
-          type: string
-          enum:
-          - Net
-          - Gross
-          description: Type of weight measurement
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          description: "Customs shipment type\n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
+        delivery_option:
+          $ref: '#/components/schemas/DeliveryOption'
+      required:
+      - from_address
+      - to_address
+      - ship_with
+      - weight
+    dimension-units:
+      type: string
+      title: Dimensional units
+      enum:
+      - cm
+      - mm
+      - m
+      - yd
+      - ft
+      - in
+      example: mm
     address-with-required-fields:
       title: Address Object
       type: object
@@ -1106,6 +1094,29 @@ components:
       - postal_code
       - city
       - country_code
+    price:
+      title: Price Object
+      type: object
+      properties:
+        value:
+          type: number
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          enum:
+          - EUR
+          - GBP
+          - USD
+      description: Price in the specified currency
+    required-price:
+      title: Price object
+      description: Price, consisting of a value and currency.
+      allOf:
+      - $ref: '#/components/schemas/Price'
+      - type: object
+        required:
+        - value
+        - currency
     parcel-customs-information:
       title: ParcelCustomsInformation
       type:
@@ -1347,322 +1358,6 @@ components:
       required:
       - invoice_number
       - export_reason
-    weight-units:
-      type: string
-      title: Mass Units Object
-      enum:
-      - kg
-      - g
-      - lbs
-      - oz
-      example: g
-    TaxNumber:
-      title: Tax Number Object
-      description: Identification numbers and codes used in different contexts. These identifiers are used for taxation, customs, business registration, and other purposes, depending on the country and the specific regulatory requirements. Depending on these requirements you may need to pass one or several numbers related to sender, receiver or importer of record provider. These numbers and codes will be included into final Customs documents.
-      type: object
-      properties:
-        name:
-          type: string
-          example: EORI
-          description: "Tax number abbreviation\n  * VAT - Value-Added Tax → VOEC number for Norway should be shared here as advised by the [Norwegian Tax Authorities](https://www.skatteetaten.no/globalassets/bedrift-og-organisasjon/voec/sending-and-marking-goods-through-postal-services-and-transporters.pdf)\n  * EIN - Employer Identification Number\n  * GST - Goods and Service Tax\n  * SSN - Social Security Number\n  * EORI - Economic Operators Registration and Identification for the European Union\n  * DUN - Data Universal Numbering System\n  * FED - Federal Tax ID\n  * STA - State Tax ID\n  * CNP - Brazil CNPJ/CPF Federal Tax\n  * IE - Brazil type IE/RG Federal Tax\n  * INN - Russia bank details section INN\n  * KPP - Russia bank details section KPP\n  * OGR - Russia bank details section OGRN\n  * OKP - Russia bank details section OKPO\n  * IOSS - SDT or Overseas Registered Supplier or Import One-Stop-Shop or GB VAT (foreign) registration or AUSid GST Registration or VAT on E-Commerce\n  * FTZ - Free Trade Zone ID\n  * DAN - Deferment Account Duties Only\n  * TAN - Deferment Account Tax Only\n  * DTF - Deferment Account Duties, Taxes and Fees Only\n  * RGP - EU Registered Exporters Registration ID\n  * DLI - Driver's License\n  * NID - National Identity Card - A PID (Personal Identification Number) should be provided as NID (National Identity Card).\n  * PAS - Passport\n  * MID - Manufacturer ID\n  * UKIMS - UK Internal Market Scheme -> customs clearance for shipping from Great Britain to Northern Ireland under the Windsor Framework, for more information see [Windsor Framework](https://www.gov.uk/government/publications/the-windsor-framework)\n"
-          enum:
-          - VAT
-          - EIN
-          - GST
-          - SSN
-          - EORI
-          - DUN
-          - FED
-          - STA
-          - CNP
-          - IE
-          - INN
-          - KPP
-          - OGR
-          - OKP
-          - IOSS
-          - FTZ
-          - DAN
-          - TAN
-          - DTF
-          - RGP
-          - DLI
-          - NID
-          - PAS
-          - MID
-          - UKIMS
-        country_code:
-          type: string
-          example: NL
-          description: Issuing country code (ISO 3166-1 alpha-2 code)
-          maxLength: 2
-        value:
-          type: string
-          example: NL123456789B01
-          description: Tax number itself
-          maxLength: 100
-      required:
-      - name
-      - country_code
-      - value
-    price:
-      title: Price Object
-      type: object
-      properties:
-        value:
-          type: number
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          enum:
-          - EUR
-          - GBP
-          - USD
-      description: Price in the specified currency
-    Return:
-      title: Return Object
-      type: object
-      description: A Sendcloud return object
-      properties:
-        from_address:
-          $ref: '#/components/schemas/address-with-required-fields'
-        to_address:
-          $ref: '#/components/schemas/address-with-required-fields'
-        shipping_product:
-          $ref: '#/components/schemas/shipping-products-ref'
-        shipping_option:
-          title: Shipping Option Code
-          type: object
-          description: Sendcloud shipping option code
-          properties:
-            code:
-              type:
-              - string
-              - 'null'
-              description: The shipping option code, as provided by the [Shipping options API](/api/v3/shipping-options/return-a-list-of-available-shipping-options).
-              example: postnl:standard/signature
-        dimensions:
-          $ref: '#/components/schemas/dimension'
-        weight:
-          $ref: '#/components/schemas/weight'
-        collo_count:
-          type: integer
-          default: 1
-          minimum: 1
-          description: The number of collos this return consists of
-        parcel_items:
-          type: array
-          description: List of items contained in this return. Required outside the EU.
-          items:
-            $ref: '#/components/schemas/parcel-item-returns-details'
-        send_tracking_emails:
-          type: boolean
-          default: false
-          description: When `true`, Sendcloud will send out the default track and trace emails
-        brand_id:
-          type: integer
-          description: The ID of the brand this Return belongs to.
-          example: 1
-          minimum: 1
-        label_url:
-          type:
-          - string
-          - 'null'
-          description: URL to download the label. This can be `null` because it might not be announced yet. **Deprecated** in favour of the `label` field.
-          example: https://panel.sendcloud.sc/api/v3/parcels/8/documents/label
-          deprecated: true
-        label:
-          type: object
-          description: URLs to download the label, if the parcel has been announced.
-          properties:
-            normal_printer:
-              type: array
-              items:
-                type: string
-                format: url
-              description: URLs to download the label as an A4 PDF. The array always contains 4 identical URLs for backward compatibility with the v2 positional label layout.
-              example:
-              - https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4
-              - https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4
-              - https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4
-              - https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4
-            label_printer:
-              type: string
-              description: URL to download the label as an A6 PDF
-              format: url
-              example: https://panel.sendcloud.sc/api/v3/parcels/8/documents/label
-        label_cost:
-          $ref: '#/components/schemas/price'
-        insurance:
-          type: boolean
-          description: Whether the return parcel is insured
-        tracking_number:
-          type:
-          - string
-          - 'null'
-          description: This can be null because it might not be announced yet.
-          example: 3SSEND12345678
-        tracking_url:
-          type:
-          - string
-          - 'null'
-          description: URL to track your return. This can be null because it might not be announced yet.
-          example: https://tracking.eu-central-1-0.sendcloud.sc/forward?carrier=sendcloud&code=3SSEND12345678&destination=NL&lang=en-gb&source=NL&type=letter&verification=1001+VV&servicepoint_verification=&created_at=2022-07-27
-        is_cancellable:
-          type: boolean
-          description: Whether the incoming parcel of this return can be cancelled
-        status_history:
-          type: array
-          description: List with the timeline of your return status
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/detailed-tracking-blob-status'
-        created_at:
-          type: string
-          description: Date and time of creation of this return
-          format: date-time
-          example: '2022-08-09T14:32:21.463473+02:00'
-        delivered_at:
-          type:
-          - number
-          - 'null'
-          example: 1734946171662
-          description: A unix timestamp indicating the delivery time of this return. **Deprecated** in favour of the `delivered_at_iso` field.
-          deprecated: true
-        delivered_at_iso:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Date and time of delivery of this return
-          example: '2022-08-09T14:32:21.463473+02:00'
-        reason:
-          $ref: '#/components/schemas/return-reason'
-        refund:
-          $ref: '#/components/schemas/return-refund'
-          type:
-          - object
-          - 'null'
-        return_fee:
-          $ref: '#/components/schemas/price-with-any-currency'
-          type:
-          - object
-          - 'null'
-          description: The fee associated with this return
-        order_number:
-          type: string
-          description: Order number filled by the user
-          example: ORD12345
-        contract:
-          type: integer
-          description: ID of the contract used to ship this return
-        customs_invoice_nr:
-          type:
-          - string
-          - 'null'
-          description: Customs invoice number
-        customs_shipment_type:
-          type: integer
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          description: "Customs shipment type\n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
-        delivery_option:
-          $ref: '#/components/schemas/DeliveryOption'
-        images:
-          type: array
-          description: Images uploaded when creating a return via the Return Portal
-          maxItems: 10
-          items:
-            type: object
-            properties:
-              product_id:
-                type:
-                - string
-                - 'null'
-                example: '123456'
-                description: The ID of the product that this image is related to.
-              uploaded_image:
-                type: string
-                format: uri
-                example: https://example.com/image.png
-                description: The temporary publicly-accessible URL of the originally uploaded image
-              thumbnail_image:
-                type:
-                - string
-                - 'null'
-                format: uri
-                example: https://example.com/thumbnail.png
-                description: The temporary publicly-accessible URL of the image thumbnail
-              description:
-                type:
-                - string
-                - 'null'
-                example: My broken camera, with a crack on the lens
-                description: A description of the uploaded image
-        status:
-          description: The current status of the return
-          example: open
-          type: string
-          enum:
-          - open
-          - requested
-          - request_rejected
-          - awaiting_payment
-          - payment_failed
-        customs_information:
-          $ref: '#/components/schemas/parcel-customs-information'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorObject'
-          readOnly: true
-          description: This array will contain errors such as carrier announcement errors.
-      required:
-      - from_address
-      - to_address
-      - shipping_product
-      - shipping_option
-      - weight
-      - send_tracking_emails
-      - is_cancellable
-      - status_history
-      - created_at
-    ShipWith:
-      title: Ship With Object
-      type: object
-      description: Shipping specifications chosen for return
-      properties:
-        type:
-          type: string
-          description: "The way the shipping method and carrier will be selected. The default is `shipping_product_code`, \nbut the `shipping_option_code` is the new and preferred way.\n"
-          enum:
-          - shipping_option_code
-          - shipping_product_code
-          example: shipping_option_code
-          default: shipping_product_code
-        shipping_option_code:
-          type: string
-          example: dpd:return/return
-          description: "Shipping option code as provided by the [Shipping options API](/api/v3/shipping-options) \nand the `code` property of the corresponding response.\n\nRequired if `type` is `shipping_option_code`."
-        shipping_product_code:
-          type: string
-          example: dpd:return/return
-          description: 'Shipping product code as provided by the [Shipping products API](/api/v2/shipping-products/retrieve-a-list-of-shipping-products)
-
-            and the `code` property of the corresponding response.
-
-
-            Required if `type` is `shipping_product_code`.'
-        functionalities:
-          $ref: '#/components/schemas/carrier-shipping-functionalities'
-          description: Shipping functionalities. Should only be provided if `type` is `shipping_product_code`.
-        contract:
-          type: integer
-          description: ID of the contract to ship the return with
     carrier-shipping-functionalities:
       title: Shipping Functionalities Object
       type: object
@@ -2041,6 +1736,21 @@ components:
 
             '
       description: Shipping functionalities
+    weight:
+      title: Weight
+      type: object
+      description: Weight in the specified unit
+      properties:
+        value:
+          type: number
+          description: Weight value
+          exclusiveMinimum: 0
+          example: 14.5
+        unit:
+          $ref: '#/components/schemas/weight-units'
+      required:
+      - value
+      - unit
     detailed-tracking-blob-status:
       title: Detailed Tracking status
       type: object
@@ -2061,116 +1771,6 @@ components:
       anyOf:
       - type: 'null'
       - $ref: '#/components/schemas/required-price'
-    return-reason:
-      title: Return reason Object
-      type: object
-      description: The reason this Return was created. This could be on the item level or the whole Return.
-      properties:
-        id:
-          type: integer
-          description: Return reason as an int matching the ones provided from Sendcloud
-          format: int64
-          example: 1
-          minimum: 1
-        description:
-          type: string
-          description: Description of the return reason provided
-          example: Too big for me
-    required-price:
-      title: Price object
-      description: Price, consisting of a value and currency.
-      allOf:
-      - $ref: '#/components/schemas/Price'
-      - type: object
-        required:
-        - value
-        - currency
-    ReturnValidation:
-      title: Return Validation Object
-      type: object
-      description: A Sendcloud return validation object
-      properties:
-        from_address:
-          $ref: '#/components/schemas/address-with-required-fields'
-        to_address:
-          $ref: '#/components/schemas/address-with-required-fields'
-        ship_with:
-          $ref: '#/components/schemas/ShipWith'
-        dimensions:
-          type: object
-          description: Dimensions of a single collo. Required for some carriers.
-          properties:
-            height:
-              type: number
-              description: Height in centimeters
-              minimum: 0
-              example: 10
-            width:
-              type: number
-              description: Width in centimeters
-              minimum: 0
-              example: 10
-            length:
-              type: number
-              description: Length in centimeters
-              minimum: 0
-              example: 10
-          required:
-          - height
-          - width
-          - length
-        weight:
-          type: number
-          description: Total weight in kilograms
-          minimum: 0.001
-          example: 2.8
-        collo_count:
-          type: integer
-          default: 1
-          minimum: 1
-          description: The number of collos this return consists of
-        parcel_items:
-          type: array
-          description: List of items contained in this return. Required outside EU.
-          items:
-            $ref: '#/components/schemas/parcel-item-returns-create'
-        send_tracking_emails:
-          type: boolean
-          default: false
-          description: When `true`, Sendcloud will send out the default track and trace emails
-        brand_id:
-          type: integer
-          description: The ID of the brand this return belongs to.
-          example: 1
-          minimum: 1
-        total_insured_value:
-          $ref: '#/components/schemas/price'
-        order_number:
-          type: string
-          description: Identifier of the order associated with this return
-          example: ORD12355
-        total_order_value:
-          $ref: '#/components/schemas/price-with-any-currency'
-        external_reference:
-          type: string
-          description: Unique reference for this return, generated by the user
-          example: RET9876
-        customs_shipment_type:
-          type: integer
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          description: "Customs shipment type\n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
-        delivery_option:
-          $ref: '#/components/schemas/DeliveryOption'
-      required:
-      - from_address
-      - to_address
-      - ship_with
-      - weight
     DeliveryOption:
       title: DeliveryOption
       x-stoplight:
@@ -2196,21 +1796,65 @@ components:
       - pickup
       - in_store
       - null
-    weight:
-      title: Weight
+    address:
+      title: Address Object
       type: object
-      description: Weight in the specified unit
+      description: Sendcloud Address object
       properties:
-        value:
-          type: number
-          description: Weight value
-          exclusiveMinimum: 0
-          example: 14.5
-        unit:
-          $ref: '#/components/schemas/weight-units'
-      required:
-      - value
-      - unit
+        name:
+          type: string
+          example: John Doe
+          description: Name of the person associated with the address
+          minLength: 1
+        company_name:
+          type: string
+          example: Sendcloud
+          description: Name of the company associated with the address
+        address_line_1:
+          type: string
+          example: Stadhuisplein
+          description: First line of the address
+        house_number:
+          type: string
+          example: '50'
+          description: House number of the address
+        address_line_2:
+          type: string
+          description: Additional address information, e.g. 2nd level
+          example: Apartment 17B
+        postal_code:
+          type: string
+          example: 1013 AB
+          description: Zip code of the address
+          minLength: 1
+        city:
+          type: string
+          example: Eindhoven
+          description: City of the address
+          minLength: 1
+        po_box:
+          type:
+          - string
+          - 'null'
+          description: Code required in case of PO Box or post locker delivery
+        state_province_code:
+          type: string
+          example: IT-RM
+          description: The character state code of the customer represented as ISO 3166-2 code. This field is required for certain countries. See [international shipping](/docs/shipments/international-shipping#required-fields-for-international-shipments) for details.
+        country_code:
+          type: string
+          example: NL
+          description: The country code of the customer represented as ISO 3166-1 alpha-2
+          minLength: 1
+        email:
+          type: string
+          format: email
+          example: johndoe@gmail.com
+          description: Email address of the person associated with the address
+        phone_number:
+          type: string
+          example: '+319881729999'
+          description: Phone number of the person associated with the address
     parcel-item-returns-details:
       title: Parcel Item Object
       description: A single item in a shipment
@@ -2227,6 +1871,20 @@ components:
             description: The ID of the return reason, if any. **Deprecated** in favour of the `return_reason` field.
             example: '1'
             deprecated: true
+    Price:
+      title: Price Object
+      type: object
+      properties:
+        value:
+          type: string
+          example: '12.65'
+          pattern: '[\d]+(\.[\d]+)?'
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          minLength: 3
+          maxLength: 3
+          example: USD
     dimension:
       title: Dimension
       type: object
@@ -2254,6 +1912,359 @@ components:
       - width
       - height
       - unit
+    weight-units:
+      type: string
+      title: Mass Units Object
+      enum:
+      - kg
+      - g
+      - lbs
+      - oz
+      example: g
+    return-refund:
+      title: Return refund Object
+      type: object
+      description: Information about the compensation chosen by the customer for the returned items
+      properties:
+        refund_type:
+          type: string
+          description: Identifier of the refund type
+          enum:
+          - money
+          - credit
+          - exchange
+          example: exchange
+        message:
+          type:
+          - string
+          - 'null'
+          description: Additional information about the refund provided by the end consumer
+          example: Exchange for size M
+    return-reason:
+      title: Return reason Object
+      type: object
+      description: The reason this Return was created. This could be on the item level or the whole Return.
+      properties:
+        id:
+          type: integer
+          description: Return reason as an int matching the ones provided from Sendcloud
+          format: int64
+          example: 1
+          minimum: 1
+        description:
+          type: string
+          description: Description of the return reason provided
+          example: Too big for me
+    dangerous-goods:
+      title: DangerousGoods
+      type: object
+      description: Hazardous materials information for items.
+      properties:
+        chemical_record_identifier:
+          type: string
+          nullable: true
+          description: Chemical record identifier for the dangerous goods
+        regulation_set:
+          type: string
+          enum:
+          - IATA
+          - ADR
+          description: Regulation set governing the dangerous goods
+        packaging_type_quantity:
+          type: string
+          nullable: true
+          description: Quantity of packaging type
+        packaging_type:
+          type: string
+          nullable: true
+          description: Type of packaging used
+        packaging_instruction_code:
+          type: string
+          nullable: true
+          description: Packaging instruction code
+        id_number:
+          type: string
+          nullable: true
+          description: UN identification number
+        class_division_number:
+          type: string
+          nullable: true
+          description: Hazard class and division number
+        quantity:
+          type: string
+          nullable: true
+          description: Quantity of dangerous goods
+        unit_of_measurement:
+          type: string
+          enum:
+          - KG
+          - G
+          - L
+          - ML
+          description: Unit of measurement for dangerous goods quantity
+        proper_shipping_name:
+          type: string
+          nullable: true
+          description: Proper shipping name as defined by regulations
+        commodity_regulated_level_code:
+          type: string
+          enum:
+          - LQ
+          - EQ
+          description: Commodity regulated level code
+        transportation_mode:
+          type: string
+          enum:
+          - Highway
+          - Ground
+          - PAX
+          - CAO
+          description: Mode of transportation
+        emergency_contact_name:
+          type: string
+          nullable: true
+          description: Name of emergency contact person
+        emergency_contact_phone:
+          type: string
+          nullable: true
+          description: Phone number of emergency contact
+        adr_packing_group_letter:
+          type: string
+          enum:
+          - I
+          - II
+          - III
+          description: ADR packing group classification
+        local_proper_shipping_name:
+          type: string
+          nullable: true
+          description: Local proper shipping name
+        transport_category:
+          type: string
+          nullable: true
+          description: Transport category for ADR regulations
+        tunnel_restriction_code:
+          type: string
+          nullable: true
+          description: Tunnel restriction code
+        weight_type:
+          type: string
+          enum:
+          - Net
+          - Gross
+          description: Type of weight measurement
+    Return:
+      title: Return Object
+      type: object
+      description: A Sendcloud return object
+      properties:
+        from_address:
+          $ref: '#/components/schemas/address-with-required-fields'
+        to_address:
+          $ref: '#/components/schemas/address-with-required-fields'
+        shipping_product:
+          $ref: '#/components/schemas/shipping-products-ref'
+        shipping_option:
+          title: Shipping Option Code
+          type: object
+          description: Sendcloud shipping option code
+          properties:
+            code:
+              type:
+              - string
+              - 'null'
+              description: The shipping option code, as provided by the [Shipping options API](/api/v3/shipping-options/return-a-list-of-available-shipping-options).
+              example: postnl:standard/signature
+        dimensions:
+          $ref: '#/components/schemas/dimension'
+        weight:
+          $ref: '#/components/schemas/weight'
+        collo_count:
+          type: integer
+          default: 1
+          minimum: 1
+          description: The number of collos this return consists of
+        parcel_items:
+          type: array
+          description: List of items contained in this return. Required outside the EU.
+          items:
+            $ref: '#/components/schemas/parcel-item-returns-details'
+        send_tracking_emails:
+          type: boolean
+          default: false
+          description: When `true`, Sendcloud will send out the default track and trace emails
+        brand_id:
+          type: integer
+          description: The ID of the brand this Return belongs to.
+          example: 1
+          minimum: 1
+        label_url:
+          type:
+          - string
+          - 'null'
+          description: URL to download the label. This can be `null` because it might not be announced yet. **Deprecated** in favour of the `label` field.
+          example: https://panel.sendcloud.sc/api/v3/parcels/8/documents/label
+          deprecated: true
+        label:
+          type: object
+          description: URLs to download the label, if the parcel has been announced.
+          properties:
+            normal_printer:
+              type: array
+              items:
+                type: string
+                format: url
+              description: URLs to download the label as an A4 PDF. The array always contains 4 identical URLs for backward compatibility with the v2 positional label layout.
+              example:
+              - https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4
+              - https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4
+              - https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4
+              - https://panel.sendcloud.sc/api/v3/parcels/8/documents/label?paper_size=a4
+            label_printer:
+              type: string
+              description: URL to download the label as an A6 PDF
+              format: url
+              example: https://panel.sendcloud.sc/api/v3/parcels/8/documents/label
+        label_cost:
+          $ref: '#/components/schemas/price'
+        insurance:
+          type: boolean
+          description: Whether the return parcel is insured
+        tracking_number:
+          type:
+          - string
+          - 'null'
+          description: This can be null because it might not be announced yet.
+          example: 3SSEND12345678
+        tracking_url:
+          type:
+          - string
+          - 'null'
+          description: URL to track your return. This can be null because it might not be announced yet.
+          example: https://tracking.eu-central-1-0.sendcloud.sc/forward?carrier=sendcloud&code=3SSEND12345678&destination=NL&lang=en-gb&source=NL&type=letter&verification=1001+VV&servicepoint_verification=&created_at=2022-07-27
+        is_cancellable:
+          type: boolean
+          description: Whether the incoming parcel of this return can be cancelled
+        status_history:
+          type: array
+          description: List with the timeline of your return status
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/detailed-tracking-blob-status'
+        created_at:
+          type: string
+          description: Date and time of creation of this return
+          format: date-time
+          example: '2022-08-09T14:32:21.463473+02:00'
+        delivered_at:
+          type:
+          - number
+          - 'null'
+          example: 1734946171662
+          description: A unix timestamp indicating the delivery time of this return. **Deprecated** in favour of the `delivered_at_iso` field.
+          deprecated: true
+        delivered_at_iso:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Date and time of delivery of this return
+          example: '2022-08-09T14:32:21.463473+02:00'
+        reason:
+          $ref: '#/components/schemas/return-reason'
+        refund:
+          $ref: '#/components/schemas/return-refund'
+          type:
+          - object
+          - 'null'
+        return_fee:
+          $ref: '#/components/schemas/price-with-any-currency'
+          type:
+          - object
+          - 'null'
+          description: The fee associated with this return
+        order_number:
+          type: string
+          description: Order number filled by the user
+          example: ORD12345
+        contract:
+          type: integer
+          description: ID of the contract used to ship this return
+        customs_invoice_nr:
+          type:
+          - string
+          - 'null'
+          description: Customs invoice number
+        customs_shipment_type:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          description: "Customs shipment type\n  * `0` - Gift\n  * `1` - Documents\n  * `2` - Commercial Goods\n  * `3` - Commercial Sample\n  * `4` - Returned Goods\n"
+        delivery_option:
+          $ref: '#/components/schemas/DeliveryOption'
+        images:
+          type: array
+          description: Images uploaded when creating a return via the Return Portal
+          maxItems: 10
+          items:
+            type: object
+            properties:
+              product_id:
+                type:
+                - string
+                - 'null'
+                example: '123456'
+                description: The ID of the product that this image is related to.
+              uploaded_image:
+                type: string
+                format: uri
+                example: https://example.com/image.png
+                description: The temporary publicly-accessible URL of the originally uploaded image
+              thumbnail_image:
+                type:
+                - string
+                - 'null'
+                format: uri
+                example: https://example.com/thumbnail.png
+                description: The temporary publicly-accessible URL of the image thumbnail
+              description:
+                type:
+                - string
+                - 'null'
+                example: My broken camera, with a crack on the lens
+                description: A description of the uploaded image
+        status:
+          description: The current status of the return
+          example: open
+          type: string
+          enum:
+          - open
+          - requested
+          - request_rejected
+          - awaiting_payment
+          - payment_failed
+        customs_information:
+          $ref: '#/components/schemas/parcel-customs-information'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorObject'
+          readOnly: true
+          description: This array will contain errors such as carrier announcement errors.
+      required:
+      - from_address
+      - to_address
+      - shipping_product
+      - shipping_option
+      - weight
+      - send_tracking_emails
+      - is_cancellable
+      - status_history
+      - created_at
     errors_2:
       title: Errors
       type: object
@@ -2284,47 +2295,6 @@ components:
                 - required
                 - not_a_list
                 description: Machine-recognizable predefined Sendcloud code of the error
-    dimension-units:
-      type: string
-      title: Dimensional units
-      enum:
-      - cm
-      - mm
-      - m
-      - yd
-      - ft
-      - in
-      example: mm
-  responses:
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          examples:
-            InvalidPostalCodeError:
-              value:
-                error:
-                  code: invalid_postal_code
-                  request: api/v2/brand/devtest/return-portal/outgoing
-                  message: The postal code you provided is invalid.
-          schema:
-            type: object
-            properties:
-              error:
-                type: object
-                properties:
-                  code:
-                    type: string
-                    description: The code of the error
-                    example: invalid_postal_code
-                  request:
-                    type: string
-                    description: The request the error is originated from
-                    example: api/v2/brand/devtest/return-portal/outgoing
-                  message:
-                    type: string
-                    description: A message describing the error
-                    example: External reference has already been used in another return.
   requestBodies:
     CreateReturn:
       content:
@@ -2514,6 +2484,36 @@ components:
                   currency: EUR
                 external_reference: RET9876
                 delivery_option: drop_off_point
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          examples:
+            InvalidPostalCodeError:
+              value:
+                error:
+                  code: invalid_postal_code
+                  request: api/v2/brand/devtest/return-portal/outgoing
+                  message: The postal code you provided is invalid.
+          schema:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: The code of the error
+                    example: invalid_postal_code
+                  request:
+                    type: string
+                    description: The request the error is originated from
+                    example: api/v2/brand/devtest/return-portal/outgoing
+                  message:
+                    type: string
+                    description: A message describing the error
+                    example: External reference has already been used in another return.
   parameters:
     SendcloudPartnerId:
       in: header

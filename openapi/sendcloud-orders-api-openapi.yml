@@ -1247,65 +1247,324 @@ paths:
       - Orders
 components:
   schemas:
-    address:
-      title: Address Object
+    measurement-partial-update:
+      title: Measurement Object
       type: object
-      description: Sendcloud Address object
+      properties:
+        dimension:
+          type: object
+          description: Dimension in the specified unit
+          properties:
+            length:
+              type: number
+              description: length in specified unit
+              minimum: 0
+              example: 15
+            width:
+              type: number
+              description: width in specified unit
+              minimum: 0
+              example: 20.5
+            height:
+              type: number
+              description: height in specified unit
+              minimum: 0
+              example: 37
+            unit:
+              $ref: '#/components/schemas/dimension-units'
+        weight:
+          type: object
+          description: Weight in the specified unit
+          properties:
+            value:
+              type: number
+              description: Weight value
+              exclusiveMinimum: 0
+              example: 14.5
+            unit:
+              $ref: '#/components/schemas/weight-units'
+        volume:
+          type: object
+          description: Volume in the specified unit
+          properties:
+            value:
+              type: integer
+              description: Volume value
+              minimum: 0
+              example: 5
+            unit:
+              $ref: '#/components/schemas/volume-units'
+      description: This object provides essential information for accurate packing, shipping, and inventory management
+    tax-number:
+      title: Tax Number
+      type: object
       properties:
         name:
-          type: string
-          example: John Doe
-          description: Name of the person associated with the address
-          minLength: 1
-        company_name:
-          type: string
-          example: Sendcloud
-          description: Name of the company associated with the address
-        address_line_1:
-          type: string
-          example: Stadhuisplein
-          description: First line of the address
-        house_number:
-          type: string
-          example: '50'
-          description: House number of the address
-        address_line_2:
-          type: string
-          description: Additional address information, e.g. 2nd level
-          example: Apartment 17B
-        postal_code:
-          type: string
-          example: 1013 AB
-          description: Zip code of the address
-          minLength: 1
-        city:
-          type: string
-          example: Eindhoven
-          description: City of the address
-          minLength: 1
-        po_box:
           type:
           - string
           - 'null'
-          description: Code required in case of PO Box or post locker delivery
-        state_province_code:
-          type: string
-          example: IT-RM
-          description: The character state code of the customer represented as ISO 3166-2 code. This field is required for certain countries. See [international shipping](/docs/shipments/international-shipping#required-fields-for-international-shipments) for details.
+          title: Tax ID name
+          example: VAT
         country_code:
-          type: string
+          type:
+          - string
+          - 'null'
+          title: The country code of the country in the address
           example: NL
-          description: The country code of the customer represented as ISO 3166-1 alpha-2
-          minLength: 1
-        email:
+        value:
+          type:
+          - string
+          - 'null'
+          title: The value of the Tax ID
+          example: NL987654321B02
+    shipping-option-code-properties:
+      title: Shipping option properties Object
+      description: Contains the required properties to be sent when API client informs the shipping method and carrier to be used
+      type: object
+      properties:
+        shipping_option_code:
+          type:
+          - string
+          - 'null'
+          description: The shipping option that will be or is used for shipping your parcel. A shipping option `code` can be retrieved from the [Create a list of shipping options](/api/v3/shipping-options/create-a-list-of-shipping-options) endpoint.
+          example: postnl:standard/insured=3000
+        contract_id:
+          type:
+          - integer
+          - 'null'
+          minimum: 1
+          description: Selected shipping contract. If you haven't specified a contract for shipping your parcel, we will automatically select the default contract for the carrier that matches your shipping option. You can retrieve your contract IDs by using the [Retrieve a list of contracts](/api/v3/contracts/retrieve-a-list-of-contracts) operation. Otherwise, the default direct contract will be automatically selected.
+      required:
+      - shipping_option_code
+    volume:
+      title: Volume
+      type: object
+      description: Volume in the specified unit
+      properties:
+        value:
+          type: integer
+          description: Volume value
+          minimum: 0
+          example: 5
+        unit:
+          $ref: '#/components/schemas/volume-units'
+      required:
+      - value
+      - unit
+    dimension-units:
+      type: string
+      title: Dimensional units
+      enum:
+      - cm
+      - mm
+      - m
+      - yd
+      - ft
+      - in
+      example: mm
+    shipping-address:
+      title: Shipping Address
+      oneOf:
+      - $ref: '#/components/schemas/address'
+      required:
+      - name
+      - address_line_1
+      - postal_code
+      - city
+      - country_code
+      description: Sendcloud Shipping Address object
+    customs-details:
+      title: Customs Details
+      type:
+      - object
+      - 'null'
+      description: Customs information required for international shipments.
+      properties:
+        commercial_invoice_number:
           type: string
-          format: email
-          example: johndoe@gmail.com
-          description: Email address of the person associated with the address
+          description: Your own commercial invoice number
+          example: '1002404102022'
+        shipment_type:
+          type: string
+          description: Indicates the purpose or reason behind exporting the items. This classification helps customs authorities determine the applicable regulations, taxes, and duties.
+          enum:
+          - gift
+          - commercial_goods
+          - commercial_sample
+          - returned_goods
+          example: commercial_goods
+        export_type:
+          type: string
+          description: "Export type documentation serves to categorize international shipments into three primary classifications: \n  - Private exports, intended for personal use\n  - Commercial B2C exports, directed towards individual consumers\n  - Commercial B2B exports, involving business-to-business transactions\n  These distinctions facilitate adherence to regulatory requirements and ensure the orderly movement of goods across international boundaries.\n"
+          enum:
+          - private
+          - commercial_b2c
+          - commercial_b2b
+          example: private
+        tax_numbers:
+          type:
+          - object
+          - 'null'
+          title: Identification numbers and codes related to sender, receiver and importer of record provider.
+          properties:
+            sender:
+              type: array
+              title: Sender's Tax Information
+              minItems: 0
+              items:
+                $ref: '#/components/schemas/tax-number'
+            receiver:
+              type: array
+              title: Receiver's Tax Information
+              minItems: 0
+              items:
+                $ref: '#/components/schemas/tax-number'
+            importer_of_record:
+              type: array
+              title: Receiver's Tax Information
+              minItems: 0
+              items:
+                $ref: '#/components/schemas/tax-number'
+    customer-details:
+      title: Customer Details
+      type: object
+      description: Node for an information about customer
+      properties:
+        name:
+          type: string
+          description: Name of the customer
+          example: John Doe
         phone_number:
           type: string
+          description: Phone number of the customer
           example: '+319881729999'
-          description: Phone number of the person associated with the address
+        email:
+          type: string
+          description: Email of the customer
+          example: john@doe.com
+      required:
+      - name
+    payment-details:
+      title: Payment Details
+      type: object
+      description: Node for everything about payments and money
+      required:
+      - total_price
+      - status
+      properties:
+        is_cash_on_delivery:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates if customers will pay the full order amount upon delivery of the order
+          example: true
+        total_price:
+          oneOf:
+          - $ref: '#/components/schemas/price'
+          description: Total value in the shop currency
+          required:
+          - value
+          - currency
+        subtotal_price:
+          oneOf:
+          - $ref: '#/components/schemas/price'
+          description: Subtotal value in the shop currency
+          required:
+          - value
+          - currency
+        estimated_shipping_price:
+          oneOf:
+          - $ref: '#/components/schemas/price'
+          description: Sum of all shipping costs
+          required:
+          - value
+          - currency
+        estimated_tax_price:
+          oneOf:
+          - $ref: '#/components/schemas/price'
+          description: Sum of all estimated taxes for the order
+          required:
+          - value
+          - currency
+        status:
+          type: object
+          description: Payment status of an order
+          required:
+          - code
+          properties:
+            code:
+              type: string
+              description: Custom internal shop status, you can use it for filtering
+              example: paid
+              minLength: 1
+            message:
+              type: string
+              description: User-defined human readable status
+              example: Order has been paid
+        invoice_date:
+          type:
+          - string
+          - 'null'
+          title: Invoice Date
+          description: The date when invoice was issued.
+          example: '2018-07-14'
+        discount_granted:
+          type:
+          - object
+          - 'null'
+          title: Discount Granted
+          description: Discount granted on the total order excluding any possible discounts on shipping.
+          $ref: '#/components/schemas/costs-object'
+        insurance_costs:
+          type:
+          - object
+          - 'null'
+          title: Insurance Cost
+          description: Amount the order is insured for
+          $ref: '#/components/schemas/costs-object'
+        freight_costs:
+          type:
+          - object
+          - 'null'
+          title: Freight Cost
+          description: Shipping cost of the order after discounts have been applied.
+          $ref: '#/components/schemas/costs-object'
+        other_costs:
+          type:
+          - object
+          - 'null'
+          title: Other Costs
+          description: Any other costs (for eg, wrapping costs) associated with the order
+          $ref: '#/components/schemas/costs-object'
+    price:
+      title: Price Object
+      type: object
+      properties:
+        value:
+          type: number
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          enum:
+          - EUR
+          - GBP
+          - USD
+      description: Price in the specified currency
+    weight:
+      title: Weight
+      type: object
+      description: Weight in the specified unit
+      properties:
+        value:
+          type: number
+          description: Weight value
+          exclusiveMinimum: 0
+          example: 14.5
+        unit:
+          $ref: '#/components/schemas/weight-units'
+      required:
+      - value
+      - unit
     order-items:
       title: Order Items
       type: array
@@ -1417,593 +1676,6 @@ components:
         - name
         - quantity
         - total_price
-    dangerous-goods:
-      title: DangerousGoods
-      type: object
-      description: Hazardous materials information for items.
-      properties:
-        chemical_record_identifier:
-          type: string
-          nullable: true
-          description: Chemical record identifier for the dangerous goods
-        regulation_set:
-          type: string
-          enum:
-          - IATA
-          - ADR
-          description: Regulation set governing the dangerous goods
-        packaging_type_quantity:
-          type: string
-          nullable: true
-          description: Quantity of packaging type
-        packaging_type:
-          type: string
-          nullable: true
-          description: Type of packaging used
-        packaging_instruction_code:
-          type: string
-          nullable: true
-          description: Packaging instruction code
-        id_number:
-          type: string
-          nullable: true
-          description: UN identification number
-        class_division_number:
-          type: string
-          nullable: true
-          description: Hazard class and division number
-        quantity:
-          type: string
-          nullable: true
-          description: Quantity of dangerous goods
-        unit_of_measurement:
-          type: string
-          enum:
-          - KG
-          - G
-          - L
-          - ML
-          description: Unit of measurement for dangerous goods quantity
-        proper_shipping_name:
-          type: string
-          nullable: true
-          description: Proper shipping name as defined by regulations
-        commodity_regulated_level_code:
-          type: string
-          enum:
-          - LQ
-          - EQ
-          description: Commodity regulated level code
-        transportation_mode:
-          type: string
-          enum:
-          - Highway
-          - Ground
-          - PAX
-          - CAO
-          description: Mode of transportation
-        emergency_contact_name:
-          type: string
-          nullable: true
-          description: Name of emergency contact person
-        emergency_contact_phone:
-          type: string
-          nullable: true
-          description: Phone number of emergency contact
-        adr_packing_group_letter:
-          type: string
-          enum:
-          - I
-          - II
-          - III
-          description: ADR packing group classification
-        local_proper_shipping_name:
-          type: string
-          nullable: true
-          description: Local proper shipping name
-        transport_category:
-          type: string
-          nullable: true
-          description: Transport category for ADR regulations
-        tunnel_restriction_code:
-          type: string
-          nullable: true
-          description: Tunnel restriction code
-        weight_type:
-          type: string
-          enum:
-          - Net
-          - Gross
-          description: Type of weight measurement
-    weight-units:
-      type: string
-      title: Mass Units Object
-      enum:
-      - kg
-      - g
-      - lbs
-      - oz
-      example: g
-    tax-number:
-      title: Tax Number
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          title: Tax ID name
-          example: VAT
-        country_code:
-          type:
-          - string
-          - 'null'
-          title: The country code of the country in the address
-          example: NL
-        value:
-          type:
-          - string
-          - 'null'
-          title: The value of the Tax ID
-          example: NL987654321B02
-    order:
-      title: Order Object
-      type: object
-      description: Sendcloud Order object
-      properties:
-        id:
-          description: Autogenerated Sendcloud's internal ID
-          type: string
-          readOnly: true
-        order_id:
-          type: string
-          description: External order ID assigned by shop system
-          example: 7bdd5bfd-76bc-4654-9d40-5d5d49f1cd6c
-          minLength: 1
-        order_number:
-          type: string
-          description: Unique order number generated manually or by shop system
-          example: '101170081'
-          minLength: 1
-        created_at:
-          type: string
-          format: date-time
-          description: The date when an order was created at Sendcloud in ISO 8601
-          example: '2018-02-27T10:00:00.555309+00:00'
-          readOnly: true
-        modified_at:
-          type: string
-          format: date-time
-          description: The date when an order was last modified at Sendcloud in ISO 8601
-          example: '2018-02-27T10:00:00.555309+00:00'
-          readOnly: true
-        order_details:
-          type: object
-          description: Node for general order information
-          required:
-          - integration
-          - status
-          - order_created_at
-          - order_items
-          properties:
-            integration:
-              type: object
-              description: Sendcloud Integration object where orders come from
-              required:
-              - id
-              properties:
-                id:
-                  type: integer
-                  description: Sendcloud Integration ID. To obtain the integration ID, you can use the [Retrieve a list of integrations](/api/v3/integrations/retrieve-a-list-of-integrations) endpoint.
-                  example: 7
-            status:
-              type: object
-              description: Order status
-              required:
-              - code
-              properties:
-                code:
-                  type: string
-                  description: Custom internal shop status, you can use it for filtering
-                  example: fulfilled
-                  minLength: 1
-                message:
-                  type: string
-                  description: User-defined human readable status
-                  example: Order has been fulfilled
-            order_created_at:
-              type: string
-              format: date-time
-              description: The date and time that the order was placed in the respective shop system in ISO 8601
-              example: '2018-02-27T10:00:00.555309+00:00'
-            order_updated_at:
-              type: string
-              format: date-time
-              description: The date and time that the order was last updated in the respective shop system in ISO 8601
-              example: '2018-02-27T10:00:00.555309+00:00'
-            order_items:
-              $ref: '#/components/schemas/order-items'
-            notes:
-              type: string
-              description: Internal notes or comments placed by consumer on the order
-              example: 'Call this number before delivery: 063 874 6473'
-            tags:
-              type: array
-              description: Tags assigned to the order
-              items:
-                type: string
-              example:
-              - fragile
-              - countryside warehouse
-        payment_details:
-          $ref: '#/components/schemas/payment-details'
-        customs_details:
-          $ref: '#/components/schemas/customs-details'
-        customer_details:
-          $ref: '#/components/schemas/customer-details'
-        billing_address:
-          $ref: '#/components/schemas/billing-address'
-        shipping_address:
-          $ref: '#/components/schemas/shipping-address'
-        shipping_details:
-          $ref: '#/components/schemas/shipping-details'
-        service_point_details:
-          $ref: '#/components/schemas/service-point'
-      required:
-      - order_id
-      - order_number
-      - order_details
-      - payment_details
-    ErrorObject:
-      title: Error
-      type: object
-      description: Error in a JSON:API error format
-      properties:
-        id:
-          type: string
-          description: A unique identifier for the error.
-        links:
-          type: object
-          description: A set of hyperlinks that provide additional information about the error.
-          properties:
-            about:
-              type: string
-              description: A URL that provides additional information about the error.
-        status:
-          type: string
-          format: int32
-          description: The HTTP status code of the error.
-          minLength: 1
-        code:
-          type: string
-          description: A unique error code for the error, in snake case format.
-          minLength: 1
-          enum:
-          - unknown_field
-          - invalid
-          - forbidden
-          - invalid_choice
-          - min_value
-          - 'null'
-          - not_found
-          - required
-          - not_a_list
-          - non_field_errors
-          - authentication_failed
-          - validation_error
-          - parcel_announcement_error
-        title:
-          type: string
-          description: A short, human-readable summary of the error.
-          minLength: 1
-        detail:
-          type: string
-          description: A human-readable explanation of the error.
-          minLength: 1
-        source:
-          type: object
-          description: An object that identifies the source of the error within the request payload.
-          properties:
-            pointer:
-              type: string
-              description: A `JSON` pointer to the location of the error within the request payload.
-            parameter:
-              type: string
-              description: The name of the `query` parameter that caused the error.
-            header:
-              type: string
-              description: The name of the `header` parameter that caused the error.
-        meta:
-          type: object
-          description: Additional metadata about the error.
-    shipping-address:
-      title: Shipping Address
-      oneOf:
-      - $ref: '#/components/schemas/address'
-      required:
-      - name
-      - address_line_1
-      - postal_code
-      - city
-      - country_code
-      description: Sendcloud Shipping Address object
-    shipping-details:
-      type: object
-      description: Shipping information
-      properties:
-        is_local_pickup:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates if customers should collect the order in person from a merchant location
-          example: true
-        delivery_indicator:
-          title: Delivery Indicator
-          description: 'A free text field to indicate how a specific order should be shipped.
-
-
-            - The field is intended for applying the Checkout Delivery Method condition in shipping rules.
-
-            - Learn more about [shipping rules](/docs/shipping/shipping-rules/).'
-          type: string
-          example: DHL Home Delivery
-        measurement:
-          $ref: '#/components/schemas/measurement'
-          description: Total order measurements
-        ship_with:
-          $ref: '#/components/schemas/ship-with'
-    customs-details:
-      title: Customs Details
-      type:
-      - object
-      - 'null'
-      description: Customs information required for international shipments.
-      properties:
-        commercial_invoice_number:
-          type: string
-          description: Your own commercial invoice number
-          example: '1002404102022'
-        shipment_type:
-          type: string
-          description: Indicates the purpose or reason behind exporting the items. This classification helps customs authorities determine the applicable regulations, taxes, and duties.
-          enum:
-          - gift
-          - commercial_goods
-          - commercial_sample
-          - returned_goods
-          example: commercial_goods
-        export_type:
-          type: string
-          description: "Export type documentation serves to categorize international shipments into three primary classifications: \n  - Private exports, intended for personal use\n  - Commercial B2C exports, directed towards individual consumers\n  - Commercial B2B exports, involving business-to-business transactions\n  These distinctions facilitate adherence to regulatory requirements and ensure the orderly movement of goods across international boundaries.\n"
-          enum:
-          - private
-          - commercial_b2c
-          - commercial_b2b
-          example: private
-        tax_numbers:
-          type:
-          - object
-          - 'null'
-          title: Identification numbers and codes related to sender, receiver and importer of record provider.
-          properties:
-            sender:
-              type: array
-              title: Sender's Tax Information
-              minItems: 0
-              items:
-                $ref: '#/components/schemas/tax-number'
-            receiver:
-              type: array
-              title: Receiver's Tax Information
-              minItems: 0
-              items:
-                $ref: '#/components/schemas/tax-number'
-            importer_of_record:
-              type: array
-              title: Receiver's Tax Information
-              minItems: 0
-              items:
-                $ref: '#/components/schemas/tax-number'
-    price:
-      title: Price Object
-      type: object
-      properties:
-        value:
-          type: number
-        currency:
-          type: string
-          description: ISO 4217 currency code
-          enum:
-          - EUR
-          - GBP
-          - USD
-      description: Price in the specified currency
-    measurement:
-      title: Measurement Object
-      type: object
-      properties:
-        dimension:
-          $ref: '#/components/schemas/dimension'
-        weight:
-          $ref: '#/components/schemas/weight'
-        volume:
-          $ref: '#/components/schemas/volume'
-      description: This object provides essential information for accurate packing, shipping, and inventory management
-    payment-details:
-      title: Payment Details
-      type: object
-      description: Node for everything about payments and money
-      required:
-      - total_price
-      - status
-      properties:
-        is_cash_on_delivery:
-          type:
-          - boolean
-          - 'null'
-          description: Indicates if customers will pay the full order amount upon delivery of the order
-          example: true
-        total_price:
-          oneOf:
-          - $ref: '#/components/schemas/price'
-          description: Total value in the shop currency
-          required:
-          - value
-          - currency
-        subtotal_price:
-          oneOf:
-          - $ref: '#/components/schemas/price'
-          description: Subtotal value in the shop currency
-          required:
-          - value
-          - currency
-        estimated_shipping_price:
-          oneOf:
-          - $ref: '#/components/schemas/price'
-          description: Sum of all shipping costs
-          required:
-          - value
-          - currency
-        estimated_tax_price:
-          oneOf:
-          - $ref: '#/components/schemas/price'
-          description: Sum of all estimated taxes for the order
-          required:
-          - value
-          - currency
-        status:
-          type: object
-          description: Payment status of an order
-          required:
-          - code
-          properties:
-            code:
-              type: string
-              description: Custom internal shop status, you can use it for filtering
-              example: paid
-              minLength: 1
-            message:
-              type: string
-              description: User-defined human readable status
-              example: Order has been paid
-        invoice_date:
-          type:
-          - string
-          - 'null'
-          title: Invoice Date
-          description: The date when invoice was issued.
-          example: '2018-07-14'
-        discount_granted:
-          type:
-          - object
-          - 'null'
-          title: Discount Granted
-          description: Discount granted on the total order excluding any possible discounts on shipping.
-          $ref: '#/components/schemas/costs-object'
-        insurance_costs:
-          type:
-          - object
-          - 'null'
-          title: Insurance Cost
-          description: Amount the order is insured for
-          $ref: '#/components/schemas/costs-object'
-        freight_costs:
-          type:
-          - object
-          - 'null'
-          title: Freight Cost
-          description: Shipping cost of the order after discounts have been applied.
-          $ref: '#/components/schemas/costs-object'
-        other_costs:
-          type:
-          - object
-          - 'null'
-          title: Other Costs
-          description: Any other costs (for eg, wrapping costs) associated with the order
-          $ref: '#/components/schemas/costs-object'
-    ship-with:
-      title: Ship with object
-      type: object
-      description: 'The ship with object can be used to define how you would like to send your shipment.
-
-
-        You can use a `shipping_option_code`. This is a unique identifier that displays what carrier and what set of shipping functionalities you want to use.
-
-        '
-      examples:
-      - type: shipping_option_code
-        properties:
-          shipping_option_code: postnl:standard/insured=3000
-          contract_id: 517
-      properties:
-        type:
-          type: string
-          description: 'The way the shipping method and carrier will be selected.
-
-            '
-          enum:
-          - shipping_option_code
-          example: shipping_option_code
-        properties:
-          $ref: '#/components/schemas/shipping-option-code-properties'
-      required:
-      - type
-      - properties
-    volume:
-      title: Volume
-      type: object
-      description: Volume in the specified unit
-      properties:
-        value:
-          type: integer
-          description: Volume value
-          minimum: 0
-          example: 5
-        unit:
-          $ref: '#/components/schemas/volume-units'
-      required:
-      - value
-      - unit
-    volume-units:
-      type: string
-      title: Volume units
-      enum:
-      - m3
-      - cm3
-      - l
-      - ml
-      - gal
-      example: l
-    shipping-option-code-properties:
-      title: Shipping option properties Object
-      description: Contains the required properties to be sent when API client informs the shipping method and carrier to be used
-      type: object
-      properties:
-        shipping_option_code:
-          type:
-          - string
-          - 'null'
-          description: The shipping option that will be or is used for shipping your parcel. A shipping option `code` can be retrieved from the [Create a list of shipping options](/api/v3/shipping-options/create-a-list-of-shipping-options) endpoint.
-          example: postnl:standard/insured=3000
-        contract_id:
-          type:
-          - integer
-          - 'null'
-          minimum: 1
-          description: Selected shipping contract. If you haven't specified a contract for shipping your parcel, we will automatically select the default contract for the carrier that matches your shipping option. You can retrieve your contract IDs by using the [Retrieve a list of contracts](/api/v3/contracts/retrieve-a-list-of-contracts) operation. Otherwise, the default direct contract will be automatically selected.
-      required:
-      - shipping_option_code
-    billing-address:
-      title: Billing Address
-      oneOf:
-      - $ref: '#/components/schemas/address'
-      required:
-      - name
-      - address_line_1
-      - postal_code
-      - city
-      - country_code
-      description: Sendcloud Billing Address object
     order-partial-update:
       title: Order partial update
       x-stoplight:
@@ -2327,6 +1999,320 @@ components:
                 description: Can contain carrier specific data
             required:
             - carrier_service_point_id
+    order:
+      title: Order Object
+      type: object
+      description: Sendcloud Order object
+      properties:
+        id:
+          description: Autogenerated Sendcloud's internal ID
+          type: string
+          readOnly: true
+        order_id:
+          type: string
+          description: External order ID assigned by shop system
+          example: 7bdd5bfd-76bc-4654-9d40-5d5d49f1cd6c
+          minLength: 1
+        order_number:
+          type: string
+          description: Unique order number generated manually or by shop system
+          example: '101170081'
+          minLength: 1
+        created_at:
+          type: string
+          format: date-time
+          description: The date when an order was created at Sendcloud in ISO 8601
+          example: '2018-02-27T10:00:00.555309+00:00'
+          readOnly: true
+        modified_at:
+          type: string
+          format: date-time
+          description: The date when an order was last modified at Sendcloud in ISO 8601
+          example: '2018-02-27T10:00:00.555309+00:00'
+          readOnly: true
+        order_details:
+          type: object
+          description: Node for general order information
+          required:
+          - integration
+          - status
+          - order_created_at
+          - order_items
+          properties:
+            integration:
+              type: object
+              description: Sendcloud Integration object where orders come from
+              required:
+              - id
+              properties:
+                id:
+                  type: integer
+                  description: Sendcloud Integration ID. To obtain the integration ID, you can use the [Retrieve a list of integrations](/api/v3/integrations/retrieve-a-list-of-integrations) endpoint.
+                  example: 7
+            status:
+              type: object
+              description: Order status
+              required:
+              - code
+              properties:
+                code:
+                  type: string
+                  description: Custom internal shop status, you can use it for filtering
+                  example: fulfilled
+                  minLength: 1
+                message:
+                  type: string
+                  description: User-defined human readable status
+                  example: Order has been fulfilled
+            order_created_at:
+              type: string
+              format: date-time
+              description: The date and time that the order was placed in the respective shop system in ISO 8601
+              example: '2018-02-27T10:00:00.555309+00:00'
+            order_updated_at:
+              type: string
+              format: date-time
+              description: The date and time that the order was last updated in the respective shop system in ISO 8601
+              example: '2018-02-27T10:00:00.555309+00:00'
+            order_items:
+              $ref: '#/components/schemas/order-items'
+            notes:
+              type: string
+              description: Internal notes or comments placed by consumer on the order
+              example: 'Call this number before delivery: 063 874 6473'
+            tags:
+              type: array
+              description: Tags assigned to the order
+              items:
+                type: string
+              example:
+              - fragile
+              - countryside warehouse
+        payment_details:
+          $ref: '#/components/schemas/payment-details'
+        customs_details:
+          $ref: '#/components/schemas/customs-details'
+        customer_details:
+          $ref: '#/components/schemas/customer-details'
+        billing_address:
+          $ref: '#/components/schemas/billing-address'
+        shipping_address:
+          $ref: '#/components/schemas/shipping-address'
+        shipping_details:
+          $ref: '#/components/schemas/shipping-details'
+        service_point_details:
+          $ref: '#/components/schemas/service-point'
+      required:
+      - order_id
+      - order_number
+      - order_details
+      - payment_details
+    address:
+      title: Address Object
+      type: object
+      description: Sendcloud Address object
+      properties:
+        name:
+          type: string
+          example: John Doe
+          description: Name of the person associated with the address
+          minLength: 1
+        company_name:
+          type: string
+          example: Sendcloud
+          description: Name of the company associated with the address
+        address_line_1:
+          type: string
+          example: Stadhuisplein
+          description: First line of the address
+        house_number:
+          type: string
+          example: '50'
+          description: House number of the address
+        address_line_2:
+          type: string
+          description: Additional address information, e.g. 2nd level
+          example: Apartment 17B
+        postal_code:
+          type: string
+          example: 1013 AB
+          description: Zip code of the address
+          minLength: 1
+        city:
+          type: string
+          example: Eindhoven
+          description: City of the address
+          minLength: 1
+        po_box:
+          type:
+          - string
+          - 'null'
+          description: Code required in case of PO Box or post locker delivery
+        state_province_code:
+          type: string
+          example: IT-RM
+          description: The character state code of the customer represented as ISO 3166-2 code. This field is required for certain countries. See [international shipping](/docs/shipments/international-shipping#required-fields-for-international-shipments) for details.
+        country_code:
+          type: string
+          example: NL
+          description: The country code of the customer represented as ISO 3166-1 alpha-2
+          minLength: 1
+        email:
+          type: string
+          format: email
+          example: johndoe@gmail.com
+          description: Email address of the person associated with the address
+        phone_number:
+          type: string
+          example: '+319881729999'
+          description: Phone number of the person associated with the address
+    ship-with:
+      title: Ship with object
+      type: object
+      description: 'The ship with object can be used to define how you would like to send your shipment.
+
+
+        You can use a `shipping_option_code`. This is a unique identifier that displays what carrier and what set of shipping functionalities you want to use.
+
+        '
+      examples:
+      - type: shipping_option_code
+        properties:
+          shipping_option_code: postnl:standard/insured=3000
+          contract_id: 517
+      properties:
+        type:
+          type: string
+          description: 'The way the shipping method and carrier will be selected.
+
+            '
+          enum:
+          - shipping_option_code
+          example: shipping_option_code
+        properties:
+          $ref: '#/components/schemas/shipping-option-code-properties'
+      required:
+      - type
+      - properties
+    dimension:
+      title: Dimension
+      type: object
+      description: Dimension in the specified unit
+      properties:
+        length:
+          type: number
+          description: length in specified unit
+          minimum: 0
+          example: 15
+        width:
+          type: number
+          description: width in specified unit
+          minimum: 0
+          example: 20.5
+        height:
+          type: number
+          description: height in specified unit
+          minimum: 0
+          example: 37
+        unit:
+          $ref: '#/components/schemas/dimension-units'
+      required:
+      - length
+      - width
+      - height
+      - unit
+    billing-address:
+      title: Billing Address
+      oneOf:
+      - $ref: '#/components/schemas/address'
+      required:
+      - name
+      - address_line_1
+      - postal_code
+      - city
+      - country_code
+      description: Sendcloud Billing Address object
+    ErrorObject:
+      title: Error
+      type: object
+      description: Error in a JSON:API error format
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the error.
+        links:
+          type: object
+          description: A set of hyperlinks that provide additional information about the error.
+          properties:
+            about:
+              type: string
+              description: A URL that provides additional information about the error.
+        status:
+          type: string
+          format: int32
+          description: The HTTP status code of the error.
+          minLength: 1
+        code:
+          type: string
+          description: A unique error code for the error, in snake case format.
+          minLength: 1
+          enum:
+          - unknown_field
+          - invalid
+          - forbidden
+          - invalid_choice
+          - min_value
+          - 'null'
+          - not_found
+          - required
+          - not_a_list
+          - non_field_errors
+          - authentication_failed
+          - validation_error
+          - parcel_announcement_error
+        title:
+          type: string
+          description: A short, human-readable summary of the error.
+          minLength: 1
+        detail:
+          type: string
+          description: A human-readable explanation of the error.
+          minLength: 1
+        source:
+          type: object
+          description: An object that identifies the source of the error within the request payload.
+          properties:
+            pointer:
+              type: string
+              description: A `JSON` pointer to the location of the error within the request payload.
+            parameter:
+              type: string
+              description: The name of the `query` parameter that caused the error.
+            header:
+              type: string
+              description: The name of the `header` parameter that caused the error.
+        meta:
+          type: object
+          description: Additional metadata about the error.
+    volume-units:
+      type: string
+      title: Volume units
+      enum:
+      - m3
+      - cm3
+      - l
+      - ml
+      - gal
+      example: l
+    weight-units:
+      type: string
+      title: Mass Units Object
+      enum:
+      - kg
+      - g
+      - lbs
+      - oz
+      example: g
     service-point:
       title: Service Point
       type: object
@@ -2393,103 +2379,129 @@ components:
             description: Can contain carrier specific data
         required:
         - carrier_service_point_id
-    costs-object:
-      title: Costs Object
+    shipping-details:
       type: object
+      description: Shipping information
       properties:
-        value:
+        is_local_pickup:
           type:
-          - string
+          - boolean
           - 'null'
-          pattern: '[\d]+(\.[\d]+)?'
-          example: '3.99'
-        currency:
-          type:
-          - string
-          - 'null'
-          example: EUR
-    measurement-partial-update:
-      title: Measurement Object
-      type: object
-      properties:
-        dimension:
-          type: object
-          description: Dimension in the specified unit
-          properties:
-            length:
-              type: number
-              description: length in specified unit
-              minimum: 0
-              example: 15
-            width:
-              type: number
-              description: width in specified unit
-              minimum: 0
-              example: 20.5
-            height:
-              type: number
-              description: height in specified unit
-              minimum: 0
-              example: 37
-            unit:
-              $ref: '#/components/schemas/dimension-units'
-        weight:
-          type: object
-          description: Weight in the specified unit
-          properties:
-            value:
-              type: number
-              description: Weight value
-              exclusiveMinimum: 0
-              example: 14.5
-            unit:
-              $ref: '#/components/schemas/weight-units'
-        volume:
-          type: object
-          description: Volume in the specified unit
-          properties:
-            value:
-              type: integer
-              description: Volume value
-              minimum: 0
-              example: 5
-            unit:
-              $ref: '#/components/schemas/volume-units'
-      description: This object provides essential information for accurate packing, shipping, and inventory management
-    weight:
-      title: Weight
-      type: object
-      description: Weight in the specified unit
-      properties:
-        value:
-          type: number
-          description: Weight value
-          exclusiveMinimum: 0
-          example: 14.5
-        unit:
-          $ref: '#/components/schemas/weight-units'
-      required:
-      - value
-      - unit
-    customer-details:
-      title: Customer Details
-      type: object
-      description: Node for an information about customer
-      properties:
-        name:
+          description: Indicates if customers should collect the order in person from a merchant location
+          example: true
+        delivery_indicator:
+          title: Delivery Indicator
+          description: 'A free text field to indicate how a specific order should be shipped.
+
+
+            - The field is intended for applying the Checkout Delivery Method condition in shipping rules.
+
+            - Learn more about [shipping rules](/docs/shipping/shipping-rules/).'
           type: string
-          description: Name of the customer
-          example: John Doe
-        phone_number:
+          example: DHL Home Delivery
+        measurement:
+          $ref: '#/components/schemas/measurement'
+          description: Total order measurements
+        ship_with:
+          $ref: '#/components/schemas/ship-with'
+    dangerous-goods:
+      title: DangerousGoods
+      type: object
+      description: Hazardous materials information for items.
+      properties:
+        chemical_record_identifier:
           type: string
-          description: Phone number of the customer
-          example: '+319881729999'
-        email:
+          nullable: true
+          description: Chemical record identifier for the dangerous goods
+        regulation_set:
           type: string
-          description: Email of the customer
-          example: john@doe.com
-      required:
-      - name
+          enum:
+          - IATA
+          - ADR
+          description: Regulation set governing the dangerous goods
+        packaging_type_quantity:
+          type: string
+          nullable: true
+          description: Quantity of packaging type
+        packaging_type:
+          type: string
+          nullable: true
+          description: Type of packaging used
+        packaging_instruction_code:
+          type: string
+          nullable: true
+          description: Packaging instruction code
+        id_number:
+          type: string
+          nullable: true
+          description: UN identification number
+        class_division_number:
+          type: string
+          nullable: true
+          description: Hazard class and division number
+        quantity:
+          type: string
+          nullable: true
+          description: Quantity of dangerous goods
+        unit_of_measurement:
+          type: string
+          enum:
+          - KG
+          - G
+          - L
+          - ML
+          description: Unit of measurement for dangerous goods quantity
+        proper_shipping_name:
+          type: string
+          nullable: true
+          description: Proper shipping name as defined by regulations
+        commodity_regulated_level_code:
+          type: string
+          enum:
+          - LQ
+          - EQ
+          description: Commodity regulated level code
+        transportation_mode:
+          type: string
+          enum:
+          - Highway
+          - Ground
+          - PAX
+          - CAO
+          description: Mode of transportation
+        emergency_contact_name:
+          type: string
+          nullable: true
+          description: Name of emergency contact person
+        emergency_contact_phone:
+          type: string
+          nullable: true
+          description: Phone number of emergency contact
+        adr_packing_group_letter:
+          type: string
+          enum:
+          - I
+          - II
+          - III
+          description: ADR packing group classification
+        local_proper_shipping_name:
+          type: string
+          nullable: true
+          description: Local proper shipping name
+        transport_category:
+          type: string
+          nullable: true
+          description: Transport category for ADR regulations
+        tunnel_restriction_code:
+          type: string
+          nullable: true
+          description: Tunnel restriction code
+        weight_type:
+          type: string
+          enum:
+          - Net
+          - Gross
+          description: Type of weight measurement
     delivery-dates:
       title: Delivery Dates
       description: Defined delivery dates
@@ -2510,33 +2522,21 @@ components:
           format: date-time
           description: The date when the order should reach the end customer in ISO 8601
           example: '2025-03-15T10:00:00.555309+00:00'
-    dimension:
-      title: Dimension
+    costs-object:
+      title: Costs Object
       type: object
-      description: Dimension in the specified unit
       properties:
-        length:
-          type: number
-          description: length in specified unit
-          minimum: 0
-          example: 15
-        width:
-          type: number
-          description: width in specified unit
-          minimum: 0
-          example: 20.5
-        height:
-          type: number
-          description: height in specified unit
-          minimum: 0
-          example: 37
-        unit:
-          $ref: '#/components/schemas/dimension-units'
-      required:
-      - length
-      - width
-      - height
-      - unit
+        value:
+          type:
+          - string
+          - 'null'
+          pattern: '[\d]+(\.[\d]+)?'
+          example: '3.99'
+        currency:
+          type:
+          - string
+          - 'null'
+          example: EUR
     errors:
       title: Errors
       type: object
@@ -2554,41 +2554,18 @@ components:
             - status
             - code
             - detail
-    dimension-units:
-      type: string
-      title: Dimensional units
-      enum:
-      - cm
-      - mm
-      - m
-      - yd
-      - ft
-      - in
-      example: mm
+    measurement:
+      title: Measurement Object
+      type: object
+      properties:
+        dimension:
+          $ref: '#/components/schemas/dimension'
+        weight:
+          $ref: '#/components/schemas/weight'
+        volume:
+          $ref: '#/components/schemas/volume'
+      description: This object provides essential information for accurate packing, shipping, and inventory management
   parameters:
-    order_updated_at_max:
-      in: query
-      name: order_updated_at_max
-      description: Find orders that were updated at or before a specific date, e.g. `order_updated_at_max=2023-04-28`.
-      schema:
-        type: string
-        format: date
-        example: '2023-04-28'
-    order_updated_at:
-      in: query
-      name: order_updated_at
-      description: Find orders that were updated on a specific date, e.g. `order_updated_at=2023-04-28`.
-      schema:
-        type: string
-        format: date
-        example: '2023-04-28'
-    order_status:
-      in: query
-      name: status
-      description: Filter orders based on their status, e.g. `status=unshipped`. The filtering is case insensitive.
-      schema:
-        type: string
-        example: unshipped
     page_size:
       in: query
       name: page_size
@@ -2599,14 +2576,6 @@ components:
         minimum: 1
         example: 150
       description: The maximum number of results to be returned per page
-    order_created_at:
-      in: query
-      name: order_created_at
-      description: Find orders that were created on a specific date, e.g. `order_created_at=2023-04-28`.
-      schema:
-        type: string
-        format: date
-        example: '2023-04-28'
     order_id:
       in: query
       name: order_id
@@ -2614,20 +2583,6 @@ components:
       schema:
         type: string
         example: 1896e94b-c01b-4e73-a9e7-57f51c8a4c77
-    cursor:
-      in: query
-      name: cursor
-      description: "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n  - `o`: Offset\n  - `r`: Reverse\n  - `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`."
-      schema:
-        type: string
-        example: cj0xJnA9MzAw
-    order_number:
-      in: query
-      name: order_number
-      description: Filter orders by a specific order number, e.g. `order_number=ORDER_284565`. The filtering is case insensitive.
-      schema:
-        type: string
-        example: ORDER_284565
     order_created_at_max:
       in: query
       name: order_created_at_max
@@ -2636,10 +2591,32 @@ components:
         type: string
         format: date
         example: '2023-04-28'
-    order_created_at_min:
+    cursor:
       in: query
-      name: order_created_at_min
-      description: Find orders that were created at or after a specific date, e.g. `order_created_at_min=2023-04-28`.
+      name: cursor
+      description: "The cursor query string is used as the pivot value to filter results. If no value is provided, the first page of results will be returned. To get this value, you must encode the offset, reverse and position into a base64 string.\n\nThere are 3 possible parameters to encode:\n  - `o`: Offset\n  - `r`: Reverse\n  - `p`: Position\n  \nFor example, `r=1&p=300` encoded as a base64 string would be `cj0xJnA9MzAw`. The query string would then be `cursor=cj0xJnA9MzAw`."
+      schema:
+        type: string
+        example: cj0xJnA9MzAw
+    order_status:
+      in: query
+      name: status
+      description: Filter orders based on their status, e.g. `status=unshipped`. The filtering is case insensitive.
+      schema:
+        type: string
+        example: unshipped
+    order_updated_at_min:
+      in: query
+      name: order_updated_at_min
+      description: Find orders that were updated at or after a specific date, e.g. `order_updated_at_min=2023-04-28`.
+      schema:
+        type: string
+        format: date
+        example: '2023-04-28'
+    order_updated_at:
+      in: query
+      name: order_updated_at
+      description: Find orders that were updated on a specific date, e.g. `order_updated_at=2023-04-28`.
       schema:
         type: string
         format: date
@@ -2653,6 +2630,21 @@ components:
         The header is not required but if it is set, the system will check it. An unknown or invalid UUID will cause a 400 error.'
       schema:
         type: string
+    sort:
+      in: query
+      name: sort
+      description: "Sort the orders in the response by using one or more of the following values:\n - `integration`: Sort by the integration ID of the retrieved orders; to sort in descending order, use `-integration`\n - `order_number`: Sort by the order number of the retrieved orders; to sort in descending order, use `-order_number`.\n - `order_created_at`: Sort by the date of an order creation of the retrieved orders; to sort in descending order, use `-order_created_at`\n - `order_updated_at`: Sort by the date of an order update of the retrieved orders; to sort in descending order, use `-order_updated_at`\n - `pk`: Sort by the ID (autogenerated internal ID) of the retrieved orders; to sort in descending order, use `-pk`\n\nAdditional information about this query:\n - Any valid combination of the above values is supported, e.g. `sort=integration,-order_created_at`. \n - In case of conflicting `sort` values, e.g. `/?sort=integration,-integration`, the conflicting value will be ignored.\n - If the `sort` query parameter is not set, the sorting of the retrieved orders will default to `-pk`.\n - If an unsupported `sort` value is provided, the results will be sorted by the default (`-pk`)."
+      schema:
+        type: string
+        example: -order_number
+    order_created_at_min:
+      in: query
+      name: order_created_at_min
+      description: Find orders that were created at or after a specific date, e.g. `order_created_at_min=2023-04-28`.
+      schema:
+        type: string
+        format: date
+        example: '2023-04-28'
     integration:
       in: query
       name: integration
@@ -2663,21 +2655,29 @@ components:
       schema:
         type: integer
         example: 17
-    sort:
+    order_updated_at_max:
       in: query
-      name: sort
-      description: "Sort the orders in the response by using one or more of the following values:\n - `integration`: Sort by the integration ID of the retrieved orders; to sort in descending order, use `-integration`\n - `order_number`: Sort by the order number of the retrieved orders; to sort in descending order, use `-order_number`.\n - `order_created_at`: Sort by the date of an order creation of the retrieved orders; to sort in descending order, use `-order_created_at`\n - `order_updated_at`: Sort by the date of an order update of the retrieved orders; to sort in descending order, use `-order_updated_at`\n - `pk`: Sort by the ID (autogenerated internal ID) of the retrieved orders; to sort in descending order, use `-pk`\n\nAdditional information about this query:\n - Any valid combination of the above values is supported, e.g. `sort=integration,-order_created_at`. \n - In case of conflicting `sort` values, e.g. `/?sort=integration,-integration`, the conflicting value will be ignored.\n - If the `sort` query parameter is not set, the sorting of the retrieved orders will default to `-pk`.\n - If an unsupported `sort` value is provided, the results will be sorted by the default (`-pk`)."
-      schema:
-        type: string
-        example: -order_number
-    order_updated_at_min:
-      in: query
-      name: order_updated_at_min
-      description: Find orders that were updated at or after a specific date, e.g. `order_updated_at_min=2023-04-28`.
+      name: order_updated_at_max
+      description: Find orders that were updated at or before a specific date, e.g. `order_updated_at_max=2023-04-28`.
       schema:
         type: string
         format: date
         example: '2023-04-28'
+    order_created_at:
+      in: query
+      name: order_created_at
+      description: Find orders that were created on a specific date, e.g. `order_created_at=2023-04-28`.
+      schema:
+        type: string
+        format: date
+        example: '2023-04-28'
+    order_number:
+      in: query
+      name: order_number
+      description: Filter orders by a specific order number, e.g. `order_number=ORDER_284565`. The filtering is case insensitive.
+      schema:
+        type: string
+        example: ORDER_284565
   responses:
     OrderUpdated:
       description: OK

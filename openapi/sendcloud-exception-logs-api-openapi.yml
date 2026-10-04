@@ -327,6 +327,119 @@ paths:
                       detail: The Integration could not be found with the search criteria given
 components:
   schemas:
+    integration-log:
+      type: object
+      title: Integration Log Object
+      description: An integration exception log record containing information about a failed API request to a shop system.
+      properties:
+        id:
+          type: integer
+          title: ID
+          description: ID of the log record
+          minimum: 1
+          example: 123
+          readOnly: true
+        integration_id:
+          type:
+          - integer
+          - 'null'
+          description: ID of the integration to which this log belongs
+          minimum: 1
+          example: 123
+        base_url:
+          description: Base shop URL
+          type: string
+          example: https://example.com
+          minLength: 1
+        full_url:
+          description: Full path to resource where error happened
+          type:
+          - string
+          - 'null'
+          example: https://example.com/order-note.json
+        method:
+          type: string
+          description: HTTP method that caused an error
+          example: POST
+        response_code:
+          type:
+          - integer
+          - 'null'
+          description: Standard HTTP error code
+          example: 495
+          minimum: 0
+        response:
+          type:
+          - object
+          - 'null'
+          title: Response object
+          description: Response JSON containing response body and headers
+          properties:
+            headers:
+              title: HTTP headers
+              description: HTTP headers which were sent within a response
+              type:
+              - object
+              - 'null'
+            body:
+              title: HTTP response body
+              description: HTTP response body
+              type:
+              - string
+              - object
+              - 'null'
+        request:
+          type:
+          - object
+          - 'null'
+          title: Request object
+          description: Request JSON containing request body and headers
+          properties:
+            headers:
+              title: HTTP headers
+              description: HTTP headers which were sent within a request
+              type:
+              - object
+              - string
+              - 'null'
+            payload:
+              title: HTTP request body
+              description: HTTP request body
+              type:
+              - object
+              - string
+              - 'null'
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp indicating when an exception occurred
+          example: '2023-03-01T02:02:00+01:00'
+        exception_type:
+          type:
+          - string
+          - 'null'
+          description: Internal field to store Python exception type. We use this field to suggest our users the ways how they can fix issues.
+          example: requests.exceptions.SSLError
+        exception:
+          type:
+          - string
+          - 'null'
+          title: Exception text
+          description: Human readable description of exception
+          example: An SSL error occurred
+        protected:
+          type: boolean
+          description: An indication whether or not request/response is obfuscated
+          example: false
+          readOnly: true
+        additional_data:
+          type:
+          - object
+          - string
+          description: Additional data associated with the log entry
+          default: ''
+      required:
+      - base_url
     ErrorObject:
       title: Error
       type: object
@@ -500,119 +613,6 @@ components:
       required:
       - base_url
       additionalProperties: false
-    integration-log:
-      type: object
-      title: Integration Log Object
-      description: An integration exception log record containing information about a failed API request to a shop system.
-      properties:
-        id:
-          type: integer
-          title: ID
-          description: ID of the log record
-          minimum: 1
-          example: 123
-          readOnly: true
-        integration_id:
-          type:
-          - integer
-          - 'null'
-          description: ID of the integration to which this log belongs
-          minimum: 1
-          example: 123
-        base_url:
-          description: Base shop URL
-          type: string
-          example: https://example.com
-          minLength: 1
-        full_url:
-          description: Full path to resource where error happened
-          type:
-          - string
-          - 'null'
-          example: https://example.com/order-note.json
-        method:
-          type: string
-          description: HTTP method that caused an error
-          example: POST
-        response_code:
-          type:
-          - integer
-          - 'null'
-          description: Standard HTTP error code
-          example: 495
-          minimum: 0
-        response:
-          type:
-          - object
-          - 'null'
-          title: Response object
-          description: Response JSON containing response body and headers
-          properties:
-            headers:
-              title: HTTP headers
-              description: HTTP headers which were sent within a response
-              type:
-              - object
-              - 'null'
-            body:
-              title: HTTP response body
-              description: HTTP response body
-              type:
-              - string
-              - object
-              - 'null'
-        request:
-          type:
-          - object
-          - 'null'
-          title: Request object
-          description: Request JSON containing request body and headers
-          properties:
-            headers:
-              title: HTTP headers
-              description: HTTP headers which were sent within a request
-              type:
-              - object
-              - string
-              - 'null'
-            payload:
-              title: HTTP request body
-              description: HTTP request body
-              type:
-              - object
-              - string
-              - 'null'
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp indicating when an exception occurred
-          example: '2023-03-01T02:02:00+01:00'
-        exception_type:
-          type:
-          - string
-          - 'null'
-          description: Internal field to store Python exception type. We use this field to suggest our users the ways how they can fix issues.
-          example: requests.exceptions.SSLError
-        exception:
-          type:
-          - string
-          - 'null'
-          title: Exception text
-          description: Human readable description of exception
-          example: An SSL error occurred
-        protected:
-          type: boolean
-          description: An indication whether or not request/response is obfuscated
-          example: false
-          readOnly: true
-        additional_data:
-          type:
-          - object
-          - string
-          description: Additional data associated with the log entry
-          default: ''
-      required:
-      - base_url
   securitySchemes:
     HTTPBasicAuth:
       type: http
