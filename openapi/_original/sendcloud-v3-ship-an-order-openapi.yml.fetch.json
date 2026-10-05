@@ -1,0 +1,12 @@
+{
+ "url": "https://sendcloud.dev/.openapi/v3/ship-an-order/openapi.yaml",
+ "requested_url": "https://sendcloud.dev/.openapi/v3/ship-an-order/openapi.yaml",
+ "status": 200,
+ "content_type": "text/yaml",
+ "bytes": 42788,
+ "sha256": "d8154279aae14ec1ff59b55b8896d4aa53f60842d762b14685d89e5fdd9ecfdb",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
