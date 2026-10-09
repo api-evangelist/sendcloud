@@ -66,3 +66,58 @@ rate_limit_statements:
 - Max. 120 000 labels/year
 - Max. 360 000 labels/year
 - there is a limit of 50 labels, after which you will be charged
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  units:
+  - period
+  plans:
+  - name: Free
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - period
+    periods:
+    - month
+  - name: Lite
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Growth
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Premium
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Pro
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
