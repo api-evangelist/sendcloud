@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/sendcloud/integrations
+- https://n8n.io/integrations/sendcloud/
+- https://composio.dev/toolkits/sendcloud
+- https://monid.ai/tools/sendcloud
+checked:
+- https://composio.dev/toolkits/sendcloud
+- https://monid.ai/tools/sendcloud
+- https://n8n.io/integrations/sendcloud/
+- https://zapier.com/apps/sendcloud/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
